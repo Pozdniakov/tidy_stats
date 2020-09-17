@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Глава 2 День 1. Основы R | A Minimal Book Example</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 День 1. Основы R | Анализ данных и статистика в R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Глава 2 День 1. Основы R | A Minimal Book Example" />
+  <meta property="og:title" content="2 День 1. Основы R | Анализ данных и статистика в R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,23 +16,23 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Глава 2 День 1. Основы R | A Minimal Book Example" />
+  <meta name="twitter:title" content="2 День 1. Основы R | Анализ данных и статистика в R" />
   
   <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
-<meta name="author" content="Yihui Xie">
+<meta name="author" content="Поздняков" />
 
 
-<meta name="date" content="2020-09-16">
+<meta name="date" content="2020-09-17" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="real.html">
+<link rel="prev" href="index.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,7 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -48,13 +48,10 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
-<script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 <style type="text/css">
@@ -108,10 +105,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">R и статистика</a></li>
+<li><a href="./">Анализ данных и статистика в R</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> О курсе</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> День 1. Основы R</a><ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#very_base"><i class="fa fa-check"></i><b>2.1</b> Знакомимся с самым базовым</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1.1</b> Установка R и Rstudio</a></li>
@@ -137,79 +134,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7.2" data-path="intro.html"><a href="intro.html#import"><i class="fa fa-check"></i><b>2.7.2</b> Импорт данных</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="real.html"><a href="real.html"><i class="fa fa-check"></i><b>3</b> День 2. Работа с реальными данными в R</a><ul>
-<li class="chapter" data-level="3.1" data-path="real.html"><a href="real.html#prep"><i class="fa fa-check"></i><b>3.1</b> Препроцессинг данных в R</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="real.html"><a href="real.html#explore"><i class="fa fa-check"></i><b>3.1.1</b> Исследование данных</a></li>
-<li class="chapter" data-level="3.1.2" data-path="real.html"><a href="real.html#subset"><i class="fa fa-check"></i><b>3.1.2</b> Subsetting</a></li>
-<li class="chapter" data-level="3.1.3" data-path="real.html"><a href="real.html#newcol"><i class="fa fa-check"></i><b>3.1.3</b> Создание новых колонок</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="real.html"><a href="real.html#loopsetc"><i class="fa fa-check"></i><b>3.2</b> Циклы, условия, создание функций</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.1</b> If, else, else if</a></li>
-<li class="chapter" data-level="3.2.2" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.2</b> Функция ifelse()</a></li>
-<li class="chapter" data-level="3.2.3" data-path="real.html"><a href="real.html#for"><i class="fa fa-check"></i><b>3.2.3</b> For loops</a></li>
-<li class="chapter" data-level="3.2.4" data-path="real.html"><a href="real.html#newfun"><i class="fa fa-check"></i><b>3.2.4</b> Создание функций</a></li>
-<li class="chapter" data-level="3.2.5" data-path="real.html"><a href="real.html#apply"><i class="fa fa-check"></i><b>3.2.5</b> Cемейство функций apply()</a></li>
-<li class="chapter" data-level="3.2.6" data-path="real.html"><a href="real.html#anon"><i class="fa fa-check"></i><b>3.2.6</b> Анонимные функции</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="real.html"><a href="real.html#text"><i class="fa fa-check"></i><b>3.3</b> Работа с текстом</a></li>
-<li class="chapter" data-level="3.4" data-path="real.html"><a href="real.html#new_pack"><i class="fa fa-check"></i><b>3.4</b> Работа с дополнительными пакетами</a></li>
-<li class="chapter" data-level="3.5" data-path="real.html"><a href="real.html#reshape"><i class="fa fa-check"></i><b>3.5</b> Решейпинг данных</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="real.html"><a href="real.html#holywar"><i class="fa fa-check"></i><b>3.5.1</b> data.table vs. dplyr</a></li>
-<li class="chapter" data-level="3.5.2" data-path="real.html"><a href="real.html#what"><i class="fa fa-check"></i><b>3.5.2</b> Так что же выбрать?</a></li>
-<li class="chapter" data-level="3.5.3" data-path="real.html"><a href="real.html#dt"><i class="fa fa-check"></i><b>3.5.3</b> data.table</a></li>
-<li class="chapter" data-level="3.5.4" data-path="real.html"><a href="real.html#long_wide"><i class="fa fa-check"></i><b>3.5.4</b> Широкий и длинный форматы данных</a></li>
-<li class="chapter" data-level="3.5.5" data-path="real.html"><a href="real.html#melt_dcast"><i class="fa fa-check"></i><b>3.5.5</b> Решейпинг в data.table: melt() и dcast()</a></li>
-<li class="chapter" data-level="3.5.6" data-path="real.html"><a href="real.html#join_merge"><i class="fa fa-check"></i><b>3.5.6</b> Объединение с помощью rbind(), cbind() и merge()</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="real.html"><a href="real.html#day2_con"><i class="fa fa-check"></i><b>3.6</b> Заключение</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="vis.html"><a href="vis.html"><i class="fa fa-check"></i><b>4</b> День 3. Описательная статистика и визуализация</a><ul>
-<li class="chapter" data-level="4.1" data-path="vis.html"><a href="vis.html#desc"><i class="fa fa-check"></i><b>4.1</b> Описательная статистика</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="vis.html"><a href="vis.html#cent_tend"><i class="fa fa-check"></i><b>4.1.1</b> Меры центральной тенденции</a></li>
-<li class="chapter" data-level="4.1.2" data-path="vis.html"><a href="vis.html#vary"><i class="fa fa-check"></i><b>4.1.2</b> Меры рассеяния</a></li>
-<li class="chapter" data-level="4.1.3" data-path="vis.html"><a href="vis.html#skku"><i class="fa fa-check"></i><b>4.1.3</b> Ассиметрия и эксцесс</a></li>
-<li class="chapter" data-level="4.1.4" data-path="vis.html"><a href="vis.html#summary"><i class="fa fa-check"></i><b>4.1.4</b> А теперь все вместе!</a></li>
-<li class="chapter" data-level="4.1.5" data-path="vis.html"><a href="vis.html#datasaurus"><i class="fa fa-check"></i><b>4.1.5</b> Описательных статистик недостаточно</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="vis.html"><a href="vis.html#vis_r"><i class="fa fa-check"></i><b>4.2</b> Визуализация данных в R</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="vis.html"><a href="vis.html#base_vis"><i class="fa fa-check"></i><b>4.2.1</b> Базовые функции для графики</a></li>
-<li class="chapter" data-level="4.2.2" data-path="vis.html"><a href="vis.html#ggplot2"><i class="fa fa-check"></i><b>4.2.2</b> ggplot2</a></li>
-<li class="chapter" data-level="4.2.3" data-path="vis.html"><a href="vis.html#дополнения-к-ggplot2"><i class="fa fa-check"></i><b>4.2.3</b> Дополнения к ggplot2</a></li>
-<li class="chapter" data-level="4.2.4" data-path="vis.html"><a href="vis.html#cowplot"><i class="fa fa-check"></i><b>4.2.4</b> cowplot</a></li>
-<li class="chapter" data-level="4.2.5" data-path="vis.html"><a href="vis.html#plotly"><i class="fa fa-check"></i><b>4.2.5</b> plotly</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>5</b> Задания</a><ul>
-<li class="chapter" data-level="5.1" data-path="tasks.html"><a href="tasks.html#vec_task_1"><i class="fa fa-check"></i><b>5.1</b> Вектор</a></li>
-<li class="chapter" data-level="5.2" data-path="tasks.html"><a href="tasks.html#vec_op"><i class="fa fa-check"></i><b>5.2</b> Вектор. Операции с векторами</a></li>
-<li class="chapter" data-level="5.3" data-path="tasks.html"><a href="tasks.html#vec_task_2"><i class="fa fa-check"></i><b>5.3</b> Вектор. Индексирование</a></li>
-<li class="chapter" data-level="5.4" data-path="tasks.html"><a href="tasks.html#t"><i class="fa fa-check"></i><b>5.4</b> Матрицы</a></li>
-<li class="chapter" data-level="5.5" data-path="tasks.html"><a href="tasks.html#list_ta"><i class="fa fa-check"></i><b>5.5</b> Списки</a></li>
-<li class="chapter" data-level="5.6" data-path="tasks.html"><a href="tasks.html#df_task"><i class="fa fa-check"></i><b>5.6</b> Датафрейм</a></li>
-<li class="chapter" data-level="5.7" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>5.7</b> Создание функций</a></li>
-<li class="chapter" data-level="5.8" data-path="tasks.html"><a href="tasks.html#task_text"><i class="fa fa-check"></i><b>5.8</b> Семейство apply()</a></li>
-<li class="chapter" data-level="5.9" data-path="tasks.html"><a href="tasks.html#task_test"><i class="fa fa-check"></i><b>5.9</b> Работа с текстом</a></li>
-<li class="chapter" data-level="5.10" data-path="tasks.html"><a href="tasks.html#dt_task"><i class="fa fa-check"></i><b>5.10</b> data.table</a></li>
-<li class="chapter" data-level="5.11" data-path="tasks.html"><a href="tasks.html#task_reshape"><i class="fa fa-check"></i><b>5.11</b> Решейпинг</a></li>
-<li class="chapter" data-level="5.12" data-path="tasks.html"><a href="tasks.html#task_desc"><i class="fa fa-check"></i><b>5.12</b> Описательная статистика</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>6</b> Решения_заданий</a><ul>
-<li class="chapter" data-level="6.1" data-path="solutions.html"><a href="solutions.html#solvvec_task_1"><i class="fa fa-check"></i><b>6.1</b> Вектор</a></li>
-<li class="chapter" data-level="6.2" data-path="solutions.html"><a href="solutions.html#solvvec_op"><i class="fa fa-check"></i><b>6.2</b> Вектор. Операции с векторами</a></li>
-<li class="chapter" data-level="6.3" data-path="solutions.html"><a href="solutions.html#solvvec_task_2"><i class="fa fa-check"></i><b>6.3</b> Вектор. Индексирование</a></li>
-<li class="chapter" data-level="6.4" data-path="solutions.html"><a href="solutions.html#solvt"><i class="fa fa-check"></i><b>6.4</b> Матрицы</a></li>
-<li class="chapter" data-level="6.5" data-path="solutions.html"><a href="solutions.html#solvlist_ta"><i class="fa fa-check"></i><b>6.5</b> Списки</a></li>
-<li class="chapter" data-level="6.6" data-path="solutions.html"><a href="solutions.html#solvdf_task"><i class="fa fa-check"></i><b>6.6</b> Датафрейм</a></li>
-<li class="chapter" data-level="6.7" data-path="solutions.html"><a href="solutions.html#solvtask_function"><i class="fa fa-check"></i><b>6.7</b> Создание функций</a></li>
-<li class="chapter" data-level="6.8" data-path="solutions.html"><a href="solutions.html#solvtask_text"><i class="fa fa-check"></i><b>6.8</b> Семейство apply()</a></li>
-<li class="chapter" data-level="6.9" data-path="solutions.html"><a href="solutions.html#solvtask_test"><i class="fa fa-check"></i><b>6.9</b> Работа с текстом</a></li>
-<li class="chapter" data-level="6.10" data-path="solutions.html"><a href="solutions.html#solvdt_task"><i class="fa fa-check"></i><b>6.10</b> data.table</a></li>
-<li class="chapter" data-level="6.11" data-path="solutions.html"><a href="solutions.html#solvtask_reshape"><i class="fa fa-check"></i><b>6.11</b> Решейпинг</a></li>
-<li class="chapter" data-level="6.12" data-path="solutions.html"><a href="solutions.html#solvtask_desc"><i class="fa fa-check"></i><b>6.12</b> Описательная статистика</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
 </ul>
 
       </nav>
@@ -219,7 +143,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Анализ данных и статистика в R</a>
           </h1>
         </div>
 
@@ -228,7 +152,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
-<h1><span class="header-section-number">Глава 2</span> День 1. Основы R</h1>
+<h1><span class="header-section-number">2</span> День 1. Основы R</h1>
 <div id="very_base" class="section level2">
 <h2><span class="header-section-number">2.1</span> Знакомимся с самым базовым</h2>
 <div id="install" class="section level3">
@@ -245,7 +169,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre><code>sudo apt-get install r-cran-base</code></pre>
 <p>В данной книге используется следующая версия R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()<span class="op">$</span>R.version<span class="op">$</span>version.string</code></pre></div>
-<pre><code>## [1] &quot;R version 3.6.0 (2019-04-26)&quot;</code></pre>
+<pre><code>## [1] &quot;R version 4.0.2 (2020-06-22)&quot;</code></pre>
 <p>После установки R необходимо скачать и установить RStudio:</p>
 <ul>
 <li><a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a></li>
@@ -256,10 +180,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Первый и вполне закономерный вопрос: зачем мы ставили R и отдельно еще какой-то RStudio? Если опустить незначительные детали, то R --- это сам язык программирования, а RStudio --- это среда (IDE), которая позволяет в этом языке очень удобно работать.</p>
 <blockquote>
-<p>RStudio --- это единственная среда для R, но, определенно, самая удобная на сегодняшний день, у нее практически нет конкурентов. Почти все пользуются именно ею и не стоит тратить время на поиск чего-то более удобного и лучшего. Если же вы привыкли работать с Jupyter Notebook</p>
-</blockquote>
-<blockquote>
-<p>Естественно, RStudio --- не единственная среда для R, но, определенно, самая крутая. Почти все пользуются именно ею и не стоит тратить время на поиск чего-то более удобного и лучшего. Если Вы привыкли к Jupyter Notebook, то здесь тоже есть ноутбуки (RNotebook --- хотя это и не совсем то же самое), но еще есть и кое-что покруче --- RMarkdown. И с этим мы тоже разберемся!</p>
+<p>RStudio --- это не единственная среда для R, но, определенно, самая удобная на сегодняшний день. Почти все пользуются именно ею и не стоит тратить время на поиск чего-то более удобного и лучшего. Если же вы привыкли работать с Jupyter Notebook, то в R обычно вместо него используется великолепный RMarkdown --- с помощью которого и написан этот онлайн-учебник, кстати говоря. И с RMarkdown мы тоже будем разбираться!</p>
 </blockquote>
 </div>
 <div id="rstudio" class="section level3">
@@ -588,7 +509,7 @@ n <span class="op">+</span><span class="st"> </span>m</code></pre></div>
 ##  [9] 3.000000 3.162278</code></pre>
 <p>Таких векторизованных функций в R очень много. Многие из них написаны на более низкоуровневых языках программирования (C, C++, FORTRAN), за счет чего использование таких функций приводит не только к более элегантному, лаконичному, но и к более быстрому коду.</p>
 <blockquote>
-<p>Векторизация в R --- это очень важная фишка, которая отличает этот язык программирования от многих других. Если вы уже имеете опыт программирования на другом языке, то вам во многих задачах захочется использовать циклы типа <code>for</code> и <code>while</code> <a href="real.html#for">3.2.3</a>. Не спешите этого делать! В очень многих случаях циклы можно заменить векторизацией. Тем не менее, векторизация --- это не единственный способ избавить от циклов типа <code>for</code> и <code>while</code> <a href="real.html#apply">3.2.5</a>.</p>
+<p>Векторизация в R --- это очень важная фишка, которая отличает этот язык программирования от многих других. Если вы уже имеете опыт программирования на другом языке, то вам во многих задачах захочется использовать циклы типа <code>for</code> и <code>while</code> <a href="#for"><strong>??</strong></a>. Не спешите этого делать! В очень многих случаях циклы можно заменить векторизацией. Тем не менее, векторизация --- это не единственный способ избавить от циклов типа <code>for</code> и <code>while</code> <a href="#apply"><strong>??</strong></a>.</p>
 </blockquote>
 </div>
 <div id="recycling" class="section level3">
@@ -818,7 +739,7 @@ A</code></pre></div>
 ## [5,]    5   10   15   20</code></pre>
 <p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами.</p>
 <blockquote>
-<p>То, что матрица --- это просто двумерный вектор, не является метафорой: в R матрица --- это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты --- это свойства объектов, своего рода &quot;метаданные&quot;. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги &quot;R in a Nutshell&quot; <span class="citation">(<span class="citeproc-not-found" data-reference-id="adler2010r"><strong>???</strong></span>)</span>.</p>
+<p>То, что матрица --- это просто двумерный вектор, не является метафорой: в R матрица --- это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты --- это свойства объектов, своего рода &quot;метаданные&quot;. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги &quot;R in a Nutshell&quot; <span class="citation">(Adler <a href="#ref-adler2010r">2010</a>)</span>.</p>
 </blockquote>
 </div>
 <div id="list" class="section level2">
@@ -916,15 +837,14 @@ age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">26<
 student &lt;-<span class="st"> </span><span class="kw">c</span>(F, F, T, T, T) 
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(name, age, student)  
 df</code></pre></div>
-<pre><code>##     name age student
-## 1   Ivan  26   FALSE
-## 2 Eugeny  34   FALSE
-## 3   Lena  23    TRUE
-## 4  Misha  27    TRUE
-## 5  Sasha  26    TRUE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Ivan","2":"26","3":"FALSE"},{"1":"Eugeny","2":"34","3":"FALSE"},{"1":"Lena","2":"23","3":"TRUE"},{"1":"Misha","2":"27","3":"TRUE"},{"1":"Sasha","2":"26","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)</code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
-##  $ name   : Factor w/ 5 levels &quot;Eugeny&quot;,&quot;Ivan&quot;,..: 2 1 3 4 5
+##  $ name   : chr  &quot;Ivan&quot; &quot;Eugeny&quot; &quot;Lena&quot; &quot;Misha&quot; ...
 ##  $ age    : num  26 34 23 27 26
 ##  $ student: logi  FALSE FALSE TRUE TRUE TRUE</code></pre>
 <p>Вообще, очень похоже на список, не правда ли? Так и есть, датафрейм --- это что-то вроде проименованного списка, каждый элемент которого является <em>atomic</em> вектором фиксированной длины. Скорее всего, список Вы представляли &quot;горизонтально&quot;. Если это так, то теперь &quot;переверните&quot; его у себя в голове на 90 градусов. Так, чтоб названия векторов оказались сверху, а колонки стали столбцами. Поскольку длина всех этих векторов равна (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут имет разные типы данных: первая колонка --- <code>character</code>, вторая колонка --- <code>numeric</code>, третья колонка --- <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с проименованным списком, и как с матрицей:</p>
@@ -934,18 +854,18 @@ df</code></pre></div>
 <p>Используя оператор <code>$</code> и присваивание можно создавать новые колонки датафрейма:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>lovesR &lt;-<span class="st"> </span>T <span class="co">#правило recycling - узнали? </span>
 df</code></pre></div>
-<pre><code>##     name age student lovesR
-## 1   Ivan  26   FALSE   TRUE
-## 2 Eugeny  34   FALSE   TRUE
-## 3   Lena  23    TRUE   TRUE
-## 4  Misha  27    TRUE   TRUE
-## 5  Sasha  26    TRUE   TRUE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["lovesR"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"Ivan","2":"26","3":"FALSE","4":"TRUE"},{"1":"Eugeny","2":"34","3":"FALSE","4":"TRUE"},{"1":"Lena","2":"23","3":"TRUE","4":"TRUE"},{"1":"Misha","2":"27","3":"TRUE","4":"TRUE"},{"1":"Sasha","2":"26","3":"TRUE","4":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>Ну а можно просто обращаться с помощью двух индексов через запятую, как мы это делали с матрицей:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
-<pre><code>##   age student
-## 3  23    TRUE
-## 4  27    TRUE
-## 5  26    TRUE</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["age"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[2],"type":["lgl"],"align":["right"]}],"data":[{"1":"23","2":"TRUE","_rn_":"3"},{"1":"27","2":"TRUE","_rn_":"4"},{"1":"26","2":"TRUE","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>Как и с матрицами, первый индекс означает строчки, а второй --- столбцы.</p>
 <p>А еще можно использовать названия колонок внутри квадратных скобок:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="st">&quot;age&quot;</span>]</code></pre></div>
@@ -1035,7 +955,28 @@ df</code></pre></div>
 <p>Для работы с экселевскими файлами есть много пакетов: <em>readxl, xlsx, openxlsx.</em> Для чтения файлов <em>SPSS, Stata, SAS</em> есть пакет <em>foreign</em>. Что такое пакеты и как их устанавливать мы изучим позже.</p>
 </blockquote>
 
+<div id="refs" class="references">
+<div>
+<p>Adler, Joseph. 2010. <em>R in a Nutshell: A Desktop Quick Reference</em>. “ O’Reilly Media, Inc.”</p>
 </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-adler2010r">
+<p>Adler, Joseph. 2010. <em>R in a Nutshell: A Desktop Quick Reference</em>. “ O’Reilly Media, Inc.”</p>
 </div>
 </div>
 <div class="footnotes">
@@ -1053,48 +994,45 @@ df</code></pre></div>
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="real.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"google": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": false,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/Pozdniakov/tidy_stats/edit/master/01-intro.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
 "text": null
 },
-"download": null,
+"view": {
+"link": null,
+"text": null
+},
+"download": ["tidy_stats.pdf", "tidy_stats.epub"],
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section"
+},
+"self_contained": true
 });
 });
 </script>
@@ -1106,8 +1044,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
