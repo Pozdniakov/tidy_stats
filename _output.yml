@@ -1,15 +1,24 @@
 bookdown::gitbook:
+  df_print: paged
   css: style.css
+  always_allow_html: yes
   config:
+    self_contained: yes
     toc:
+      collapse: section
       before: |
-        <li><a href="./">R и статистика</a></li>
-      after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="./">Анализ данных и статистика в R</a></li>
+    download: ["pdf", "epub"]
+    sharing: no
+    edit:
+      link: https://github.com/Pozdniakov/tidy_stats/edit/master/%s
+      text: "Edit"
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
-  keep_tex: yes
+  fig_width: 7
+  fig_height: 4
+  highlight: tango
 bookdown::epub_book: default
