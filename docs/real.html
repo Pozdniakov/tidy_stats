@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Глава 3 День 2. Работа с реальными данными в R | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Глава 3 День 2. Работа с реальными данными в R | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Глава 3 День 2. Работа с реальными данными в R | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2020-09-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intro.html">
+<link rel="next" href="vis.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R и статистика</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> День 1. Основы R</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#very_base"><i class="fa fa-check"></i><b>2.1</b> Знакомимся с самым базовым</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1.1</b> Установка R и Rstudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="2.1.3" data-path="intro.html"><a href="intro.html#calc"><i class="fa fa-check"></i><b>2.1.3</b> R как калькулятор</a></li>
+<li class="chapter" data-level="2.1.4" data-path="intro.html"><a href="intro.html#func"><i class="fa fa-check"></i><b>2.1.4</b> Функции</a></li>
+<li class="chapter" data-level="2.1.5" data-path="intro.html"><a href="intro.html#variables"><i class="fa fa-check"></i><b>2.1.5</b> Переменные</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#data_types"><i class="fa fa-check"></i><b>2.2</b> Типы данных</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#atomic"><i class="fa fa-check"></i><b>2.3</b> Вектор</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#coercion"><i class="fa fa-check"></i><b>2.3.1</b> Приведение типов</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#vector_op"><i class="fa fa-check"></i><b>2.3.2</b> Векторизация</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#recycling"><i class="fa fa-check"></i><b>2.3.3</b> Recycling</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#index_atomic"><i class="fa fa-check"></i><b>2.3.4</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="2.3.5" data-path="intro.html"><a href="intro.html#na"><i class="fa fa-check"></i><b>2.3.5</b> NA - пропущенные значения</a></li>
+<li class="chapter" data-level="2.3.6" data-path="intro.html"><a href="intro.html#google"><i class="fa fa-check"></i><b>2.3.6</b> В любой непонятной ситуации --- гуглите</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>2.4</b> Матрицы (matrix)</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>2.5</b> Списки (list)</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#df"><i class="fa fa-check"></i><b>2.6</b> Data.frame</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#real_data"><i class="fa fa-check"></i><b>2.7</b> Начинаем работу с реальными данными</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="intro.html"><a href="intro.html#wd"><i class="fa fa-check"></i><b>2.7.1</b> Рабочая папка и проекты</a></li>
+<li class="chapter" data-level="2.7.2" data-path="intro.html"><a href="intro.html#import"><i class="fa fa-check"></i><b>2.7.2</b> Импорт данных</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="real.html"><a href="real.html"><i class="fa fa-check"></i><b>3</b> День 2. Работа с реальными данными в R</a><ul>
+<li class="chapter" data-level="3.1" data-path="real.html"><a href="real.html#prep"><i class="fa fa-check"></i><b>3.1</b> Препроцессинг данных в R</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="real.html"><a href="real.html#explore"><i class="fa fa-check"></i><b>3.1.1</b> Исследование данных</a></li>
+<li class="chapter" data-level="3.1.2" data-path="real.html"><a href="real.html#subset"><i class="fa fa-check"></i><b>3.1.2</b> Subsetting</a></li>
+<li class="chapter" data-level="3.1.3" data-path="real.html"><a href="real.html#newcol"><i class="fa fa-check"></i><b>3.1.3</b> Создание новых колонок</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="real.html"><a href="real.html#loopsetc"><i class="fa fa-check"></i><b>3.2</b> Циклы, условия, создание функций</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.1</b> If, else, else if</a></li>
+<li class="chapter" data-level="3.2.2" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.2</b> Функция ifelse()</a></li>
+<li class="chapter" data-level="3.2.3" data-path="real.html"><a href="real.html#for"><i class="fa fa-check"></i><b>3.2.3</b> For loops</a></li>
+<li class="chapter" data-level="3.2.4" data-path="real.html"><a href="real.html#newfun"><i class="fa fa-check"></i><b>3.2.4</b> Создание функций</a></li>
+<li class="chapter" data-level="3.2.5" data-path="real.html"><a href="real.html#apply"><i class="fa fa-check"></i><b>3.2.5</b> Cемейство функций apply()</a></li>
+<li class="chapter" data-level="3.2.6" data-path="real.html"><a href="real.html#anon"><i class="fa fa-check"></i><b>3.2.6</b> Анонимные функции</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="real.html"><a href="real.html#text"><i class="fa fa-check"></i><b>3.3</b> Работа с текстом</a></li>
+<li class="chapter" data-level="3.4" data-path="real.html"><a href="real.html#new_pack"><i class="fa fa-check"></i><b>3.4</b> Работа с дополнительными пакетами</a></li>
+<li class="chapter" data-level="3.5" data-path="real.html"><a href="real.html#reshape"><i class="fa fa-check"></i><b>3.5</b> Решейпинг данных</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="real.html"><a href="real.html#holywar"><i class="fa fa-check"></i><b>3.5.1</b> data.table vs. dplyr</a></li>
+<li class="chapter" data-level="3.5.2" data-path="real.html"><a href="real.html#what"><i class="fa fa-check"></i><b>3.5.2</b> Так что же выбрать?</a></li>
+<li class="chapter" data-level="3.5.3" data-path="real.html"><a href="real.html#dt"><i class="fa fa-check"></i><b>3.5.3</b> data.table</a></li>
+<li class="chapter" data-level="3.5.4" data-path="real.html"><a href="real.html#long_wide"><i class="fa fa-check"></i><b>3.5.4</b> Широкий и длинный форматы данных</a></li>
+<li class="chapter" data-level="3.5.5" data-path="real.html"><a href="real.html#melt_dcast"><i class="fa fa-check"></i><b>3.5.5</b> Решейпинг в data.table: melt() и dcast()</a></li>
+<li class="chapter" data-level="3.5.6" data-path="real.html"><a href="real.html#join_merge"><i class="fa fa-check"></i><b>3.5.6</b> Объединение с помощью rbind(), cbind() и merge()</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="real.html"><a href="real.html#day2_con"><i class="fa fa-check"></i><b>3.6</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vis.html"><a href="vis.html"><i class="fa fa-check"></i><b>4</b> День 3. Описательная статистика и визуализация</a><ul>
+<li class="chapter" data-level="4.1" data-path="vis.html"><a href="vis.html#desc"><i class="fa fa-check"></i><b>4.1</b> Описательная статистика</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="vis.html"><a href="vis.html#cent_tend"><i class="fa fa-check"></i><b>4.1.1</b> Меры центральной тенденции</a></li>
+<li class="chapter" data-level="4.1.2" data-path="vis.html"><a href="vis.html#vary"><i class="fa fa-check"></i><b>4.1.2</b> Меры рассеяния</a></li>
+<li class="chapter" data-level="4.1.3" data-path="vis.html"><a href="vis.html#skku"><i class="fa fa-check"></i><b>4.1.3</b> Ассиметрия и эксцесс</a></li>
+<li class="chapter" data-level="4.1.4" data-path="vis.html"><a href="vis.html#summary"><i class="fa fa-check"></i><b>4.1.4</b> А теперь все вместе!</a></li>
+<li class="chapter" data-level="4.1.5" data-path="vis.html"><a href="vis.html#datasaurus"><i class="fa fa-check"></i><b>4.1.5</b> Описательных статистик недостаточно</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="vis.html"><a href="vis.html#vis_r"><i class="fa fa-check"></i><b>4.2</b> Визуализация данных в R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="vis.html"><a href="vis.html#base_vis"><i class="fa fa-check"></i><b>4.2.1</b> Базовые функции для графики</a></li>
+<li class="chapter" data-level="4.2.2" data-path="vis.html"><a href="vis.html#ggplot2"><i class="fa fa-check"></i><b>4.2.2</b> ggplot2</a></li>
+<li class="chapter" data-level="4.2.3" data-path="vis.html"><a href="vis.html#дополнения-к-ggplot2"><i class="fa fa-check"></i><b>4.2.3</b> Дополнения к ggplot2</a></li>
+<li class="chapter" data-level="4.2.4" data-path="vis.html"><a href="vis.html#cowplot"><i class="fa fa-check"></i><b>4.2.4</b> cowplot</a></li>
+<li class="chapter" data-level="4.2.5" data-path="vis.html"><a href="vis.html#plotly"><i class="fa fa-check"></i><b>4.2.5</b> plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>5</b> Задания</a><ul>
+<li class="chapter" data-level="5.1" data-path="tasks.html"><a href="tasks.html#vec_task_1"><i class="fa fa-check"></i><b>5.1</b> Вектор</a></li>
+<li class="chapter" data-level="5.2" data-path="tasks.html"><a href="tasks.html#vec_op"><i class="fa fa-check"></i><b>5.2</b> Вектор. Операции с векторами</a></li>
+<li class="chapter" data-level="5.3" data-path="tasks.html"><a href="tasks.html#vec_task_2"><i class="fa fa-check"></i><b>5.3</b> Вектор. Индексирование</a></li>
+<li class="chapter" data-level="5.4" data-path="tasks.html"><a href="tasks.html#t"><i class="fa fa-check"></i><b>5.4</b> Матрицы</a></li>
+<li class="chapter" data-level="5.5" data-path="tasks.html"><a href="tasks.html#list_ta"><i class="fa fa-check"></i><b>5.5</b> Списки</a></li>
+<li class="chapter" data-level="5.6" data-path="tasks.html"><a href="tasks.html#df_task"><i class="fa fa-check"></i><b>5.6</b> Датафрейм</a></li>
+<li class="chapter" data-level="5.7" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>5.7</b> Создание функций</a></li>
+<li class="chapter" data-level="5.8" data-path="tasks.html"><a href="tasks.html#task_text"><i class="fa fa-check"></i><b>5.8</b> Семейство apply()</a></li>
+<li class="chapter" data-level="5.9" data-path="tasks.html"><a href="tasks.html#task_test"><i class="fa fa-check"></i><b>5.9</b> Работа с текстом</a></li>
+<li class="chapter" data-level="5.10" data-path="tasks.html"><a href="tasks.html#dt_task"><i class="fa fa-check"></i><b>5.10</b> data.table</a></li>
+<li class="chapter" data-level="5.11" data-path="tasks.html"><a href="tasks.html#task_reshape"><i class="fa fa-check"></i><b>5.11</b> Решейпинг</a></li>
+<li class="chapter" data-level="5.12" data-path="tasks.html"><a href="tasks.html#task_desc"><i class="fa fa-check"></i><b>5.12</b> Описательная статистика</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>6</b> Решения_заданий</a><ul>
+<li class="chapter" data-level="6.1" data-path="solutions.html"><a href="solutions.html#solvvec_task_1"><i class="fa fa-check"></i><b>6.1</b> Вектор</a></li>
+<li class="chapter" data-level="6.2" data-path="solutions.html"><a href="solutions.html#solvvec_op"><i class="fa fa-check"></i><b>6.2</b> Вектор. Операции с векторами</a></li>
+<li class="chapter" data-level="6.3" data-path="solutions.html"><a href="solutions.html#solvvec_task_2"><i class="fa fa-check"></i><b>6.3</b> Вектор. Индексирование</a></li>
+<li class="chapter" data-level="6.4" data-path="solutions.html"><a href="solutions.html#solvt"><i class="fa fa-check"></i><b>6.4</b> Матрицы</a></li>
+<li class="chapter" data-level="6.5" data-path="solutions.html"><a href="solutions.html#solvlist_ta"><i class="fa fa-check"></i><b>6.5</b> Списки</a></li>
+<li class="chapter" data-level="6.6" data-path="solutions.html"><a href="solutions.html#solvdf_task"><i class="fa fa-check"></i><b>6.6</b> Датафрейм</a></li>
+<li class="chapter" data-level="6.7" data-path="solutions.html"><a href="solutions.html#solvtask_function"><i class="fa fa-check"></i><b>6.7</b> Создание функций</a></li>
+<li class="chapter" data-level="6.8" data-path="solutions.html"><a href="solutions.html#solvtask_text"><i class="fa fa-check"></i><b>6.8</b> Семейство apply()</a></li>
+<li class="chapter" data-level="6.9" data-path="solutions.html"><a href="solutions.html#solvtask_test"><i class="fa fa-check"></i><b>6.9</b> Работа с текстом</a></li>
+<li class="chapter" data-level="6.10" data-path="solutions.html"><a href="solutions.html#solvdt_task"><i class="fa fa-check"></i><b>6.10</b> data.table</a></li>
+<li class="chapter" data-level="6.11" data-path="solutions.html"><a href="solutions.html#solvtask_reshape"><i class="fa fa-check"></i><b>6.11</b> Решейпинг</a></li>
+<li class="chapter" data-level="6.12" data-path="solutions.html"><a href="solutions.html#solvtask_desc"><i class="fa fa-check"></i><b>6.12</b> Описательная статистика</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="real" class="section level1">
+<h1><span class="header-section-number">Глава 3</span> День 2. Работа с реальными данными в R</h1>
+<div id="prep" class="section level2">
+<h2><span class="header-section-number">3.1</span> Препроцессинг данных в R</h2>
+<p>Вчера мы узнали про основы языка R, про то, как работать с векторами, списками, матрицами и, наконец, датафреймами. Мы закончили день на загрузке данных, с чего мы и начнем сегодня:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/character-deaths.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>После загрузки данных стоит немного &quot;осмотреть&quot; получившийся датафрейм <code>got</code>.</p>
+<div id="explore" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Исследование данных</h3>
+<p>Ок, давайте немного поизучаем датасет. Обычно мы привыкли глазами пробегать по данным, листая строки и столбцы - и это вполне правильно и логично, от этого не нужно отучаться. Но мы можем дополнить наш базовый зрительнопоисковой инструментарий несколькими полезными командами.</p>
+<p>Во-первых, вспомним другую полезную функцию <code>str()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(got)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    917 obs. of  13 variables:
+##  $ Name              : chr  &quot;Addam Marbrand&quot; &quot;Aegon Frey (Jinglebell)&quot; &quot;Aegon Targaryen&quot; &quot;Adrack Humble&quot; ...
+##  $ Allegiances       : chr  &quot;Lannister&quot; &quot;None&quot; &quot;House Targaryen&quot; &quot;House Greyjoy&quot; ...
+##  $ Death.Year        : int  NA 299 NA 300 NA NA 300 300 NA NA ...
+##  $ Book.of.Death     : int  NA 3 NA 5 NA NA 4 5 NA NA ...
+##  $ Death.Chapter     : int  NA 51 NA 20 NA NA 35 NA NA NA ...
+##  $ Book.Intro.Chapter: int  56 49 5 20 NA NA 21 59 11 0 ...
+##  $ Gender            : int  1 1 1 1 1 1 1 0 1 1 ...
+##  $ Nobility          : int  1 1 1 1 1 1 1 1 1 0 ...
+##  $ GoT               : int  1 0 0 0 0 0 1 1 0 0 ...
+##  $ CoK               : int  1 0 0 0 0 1 0 1 1 0 ...
+##  $ SoS               : int  1 1 0 0 1 1 1 1 0 1 ...
+##  $ FfC               : int  1 0 0 0 0 0 1 0 1 0 ...
+##  $ DwD               : int  0 0 1 1 0 0 0 1 0 0 ...</code></pre>
+<p>Давайте разберемся с переменными в датафрейме:</p>
+<p>Колонка <code>Name</code> - здесь все понятно. Важно, что эти имена записаны абсолютно по-разному: где-то с фамилией, где-то без, где-то в скобочках есть пояснения. Колонка <code>Allegiances</code> - к какому дому принадлежит персонаж. С этим сложно, иногда они меняют дома, здесь путаются сами семьи и персонажи, лояльные им. Особой разницы между <code>Stark</code> и <code>House Stark</code> нет. Следующие колонки - <code>Death Year</code>, <code>Book.of.Death</code>, <code>Death.Chapter</code>, <code>Book.Intro.Chapter</code> - означают номер главы, в которой персонаж впервые появляется, а так же номер книги, глава и год (от завоевания Вестероса Эйгоном Таргариеном), в которой персонаж умирает. <code>Gender</code> - <code>1</code> для мужчин, <code>0</code> для женщин. <code>Nobility</code> - дворянское происхождение персонажа. Последние 5 столбцов содержат информацию, появлялся ли персонаж в книге (всего книг пока что 5).</p>
+<p>Другая полезная функция для больших таблиц - функция <code>head()</code>: она выведет первые несколько (по дефолту 6) строчек датафрейма.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(got)</code></pre></div>
+<pre><code>##                      Name     Allegiances Death.Year Book.of.Death
+## 1          Addam Marbrand       Lannister         NA            NA
+## 2 Aegon Frey (Jinglebell)            None        299             3
+## 3         Aegon Targaryen House Targaryen         NA            NA
+## 4           Adrack Humble   House Greyjoy        300             5
+## 5          Aemon Costayne       Lannister         NA            NA
+## 6         Aemon Estermont       Baratheon         NA            NA
+##   Death.Chapter Book.Intro.Chapter Gender Nobility GoT CoK SoS FfC DwD
+## 1            NA                 56      1        1   1   1   1   1   0
+## 2            51                 49      1        1   0   0   1   0   0
+## 3            NA                  5      1        1   0   0   0   0   1
+## 4            20                 20      1        1   0   0   0   0   1
+## 5            NA                 NA      1        1   0   0   1   0   0
+## 6            NA                 NA      1        1   0   1   1   0   0</code></pre>
+<p>Есть еще функция <code>tail()</code>. Догадайтесь сами, что она делает.</p>
+<p>Для некоторых переменных полезно посмотреть таблицы частотности с помощью функции <code>table()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(got<span class="op">$</span>Allegiances)</code></pre></div>
+<pre><code>## 
+##           Arryn       Baratheon         Greyjoy     House Arryn House Baratheon 
+##              23              56              51               7               8 
+##   House Greyjoy House Lannister   House Martell     House Stark House Targaryen 
+##              24              21              12              35              19 
+##     House Tully    House Tyrell       Lannister         Martell   Night&#39;s Watch 
+##               8              11              81              25             116 
+##            None           Stark       Targaryen           Tully          Tyrell 
+##             253              73              17              22              15 
+##        Wildling 
+##              40</code></pre>
+<p>Уау! Очень просто и удобно, не так ли? Функция <code>table()</code> может принимать сразу несколько столбцов. Это удобно для получения <em>таблиц сопряженности</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(got<span class="op">$</span>Allegiances, got<span class="op">$</span>Gender)</code></pre></div>
+<pre><code>##                  
+##                     0   1
+##   Arryn             3  20
+##   Baratheon         6  50
+##   Greyjoy           4  47
+##   House Arryn       3   4
+##   House Baratheon   0   8
+##   House Greyjoy     1  23
+##   House Lannister   2  19
+##   House Martell     7   5
+##   House Stark       6  29
+##   House Targaryen   5  14
+##   House Tully       0   8
+##   House Tyrell      4   7
+##   Lannister        12  69
+##   Martell           7  18
+##   Night&#39;s Watch     0 116
+##   None             51 202
+##   Stark            21  52
+##   Targaryen         1  16
+##   Tully             2  20
+##   Tyrell            6   9
+##   Wildling         16  24</code></pre>
+</div>
+<div id="subset" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Subsetting</h3>
+<p>Как мы обсуждали на прошлом занятии, мы можем сабсеттить (т.е. выделять часть датафрейма) датафрейм, обращаясь к нему и как к матрице: <em>датафрейм[вектор_с_номерами_строк, вектор_с_номерами_колонок]</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got[<span class="dv">100</span><span class="op">:</span><span class="dv">115</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<pre><code>##                 Name   Allegiances
+## 100        Blue Bard  House Tyrell
+## 101    Bonifer Hasty     Lannister
+## 102           Borcas Night&#39;s Watch
+## 103  Boremund Harlaw       Greyjoy
+## 104     Boros Blount     Baratheon
+## 105           Borroq      Wildling
+## 106      Bowen Marsh Night&#39;s Watch
+## 107       Bran Stark   House Stark
+## 108   Brandon Norrey         Stark
+## 109          Brenett          None
+## 110 Brienne of Tarth         Stark
+## 111            Bronn     Lannister
+## 112    Brown Bernarr Night&#39;s Watch
+## 113           Brusco          None
+## 114   Bryan Fossoway     Baratheon
+## 115      Bryce Caron     Baratheon</code></pre>
+<p>и используя имена колонок:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got[<span class="dv">508</span><span class="op">:</span><span class="dv">515</span>, <span class="st">&quot;Name&quot;</span>]</code></pre></div>
+<pre><code>## [1] &quot;Mance Rayder&quot;    &quot;Mandon Moore&quot;    &quot;Maric Seaworth&quot;  &quot;Marei&quot;          
+## [5] &quot;Margaery Tyrell&quot; &quot;Marillion&quot;       &quot;Maris&quot;           &quot;Marissa Frey&quot;</code></pre>
+<p>и даже используя вектора названий колонок!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got[<span class="dv">508</span><span class="op">:</span><span class="dv">515</span>, <span class="kw">c</span>(<span class="st">&quot;Name&quot;</span>, <span class="st">&quot;Allegiances&quot;</span>, <span class="st">&quot;Gender&quot;</span>)]</code></pre></div>
+<pre><code>##                Name     Allegiances Gender
+## 508    Mance Rayder        Wildling      1
+## 509    Mandon Moore       Baratheon      1
+## 510  Maric Seaworth House Baratheon      1
+## 511           Marei            None      0
+## 512 Margaery Tyrell    House Tyrell      0
+## 513       Marillion           Arryn      1
+## 514           Maris        Wildling      0
+## 515    Marissa Frey            None      0</code></pre>
+<p>Мы можем вытаскивать отдельные колонки как векторы:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">houses &lt;-<span class="st"> </span>got<span class="op">$</span>Allegiances
+<span class="kw">unique</span>(houses) <span class="co">#посмотреть все уникальные значения - почти как с помощью table()</span></code></pre></div>
+<pre><code>##  [1] &quot;Lannister&quot;       &quot;None&quot;            &quot;House Targaryen&quot; &quot;House Greyjoy&quot;  
+##  [5] &quot;Baratheon&quot;       &quot;Night&#39;s Watch&quot;   &quot;Arryn&quot;           &quot;House Stark&quot;    
+##  [9] &quot;House Tyrell&quot;    &quot;Tyrell&quot;          &quot;Stark&quot;           &quot;Greyjoy&quot;        
+## [13] &quot;House Lannister&quot; &quot;Martell&quot;         &quot;House Martell&quot;   &quot;Wildling&quot;       
+## [17] &quot;Targaryen&quot;       &quot;House Arryn&quot;     &quot;House Tully&quot;     &quot;Tully&quot;          
+## [21] &quot;House Baratheon&quot;</code></pre>
+<p>Итак, давайте решим нашу первую задачу - вытащим в отдельный датасет всех представителей Ночного Дозора. Для этого нам нужно создать вектор логических значений - результат сравнений колонки <code>Allegiances</code> со значением <code>&quot;Night's Watch&quot;</code> и использовать его как вектор индексов для датафрейма.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vectornight &lt;-<span class="st"> </span>got<span class="op">$</span>Allegiances <span class="op">==</span><span class="st"> &quot;Night&#39;s Watch&quot;</span>
+<span class="kw">head</span>(vectornight)</code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Теперь этот вектор с <code>TRUE</code> и <code>FALSE</code> нам надо использовать для индексирования строк. Но что со столбцами? Если мы хотем сохранить все столбцы, то после запятой внутри квадратных скобок нам не нужно ничего указывать:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nightswatch &lt;-<span class="st"> </span>got[vectornight, ]
+<span class="kw">head</span>(nightswatch)</code></pre></div>
+<pre><code>##                                 Name   Allegiances Death.Year Book.of.Death
+## 7  Aemon Targaryen (son of Maekar I) Night&#39;s Watch        300             4
+## 10                            Aethan Night&#39;s Watch         NA            NA
+## 13                     Alan of Rosby Night&#39;s Watch        300             5
+## 16                            Albett Night&#39;s Watch         NA            NA
+## 24                    Alliser Thorne Night&#39;s Watch         NA            NA
+## 49                             Arron Night&#39;s Watch         NA            NA
+##    Death.Chapter Book.Intro.Chapter Gender Nobility GoT CoK SoS FfC DwD
+## 7             35                 21      1        1   1   0   1   1   0
+## 10            NA                  0      1        0   0   0   1   0   0
+## 13             4                 18      1        1   0   1   1   0   1
+## 16            NA                 26      1        0   1   0   0   0   0
+## 24            NA                 19      1        0   1   1   1   0   1
+## 49            NA                 75      1        0   0   0   1   0   1</code></pre>
+<p>Вуаля! Все это можно сделать проще и в одну строку:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nightswatch &lt;-<span class="st"> </span>got[got<span class="op">$</span>Allegiances <span class="op">==</span><span class="st"> &quot;Night&#39;s Watch&quot;</span>, ]</code></pre></div>
+<p>И не забывайте про запятую!</p>
+<p>Теперь попробуем вытащить одновременно всех Одичалых (<code>Wildling</code>) и всех представителей Ночного Дозора. Это можно сделать, используя оператор <code>|</code> (ИЛИ) при выборе колонок:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nightwatch_wildling &lt;-
+<span class="st">  </span>got[got<span class="op">$</span>Allegiances <span class="op">==</span><span class="st"> &quot;Night&#39;s Watch&quot;</span> <span class="op">|</span><span class="st"> </span>got<span class="op">$</span>Allegiances <span class="op">==</span><span class="st"> &quot;Wildling&quot;</span>, ]
+
+<span class="kw">head</span>(nightwatch_wildling)</code></pre></div>
+<pre><code>##                                 Name   Allegiances Death.Year Book.of.Death
+## 7  Aemon Targaryen (son of Maekar I) Night&#39;s Watch        300             4
+## 10                            Aethan Night&#39;s Watch         NA            NA
+## 13                     Alan of Rosby Night&#39;s Watch        300             5
+## 16                            Albett Night&#39;s Watch         NA            NA
+## 24                    Alliser Thorne Night&#39;s Watch         NA            NA
+## 49                             Arron Night&#39;s Watch         NA            NA
+##    Death.Chapter Book.Intro.Chapter Gender Nobility GoT CoK SoS FfC DwD
+## 7             35                 21      1        1   1   0   1   1   0
+## 10            NA                  0      1        0   0   0   1   0   0
+## 13             4                 18      1        1   0   1   1   0   1
+## 16            NA                 26      1        0   1   0   0   0   0
+## 24            NA                 19      1        0   1   1   1   0   1
+## 49            NA                 75      1        0   0   0   1   0   1</code></pre>
+<blockquote>
+<p>Кажется очевидным следующий вариант: <code>got[got$Allegiances == c(&quot;Night's Watch&quot;, &quot;Wildling&quot;),]</code>. Однако это выдаст не совсем то, что нужно, хотя результат может показаться верным на первый взгляд. Попробуйте самостоятельно ответить на вопрос, что происходит в данном случае и чем результат отличается от предполагаемого. Подсказка: вспомните правило recycling.</p>
+</blockquote>
+<p>Для таких случаев есть удобный оператор <code>%in%</code>, который позволяет сравнить каждое значение вектора с целым набором значений. Если значение вектора хотя бы один раз встречается в векторе справа от <code>%in%</code>, то результат - <code>TRUE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">6</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nightwatch_wildling &lt;-<span class="st"> </span>got[got<span class="op">$</span>Allegiances <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Night&#39;s Watch&quot;</span>, <span class="st">&quot;Wildling&quot;</span>), ]
+<span class="kw">head</span>(nightwatch_wildling)</code></pre></div>
+<pre><code>##                                 Name   Allegiances Death.Year Book.of.Death
+## 7  Aemon Targaryen (son of Maekar I) Night&#39;s Watch        300             4
+## 10                            Aethan Night&#39;s Watch         NA            NA
+## 13                     Alan of Rosby Night&#39;s Watch        300             5
+## 16                            Albett Night&#39;s Watch         NA            NA
+## 24                    Alliser Thorne Night&#39;s Watch         NA            NA
+## 49                             Arron Night&#39;s Watch         NA            NA
+##    Death.Chapter Book.Intro.Chapter Gender Nobility GoT CoK SoS FfC DwD
+## 7             35                 21      1        1   1   0   1   1   0
+## 10            NA                  0      1        0   0   0   1   0   0
+## 13             4                 18      1        1   0   1   1   0   1
+## 16            NA                 26      1        0   1   0   0   0   0
+## 24            NA                 19      1        0   1   1   1   0   1
+## 49            NA                 75      1        0   0   0   1   0   1</code></pre>
+</div>
+<div id="newcol" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> Создание новых колонок</h3>
+<p>Давайте создадим новую колонку, которая будет означать, жив ли еще персонаж (по книгам). Заметьте, что в этом датасете, хоть он и посвящен смертям персонажей, нет нужной колонки. Мы можем попытаться &quot;вытащить&quot; эту информацию. В колонках <code>Death.Year</code>, <code>Death.Chapter</code> и <code>Book.of.Death</code> стоит <code>NA</code> у многих персонажей. Например, у <code>&quot;Arya Stark&quot;</code>, которая и по книгам, и по сериалу живее всех живых и мертвых:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got[got<span class="op">$</span>Name <span class="op">==</span><span class="st"> &quot;Arya Stark&quot;</span>, ]</code></pre></div>
+<pre><code>##          Name Allegiances Death.Year Book.of.Death Death.Chapter
+## 56 Arya Stark       Stark         NA            NA            NA
+##    Book.Intro.Chapter Gender Nobility GoT CoK SoS FfC DwD
+## 56                  2      0        1   1   1   1   1   1</code></pre>
+<p>Следовательно, если в <code>Book.of.Death</code> стоит <code>NA</code>, мы можем предположить, что Джордж Мартин еще не занес своей карающей руки над этим героем.</p>
+<p>Мы можем создать новую колонку <code>Is.Alive</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="kw">is.na</span>(got<span class="op">$</span>Book.of.Death)</code></pre></div>
+<p>Готово! Как легко, просто и элегантно, не так ли? Но в жизни часто бывает все сложнее, поэтому давайте научимся еще некоторым важным инструментам.</p>
+</div>
+</div>
+<div id="loopsetc" class="section level2">
+<h2><span class="header-section-number">3.2</span> Циклы, условия, создание функций</h2>
+<div id="ifelse" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> If, else, else if</h3>
+<p>Как и во всех &quot;нормальных&quot; языках программирования, в R есть if-else statements.</p>
+<p>Например:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">na_slovah &lt;-<span class="st"> &quot;Лев Толстой&quot;</span>
+<span class="cf">if</span> (na_slovah <span class="op">==</span><span class="st"> &quot;Лев Толстой&quot;</span>){
+  na_dele =<span class="st"> &quot;Парень простой&quot;</span>
+} <span class="cf">else</span> {na_dele =<span class="st"> </span>na_slovah} 
+
+na_dele</code></pre></div>
+<pre><code>## [1] &quot;Парень простой&quot;</code></pre>
+<p>В круглых скобках после <code>if</code> - условие. Если оно <code>TRUE</code>, то выполняется то, что внутри последующих фигурных. Если не выполняется, то выполняется то, что в фигурных скобках после <code>else</code> (если <code>else</code> вообще присутствует).</p>
+<p>Можно использовать несколько условий:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">na_slovah &lt;-<span class="st"> &quot;Алексей Толстой&quot;</span>
+<span class="cf">if</span> (na_slovah <span class="op">==</span><span class="st"> &quot;Лев Толстой&quot;</span>){
+  na_dele =<span class="st"> &quot;Парень простой&quot;</span>
+} <span class="cf">else</span> <span class="cf">if</span> (na_slovah <span class="op">==</span><span class="st"> &quot;Алексей Толстой&quot;</span>) {
+  na_dele =<span class="st"> &quot;Лев Толстой&quot;</span>
+} <span class="cf">else</span> {na_dele =<span class="st"> </span>na_slovah}
+
+na_dele</code></pre></div>
+<pre><code>## [1] &quot;Лев Толстой&quot;</code></pre>
+<p>Тем не менее, с <code>if</code>, <code>else</code>, <code>else if</code> есть одна серьезная проблема - на входе нельзя дать вектор, можно только единственное значение. Какая боль! Для решения этой проблемы можно воспользоваться функцией <code>ifelse()</code> или циклами.</p>
+</div>
+<div id="ifelse" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Функция ifelse()</h3>
+<p>Функция <code>ifelse()</code> принимает три аргумента - 1) условие (т.е., по сути, логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>), 2) что выдавать в случае <code>TRUE</code>, 3) что выдавать в случае <code>FALSE</code>. Вот это как раз мы можем применить уже к нашим данным.</p>
+<p>Давайте сначала сотрем созданную колонку <code>Is.Alive</code>. Для этого присвоим ей значение <code>NULL</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="ot">NULL</span></code></pre></div>
+<p>Затем создадим ее заново, но уже как текстовую с помощью ifelse():</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(got<span class="op">$</span>Book.of.Death), <span class="st">&quot;Alive&quot;</span>, <span class="st">&quot;Dead&quot;</span>)</code></pre></div>
+<blockquote>
+<p>К сожалению, аналога <code>else if</code> в этой функции нет. Но если у вас больше, чем два варианта, то никто не мешает использовать <code>ifelse()</code> внутри <code>ifelse()</code></p>
+</blockquote>
+</div>
+<div id="for" class="section level3">
+<h3><span class="header-section-number">3.2.3</span> For loops</h3>
+<p>Во многих других языках программирования циклы (типа <code>for</code> и <code>while</code>) - это основа основ. Но не в R. В R они, конечно, есть, но использовать их не рекомендуется. Векторизированные операции в R экономнее - как в плане более короткого и читаемого кода, так и в плане скорости.</p>
+<blockquote>
+<p>Векторизованные функции часто написаны на более низкоуровневом языке (например, С), которые быстрее R.</p>
+</blockquote>
+<p>Поэтому дважды подумайте, прежде чем делать то, что я сейчас покажу! Почти всегда в R можно обойтись без циклов.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="ot">NULL</span>
+got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="kw">character</span>(<span class="kw">nrow</span>(got)) <span class="co">#сделаем вектор, заполненный пустыми строками</span>
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(got)) {
+  <span class="cf">if</span> (<span class="kw">is.na</span>(got<span class="op">$</span>Book.of.Death[i])) {
+  got<span class="op">$</span>Is.Alive[i] &lt;-<span class="st"> &quot;Alive&quot;</span>
+  } <span class="cf">else</span> {
+  got<span class="op">$</span>Is.Alive[i] &lt;-<span class="st"> &quot;Dead&quot;</span>
+  }
+}</code></pre></div>
+<p>Ужас какой! Да еще и легко ошибиться. К тому, чтобы НЕ использовать циклы обычно получается приучиться не сразу у тех, кто пришел из других языков программирования. Часто кажется, что именно в данном случае без циклов не обойтись, но в подавляющем числе случаев это не так. Дело в том, что обычно мы работаем в R с датафреймами, которые представляют собой множество относительно независимых наблюдений. Если мы хотим провести какие-нибудь операции с этими наблюдениями, то они обычно могут быть выполнены параллельно. Скажем, вы хотите для каждого испытуемого пересчитать его массу из фунтов в килограммы. Этот пересчет осуществляется по одинаковой формуле для каждого испытуемого. Эта формула не изменится из-за того, что какой-то испытуемый слишком большой или слишком маленький - для следующего испытуемого формула будет прежняя. Если Вы встречаете подобную задачу (где функцию можно применить независимо для всех значений), то без цикла <code>for</code> вполне можно обойтись.</p>
+<blockquote>
+<p>После этих объяснений кому-то может показаться странным, что я вообще упоминаю про эти циклы. Но для кого-то циклы <code>for</code> настолько привычны, что их полное отсутствие в курсе может показаться еще более странным. Поэтому лучше от меня, чем на улице.</p>
+</blockquote>
+<p>Бывают случаи, в которых расчет значения в строчке все-таки зависит от предыдущих, но и тогда можно обойтись без циклов! Например, для подсчета кумулятивной суммы можно использовать функцию <code>cumsum()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>##  [1]  1  3  6 10 15 21 28 36 45 55</code></pre>
+<p>Существуют и исключения - некоторые функции не векторизованы. Но и тогда можно обойтись без <code>for</code>. В R есть &quot;скрытые&quot; циклы - семейство функций <code>apply()</code>. Но сначала нам нужно научиться создавать собственные функции.</p>
+<blockquote>
+<p>Вообще, если писать циклы <code>for</code> корректно, то они не такие уж и медленные. Главное --- заранее создавать переменную нужного размера и не изменять размер объекта при каждой итерации цикла. Это основная причина &quot;тормознутости&quot; циклов в R. Тем не менее, циклов следует избегать по той причине, что они со скрипом вписываются в логику функционального программирования в R, поэтому решения без циклов <code>for</code> обычно оказываются проще и элегантнее.</p>
+</blockquote>
+</div>
+<div id="newfun" class="section level3">
+<h3><span class="header-section-number">3.2.4</span> Создание функций</h3>
+<p>Поздравляю, сейчас мы выйдем на качественно новый уровень владения R. Вместо того, чтобы пользоваться теми функциями, которые уже написали за нас, мы можем сами создавать свои функции! В этом нет ничего сложного. Функция - это такой же объект в R, как и остальные. Давайте разберем на примере создания функции <code>sumofsquares()</code>, которая будет считать сумму квадратичных отклонений от среднего: <span class="math inline">\(Sum of squares = \sum_{i=1}^{n}(x_i - \bar{x})^2\)</span></p>
+<p>Эта формула будет нам часто встречаться, когда мы перейдем к статистике!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sumofsquares &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  centralized_x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)
+  squares &lt;-<span class="st"> </span>centralized_x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>
+  sum_of_squares &lt;-<span class="st"> </span><span class="kw">sum</span>(squares)
+  <span class="kw">return</span>(sum_of_squares)
+}
+<span class="kw">sumofsquares</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 82.5</code></pre>
+<p>Синтаксис создания функции внешне похож на создание циклов. Мы пишем ключевое слово <code>function</code>, в круглых скобках обозначаем переменные, с которыми собираемся что-то делать. Внутри фигурных скобок пишем выражения, которые будут выполняться при запуске функции. У функции есть свое собственное окружение --- место, где хранятся переменные. Вот именно те объекты, которые мы передаем в скобочках, и будут в окружении, так же как и &quot;обычные&quot; переменные для нас в глобальном окружении. Это означает, что функция будет искать переменные в первую очередь среди объектов, которые переданы в круглых скобочках. С ними функция и будет работать. На выходе функция выдаст то, что будет закинуто в <code>return()</code>. Однако функция <code>return()</code> часто опускается: если ее нет, то функция будет выводить результат последнего выражения.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> Таким образом, нашу функцию можно написать короче:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sumofsquares &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  centralized_x &lt;-<span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)
+  squares &lt;-<span class="st"> </span>centralized_x <span class="op">^</span><span class="st"> </span><span class="dv">2</span>
+  <span class="kw">sum</span>(squares)
+}
+<span class="kw">sumofsquares</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 82.5</code></pre>
+<p>Можно еще сократить функцию:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sumofsquares &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+}
+<span class="kw">sumofsquares</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 82.5</code></pre>
+<p>На самом деле, если функция занимает всего одну строчку, то фигурные скобки и не нужны.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sumofsquares &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+
+<span class="kw">sumofsquares</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 82.5</code></pre>
+<p>Вообще, фигурные скобки используются для того, чтобы выполнить серию выражений, но вернуть только результат выполнения последнего выражения. Это можно использовать, чтобы не создавать лишних временных переменных в глобальном окружении.</p>
+<p>Когда стоит создавать функции? Существует <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">&quot;правило трех&quot;</a> - если у вас есть три куска очень похожего кода, то самое время превратить код в функцию. Это очень условное правило, но, действительно, стоит избегать копипастинга в коде. В этом случае очень легко ошибиться, код становится нечитаемым.</p>
+<p>Но есть и другой подход к созданию функций. Их стоит создавать не столько для того, чтобы использовать тот же код снова, сколько для абстрагирования от того, что происходит в отдельных строчках кода. Если несколько строчек кода были написаны для того, чтобы решить одну задачу, которой можно дать понятное название (например, подсчет какой-то особенной метрики, для которой нет готовой функции в R), то этот код стоит обернуть в функцию. Если функция работает корректно, то теперь не нужно думать над тем, что происходит внутри нее. Вы ее можете мысленно представить как операцию, которая имеет определенный вход и выход --- как и встроенные функции в R.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+The reason for writing a function is not to reuse its code, but to name the operation it performs.
+</p>
+— Tim &quot;Agile Otter&quot; Ottinger (<span class="citation">(<span class="citeproc-not-found" data-reference-id="tottinge"><strong>???</strong></span>)</span>) <a href="https://twitter.com/tottinge/status/293776089099153408?ref_src=twsrc%5Etfw">January 22, 2013</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</div>
+<div id="apply" class="section level3">
+<h3><span class="header-section-number">3.2.5</span> Cемейство функций apply()</h3>
+<p>Семейство? Да, их целое множество: <code>apply()</code>, <code>lapply()</code>,<code>sapply()</code>, <code>vapply()</code>,<code>tapply()</code>,<code>mapply()</code>, <code>rapply()</code>... Ладно, не пугайтесь, всех их знать не придется. Обычно достаточно первых двух-трех. Проще всего пояснить как они работают на простой матрице с числами:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">4</span>)
+A </code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code>apply()</code> вы можете в буквальном смысле &quot;применить&quot; какую либо функцию к матрице или датафрейму. Правда, эта функция будет пытаться превратить датафрейм в матрицу, так что будьте осторожны. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> --- Ваши данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.е. для каждого элемента по отдельности), а <code>FUN</code> --- это функция, которую вы хотите применить, но без скобок <code>()</code>! <code>apply()</code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
+<div class="figure">
+<img src="images/Apply_function.png" alt="apply" width="400" />
+<p class="caption">apply</p>
+</div>
+<p>Давайте разберем на примере:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="dv">1</span>, sum) <span class="co">#сумма по каждой строчке</span></code></pre></div>
+<pre><code>## [1] 22 26 30</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="dv">2</span>, sum) <span class="co">#сумма по каждой колонке</span></code></pre></div>
+<pre><code>## [1]  6 15 24 33</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), sum) <span class="co">#кхм... сумма каждого элемента</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    4    7   10
+## [2,]    2    5    8   11
+## [3,]    3    6    9   12</code></pre>
+<p>Заметьте, мы вставляем функцию (а не ее аутпут!) как инпут в функцию.</p>
+<div class="figure">
+<img src="images/monitor.jpg" width="400" />
+
+</div>
+</div>
+<div id="anon" class="section level3">
+<h3><span class="header-section-number">3.2.6</span> Анонимные функции</h3>
+<p>Если вдумаетесь, то тут возникает определенная сложность: функция <code>apply()</code> будет работать только в том случае, если функция принимает первым аргументом именно то, что мы ей даем... А если это не так? Тогда мы можем создать <em>анонимные функции</em>!</p>
+<blockquote>
+<p>Еще можно написать нужные аргументы через запятую после аргумента FUN:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="dv">1</span>, weighted.mean, <span class="dt">w =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0.1</span>)) </code></pre></div>
+<pre><code>## [1] 4.9 5.9 6.9</code></pre>
+<p>Анонимные функции - это функциии, которые будут использоваться один раз и без названия.</p>
+<blockquote>
+<p>Питонистам знакомо понятие <em>лямбда-функций</em>. Да, это то же самое</p>
+</blockquote>
+<p>Например, мы можем посчитать сумму квадратичных отклонений от среднего без называния этой функции:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
+<pre><code>## [1] 45 45 45</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
+<pre><code>## [1] 2 2 2 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="cf">function</span>(x) <span class="kw">sum</span>((x<span class="op">-</span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    0    0    0    0
+## [2,]    0    0    0    0
+## [3,]    0    0    0    0</code></pre>
+<p>Как и в случае с обычной функцией, в качестве <code>x</code> выступает объект, с которым мы хотим что-то сделать, а дальше следует функция, которую мы собираемся применить к <code>х</code>. Можно использовать не <code>х</code>, а что угодно, как и в обычных функциях:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(whatevername) <span class="kw">sum</span>((whatevername<span class="op">-</span><span class="kw">mean</span>(whatevername))<span class="op">^</span><span class="dv">2</span>))</code></pre></div>
+<pre><code>## [1] 45 45 45</code></pre>
+<p>Ок, с <code>apply()</code> разобрались. А что с остальными? Некоторые из них еще проще и не требуют индексов, например, <code>lapply</code> (для применения к каждому элементу списка) и <code>sapply()</code> - упрощенная версия <code>lapply()</code>, которая пытается по возможности &quot;упростить&quot; результат до вектора или матрицы. Давайте теперь сделаем то же самое, что мы и делали (создание колонки <code>got$Is.Alive</code>), но с помощью <code>sapply()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="ot">NA</span>
+got<span class="op">$</span>Is.Alive &lt;-<span class="st"> </span><span class="kw">sapply</span>(got<span class="op">$</span>Book.of.Death, <span class="cf">function</span> (x) <span class="kw">ifelse</span>(<span class="kw">is.na</span>(x), <span class="st">&quot;Alive&quot;</span>, <span class="st">&quot;Dead&quot;</span>))</code></pre></div>
+<p>Можно применять функции <code>lapply()</code> и <code>sapply()</code> на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. <a href="intro.html#df">2.6</a>), то итерироваться эти функции будут по колонкам:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(got, class)</code></pre></div>
+<pre><code>## $Name
+## [1] &quot;character&quot;
+## 
+## $Allegiances
+## [1] &quot;character&quot;
+## 
+## $Death.Year
+## [1] &quot;integer&quot;
+## 
+## $Book.of.Death
+## [1] &quot;integer&quot;
+## 
+## $Death.Chapter
+## [1] &quot;integer&quot;
+## 
+## $Book.Intro.Chapter
+## [1] &quot;integer&quot;
+## 
+## $Gender
+## [1] &quot;integer&quot;
+## 
+## $Nobility
+## [1] &quot;integer&quot;
+## 
+## $GoT
+## [1] &quot;integer&quot;
+## 
+## $CoK
+## [1] &quot;integer&quot;
+## 
+## $SoS
+## [1] &quot;integer&quot;
+## 
+## $FfC
+## [1] &quot;integer&quot;
+## 
+## $DwD
+## [1] &quot;integer&quot;
+## 
+## $Is.Alive
+## [1] &quot;character&quot;</code></pre>
+<p>Еще одна функция из семейства <code>apply()</code> - функция <code>replicate()</code> - самый простой способ повторить одну и ту же операцию много раз. Обычно это используется при симуляции данных и моделировании. Например, давайте сделаем выборку из логнормального распределения:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>) <span class="co">#Это сделает выбор случайных чисел воспроизводимым</span>
+samp &lt;-<span class="st"> </span><span class="kw">rlnorm</span>(<span class="dv">30</span>)
+<span class="kw">hist</span>(samp)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p>А теперь давайте сделаем 1000 таких выборок и из каждой возьмем среднее:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sampdist &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">1000</span>, <span class="kw">mean</span>(<span class="kw">rlnorm</span>(<span class="dv">30</span>)))
+<span class="kw">hist</span>(sampdist)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<blockquote>
+<p>Про функции для генерации случайных чисел и про визуализацию мы поговорим в следующие дни.</p>
+</blockquote>
+<p>Если хотите познакомиться с семейством <code>apply()</code> чуточку ближе, то рекомендую <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">вот этот туториал</a>.</p>
+</div>
+</div>
+<div id="text" class="section level2">
+<h2><span class="header-section-number">3.3</span> Работа с текстом</h2>
+<p>Работа с текстом - это отдельная и сложная задача. И у R есть мощные инструменты для этого!. Для более-менее продвинутой работы с текстом придется выучить специальный язык - &quot;регулярные выражения&quot; (<em>regular expressions, regex, regexp</em>). Регулярные выражения реализованы на многих языках, в том числе в R. Но мы пока обойдемся наиболее простыми функциями, которые покроют большую часть того, что нам нужно уметь делать при работе с текстом.</p>
+<p>У нас есть две текстовые переменные - <code>Name</code> (имя персонажа) и <code>Allegiances</code> (дом, которому персонаж принадлежит/лоялен). Давайте попробуем вытащить всех персонажей, лояльных Старкам - как тех, у которых в <code>Allegiances</code> стоит <code>&quot;House Stark&quot;</code>, так и тех, у кого стоит <code>&quot;Stark&quot;</code>. В этом нам поможет функция <code>grep()</code>. Заметьте, что в этой функции необычного - первым ее аргументом является паттерн, который мы ищем, а не данные (как обычно).</p>
+<blockquote>
+<p>Я рекомендую пока что ставить параметр <code>fixed = TRUE</code>. Иначе он будет искать по правилам регулярных выражений (да, R по умолчанию работает именно с регулярными выражениями). Сейчас это не создаст нам проблем, а вот если будете искать что-то с математическими или другими знаками - проблемы будут возникать. Регулярные выражения - это специальный язык поиска сложных паттернов в тексте. Типа &quot;Хочу все первые три знака после второго дефиса&quot;. Он выглядит страшным и совершенно не читаемым, но в нем нет ничего сложного. Если Вам нужно много работать с текстом, то уделите один день освоению &quot;регулярок&quot;! По умолчанию с помощью функции grep() идет поиск именно по регулярным выражениям. Чтобы это отключить, мы и используем параметр fixed = TRUE.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grep</span>(<span class="st">&quot;Stark&quot;</span>, got<span class="op">$</span>Allegiances, <span class="dt">fixed =</span> <span class="ot">TRUE</span>) </code></pre></div>
+<pre><code>##   [1]  17  25  29  30  47  53  56  65  69  85  90  91 107 108 110 127 128 133
+##  [19] 141 155 161 175 183 194 198 200 209 217 218 227 250 260 262 265 272 286
+##  [37] 326 328 340 342 343 346 348 353 362 367 381 392 397 398 405 411 413 414
+##  [55] 417 419 448 464 465 467 471 489 500 518 533 534 539 550 561 570 576 581
+##  [73] 590 607 613 623 645 647 664 686 697 698 699 702 705 706 709 713 717 726
+##  [91] 744 775 783 789 799 817 820 856 872 876 879 881 894 896 897 898 899 912</code></pre>
+<p>Результат --- индексы, которые мы можем использовать, чтобы вытащить всех Старков:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starks &lt;-<span class="st"> </span>got[<span class="kw">grep</span>(<span class="st">&quot;Stark&quot;</span>, got<span class="op">$</span>Allegiances, <span class="dt">fixed =</span> <span class="ot">TRUE</span>), ]
+<span class="kw">table</span>(starks<span class="op">$</span>Allegiances)</code></pre></div>
+<pre><code>## 
+## House Stark       Stark 
+##          35          73</code></pre>
+<p>Остались только Старки!</p>
+<blockquote>
+<p>Если вы вдруг при чтении файла не поставили <code>stringsAsFactors = FALSE</code>, то в полученной таблице останутся другие дома, пусть и с нулевыми значениями. Так работают факторы в R. Чтобы избавиться от &quot;пустых&quot; уровней факторов (иногда это нужно), можно воспользоваться простой функцией <code>droplevels()</code>. С character колонками такой магии не нужно.</p>
+</blockquote>
+<p>Хорошо, как находить что-то в текстовых переменных --- разобрались. А как заменять? У нас здесь есть очевидная задача: cовместить все <code>&quot;House Stark&quot;</code> и просто <code>&quot;Stark&quot;</code>, но для всех домов в оригинальном датасете. Для этого можно поменять все <code>&quot;House &quot;</code> на пустую строку <code>&quot;&quot;</code> с помощью функции <code>gsub()</code>. Она работает примерно так же как и <code>grep()</code>, но сначала ищет искомый паттерн (<code>&quot;House &quot;</code>), затем то, на что мы его меняем (<code>&quot;&quot;</code>), потом наш вектор. На выходе мы получим новый вектор, который можно подставить взамен старой колонки <code>got$Allegiances</code> (или создать новую колонку <code>got$Houses</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Houses &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&quot;House &quot;</span>, <span class="st">&quot;&quot;</span>, got<span class="op">$</span>Allegiances, <span class="dt">fixed =</span> <span class="ot">TRUE</span>)
+<span class="kw">table</span>(got<span class="op">$</span>Allegiances)</code></pre></div>
+<pre><code>## 
+##           Arryn       Baratheon         Greyjoy     House Arryn House Baratheon 
+##              23              56              51               7               8 
+##   House Greyjoy House Lannister   House Martell     House Stark House Targaryen 
+##              24              21              12              35              19 
+##     House Tully    House Tyrell       Lannister         Martell   Night&#39;s Watch 
+##               8              11              81              25             116 
+##            None           Stark       Targaryen           Tully          Tyrell 
+##             253              73              17              22              15 
+##        Wildling 
+##              40</code></pre>
+<p>Другая важная функция для работы с текстом: <code>nchar()</code> - количество знаков. Давайте найдем самое длинное имя в книгах Джорджа Мартина про лед, пламя, насилие и инцест:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="kw">nchar</span>(got<span class="op">$</span>Name))</code></pre></div>
+<pre><code>## [1] 33</code></pre>
+<p>33 символа! Интересно, у кого же это?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">longest &lt;-<span class="st"> </span><span class="kw">which.max</span>(<span class="kw">nchar</span>(got<span class="op">$</span>Name)) <span class="co">#index of the longest name</span>
+got[longest, <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<pre><code>##                                Name   Allegiances
+## 7 Aemon Targaryen (son of Maekar I) Night&#39;s Watch</code></pre>
+<p>А, ну, конечно, вот это вот пояснение в скобочках все испортило. Давайте его уберем.</p>
+<p>Для этого нам понадобится функция <code>substr()</code>. Она работает как &quot;ножницы&quot;: Сначала берем вектор значений, а потом два числа: откуда и покуда будем вырезать нужный кусок:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">aemon &lt;-<span class="st"> </span><span class="kw">substr</span>(got<span class="op">$</span>Name[longest], <span class="dv">1</span>, <span class="dv">15</span>)
+aemon</code></pre></div>
+<pre><code>## [1] &quot;Aemon Targaryen&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got<span class="op">$</span>Name[longest] &lt;-<span class="st"> </span>aemon </code></pre></div>
+<p>Ну и, конечно, нам нужно знать как объединять строки. Не в вектор, а в одно значение. Для этого есть простые функции <code>paste()</code> и <code>paste0()</code>. Для <code>paste()</code> можно выбрать разделить <code>sep =</code>, который по умолчанию является пробелом, а <code>paste0()</code> - это функция <code>paste()</code> с пустым разделителем по умолчанию:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;love&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;R is love&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;R&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;love&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Rislove&quot;</code></pre>
+<p>Обратите внимание: функция <code>paste()</code> принимает в качестве аргуметов векторы, чтобы соединить их в один вектор. Если нужно превратить один строковый вектор в одно значение, то можно поставить какое-нибудь значение параметра <code>collapse =</code> (по дефолту это <code>NULL</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phrase &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;All&quot;</span>, <span class="st">&quot;you&quot;</span>, <span class="st">&quot;need&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;love&quot;</span>), <span class="dt">collapse =</span> <span class="st">&quot; &lt;3 &quot;</span>)
+phrase</code></pre></div>
+<pre><code>## [1] &quot;All &lt;3 you &lt;3 need &lt;3 is &lt;3 love&quot;</code></pre>
+<p>Функция <code>strsplit()</code> делает наоборот - она разбирает значение на вектор с выбранным разделителем:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">strsplit</span>(phrase, <span class="dt">split =</span> <span class="st">&quot; &lt;3 &quot;</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;All&quot;  &quot;you&quot;  &quot;need&quot; &quot;is&quot;   &quot;love&quot;</code></pre>
+<blockquote>
+<p>Для тех, кто привык к C format (printf-style formatting), в R это можно сделать с помощью функции <code>sprintf()</code>:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sprintf</span>(<span class="st">&quot;%i на кроссовки; Трачу деньги на %s и трачу их без остановки&quot;</span>, <span class="dv">20000</span>, <span class="st">&quot;ерунду&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;20000 на кроссовки; Трачу деньги на ерунду и трачу их без остановки&quot;</code></pre>
+<p>Пока что этого будет нам достаточно для работы с текстом. В принципе, этих функций достаточно в большинстве случаев. Если же вдруг нужно копнуть глубже - придется освоить язык регулярных выражений. Он кажется страшным, но это займет у Вас всего пару часов с вот этим <a href="https://regexone.com/">удобным онлайн туториалом</a> и <a href="https://regex101.com/">этим онлайн инструментом</a>. Для базовой работы с текстом в R есть вот <a href="http://gastonsanchez.com/Handling_and_Processing_Strings_in_R.pdf">эта немного занудная, но короткая книжка</a>. В ней примерно все то же самое, что мы сегодня разобрали, но на более глубоком уровне.</p>
+</div>
+<div id="new_pack" class="section level2">
+<h2><span class="header-section-number">3.4</span> Работа с дополнительными пакетами</h2>
+<p>Пакеты в R - это обычно набор функций (иногда датасетов и т.п.) с документацией по ним. Они нужны для того, чтобы выйти за рамки функциональности базового R или же просто для того, чтобы сделать работу в R еще удобнее. Для R есть более 15000 пакетов (по данным на февраль 2020 года), которые вы можете скачать с зеркал Comprehensive R Archive Network (CRAN) с помощью простой функции <code>install.packages()</code>, где в качестве основного аргумента используется вектор имен скачиваемых пакетов.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;data.table&quot;</span>, <span class="st">&quot;dplyr&quot;</span>))</code></pre></div>
+<p>Для установки пакетов нужен интернет!</p>
+<p>Эти 15000+ пакетов содержат в себе уйму всякого. Некоторые представляют собой буквально одну удобную функцию, некоторые посвящены какой-то узкоспециализированной теме (например, работе с текстом), есть даже просто наборы всякой всячины от того или иного разработчика (например, пакет <code>Hmisc</code>). Кроме того, можно устанавливать пакеты из других источников и делать собственные.<br />
+После установки пакета Вы увидете его во вкладке Packages справа внизу</p>
+<div class="figure">
+<img src="images/packages.PNG" width="400" />
+
+</div>
+<p>Затем нужно &quot;присоединить&quot; этот пакет. Запомните: устанавливаете пакет всего один раз, а присоединяете его в каждой новой сессии.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="figure">
+<img src="images/pack2.PNG" width="400" />
+
+</div>
+</div>
+<div id="reshape" class="section level2">
+<h2><span class="header-section-number">3.5</span> Решейпинг данных</h2>
+<p>Теперь мы возьмем данные по битвам из книг про Игру Престолов. Каждая строчка означает какую-то битву, описанную в книгах нашего любомого пухляша-бородача. Подробную информацию про набор данных можно найти <a href="https://www.kaggle.com/mylesoneill/game-of-thrones">здесь</a>. Скачать данные можно <a href="https://raw.githubusercontent.com/Pozdniakov/stats/master/data/character-deaths.csv">здесь</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bat &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/battles.csv&quot;</span>)</code></pre></div>
+<p>После освоения базовых возможностей датафрейма, становится понятно, что чего-то не хватает. Допустим, мы хотим узнать, в каких годах были наиболее эпичные битвы. Нам нужно посчитать среднее количество бойцов атакующей армии по годам. Зная все года битв, можно сделать так:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bat[bat<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">298</span>, <span class="st">&quot;attacker_size&quot;</span>], <span class="dt">na.rm =</span> T)</code></pre></div>
+<pre><code>## [1] 11175</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bat[bat<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">299</span>, <span class="st">&quot;attacker_size&quot;</span>], <span class="dt">na.rm =</span> T)</code></pre></div>
+<pre><code>## [1] 5134.308</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bat[bat<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">300</span>, <span class="st">&quot;attacker_size&quot;</span>], <span class="dt">na.rm =</span> T)</code></pre></div>
+<pre><code>## [1] 19333.33</code></pre>
+<p>Всякий раз, когда у Вас возникает желание сделать что-нибудь с помощью священного копипаста - задумайтесь: разве ради этого Вы пришли на курс? Конечно, нет! Как говорилось ранее, если появляется желание копипастить одни и те же строчки, это означает, что, скорее всего, это можно сделать быстрее, проще и лучше.</p>
+<p>Конечно, стандартными возможностями R, которые мы уже освоили, нашу задачу можно выполнить, но довольно неудобно:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(<span class="kw">unique</span>(bat<span class="op">$</span>year), <span class="cf">function</span>(x) <span class="kw">mean</span>(bat<span class="op">$</span>attacker_size[bat<span class="op">$</span>year <span class="op">==</span><span class="st"> </span>x], <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## [1] 11175.000  5134.308 19333.333</code></pre>
+<blockquote>
+<p>В принципе, есть много других способов сделать то же самое - функция <code>aggregate()</code>, <code>split()</code>, но мы на них останавливаться не будем.</p>
+</blockquote>
+<p>Тем не менее, задача аггрегации данных - это то, что необходимо постоянно. Усреднить значения по каждому испытуемому, получить средние значения по каждому из уровней всех переменных... А если нужно не усреднять, а делать что-то более сложное? Очевидно, что тут нам нужны какие-то новые инструменты, которых мы еще не знаем. И здесь у нас появляется важная развилка - есть два разных пакета, которые позволяют удобно делать агрегацию и другие операции, о которых мы говорили раньше (например, сабсеттинг) и о которых мы еще поговорим позднее.</p>
+<div id="holywar" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> data.table vs. dplyr</h3>
+<div class="figure">
+<img src="images/New-Mind-Map_1.jpg" />
+
+</div>
+<p>Начнем с пакета <strong><code>dplyr</code></strong> от создателя <code>ggplot2</code> (а еще <code>tidyr</code>, <code>stringr</code>, <code>lubridate</code>, <code>devtools</code>, <code>httr</code>, <code>readr</code> и много других популярных пакетов для R) Хэдли Уиэкхэма.</p>
+<blockquote>
+<p>Сейчас этот парень работает в RStudio, следы чего вы можете обнаружить. Например, откройте Help - Cheatsheets: Вы обнаружите читшиты для dplyr. Но не для data.table =)</p>
+</blockquote>
+<p>Этот подход сильно перерабатывает синтаксис R, отличается понятностью и читаемостью. Более того, он очень популярен, многие пакеты предполагают, что Вы именно с ним работаете и хорошо им владеете.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+bat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(attacker_size, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    year `mean(attacker_size, na.rm = T)`
+##   &lt;int&gt;                            &lt;dbl&gt;
+## 1   298                           11175 
+## 2   299                            5134.
+## 3   300                           19333.</code></pre>
+<p>Просто попытайтесь догадаться, что значат эти строчки: берем датафрейм, группируем по году, выводим какую-то суммирующию информацию по каждой группе.</p>
+<blockquote>
+<p>Оператор %&gt;% называется &quot;пайпом&quot; (pipe), т.е. &quot;трубой&quot;. Он означает, что следующая функция принимает на вход в качестве первого аргумента аутпут предыдущей. Фактически, это примерно то же самое, что и вставлять аутпут функции как первый инпут в другую функцию. Просто выглядит это красивее и читабельнее. Как будто данные пропускаются через трубы функций или конвеерную ленту на заводе, если хотите. А то, что первый параметр функции - это почти всегда данные, работает нам на руку. Этот оператор взят из пакета magrittr. Возможно, даже если вы не захотите пользоваться dplyr, использование пайпов Вам понравится. Ну а если нет, то тогда вперед к data.table!</p>
+</blockquote>
+<p>Множество пакетов, опирающихся и дополняющих <code>dplyr</code> (<code>magrittr</code>, <code>purrr</code>, <code>stringr</code>, <code>readr</code>, <code>tidyr</code>, <code>tibble</code> и т.д.), называют &quot;tidyverse&quot;. Эти пакеты предлагают альтернативные варианты для многих операций в R. Например, <code>stringr</code> дает удобные функции для работы со строковыми данными (фактически заменяя стандартные), пакет <code>readr</code> заменяет стандартный импорт данных, а <code>purrr</code> - функции типа <code>apply()</code>. Выходит, что это уже практически новый язык!</p>
+<p>Другой подход - пакет <strong><code>data.table</code></strong>. Он не так сильно перерабатывает стиль работы в R, но изменяет датафреймы, &quot;совершенствуя&quot; их. Этот пакет сильно повышает скорость обработки данных, поскольку написан с использованием более совершенных алгоритмов. <code>data.table</code> обладает более &quot;суровым&quot; и лаконичным синтаксисом:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;data.table&quot;</span>)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;data.table&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     between, first, last</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(bat)
+batdt[,<span class="kw">mean</span>(attacker_size, <span class="dt">na.rm =</span> T), by =<span class="st"> </span>year]</code></pre></div>
+<pre><code>##    year        V1
+## 1:  298 11175.000
+## 2:  299  5134.308
+## 3:  300 19333.333</code></pre>
+<p>Внешне все очень похоже на работу с обычным data.frame, но если приглядитесь, то увидите, что появился непонятный <em>by =</em> - это как раз-таки группировка. Более того, мы делаем анализ прямо в том месте, где раньше просто выбирали столбцы. Да и столбцы эти (как и строчки) мы выбираем без кавычек.</p>
+</div>
+<div id="what" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Так что же выбрать?</h3>
+<p>Мы остановимся на data.table. В принципе, если Вы освоили один пакет, то альтернативный пакет уже не нужен - про это можете почитать замечательную дискуссию от создателей пакетов. Основной вывод - оба пакета позволяют делать нужные нам вещи, но <a href="https://stackoverflow.com/questions/21435339/data-table-vs-dplyr-can-one-do-something-well-the-other-cant-or-does-poorly">разными способами</a>.</p>
+</div>
+<div id="dt" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> data.table</h3>
+<p>Мы начнем с очень милой функции под названием <code>fread()</code>. Эта функция похожа на функцию <code>read.table()</code>, но быстрее (воистину!) и автоматически подбирает параметры чтения файлов (обычно правильно). В большинстве случаев Вы можете просто использовать эту функцию без задания каких-либо параметров для чтения таблицы - и готово!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;data/battles.csv&quot;</span>)</code></pre></div>
+<blockquote>
+<p>Ну, на этом датасете Вы едва ли заметите разницу в скорости, а вот если у вас датасет побольше, скажем, на несколько десятков мегабайт, то разница будет заметна.</p>
+</blockquote>
+<p>Заметьте, теперь это уже не совсем датафрейм:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(batdt)</code></pre></div>
+<pre><code>## [1] &quot;data.table&quot; &quot;data.frame&quot;</code></pre>
+<p>Одновременно датафрейм и дататейбл! Это означает, что почти все, что мы умеем делать с датафреймом, мы можем делать так же и с дататейблом, но теперь нам открываются новые возможности (и новый синтаксис).</p>
+<blockquote>
+<p>Некоторые используют пакет data.table только для того, чтобы быстрее загружать данные. Если Вы захотите пойти этим путем, то нужно поставить параметр <code>data.table = FALSE</code> - тогда данные загрузятся как &quot;чистый&quot; датафрейм. Кроме того, в R можно использовать функцию, не подключая весь пакет с помощью оператора <code>::</code>. То есть вот так:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdataframe &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">fread</span>(<span class="st">&quot;data/battles.csv&quot;</span>, <span class="dt">data.table =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<blockquote>
+<p>Этот оператор <code>::</code> еще рекомендуется использовать, если у Вас есть есть несколько одноименных функций для одного и того же из разных пакетов, и есть риск запутаться в том, какой именно пакет вы используете.</p>
+</blockquote>
+<div id="base_dt" class="section level4">
+<h4><span class="header-section-number">3.5.3.1</span> Основы data.table</h4>
+<p>data.table обладает своим синтаксисом, напоминающим SQL (если Вы не знаете, что это, то Вы счастливый человек; ну а если знаете, то быстрее освоитесь). Главная формула звучит так:</p>
+<p><code>DT[i, j, by]</code></p>
+<p>Здесь <code>i</code> - это то, какие Вы выбираете строки. Очень похоже на обычный data.frame, не так ли? <code>j</code> - это то, что Вы считаете. Это тоже похоже на датафрейм - Вы выбираете колонки. Но тут есть важное различие - можно что-то считать прямо внутри <code>j</code>, т.е. внутри квадратных скобочек! <code>by</code> - это аггрегация по подгруппам.</p>
+<blockquote>
+<p>&quot;General form: DT[i, j, by] “Take DT, subset rows using <code>i</code>, then calculate <code>j</code> grouped by <code>by</code> &quot; (из читшита по data.table). Если проводить аналогии с SQL, то i = WHERE, j = SELECT | UPDATE, by = GROUP BY.</p>
+</blockquote>
+<p>Естественно, далеко не всегда используются сразу все три <code>i</code>, <code>j</code> и <code>by</code>. Но это дает прекрасные возможности делать сложные операции с данными в одну строчку. Как и в датафрейме, если Вы хотите выбрать все строчки, просто оставляете поле перед первой запятой пустым. Если не хотите делать группировку, то можете просто не писать вторую запятую. Если же не писать вообще запятых внутри квадратных скобок, то все внутри будет считаться как <code>i</code>, т.е. Вы будете выбирать только строки. Но я советую все-таки ставить одну запятую, чтобы не запутаться с тем, где выбираются строки (<code>i</code>), а где производятся манипуляции с колонками (<code>j</code>).</p>
+<p>Скажем, мы хотим посчитать средний размер защищающихся армий только для битв, где победили атакующие, группируя по регионам:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[attacker_outcome <span class="op">==</span><span class="st"> &quot;win&quot;</span>, <span class="kw">mean</span>(attacker_size, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), by =<span class="st"> </span>region]</code></pre></div>
+<pre><code>##             region       V1
+## 1: The Westerlands 9000.000
+## 2:  The Riverlands 4425.000
+## 3:       The North 1107.667
+## 4:  The Stormlands 3500.000
+## 5:       The Reach      NaN</code></pre>
+<p>Готово!</p>
+<p>Давайте разберем этот пример подробнее:</p>
+<ul>
+<li><code>i</code>: выбираем только те строки, где <code>attacker_outcome</code> равен <code>&quot;win&quot;</code>. Заметьте, мы тут используем не вектор (как если бы это была переменная), а название колонки и без кавычек!</li>
+<li><code>j</code>: прямо в <code>j</code> считаем средний размер атакующей армии. Опять же - без кавычек используем название столбца.</li>
+<li><code>by</code>: группируем по региону. То есть как бы делим дататейбл на пять дататейблов и применяем функцию среднего для каждого.</li>
+</ul>
+<p>В итоге мы получили новый дататейбл!</p>
+<p>По умолчанию новому столбцу будет присваиваться название <code>V1</code> (а если такая колонка есть, то <code>V2</code> и т.д.), но можно присвоить и свое название колонки. Для этого используйте круглые скобки и точку перед ними:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[attacker_outcome <span class="op">==</span><span class="st"> &quot;win&quot;</span>, 
+      .(<span class="dt">mean_attack =</span> <span class="kw">mean</span>(attacker_size, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
+      by =<span class="st"> </span>region]</code></pre></div>
+<pre><code>##             region mean_attack
+## 1: The Westerlands    9000.000
+## 2:  The Riverlands    4425.000
+## 3:       The North    1107.667
+## 4:  The Stormlands    3500.000
+## 5:       The Reach         NaN</code></pre>
+<blockquote>
+<p>.() - это то же самое, что и list(). То есть мы создаем список, а это значит, что мы можем сделать сразу несколько операций:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[attacker_outcome <span class="op">==</span><span class="st"> &quot;win&quot;</span>, 
+      .(<span class="dt">mean_attack =</span> <span class="kw">mean</span>(attacker_size, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
+        <span class="dt">max_attacker =</span> <span class="kw">max</span>(attacker_size, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), 
+      by =<span class="st"> </span>region]</code></pre></div>
+<pre><code>## Warning in gmax(attacker_size, na.rm = TRUE): No non-missing values found in at
+## least one group. Coercing to numeric type and returning &#39;Inf&#39; for such groups to
+## be consistent with base</code></pre>
+<pre><code>##             region mean_attack max_attacker
+## 1: The Westerlands    9000.000        15000
+## 2:  The Riverlands    4425.000        15000
+## 3:       The North    1107.667         4500
+## 4:  The Stormlands    3500.000         5000
+## 5:       The Reach         NaN         -Inf</code></pre>
+<p>Чтобы аггрегировать по двум условиям, нужно использовать конструкцию с <code>.()</code> в <code>by</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,.(<span class="dt">mean_attack =</span> <span class="kw">mean</span>(attacker_size, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), by =<span class="st"> </span>.(region, attacker_outcome)]</code></pre></div>
+<pre><code>##             region attacker_outcome mean_attack
+## 1: The Westerlands              win    9000.000
+## 2:  The Riverlands              win    4425.000
+## 3:  The Riverlands             loss   19000.000
+## 4:       The North              win    1107.667
+## 5:  The Stormlands              win    3500.000
+## 6:  The Crownlands             loss   12000.000
+## 7: Beyond the Wall             loss  100000.000
+## 8:       The Reach              win         NaN
+## 9:       The North                     5000.000</code></pre>
+</div>
+<div id="new_col_dt" class="section level4">
+<h4><span class="header-section-number">3.5.3.2</span> Создание новых колонок</h4>
+<p>В data.table есть специальный оператор <code>:=</code> для создания новых колонок.</p>
+<p>Давайте создадим новую колонку, по которой будет проще понять, кто победил в битве:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,outcome<span class="op">:</span><span class="er">=</span><span class="kw">ifelse</span>(attacker_outcome <span class="op">==</span><span class="st"> &quot;win&quot;</span>, 
+                       <span class="st">&quot;Победа атакующих&quot;</span>, 
+                       <span class="kw">ifelse</span>(attacker_outcome <span class="op">==</span><span class="st"> &quot;loss&quot;</span>, 
+                              <span class="st">&quot;Победа защищающихся&quot;</span>, 
+                              <span class="st">&quot;Исход неизвестен&quot;</span>))]</code></pre></div>
+<blockquote>
+<p>Оператор <code>:=</code> создает поверхностную копию, т.е. не копирует физически данные.</p>
+</blockquote>
+<p>Заметьте, мы даже не присваиваем результат выполнения этой операции новой переменной: просто в нашем batdt появилась новая колонка.</p>
+<blockquote>
+<p>Если мы хотим создать сразу несколько столбцов за раз, то можно использовать оператор <code>:=</code> как функцию:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[, <span class="st">&#39;:=&#39;</span>(<span class="dt">all_army =</span> attacker_size <span class="op">+</span><span class="st"> </span>defender_size, 
+             <span class="dt">ratio_army =</span> attacker_size <span class="op">/</span><span class="st"> </span>defender_size)]</code></pre></div>
+</div>
+<div id="chaining" class="section level4">
+<h4><span class="header-section-number">3.5.3.3</span> Chaining</h4>
+<p><em>Chaining</em> (формирование цепочки) - это что-то вроде альтернативы пайпам. В принципе, это можно делать и с обычным датафреймом или матрицей, но именно с data.table это становится удобным и клевым инструментом. А также способом &quot;сделать весь анализ в одну очень длинную строчку&quot;. Все просто - результатом вычислений в data.table обычно является новый data.table. И ничто не мешает нам делать несколько квадратных скобочек, превращая код в паравозик со множеством вагонов. Это позволяет избежать промежуточных присвоений переменных, как и в случае с пайпами.</p>
+<p>Давайте шаг за шагом создадим такой паровозик для того, чтобы сделать таблицу частот битв по регионам.</p>
+<p>Для начала нам нужно посчитать длину столбцов. Для этого в data.table есть <code>.N</code>, и это гораздо удобнее, чем считать <code>length()</code> какого-нибудь столбца:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[.N,]</code></pre></div>
+<pre><code>##                   name year battle_number     attacker_king
+## 1: Siege of Winterfell  300            38 Stannis Baratheon
+##               defender_king attacker_1 attacker_2 attacker_3 attacker_4
+## 1: Joffrey/Tommen Baratheon  Baratheon   Karstark    Mormont     Glover
+##    defender_1 defender_2 defender_3 defender_4 attacker_outcome battle_type
+## 1:     Bolton       Frey         NA         NA                             
+##    major_death major_capture attacker_size defender_size attacker_commander
+## 1:          NA            NA          5000          8000  Stannis Baratheon
+##    defender_commander summer   location    region note          outcome
+## 1:       Roose Bolton      0 Winterfell The North      Исход неизвестен
+##    all_army ratio_army
+## 1:    13000      0.625</code></pre>
+<blockquote>
+<p>Заметьте, мы используем <code>.N</code> в j (т.е. после первой запятой). Если мы используем <code>.N</code> в <code>i</code>, то получим просто последнюю строчку дататейбла.</p>
+</blockquote>
+<p>Если же мы аггрегируем по регионам, то получим таблицу частот регионов - что нам и нужно:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,.N, by =<span class="st"> </span>region]</code></pre></div>
+<pre><code>##             region  N
+## 1: The Westerlands  3
+## 2:  The Riverlands 17
+## 3:       The North 10
+## 4:  The Stormlands  3
+## 5:  The Crownlands  2
+## 6: Beyond the Wall  1
+## 7:       The Reach  2</code></pre>
+<p>Отличная альтернатива функции <code>table()</code>!</p>
+<p>Можно было сохранить результат в новой переменной, а можно просто продолжить работать с получившимся дататейблом, &quot;дописывая&quot; его.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,.N, by =<span class="st"> </span>region][<span class="kw">order</span>(<span class="op">-</span>N),]</code></pre></div>
+<pre><code>##             region  N
+## 1:  The Riverlands 17
+## 2:       The North 10
+## 3: The Westerlands  3
+## 4:  The Stormlands  3
+## 5:  The Crownlands  2
+## 6:       The Reach  2
+## 7: Beyond the Wall  1</code></pre>
+<p>Теперь мы отсортировали регионы по количеству битв. Мы используем функцию <code>order()</code>, чтобы посчитать ранг каждого значения нового столбца <code>N</code>, а потом использовать значения этого столбца для выбора строк в нужном порядке. Добавление минуса позволяет &quot;инвертировать&quot; этот порядок, чтобы получилось от большего к меньшему.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,.N, by =<span class="st"> </span>region][<span class="kw">order</span>(<span class="op">-</span>N),][N<span class="op">&gt;</span><span class="dv">2</span>,]</code></pre></div>
+<pre><code>##             region  N
+## 1:  The Riverlands 17
+## 2:       The North 10
+## 3: The Westerlands  3
+## 4:  The Stormlands  3</code></pre>
+<p>Продолжая наш паровозик, мы &quot;отрезали&quot; от получившегося дататейбла только те регионы, где <code>N</code> больше двух.</p>
+<p>Для лучшей читаемости можно организовать цепочку таким образом:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,.N, by =<span class="st"> </span>region
+      ][<span class="kw">order</span>(<span class="op">-</span>N),
+        ][N<span class="op">&gt;</span><span class="dv">2</span>,]</code></pre></div>
+<pre><code>##             region  N
+## 1:  The Riverlands 17
+## 2:       The North 10
+## 3: The Westerlands  3
+## 4:  The Stormlands  3</code></pre>
+</div>
+</div>
+<div id="long_wide" class="section level3">
+<h3><span class="header-section-number">3.5.4</span> Широкий и длинный форматы данных</h3>
+<p>Что если есть несколько измерений по одному испытуемому? Например, вес до и после прохождения курса. Как это лучше записать - как два числовых столбца (один испытуемый - одна строка) или же создать отдельную &quot;группирующую&quot; колонку, в которой будет написано время измерения, а в другой - измеренные значения (одно измерение - одна строка)? На самом деле, оба варианта приемлимы, оба варианта возможны в реальных данных, а разные функции и статистические пакеты могут требовать от вас как &quot;длинный&quot;, так и &quot;широкий&quot; форматы.</p>
+<div id="wide_f" class="section level4">
+<h4><span class="header-section-number">3.5.4.1</span> &quot;Широкий&quot; формат</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Студент</th>
+<th>До курса по R</th>
+<th>После курса по R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Маша</td>
+<td>70</td>
+<td>63</td>
+</tr>
+<tr class="even">
+<td>Рома</td>
+<td>80</td>
+<td>74</td>
+</tr>
+<tr class="odd">
+<td>Антонина</td>
+<td>86</td>
+<td>71</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="long_f" class="section level4">
+<h4><span class="header-section-number">3.5.4.2</span> &quot;Длинный&quot; формат</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Студент</th>
+<th>Время измерения</th>
+<th>Вес (кг)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Маша</td>
+<td>До курса по R</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>Рома</td>
+<td>До курса по R</td>
+<td>80</td>
+</tr>
+<tr class="odd">
+<td>Антонина</td>
+<td>До курса по R</td>
+<td>86</td>
+</tr>
+<tr class="even">
+<td>Маша</td>
+<td>После курса по R</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td>Рома</td>
+<td>После курса по R</td>
+<td>74</td>
+</tr>
+<tr class="even">
+<td>Антонина</td>
+<td>После курса по R</td>
+<td>71</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="melt_dcast" class="section level3">
+<h3><span class="header-section-number">3.5.5</span> Решейпинг в data.table: melt() и dcast()</h3>
+<p>Таким образом, нам нужно научиться переводить из широкого формата в длинный и наоборот. Это может показаться довольно сложной задачей, но для это в data.table есть специальные функции:</p>
+<ul>
+<li><p><code>melt()</code> (= &quot;плавление&quot;): из <em>широкого</em> в <em>длинный</em> формат</p></li>
+<li><p><code>dcast()</code>(= &quot;литье&quot;): из <em>длинного</em> в <em>широкий</em> формат</p></li>
+</ul>
+<div id="melt" class="section level4">
+<h4><span class="header-section-number">3.5.5.1</span> Пример 1: melt() для размера армий</h4>
+<p>В нашем дататейбле <code>batdt</code> у нас есть две колонки, которые содержат информацию про размер армий: <code>attacker_size</code> и <code>defender_size</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(batdt[, .(name, year, attacker_size, defender_size)])</code></pre></div>
+<pre><code>##                             name year attacker_size defender_size
+## 1:    Battle of the Golden Tooth  298         15000          4000
+## 2:   Battle at the Mummer&#39;s Ford  298            NA           120
+## 3:            Battle of Riverrun  298         15000         10000
+## 4:      Battle of the Green Fork  298         18000         20000
+## 5: Battle of the Whispering Wood  298          1875          6000
+## 6:           Battle of the Camps  298          6000         12625</code></pre>
+<p>Это пример широкого формата: у нас два измерения на каждую битву. Допустим, мы хотим сделать длинный формат. В новом дататейбле будет &quot;группирующая&quot; колонка <code>battle_role</code>, а все размеры армий будут в новой колонке <code>army_size</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batlong &lt;-<span class="st"> </span><span class="kw">melt</span>(batdt, 
+                <span class="dt">measure.vars =</span> <span class="kw">c</span>(<span class="st">&quot;attacker_size&quot;</span>, <span class="st">&quot;defender_size&quot;</span>),
+                <span class="dt">variable.name =</span> <span class="st">&quot;battle_role&quot;</span>, 
+                <span class="dt">value.name =</span> <span class="st">&quot;army_size&quot;</span>)</code></pre></div>
+<p>Теперь новый дататейбл batlong в два раза длиннее оригинального, а названия колонок <code>attacker_size</code> и <code>defender_size</code> превратились в значения колонки <code>battle_role</code>.</p>
+<p>Важные параметры функции <code>melt()</code>:</p>
+<ul>
+<li><code>data</code> - Ваш data.table</li>
+<li><code>id.vars</code> - вектор имен id. Можно не ставить, если у нас &quot;чистый&quot; длинный формат.</li>
+<li><p><code>measure.vars</code> - вектор названий колонок (т.е. в кавычках!), которые содержат измерения <em>Note:</em> <code>melt()</code> удалит в новом дататейбле все колонки, которые вы написали в <code>id.vars</code> и <code>measure.vars</code>.</p></li>
+<li><code>variable.name</code> - название новой &quot;группирующей&quot; колонки</li>
+<li><p><code>value.name</code> - название новой колонки с измерениями</p></li>
+</ul>
+</div>
+<div id="dcast" class="section level4">
+<h4><span class="header-section-number">3.5.5.2</span> Пример 2: dcast() для размера армий</h4>
+<p>А теперь обратно к широкому формату!</p>
+<p>Функция <code>dcast()</code> использует формулы. Это новый для нас тип данных, но мы с ним еще столкнемся, когда перейдем к статистическим тестам и моделям, поэтому давайте немного ознакомимся с ними. Собственно, для задания статистических моделей формулы в R и существуют, но иногда они используются и в других случаях.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2 <span class="op">*</span><span class="st"> </span>x3)</code></pre></div>
+<pre><code>## [1] &quot;formula&quot;</code></pre>
+<p>В формуле обязательно присутствует тильда (<code>~</code> - в клавиатуре на кнопке &quot;ё&quot;), которая разделяет левую и правую часть.</p>
+<p>Давайте вернемся к <code>dcast()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batwide &lt;-<span class="st"> </span><span class="kw">dcast</span>(batlong,  
+                 ... <span class="op">~</span><span class="st"> </span>battle_role, 
+                 <span class="dt">value.var =</span> <span class="st">&quot;army_size&quot;</span>)</code></pre></div>
+<p>Мы практически вернулись к исходному <code>batdt</code>, разве что колонки в другой последовательности.</p>
+</div>
+</div>
+<div id="join_merge" class="section level3">
+<h3><span class="header-section-number">3.5.6</span> Объединение с помощью rbind(), cbind() и merge()</h3>
+<p>Допустим, у нас есть два дататейбла. Мы создадим немного искусственную ситуацию, разделив длинный дататейбл на два:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bat_at &lt;-<span class="st"> </span>batlong[battle_role <span class="op">==</span><span class="st"> &quot;attacker_size&quot;</span>,]
+bat_def &lt;-<span class="st"> </span>batlong[battle_role <span class="op">==</span><span class="st"> &quot;defender_size&quot;</span>,]</code></pre></div>
+<p>Ну а теперь попробуем склеить их обратно!</p>
+<p>Для этого есть три замечательные функции: <code>rbind()</code>, <code>cbind()</code> и <code>merge()</code>.</p>
+<div class="figure">
+<img src="images/R_rbind_cbind.png" />
+
+</div>
+<p>С первымии двумя все просто. <code>rbind()</code> соединяет вертикально, а <code>cbind()</code> - горизонтально.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">verylong_bat &lt;-<span class="kw">cbind</span>(bat_at, bat_def) <span class="co">#c stands for columns</span></code></pre></div>
+<p><code>h_bat</code> это результат вертикального соединения. По сути, мы почти вернулись к <code>batlong</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">verywide_bat &lt;-<span class="st"> </span><span class="kw">rbind</span>(bat_at, bat_def) <span class="co">#r stands for rows</span></code></pre></div>
+<p>А теперь мы сделали горизонтальное соединение, получив ооочень широкий дататейбл с повторяющимися колонками.</p>
+<p>Самое сложное (и самое интересное!) - это <code>merge()</code>.</p>
+<p>На практике часто случается, что нужно объединить два датасета. Например, поведенческие данные с какими-нибудь метриками ЭЭГ. Скажем, время реакции на задачу и мощность альфа-ритма. Или, например, мы хотим добавить в набор данных информацию о поле и возрасте, которая у нас хранится в отдельной табличке. Все, что объединяет два датасета - это <em>id</em> испытуемых, по которым нужно составить новую табличку.</p>
+<p>Другая проблема может возникнуть, когда мы сделали какой-то анализ с данными, что-то аггрегировали, посчитали, а теперь это нужно вставить в оригинальный датасет. Давайте решим такую задачу: создадим сабсет из нашего <code>batdt</code>, в котором будут только битвы, которые проходили в регионах, где было больше двух битв.</p>
+<p>Первую часть этой задачи мы уже делали сегодня: считали частоты по регионам, а потом оставляли только регионы с больше чем двумя битвами:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">batdt[,.N, by =<span class="st"> </span>region][<span class="kw">order</span>(<span class="op">-</span>N),][N<span class="op">&gt;</span><span class="dv">2</span>,]</code></pre></div>
+<pre><code>##             region  N
+## 1:  The Riverlands 17
+## 2:       The North 10
+## 3: The Westerlands  3
+## 4:  The Stormlands  3</code></pre>
+<p>Сохраним этот результат в переменную <code>hot_regions</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hot_regions &lt;-<span class="st"> </span>batdt[,.N, by =<span class="st"> </span>region][<span class="kw">order</span>(<span class="op">-</span>N),][N<span class="op">&gt;</span><span class="dv">2</span>,]</code></pre></div>
+<p>Теперь воспользуемся <code>merge()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset_batdt &lt;-<span class="st"> </span><span class="kw">merge</span>(hot_regions, batdt, 
+      <span class="dt">by =</span> <span class="st">&quot;region&quot;</span>, 
+      <span class="dt">all.x =</span> <span class="ot">TRUE</span>, <span class="dt">all.y =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Получилось! А теперь чуть подробнее, о том, что мы сделали.</p>
+<p>Первые два аргумента в <code>merge()</code> - это дататейблы. <code>by =</code> это тот самый айди, который должен совпадать у обоих дататейблов. Это может быть не одна, а сразу несколько колонок. В качестве значения по умолчанию используются все общие колонки двух дататейблов. Если названия не совпадают, то их можно прописать в <code>by.x =</code> и <code>by.y =</code> отдельно.</p>
+<p>Следующие важные варианты - это <code>all.x =</code> и <code>all.y =</code>. С помощью этих параметров мы прописываем, что нужно сделать, если список айдишников (в нашем случае - регионов) не совпадает. Они могут принимать значения <code>TRUE</code> и <code>FALSE</code>, в зависимости от этого есть 4 варианта:</p>
+<ul>
+<li><code>all = T</code>: добавит новые строки, если в каком-то из дататейблов каких-то значений нет. Что-то вроде логического &quot;ИЛИ&quot; для выбора строк: если хотя бы в одном дататейбле есть строки с каким-то айди, то они добавятся в получившийся дататейбл.<br />
+</li>
+<li><code>all.x = T, all.y = F</code>: возьмет все строки из первого дататейбла, но проигнорирует все строки с айдишниками, которых нет во втором дататейбле.<br />
+</li>
+<li><code>all.x = F, all.y = T</code>: возьмет все строки из второго дататейбла, но проигнорирует лишние строки из первого.<br />
+</li>
+<li><code>all.x = F, all.y = F</code>: возьмет только строчки, айдишники которых пересекаются в обоих дататейблах.</li>
+</ul>
+<p>Мы взяли именно второй вариант. Взяли все регионы из <code>hot_regions</code> и проигнорировали те регионы, что встречаются только в <code>batdt</code>.</p>
+</div>
+</div>
+<div id="day2_con" class="section level2">
+<h2><span class="header-section-number">3.6</span> Заключение</h2>
+<p>Итак, мы научились делать самые сложные штуки в R (из тех, которые жизненно необходимы вне зависимости от данных). Сабсетить данные, агрегировать, вертеть их, соединять... На самом деле, подобные вещи отнимают большую часть времени, и они не раз нам понадобятся в будущем. С другой стороны, какие-то сложные вещи, например, <code>melt()</code>, <code>dcast()</code> и <code>merge()</code> сложно запомнить сразу. И это нормально, главное - понимать, в какую сторону гуглить и какие заметки смотреть в случае необходимости.</p>
+<blockquote>
+<p>Кстати говоря, для более глубокого погружения в data.table есть замечательный <a href="https://bookdown.org/statist_/DataTableManual/01_data.table_intro.html">туториал, переведенный на русский язык</a>.</p>
+</blockquote>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p>Если в последней строчке будет присвоение, то функция ничего не вернет обратно. Это очень распространенная ошибка: функция вроде бы работает правильно, но ничего не возвращает. Нужно писать так, как будто бы в последней строчке результат выполнения выводится в консоль.<a href="real.html#fnref6">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

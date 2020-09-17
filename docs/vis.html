@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Глава 4 День 3. Описательная статистика и визуализация | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Глава 4 День 3. Описательная статистика и визуализация | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Глава 4 День 3. Описательная статистика и визуализация | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2020-09-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="real.html">
+<link rel="next" href="tasks.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R и статистика</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> День 1. Основы R</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#very_base"><i class="fa fa-check"></i><b>2.1</b> Знакомимся с самым базовым</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1.1</b> Установка R и Rstudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="2.1.3" data-path="intro.html"><a href="intro.html#calc"><i class="fa fa-check"></i><b>2.1.3</b> R как калькулятор</a></li>
+<li class="chapter" data-level="2.1.4" data-path="intro.html"><a href="intro.html#func"><i class="fa fa-check"></i><b>2.1.4</b> Функции</a></li>
+<li class="chapter" data-level="2.1.5" data-path="intro.html"><a href="intro.html#variables"><i class="fa fa-check"></i><b>2.1.5</b> Переменные</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#data_types"><i class="fa fa-check"></i><b>2.2</b> Типы данных</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#atomic"><i class="fa fa-check"></i><b>2.3</b> Вектор</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#coercion"><i class="fa fa-check"></i><b>2.3.1</b> Приведение типов</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#vector_op"><i class="fa fa-check"></i><b>2.3.2</b> Векторизация</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#recycling"><i class="fa fa-check"></i><b>2.3.3</b> Recycling</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#index_atomic"><i class="fa fa-check"></i><b>2.3.4</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="2.3.5" data-path="intro.html"><a href="intro.html#na"><i class="fa fa-check"></i><b>2.3.5</b> NA - пропущенные значения</a></li>
+<li class="chapter" data-level="2.3.6" data-path="intro.html"><a href="intro.html#google"><i class="fa fa-check"></i><b>2.3.6</b> В любой непонятной ситуации --- гуглите</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>2.4</b> Матрицы (matrix)</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>2.5</b> Списки (list)</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#df"><i class="fa fa-check"></i><b>2.6</b> Data.frame</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#real_data"><i class="fa fa-check"></i><b>2.7</b> Начинаем работу с реальными данными</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="intro.html"><a href="intro.html#wd"><i class="fa fa-check"></i><b>2.7.1</b> Рабочая папка и проекты</a></li>
+<li class="chapter" data-level="2.7.2" data-path="intro.html"><a href="intro.html#import"><i class="fa fa-check"></i><b>2.7.2</b> Импорт данных</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="real.html"><a href="real.html"><i class="fa fa-check"></i><b>3</b> День 2. Работа с реальными данными в R</a><ul>
+<li class="chapter" data-level="3.1" data-path="real.html"><a href="real.html#prep"><i class="fa fa-check"></i><b>3.1</b> Препроцессинг данных в R</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="real.html"><a href="real.html#explore"><i class="fa fa-check"></i><b>3.1.1</b> Исследование данных</a></li>
+<li class="chapter" data-level="3.1.2" data-path="real.html"><a href="real.html#subset"><i class="fa fa-check"></i><b>3.1.2</b> Subsetting</a></li>
+<li class="chapter" data-level="3.1.3" data-path="real.html"><a href="real.html#newcol"><i class="fa fa-check"></i><b>3.1.3</b> Создание новых колонок</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="real.html"><a href="real.html#loopsetc"><i class="fa fa-check"></i><b>3.2</b> Циклы, условия, создание функций</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.1</b> If, else, else if</a></li>
+<li class="chapter" data-level="3.2.2" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.2</b> Функция ifelse()</a></li>
+<li class="chapter" data-level="3.2.3" data-path="real.html"><a href="real.html#for"><i class="fa fa-check"></i><b>3.2.3</b> For loops</a></li>
+<li class="chapter" data-level="3.2.4" data-path="real.html"><a href="real.html#newfun"><i class="fa fa-check"></i><b>3.2.4</b> Создание функций</a></li>
+<li class="chapter" data-level="3.2.5" data-path="real.html"><a href="real.html#apply"><i class="fa fa-check"></i><b>3.2.5</b> Cемейство функций apply()</a></li>
+<li class="chapter" data-level="3.2.6" data-path="real.html"><a href="real.html#anon"><i class="fa fa-check"></i><b>3.2.6</b> Анонимные функции</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="real.html"><a href="real.html#text"><i class="fa fa-check"></i><b>3.3</b> Работа с текстом</a></li>
+<li class="chapter" data-level="3.4" data-path="real.html"><a href="real.html#new_pack"><i class="fa fa-check"></i><b>3.4</b> Работа с дополнительными пакетами</a></li>
+<li class="chapter" data-level="3.5" data-path="real.html"><a href="real.html#reshape"><i class="fa fa-check"></i><b>3.5</b> Решейпинг данных</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="real.html"><a href="real.html#holywar"><i class="fa fa-check"></i><b>3.5.1</b> data.table vs. dplyr</a></li>
+<li class="chapter" data-level="3.5.2" data-path="real.html"><a href="real.html#what"><i class="fa fa-check"></i><b>3.5.2</b> Так что же выбрать?</a></li>
+<li class="chapter" data-level="3.5.3" data-path="real.html"><a href="real.html#dt"><i class="fa fa-check"></i><b>3.5.3</b> data.table</a></li>
+<li class="chapter" data-level="3.5.4" data-path="real.html"><a href="real.html#long_wide"><i class="fa fa-check"></i><b>3.5.4</b> Широкий и длинный форматы данных</a></li>
+<li class="chapter" data-level="3.5.5" data-path="real.html"><a href="real.html#melt_dcast"><i class="fa fa-check"></i><b>3.5.5</b> Решейпинг в data.table: melt() и dcast()</a></li>
+<li class="chapter" data-level="3.5.6" data-path="real.html"><a href="real.html#join_merge"><i class="fa fa-check"></i><b>3.5.6</b> Объединение с помощью rbind(), cbind() и merge()</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="real.html"><a href="real.html#day2_con"><i class="fa fa-check"></i><b>3.6</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vis.html"><a href="vis.html"><i class="fa fa-check"></i><b>4</b> День 3. Описательная статистика и визуализация</a><ul>
+<li class="chapter" data-level="4.1" data-path="vis.html"><a href="vis.html#desc"><i class="fa fa-check"></i><b>4.1</b> Описательная статистика</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="vis.html"><a href="vis.html#cent_tend"><i class="fa fa-check"></i><b>4.1.1</b> Меры центральной тенденции</a></li>
+<li class="chapter" data-level="4.1.2" data-path="vis.html"><a href="vis.html#vary"><i class="fa fa-check"></i><b>4.1.2</b> Меры рассеяния</a></li>
+<li class="chapter" data-level="4.1.3" data-path="vis.html"><a href="vis.html#skku"><i class="fa fa-check"></i><b>4.1.3</b> Ассиметрия и эксцесс</a></li>
+<li class="chapter" data-level="4.1.4" data-path="vis.html"><a href="vis.html#summary"><i class="fa fa-check"></i><b>4.1.4</b> А теперь все вместе!</a></li>
+<li class="chapter" data-level="4.1.5" data-path="vis.html"><a href="vis.html#datasaurus"><i class="fa fa-check"></i><b>4.1.5</b> Описательных статистик недостаточно</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="vis.html"><a href="vis.html#vis_r"><i class="fa fa-check"></i><b>4.2</b> Визуализация данных в R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="vis.html"><a href="vis.html#base_vis"><i class="fa fa-check"></i><b>4.2.1</b> Базовые функции для графики</a></li>
+<li class="chapter" data-level="4.2.2" data-path="vis.html"><a href="vis.html#ggplot2"><i class="fa fa-check"></i><b>4.2.2</b> ggplot2</a></li>
+<li class="chapter" data-level="4.2.3" data-path="vis.html"><a href="vis.html#дополнения-к-ggplot2"><i class="fa fa-check"></i><b>4.2.3</b> Дополнения к ggplot2</a></li>
+<li class="chapter" data-level="4.2.4" data-path="vis.html"><a href="vis.html#cowplot"><i class="fa fa-check"></i><b>4.2.4</b> cowplot</a></li>
+<li class="chapter" data-level="4.2.5" data-path="vis.html"><a href="vis.html#plotly"><i class="fa fa-check"></i><b>4.2.5</b> plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>5</b> Задания</a><ul>
+<li class="chapter" data-level="5.1" data-path="tasks.html"><a href="tasks.html#vec_task_1"><i class="fa fa-check"></i><b>5.1</b> Вектор</a></li>
+<li class="chapter" data-level="5.2" data-path="tasks.html"><a href="tasks.html#vec_op"><i class="fa fa-check"></i><b>5.2</b> Вектор. Операции с векторами</a></li>
+<li class="chapter" data-level="5.3" data-path="tasks.html"><a href="tasks.html#vec_task_2"><i class="fa fa-check"></i><b>5.3</b> Вектор. Индексирование</a></li>
+<li class="chapter" data-level="5.4" data-path="tasks.html"><a href="tasks.html#t"><i class="fa fa-check"></i><b>5.4</b> Матрицы</a></li>
+<li class="chapter" data-level="5.5" data-path="tasks.html"><a href="tasks.html#list_ta"><i class="fa fa-check"></i><b>5.5</b> Списки</a></li>
+<li class="chapter" data-level="5.6" data-path="tasks.html"><a href="tasks.html#df_task"><i class="fa fa-check"></i><b>5.6</b> Датафрейм</a></li>
+<li class="chapter" data-level="5.7" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>5.7</b> Создание функций</a></li>
+<li class="chapter" data-level="5.8" data-path="tasks.html"><a href="tasks.html#task_text"><i class="fa fa-check"></i><b>5.8</b> Семейство apply()</a></li>
+<li class="chapter" data-level="5.9" data-path="tasks.html"><a href="tasks.html#task_test"><i class="fa fa-check"></i><b>5.9</b> Работа с текстом</a></li>
+<li class="chapter" data-level="5.10" data-path="tasks.html"><a href="tasks.html#dt_task"><i class="fa fa-check"></i><b>5.10</b> data.table</a></li>
+<li class="chapter" data-level="5.11" data-path="tasks.html"><a href="tasks.html#task_reshape"><i class="fa fa-check"></i><b>5.11</b> Решейпинг</a></li>
+<li class="chapter" data-level="5.12" data-path="tasks.html"><a href="tasks.html#task_desc"><i class="fa fa-check"></i><b>5.12</b> Описательная статистика</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>6</b> Решения_заданий</a><ul>
+<li class="chapter" data-level="6.1" data-path="solutions.html"><a href="solutions.html#solvvec_task_1"><i class="fa fa-check"></i><b>6.1</b> Вектор</a></li>
+<li class="chapter" data-level="6.2" data-path="solutions.html"><a href="solutions.html#solvvec_op"><i class="fa fa-check"></i><b>6.2</b> Вектор. Операции с векторами</a></li>
+<li class="chapter" data-level="6.3" data-path="solutions.html"><a href="solutions.html#solvvec_task_2"><i class="fa fa-check"></i><b>6.3</b> Вектор. Индексирование</a></li>
+<li class="chapter" data-level="6.4" data-path="solutions.html"><a href="solutions.html#solvt"><i class="fa fa-check"></i><b>6.4</b> Матрицы</a></li>
+<li class="chapter" data-level="6.5" data-path="solutions.html"><a href="solutions.html#solvlist_ta"><i class="fa fa-check"></i><b>6.5</b> Списки</a></li>
+<li class="chapter" data-level="6.6" data-path="solutions.html"><a href="solutions.html#solvdf_task"><i class="fa fa-check"></i><b>6.6</b> Датафрейм</a></li>
+<li class="chapter" data-level="6.7" data-path="solutions.html"><a href="solutions.html#solvtask_function"><i class="fa fa-check"></i><b>6.7</b> Создание функций</a></li>
+<li class="chapter" data-level="6.8" data-path="solutions.html"><a href="solutions.html#solvtask_text"><i class="fa fa-check"></i><b>6.8</b> Семейство apply()</a></li>
+<li class="chapter" data-level="6.9" data-path="solutions.html"><a href="solutions.html#solvtask_test"><i class="fa fa-check"></i><b>6.9</b> Работа с текстом</a></li>
+<li class="chapter" data-level="6.10" data-path="solutions.html"><a href="solutions.html#solvdt_task"><i class="fa fa-check"></i><b>6.10</b> data.table</a></li>
+<li class="chapter" data-level="6.11" data-path="solutions.html"><a href="solutions.html#solvtask_reshape"><i class="fa fa-check"></i><b>6.11</b> Решейпинг</a></li>
+<li class="chapter" data-level="6.12" data-path="solutions.html"><a href="solutions.html#solvtask_desc"><i class="fa fa-check"></i><b>6.12</b> Описательная статистика</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="vis" class="section level1">
+<h1><span class="header-section-number">Глава 4</span> День 3. Описательная статистика и визуализация</h1>
+<div id="desc" class="section level2">
+<h2><span class="header-section-number">4.1</span> Описательная статистика</h2>
+<p>Статистика делится на <strong>описательную статистику</strong> (<em>descriptive statistics</em>) и <strong>статистику вывода</strong> (<em>inferential statistics</em>). Описательная статистика пытается описать нашу <strong>выборку</strong> (<em>sample</em>, т.е. те данные, что у нас на руках) различными способами. Проблема в том, что описательная статистика может описать только то, что у нас есть, но не позволяет сделать выводы о <strong>генеральной совокупности</strong> (<em>population</em>) - это уже цель статистики вывода. Цель описательной статистики - &quot;ужать&quot; данные для их обобщенного понимания с помощью <em>статистик</em>.</p>
+<blockquote>
+<p>Заметьте, у выборки (<strong>s</strong>ample) мы считаем статистики (<strong>s</strong>tatistics), а у генеральной совокупности (<strong>P</strong>opulation) есть параметры (<strong>P</strong>arameters). Вот такая вот мнемотехника.</p>
+</blockquote>
+<p>Статистики часто выступают в роли <em>точечной оценки</em> (point estimators) параметров, так что в этом легко запутаться. Например, среднее (в выборке) - это оценка среднего (в генеральной совокупности). Да, можно свихнуться. Мы это будем разбирать подробнее в следующие занятия (это действительно важно, поверьте), пока что остановимся только на описании выборки.</p>
+<div class="figure">
+<img src="images/sample2.png" width="400" />
+
+</div>
+<p>Сегодня мы будем работать с пакетом <code>survival</code>, в котором есть датасет <code>pbc</code>. Мы его сразу превратим в <code>data.table</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(survival)
+<span class="kw">library</span>(data.table)
+
+<span class="kw">data</span>(pbc)
+pbcdt &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(pbc)</code></pre></div>
+<p>Это данные 424 пациентов с первичным билиарным циррозом - редким аутоимунным заболеванием печени. При поступлении в клинику у них измерили разные медицинские показатели, определели в экспериментальную и контрольную группу. В наборе данных есть информация о том, что стало с этими испытуемыми.</p>
+<blockquote>
+<p>&quot;This data is from the Mayo Clinic trial in primary biliary cirrhosis (PBC) of the liver conducted between 1974 and 1984. A total of 424 PBC patients, referred to Mayo Clinic during that ten-year interval, met eligibility criteria for the randomized placebo controlled trial of the drug D-penicillamine. The first 312 cases in the data set participated in the randomized trial and contain largely complete data.&quot;</p>
+</blockquote>
+<p>Подробнее про датасет можно почитать <a href="https://stat.ethz.ch/R-manual/R-devel/RHOME/library/survival/html/pbc.html">здесь</a> или в <code>Help</code>.</p>
+<p>Эти данные часто используются в качестве примера для анализа выживаемости. Они уже в достаточно упорядоченном виде и не нуждаются в предобработке (что, к сожалению, случай малореалистичный).</p>
+<p>Для простоты мы удалим все пропущенные значения. Мы уже знакомы с функцией <code>is.na()</code>, теперь познакомимся с еще одной функцией: <code>complete.cases()</code> возвращает вектор, равный длине датафрейма, с <code>FALSE</code> для строчек, где есть хотя бы один <code>NA</code>, и <code>TRUE</code> если пропущенных значений нет.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pbcdt &lt;-<span class="st"> </span>pbcdt[<span class="kw">complete.cases</span>(pbc),]</code></pre></div>
+<p>Пока что мы будем использовать только данные о возрасте испытуемых. Для краткости обозначим это вектором <code>a</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>pbcdt<span class="op">$</span>age</code></pre></div>
+<div id="cent_tend" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Меры центральной тенденции</h3>
+<p>Мера центральной тенденции - это число для описания <em>центра</em> распределения.</p>
+<div id="mean" class="section level4">
+<h4><span class="header-section-number">4.1.1.1</span> Арифметическое среднее</h4>
+<p>Самая распространенная мера центральных тенденций - <strong>арифметическое среднее</strong>, то самое, которые мы считаем с помощью функции <code>mean()</code>.</p>
+<p><span class="math display">\[\overline{x}= \frac{\sum\limits_{i=1}^{n} x_{i}} {n}\]</span></p>
+<p>Не пугайтесь значка <span class="math display">\[\sum\limits_{i=1}^{n}\]</span> - это означает сумму от i = 1 до n. Что-то вроде цикла <code>for</code>!</p>
+<p>В качестве упражнения попробуйте самостоятельно превратить эту формулу в функцию <code>mymean()</code> c помощью <code>sum()</code> и <code>length()</code>. Можете убирать <code>NA</code> по дефолту! Сравните с результатом функции <code>mean()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a)</code></pre></div>
+<pre><code>## [1] 49.79966</code></pre>
+</div>
+<div id="median" class="section level4">
+<h4><span class="header-section-number">4.1.1.2</span> Медиана</h4>
+<p><strong>Медиана</strong> - это <em>середина</em> распределения. Представим, что мы расставили значения по порядку (от меньшего к большему) и взяли значение по середине. Если у нас четное количество значений, то берется среднее значение между теми двумя, что по середине. Для расчета медианы есть функция <code>median()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(a)</code></pre></div>
+<pre><code>## [1] 49.70979</code></pre>
+<p>Разница медианы со средним не очень существенная. Это значит, что распределение довольно &quot;симметричное&quot;. Но бывает и по-другому.</p>
+<p>Представьте себе, что кто-то говорит про среднюю зарплату в Москве. Но ведь эта средняя зарплата становится гораздо больше, если учитывать относительно небольшое количество мультимиллионеров и миллиардеров! А вот медианная зарплата будет гораздо меньше.</p>
+<p>Представьте себе, что в эту клинику с циррозом печени пришел 8000-летний Король Ночи из Игры Престолов. Тогда арифметическое среднее станет гораздо больше:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">c</span>(a, <span class="dv">8000</span>))</code></pre></div>
+<pre><code>## [1] 78.50075</code></pre>
+<p>А вот медиана останется почти той же.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(<span class="kw">c</span>(a, <span class="dv">8000</span>))</code></pre></div>
+<pre><code>## [1] 49.76318</code></pre>
+<p>Таким образом, экстремально большие или маленькие значения оказывают сильное влияние на арифметическое среднее, но не на медиану. Поэтому медиана считается более &quot;робастной&quot; оценкой, т.е. более устойчивой к выбросам и крайним значениям.</p>
+</div>
+<div id="trim" class="section level4">
+<h4><span class="header-section-number">4.1.1.3</span> Усеченное среднее (trimmed mean)</h4>
+<p>Если про среднее и медиану слышали все, то про усеченное (тримленное) среднее известно гораздо меньше. Тем не менее, на практике это довольно удобная штука, потому что представляет собой некий компромисс между арифметическим средним и медианой.</p>
+<p>В усеченном среднем значения ранжируются так же, как и для медианы, но отбрасывается только какой-то процент крайних значений. Усеченное среднее можно посчитать с помощью обычной функции mean(), поставив нужное значение параметра <code>trim =</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a, <span class="dt">trim =</span> <span class="fl">0.1</span>)</code></pre></div>
+<pre><code>## [1] 49.57392</code></pre>
+<p><code>trim = 0.1</code> означает, что мы отбросили 10% слева и 10% справа. <code>trim</code> может принимать значения от 0 до 0.5. Что будет, если <code>trim = 0</code>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a, <span class="dt">trim =</span> <span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] 49.79966</code></pre>
+<p>Обычное арифметическое среднее! А если <code>trim = 0.5</code>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a, <span class="dt">trim =</span> <span class="fl">0.5</span>)</code></pre></div>
+<pre><code>## [1] 49.70979</code></pre>
+<p>Медиана!</p>
+</div>
+<div id="mode" class="section level4">
+<h4><span class="header-section-number">4.1.1.4</span> Мода</h4>
+<p><strong>Мода</strong> <em>(mode)</em> - это самое <em>частое</em> значение. Обычно используется для номинальных переменных. Например, можно посчитать моду для регионов, в которых происходили битвы. Что интересно, в R нет встроенной функции для подсчета моды. Обычно она и не нужна: мы можем посчитать таблицу частот и даже проранжировать ее (и мы уже умеем это делать разными способами). На случай если Вы все-таки хотите создать свою функцию для моды, можно попробовать что-то такое:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mymode &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">names</span>(<span class="kw">which.max</span>(<span class="kw">table</span>(x)))}
+<span class="kw">mymode</span>(pbcdt<span class="op">$</span>sex)</code></pre></div>
+<pre><code>## [1] &quot;f&quot;</code></pre>
+</div>
+</div>
+<div id="vary" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Меры рассеяния</h3>
+<blockquote>
+<p>Начинающий статистик пытался перейти в брод реку, средняя глубина которой 1 метр. И утонул.<br />
+В чем была его ошибка? Он не учитывал разброс значений глубины!</p>
+</blockquote>
+<p>Мер центральной тенденции недостаточно, чтобы описать выборку. Необходимо знать ее вариабельность.</p>
+<div id="размах-range" class="section level4">
+<h4><span class="header-section-number">4.1.2.1</span> Размах {range}</h4>
+<p>Самое очевидное - посчитать <strong>размах</strong> <em>(range)</em>, то есть разницу между минимальным и максимальным значением. В R есть функция для вывода максимального и минимального значений:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(a)</code></pre></div>
+<pre><code>## [1] 26.27789 78.43943</code></pre>
+<p>Осталось посчитать разницу между ними:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(<span class="kw">range</span>(a))</code></pre></div>
+<pre><code>## [1] 52.16153</code></pre>
+<p>Естественно, крайние значения очень сильно влияют на этот размах, поэтому на практике он не очень-то используется.</p>
+</div>
+<div id="var" class="section level4">
+<h4><span class="header-section-number">4.1.2.2</span> Дисперсия</h4>
+<p><strong>Дисперсия</strong> <em>(variance)</em> вычисляется по следующей формуле:</p>
+<p><span class="math display">\[s^2= \frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<p>Попробуйте превратить это в функцию <code>myvar()</code>!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myvar &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<p>Естественно, в R уже есть готовая функция <code>var()</code>. Но, заметьте, ее результат немного отличается от нашего:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myvar</span>(a)</code></pre></div>
+<pre><code>## [1] 110.334</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(a)</code></pre></div>
+<pre><code>## [1] 110.7353</code></pre>
+<p>Дело в том, что встроенная функция <code>var()</code> делит не на <span class="math inline">\(n\)</span>, а на <span class="math inline">\(n-1\)</span>. Это связано с тем, что эта функция пытается оценить дисперсию в генеральной совокупности, т.е. относится уже к статистике вывода. Про это мы будем говорить в дальнейших занятиях, сейчас нам нужно только отметить то, что здесь есть небольшое различие.</p>
+</div>
+<div id="sd" class="section level4">
+<h4><span class="header-section-number">4.1.2.3</span> Стандартное отклонение</h4>
+<p>Если вы заметили, значение дисперсии очень большое. Чтобы вернуться к единицам измерения, соответствующих нашим данным используется корень из дисперсии, то есть <strong>стандартное отклонение</strong> <em>(standard deviation)</em>:</p>
+<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<p>Для этого есть функция <code>sd()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(a)</code></pre></div>
+<pre><code>## [1] 10.52308</code></pre>
+<p>Что то же самое, что и:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">var</span>(a))</code></pre></div>
+<pre><code>## [1] 10.52308</code></pre>
+</div>
+<div id="mad" class="section level4">
+<h4><span class="header-section-number">4.1.2.4</span> Медианное абсолютное отклонение</h4>
+<p>Поскольку стандартное отклонение не устойчово ко всяким выбросам, то иногда используют его альтернативу, которая устойчива к выбросам (особенно если эти выбросы нам как раз и нужно удалить) - медианное абсолютное отклонение (median absolute deviation):</p>
+<p><span class="math display">\[mad= median(|x_{i} - median(x)|)\]</span></p>
+<p>Для этого есть функция <code>mad()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mad</span>(a)</code></pre></div>
+<pre><code>## [1] 10.63291</code></pre>
+</div>
+<div id="iqr" class="section level4">
+<h4><span class="header-section-number">4.1.2.5</span> Межквартильный размах</h4>
+<p>Другой вариант рабостной оценки вариабельности данных является <strong>межквартильный размах</strong> <em>(interquartile range, IQR)</em>. Это разница между третьим и первым <strong>квартилем</strong><a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> - значением, которое больше 75% значений в выборке, и значением, которое больше 25% значений в выборке.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">IQR</span>(a)</code></pre></div>
+<pre><code>## [1] 15.07187</code></pre>
+<blockquote>
+<p>Ну а второй квартиль - это медиана!</p>
+</blockquote>
+</div>
+</div>
+<div id="skku" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Ассиметрия и эксцесс</h3>
+<div id="skew" class="section level4">
+<h4><span class="header-section-number">4.1.3.1</span> Ассиметрия</h4>
+<p>Ассиметрия (skewness) измеряет симметричность распределения. Положительный показатель ассиметрии (&quot;Right-skewed&quot; или positive skewness) означает, что хвосты с правой части распределения длиннее. Негативный показатель ассиметрии (&quot;Left-skewed&quot; или negative skewness) означает, что левый хвост длиннее.</p>
+<div class="figure">
+<img src="images/7180OS_01_180.jpg" />
+
+</div>
+<blockquote>
+<p>Например, в психологии положительная ассиметрия встречается очень часто. Например, время реакции: оно ограничено снизу 0 мс (а по факту не меньше 100 мс - быстрее сигнал не успеет по нервной системе пройти до пальцев), а вот с другой стороны оно никак не ограничено. Испытуемый может на полчаса перед монитором затупить, ага.</p>
+</blockquote>
+</div>
+<div id="kurtosis" class="section level4">
+<h4><span class="header-section-number">4.1.3.2</span> Эксцесс</h4>
+<p><strong>Эксцесс</strong> <em>(kurtosis)</em> - это мера &quot;вытянутости&quot; распределения:</p>
+<div class="figure">
+<img src="images/kurtosis.gif" />
+
+</div>
+<p>Положительные показатели эксцесса означают &quot;вытянутое&quot; распределение, а отрицательные - &quot;плоское&quot;.</p>
+</div>
+<div id="skewR" class="section level4">
+<h4><span class="header-section-number">4.1.3.3</span> Ассиметрия и эксцесс в R</h4>
+<p>К сожалению, в базовом R нет функций для ассиметрии и эксцесса. Зато есть замечательный пакет <code>psych</code> (да-да, специально для психологов).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;psych&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;psych&quot;</span>)</code></pre></div>
+<p>В нем есть функции <code>skew()</code> и <code>kurtosi()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skew</span>(a)</code></pre></div>
+<pre><code>## [1] 0.1786867</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosi</span>(a)</code></pre></div>
+<pre><code>## [1] -0.5174814</code></pre>
+<p>Ассиметрия близка к нулю - значит распределение выборки достаточно симметричное, а эксцесс немного ниже нуля - значит распределение довольно &quot;плоское&quot;.</p>
+</div>
+</div>
+<div id="summary" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> А теперь все вместе!</h3>
+<p>В базовом R есть функция <code>summary()</code>, которая позволяет получить сразу неплохой набор описательных статистик.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(a)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   26.28   41.51   49.71   49.80   56.58   78.44</code></pre>
+<blockquote>
+<p>Функция summary() - это универсальная (generic) функция. Это означает, что Вы можете ее применять для разных объектов и получать разные результаты. Попробуйте применить ее к векторам с разными типами данных и даже к дата.фреймам и дата.тейблам. Посмотрите, что получится.</p>
+</blockquote>
+<p>В пакете <code>psych</code> есть еще и замечательная функция <code>describe()</code>, которая даст Вам еще больше статистик, включая ассиметрию и куртозис:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">describe</span>(a)</code></pre></div>
+<pre><code>##    vars   n mean    sd median trimmed   mad   min   max range skew kurtosis
+## X1    1 276 49.8 10.52  49.71   49.57 10.63 26.28 78.44 52.16 0.18    -0.52
+##      se
+## X1 0.63</code></pre>
+<p>Даже усеченное (trimmed) среднее есть (с <code>trim = 0.1</code>)! Все кроме <code>se</code> мы уже знаем. А про этот <code>se</code> узнаем через позже.</p>
+<p>Эта функция прекрасно работает в <code>data.table</code> в сочетании с <code>by =</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pbcdt[, <span class="kw">describe</span>(age), by =<span class="st"> </span>stage]</code></pre></div>
+<pre><code>##    stage vars   n     mean       sd   median  trimmed       mad      min
+## 1:     4    1  94 53.09709 10.71781 53.92334 53.20437 10.890666 29.55510
+## 2:     3    1 111 47.94154 10.00419 47.42779 47.41838  9.948946 26.27789
+## 3:     2    1  59 48.52757 10.22616 48.75838 48.34855 10.975908 30.27515
+## 4:     1    1  12 47.41182 10.11477 47.97673 47.75359 12.132762 28.88433
+##         max    range        skew   kurtosis       se
+## 1: 78.43943 48.88433 -0.07684694 -0.4361883 1.105458
+## 2: 71.89322 45.61533  0.35465904 -0.3655477 0.949556
+## 3: 75.01164 44.73648  0.19440406 -0.7000602 1.331333
+## 4: 62.52156 33.63723 -0.06406915 -1.1025021 2.919883</code></pre>
+</div>
+<div id="datasaurus" class="section level3">
+<h3><span class="header-section-number">4.1.5</span> Описательных статистик недостаточно</h3>
+<p>Я в тайне от Вас загрузил данные в переменную <code>xxx</code> (можете найти этот набор данных <a href="https://raw.githubusercontent.com/Pozdniakov/stats/master/data/d.csv">здесь</a>, если интересно). Выглядят они примерно так:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xxx)</code></pre></div>
+<pre><code>##          x       y
+## 1: 55.3846 97.1795
+## 2: 51.5385 96.0256
+## 3: 46.1538 94.4872
+## 4: 42.8205 91.4103
+## 5: 40.7692 88.3333
+## 6: 38.7179 84.8718</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(xxx)</code></pre></div>
+<pre><code>## Classes &#39;data.table&#39; and &#39;data.frame&#39;:   142 obs. of  2 variables:
+##  $ x: num  55.4 51.5 46.2 42.8 40.8 ...
+##  $ y: num  97.2 96 94.5 91.4 88.3 ...
+##  - attr(*, &quot;.internal.selfref&quot;)=&lt;externalptr&gt;</code></pre>
+<p>Надеюсь, Вы уже понимаете, как это интерпретировать - два столбца с 142 числами каждый. Представьте себе, как выглядят эти точки на плоскости, если каждая строчка означают координаты одной точки по осям x и y (это называется диаграмма рассеяния, точечная диаграмма или scatterplot).</p>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.6.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggplot2&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:psych&#39;:
+## 
+##     %+%, alpha</code></pre>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<p>Применим разные функции, которые мы выучили:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 54.26327</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 47.83225</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 53.3333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 46.0256</code></pre>
+<p>Средние и медианы примерно одинаковые, при этом по х они около 53-54, а по у - примерно 46-47. Попытайтесь представить это. Идем дальше:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 16.76514</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 26.9354</code></pre>
+<p>Похоже, расброс по у несколько больше, верно?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skew</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 0.2807568</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skew</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 0.2472603</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosi</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] -0.2854912</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosi</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] -1.063552</code></pre>
+<p>Похоже, оба распределения немного право-ассиметричны и довольно &quot;плоские&quot;.</p>
+<p>Давайте еще посчитаем корреляцию. Мы про нее будем говорить позже гораздо подробнее. Пока что нам нужно знать, что она говорит о линейной связи двух переменных. Если корреляция <em>положительная</em> (максимум равен <code>1</code>), то чем <em>больше</em> х, тем <em>больше</em> у. Если <em>отрицательная</em> (минимум равен <code>-1</code>), то чем <em>больше</em> х, тем <em>меньше</em> у. Если же корреляция равна нулю, то такая линейная зависимость отсутствует.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(xxx<span class="op">$</span>x, xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] -0.06447185</code></pre>
+<p>Корреляция очень близка к нулю (делайте выводы и представляйте).</p>
+<p>Давайте напоследок воспользуемся функцией describe() из psych:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">describe</span>(xxx)</code></pre></div>
+<pre><code>##   vars   n  mean    sd median trimmed   mad   min   max range skew kurtosis
+## x    1 142 54.26 16.77  53.33   53.69 15.97 22.31 98.21 75.90 0.28    -0.29
+## y    2 142 47.83 26.94  46.03   46.90 30.79  2.95 99.49 96.54 0.25    -1.06
+##     se
+## x 1.41
+## y 2.26</code></pre>
+<p>Готовы узнать, как выглядят эти данные на самом деле?!</p>
+<p><details> <summary>Жмите сюда если готовы!</summary></p>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+<p></details></p>
+<p>Из этого можно сделать важный вывод: не стоит слепо доверять описательным статистикам. Нужно визуализировать данные, иначе можно попасть в такую ситуацию в реальности. Все следующее занятие будет посвящено визуализации данных.</p>
+</div>
+</div>
+<div id="vis_r" class="section level2">
+<h2><span class="header-section-number">4.2</span> Визуализация данных в R</h2>
+<div id="base_vis" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Базовые функции для графики</h3>
+<p>В R есть достаточно мощный встроенный инструмент для визуализации. Я приведу три простых примера. Во-первых, это та самая диаграмма рассеяния. Здесь все просто: функция <code>plot()</code>, вектора <code>x</code> и <code>у</code>, дополнительные параметры для цвета, размера, формы точек.</p>
+<p>Для примера возьмем из дататейбла <code>pbcdt</code> уровень холистерина и возраст:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(pbcdt<span class="op">$</span>age, pbcdt<span class="op">$</span>chol)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-205-1.png" width="672" /></p>
+<blockquote>
+<p>Между прочим, функция <code>plot()</code> - это тоже универсальная (generic) функция, как и <code>summary()</code>. В качестве аргумента можете ей скормить просто один вектор, матрицу, датафрейм. Более того, многие пакеты добавляют новые методы plot() для новых объектов из этих пакетов.</p>
+</blockquote>
+<p>Другая распространенная функция - <code>hist()</code> - гистограмма:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(pbcdt<span class="op">$</span>age)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
+<p>Ну и закончим на суперзвезде прошлого века под названием &quot;ящик с усами&quot;(boxplot with whiskers):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(chol <span class="op">~</span><span class="st"> </span>stage, pbcdt)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
+<p>Здесь мы использовали уже знакомый нам класс формул. Они еще будут нам встречаться дальше, обычно они используются следующим образом: слева от <code>~</code> находится зависимая переменная, а справа - &quot;предикторы&quot;. Эта интуиция работает и здесь: мы хотим посмотреть, как различается холестирин в зависимости от стадии.</p>
+</div>
+<div id="ggplot2" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> ggplot2</h3>
+<p>gg в <code>ggplot2</code> означает Grammar of Graphics - это книга Леланда Уилкинсона, в которой он попытался создать язык описания и создания всевозможных визуализаций. Хэдли Викхэм (уже знакомый нам по <code>dplyr</code>) дополнил эту систему <em>(Layered Grammar of Graphics)</em> и реализовал в качестве пакета в R под названием <code>ggplot2</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<div id="layered-grammar-of-graphics" class="section level4">
+<h4><span class="header-section-number">4.2.2.1</span> Layered Grammar of Graphics</h4>
+<p>Основные элементы Layered Grammar of Graphics</p>
+<ul>
+<li>Layer (geom +)</li>
+<li>Scale</li>
+<li>Coordinate system (coord)</li>
+<li>Faceting (facet)</li>
+<li>Theme</li>
+<li>Defaults
+<ul>
+<li>Data</li>
+<li>Mapping</li>
+</ul></li>
+</ul>
+<p>-Layer: - Data - Mapping (aes) - Statistical transformation (stat) - Geometric object (geom) - Position adjustment (position)</p>
+</div>
+<div id="пример-0-круговая-диаграмма" class="section level4">
+<h4><span class="header-section-number">4.2.2.2</span> Пример 0: Круговая диаграмма</h4>
+<p>Чтобы продемонстрировать суть &quot;графической грамматики&quot; Уилкинсон в своей книге приводит в качестве примера круговую диаграмму. Да-да, тот самый злополучный пирог, которым все так плюются! Тем не менее, этот пример перевернет Ваше понимание графиков с ног на голову.</p>
+<p>Итак, создадим объект <code>ggplot</code> с данными и каким-нибудь мэппингом по умолчанию (пока не обращайте внимания на него). Если мы попробуем это отрисовать, то получим пустой экран.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pie &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">fill =</span> sex))
+pie</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<p>Теперь мы добавим на картинку геом, который будет наследовать мэппинг и набор данных, указанные в <code>ggplot()</code>. Этим геомом будет <code>geom_bar()</code>, для столбиковой диаграммы. Мы получаем немного странный график:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pie &lt;-<span class="st"> </span>pie <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>)
+pie</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
+<p>Как нам из этого получить круговую диаграмму? Надо поменять декартову систему координат на полярную (круговую)!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pie <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
+<p>В качестве финального штриха мы можем максимально упростить тему:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pie <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>)<span class="op">+</span><span class="kw">theme_void</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-213-1.png" width="672" /></p>
+<p>То есть пай-чарт можно рассматривать не как отдельный вид графика, а как столбчатую диаграмму в полярной системе координат. То же верно и для многих других графиков, которые можно представить с помощью ограниченного количества геомов и других элементов грамматики графики. Подумайте над этим!</p>
+</div>
+<div id="пример-1-диаграмма-рассеяния" class="section level4">
+<h4><span class="header-section-number">4.2.2.3</span> Пример 1: Диаграмма рассеяния</h4>
+<p>Итак, давайте разбираться детально с синтаксисом <code>ggplot2</code>.</p>
+<p>Для начала создадим объект ggplot с помощью <code>ggplot()</code> команды. Для нее можно указать данные и мэппинг по умолчанию с помощью аргументов <code>data =</code> и <code>mapping = aes()</code></p>
+<p>В качестве примера мы сделаем диаграмму рассеяния с возрастом по х и уровнем холестирина по у:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-214-1.png" width="672" /></p>
+<p>На самом деле, название параметров <code>data =</code> и <code>mapping =</code> можно опустить.</p>
+<p>Наш график пуст. Нам нужно сделать слой с нужной геометрией. В данном случае - <code>geom_point()</code>. Синтаксис <code>ggplot()</code> несколько необычный - мы добавляем новые слои и дополнительные параметры с помощью <code>+</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-215-1.png" width="672" /></p>
+<div id="фиксированные-параметры-vs-mapping-aesthetics" class="section level5">
+<h5><span class="header-section-number">4.2.2.3.1</span> Фиксированные параметры vs mapping aesthetics</h5>
+<p>Теперь нам хотелось бы как-то разнообразить график. Изменить цвет, форму, размер точек:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">colour =</span> <span class="st">&quot;purple&quot;</span>, <span class="dt">shape =</span> <span class="dv">15</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-216-1.png" width="672" /></p>
+<p>А что если мы хотим сделать параметры геома поставить в зависимость от данных? Тогда нам нужно менять мэппинг с помощью эстетики - <code>aes()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>,<span class="kw">aes</span>(<span class="dt">colour =</span> sex, <span class="dt">shape =</span> <span class="kw">as.factor</span>(hepato)))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
+<p>Если какой-то параметр зависит от данных, то он прописывается внутри <code>aes()</code>, если же это фиксированное значение - то он находится &quot;извне&quot; функции <code>aes()</code> (параметра <code>mapping =</code>).</p>
+<blockquote>
+<p>Здесь мы <code>hepato</code> (является печень увеличенной или нет) превратили в фактор. Иначе <code>ggplot2</code> воспринимает эту колонку как континуальную переменную, потому что она <code>numeric</code>.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>,<span class="kw">aes</span>(<span class="dt">shape =</span> <span class="kw">as.factor</span>(hepato)))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
+<p>У использования цветов на графиков есть 3 основные функции:</p>
+<ul>
+<li><p>Для различения групп</p></li>
+<li><p>Для кодирования информации</p></li>
+<li><p>Для подчеркивания</p></li>
+</ul>
+<p>Если на диаграмме рассеяния у нас есть и мэппинг формы, и мэппинг цвета, то победа будет за цветом, причем обычно с большим перевесом. Разные формы будут только отвлекать, поэтому и смысла в них особого не будет. Впрочем, при достаточно большом количестве точек даже при одинаковом цвете формы точек дадут какое-то представление только если эти точки довольно сильно обособляются в отдельные паттерны.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>,<span class="kw">aes</span>(<span class="dt">shape =</span> <span class="kw">as.factor</span>(hepato)))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
+</div>
+<div id="overplotting-и-position" class="section level5">
+<h5><span class="header-section-number">4.2.2.3.2</span> Overplotting и position</h5>
+<p>На картинке мы видим много точек, которые перекрывают друг друга. Мы не знаем, что стоит за точкой - возможно, под ней еще 10 таких же на той же позиции. Это плохо.</p>
+<p>Данная проблема получила название оверплоттинга (overplotting). Решить ее можно разными способами.</p>
+<p>Первый способ - добавить небольшой случайный шум (jitter). Это иногда подходит в случае дискретных значений - точки за счет шума немного &quot;раздвигаются&quot; и создают пятна большего или меньшего размера. Для зашумления можно использовать position adjustment:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>,<span class="kw">aes</span>(<span class="dt">shape =</span> <span class="kw">as.factor</span>(hepato)), <span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<p>То же самое можно сделать выбрав <code>geom_jitter</code> - <code>geom_point</code> с <code>position = &quot;jitter&quot;</code> по умолчанию. Но это нам не подходит - у нас значения не дискретные и никакой разницы не видно. Поэтому мы решим проблему оверплоттинга с помощью использования прозрачных точек. Для этого есть параметр <code>alpha =</code>, который при 0 дает полностью прозрачные точки, а при 1 - полностью непрозрачные точки.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>,<span class="kw">aes</span>(<span class="dt">shape =</span> <span class="kw">as.factor</span>(hepato)), <span class="dt">alpha =</span> <span class="fl">0.4</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
+</div>
+<div id="двумерные-гистограммы" class="section level5">
+<h5><span class="header-section-number">4.2.2.3.3</span> Двумерные гистограммы</h5>
+<p>Другой способ избежать оверплоттинга - использование других геомов, в которых можно кодировать плотность. Плотность здесь становится третьей переменной: мы разделяем все пространство на прямоугольники или шестиугольники, считаем сколько попало в каждый из них. Количество попаданий мы можем кодировать цветом. У нас получится &quot;температурная карта&quot; (heatmap) - там, где много точек, происходит что-то &quot;горячее&quot;, а там где их нет - что-то &quot;холодное&quot;. Но на самом деле, это всего лишь двумерная гистограмма.</p>
+<blockquote>
+<p>В теории, мы могли бы сами агррегировать данные, использовать точки определенного цвета и размера и отрисовать двумерные гистограммы как точки или маленькие прямоугольники, просто в <code>ggplot2</code> есть геомы, которые все это немного упрощают.</p>
+</blockquote>
+<p>Для этого в ggplot2 есть несколько геомов: <code>geom_hex()</code>, <code>geom_bin2d</code> и их &quot;трехмерные&quot; братья (если плотность уже посчитана) - <code>geom_raster()</code>, <code>geom_tile()</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-222-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bin2d</span>(<span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">50</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-223-1.png" width="672" /></p>
+<p>Геом <code>geom_density_2d()</code> позволяет нарисовать контуры плотности - довольно элегантный способ визуализировать пространственную динамику плотности. Можно</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol, <span class="dt">colour =</span> sex))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density_2d</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.4</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-224-1.png" width="672" /></p>
+<p>Мы можем наложить два слоя с разными геомами друг на друга. Таким образом можно создавать совершенно новые графики!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol, <span class="dt">colour =</span> sex, <span class="dt">fill =</span> sex))<span class="op">+</span>
+<span class="st">   </span><span class="kw">stat_density_2d</span>(<span class="kw">aes</span>(<span class="dt">alpha =</span> ..level..), <span class="dt">geom =</span> <span class="st">&quot;polygon&quot;</span>)<span class="op">+</span>
+<span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.4</span>)<span class="op">+</span>
+<span class="st">   </span><span class="kw">scale_alpha_continuous</span>(<span class="dt">range =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.2</span>))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-225-1.png" width="672" /></p>
+</div>
+</div>
+<div id="пример-2-столбиковая-диаграмма" class="section level4">
+<h4><span class="header-section-number">4.2.2.4</span> Пример 2: Столбиковая диаграмма</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sex, <span class="dt">fill =</span> sex))<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="dt">rows =</span> <span class="kw">vars</span>(stage), <span class="dt">cols =</span> <span class="kw">vars</span>(hepato))<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-226-1.png" width="672" /></p>
+</div>
+<div id="пример-3-гистограмма-и-ящик-с-усами" class="section level4">
+<h4><span class="header-section-number">4.2.2.5</span> Пример 3: Гистограмма и ящик с усами</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> chol, <span class="dt">fill =</span> <span class="kw">as.factor</span>(stage)))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="dt">rows =</span> <span class="kw">vars</span>(stage))</code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-227-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> chol, <span class="dt">fill =</span> <span class="kw">as.factor</span>(stage)))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-228-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> chol, <span class="dt">fill =</span> <span class="kw">as.factor</span>(stage)))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>, <span class="dt">adjust =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(stage), <span class="dt">y =</span> chol, <span class="dt">fill =</span> <span class="kw">as.factor</span>(stage)))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_violin</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-230-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(stage), <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-231-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(stage), <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_violin</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">as.factor</span>(stage)))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">width =</span> <span class="fl">0.1</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-232-1.png" width="672" /></p>
+</div>
+</div>
+<div id="дополнения-к-ggplot2" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Дополнения к ggplot2</h3>
+<p><code>ggplot2</code> стал настолько популярным пакетом, что существуют сторонние пакеты, которые расширяют его функциональность. В некоторых можно найти новые геомы, в некоторых - новые темы и палитры. Ознакомиться с разнообразием расширений <code>ggplot2</code> можно <a href="http://www.ggplot2-exts.org/gallery/">здесь</a>. Мы же остановимся на одном из них - <code>cowplot</code></p>
+</div>
+<div id="cowplot" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> cowplot</h3>
+<p>Для начала нужно установить <code>cowplot</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;cowplot&quot;</span>)</code></pre></div>
+<p>И подгрузить его:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(cowplot)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     ggsave</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> pbcdt, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>,<span class="kw">aes</span>(<span class="dt">colour =</span> sex), <span class="dt">alpha =</span> <span class="fl">0.3</span>)
+
+g2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>()
+
+g3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis_c</span>()
+
+g4 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(pbcdt, <span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> chol, <span class="dt">colour =</span> sex))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_density_2d</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_grid</span>(g1, g4,g2, g3, <span class="dt">labels =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-236-1.png" width="672" /></p>
+<p>Если хотите вернуть стандартную тему <code>ggplot2</code>, то выполните следующую команду:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">theme_set</span>(<span class="kw">theme_grey</span>())</code></pre></div>
+</div>
+<div id="plotly" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> plotly</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;plotly&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plotly)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;plotly&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     last_plot</code></pre>
+<pre><code>## The following object is masked from &#39;package:stats&#39;:
+## 
+##     filter</code></pre>
+<pre><code>## The following object is masked from &#39;package:graphics&#39;:
+## 
+##     layout</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplotly</span>(g1)</code></pre></div>
+<div id="htmlwidget-89167813eb2040c0c509" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-89167813eb2040c0c509">{"x":{"data":[{"x":[70.072553045859,64.1889117043121,44.5201916495551,49.1362080766598,50.5407255304586,65.7631759069131,43.8986995208761,46.4531143052704,67.4113620807666,33.4757015742642,71.8932238193019,48.4681724845996,51.4688569472964,52.8268309377139,35.1512662559891,67.9069130732375,52.8898015058179,62.6447638603696,51.2498288843258,61.8042436687201,69.9411362080767,69.3771389459274,45.7604380561259,53.305954825462,60.9582477754962,49.7631759069131,58.9514031485284,78.4394250513347,74.5242984257358,67.5728952772074,50.2450376454483,60.5366187542779,35.3511293634497,55.9863107460643],"y":[176,252,456,259,614,416,216,427,247,660,420,460,178,259,325,151,251,331,426,257,586,168,317,196,376,346,316,243,232,416,546,1000,646,275],"text":["sex: m<br />age: 70.07255<br />chol:  176","sex: m<br />age: 64.18891<br />chol:  252","sex: m<br />age: 44.52019<br />chol:  456","sex: m<br />age: 49.13621<br />chol:  259","sex: m<br />age: 50.54073<br />chol:  614","sex: m<br />age: 65.76318<br />chol:  416","sex: m<br />age: 43.89870<br />chol:  216","sex: m<br />age: 46.45311<br />chol:  427","sex: m<br />age: 67.41136<br />chol:  247","sex: m<br />age: 33.47570<br />chol:  660","sex: m<br />age: 71.89322<br />chol:  420","sex: m<br />age: 48.46817<br />chol:  460","sex: m<br />age: 51.46886<br />chol:  178","sex: m<br />age: 52.82683<br />chol:  259","sex: m<br />age: 35.15127<br />chol:  325","sex: m<br />age: 67.90691<br />chol:  151","sex: m<br />age: 52.88980<br />chol:  251","sex: m<br />age: 62.64476<br />chol:  331","sex: m<br />age: 51.24983<br />chol:  426","sex: m<br />age: 61.80424<br />chol:  257","sex: m<br />age: 69.94114<br />chol:  586","sex: m<br />age: 69.37714<br />chol:  168","sex: m<br />age: 45.76044<br />chol:  317","sex: m<br />age: 53.30595<br />chol:  196","sex: m<br />age: 60.95825<br />chol:  376","sex: m<br />age: 49.76318<br />chol:  346","sex: m<br />age: 58.95140<br />chol:  316","sex: m<br />age: 78.43943<br />chol:  243","sex: m<br />age: 74.52430<br />chol:  232","sex: m<br />age: 67.57290<br />chol:  416","sex: m<br />age: 50.24504<br />chol:  546","sex: m<br />age: 60.53662<br />chol: 1000","sex: m<br />age: 35.35113<br />chol:  646","sex: m<br />age: 55.98631<br />chol:  275"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.3,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"m","legendgroup":"m","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[58.7652292950034,56.4462696783025,54.7405886379192,38.1054072553046,55.5345653661875,53.056810403833,42.507871321013,70.5598904859685,53.7138945927447,59.1375770020534,45.6892539356605,64.6461327857632,40.4435318275154,52.1834360027378,53.9301848049281,49.5605749486653,59.9534565366188,56.2765229295003,55.9671457905544,45.0732375085558,52.0246406570842,54.4394250513347,44.9472963723477,63.8767967145791,41.3853524982888,41.5523613963039,53.9958932238193,51.2826830937714,52.0602327173169,48.6187542778919,56.4106776180698,61.7275838466804,36.6269678302532,55.3921971252567,48.870636550308,37.5824777549624,45.7987679671458,47.4277891854894,53.5085557837098,52.0876112251882,39.1978097193703,33.6180698151951,53.5715263518138,40.394250513347,58.3819301848049,60.7063655030801,46.6283367556468,62.9075975359343,40.2026009582478,51.2881587953457,32.6132785763176,49.3388090349076,48.8459958932238,32.4928131416838,38.4941820670773,51.9206023271732,43.5181382614647,51.9425051334702,49.8261464750171,47.9452429842574,46.5160848733744,63.2635181382615,67.3100616016427,56.0136892539357,55.8302532511978,47.2169746748802,52.7583846680356,37.2785763175907,41.3935660506502,52.4435318275154,45.6071184120465,76.7091033538672,36.5338809034908,53.9164955509925,28.8843258042437,44.9500342231348,56.5694729637235,48.9637234770705,43.0171115674196,34.0396988364134,62.5215605749487,50.3572895277207,44.062970568104,38.9103353867214,41.1526351813826,55.4579055441478,51.233401779603,42.6392881587953,61.0704996577687,49.6563997262149,48.8542094455852,54.2559890485969,55.4360027378508,47.1813826146475,44.104038329911,44.227241615332,62.0013689253936,40.5530458590007,42.3353867214237,42.9678302532512,55.9616700889801,62.861054072553,46.7624914442163,54.0752908966461,47.0362765229295,55.7262149212868,46.1026694045175,52.2874743326489,51.2005475701574,75.0116358658453,30.8637919233402,55.0417522245038,49.6043805612594,43.5564681724846,59.4086242299795,48.7583846680356,36.4928131416838,57.3716632443532,42.7433264887064,58.8172484599589,53.4976043805613,41.3552361396304,35.4907597535934,48.662559890486,49.8699520876112,30.2751540041068,52.1533196440794,55.4524298425736,43.9425051334702,42.5681040383299,44.5694729637235,40.2600958247776,37.6071184120465,48.3613963039014,70.8364134154689,35.791923340178,62.6228610540726,50.6475017111567,52.6926762491444,52.7200547570157,56.7720739219713,44.3969883641342,29.555099247091,57.0403832991102,44.6269678302532,35.7973990417522,40.7173169062286,32.2327173169062,41.0924024640657,61.6399726214921,37.056810403833,62.5790554414784,61.990417522245,61.2950034223135,52.6242299794661,47.2635181382615,50.2039698836413,69.347022587269,41.1690622861054,36.0793976728268,42.7132101300479,63.6303901437372,56.6297056810404,46.2642026009582,61.242984257358,38.6201232032854,38.7707049965777,56.6954140999316,36.9226557152635,62.4147843942505,34.6091718001369,58.3353867214237,50.1820670773443,42.6858316221766,34.3791923340178,33.1827515400411,38.3819301848049,59.7618069815195,46.7898699520876,56.0793976728268,41.3744010951403,64.5722108145106,67.4880219028063,44.829568788501,45.7713894592745,32.9500342231348,41.2210814510609,55.4168377823409,47.9808350444901,40.7912388774812,56.974674880219,68.4626967830253,39.8576317590691,35.3100616016427,31.4442162902122,58.2642026009582,51.4880219028063,59.9698836413415,42.7871321013005,34.8747433264887,44.1396303901437,46.3819301848049,56.3093771389459,70.9075975359343,55.3949349760438,45.0841889117043,26.2778918548939,50.4722792607803,38.3983572895277,47.419575633128,38.3162217659138,50.1081451060917,35.088295687885,32.5037645448323,56.1533196440794,46.154688569473,65.8836413415469,33.9438740588638,62.861054072553,48.5639972621492,46.3490759753593,38.8528405201916,58.6475017111567,48.9363449691992,65.9849418206708,40.9007529089665,57.1964407939767,31.3812457221081,52.72553045859,38.0917180013689,45.2101300479124,37.7987679671458,60.6598220396988,35.5345653661875,43.066392881588,56.3915126625599,30.5735797399042,61.1827515400411,58.299794661191,62.3326488706366,37.9986310746064,33.1526351813826],"y":[261,302,244,279,322,280,562,200,259,236,281,231,204,274,178,235,374,271,395,298,1128,175,222,370,260,296,262,210,364,314,172,334,383,282,361,299,482,316,257,276,288,498,260,329,604,302,932,373,256,466,174,652,258,320,132,558,674,394,244,436,315,448,472,250,263,262,1600,345,296,408,325,206,353,201,239,400,248,188,303,464,212,127,120,486,528,267,374,303,458,950,390,636,298,316,268,1775,242,448,578,263,263,399,328,290,346,364,332,556,309,288,1015,460,217,220,358,286,450,217,502,260,233,1480,408,390,205,236,283,258,396,478,248,201,674,256,225,808,187,360,1092,308,932,293,347,226,266,286,392,236,235,223,149,255,213,396,252,232,400,404,1276,608,215,426,360,372,448,309,274,223,215,191,302,518,267,514,578,1336,253,442,300,232,316,354,468,350,273,387,1712,324,242,299,227,246,227,193,336,280,414,277,322,432,356,348,318,222,344,374,448,321,226,328,572,219,317,338,198,325,175,304,412,291,253,310,373,310,294,339,194,328,340,342,393,335,372,219,426,239,273,246,260,434,247,576],"text":["sex: f<br />age: 58.76523<br />chol:  261","sex: f<br />age: 56.44627<br />chol:  302","sex: f<br />age: 54.74059<br />chol:  244","sex: f<br />age: 38.10541<br />chol:  279","sex: f<br />age: 55.53457<br />chol:  322","sex: f<br />age: 53.05681<br />chol:  280","sex: f<br />age: 42.50787<br />chol:  562","sex: f<br />age: 70.55989<br />chol:  200","sex: f<br />age: 53.71389<br />chol:  259","sex: f<br />age: 59.13758<br />chol:  236","sex: f<br />age: 45.68925<br />chol:  281","sex: f<br />age: 64.64613<br />chol:  231","sex: f<br />age: 40.44353<br />chol:  204","sex: f<br />age: 52.18344<br />chol:  274","sex: f<br />age: 53.93018<br />chol:  178","sex: f<br />age: 49.56057<br />chol:  235","sex: f<br />age: 59.95346<br />chol:  374","sex: f<br />age: 56.27652<br />chol:  271","sex: f<br />age: 55.96715<br />chol:  395","sex: f<br />age: 45.07324<br />chol:  298","sex: f<br />age: 52.02464<br />chol: 1128","sex: f<br />age: 54.43943<br />chol:  175","sex: f<br />age: 44.94730<br />chol:  222","sex: f<br />age: 63.87680<br />chol:  370","sex: f<br />age: 41.38535<br />chol:  260","sex: f<br />age: 41.55236<br />chol:  296","sex: f<br />age: 53.99589<br />chol:  262","sex: f<br />age: 51.28268<br />chol:  210","sex: f<br />age: 52.06023<br />chol:  364","sex: f<br />age: 48.61875<br />chol:  314","sex: f<br />age: 56.41068<br />chol:  172","sex: f<br />age: 61.72758<br />chol:  334","sex: f<br />age: 36.62697<br />chol:  383","sex: f<br />age: 55.39220<br />chol:  282","sex: f<br />age: 48.87064<br />chol:  361","sex: f<br />age: 37.58248<br />chol:  299","sex: f<br />age: 45.79877<br />chol:  482","sex: f<br />age: 47.42779<br />chol:  316","sex: f<br />age: 53.50856<br />chol:  257","sex: f<br />age: 52.08761<br />chol:  276","sex: f<br />age: 39.19781<br />chol:  288","sex: f<br />age: 33.61807<br />chol:  498","sex: f<br />age: 53.57153<br />chol:  260","sex: f<br />age: 40.39425<br />chol:  329","sex: f<br />age: 58.38193<br />chol:  604","sex: f<br />age: 60.70637<br />chol:  302","sex: f<br />age: 46.62834<br />chol:  932","sex: f<br />age: 62.90760<br />chol:  373","sex: f<br />age: 40.20260<br />chol:  256","sex: f<br />age: 51.28816<br />chol:  466","sex: f<br />age: 32.61328<br />chol:  174","sex: f<br />age: 49.33881<br />chol:  652","sex: f<br />age: 48.84600<br />chol:  258","sex: f<br />age: 32.49281<br />chol:  320","sex: f<br />age: 38.49418<br />chol:  132","sex: f<br />age: 51.92060<br />chol:  558","sex: f<br />age: 43.51814<br />chol:  674","sex: f<br />age: 51.94251<br />chol:  394","sex: f<br />age: 49.82615<br />chol:  244","sex: f<br />age: 47.94524<br />chol:  436","sex: f<br />age: 46.51608<br />chol:  315","sex: f<br />age: 63.26352<br />chol:  448","sex: f<br />age: 67.31006<br />chol:  472","sex: f<br />age: 56.01369<br />chol:  250","sex: f<br />age: 55.83025<br />chol:  263","sex: f<br />age: 47.21697<br />chol:  262","sex: f<br />age: 52.75838<br />chol: 1600","sex: f<br />age: 37.27858<br />chol:  345","sex: f<br />age: 41.39357<br />chol:  296","sex: f<br />age: 52.44353<br />chol:  408","sex: f<br />age: 45.60712<br />chol:  325","sex: f<br />age: 76.70910<br />chol:  206","sex: f<br />age: 36.53388<br />chol:  353","sex: f<br />age: 53.91650<br />chol:  201","sex: f<br />age: 28.88433<br />chol:  239","sex: f<br />age: 44.95003<br />chol:  400","sex: f<br />age: 56.56947<br />chol:  248","sex: f<br />age: 48.96372<br />chol:  188","sex: f<br />age: 43.01711<br />chol:  303","sex: f<br />age: 34.03970<br />chol:  464","sex: f<br />age: 62.52156<br />chol:  212","sex: f<br />age: 50.35729<br />chol:  127","sex: f<br />age: 44.06297<br />chol:  120","sex: f<br />age: 38.91034<br />chol:  486","sex: f<br />age: 41.15264<br />chol:  528","sex: f<br />age: 55.45791<br />chol:  267","sex: f<br />age: 51.23340<br />chol:  374","sex: f<br />age: 42.63929<br />chol:  303","sex: f<br />age: 61.07050<br />chol:  458","sex: f<br />age: 49.65640<br />chol:  950","sex: f<br />age: 48.85421<br />chol:  390","sex: f<br />age: 54.25599<br />chol:  636","sex: f<br />age: 55.43600<br />chol:  298","sex: f<br />age: 47.18138<br />chol:  316","sex: f<br />age: 44.10404<br />chol:  268","sex: f<br />age: 44.22724<br />chol: 1775","sex: f<br />age: 62.00137<br />chol:  242","sex: f<br />age: 40.55305<br />chol:  448","sex: f<br />age: 42.33539<br />chol:  578","sex: f<br />age: 42.96783<br />chol:  263","sex: f<br />age: 55.96167<br />chol:  263","sex: f<br />age: 62.86105<br />chol:  399","sex: f<br />age: 46.76249<br />chol:  328","sex: f<br />age: 54.07529<br />chol:  290","sex: f<br />age: 47.03628<br />chol:  346","sex: f<br />age: 55.72621<br />chol:  364","sex: f<br />age: 46.10267<br />chol:  332","sex: f<br />age: 52.28747<br />chol:  556","sex: f<br />age: 51.20055<br />chol:  309","sex: f<br />age: 75.01164<br />chol:  288","sex: f<br />age: 30.86379<br />chol: 1015","sex: f<br />age: 55.04175<br />chol:  460","sex: f<br />age: 49.60438<br />chol:  217","sex: f<br />age: 43.55647<br />chol:  220","sex: f<br />age: 59.40862<br />chol:  358","sex: f<br />age: 48.75838<br />chol:  286","sex: f<br />age: 36.49281<br />chol:  450","sex: f<br />age: 57.37166<br />chol:  217","sex: f<br />age: 42.74333<br />chol:  502","sex: f<br />age: 58.81725<br />chol:  260","sex: f<br />age: 53.49760<br />chol:  233","sex: f<br />age: 41.35524<br />chol: 1480","sex: f<br />age: 35.49076<br />chol:  408","sex: f<br />age: 48.66256<br />chol:  390","sex: f<br />age: 49.86995<br />chol:  205","sex: f<br />age: 30.27515<br />chol:  236","sex: f<br />age: 52.15332<br />chol:  283","sex: f<br />age: 55.45243<br />chol:  258","sex: f<br />age: 43.94251<br />chol:  396","sex: f<br />age: 42.56810<br />chol:  478","sex: f<br />age: 44.56947<br />chol:  248","sex: f<br />age: 40.26010<br />chol:  201","sex: f<br />age: 37.60712<br />chol:  674","sex: f<br />age: 48.36140<br />chol:  256","sex: f<br />age: 70.83641<br />chol:  225","sex: f<br />age: 35.79192<br />chol:  808","sex: f<br />age: 62.62286<br />chol:  187","sex: f<br />age: 50.64750<br />chol:  360","sex: f<br />age: 52.69268<br />chol: 1092","sex: f<br />age: 52.72005<br />chol:  308","sex: f<br />age: 56.77207<br />chol:  932","sex: f<br />age: 44.39699<br />chol:  293","sex: f<br />age: 29.55510<br />chol:  347","sex: f<br />age: 57.04038<br />chol:  226","sex: f<br />age: 44.62697<br />chol:  266","sex: f<br />age: 35.79740<br />chol:  286","sex: f<br />age: 40.71732<br />chol:  392","sex: f<br />age: 32.23272<br />chol:  236","sex: f<br />age: 41.09240<br />chol:  235","sex: f<br />age: 61.63997<br />chol:  223","sex: f<br />age: 37.05681<br />chol:  149","sex: f<br />age: 62.57906<br />chol:  255","sex: f<br />age: 61.99042<br />chol:  213","sex: f<br />age: 61.29500<br />chol:  396","sex: f<br />age: 52.62423<br />chol:  252","sex: f<br />age: 47.26352<br />chol:  232","sex: f<br />age: 50.20397<br />chol:  400","sex: f<br />age: 69.34702<br />chol:  404","sex: f<br />age: 41.16906<br />chol: 1276","sex: f<br />age: 36.07940<br />chol:  608","sex: f<br />age: 42.71321<br />chol:  215","sex: f<br />age: 63.63039<br />chol:  426","sex: f<br />age: 56.62971<br />chol:  360","sex: f<br />age: 46.26420<br />chol:  372","sex: f<br />age: 61.24298<br />chol:  448","sex: f<br />age: 38.62012<br />chol:  309","sex: f<br />age: 38.77070<br />chol:  274","sex: f<br />age: 56.69541<br />chol:  223","sex: f<br />age: 36.92266<br />chol:  215","sex: f<br />age: 62.41478<br />chol:  191","sex: f<br />age: 34.60917<br />chol:  302","sex: f<br />age: 58.33539<br />chol:  518","sex: f<br />age: 50.18207<br />chol:  267","sex: f<br />age: 42.68583<br />chol:  514","sex: f<br />age: 34.37919<br />chol:  578","sex: f<br />age: 33.18275<br />chol: 1336","sex: f<br />age: 38.38193<br />chol:  253","sex: f<br />age: 59.76181<br />chol:  442","sex: f<br />age: 46.78987<br />chol:  300","sex: f<br />age: 56.07940<br />chol:  232","sex: f<br />age: 41.37440<br />chol:  316","sex: f<br />age: 64.57221<br />chol:  354","sex: f<br />age: 67.48802<br />chol:  468","sex: f<br />age: 44.82957<br />chol:  350","sex: f<br />age: 45.77139<br />chol:  273","sex: f<br />age: 32.95003<br />chol:  387","sex: f<br />age: 41.22108<br />chol: 1712","sex: f<br />age: 55.41684<br />chol:  324","sex: f<br />age: 47.98084<br />chol:  242","sex: f<br />age: 40.79124<br />chol:  299","sex: f<br />age: 56.97467<br />chol:  227","sex: f<br />age: 68.46270<br />chol:  246","sex: f<br />age: 39.85763<br />chol:  227","sex: f<br />age: 35.31006<br />chol:  193","sex: f<br />age: 31.44422<br />chol:  336","sex: f<br />age: 58.26420<br />chol:  280","sex: f<br />age: 51.48802<br />chol:  414","sex: f<br />age: 59.96988<br />chol:  277","sex: f<br />age: 42.78713<br />chol:  322","sex: f<br />age: 34.87474<br />chol:  432","sex: f<br />age: 44.13963<br />chol:  356","sex: f<br />age: 46.38193<br />chol:  348","sex: f<br />age: 56.30938<br />chol:  318","sex: f<br />age: 70.90760<br />chol:  222","sex: f<br />age: 55.39493<br />chol:  344","sex: f<br />age: 45.08419<br />chol:  374","sex: f<br />age: 26.27789<br />chol:  448","sex: f<br />age: 50.47228<br />chol:  321","sex: f<br />age: 38.39836<br />chol:  226","sex: f<br />age: 47.41958<br />chol:  328","sex: f<br />age: 38.31622<br />chol:  572","sex: f<br />age: 50.10815<br />chol:  219","sex: f<br />age: 35.08830<br />chol:  317","sex: f<br />age: 32.50376<br />chol:  338","sex: f<br />age: 56.15332<br />chol:  198","sex: f<br />age: 46.15469<br />chol:  325","sex: f<br />age: 65.88364<br />chol:  175","sex: f<br />age: 33.94387<br />chol:  304","sex: f<br />age: 62.86105<br />chol:  412","sex: f<br />age: 48.56400<br />chol:  291","sex: f<br />age: 46.34908<br />chol:  253","sex: f<br />age: 38.85284<br />chol:  310","sex: f<br />age: 58.64750<br />chol:  373","sex: f<br />age: 48.93634<br />chol:  310","sex: f<br />age: 65.98494<br />chol:  294","sex: f<br />age: 40.90075<br />chol:  339","sex: f<br />age: 57.19644<br />chol:  194","sex: f<br />age: 31.38125<br />chol:  328","sex: f<br />age: 52.72553<br />chol:  340","sex: f<br />age: 38.09172<br />chol:  342","sex: f<br />age: 45.21013<br />chol:  393","sex: f<br />age: 37.79877<br />chol:  335","sex: f<br />age: 60.65982<br />chol:  372","sex: f<br />age: 35.53457<br />chol:  219","sex: f<br />age: 43.06639<br />chol:  426","sex: f<br />age: 56.39151<br />chol:  239","sex: f<br />age: 30.57358<br />chol:  273","sex: f<br />age: 61.18275<br />chol:  246","sex: f<br />age: 58.29979<br />chol:  260","sex: f<br />age: 62.33265<br />chol:  434","sex: f<br />age: 37.99863<br />chol:  247","sex: f<br />age: 33.15264<br />chol:  576"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":0.3,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"f","legendgroup":"f","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":28.4931506849315,"l":25.5707762557078},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[23.6698151950719,81.0475017111568],"tickmode":"array","ticktext":[null],"categoryorder":"array","categoryarray":[null],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"age","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[37.25,1857.75],"tickmode":"array","ticktext":[null],"categoryorder":"array","categoryarray":[null],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"chol","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.913385826771654},"annotations":[{"text":"sex","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"4c4d985cea7":{"colour":{},"x":{},"y":{},"type":"scatter"}},"cur_data":"4c4d985cea7","visdat":{"4c4d985cea7":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="7">
+<li id="fn7"><p>Квартиль --- это частный пример квантиля. Другой известный квантиль --- процентиль. Процентили часто используют для сравнения значения с другими значениями. Например, 63ий процентиль означает, что данное значение больше 63% значений в выборке.<a href="vis.html#fnref7">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="real.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tasks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Глава 2 День 1. Основы R | A Minimal Book Example</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Глава 2 День 1. Основы R | A Minimal Book Example" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Глава 2 День 1. Основы R | A Minimal Book Example" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Yihui Xie">
+
+
+<meta name="date" content="2020-09-16">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="real.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R и статистика</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> День 1. Основы R</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#very_base"><i class="fa fa-check"></i><b>2.1</b> Знакомимся с самым базовым</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1.1</b> Установка R и Rstudio</a></li>
+<li class="chapter" data-level="2.1.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>2.1.2</b> RStudio</a></li>
+<li class="chapter" data-level="2.1.3" data-path="intro.html"><a href="intro.html#calc"><i class="fa fa-check"></i><b>2.1.3</b> R как калькулятор</a></li>
+<li class="chapter" data-level="2.1.4" data-path="intro.html"><a href="intro.html#func"><i class="fa fa-check"></i><b>2.1.4</b> Функции</a></li>
+<li class="chapter" data-level="2.1.5" data-path="intro.html"><a href="intro.html#variables"><i class="fa fa-check"></i><b>2.1.5</b> Переменные</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#data_types"><i class="fa fa-check"></i><b>2.2</b> Типы данных</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#atomic"><i class="fa fa-check"></i><b>2.3</b> Вектор</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="intro.html"><a href="intro.html#coercion"><i class="fa fa-check"></i><b>2.3.1</b> Приведение типов</a></li>
+<li class="chapter" data-level="2.3.2" data-path="intro.html"><a href="intro.html#vector_op"><i class="fa fa-check"></i><b>2.3.2</b> Векторизация</a></li>
+<li class="chapter" data-level="2.3.3" data-path="intro.html"><a href="intro.html#recycling"><i class="fa fa-check"></i><b>2.3.3</b> Recycling</a></li>
+<li class="chapter" data-level="2.3.4" data-path="intro.html"><a href="intro.html#index_atomic"><i class="fa fa-check"></i><b>2.3.4</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="2.3.5" data-path="intro.html"><a href="intro.html#na"><i class="fa fa-check"></i><b>2.3.5</b> NA - пропущенные значения</a></li>
+<li class="chapter" data-level="2.3.6" data-path="intro.html"><a href="intro.html#google"><i class="fa fa-check"></i><b>2.3.6</b> В любой непонятной ситуации --- гуглите</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#matrix"><i class="fa fa-check"></i><b>2.4</b> Матрицы (matrix)</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#list"><i class="fa fa-check"></i><b>2.5</b> Списки (list)</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#df"><i class="fa fa-check"></i><b>2.6</b> Data.frame</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#real_data"><i class="fa fa-check"></i><b>2.7</b> Начинаем работу с реальными данными</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="intro.html"><a href="intro.html#wd"><i class="fa fa-check"></i><b>2.7.1</b> Рабочая папка и проекты</a></li>
+<li class="chapter" data-level="2.7.2" data-path="intro.html"><a href="intro.html#import"><i class="fa fa-check"></i><b>2.7.2</b> Импорт данных</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="real.html"><a href="real.html"><i class="fa fa-check"></i><b>3</b> День 2. Работа с реальными данными в R</a><ul>
+<li class="chapter" data-level="3.1" data-path="real.html"><a href="real.html#prep"><i class="fa fa-check"></i><b>3.1</b> Препроцессинг данных в R</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="real.html"><a href="real.html#explore"><i class="fa fa-check"></i><b>3.1.1</b> Исследование данных</a></li>
+<li class="chapter" data-level="3.1.2" data-path="real.html"><a href="real.html#subset"><i class="fa fa-check"></i><b>3.1.2</b> Subsetting</a></li>
+<li class="chapter" data-level="3.1.3" data-path="real.html"><a href="real.html#newcol"><i class="fa fa-check"></i><b>3.1.3</b> Создание новых колонок</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="real.html"><a href="real.html#loopsetc"><i class="fa fa-check"></i><b>3.2</b> Циклы, условия, создание функций</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.1</b> If, else, else if</a></li>
+<li class="chapter" data-level="3.2.2" data-path="real.html"><a href="real.html#ifelse"><i class="fa fa-check"></i><b>3.2.2</b> Функция ifelse()</a></li>
+<li class="chapter" data-level="3.2.3" data-path="real.html"><a href="real.html#for"><i class="fa fa-check"></i><b>3.2.3</b> For loops</a></li>
+<li class="chapter" data-level="3.2.4" data-path="real.html"><a href="real.html#newfun"><i class="fa fa-check"></i><b>3.2.4</b> Создание функций</a></li>
+<li class="chapter" data-level="3.2.5" data-path="real.html"><a href="real.html#apply"><i class="fa fa-check"></i><b>3.2.5</b> Cемейство функций apply()</a></li>
+<li class="chapter" data-level="3.2.6" data-path="real.html"><a href="real.html#anon"><i class="fa fa-check"></i><b>3.2.6</b> Анонимные функции</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="real.html"><a href="real.html#text"><i class="fa fa-check"></i><b>3.3</b> Работа с текстом</a></li>
+<li class="chapter" data-level="3.4" data-path="real.html"><a href="real.html#new_pack"><i class="fa fa-check"></i><b>3.4</b> Работа с дополнительными пакетами</a></li>
+<li class="chapter" data-level="3.5" data-path="real.html"><a href="real.html#reshape"><i class="fa fa-check"></i><b>3.5</b> Решейпинг данных</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="real.html"><a href="real.html#holywar"><i class="fa fa-check"></i><b>3.5.1</b> data.table vs. dplyr</a></li>
+<li class="chapter" data-level="3.5.2" data-path="real.html"><a href="real.html#what"><i class="fa fa-check"></i><b>3.5.2</b> Так что же выбрать?</a></li>
+<li class="chapter" data-level="3.5.3" data-path="real.html"><a href="real.html#dt"><i class="fa fa-check"></i><b>3.5.3</b> data.table</a></li>
+<li class="chapter" data-level="3.5.4" data-path="real.html"><a href="real.html#long_wide"><i class="fa fa-check"></i><b>3.5.4</b> Широкий и длинный форматы данных</a></li>
+<li class="chapter" data-level="3.5.5" data-path="real.html"><a href="real.html#melt_dcast"><i class="fa fa-check"></i><b>3.5.5</b> Решейпинг в data.table: melt() и dcast()</a></li>
+<li class="chapter" data-level="3.5.6" data-path="real.html"><a href="real.html#join_merge"><i class="fa fa-check"></i><b>3.5.6</b> Объединение с помощью rbind(), cbind() и merge()</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="real.html"><a href="real.html#day2_con"><i class="fa fa-check"></i><b>3.6</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="vis.html"><a href="vis.html"><i class="fa fa-check"></i><b>4</b> День 3. Описательная статистика и визуализация</a><ul>
+<li class="chapter" data-level="4.1" data-path="vis.html"><a href="vis.html#desc"><i class="fa fa-check"></i><b>4.1</b> Описательная статистика</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="vis.html"><a href="vis.html#cent_tend"><i class="fa fa-check"></i><b>4.1.1</b> Меры центральной тенденции</a></li>
+<li class="chapter" data-level="4.1.2" data-path="vis.html"><a href="vis.html#vary"><i class="fa fa-check"></i><b>4.1.2</b> Меры рассеяния</a></li>
+<li class="chapter" data-level="4.1.3" data-path="vis.html"><a href="vis.html#skku"><i class="fa fa-check"></i><b>4.1.3</b> Ассиметрия и эксцесс</a></li>
+<li class="chapter" data-level="4.1.4" data-path="vis.html"><a href="vis.html#summary"><i class="fa fa-check"></i><b>4.1.4</b> А теперь все вместе!</a></li>
+<li class="chapter" data-level="4.1.5" data-path="vis.html"><a href="vis.html#datasaurus"><i class="fa fa-check"></i><b>4.1.5</b> Описательных статистик недостаточно</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="vis.html"><a href="vis.html#vis_r"><i class="fa fa-check"></i><b>4.2</b> Визуализация данных в R</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="vis.html"><a href="vis.html#base_vis"><i class="fa fa-check"></i><b>4.2.1</b> Базовые функции для графики</a></li>
+<li class="chapter" data-level="4.2.2" data-path="vis.html"><a href="vis.html#ggplot2"><i class="fa fa-check"></i><b>4.2.2</b> ggplot2</a></li>
+<li class="chapter" data-level="4.2.3" data-path="vis.html"><a href="vis.html#дополнения-к-ggplot2"><i class="fa fa-check"></i><b>4.2.3</b> Дополнения к ggplot2</a></li>
+<li class="chapter" data-level="4.2.4" data-path="vis.html"><a href="vis.html#cowplot"><i class="fa fa-check"></i><b>4.2.4</b> cowplot</a></li>
+<li class="chapter" data-level="4.2.5" data-path="vis.html"><a href="vis.html#plotly"><i class="fa fa-check"></i><b>4.2.5</b> plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>5</b> Задания</a><ul>
+<li class="chapter" data-level="5.1" data-path="tasks.html"><a href="tasks.html#vec_task_1"><i class="fa fa-check"></i><b>5.1</b> Вектор</a></li>
+<li class="chapter" data-level="5.2" data-path="tasks.html"><a href="tasks.html#vec_op"><i class="fa fa-check"></i><b>5.2</b> Вектор. Операции с векторами</a></li>
+<li class="chapter" data-level="5.3" data-path="tasks.html"><a href="tasks.html#vec_task_2"><i class="fa fa-check"></i><b>5.3</b> Вектор. Индексирование</a></li>
+<li class="chapter" data-level="5.4" data-path="tasks.html"><a href="tasks.html#t"><i class="fa fa-check"></i><b>5.4</b> Матрицы</a></li>
+<li class="chapter" data-level="5.5" data-path="tasks.html"><a href="tasks.html#list_ta"><i class="fa fa-check"></i><b>5.5</b> Списки</a></li>
+<li class="chapter" data-level="5.6" data-path="tasks.html"><a href="tasks.html#df_task"><i class="fa fa-check"></i><b>5.6</b> Датафрейм</a></li>
+<li class="chapter" data-level="5.7" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>5.7</b> Создание функций</a></li>
+<li class="chapter" data-level="5.8" data-path="tasks.html"><a href="tasks.html#task_text"><i class="fa fa-check"></i><b>5.8</b> Семейство apply()</a></li>
+<li class="chapter" data-level="5.9" data-path="tasks.html"><a href="tasks.html#task_test"><i class="fa fa-check"></i><b>5.9</b> Работа с текстом</a></li>
+<li class="chapter" data-level="5.10" data-path="tasks.html"><a href="tasks.html#dt_task"><i class="fa fa-check"></i><b>5.10</b> data.table</a></li>
+<li class="chapter" data-level="5.11" data-path="tasks.html"><a href="tasks.html#task_reshape"><i class="fa fa-check"></i><b>5.11</b> Решейпинг</a></li>
+<li class="chapter" data-level="5.12" data-path="tasks.html"><a href="tasks.html#task_desc"><i class="fa fa-check"></i><b>5.12</b> Описательная статистика</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>6</b> Решения_заданий</a><ul>
+<li class="chapter" data-level="6.1" data-path="solutions.html"><a href="solutions.html#solvvec_task_1"><i class="fa fa-check"></i><b>6.1</b> Вектор</a></li>
+<li class="chapter" data-level="6.2" data-path="solutions.html"><a href="solutions.html#solvvec_op"><i class="fa fa-check"></i><b>6.2</b> Вектор. Операции с векторами</a></li>
+<li class="chapter" data-level="6.3" data-path="solutions.html"><a href="solutions.html#solvvec_task_2"><i class="fa fa-check"></i><b>6.3</b> Вектор. Индексирование</a></li>
+<li class="chapter" data-level="6.4" data-path="solutions.html"><a href="solutions.html#solvt"><i class="fa fa-check"></i><b>6.4</b> Матрицы</a></li>
+<li class="chapter" data-level="6.5" data-path="solutions.html"><a href="solutions.html#solvlist_ta"><i class="fa fa-check"></i><b>6.5</b> Списки</a></li>
+<li class="chapter" data-level="6.6" data-path="solutions.html"><a href="solutions.html#solvdf_task"><i class="fa fa-check"></i><b>6.6</b> Датафрейм</a></li>
+<li class="chapter" data-level="6.7" data-path="solutions.html"><a href="solutions.html#solvtask_function"><i class="fa fa-check"></i><b>6.7</b> Создание функций</a></li>
+<li class="chapter" data-level="6.8" data-path="solutions.html"><a href="solutions.html#solvtask_text"><i class="fa fa-check"></i><b>6.8</b> Семейство apply()</a></li>
+<li class="chapter" data-level="6.9" data-path="solutions.html"><a href="solutions.html#solvtask_test"><i class="fa fa-check"></i><b>6.9</b> Работа с текстом</a></li>
+<li class="chapter" data-level="6.10" data-path="solutions.html"><a href="solutions.html#solvdt_task"><i class="fa fa-check"></i><b>6.10</b> data.table</a></li>
+<li class="chapter" data-level="6.11" data-path="solutions.html"><a href="solutions.html#solvtask_reshape"><i class="fa fa-check"></i><b>6.11</b> Решейпинг</a></li>
+<li class="chapter" data-level="6.12" data-path="solutions.html"><a href="solutions.html#solvtask_desc"><i class="fa fa-check"></i><b>6.12</b> Описательная статистика</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">Глава 2</span> День 1. Основы R</h1>
+<div id="very_base" class="section level2">
+<h2><span class="header-section-number">2.1</span> Знакомимся с самым базовым</h2>
+<div id="install" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Установка R и Rstudio</h3>
+<p>Для работы с R необходимо его сначала скачать и установить.</p>
+<ul>
+<li>R
+<ul>
+<li><a href="https://cran.r-project.org/bin/windows/base/">на Windows</a>, найдите большую кнопку <strong>Download R (номер версии) for Windows.</strong></li>
+<li><a href="https://cran.r-project.org/bin/macosx/">на Mac</a>, если маку меньше, чем 5 лет, то смело ставьте *.pkg файл с последней версией. Если старше, то поищите на той же странице версию для вашей системы.</li>
+<li><a href="https://cran.rstudio.com/bin/linux/">на Linux</a>, также можно добавить зеркало и установить из командной строки:</li>
+</ul></li>
+</ul>
+<pre><code>sudo apt-get install r-cran-base</code></pre>
+<p>В данной книге используется следующая версия R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()<span class="op">$</span>R.version<span class="op">$</span>version.string</code></pre></div>
+<pre><code>## [1] &quot;R version 3.6.0 (2019-04-26)&quot;</code></pre>
+<p>После установки R необходимо скачать и установить RStudio:</p>
+<ul>
+<li><a href="https://www.rstudio.com/products/rstudio/download/">RStudio</a></li>
+</ul>
+<p>Если вдруг что-то установить не получается (или же вы просто не хотите устанавливать на компьютер лишние программы), то можно работать в облаке, делая все то же самое в веб-браузере:</p>
+<ul>
+<li><a href="https://rstudio.cloud/">RStudio cloud</a></li>
+</ul>
+<p>Первый и вполне закономерный вопрос: зачем мы ставили R и отдельно еще какой-то RStudio? Если опустить незначительные детали, то R --- это сам язык программирования, а RStudio --- это среда (IDE), которая позволяет в этом языке очень удобно работать.</p>
+<blockquote>
+<p>RStudio --- это единственная среда для R, но, определенно, самая удобная на сегодняшний день, у нее практически нет конкурентов. Почти все пользуются именно ею и не стоит тратить время на поиск чего-то более удобного и лучшего. Если же вы привыкли работать с Jupyter Notebook</p>
+</blockquote>
+<blockquote>
+<p>Естественно, RStudio --- не единственная среда для R, но, определенно, самая крутая. Почти все пользуются именно ею и не стоит тратить время на поиск чего-то более удобного и лучшего. Если Вы привыкли к Jupyter Notebook, то здесь тоже есть ноутбуки (RNotebook --- хотя это и не совсем то же самое), но еще есть и кое-что покруче --- RMarkdown. И с этим мы тоже разберемся!</p>
+</blockquote>
+</div>
+<div id="rstudio" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> RStudio</h3>
+<p>Так, давайте взглянем на то, что нам тут открылось:</p>
+<div class="figure">
+<img src="images/01_01_rstudio.png" />
+
+</div>
+<p>В первую очередь нас интересуют два окна: <strong>1 - Code Editor</strong> (окно для написания скриптов)<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> и <strong>2 - R Console</strong> (консоль). Здесь можно писать команды и запускать их. При этом работа в консоли и работа со скриптом немного различается.</p>
+<p>В <strong>2 - R Console</strong> вы пишите команду и запускаете ее нажиманием <code>Enter</code>. Иногда после запуска команды появляется какой-то результат. Если нажимать стрелку вверх на клавиатуре, то можно выводить в консоль предыдущие команды. Это очень удобно для запуска предыдущих команд с небольшими изменениями.</p>
+<p>В <strong>1 - Code Editor</strong> для запуска команды вы должны выделить ее и нажать <code>Ctrl</code> + <code>Enter</code> (<code>Cmd</code> + <code>Enter</code> на macOS). Если не нажать эту комбинацию клавиш, то команда не запустится. Можно выделить и запустить сразу несколько команд или даже все команды скрипта. Все команды скрипта можно выделить с помощью сочетания клавиш <code>Ctrl</code> + <code>A</code> на Windows и Linux, <code>Cmd</code> + <code>A</code> на macOS.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> Как только вы запустите команду (или несколько команд), соответствующие строчки кода появятся в <strong>2 - R Console</strong>, как будто бы вы запускали их прямо там.</p>
+<p>Обычно в консоли удобно что-то писать, чтобы быстро что-то посчитать. Скрипты удобнее при работе с длинными командами и как способ сохранения написанного кода для дальнейшей работы. Для сохранения скрипта нажмите <code>File - Save As...</code>. R скрипты сохраняются с разрешением <em>.R</em>, но по своей сути это просто текстовые файлы, которые можно открыть и модифицировать в любом текстовом редакторе а-ля &quot;Блокнот&quot;.</p>
+<p><strong>3 - Workspace and History</strong> --- здесь можно увидеть переменные. Это поле будет автоматически обновляться по мере того, как Вы будете запускать строчки кода и создавать новые переменные. Еще там есть вкладка с историей всех команд, которые были запущены.</p>
+<p><strong>4 - Plots and files</strong>. Здесь есть очень много всего. Во-первых, небольшой файловый менеджер, во-вторых, там будут появляться графики, когда вы будете их рисовать. Там же есть вкладка с вашими пакетами (<code>Packages</code>) и <code>Help</code> по функциям. Но об этом потом.</p>
+</div>
+<div id="calc" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> R как калькулятор</h3>
+<p>R --- полноценный язык программирования, который позволяет решать широкий спектр задач. Но в первую очередь R используется для анализа данных и статистических вычислений. Тем не менее, многими R до сих пор воспринимается как просто продвинутый калькулятор. Ну что ж, калькулятор, так калькулятор.</p>
+<p>Давайте начнем с самого простого и попробуем использовать R как калькулятор с помощью арифметических операторов <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code> (степень), <code>()</code> и т.д.</p>
+<p>Просто запускайте в консоли пока не надоест:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">40</span><span class="op">+</span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 42</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span><span class="op">-</span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">*</span><span class="dv">6</span></code></pre></div>
+<pre><code>## [1] 30</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">99</span><span class="op">/</span><span class="dv">9</span> <span class="co">#деление</span></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span><span class="op">^</span><span class="dv">3</span> <span class="co">#степень</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">13</span> <span class="op">%/%</span><span class="st"> </span><span class="dv">3</span> <span class="co">#целочисленное деление</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">13</span> <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="co">#остаток от деления</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Попробуйте самостоятельно посчитать что-нибудь с разными числами.</p>
+<div class="figure">
+<img src="images/ThePracticalDev_2016-Apr-13.jpg" width="400" />
+
+</div>
+<p>Ничего сложного, верно? Вводим выражение и получаем результат.</p>
+<p>Вы могли заметить, что некоторые команды у меня заканчиваются знаком решетки (<code>#</code>). Все, что написано в строчке после <code>#</code> игнорируется R при выполнении команды. Написанные команды в скрипте рекомендуется сопровождать комментариями, которые будут объяснять вам же в будущем (или кому-то еще), что конкретно происходит в соответствующем куске кода.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> Кроме того, комментарии можно использовать в тех случаях, когда вы хотите написать кусок кода по-другому, не стирая полностью предыдущий код: достаточно &quot;закомментить&quot; нужные строчки - поставить <code>#</code> в начало каждой строки, которую вы хотите переписать. Для этого есть специальное сочетание горячих клавиш: <code>Ctrl</code> + <code>Shift</code> + <code>C</code> (<code>Cmd</code> + <code>Shift</code> + <code>C</code> на macOS) --- во всех выделенных строчках будет написан <code>#</code> в начале.</p>
+<p>Согласно данным навязчивых рекламных баннеров в интернете, только 14% россиян могут справиться с этим примером:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 6</code></pre>
+<p>На самом деле, разные языки программирования ведут себя <a href="https://www.quora.com/Do-all-computer-languages-with-operator-precedence-use-the-same-operator-precedence">по-разному</a> в таких ситуациях, поэтому ответ 6 (сначала умножаем, потом складываем) не так очевиден.</p>
+<p>Порядок выполнения арифметических операций (т.е. приоритет операторов, <em>operator precedence</em>) в R как в математике, так что не забывайте про скобочки.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">2</span><span class="op">+</span><span class="dv">2</span>)<span class="op">*</span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<p>Если Вы не уверены в том, какие операторы имеют приоритет, то используйте скобочки, чтобы точно обозначить, в каком порядке нужно производить операции. Или же смотрите на таблицу приоритета операторов с помощью команды <code>?Syntax</code>.</p>
+</div>
+<div id="func" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> Функции</h3>
+<p>Давайте теперь извлечем корень из какого-нибудь числа. В принципе, тем, кто помнит школьный курс математики, возведения в степень вполне достаточно:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">16</span><span class="op">^</span><span class="fl">0.5</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<p>Ну а если нет, то можете воспользоваться специальной <strong>функцией</strong>: это обычно какие-то буквенные символы с круглыми скобками сразу после названия функции. Мы подаем на вход (внутрь скобочек) какие-то данные, внутри этих функций происходят какие-то вычисления, которые выдает в ответ какие-то другие данные (или же функция записывает файл, рисует график и т.д.).</p>
+<p>Вот, например, функция для корня:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">16</span>)</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<blockquote>
+<p>R --- case-sensitive язык, т.е. регистр важен. SQRT(16) не будет работать.</p>
+</blockquote>
+<p>А вот так выглядит функция логарифма:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dv">8</span>)</code></pre></div>
+<pre><code>## [1] 2.079442</code></pre>
+<p>Так, вроде бы все нормально, но... Если Вы еще что-то помните из школьной математики, то должны понимать, что что-то здесь не так.</p>
+<p>Здесь не хватает основания логарифма!</p>
+<blockquote>
+<p>Логарифм --- показатель степени, в которую надо возвести число, называемое основанием, чтобы получить данное число.</p>
+</blockquote>
+<p>То есть у логарифма 8 по основанию 2 будет значение 3:</p>
+<p><span class="math inline">\(\log_2 8 = 3\)</span></p>
+<p>То есть если возвести 2 в степень 3 у нас будет 8:</p>
+<p><span class="math inline">\(2^3 = 8\)</span></p>
+<p>Только наша функция считает все как-то не так.</p>
+<p>Чтобы понять, что происходит, нам нужно залезть в хэлп этой функции:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?log</code></pre></div>
+<p>Справа внизу в RStudio появится вот такое окно:</p>
+<div class="figure">
+<img src="images/help.PNG" width="400" />
+
+</div>
+<p>Действительно, у этой функции есть еще аргумент <em><code>base =</code></em>. По дефолту он равен числу Эйлера (2.7182818...), т.е. функция считает натуральный логарифм. В большинстве функций R есть какой-то основной инпут --- данные в том или ином формате, а есть и дополнительные параметры, которые можно прописывать вручную, если параметры по умолчанию нас не устраивают.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">8</span>, <span class="dt">base =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>...или просто (если Вы уверены в порядке переменных):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dv">8</span>,<span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Более того, Вы можете использовать оутпут одних функций как инпут для других:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dv">8</span>, <span class="kw">sqrt</span>(<span class="dv">4</span>))</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Отличненько. Мы еще много раз будем возвращаться к функциям. Вообще, функции --- это одна из важнейших штук в R (примерно так же как и в Python). Мы будем создавать свои функции, использовать функции как инпут для функций и многое-многое другое. В R очень крутые возможности работы с функциями. Поэтому подружитесь с функциями, они клевые.</p>
+<blockquote>
+<p>Арифметические знаки, которые мы использовали: <code>+</code>, <code>-</code> , <code>/</code>, <code>^</code> и т.д. называются <strong>операторами</strong> и на самом деле тоже являются функциями:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="st">&#39;+&#39;</span>(<span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
+<pre><code>## [1] 7</code></pre>
+</div>
+<div id="variables" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> Переменные</h3>
+<p>Важная штука в программировании на практически любом языке --- возможность сохранять значения в <strong>переменных</strong>. В R это обычно делается с помощью вот этих символов: <code>&lt;-</code> (но можно использовать и обычное <code>=</code>, хотя это не очень принято). Для этого есть удобное сочетание клавиш: нажмите одновременно <code>Alt</code> + <code>-</code> (или <code>option</code> + <code>-</code> на macOS).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">2</span>
+a</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Заметьте, при присвоении результат вычисления не выводится в консоль! Если опустить детали, то обычно результат выполнения комманды либо выводится в консоль, либо записывается в переменную.</p>
+<p>После присвоения переменная появляется во вкладке <strong>Environment</strong> в RStudio:</p>
+<div class="figure">
+<img src="images/env.PNG" width="400" />
+
+</div>
+<p>Можно использовать переменные в функциях и просто вычислениях:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span>a <span class="op">^</span><span class="st"> </span>a <span class="op">+</span><span class="st"> </span>a <span class="op">*</span><span class="st"> </span>a
+b</code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(b, a)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Вы можете сравнивать разные переменные:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">==</span><span class="st"> </span>b</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Заметьте, что сравнивая две переменные мы используем два знака равно <code>==</code>, а не один <code>=</code>. Иначе это будет означать присвоение.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span>b
+a</code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<p>Теперь Вы сможете понять комикс про восстание роботов на следующей странице (пусть он и совсем про другой язык программирования)</p>
+<div class="figure">
+<img src="images/WaCM5x3mvQM.jpg" width="400" />
+
+</div>
+<p>Этот комикс объясняет, как важно не путать присваивание и сравнение <em>(хотя я иногда путаю до сих пор =( )</em>.</p>
+<p>Иногда нам нужно проверить на <em>не</em>равенство:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">2</span>
+b &lt;-<span class="st"> </span><span class="dv">3</span>
+
+a<span class="op">==</span>b</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a<span class="op">!=</span>b</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Восклицательный язык в программировании вообще и в R в частности стандартно означает отрицание.</p>
+<p>Еще мы можем сравнивать на больше/меньше:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">&gt;</span><span class="st"> </span>b</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">&lt;</span><span class="st"> </span>b</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">&gt;=</span><span class="st"> </span>b</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">&lt;=</span><span class="st"> </span>b</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="data_types" class="section level2">
+<h2><span class="header-section-number">2.2</span> Типы данных</h2>
+<p>До этого момента мы работали только с числами (numeric):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(a)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<blockquote>
+<p>Вообще, в R много типов numeric: integer (целые), double (с десятичной дробью), complex (комплексные числа). Последние пишутся так: <code>complexnumber &lt;- 2+2i</code> Однако в R с этим обычно можно вообще не заморачиваться, R сам будет конвертить между форматами при необходимости. Немного подробностей здесь:</p>
+</blockquote>
+<p><a href="https://stackoverflow.com/questions/23660094/whats-the-difference-between-integer-class-and-numeric-class-in-r">Разница между numeric и integer</a>, <a href="http://www.r-tutor.com/r-introduction/basic-data-types/complex">Как работать с комплексными числами в R</a></p>
+<p>Теперь же нам нужно ознакомиться с двумя другими важными типами данных в R:</p>
+<ol style="list-style-type: decimal">
+<li><strong>character</strong>: строки символов. Они должны выделяться кавычками. Можно использовать как <code>&quot;</code>, так и <code>'</code> (что удобно, когда строчка внутри уже содержит какие-то кавычки).</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s &lt;-<span class="st"> &quot;Всем привет!&quot;</span>
+s</code></pre></div>
+<pre><code>## [1] &quot;Всем привет!&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(s)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>logical</strong>: просто <code>TRUE</code> или <code>FALSE</code>.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 &lt;-<span class="st"> </span><span class="ot">TRUE</span>
+f1 &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+
+t1</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Вообще, можно еще писать <code>T</code> и <code>F</code> (но не <code>True</code> и <code>False</code>!)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t2 &lt;-<span class="st"> </span>T
+f2 &lt;-<span class="st"> </span>F</code></pre></div>
+<p>Это дурная практика, так как R защищает от перезаписи переменные <code>TRUE</code> и <code>FALSE</code>, но не защищает от этого <code>T</code> и <code>F</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span> &lt;-<span class="st"> </span><span class="ot">FALSE</span></code></pre></div>
+<pre><code>## Error in TRUE &lt;- FALSE: неправильная (do_set) левая сторона в присвоении</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="ot">TRUE</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+T</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Теперь вы можете догадаться, что результаты сравнения, например, числовых или строковых переменных вы можете сохранять в переменные тоже!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comparison &lt;-<span class="st"> </span>a <span class="op">==</span><span class="st"> </span>b
+comparison</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Это нам очень понадобится, когда мы будем работать с реальными данными: нам нужно будет постоянно вытаскивать какие-то данные из датасета, а это как раз и построено на игре со сравнением переменных.</p>
+<p>Чтобы этим хорошо уметь пользоваться, нам нужно еще освоить как работать с логическими операторами. Про один мы немного уже говорили --- это не (<code>!</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span>t1</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!!</span>t1 <span class="co">#Двойное отрицание!</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Еще есть И (выдаст <code>TRUE</code> только в том случае если обе переменные <code>TRUE</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 <span class="op">&amp;</span><span class="st"> </span>t2</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 <span class="op">&amp;</span><span class="st"> </span>f1</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>А еще ИЛИ (выдаст <code>TRUE</code> в случае если хотя бы одна из переменных <code>TRUE</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t1 <span class="op">|</span><span class="st"> </span>f1</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f1 <span class="op">|</span><span class="st"> </span>f2</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>Поздравляю, мы только что разобрались с самой занудной (но очень важной!) частью. Пора переходить к важному и интересному. ВЕКТОРАМ!</p>
+</div>
+<div id="atomic" class="section level2">
+<h2><span class="header-section-number">2.3</span> Вектор</h2>
+<p>Если у вас не было линейной алгебры (или у вас с ней было все плохо), то просто запомните, что <strong>вектор</strong> (<strong>atomic vector</strong> или просто <strong>atomic</strong>) --- это набор (столбик) чисел в определенном порядке.</p>
+<p>Если вы привыкли из школьного курса физики считать вектора стрелочками, то не спешите возмущаться и паниковать. Представьте стрелочки как точки из нуля координат {0,0} до какой-то точки на координатной плоскости, например, {2,3}:</p>
+<div class="figure">
+<img src="images/coord_vector.png" width="400" />
+
+</div>
+<p>Вот последние два числа и будем считать вектором. Попытайтесь теперь мысленно стереть координатную плоскость и выбросить стрелочки из головы, оставив только последовательность чисел {2,3}:</p>
+<div class="figure">
+<img src="images/coord_vector_blur.png" width="400" />
+
+</div>
+<p>На самом деле, мы уже работали с векторами в R, но, возможно, вы об этом даже не догадывались. Дело в том, что в R нет как таковых скалярных (т.е. одиночных) значений, <strong>есть вектора длиной 1</strong>. Такие дела!</p>
+<p>Чтобы создать вектор из нескольких значений, нужно воспользоваться функцией <em><code>c()</code></em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">15</span>,<span class="dv">16</span>,<span class="dv">23</span>,<span class="dv">42</span>)</code></pre></div>
+<pre><code>## [1]  4  8 15 16 23 42</code></pre>
+<p>Создавать вектора можно не только из <em>numeric</em>, но также и из <em>character</em> и <em>logical</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;Хэй&quot;</span>, <span class="st">&quot;Хэй&quot;</span>, <span class="st">&quot;Ха&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Хэй&quot; &quot;Хэй&quot; &quot;Ха&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## [1]  TRUE FALSE</code></pre>
+<blockquote>
+<p>Одна из самых мерзких и раздражающих причин ошибок в коде --- это использование <code>с</code> из кириллицы вместо <code>c</code> из латиницы. Видите разницу? И я не вижу. А R видит.</p>
+</blockquote>
+<p>Для создания числовых векторов есть удобный <strong>оператор</strong> <code>:</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">5</span><span class="op">:-</span><span class="dv">3</span></code></pre></div>
+<pre><code>## [1]  5  4  3  2  1  0 -1 -2 -3</code></pre>
+<p>Этот оператор создает вектор от первого числа до второго с шагом 1. Вы не представляете, как часто эта штука нам пригодится... Если же нужно сделать вектор с другим шагом, то есть функция <code>seq()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">10</span>,<span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>##  [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
+<p>Кроме того, можно задавать не шаг, а длину вектора. Тогда шаг функция <code>seq()</code> посчитает сама:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">13</span>, <span class="dt">length.out =</span> <span class="dv">4</span>)</code></pre></div>
+<pre><code>## [1]  1  5  9 13</code></pre>
+<p>Другая функция --- <code>rep()</code> --- позволяет создавать вектора с повторяющимися значениями. Первый аргумент --- значение, которое нужно повторять, а второй аргумент --- сколько раз повторять.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [1] 1 1 1 1 1</code></pre>
+<p>И первый, и второй аргумент могут быть векторами!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## [1] 1 2 3 1 2 3 1 2 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>)</code></pre></div>
+<pre><code>## [1] 1 2 2 3 3 3</code></pre>
+<p>Еще можно объединять вектора (что мы, по сути, и делали, просто с векторами длиной 1):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Hey&quot;</span>, <span class="st">&quot;Ho&quot;</span>)
+v2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Let&#39;s&quot;</span>, <span class="st">&quot;Go!&quot;</span>)
+<span class="kw">c</span>(v1, v2)</code></pre></div>
+<pre><code>## [1] &quot;Hey&quot;   &quot;Ho&quot;    &quot;Let&#39;s&quot; &quot;Go!&quot;</code></pre>
+<p>Очень многие функции в R работают именно с векторами. Например, функции <code>sum()</code> (считает сумму значений вектора) и <code>mean()</code> (считает среднее арифметическое всех значений в векторе):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 55</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## [1] 5.5</code></pre>
+<div id="coercion" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Приведение типов</h3>
+<p>Что будет, если вы объедините два вектора с значениями разных типов? Ошибка?</p>
+<p>Мы уже обсуждали, что в <em>atomic</em> может быть только один тип данных. В некоторых языках программирования при операции с данными разных типов мы бы получили ошибку. А вот в R при несовпадении типов пройзойдет попытка привести типы к &quot;общему знаменателю&quot;, то есть конвертировать данные в более &quot;широкий&quot; тип.</p>
+<p>Например:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 0 2</code></pre>
+<p><code>FALSE</code> превратился в <code>0</code> (а <code>TRUE</code> превратился бы в <code>1</code>), чтобы оба значения можно было объединить в вектор. То же самое произошло бы в случае операций с векторами:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>Это называется <strong>неявным приведением типов (implicit coercion)</strong>.</p>
+<p>Вот более сложный пример:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="dv">3</span>, <span class="st">&quot;Привет&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;TRUE&quot;   &quot;3&quot;      &quot;Привет&quot;</code></pre>
+<p>У R есть иерархия коэрсинга:</p>
+<p><code>NULL &lt; raw &lt; logical &lt; integer &lt; double &lt; complex &lt; character &lt; list &lt; expression</code>.</p>
+<p>Мы из этого списка еще многого не знаем, сейчас важно запомнить, что логические данные --- <code>TRUE</code> и <code>FALSE</code> --- превращаются в <code>0</code> и <code>1</code> соответственно, а <code>0</code> и <code>1</code> в строчки <code>&quot;0&quot;</code> и <code>&quot;1&quot;</code>.</p>
+<p>Если Вы боитесь полагаться на приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных</code> для явного приведения типов (<strong>explicit coercion</strong>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">c</span>(T, F, F))</code></pre></div>
+<pre><code>## [1] 1 0 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(<span class="kw">as.numeric</span>(<span class="kw">c</span>(T, F, F)))</code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;0&quot; &quot;0&quot;</code></pre>
+<p>Можно превращать и обратно, например, строковые значения в числовые. Если среди числа встретится буква или другой неподходящий знак, то мы получим предупреждение <code>NA</code> --- пропущенное значение (мы очень скоро научимся с ними работать).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">c</span>(<span class="st">&quot;1&quot;</span>, <span class="st">&quot;2&quot;</span>, <span class="st">&quot;три&quot;</span>))</code></pre></div>
+<pre><code>## Warning: в результате преобразования созданы NA</code></pre>
+<pre><code>## [1]  1  2 NA</code></pre>
+<blockquote>
+<p>Один из распространенных примеров использования неявного приведения типов --- использования функций <code>sum()</code> и <code>mean()</code> для подсчета в логическом векторе количества и доли <code>TRUE</code> соответсвенно. Мы будем много раз пользоваться этим приемом в дальнейшем!</p>
+</blockquote>
+</div>
+<div id="vector_op" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Векторизация</h3>
+<p>Все те арифметические операторы, что мы использовали ранее, можно использовать с векторами одинаковой длины:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+m &lt;-<span class="st"> </span><span class="dv">4</span><span class="op">:</span><span class="dv">1</span>
+n <span class="op">+</span><span class="st"> </span>m</code></pre></div>
+<pre><code>## [1] 5 5 5 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">-</span><span class="st"> </span>m</code></pre></div>
+<pre><code>## [1] -3 -1  1  3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">*</span><span class="st"> </span>m</code></pre></div>
+<pre><code>## [1] 4 6 6 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">/</span><span class="st"> </span>m</code></pre></div>
+<pre><code>## [1] 0.2500000 0.6666667 1.5000000 4.0000000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">^</span><span class="st"> </span>m <span class="op">+</span><span class="st"> </span>m <span class="op">*</span><span class="st"> </span>(n <span class="op">-</span><span class="st"> </span>m)</code></pre></div>
+<pre><code>## [1] -11   5  11   7</code></pre>
+<p>Если применить операторы на двух векторах одинаковой длины, то в мы получим результат поэлементного применения оператора к двум векторам. Это называется <strong>векторизацией</strong> (<strong>vectorization</strong>).</p>
+<blockquote>
+<p>Если после какого-нибудь MATLAB Вы привыкли, что по умолчанию операторы работают по правилам линейной алгебры и <code>m*n</code> будет давать скалярное произведение (<em>dot product</em>), то снова нет. Для скалярного произведения нужно использовать операторы с <code>%</code> по краям:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">%*%</span><span class="st"> </span>m</code></pre></div>
+<pre><code>##      [,1]
+## [1,]   20</code></pre>
+<blockquote>
+<p>Абсолютно так же и с операциями с матрицами в R, хотя про матрицы будет немного позже.</p>
+</blockquote>
+<p>В принципе, большинство функций в R, которые работают с отдельными значениями, так же хорошо работают и с целыми векторами. Скажем, Вы хотите извлечь корень из нескольких чисел, для этого не нужны никакие циклы (как это обычно делается в других языках программирования). Можно просто &quot;скормить&quot; вектор функции и получить результат применения функции к каждому элементу вектора:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>##  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+##  [9] 3.000000 3.162278</code></pre>
+<p>Таких векторизованных функций в R очень много. Многие из них написаны на более низкоуровневых языках программирования (C, C++, FORTRAN), за счет чего использование таких функций приводит не только к более элегантному, лаконичному, но и к более быстрому коду.</p>
+<blockquote>
+<p>Векторизация в R --- это очень важная фишка, которая отличает этот язык программирования от многих других. Если вы уже имеете опыт программирования на другом языке, то вам во многих задачах захочется использовать циклы типа <code>for</code> и <code>while</code> <a href="real.html#for">3.2.3</a>. Не спешите этого делать! В очень многих случаях циклы можно заменить векторизацией. Тем не менее, векторизация --- это не единственный способ избавить от циклов типа <code>for</code> и <code>while</code> <a href="real.html#apply">3.2.5</a>.</p>
+</blockquote>
+</div>
+<div id="recycling" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Recycling</h3>
+<p>Допустим мы хотим совершить какую-нибудь операцию с двумя векторами. Как мы убедились, с этим обычно нет никаких проблем, если они совпадают по длине. А что если вектора не совпадают по длине? Ничего страшного! Здесь будет работать правило <strong>ресайклинга</strong> (<em>правило переписывания, recycling rule</em>). Это означает, что если мы делаем операцию на двух векторах разной длины, то если короткий вектор кратен по длине длинному, короткий вектор будет повторяться необходимое количество раз:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+m &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">2</span>
+n <span class="op">*</span><span class="st"> </span>m</code></pre></div>
+<pre><code>## [1] 1 4 3 8</code></pre>
+<p>А что будет, если совершать операции с вектором и отдельным значением? Можно считать это частным случаем ресайклинга: короткий вектор длиной 1 будет повторятся столько раз, сколько нужно, чтобы он совпадал по длине с длинным:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">*</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
+<pre><code>## [1] 2 4 6 8</code></pre>
+<p>Если же меньший вектор не кратен большему (например, один из них длиной 3, а другой длиной 4), то R посчитает результат, но выдаст предупреждение.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>)</code></pre></div>
+<pre><code>## Warning in n + c(3, 4, 5): длина большего объекта не является произведением
+## длины меньшего объекта</code></pre>
+<pre><code>## [1] 4 6 8 7</code></pre>
+<p>Проблема в том, что эти предупреждения могут в неожиданный момент стать причиной ошибок. Поэтому не стоит полагаться на ресайклинг некратных по длине векторов. <a href="https://stackoverflow.com/questions/6555651/under-what-circumstances-does-r-recycle">См. здесь</a>. А вот ресайклинг кратных по длине векторов --- это очень удобная штука, которая используется очень часто.</p>
+</div>
+<div id="index_atomic" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Индексирование векторов</h3>
+<p>Итак, мы подошли к одному из самых сложных моментов. И одному из основных. От того, как хорошо вы научись с этим работать, зависит весь ваш дальнейший успех на R-поприще!</p>
+<p>Речь пойдет об <strong>индексировании</strong> векторов. Задача, которую Вам придется решать каждые пять минут работы в R --- как выбрать из вектора (или же списка, матрицы и датафрейма) какую-то его часть. Для этого используются квадратные скобочки <code>[]</code> (не круглые --- они для функций!).</p>
+<p>Самое простое --- индексировать по номеру индекса, т.е. порядку значения в векторе.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>
+n[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="dv">10</span>]</code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<blockquote>
+<p>Если вы знакомы с другими языками программирования (не MATLAB, там все так же) и уже научились думать, что индексация с 0 --- это очень удобно и очень правильно (ну или просто свыклись с этим), то в R Вам придется переучиться обратно. Здесь первый индекс --- это 1, а последний равен длине вектора --- ее можно узнать с помощью функции <code>length()</code>. С обоих сторон индексы берутся включительно.</p>
+</blockquote>
+<p>С помощью индексирования можно не только вытаскивать имеющиеся значения в векторе, но и присваивать им новые:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="dv">20</span>
+n</code></pre></div>
+<pre><code>##  [1]  1  2 20  4  5  6  7  8  9 10</code></pre>
+<p>Конечно, можно использовать целые векторы для индексирования:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="dv">4</span><span class="op">:</span><span class="dv">7</span>]</code></pre></div>
+<pre><code>## [1] 4 5 6 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="dv">10</span><span class="op">:</span><span class="dv">1</span>]</code></pre></div>
+<pre><code>##  [1] 10  9  8  7  6  5  4 20  2  1</code></pre>
+<p>Индексирование с минусом выдаст вам все значения вектора кроме выбранных:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="op">-</span><span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1]  2 20  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="kw">c</span>(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">5</span>)]</code></pre></div>
+<pre><code>## [1]  1  2 20  6  7  8  9 10</code></pre>
+<p>Более того, можно использовать логический вектор для индексирования. В этом случае нужен логический вектор такой же длины:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="kw">c</span>(T,F,T,F,T,F,T,F,T,F)]</code></pre></div>
+<pre><code>## [1]  1 20  5  7  9</code></pre>
+<p>Ну а если они не равны, то тут будет снова работать правило ресайклинга!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="kw">c</span>(T,F)] <span class="co">#то же самое - recycling rule!</span></code></pre></div>
+<pre><code>## [1]  1 20  5  7  9</code></pre>
+<p>Есть еще один способ индексирования векторов, но он несколько более редкий: индексирование по имени. Дело в том, что для значений векторов можно (но не обязательно) присваивать имена:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_named_vector &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">first =</span> <span class="dv">1</span>, <span class="dt">second =</span> <span class="dv">2</span>, <span class="dt">third =</span> <span class="dv">3</span>)
+my_named_vector[<span class="st">&#39;first&#39;</span>]</code></pre></div>
+<pre><code>## first 
+##     1</code></pre>
+<p>А еще можно &quot;вытаскивать&quot; имена из вектора с помощью функции <code>names()</code> и присваивать таким образом новые.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">4</span>
+<span class="kw">names</span>(d) &lt;-<span class="st"> </span>letters[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]
+d[<span class="st">&quot;a&quot;</span>]</code></pre></div>
+<pre><code>## a 
+## 1</code></pre>
+<blockquote>
+<p><code>letters</code> --- это &quot;зашитая&quot; в R константа --- вектор букв от a до z. Иногда это очень удобно! Кроме того, есть константа <code>LETTERS</code> --- то же самое, но заглавными буквами. А еще есть названия месяцев на английском и числовая константа <code>pi</code>.</p>
+</blockquote>
+<p>Теперь посчитаем среднее вектора <code>n</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(n)</code></pre></div>
+<pre><code>## [1] 7.2</code></pre>
+<p>А как вытащить все значения, которые больше среднего?</p>
+<p>Сначала получим логический вектор --- какие значения больше среднего:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">larger &lt;-<span class="st"> </span>n<span class="op">&gt;</span><span class="kw">mean</span>(n)
+larger</code></pre></div>
+<pre><code>##  [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>А теперь используем его для индексирования вектора <code>n</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[larger]</code></pre></div>
+<pre><code>## [1] 20  8  9 10</code></pre>
+<p>Можно все это сделать в одну строчку:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[n<span class="op">&gt;</span><span class="kw">mean</span>(n)]</code></pre></div>
+<pre><code>## [1] 20  8  9 10</code></pre>
+<p>Предыдущая строчка отражает то, что мы будем постоянно делать в R: вычленять (subset) из данных отдельные куски на основании разных условий.</p>
+</div>
+<div id="na" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> NA - пропущенные значения</h3>
+<p>В реальных данных у нас часто чего-то не хватает. Например, из-за технической ошибки или невнимательности не получилось записать какое-то измерение. Для этого в R есть <code>NA</code> (расшифровывается как <em>Not Available</em> - недоступное значение). <code>NA</code> --- это не строка <code>&quot;NA&quot;</code>, не <code>0</code>, не пустая строка <code>&quot;&quot;</code> и не <code>FALSE</code>. <code>NA</code> --- это <code>NA</code>. Большинство операций с векторами, содержащими <code>NA</code> будут выдавать <code>NA</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">missed &lt;-<span class="st"> </span><span class="ot">NA</span>
+missed <span class="op">==</span><span class="st"> &quot;NA&quot;</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">missed <span class="op">==</span><span class="st"> &quot;&quot;</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">missed <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Заметьте: даже сравнение <code>NA</code> c <code>NA</code> выдает <code>NA</code>!</p>
+<p>Иногда <code>NA</code> в данных очень бесит:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="dv">5</span>] &lt;-<span class="st"> </span><span class="ot">NA</span>
+n</code></pre></div>
+<pre><code>##  [1]  1  2 20  4 NA  6  7  8  9 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(n)</code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Что же делать?<br />
+Наверное, надо сравнить вектор с <code>NA</code> и исключить этих пакостников. Давайте попробуем:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n <span class="op">==</span><span class="st"> </span><span class="ot">NA</span></code></pre></div>
+<pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA</code></pre>
+<p>Ах да, мы ведь только что узнали, что даже сравнение <code>NA</code> c <code>NA</code> приводит к <code>NA</code>...</p>
+<p>Чтобы выбраться из этой непростой ситуации, используйте функцию <code>is.na()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(n)</code></pre></div>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> в тех местах, где у нас числа и <code>TRUE</code> там, где у нас <code>NA</code>. Нам нужно сделать наоборот. Здесь нам понадобится оператор <code>!</code> (мы его уже встречали), который инвертирует логические значения:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n[<span class="op">!</span><span class="kw">is.na</span>(n)]</code></pre></div>
+<pre><code>## [1]  1  2 20  4  6  7  8  9 10</code></pre>
+<p>Ура, мы можем считать среднее!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(n[<span class="op">!</span><span class="kw">is.na</span>(n)])</code></pre></div>
+<pre><code>## [1] 7.444444</code></pre>
+<p>Теперь Вы понимаете, зачем нужно отрицание (<code>!</code>)</p>
+<p>Вообще, есть еще один из способов посчитать среднее, если есть <code>NA</code>. Для этого надо залезть в хэлп по функции <em>mean()</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?<span class="kw">mean</span>()</code></pre></div>
+<p>В хэлпе мы найдем параметр <code>na.rm =</code>, который по дефолту <code>FALSE</code>. Вы знаете, что нужно делать!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(n, <span class="dt">na.rm =</span> T)</code></pre></div>
+<pre><code>## [1] 7.444444</code></pre>
+<p>Еееее!</p>
+<blockquote>
+<p><code>NA</code> может появляться в векторах других типов тоже. Более того, на самом деле, это все разные <code>NA</code>: логический <code>NA</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> and <code>NA_character_</code>.</p>
+</blockquote>
+<blockquote>
+<p>Кроме <code>NA</code> есть еще <code>NaN</code> --- это разные вещи. <code>NaN</code> расшифровывается как <em>Not a Number</em> и получается в результате таких операций как <code>0 / 0</code>. Тем не менее, функция <code>is.na()</code> выдает <code>TRUE</code> на <code>NaN</code>, а вот функция <code>is.nan()</code> выдает <code>TRUE</code> на <code>NaN</code> и <code>FALSE</code> на <code>NA</code>:</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="ot">NA</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(<span class="ot">NaN</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.nan</span>(<span class="ot">NA</span>)</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.nan</span>(<span class="ot">NaN</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="google" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> В любой непонятной ситуации --- гуглите</h3>
+<p>Если вдруг вы не знаете, что искать в хэлпе, или хэлпа попросту недостаточно, то... гуглите!</p>
+<div class="figure">
+<img src="images/2AmXWgVoULk.jpg" width="400" />
+
+</div>
+<p>Нет ничего постыдного в том, чтобы гуглить решения проблем. Это абсолютно нормально. Используйте силу интернета во благо и да помогут Вам <em>Stackoverflow</em><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> и бесчисленные R-туториалы!</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Computer Programming To Be Officially Renamed “Googling Stack Overflow”<br><br>Source: <a href="http://t.co/xu7acfXvFF">http://t.co/xu7acfXvFF</a> <a href="http://t.co/iJ9k7aAVhd">pic.twitter.com/iJ9k7aAVhd</a>
+</p>
+— Stack Exchange (<span class="citation">(<span class="citeproc-not-found" data-reference-id="StackExchange"><strong>???</strong></span>)</span>) <a href="https://twitter.com/StackExchange/status/623139544276299776?ref_src=twsrc%5Etfw">July 20, 2015</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<div class="figure">
+<img src="images/doctors-googling-stuff-online-does-not-make-you-a-doctor-programmers-confused.jpg" width="400" />
+
+</div>
+<p>Главное, помните: загуглить работающий ответ всегда недостаточно. Надо понять, как и почему решение работает. Иначе что-то обязательно пойдет не так.</p>
+<p>Кроме того, правильно загуглить проблему --- не так уж и просто.</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Does anyone ever get good at R or do they just get good at googling how to do things in R
+</p>
+— 🔬🖤Lauren M. Seyler, Ph.D.❤️⚒ (<span class="citation">(<span class="citeproc-not-found" data-reference-id="mousquemere"><strong>???</strong></span>)</span>) <a href="https://twitter.com/mousquemere/status/1125522375141883907?ref_src=twsrc%5Etfw">May 6, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Итак, с векторами мы более-менее разобрались. Помните, что вектора --- это один из краеугольных камней вашей работы в R. Если вы хорошо с ними разобрались, то дальше все будет довольно несложно. Тем не менее, вектора --- это не все. Есть еще два важных типа данных: списки (<strong>list</strong>) и матрицы (<strong>matrix</strong>). Их можно рассматривать как своеобразное &quot;расширение&quot; векторов, каждый в свою сторону. Ну а списки и матрицы нужны чтобы понять основной тип данных в R --- <strong>data.frame</strong>.</p>
+<div class="figure">
+<img src="images/New-Mind-Map.jpg" width="400" />
+
+</div>
+</div>
+</div>
+<div id="matrix" class="section level2">
+<h2><span class="header-section-number">2.4</span> Матрицы (matrix)</h2>
+<p>Если вдруг вас пугает это слово, то совершенно зря. Матрица --- это всего лишь &quot;двумерный&quot; вектор: вектор, у которого есть не только длина, но и ширина. Создать матрицу можно с помощью функции <code>matrix()</code> из вектора, указав при этом количество строк и столбцов.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">nrow=</span><span class="dv">5</span>,<span class="dt">ncol=</span><span class="dv">4</span>)
+A</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<p>Если мы знаем сколько значений в матрице и сколько мы хотим строк, то количество столбцов указывать необязательно:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>, <span class="dt">nrow=</span><span class="dv">5</span>)
+A</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<p>Все остальное так же как и с векторами: внутри находится данные только одного типа. Поскольку матрица --- это уже двумерный массив, то у него имеется два индекса. Эти два индекса разделяются запятыми.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A[<span class="dv">2</span>,<span class="dv">3</span>]</code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    7   12
+## [2,]    3    8   13
+## [3,]    4    9   14</code></pre>
+<p>Первый индекс --- выбор строк, второй индекс --- выбор колонок. Если же мы оставляем пустое поле вместо числа, то мы выбираем все строки/колонки в зависимости от того, оставили мы поле пустым до или после запятой:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A[, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    6   11
+## [2,]    2    7   12
+## [3,]    3    8   13
+## [4,]    4    9   14
+## [5,]    5   10   15</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, ]</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    2    7   12   17
+## [2,]    3    8   13   18
+## [3,]    4    9   14   19</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A[, ]</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<p>Так же как и в случае с обычными векторами, часть матрицы можно переписать:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">A[<span class="dv">2</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">4</span>] &lt;-<span class="st"> </span><span class="dv">100</span>
+A</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2  100  100  100
+## [3,]    3  100  100  100
+## [4,]    4  100  100  100
+## [5,]    5   10   15   20</code></pre>
+<p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами.</p>
+<blockquote>
+<p>То, что матрица --- это просто двумерный вектор, не является метафорой: в R матрица --- это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты --- это свойства объектов, своего рода &quot;метаданные&quot;. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги &quot;R in a Nutshell&quot; <span class="citation">(<span class="citeproc-not-found" data-reference-id="adler2010r"><strong>???</strong></span>)</span>.</p>
+</blockquote>
+</div>
+<div id="list" class="section level2">
+<h2><span class="header-section-number">2.5</span> Списки (list)</h2>
+<p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим список!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">42</span>, <span class="st">&quot;Пам пам&quot;</span>, T)
+l</code></pre></div>
+<pre><code>## [[1]]
+## [1] 42
+## 
+## [[2]]
+## [1] &quot;Пам пам&quot;
+## 
+## [[3]]
+## [1] TRUE</code></pre>
+<p>А это значит, что там могут содержаться самые разные данные, в том числе и другие списки и векторы!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lbig &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;Wow&quot;</span>, <span class="st">&quot;this&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;so&quot;</span>, <span class="st">&quot;big&quot;</span>), <span class="st">&quot;16&quot;</span>, l)
+lbig</code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;Wow&quot;  &quot;this&quot; &quot;list&quot; &quot;is&quot;   &quot;so&quot;   &quot;big&quot; 
+## 
+## [[2]]
+## [1] &quot;16&quot;
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 42
+## 
+## [[3]][[2]]
+## [1] &quot;Пам пам&quot;
+## 
+## [[3]][[3]]
+## [1] TRUE</code></pre>
+<p>Если у нас сложный список, то есть очень классная функция, чтобы посмотреть, как он устроен, под названием <code>str()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(lbig)</code></pre></div>
+<pre><code>## List of 3
+##  $ : chr [1:6] &quot;Wow&quot; &quot;this&quot; &quot;list&quot; &quot;is&quot; ...
+##  $ : chr &quot;16&quot;
+##  $ :List of 3
+##   ..$ : num 42
+##   ..$ : chr &quot;Пам пам&quot;
+##   ..$ : logi TRUE</code></pre>
+<blockquote>
+<p>Представьте, что список - это такое дерево с ветвистой структурой. А на конце этих ветвей - листья-векторы.</p>
+</blockquote>
+<p>Как и в случае с векторами мы можем давать имена элементам списка:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">namedl &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">age =</span> <span class="dv">24</span>, <span class="dt">PhDstudent =</span> T, <span class="dt">language =</span> <span class="st">&quot;Russian&quot;</span>)
+namedl</code></pre></div>
+<pre><code>## $age
+## [1] 24
+## 
+## $PhDstudent
+## [1] TRUE
+## 
+## $language
+## [1] &quot;Russian&quot;</code></pre>
+<p>К списку можно обращаться как с помощью индексов, так и по именам. Начнем с последнего:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">namedl<span class="op">$</span>age</code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>А вот с индексами сложнее, и в этом очень легко запутаться. Давайте попробуем сделать так, как мы делали это раньше:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">namedl[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## $age
+## [1] 24</code></pre>
+<p>Мы, по сути, получили элемент списка --- просто как часть списка, т.е. как список длиной один:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(namedl)</code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(namedl[<span class="dv">1</span>])</code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p>А вот чтобы добраться до самого элемента списка (и сделать с ним что-то хорошее) нам нужна не одна, а две квадратных скобочки:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">namedl[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(namedl[[<span class="dv">1</span>]])</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Indexing lists in <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>. Inspired by the Residence Inn <a href="http://t.co/YQ6axb2w7t">pic.twitter.com/YQ6axb2w7t</a>
+</p>
+— Hadley Wickham (<span class="citation">(<span class="citeproc-not-found" data-reference-id="hadleywickham"><strong>???</strong></span>)</span>) <a href="https://twitter.com/hadleywickham/status/643381054758363136?ref_src=twsrc%5Etfw">September 14, 2015</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Как и в случае с вектором, к элементу списка можно обращаться по имени.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">namedl[[<span class="st">&#39;age&#39;</span>]]</code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>Хотя последнее --- практически то же самое, что и использование знака $.</p>
+<blockquote>
+<p>Списки довольно часто используются в R, но реже, чем в Python. Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками --- к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры --- хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
+</blockquote>
+</div>
+<div id="df" class="section level2">
+<h2><span class="header-section-number">2.6</span> Data.frame</h2>
+<p>Итак, мы перешли к самому главному. Самому-самому. Датафреймы (<strong>data.frames</strong>). Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
+<p>Без векторов мы не смогли бы разобраться с матрицами и списками. А без последних мы не сможем понять, что такое датафрейм.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Ivan&quot;</span>, <span class="st">&quot;Eugeny&quot;</span>, <span class="st">&quot;Lena&quot;</span>, <span class="st">&quot;Misha&quot;</span>, <span class="st">&quot;Sasha&quot;</span>) 
+age &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>) 
+student &lt;-<span class="st"> </span><span class="kw">c</span>(F, F, T, T, T) 
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(name, age, student)  
+df</code></pre></div>
+<pre><code>##     name age student
+## 1   Ivan  26   FALSE
+## 2 Eugeny  34   FALSE
+## 3   Lena  23    TRUE
+## 4  Misha  27    TRUE
+## 5  Sasha  26    TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(df)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ name   : Factor w/ 5 levels &quot;Eugeny&quot;,&quot;Ivan&quot;,..: 2 1 3 4 5
+##  $ age    : num  26 34 23 27 26
+##  $ student: logi  FALSE FALSE TRUE TRUE TRUE</code></pre>
+<p>Вообще, очень похоже на список, не правда ли? Так и есть, датафрейм --- это что-то вроде проименованного списка, каждый элемент которого является <em>atomic</em> вектором фиксированной длины. Скорее всего, список Вы представляли &quot;горизонтально&quot;. Если это так, то теперь &quot;переверните&quot; его у себя в голове на 90 градусов. Так, чтоб названия векторов оказались сверху, а колонки стали столбцами. Поскольку длина всех этих векторов равна (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут имет разные типы данных: первая колонка --- <code>character</code>, вторая колонка --- <code>numeric</code>, третья колонка --- <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с проименованным списком, и как с матрицей:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>age[<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<pre><code>## [1] 34 23</code></pre>
+<p>Здесь мы сначала вытащили колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор, из которого мы вытащили кусок, выбрав индексы <code>2</code> и <code>3</code>.</p>
+<p>Используя оператор <code>$</code> и присваивание можно создавать новые колонки датафрейма:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>lovesR &lt;-<span class="st"> </span>T <span class="co">#правило recycling - узнали? </span>
+df</code></pre></div>
+<pre><code>##     name age student lovesR
+## 1   Ivan  26   FALSE   TRUE
+## 2 Eugeny  34   FALSE   TRUE
+## 3   Lena  23    TRUE   TRUE
+## 4  Misha  27    TRUE   TRUE
+## 5  Sasha  26    TRUE   TRUE</code></pre>
+<p>Ну а можно просто обращаться с помощью двух индексов через запятую, как мы это делали с матрицей:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<pre><code>##   age student
+## 3  23    TRUE
+## 4  27    TRUE
+## 5  26    TRUE</code></pre>
+<p>Как и с матрицами, первый индекс означает строчки, а второй --- столбцы.</p>
+<p>А еще можно использовать названия колонок внутри квадратных скобок:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>,<span class="st">&quot;age&quot;</span>]</code></pre></div>
+<pre><code>## [1] 26 34</code></pre>
+<p>И здесь перед нами открываются невообразимые возможности! Узнаем, любят ли R те, кто моложе среднего возраста в группе:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[df<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="kw">mean</span>(df<span class="op">$</span>age), <span class="dv">4</span>]</code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<p>Эту же задачу можно выполнить другими способами:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>lovesR[df<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="kw">mean</span>(df<span class="op">$</span>age)]</code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df[df<span class="op">$</span>age <span class="op">&lt;</span><span class="st"> </span><span class="kw">mean</span>(df<span class="op">$</span>age), <span class="st">&#39;lovesR&#39;</span>]</code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<p>В большинстве случаев подходят сразу несколько способов --- тем не менее, стоит овладеть ими всеми.</p>
+<p>Датафреймы удобно просматривать в RStudio. Для это нужно написать команду <code>View(df)</code> или же просто нажать на названии нужной переменной из списка вверху справа (там где Environment). Тогда увидите табличку, очень похожую на Excel и тому подобные программы для работы с таблицами. Там же есть и всякие возможности для фильтрации, сортировки и поиска...<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a></p>
+<div class="figure">
+<img src="images/View.png" width="200" />
+
+</div>
+<p>Но, конечно, интереснее все эти вещи делать руками, т.е. с помощью написания кода.</p>
+<p>На этом пора заканчивать с введением и приступать к работе с реальными данными.</p>
+</div>
+<div id="real_data" class="section level2">
+<h2><span class="header-section-number">2.7</span> Начинаем работу с реальными данными</h2>
+<p>Итак, пришло время перейти к реальным данным. Мы начнем с использования датасета (так мы будем называть любой набор данных) по Игре Престолов, а точнее, по книгам цикла <em>&quot;Песнь льда и пламени&quot;</em> Дж. Мартина. Да, будут спойлеры, но сериал уже давно закончился и сильно разошелся с книгами...</p>
+<div id="wd" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Рабочая папка и проекты</h3>
+<p>Для начала скачайте файл по <a href="https://raw.githubusercontent.com/Pozdniakov/stats/master/data/character-deaths.csv">ссылке</a></p>
+<p>Он, скорее всего, появился у Вас в папке &quot;Загрузки&quot;. Если мы будем просто пытаться прочитать этот файл (например, с помощью <code>read.csv()</code> --- мы к этой функцией очень скоро перейдем), указав его имя и разрешение, то наткнемся на такую ошибку:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.csv</span>(<span class="st">&quot;character-deaths.csv&quot;</span>)</code></pre></div>
+<pre><code>## Warning in file(file, &quot;rt&quot;): не могу открыть файл &#39;character-deaths.csv&#39;: No
+## such file or directory</code></pre>
+<pre><code>## Error in file(file, &quot;rt&quot;): не могу открыть соединение</code></pre>
+<p>Это означает, что R не может найти нужный файл. Вообще-то мы даже не сказали, где искать. Нам нужно как-то совместить место, где R ищет загружаемые файлы и сами файлы. Для этого есть несколько способов.</p>
+<ul>
+<li>Магомет идет к горе: <em>перемещение файлов в рабочую папку.</em></li>
+</ul>
+<p>Для этого нужно узнать, какая папка является рабочей с помощью функции <code>getwd()</code> (без аргументов), найти эту папку в проводнике и переместить туда файл. После этого можно использовать просто название файла с разрешением:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;character-deaths.csv&quot;</span>)</code></pre></div>
+<ul>
+<li>Гора идет к Магомету: <em>изменение рабочей папки.</em></li>
+</ul>
+<p>Можно просто сменить рабочую папку с помощью <code>setwd()</code> на ту, где сейчас лежит файл, прописав путь до этой папки. Теперь файл находится в рабочей папке:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;character-deaths.csv&quot;</span>)</code></pre></div>
+<p>Этот вариант использовать не рекомендуется. Как минимум, это сразу делает невозможным запустить скрипт на другом компьютере.</p>
+<ul>
+<li>Гора находит Магомета по месту прописки: <em>указание полного пути файла.</em></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;/Users/Username/Some_Folder/character-deaths.csv&quot;</span>)</code></pre></div>
+<p>Этот вариант страдает теми же проблемами, что и предыдущий, поэтому тоже не рекомендуется.</p>
+<blockquote>
+<p>Для пользователей Windows есть дополнительная сложность: знак <code>/</code> является особым знаком для R, поэтому вместо него нужно использовать двойной <code>//</code>.</p>
+</blockquote>
+<ul>
+<li>Магомет использует кнопочный интерфейс: <em>Import Dataset.</em></li>
+</ul>
+<p>Во вкладке Environment справа в окне RStudio есть кнопка <em>Import Dataset</em>. Возможно, у Вас возникло непреодолимое желание отдохнуть от написания кода и понажимать кнопочки --- сопротивляйтесь этому всеми силами, но не вините себя, если не сдержитесь.</p>
+<ul>
+<li>Гора находит Магомета <em>в интернете.</em></li>
+</ul>
+<p>Многие функции в R, предназначенные для чтения файлов, могут прочитать файл не только на Вашем компьютере, но и сразу из интернета. Для этого просто используйте ссылку вместо пути:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/Pozdniakov/stats/master/data/character-deaths.csv&quot;</span>)</code></pre></div>
+<ul>
+<li>Каждый Магомет получает по своей горе: <em>использование проектов в RStudio.</em></li>
+</ul>
+<p><code>File - New Project...</code>, Затем <code>New Directory</code>, <code>New Project</code>, выбираете подходящее <code>Directory Name</code> и нажимаете <code>Create Project</code>.</p>
+<p>На первый взгляд это кажется чем-то очень сложным, но это не так. Пользоваться проектами очень просто и ОЧЕНЬ удобно. При создании проекта создается отдельная папочка, где у Вас лежат данные, хранятся скрипты, вспомогательные файлы и отчеты. Если нужно вернуться к другому проекту --- просто открываете другой проект, с другими файлами и скриптами. Это еще помогает не пересекаться переменным из разных проектов --- а то, знаете, использование двух переменных <code>data</code> в разных скриптах чревато ошибками. Поэтому очень удобным решением будет выделение отдельного проекта под этот курс.</p>
+<blockquote>
+<p>А еще проекты очень удобно работают совместно с системами контроля версий, в частности, с Git. В RStudio есть для этого удобные инструменты. Самый простой способ --- при создании проекта <code>File - New Project...</code> выбрать <code>Version Control</code>, затем выбрать Git или Subversion и указать ссылку на репозиторий. После этого RStudio его склонирует и все сам настроит. Вот <a href="https://happygitwithr.com">здесь</a> есть подробный туториал по работе с Git и RStudio.</p>
+</blockquote>
+</div>
+<div id="import" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Импорт данных</h3>
+<p>Как Вы уже поняли, импортирование данных --- одна из самых муторных и неприятных вещей в R. Если у Вас получится с этим справиться, то все остальное --- ерунда. Мы уже разобрались с первой частью этого процесса --- нахождением файла с данными, осталось научиться их читать.</p>
+<p>Здесь стоит сделать небольшую ремарку. Довольно часто данные представляют собой табличку. Или же их можно свести к табличке. Такая табличка, как мы уже выяснили, удобно репрезентируется в виде датафрейма. Но как эти данные хранятся на компьютере? Есть два варианта: в <em>бинарном</em> и в <em>текстовом</em> файле.</p>
+<p>Текстовый файл означает, что такой файл можно открыть в программе &quot;Блокнот&quot; или ее аналоге и увидеть напечатанный текст: скрипт, роман или упорядоченный набор цифр и букв. Нас сейчас интересует именно последний случай. Таблица может быть представлена как текст: отдельные строчки в файле будут разделять разные строчки таблицы, а какой-нибудь знак-разделитель отделет колонки друг от друга.</p>
+<p>Для чтения данных из текстового файла есть довольно удобная функция <code>read.table()</code>. Почитайте хэлп по ней и ужаснитесь: столько разных параметров на входе! Но там же вы увидете функции <code>read.csv()</code>, <code>read.csv2()</code> и некоторые другие --- по сути, это тот же <code>read.table()</code>, но с другими дефолтными параметрами, соответствующие формату файла, который мы загружаем. В данном случае используется формат .csv, что означает <em>Comma Separated Values</em> (Значения, Разделенные Запятыми). Это просто текстовый файл, в котором &quot;закодирована&quot; таблица: разные строчки разделяют разные строчки таблицы, а столбцы отделяются запятыми. С этим связана одна проблема: в некоторых странах (в т.ч. и России) принято использовать запятую для разделения дробной части числа, а не точку, как это делается в большинстве стран мира. Поэтому есть &quot;другой&quot; формат .csv, где значения разделены точкой с запятой (<code>;</code>), а дробные значения --- запятой (<code>,</code>). В этом и различие функций <code>read.csv()</code> и <code>read.csv2()</code> --- первая функция предназначена для &quot;международного&quot; формата, вторая --- для (условно) &quot;Российского&quot;.</p>
+<p>В первой строчке обычно содержатся названия столбцов --- и это чертовски удобно, функции <code>read.csv()</code> и <code>read.csv2()</code> по умолчанию считают первую строчку именно как название для колонок.</p>
+<p>Итак, прочитаем наш файл. Для этого используем только параметр <code>file =</code>, который идет первым, и для параметра <code>stringsAsFactors =</code> поставим значение <code>FALSE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/character-deaths.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<blockquote>
+<p>По умолчанию, функции семейства <code>read.table()</code> читают <em>character</em> переменные как фактор (<em>factor</em>). По сути, факторы --- это примерно то же самое, что и character, но закодированные числами. Когда-то это было придумано для экономии используемых времени и памяти: вместо того, чтобы хранить многократно &quot;male&quot; и &quot;female&quot;, можно закодировать их числами 1 и 2, записав отдельно, как расшифровывается 1 и 2. На сегодняшний день факторы обычно становится просто лишней морокой, хотя факторы могут быть удобным инструментом для контроля порядка значений при визуализации данных. Некоторые функции требуют именно <em>character</em>, некоторые <em>factor</em>, в большинстве случаев это без разницы. Но иногда непонимание может привести к дурацким ошибкам. В данном случае мы просто пока обойдемся без факторов.</p>
+</blockquote>
+<p>Можете проверить с помощью <code>View(got)</code>: все работает! Если же вылезает какая-то странная ерунда или же просто ошибка --- попробуйте другие функции и покопаться с параметрами. Для этого читайте <em>Help.</em></p>
+<p>Кроме .csv формата есть и другие варианты хранения таблиц в виде текста. Например, .tsv --- тоже самое, что и .csv, но разделитель --- знак табуляции. Для чтения таких файлов есть функция <code>read.delim()</code> и <code>read.delim2()</code>. Впрочем, даже если бы ее и не было, можно было бы просто подобрать нужные параметры для функции <code>read.table()</code>. Есть даже функции (например, <code>fread()</code> из пакета <code>data.table</code> --- мы ее будем использовать завтра!), которые пытаются сами &quot;угадать&quot; нужные параметры для чтения --- часто они справляются с этим довольно удачно. Но не всегда. Поэтому стоит научиться справляться с любого рода данными на входе.</p>
+<p>Тем не менее, далеко не всегда таблицы представлены в виде текстового файла. Самый распространенный пример таблицы в бинарном виде --- родные форматы <em>Microsoft Excel</em>. Если Вы попробуете открыть .xlsx файл в Блокноте, то увидите кракозябры. Это делает работу с этим файлами гораздо менее удобной, поэтому стоит избегать экселевских форматов и стараться все сохранять в .csv.</p>
+<blockquote>
+<p>Для работы с экселевскими файлами есть много пакетов: <em>readxl, xlsx, openxlsx.</em> Для чтения файлов <em>SPSS, Stata, SAS</em> есть пакет <em>foreign</em>. Что такое пакеты и как их устанавливать мы изучим позже.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>При первом запуске RStudio вы не увидите это окно. Для того, чтобы оно появилось, нужно нажать <code>File - New File - R Script</code>.<a href="intro.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>В RStudio есть много удобных сочетаний горячих клавиш. Чтобы посмотреть их все, нажмите <code>Help - Keyboard Shortcuts Help</code>.<a href="intro.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>Во время написания кода вам может казаться понятным то, что вы написали, но при возвращении к коду через некоторое время вы уже не будете этого помнить. Старайтесь писать комментарии как можно чаще!<a href="intro.html#fnref3">↩</a></p></li>
+<li id="fn4"><p>Stackoverflow --- это сайт с вопросами и ответами. Эдакий аналог <em>Quora</em>, <em>The Question</em>, ну или <em>Ответы Mail.ru</em> в мире программирования.<a href="intro.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>Все, что вы нажмете в этом окошке, никак не повлияет на исходную переменную. Так что можете смело использовать эти функции для исследования содержимого датафрейма.<a href="intro.html#fnref5">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="real.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
