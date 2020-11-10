@@ -213,7 +213,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.2.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_join"><i class="fa fa-check"></i><b>10.2.2</b> Реляционные данные: <code>*_join()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_data"><i class="fa fa-check"></i><b>10.3</b> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
-<li class="chapter" data-level="10.4" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#функциональное-программирование-purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
+<li class="chapter" data-level="10.4" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
 <li class="chapter" data-level="10.5" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#list_colums_nest"><i class="fa fa-check"></i><b>10.5</b> Колонки-списки и нестинг: <code>nest()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>11</b> Задания</a><ul>
@@ -694,6 +694,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p><code>tidyr::pivot_longer()</code>: из <em>широкого</em> в <em>длинный</em> формат</p></li>
 <li><p><code>tidyr::pivot_wider()</code>: из <em>длинного</em> в <em>широкий</em> формат</p></li>
 </ul>
+<div class="figure">
+<img src="images/tidyr-longer-wider.gif" />
+
+</div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_diet &lt;-<span class="st"> </span><span class="kw">tibble</span>(
   <span class="dt">student =</span> <span class="kw">c</span>(<span class="st">&quot;Маша&quot;</span>, <span class="st">&quot;Рома&quot;</span>, <span class="st">&quot;Антонина&quot;</span>),
   <span class="dt">before_r_course =</span> <span class="kw">c</span>(<span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">86</span>),
@@ -729,7 +733,7 @@ new_diet</code></pre></div>
   </script>
 </div>
 </div>
-<div id="функциональное-программирование-purrr" class="section level2">
+<div id="purrr" class="section level2">
 <h2><span class="header-section-number">10.4</span> Функциональное программирование: <code>purrr</code></h2>
 <p><code>purrr</code> --- это пакет для функционального программирования в tidyverse. Как и многие пакеты tidyverse, <code>purrr</code> пытается заменить собой базовый функционал R на более понятный и удобный. В данном случае, речь в первую очередь идет о функциях семейства <code>apply()</code>, с которыми мы работали ранее (@ref(apply_f)).</p>
 <p>Давайте вспомним, как работает <code>lapply()</code>. В качестве первого аргумента функция <code>lapply()</code> принимает список (или то, что может быть в него превращено, например, датафрейм), в качестве второго - функцию, которая будет применена к каждому элементу списка. На выходе мы получим список такой же длины.</p>
@@ -930,7 +934,7 @@ new_diet</code></pre></div>
 <div class="footnotes">
 <hr />
 <ol start="26">
-<li id="fn26"><p>Функция <code>across()</code> появилась в пакете <code>dplyr</code> относительно недавно, до этого для работы с множественными колонками в tidyverse использовались многочисленные функции <code>*_at()</code>, <code>*_if()</code>, <code>*_all()</code>, например, <code>summarise_at()</code>, <code>summarise_if()</code>, <code>summarize_all()</code>. Эти функции до сих пор присутствуют в <code>dplyr</code>, но считаются устаревшими. Другая альтернатива - использование пакета <code>purrr</code> (<a href="#purrr"><strong>??</strong></a>) или семейства функций <code>apply()</code> (@ref(apply_f)).<a href="tidyverse-advanced.html#fnref26">↩</a></p></li>
+<li id="fn26"><p>Функция <code>across()</code> появилась в пакете <code>dplyr</code> относительно недавно, до этого для работы с множественными колонками в tidyverse использовались многочисленные функции <code>*_at()</code>, <code>*_if()</code>, <code>*_all()</code>, например, <code>summarise_at()</code>, <code>summarise_if()</code>, <code>summarize_all()</code>. Эти функции до сих пор присутствуют в <code>dplyr</code>, но считаются устаревшими. Другая альтернатива - использование пакета <code>purrr</code> (<a href="tidyverse-advanced.html#purrr">10.4</a>) или семейства функций <code>apply()</code> (@ref(apply_f)).<a href="tidyverse-advanced.html#fnref26">↩</a></p></li>
 <li id="fn27"><p>Если ключи будут неуникальными, то функции <code>*_join()</code> не будут выдавать ошибку. Вместо этого они добавят в итоговую таблицу все возможные пересечения повторяющихся ключей. С этим нужно быть очень осторожным, поэтому рекомендуется, во-первых, проверять уникальность ключей на входе и, во-вторых, проверять тиббл на выходе. Ну или использовать эту особенность работы функции <code>*_join()</code> себе во благо.<a href="tidyverse-advanced.html#fnref27">↩</a></p></li>
 </ol>
 </div>
