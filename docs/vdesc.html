@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11 Описательная статистика | Анализ данных и статистика в R</title>
+  <meta name="description" content="11 Описательная статистика | Анализ данных и статистика в R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11 Описательная статистика | Анализ данных и статистика в R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11 Описательная статистика | Анализ данных и статистика в R" />
+  
+  
+  
+
+<meta name="author" content="Поздняков Иван" />
+
+
+<meta name="date" content="2020-11-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tidyverse-advanced.html"/>
+<link rel="next" href="r-vis.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Анализ данных и статистика в R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> О курсе</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Введение в R</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1</b> Установка R и Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>2.2</b> Знакомство с RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#calc"><i class="fa fa-check"></i><b>2.3</b> R как калькулятор</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#func"><i class="fa fa-check"></i><b>2.4</b> Функции</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#google"><i class="fa fa-check"></i><b>2.5</b> В любой непонятной ситуации --- гуглите</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#variables"><i class="fa fa-check"></i><b>2.6</b> Переменные</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#logic"><i class="fa fa-check"></i><b>2.7</b> Логические операторы</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#data_types"><i class="fa fa-check"></i><b>2.8</b> Типы данных</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>3</b> Вектор</a><ul>
+<li class="chapter" data-level="3.1" data-path="vector.html"><a href="vector.html#atomic"><i class="fa fa-check"></i><b>3.1</b> Понятие atomic вектора в R</a></li>
+<li class="chapter" data-level="3.2" data-path="vector.html"><a href="vector.html#coercion"><i class="fa fa-check"></i><b>3.2</b> Приведение типов</a></li>
+<li class="chapter" data-level="3.3" data-path="vector.html"><a href="vector.html#vector_op"><i class="fa fa-check"></i><b>3.3</b> Векторизация</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="vector.html"><a href="vector.html#recycling"><i class="fa fa-check"></i><b>3.3.1</b> Ресайклинг</a></li>
+<li class="chapter" data-level="3.3.2" data-path="vector.html"><a href="vector.html#index_atomic"><i class="fa fa-check"></i><b>3.3.2</b> Индексирование векторов</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="vector.html"><a href="vector.html#logic_vectors"><i class="fa fa-check"></i><b>3.4</b> Работа с логическими векторами</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="vector.html"><a href="vector.html#logic_mean_sum"><i class="fa fa-check"></i><b>3.4.1</b> <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</a></li>
+<li class="chapter" data-level="3.4.2" data-path="vector.html"><a href="vector.html#all_any"><i class="fa fa-check"></i><b>3.4.2</b> <code>all()</code> и <code>any()</code></a></li>
+<li class="chapter" data-level="3.4.3" data-path="vector.html"><a href="vector.html#which"><i class="fa fa-check"></i><b>3.4.3</b> Превращение логических значений в индексы: <code>which()</code></a></li>
+<li class="chapter" data-level="3.4.4" data-path="vector.html"><a href="vector.html#in"><i class="fa fa-check"></i><b>3.4.4</b> оператор %in% и match()</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="vector.html"><a href="vector.html#na"><i class="fa fa-check"></i><b>3.5</b> NA - пропущенные значения</a></li>
+<li class="chapter" data-level="3.6" data-path="vector.html"><a href="vector.html#vector_end"><i class="fa fa-check"></i><b>3.6</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="complex-structures.html"><a href="complex-structures.html"><i class="fa fa-check"></i><b>4</b> Сложные структуры данных в R</a><ul>
+<li class="chapter" data-level="4.1" data-path="complex-structures.html"><a href="complex-structures.html#matrix"><i class="fa fa-check"></i><b>4.1</b> Матрица</a></li>
+<li class="chapter" data-level="4.2" data-path="complex-structures.html"><a href="complex-structures.html#arrays"><i class="fa fa-check"></i><b>4.2</b> Массив</a></li>
+<li class="chapter" data-level="4.3" data-path="complex-structures.html"><a href="complex-structures.html#list"><i class="fa fa-check"></i><b>4.3</b> Список</a></li>
+<li class="chapter" data-level="4.4" data-path="complex-structures.html"><a href="complex-structures.html#df"><i class="fa fa-check"></i><b>4.4</b> Датафрейм</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>5</b> Пакеты в R</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-packages.html"><a href="r-packages.html#extra_pack"><i class="fa fa-check"></i><b>5.1</b> Дополнительные пакеты</a></li>
+<li class="chapter" data-level="5.2" data-path="r-packages.html"><a href="r-packages.html#r_built_in"><i class="fa fa-check"></i><b>5.2</b> Встроенные пакеты R</a></li>
+<li class="chapter" data-level="5.3" data-path="r-packages.html"><a href="r-packages.html#install_cran"><i class="fa fa-check"></i><b>5.3</b> Установка пакетов с CRAN</a></li>
+<li class="chapter" data-level="5.4" data-path="r-packages.html"><a href="r-packages.html#package_load"><i class="fa fa-check"></i><b>5.4</b> Загрузка установленного пакета</a></li>
+<li class="chapter" data-level="5.5" data-path="r-packages.html"><a href="r-packages.html#from_package"><i class="fa fa-check"></i><b>5.5</b> Вызов функции из пакета с помощью <code>::</code></a></li>
+<li class="chapter" data-level="5.6" data-path="r-packages.html"><a href="r-packages.html#install_bioc"><i class="fa fa-check"></i><b>5.6</b> Установка пакетов c Bioconductor</a></li>
+<li class="chapter" data-level="5.7" data-path="r-packages.html"><a href="r-packages.html#install_github"><i class="fa fa-check"></i><b>5.7</b> Установка пакетов с Github</a></li>
+<li class="chapter" data-level="5.8" data-path="r-packages.html"><a href="r-packages.html#where_packages"><i class="fa fa-check"></i><b>5.8</b> Где искать нужные пакеты</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>6</b> Импорт и экспорт данных</a><ul>
+<li class="chapter" data-level="6.1" data-path="real-data.html"><a href="real-data.html#wd"><i class="fa fa-check"></i><b>6.1</b> Рабочая папка и проекты RStudio</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.1.1</b> Табличные данные: текстовые и бинарные данные</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="real-data.html"><a href="real-data.html#проверка-импортированных-данных"><i class="fa fa-check"></i><b>6.2</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.3</b> Экспорт данных</a></li>
+<li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.4</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+<li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.5</b> Быстрый импорт данных</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="loops-conditions.html"><a href="loops-conditions.html"><i class="fa fa-check"></i><b>7</b> Условные конструкции и циклы</a><ul>
+<li class="chapter" data-level="7.1" data-path="loops-conditions.html"><a href="loops-conditions.html#if"><i class="fa fa-check"></i><b>7.1</b> Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+<li class="chapter" data-level="7.2" data-path="loops-conditions.html"><a href="loops-conditions.html#for"><i class="fa fa-check"></i><b>7.2</b> Циклы <code>for</code></a></li>
+<li class="chapter" data-level="7.3" data-path="loops-conditions.html"><a href="loops-conditions.html#ifelse"><i class="fa fa-check"></i><b>7.3</b> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>8</b> Функциональное программирование в R</a><ul>
+<li class="chapter" data-level="8.1" data-path="functional.html"><a href="functional.html#create_fun"><i class="fa fa-check"></i><b>8.1</b> Создание функций</a></li>
+<li class="chapter" data-level="8.2" data-path="functional.html"><a href="functional.html#sanity_check"><i class="fa fa-check"></i><b>8.2</b> Проверка на адекватность</a></li>
+<li class="chapter" data-level="8.3" data-path="functional.html"><a href="functional.html#why_functions"><i class="fa fa-check"></i><b>8.3</b> Когда и зачем создавать функции?</a></li>
+<li class="chapter" data-level="8.4" data-path="functional.html"><a href="functional.html#functions_objects"><i class="fa fa-check"></i><b>8.4</b> Функции как объекты первого порядка</a></li>
+<li class="chapter" data-level="8.5" data-path="functional.html"><a href="functional.html#apply_f"><i class="fa fa-check"></i><b>8.5</b> Семейство функций apply()</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="functional.html"><a href="functional.html#apply"><i class="fa fa-check"></i><b>8.5.1</b> Применение <code>apply()</code> для матриц</a></li>
+<li class="chapter" data-level="8.5.2" data-path="functional.html"><a href="functional.html#anon_f"><i class="fa fa-check"></i><b>8.5.2</b> Анонимные функции</a></li>
+<li class="chapter" data-level="8.5.3" data-path="functional.html"><a href="functional.html#apply_other"><i class="fa fa-check"></i><b>8.5.3</b> Другие функции семейства <code>apply()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="tidy-intro.html"><a href="tidy-intro.html"><i class="fa fa-check"></i><b>9</b> Введение в tidyverse</a><ul>
+<li class="chapter" data-level="9.1" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_verse"><i class="fa fa-check"></i><b>9.1</b> Вселенная tidyverse</a></li>
+<li class="chapter" data-level="9.2" data-path="tidy-intro.html"><a href="tidy-intro.html#загрузка-данных-с-помощью-readr"><i class="fa fa-check"></i><b>9.2</b> Загрузка данных с помощью <code>readr</code></a></li>
+<li class="chapter" data-level="9.3" data-path="tidy-intro.html"><a href="tidy-intro.html#tibble"><i class="fa fa-check"></i><b>9.3</b> tibble</a></li>
+<li class="chapter" data-level="9.4" data-path="tidy-intro.html"><a href="tidy-intro.html#pipe"><i class="fa fa-check"></i><b>9.4</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="9.5" data-path="tidy-intro.html"><a href="tidy-intro.html#главные-пакеты-tidyverse-dplyr-и-tidyr"><i class="fa fa-check"></i><b>9.5</b> Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></a></li>
+<li class="chapter" data-level="9.6" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_select_cols"><i class="fa fa-check"></i><b>9.6</b> Работа с колонками тиббла</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="tidy-intro.html"><a href="tidy-intro.html#выбор-колонок-dplyrselect"><i class="fa fa-check"></i><b>9.6.1</b> Выбор колонок: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="9.6.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidyselect"><i class="fa fa-check"></i><b>9.6.2</b> Мини-язык tidyselect для выбора колонок</a></li>
+<li class="chapter" data-level="9.6.3" data-path="tidy-intro.html"><a href="tidy-intro.html#переименование-колонок-dplyrrename"><i class="fa fa-check"></i><b>9.6.3</b> Переименование колонок: <code>dplyr::rename()</code></a></li>
+<li class="chapter" data-level="9.6.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_relocate"><i class="fa fa-check"></i><b>9.6.4</b> Перестановка колонок: <code>dplyr::relocate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_select_rows"><i class="fa fa-check"></i><b>9.7</b> Работа со строками тиббла</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_slice"><i class="fa fa-check"></i><b>9.7.1</b> Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
+<li class="chapter" data-level="9.7.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_filter"><i class="fa fa-check"></i><b>9.7.2</b> Выбор строк по условию: <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="9.7.3" data-path="tidy-intro.html"><a href="tidy-intro.html#slice_family"><i class="fa fa-check"></i><b>9.7.3</b> Семейство функций <code>slice()</code></a></li>
+<li class="chapter" data-level="9.7.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_drop_na"><i class="fa fa-check"></i><b>9.7.4</b> Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
+<li class="chapter" data-level="9.7.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_arrange"><i class="fa fa-check"></i><b>9.7.5</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_mutate"><i class="fa fa-check"></i><b>9.8</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="9.9" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_aggregate"><i class="fa fa-check"></i><b>9.9</b> Агрегация данных в тиббле</a><ul>
+<li class="chapter" data-level="9.9.1" data-path="tidy-intro.html"><a href="tidy-intro.html#summarise"><i class="fa fa-check"></i><b>9.9.1</b> Подытоживание: <code>summarise()</code></a></li>
+<li class="chapter" data-level="9.9.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_group"><i class="fa fa-check"></i><b>9.9.2</b> Группировка: <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.9.3" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_count"><i class="fa fa-check"></i><b>9.9.3</b> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
+<li class="chapter" data-level="9.9.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_distinct"><i class="fa fa-check"></i><b>9.9.4</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="9.9.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_group_mutate"><i class="fa fa-check"></i><b>9.9.5</b> Создание колонок с группировкой</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html"><i class="fa fa-check"></i><b>10</b> Продвинутый tidyverse</a><ul>
+<li class="chapter" data-level="10.1" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#трансформация-нескольких-колонок-dplyracross"><i class="fa fa-check"></i><b>10.1</b> Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_several"><i class="fa fa-check"></i><b>10.2</b> Объединение нескольких датафреймов</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_bind"><i class="fa fa-check"></i><b>10.2.1</b> Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
+<li class="chapter" data-level="10.2.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_join"><i class="fa fa-check"></i><b>10.2.2</b> Реляционные данные: <code>*_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_data"><i class="fa fa-check"></i><b>10.3</b> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
+<li class="chapter" data-level="10.5" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#list_colums_nest"><i class="fa fa-check"></i><b>10.5</b> Колонки-списки и нестинг: <code>nest()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="vdesc.html"><a href="vdesc.html"><i class="fa fa-check"></i><b>11</b> Описательная статистика</a><ul>
+<li class="chapter" data-level="11.1" data-path="vdesc.html"><a href="vdesc.html#desc_infer"><i class="fa fa-check"></i><b>11.1</b> Описательная статистика и статистика вывода</a></li>
+<li class="chapter" data-level="11.2" data-path="vdesc.html"><a href="vdesc.html#cent_tend"><i class="fa fa-check"></i><b>11.2</b> Меры центральной тенденции</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="vdesc.html"><a href="vdesc.html#mean"><i class="fa fa-check"></i><b>11.2.1</b> Арифметическое среднее</a></li>
+<li class="chapter" data-level="11.2.2" data-path="vdesc.html"><a href="vdesc.html#median"><i class="fa fa-check"></i><b>11.2.2</b> Медиана</a></li>
+<li class="chapter" data-level="11.2.3" data-path="vdesc.html"><a href="vdesc.html#trim"><i class="fa fa-check"></i><b>11.2.3</b> Усеченное среднее (trimmed mean)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="vdesc.html"><a href="vdesc.html#mode"><i class="fa fa-check"></i><b>11.2.4</b> Мода</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="vdesc.html"><a href="vdesc.html#vary"><i class="fa fa-check"></i><b>11.3</b> Меры рассеяния</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="vdesc.html"><a href="vdesc.html#размах-range"><i class="fa fa-check"></i><b>11.3.1</b> Размах {range}</a></li>
+<li class="chapter" data-level="11.3.2" data-path="vdesc.html"><a href="vdesc.html#var"><i class="fa fa-check"></i><b>11.3.2</b> Дисперсия</a></li>
+<li class="chapter" data-level="11.3.3" data-path="vdesc.html"><a href="vdesc.html#sd"><i class="fa fa-check"></i><b>11.3.3</b> Стандартное отклонение</a></li>
+<li class="chapter" data-level="11.3.4" data-path="vdesc.html"><a href="vdesc.html#mad"><i class="fa fa-check"></i><b>11.3.4</b> Медианное абсолютное отклонение</a></li>
+<li class="chapter" data-level="11.3.5" data-path="vdesc.html"><a href="vdesc.html#iqr"><i class="fa fa-check"></i><b>11.3.5</b> Межквартильный размах</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="vdesc.html"><a href="vdesc.html#skku"><i class="fa fa-check"></i><b>11.4</b> Ассиметрия и эксцесс</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="vdesc.html"><a href="vdesc.html#skew"><i class="fa fa-check"></i><b>11.4.1</b> Ассиметрия</a></li>
+<li class="chapter" data-level="11.4.2" data-path="vdesc.html"><a href="vdesc.html#kurtosis"><i class="fa fa-check"></i><b>11.4.2</b> Эксцесс</a></li>
+<li class="chapter" data-level="11.4.3" data-path="vdesc.html"><a href="vdesc.html#skewR"><i class="fa fa-check"></i><b>11.4.3</b> Ассиметрия и эксцесс в R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="vdesc.html"><a href="vdesc.html#summary"><i class="fa fa-check"></i><b>11.5</b> А теперь все вместе!</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="vdesc.html"><a href="vdesc.html#datasaurus"><i class="fa fa-check"></i><b>11.5.1</b> Описательных статистик недостаточно</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="r-vis.html"><a href="r-vis.html"><i class="fa fa-check"></i><b>12</b> Визуализация в R</a><ul>
+<li class="chapter" data-level="12.1" data-path="r-vis.html"><a href="r-vis.html#base_vis"><i class="fa fa-check"></i><b>12.1</b> Базовые функции для графики</a></li>
+<li class="chapter" data-level="12.2" data-path="r-vis.html"><a href="r-vis.html#grammar_of_graphics"><i class="fa fa-check"></i><b>12.2</b> История грамматики графики</a></li>
+<li class="chapter" data-level="12.3" data-path="r-vis.html"><a href="r-vis.html#gg_base"><i class="fa fa-check"></i><b>12.3</b> Основы грамматики графики</a></li>
+<li class="chapter" data-level="12.4" data-path="r-vis.html"><a href="r-vis.html#gg_0"><i class="fa fa-check"></i><b>12.4</b> Пример №0: пайчарт с распределение по полу</a></li>
+<li class="chapter" data-level="12.5" data-path="r-vis.html"><a href="r-vis.html#gg_1"><i class="fa fa-check"></i><b>12.5</b> Пример №1: Education and IQ meta-analysis</a></li>
+<li class="chapter" data-level="12.6" data-path="r-vis.html"><a href="r-vis.html#gg_ext"><i class="fa fa-check"></i><b>12.6</b> Расширения <code>ggplot2</code></a></li>
+<li class="chapter" data-level="12.7" data-path="r-vis.html"><a href="r-vis.html#vis_dynamic"><i class="fa fa-check"></i><b>12.7</b> Динамические визуализации в R</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="r-vis.html"><a href="r-vis.html#html_w"><i class="fa fa-check"></i><b>12.7.1</b> Интерфейс для JavaScript фреймворков: пакет <code>htmlwidgets</code></a></li>
+<li class="chapter" data-level="12.7.2" data-path="r-vis.html"><a href="r-vis.html#plotly"><i class="fa fa-check"></i><b>12.7.2</b> Динамические визуализации в <code>plotly</code></a></li>
+<li class="chapter" data-level="12.7.3" data-path="r-vis.html"><a href="r-vis.html#html_other"><i class="fa fa-check"></i><b>12.7.3</b> Другие пакеты для динамической визуализации</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>13</b> Задания</a><ul>
+<li class="chapter" data-level="13.1" data-path="tasks.html"><a href="tasks.html#task_begin"><i class="fa fa-check"></i><b>13.1</b> Начало работы в R</a></li>
+<li class="chapter" data-level="13.2" data-path="tasks.html"><a href="tasks.html#task_new_vecs"><i class="fa fa-check"></i><b>13.2</b> Создание векторов</a></li>
+<li class="chapter" data-level="13.3" data-path="tasks.html"><a href="tasks.html#task_coer"><i class="fa fa-check"></i><b>13.3</b> Приведение типов</a></li>
+<li class="chapter" data-level="13.4" data-path="tasks.html"><a href="tasks.html#task_vec_ion"><i class="fa fa-check"></i><b>13.4</b> Векторизация</a></li>
+<li class="chapter" data-level="13.5" data-path="tasks.html"><a href="tasks.html#task_vec_ind"><i class="fa fa-check"></i><b>13.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="13.6" data-path="tasks.html"><a href="tasks.html#task_na"><i class="fa fa-check"></i><b>13.6</b> Работа с пропущенными значениями</a></li>
+<li class="chapter" data-level="13.7" data-path="tasks.html"><a href="tasks.html#task_matrix"><i class="fa fa-check"></i><b>13.7</b> Матрицы</a></li>
+<li class="chapter" data-level="13.8" data-path="tasks.html"><a href="tasks.html#task_list"><i class="fa fa-check"></i><b>13.8</b> Списки</a></li>
+<li class="chapter" data-level="13.9" data-path="tasks.html"><a href="tasks.html#task_df"><i class="fa fa-check"></i><b>13.9</b> Датафрейм</a></li>
+<li class="chapter" data-level="13.10" data-path="tasks.html"><a href="tasks.html#task_if"><i class="fa fa-check"></i><b>13.10</b> Условные конструкции</a></li>
+<li class="chapter" data-level="13.11" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>13.11</b> Создание функций</a></li>
+<li class="chapter" data-level="13.12" data-path="tasks.html"><a href="tasks.html#task_apply"><i class="fa fa-check"></i><b>13.12</b> Семейство функций apply()</a></li>
+<li class="chapter" data-level="13.13" data-path="tasks.html"><a href="tasks.html#task_pipe"><i class="fa fa-check"></i><b>13.13</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="13.14" data-path="tasks.html"><a href="tasks.html#task_filt"><i class="fa fa-check"></i><b>13.14</b> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="13.15" data-path="tasks.html"><a href="tasks.html#task_select"><i class="fa fa-check"></i><b>13.15</b> Выбор столбцов: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="13.16" data-path="tasks.html"><a href="tasks.html#task_arr"><i class="fa fa-check"></i><b>13.16</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="13.17" data-path="tasks.html"><a href="tasks.html#task_dist"><i class="fa fa-check"></i><b>13.17</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="13.18" data-path="tasks.html"><a href="tasks.html#task_mutate"><i class="fa fa-check"></i><b>13.18</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="13.19" data-path="tasks.html"><a href="tasks.html#task_group_by"><i class="fa fa-check"></i><b>13.19</b> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="13.20" data-path="tasks.html"><a href="tasks.html#task_across"><i class="fa fa-check"></i><b>13.20</b> Операции с несколькими колонками: <code>across()</code></a></li>
+<li class="chapter" data-level="13.21" data-path="tasks.html"><a href="tasks.html#соединение-датафреймов-_join-task_join"><i class="fa fa-check"></i><b>13.21</b> Соединение датафреймов: *_join {#task_join}</a></li>
+<li class="chapter" data-level="13.22" data-path="tasks.html"><a href="tasks.html#task_join"><i class="fa fa-check"></i><b>13.22</b> Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>14</b> Решения заданий</a><ul>
+<li class="chapter" data-level="14.1" data-path="solutions.html"><a href="solutions.html#solution_begin"><i class="fa fa-check"></i><b>14.1</b> Начало работы в R</a></li>
+<li class="chapter" data-level="14.2" data-path="solutions.html"><a href="solutions.html#solution_new_vecs"><i class="fa fa-check"></i><b>14.2</b> Создание векторов</a></li>
+<li class="chapter" data-level="14.3" data-path="solutions.html"><a href="solutions.html#solution_coer"><i class="fa fa-check"></i><b>14.3</b> Приведение типов</a></li>
+<li class="chapter" data-level="14.4" data-path="solutions.html"><a href="solutions.html#solution_vec_ion"><i class="fa fa-check"></i><b>14.4</b> Векторизация</a></li>
+<li class="chapter" data-level="14.5" data-path="solutions.html"><a href="solutions.html#solution_vec_ind"><i class="fa fa-check"></i><b>14.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="14.6" data-path="solutions.html"><a href="solutions.html#solution_na"><i class="fa fa-check"></i><b>14.6</b> Работа с пропущенными значениями</a></li>
+<li class="chapter" data-level="14.7" data-path="solutions.html"><a href="solutions.html#solution_matrix"><i class="fa fa-check"></i><b>14.7</b> Матрицы</a></li>
+<li class="chapter" data-level="14.8" data-path="solutions.html"><a href="solutions.html#solution_list"><i class="fa fa-check"></i><b>14.8</b> Списки</a></li>
+<li class="chapter" data-level="14.9" data-path="solutions.html"><a href="solutions.html#solution_df"><i class="fa fa-check"></i><b>14.9</b> Датафрейм</a></li>
+<li class="chapter" data-level="14.10" data-path="solutions.html"><a href="solutions.html#solution_if"><i class="fa fa-check"></i><b>14.10</b> Условные конструкции</a></li>
+<li class="chapter" data-level="14.11" data-path="solutions.html"><a href="solutions.html#solution_function"><i class="fa fa-check"></i><b>14.11</b> Создание функций</a></li>
+<li class="chapter" data-level="14.12" data-path="solutions.html"><a href="solutions.html#solution_apply"><i class="fa fa-check"></i><b>14.12</b> Семейство функций apply()</a></li>
+<li class="chapter" data-level="14.13" data-path="solutions.html"><a href="solutions.html#solution_pipe"><i class="fa fa-check"></i><b>14.13</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="14.14" data-path="solutions.html"><a href="solutions.html#solution_filt"><i class="fa fa-check"></i><b>14.14</b> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="14.15" data-path="solutions.html"><a href="solutions.html#solution_select"><i class="fa fa-check"></i><b>14.15</b> Выбор столбцов: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="14.16" data-path="solutions.html"><a href="solutions.html#solution_arr"><i class="fa fa-check"></i><b>14.16</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="14.17" data-path="solutions.html"><a href="solutions.html#solution_dist"><i class="fa fa-check"></i><b>14.17</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="14.18" data-path="solutions.html"><a href="solutions.html#solution_mutate"><i class="fa fa-check"></i><b>14.18</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="14.19" data-path="solutions.html"><a href="solutions.html#solution_group_by"><i class="fa fa-check"></i><b>14.19</b> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="14.20" data-path="solutions.html"><a href="solutions.html#solution_across"><i class="fa fa-check"></i><b>14.20</b> Операции с несколькими колонками: <code>across()</code></a></li>
+<li class="chapter" data-level="14.21" data-path="solutions.html"><a href="solutions.html#соединение-датафреймов-_join-solution_join"><i class="fa fa-check"></i><b>14.21</b> Соединение датафреймов: *_join {#solution_join}</a></li>
+<li class="chapter" data-level="14.22" data-path="solutions.html"><a href="solutions.html#solution_join"><i class="fa fa-check"></i><b>14.22</b> Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ссылки-на-литературу.html"><a href="ссылки-на-литературу.html"><i class="fa fa-check"></i>Ссылки на литературу</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Анализ данных и статистика в R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="vdesc" class="section level1">
+<h1><span class="header-section-number">11</span> Описательная статистика</h1>
+<div id="desc_infer" class="section level2">
+<h2><span class="header-section-number">11.1</span> Описательная статистика и статистика вывода</h2>
+<p>Статистика делится на <strong>описательную статистику</strong> (<em>descriptive statistics</em>) и <strong>статистику вывода</strong> (<em>inferential statistics</em>). Описательная статистика пытается описать нашу <strong>выборку</strong> (<em>sample</em>, т.е. те данные, что у нас на руках) различными способами. Проблема в том, что описательная статистика может описать только то, что у нас есть, но не позволяет сделать выводы о <strong>генеральной совокупности</strong> (<em>population</em>) - это уже цель статистики вывода. Цель описательной статистики - &quot;ужать&quot; данные для их обобщенного понимания с помощью <em>статистик</em>.</p>
+<blockquote>
+<p>Заметьте, у выборки (<strong>s</strong>ample) мы считаем статистики (<strong>s</strong>tatistics), а у генеральной совокупности (<strong>P</strong>opulation) есть параметры (<strong>P</strong>arameters). Вот такая вот мнемотехника.</p>
+</blockquote>
+<p>Статистики часто выступают в роли <em>точечной оценки</em> (point estimators) параметров, так что в этом легко запутаться. Например, среднее (в выборке) - это оценка среднего (в генеральной совокупности). Да, можно свихнуться. Мы это будем разбирать подробнее в следующие занятия (это действительно важно, поверьте), пока что остановимся только на описании выборки.</p>
+<div class="figure">
+<img src="images/sample2.png" width="400" />
+
+</div>
+<p>Сегодня мы будем работать с пакетом <code>survival</code>, в котором есть датасет <code>pbc</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(survival)
+
+<span class="kw">data</span>(pbc)</code></pre></div>
+<p>Это данные 424 пациентов с первичным билиарным циррозом - редким аутоимунным заболеванием печени. При поступлении в клинику у них измерили разные медицинские показатели, определели в экспериментальную и контрольную группу. В наборе данных есть информация о том, что стало с этими испытуемыми.</p>
+<blockquote>
+<p>&quot;This data is from the Mayo Clinic trial in primary biliary cirrhosis (PBC) of the liver conducted between 1974 and 1984. A total of 424 PBC patients, referred to Mayo Clinic during that ten-year interval, met eligibility criteria for the randomized placebo controlled trial of the drug D-penicillamine. The first 312 cases in the data set participated in the randomized trial and contain largely complete data.&quot;</p>
+</blockquote>
+<p>Подробнее про датасет можно почитать <a href="https://stat.ethz.ch/R-manual/R-devel/RHOME/library/survival/html/pbc.html">здесь</a> или в <code>Help</code>.</p>
+<p>Эти данные часто используются в качестве примера для анализа выживаемости. Они уже в достаточно упорядоченном виде и не нуждаются в предобработке (что, к сожалению, случай малореалистичный).</p>
+<p>Для простоты мы удалим все пропущенные значения c помощью <code>drop_na()</code>. Перед этим надо не забыть подключить tidyverse.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+pbc &lt;-<span class="st"> </span>pbc <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">drop_na</span>()</code></pre></div>
+<p>Пока что мы будем использовать только данные о возрасте испытуемых. Для краткости обозначим это вектором <code>a</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>pbc<span class="op">$</span>age</code></pre></div>
+</div>
+<div id="cent_tend" class="section level2">
+<h2><span class="header-section-number">11.2</span> Меры центральной тенденции</h2>
+<p>Мера центральной тенденции - это число для описания <em>центра</em> распределения.</p>
+<div id="mean" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> Арифметическое среднее</h3>
+<p>Самая распространенная мера центральных тенденций - <strong>арифметическое среднее</strong>, то самое, которые мы считаем с помощью функции <code>mean()</code>.</p>
+<p><span class="math display">\[\overline{x}= \frac{\sum\limits_{i=1}^{n} x_{i}} {n}\]</span></p>
+<p>Не пугайтесь значка <span class="math display">\[\sum\limits_{i=1}^{n}\]</span> - это означает сумму от i = 1 до n. Что-то вроде цикла <code>for</code>!</p>
+<p>В качестве упражнения попробуйте самостоятельно превратить эту формулу в функцию <code>mymean()</code> c помощью <code>sum()</code> и <code>length()</code>. Можете убирать <code>NA</code> по дефолту! Сравните с результатом функции <code>mean()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a)</code></pre></div>
+<pre><code>## [1] 49.79966</code></pre>
+</div>
+<div id="median" class="section level3">
+<h3><span class="header-section-number">11.2.2</span> Медиана</h3>
+<p><strong>Медиана</strong> - это <em>середина</em> распределения. Представим, что мы расставили значения по порядку (от меньшего к большему) и взяли значение по середине. Если у нас четное количество значений, то берется среднее значение между теми двумя, что по середине. Для расчета медианы есть функция <code>median()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(a)</code></pre></div>
+<pre><code>## [1] 49.70979</code></pre>
+<p>Разница медианы со средним не очень существенная. Это значит, что распределение довольно &quot;симметричное&quot;. Но бывает и по-другому.</p>
+<p>Представьте себе, что кто-то говорит про среднюю зарплату в Москве. Но ведь эта средняя зарплата становится гораздо больше, если учитывать относительно небольшое количество мультимиллионеров и миллиардеров! А вот медианная зарплата будет гораздо меньше.</p>
+<p>Представьте себе, что в эту клинику с циррозом печени пришел 8000-летний Король Ночи из Игры Престолов. Тогда арифметическое среднее станет гораздо больше:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">c</span>(a, <span class="dv">8000</span>))</code></pre></div>
+<pre><code>## [1] 78.50075</code></pre>
+<p>А вот медиана останется почти той же.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(<span class="kw">c</span>(a, <span class="dv">8000</span>))</code></pre></div>
+<pre><code>## [1] 49.76318</code></pre>
+<p>Таким образом, экстремально большие или маленькие значения оказывают сильное влияние на арифметическое среднее, но не на медиану. Поэтому медиана считается более &quot;робастной&quot; оценкой, т.е. более устойчивой к выбросам и крайним значениям.</p>
+</div>
+<div id="trim" class="section level3">
+<h3><span class="header-section-number">11.2.3</span> Усеченное среднее (trimmed mean)</h3>
+<p>Если про среднее и медиану слышали все, то про усеченное (тримленное) среднее известно гораздо меньше. Тем не менее, на практике это довольно удобная штука, потому что представляет собой некий компромисс между арифметическим средним и медианой.</p>
+<p>В усеченном среднем значения ранжируются так же, как и для медианы, но отбрасывается только какой-то процент крайних значений. Усеченное среднее можно посчитать с помощью обычной функции <code>mean()</code>, поставив нужное значение параметра <code>trim =</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a, <span class="dt">trim =</span> <span class="fl">0.1</span>)</code></pre></div>
+<pre><code>## [1] 49.57392</code></pre>
+<p><code>trim = 0.1</code> означает, что мы отбросили 10% слева и 10% справа. <code>trim</code> может принимать значения от 0 до 0.5. Что будет, если <code>trim = 0</code>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a, <span class="dt">trim =</span> <span class="dv">0</span>)</code></pre></div>
+<pre><code>## [1] 49.79966</code></pre>
+<p>Обычное арифметическое среднее! А если <code>trim = 0.5</code>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(a, <span class="dt">trim =</span> <span class="fl">0.5</span>)</code></pre></div>
+<pre><code>## [1] 49.70979</code></pre>
+<p>Медиана!</p>
+</div>
+<div id="mode" class="section level3">
+<h3><span class="header-section-number">11.2.4</span> Мода</h3>
+<p><strong>Мода</strong> <em>(mode)</em> - это самое <em>частое</em> значение. Обычно используется для номинальных переменных, для континуальных данных мода неприменима. Что интересно, в R нет встроенной функции для подсчета моды. Обычно она и не нужна: мы можем посчитать таблицу частот и даже проранжировать ее (и мы уже умеем это делать разными способами). На случай если Вы все-таки хотите создать свою функцию для моды, можно попробовать что-то такое:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mymode &lt;-<span class="st"> </span><span class="cf">function</span>(x){<span class="kw">names</span>(<span class="kw">which.max</span>(<span class="kw">table</span>(x)))} <span class="co">#эта функция возвращает только первое значение, если наиболее наиболее частых значений несколько.</span>
+<span class="kw">mymode</span>(pbc<span class="op">$</span>sex)</code></pre></div>
+<pre><code>## [1] &quot;f&quot;</code></pre>
+</div>
+</div>
+<div id="vary" class="section level2">
+<h2><span class="header-section-number">11.3</span> Меры рассеяния</h2>
+<blockquote>
+<p>Начинающий статистик пытался перейти в брод реку, средняя глубина которой 1 метр. И утонул.<br />
+В чем была его ошибка? Он не учитывал разброс значений глубины!</p>
+</blockquote>
+<p>Мер центральной тенденции недостаточно, чтобы описать выборку. Необходимо знать ее вариабельность.</p>
+<div id="размах-range" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> Размах {range}</h3>
+<p>Самое очевидное - посчитать <strong>размах</strong> <em>(range)</em>, то есть разницу между минимальным и максимальным значением. В R есть функция для вывода максимального и минимального значений:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">range</span>(a)</code></pre></div>
+<pre><code>## [1] 26.27789 78.43943</code></pre>
+<p>Осталось посчитать разницу между ними:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">diff</span>(<span class="kw">range</span>(a))</code></pre></div>
+<pre><code>## [1] 52.16153</code></pre>
+<p>Естественно, крайние значения очень сильно влияют на этот размах, поэтому на практике он не очень-то используется.</p>
+</div>
+<div id="var" class="section level3">
+<h3><span class="header-section-number">11.3.2</span> Дисперсия</h3>
+<p><strong>Дисперсия</strong> <em>(variance)</em> вычисляется по следующей формуле:</p>
+<p><span class="math display">\[s^2= \frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<p>Попробуйте превратить это в функцию <code>myvar()</code>!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myvar &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x))<span class="op">^</span><span class="dv">2</span>)</code></pre></div>
+<p>Естественно, в R уже есть готовая функция <code>var()</code>. Но, заметьте, ее результат немного отличается от нашего:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">myvar</span>(a)</code></pre></div>
+<pre><code>## [1] 110.334</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(a)</code></pre></div>
+<pre><code>## [1] 110.7353</code></pre>
+<p>Дело в том, что встроенная функция <code>var()</code> делит не на <span class="math inline">\(n\)</span>, а на <span class="math inline">\(n-1\)</span>. Это связано с тем, что эта функция пытается оценить дисперсию в генеральной совокупности, т.е. относится уже к статистике вывода. Про это мы будем говорить в дальнейших занятиях, сейчас нам нужно только отметить то, что здесь есть небольшое различие.</p>
+</div>
+<div id="sd" class="section level3">
+<h3><span class="header-section-number">11.3.3</span> Стандартное отклонение</h3>
+<p>Если вы заметили, значение дисперсии очень большое. Чтобы вернуться к единицам измерения, соответствующих нашим данным используется корень из дисперсии, то есть <strong>стандартное отклонение</strong> <em>(standard deviation)</em>:</p>
+<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<p>Для этого есть функция <code>sd()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(a)</code></pre></div>
+<pre><code>## [1] 10.52308</code></pre>
+<p>Что то же самое, что и:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">var</span>(a))</code></pre></div>
+<pre><code>## [1] 10.52308</code></pre>
+</div>
+<div id="mad" class="section level3">
+<h3><span class="header-section-number">11.3.4</span> Медианное абсолютное отклонение</h3>
+<p>Поскольку стандартное отклонение не устойчово ко всяким выбросам, то иногда используют его альтернативу, которая устойчива к выбросам (особенно если эти выбросы нам как раз и нужно удалить) - медианное абсолютное отклонение (median absolute deviation):</p>
+<p><span class="math display">\[mad= median(|x_{i} - median(x)|)\]</span></p>
+<p>Для этого есть функция <code>mad()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mad</span>(a)</code></pre></div>
+<pre><code>## [1] 10.63291</code></pre>
+</div>
+<div id="iqr" class="section level3">
+<h3><span class="header-section-number">11.3.5</span> Межквартильный размах</h3>
+<p>Другой вариант рабостной оценки вариабельности данных является <strong>межквартильный размах</strong> <em>(interquartile range, IQR)</em>. Это разница между третьим и первым <strong>квартилем</strong><a href="#fn28" class="footnoteRef" id="fnref28"><sup>28</sup></a> - значением, которое больше 75% значений в выборке, и значением, которое больше 25% значений в выборке.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">IQR</span>(a)</code></pre></div>
+<pre><code>## [1] 15.07187</code></pre>
+<blockquote>
+<p>Ну а второй квартиль - это медиана!</p>
+</blockquote>
+</div>
+</div>
+<div id="skku" class="section level2">
+<h2><span class="header-section-number">11.4</span> Ассиметрия и эксцесс</h2>
+<div id="skew" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> Ассиметрия</h3>
+<p><strong>Ассиметрия (skewness)</strong> измеряет симметричность распределения. Положительный показатель ассиметрии (&quot;Right-skewed&quot; или positive skewness) означает, что хвосты с правой части распределения длиннее. Негативный показатель ассиметрии (&quot;Left-skewed&quot; или negative skewness) означает, что левый хвост длиннее.</p>
+<div class="figure">
+<img src="images/7180OS_01_180.jpg" />
+
+</div>
+<blockquote>
+<p>Например, в психологии положительная ассиметрия встречается очень часто. Например, время реакции: оно ограничено снизу 0 мс (а по факту не меньше 100 мс - быстрее сигнал не успеет по нервной системе пройти до пальцев), а вот с другой стороны оно никак не ограничено. Испытуемый может на полчаса перед монитором затупить, ага.</p>
+</blockquote>
+</div>
+<div id="kurtosis" class="section level3">
+<h3><span class="header-section-number">11.4.2</span> Эксцесс</h3>
+<p><strong>Эксцесс (kurtosis)</strong> - это мера &quot;вытянутости&quot; распределения:</p>
+<div class="figure">
+<img src="images/kurtosis.gif" />
+
+</div>
+<p>Положительные показатели эксцесса означают &quot;вытянутое&quot; распределение, а отрицательные - &quot;плоское&quot;.</p>
+</div>
+<div id="skewR" class="section level3">
+<h3><span class="header-section-number">11.4.3</span> Ассиметрия и эксцесс в R</h3>
+<p>К сожалению, в базовом R нет функций для ассиметрии и эксцесса. Зато есть замечательный пакет <code>psych</code> (да-да, специально для психологов).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;psych&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;psych&quot;</span>)</code></pre></div>
+<pre><code>## 
+## Присоединяю пакет: &#39;psych&#39;</code></pre>
+<pre><code>## Следующие объекты скрыты от &#39;package:ggplot2&#39;:
+## 
+##     %+%, alpha</code></pre>
+<p>В нем есть функции <code>skew()</code> и <code>kurtosi()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skew</span>(a)</code></pre></div>
+<pre><code>## [1] 0.1786867</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosi</span>(a)</code></pre></div>
+<pre><code>## [1] -0.5174814</code></pre>
+<p>Ассиметрия близка к нулю - значит распределение выборки достаточно симметричное, а эксцесс немного ниже нуля - значит распределение довольно &quot;плоское&quot;.</p>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">11.5</span> А теперь все вместе!</h2>
+<p>В базовом R есть функция <code>summary()</code>, которая позволяет получить сразу неплохой набор описательных статистик.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(a)</code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   26.28   41.51   49.71   49.80   56.58   78.44</code></pre>
+<blockquote>
+<p>Функция <code>summary()</code> - это универсальная (generic) функция. Это означает, что Вы можете ее применять для разных объектов и получать разные результаты. Попробуйте применить ее к векторам с разными типами данных и даже к дата.фреймам и дата.тейблам. Посмотрите, что получится.</p>
+</blockquote>
+<p>В пакете <code>psych</code> есть еще и замечательная функция <code>describe()</code>, которая даст Вам еще больше статистик, включая ассиметрию и куртозис:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(a)</code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["vars"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["n"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["trimmed"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mad"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["range"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["skew"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"276","3":"49.79966","4":"10.52308","5":"49.70979","6":"49.57392","7":"10.63291","8":"26.27789","9":"78.43943","10":"52.16153","11":"0.1786867","12":"-0.5174814","13":"0.6334151","_rn_":"X1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Даже усеченное (trimmed) среднее есть (с <code>trim = 0.1</code>)! Все кроме <code>se</code> мы уже знаем. А про этот <code>se</code> узнаем через позже.</p>
+<p>Эта функция прекрасно работает в <code>data.table</code> в сочетании с <code>by =</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pbc <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(stage) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">describe</span>(age))</code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["stage"],"name":[1],"type":["int"],"align":["right"]},{"label":["vars"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["n"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["median"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["trimmed"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["mad"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["range"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["skew"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[14],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"1","3":"12","4":"47.41182","5":"10.11477","6":"47.97673","7":"47.75359","8":"12.132762","9":"28.88433","10":"62.52156","11":"33.63723","12":"-0.06406915","13":"-1.1025021","14":"2.919883"},{"1":"2","2":"1","3":"59","4":"48.52757","5":"10.22616","6":"48.75838","7":"48.34855","8":"10.975908","9":"30.27515","10":"75.01164","11":"44.73648","12":"0.19440406","13":"-0.7000602","14":"1.331333"},{"1":"3","2":"1","3":"111","4":"47.94154","5":"10.00419","6":"47.42779","7":"47.41838","8":"9.948946","9":"26.27789","10":"71.89322","11":"45.61533","12":"0.35465904","13":"-0.3655477","14":"0.949556"},{"1":"4","2":"1","3":"94","4":"53.09709","5":"10.71781","6":"53.92334","7":"53.20437","8":"10.890666","9":"29.55510","10":"78.43943","11":"48.88433","12":"-0.07684694","13":"-0.4361883","14":"1.105458"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Другой интересный пакет для получения описательных статистик для всего датафрейма --- <code>skimr</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;skimr&quot;</span>)</code></pre></div>
+<p>Его основная функция --- <code>skim()</code>, выводит симпатичную сводную таблицу для датафрейма.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">skimr<span class="op">::</span><span class="kw">skim</span>(pbc)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-299">Таблица 11.1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">pbc</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">276</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">20</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">19</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">sex</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">FALSE</td>
+<td align="right">2</td>
+<td align="left">f: 242, m: 34</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">id</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">158.62</td>
+<td align="right">91.66</td>
+<td align="right">1.00</td>
+<td align="right">79.75</td>
+<td align="right">157.50</td>
+<td align="right">240.25</td>
+<td align="right">312.00</td>
+<td align="left">▇▇▇▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">time</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1979.17</td>
+<td align="right">1112.38</td>
+<td align="right">41.00</td>
+<td align="right">1185.75</td>
+<td align="right">1788.00</td>
+<td align="right">2689.75</td>
+<td align="right">4556.00</td>
+<td align="left">▅▇▆▃▂</td>
+</tr>
+<tr class="odd">
+<td align="left">status</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.87</td>
+<td align="right">0.96</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">2.00</td>
+<td align="right">2.00</td>
+<td align="left">▇▁▁▁▆</td>
+</tr>
+<tr class="even">
+<td align="left">trt</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.51</td>
+<td align="right">0.50</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="right">2.00</td>
+<td align="right">2.00</td>
+<td align="right">2.00</td>
+<td align="left">▇▁▁▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">49.80</td>
+<td align="right">10.52</td>
+<td align="right">26.28</td>
+<td align="right">41.51</td>
+<td align="right">49.71</td>
+<td align="right">56.58</td>
+<td align="right">78.44</td>
+<td align="left">▃▆▇▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">ascites</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.07</td>
+<td align="right">0.25</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">hepato</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.51</td>
+<td align="right">0.50</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">spiders</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.29</td>
+<td align="right">0.45</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▃</td>
+</tr>
+<tr class="odd">
+<td align="left">edema</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.11</td>
+<td align="right">0.27</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">1.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">bili</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.33</td>
+<td align="right">4.60</td>
+<td align="right">0.30</td>
+<td align="right">0.80</td>
+<td align="right">1.40</td>
+<td align="right">3.52</td>
+<td align="right">28.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">chol</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">371.26</td>
+<td align="right">234.79</td>
+<td align="right">120.00</td>
+<td align="right">249.50</td>
+<td align="right">310.00</td>
+<td align="right">401.00</td>
+<td align="right">1775.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">albumin</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.52</td>
+<td align="right">0.40</td>
+<td align="right">1.96</td>
+<td align="right">3.31</td>
+<td align="right">3.54</td>
+<td align="right">3.77</td>
+<td align="right">4.40</td>
+<td align="left">▁▁▅▇▂</td>
+</tr>
+<tr class="odd">
+<td align="left">copper</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">100.77</td>
+<td align="right">88.27</td>
+<td align="right">4.00</td>
+<td align="right">42.75</td>
+<td align="right">74.00</td>
+<td align="right">129.25</td>
+<td align="right">588.00</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">alk.phos</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1996.61</td>
+<td align="right">2115.48</td>
+<td align="right">289.00</td>
+<td align="right">922.50</td>
+<td align="right">1277.50</td>
+<td align="right">2068.25</td>
+<td align="right">13862.40</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">ast</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">124.12</td>
+<td align="right">56.72</td>
+<td align="right">28.38</td>
+<td align="right">82.46</td>
+<td align="right">116.62</td>
+<td align="right">153.45</td>
+<td align="right">457.25</td>
+<td align="left">▇▇▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">trig</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">124.98</td>
+<td align="right">65.28</td>
+<td align="right">33.00</td>
+<td align="right">85.00</td>
+<td align="right">108.00</td>
+<td align="right">151.25</td>
+<td align="right">598.00</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">platelet</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">261.77</td>
+<td align="right">93.13</td>
+<td align="right">62.00</td>
+<td align="right">200.00</td>
+<td align="right">257.00</td>
+<td align="right">318.25</td>
+<td align="right">563.00</td>
+<td align="left">▃▇▇▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">protime</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10.74</td>
+<td align="right">1.01</td>
+<td align="right">9.00</td>
+<td align="right">10.00</td>
+<td align="right">10.60</td>
+<td align="right">11.20</td>
+<td align="right">17.10</td>
+<td align="left">▇▆▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">stage</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.04</td>
+<td align="right">0.85</td>
+<td align="right">1.00</td>
+<td align="right">2.00</td>
+<td align="right">3.00</td>
+<td align="right">4.00</td>
+<td align="right">4.00</td>
+<td align="left">▁▅▁▇▇</td>
+</tr>
+</tbody>
+</table>
+<p>Здесь количество и доля пропущенных значений, среднее, стандартное отклонение, минимальное и максимальное значение (<em>p0</em> и <em>p100</em> соответственно), квартили. Ну и вишенкой на торте выступает маленькая гистограмма для каждой колонки!</p>
+<p>Кроме того, <code>skimr</code> адаптирован под tidyverse. В нем можно выбирать колонки с помощью tidyselect (<a href="tidy-intro.html#tidyselect">9.6.2</a>) прямо внутри функции <code>skim()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pbc <span class="op">%&gt;%</span>
+<span class="st">  </span>skimr<span class="op">::</span><span class="kw">skim</span>(<span class="kw">c</span>(age, bili<span class="op">:</span>albumin))</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-300">Таблица 11.2: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">276</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">20</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">49.80</td>
+<td align="right">10.52</td>
+<td align="right">26.28</td>
+<td align="right">41.51</td>
+<td align="right">49.71</td>
+<td align="right">56.58</td>
+<td align="right">78.44</td>
+<td align="left">▃▆▇▃▁</td>
+</tr>
+<tr class="even">
+<td align="left">bili</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.33</td>
+<td align="right">4.60</td>
+<td align="right">0.30</td>
+<td align="right">0.80</td>
+<td align="right">1.40</td>
+<td align="right">3.52</td>
+<td align="right">28.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">chol</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">371.26</td>
+<td align="right">234.79</td>
+<td align="right">120.00</td>
+<td align="right">249.50</td>
+<td align="right">310.00</td>
+<td align="right">401.00</td>
+<td align="right">1775.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">albumin</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.52</td>
+<td align="right">0.40</td>
+<td align="right">1.96</td>
+<td align="right">3.31</td>
+<td align="right">3.54</td>
+<td align="right">3.77</td>
+<td align="right">4.40</td>
+<td align="left">▁▁▅▇▂</td>
+</tr>
+</tbody>
+</table>
+<p>А еще можно сочетать с группировкой с помощью <code>group_by()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pbc <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(stage) <span class="op">%&gt;%</span>
+<span class="st">  </span>skimr<span class="op">::</span><span class="kw">skim</span>(<span class="kw">c</span>(age, bili<span class="op">:</span>albumin))</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-301">Таблица 11.3: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Piped data</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">276</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">20</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">stage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">stage</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">47.41</td>
+<td align="right">10.11</td>
+<td align="right">28.88</td>
+<td align="right">39.78</td>
+<td align="right">47.98</td>
+<td align="right">52.76</td>
+<td align="right">62.52</td>
+<td align="left">▂▇▅▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">age</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">48.53</td>
+<td align="right">10.23</td>
+<td align="right">30.28</td>
+<td align="right">41.45</td>
+<td align="right">48.76</td>
+<td align="right">56.27</td>
+<td align="right">75.01</td>
+<td align="left">▆▆▇▅▁</td>
+</tr>
+<tr class="odd">
+<td align="left">age</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">47.94</td>
+<td align="right">10.00</td>
+<td align="right">26.28</td>
+<td align="right">40.50</td>
+<td align="right">47.43</td>
+<td align="right">53.53</td>
+<td align="right">71.89</td>
+<td align="left">▂▆▇▃▂</td>
+</tr>
+<tr class="even">
+<td align="left">age</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">53.10</td>
+<td align="right">10.72</td>
+<td align="right">29.56</td>
+<td align="right">45.73</td>
+<td align="right">53.92</td>
+<td align="right">60.69</td>
+<td align="right">78.44</td>
+<td align="left">▃▆▇▆▂</td>
+</tr>
+<tr class="odd">
+<td align="left">bili</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.21</td>
+<td align="right">1.53</td>
+<td align="right">0.50</td>
+<td align="right">0.60</td>
+<td align="right">0.75</td>
+<td align="right">1.02</td>
+<td align="right">6.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">bili</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">2.00</td>
+<td align="right">3.52</td>
+<td align="right">0.30</td>
+<td align="right">0.65</td>
+<td align="right">0.90</td>
+<td align="right">2.00</td>
+<td align="right">25.50</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">bili</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.03</td>
+<td align="right">4.49</td>
+<td align="right">0.30</td>
+<td align="right">0.80</td>
+<td align="right">1.40</td>
+<td align="right">3.15</td>
+<td align="right">28.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">bili</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4.80</td>
+<td align="right">5.18</td>
+<td align="right">0.60</td>
+<td align="right">1.30</td>
+<td align="right">2.95</td>
+<td align="right">6.47</td>
+<td align="right">24.50</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">chol</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">270.00</td>
+<td align="right">125.89</td>
+<td align="right">132.00</td>
+<td align="right">215.25</td>
+<td align="right">232.50</td>
+<td align="right">253.75</td>
+<td align="right">614.00</td>
+<td align="left">▇▅▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">chol</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">356.05</td>
+<td align="right">188.06</td>
+<td align="right">127.00</td>
+<td align="right">261.50</td>
+<td align="right">303.00</td>
+<td align="right">412.00</td>
+<td align="right">1480.00</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">chol</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">418.00</td>
+<td align="right">296.79</td>
+<td align="right">120.00</td>
+<td align="right">265.00</td>
+<td align="right">322.00</td>
+<td align="right">434.50</td>
+<td align="right">1775.00</td>
+<td align="left">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">chol</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">338.54</td>
+<td align="right">172.42</td>
+<td align="right">151.00</td>
+<td align="right">243.25</td>
+<td align="right">299.50</td>
+<td align="right">375.50</td>
+<td align="right">1092.00</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">albumin</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.70</td>
+<td align="right">0.32</td>
+<td align="right">2.93</td>
+<td align="right">3.57</td>
+<td align="right">3.74</td>
+<td align="right">3.95</td>
+<td align="right">4.07</td>
+<td align="left">▂▁▆▃▇</td>
+</tr>
+<tr class="even">
+<td align="left">albumin</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.61</td>
+<td align="right">0.33</td>
+<td align="right">2.75</td>
+<td align="right">3.38</td>
+<td align="right">3.60</td>
+<td align="right">3.80</td>
+<td align="right">4.30</td>
+<td align="left">▁▅▇▅▃</td>
+</tr>
+<tr class="odd">
+<td align="left">albumin</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.62</td>
+<td align="right">0.37</td>
+<td align="right">2.56</td>
+<td align="right">3.41</td>
+<td align="right">3.61</td>
+<td align="right">3.85</td>
+<td align="right">4.40</td>
+<td align="left">▁▃▇▆▃</td>
+</tr>
+<tr class="even">
+<td align="left">albumin</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">3.31</td>
+<td align="right">0.43</td>
+<td align="right">1.96</td>
+<td align="right">3.07</td>
+<td align="right">3.36</td>
+<td align="right">3.60</td>
+<td align="right">4.16</td>
+<td align="left">▁▂▅▇▃</td>
+</tr>
+</tbody>
+</table>
+<div id="datasaurus" class="section level3">
+<h3><span class="header-section-number">11.5.1</span> Описательных статистик недостаточно</h3>
+<p>Я в тайне от Вас загрузил данные в переменную <code>xxx</code> (можете найти этот набор данных <a href="https://raw.githubusercontent.com/Pozdniakov/stats/master/data/d.csv">здесь</a>, если интересно). Выглядят они примерно так:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(xxx)</code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"55.3846","2":"97.1795"},{"1":"51.5385","2":"96.0256"},{"1":"46.1538","2":"94.4872"},{"1":"42.8205","2":"91.4103"},{"1":"40.7692","2":"88.3333"},{"1":"38.7179","2":"84.8718"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(xxx)</code></pre></div>
+<pre><code>## tibble [142 × 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ x: num [1:142] 55.4 51.5 46.2 42.8 40.8 ...
+##  $ y: num [1:142] 97.2 96 94.5 91.4 88.3 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   x = col_double(),
+##   ..   y = col_double()
+##   .. )</code></pre>
+<p>Надеюсь, Вы уже понимаете, как это интерпретировать - два столбца с 142 числами каждый. Представьте себе, как выглядят эти точки на плоскости, если каждая строчка означают координаты одной точки по осям x и y (это называется диаграмма рассеяния, точечная диаграмма или scatterplot).</p>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-304-1.png" width="672" /></p>
+<p>Применим разные функции, которые мы выучили:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 54.26327</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 47.83225</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 53.3333</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 46.0256</code></pre>
+<p>Средние и медианы примерно одинаковые, при этом по х они около 53-54, а по у - примерно 46-47. Попытайтесь представить это. Идем дальше:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 16.76514</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 26.9354</code></pre>
+<p>Похоже, расброс по у несколько больше, верно?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skew</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] 0.2807568</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">skew</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] 0.2472603</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosi</span>(xxx<span class="op">$</span>x)</code></pre></div>
+<pre><code>## [1] -0.2854912</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosi</span>(xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] -1.063552</code></pre>
+<p>Похоже, оба распределения немного право-ассиметричны и довольно &quot;плоские&quot;.</p>
+<p>Давайте еще посчитаем <strong>коэффициент корреляции (correlation coefficient)</strong>. Мы про него будем говорить позже гораздо подробнее. Пока что нам нужно знать, что она говорит о линейной связи двух переменных. Если коэффициент корреляции <em>положительный</em> (максимум равен <code>1</code>), то чем <em>больше</em> х, тем <em>больше</em> у. Если <em>отрицательный</em> (минимум равен <code>-1</code>), то чем <em>больше</em> х, тем <em>меньше</em> у. Если же коэффициент корреляции равна нулю, то такая линейная зависимость отсутствует.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cor</span>(xxx<span class="op">$</span>x, xxx<span class="op">$</span>y)</code></pre></div>
+<pre><code>## [1] -0.06447185</code></pre>
+<p>Коэффициент корреляции очень близка к нулю (делайте выводы и представляйте).</p>
+<p>Давайте напоследок воспользуемся функцией <code>describe()</code> из <code>psych</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">psych<span class="op">::</span><span class="kw">describe</span>(xxx)</code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["vars"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["median"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["trimmed"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mad"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["min"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["max"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["range"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["skew"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["kurtosis"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["se"],"name":[13],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"142","3":"54.26327","4":"16.76514","5":"53.3333","6":"53.68646","7":"15.96656","8":"22.3077","9":"98.2051","10":"75.8974","11":"0.2807568","12":"-0.2854912","13":"1.406899","_rn_":"x"},{"1":"2","2":"142","3":"47.83225","4":"26.93540","5":"46.0256","6":"46.90284","7":"30.79242","8":"2.9487","9":"99.4872","10":"96.5385","11":"0.2472603","12":"-1.0635521","13":"2.260369","_rn_":"y"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">skimr<span class="op">::</span><span class="kw">skim</span>(xxx)</code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-310">Таблица 11.4: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">xxx</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">142</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">x</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">54.26</td>
+<td align="right">16.77</td>
+<td align="right">22.31</td>
+<td align="right">44.10</td>
+<td align="right">53.33</td>
+<td align="right">64.74</td>
+<td align="right">98.21</td>
+<td align="left">▅▇▇▅▂</td>
+</tr>
+<tr class="even">
+<td align="left">y</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">47.83</td>
+<td align="right">26.94</td>
+<td align="right">2.95</td>
+<td align="right">25.29</td>
+<td align="right">46.03</td>
+<td align="right">68.53</td>
+<td align="right">99.49</td>
+<td align="left">▇▇▇▅▆</td>
+</tr>
+</tbody>
+</table>
+<p>Готовы узнать, как выглядят эти данные на самом деле?!</p>
+<p><details> <summary>Жмите сюда если готовы!</summary></p>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-311-1.png" width="672" /></p>
+<p></details></p>
+<p>Из этого можно сделать важный вывод: не стоит слепо доверять описательным статистикам. Нужно визуализировать данные, иначе можно попасть в такую ситуацию в реальности. По словам знаменитого статитстика Джона Тьюки, величайшая ценность картинки в том, что она заставляет нас заметить то, что мы не ожидали заметить. Поэтому графики --- это не просто метод коммуникации --- представления ваших результатов сообществу в понятном виде (хотя и это, конечно, тоже), но и сам по себе очень важный метод анализа данных.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="28">
+<li id="fn28"><p>Квартиль --- это частный пример квантиля. Другой известный квантиль --- процентиль. Процентили часто используют для сравнения значения с другими значениями. Например, 63ий процентиль означает, что данное значение больше 63% значений в выборке.<a href="vdesc.html#fnref28">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tidyverse-advanced.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-vis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Pozdniakov/tidy_stats/edit/master/04-1-desc_stats_ggplot2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["tidy_stats.pdf", "tidy_stats.epub"],
+"toc": {
+"collapse": "section"
+},
+"self_contained": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
