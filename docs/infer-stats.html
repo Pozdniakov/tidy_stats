@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>13 Статистика вывода | Анализ данных и статистика в R</title>
+  <meta name="description" content="13 Статистика вывода | Анализ данных и статистика в R" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="13 Статистика вывода | Анализ данных и статистика в R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="13 Статистика вывода | Анализ данных и статистика в R" />
+  
+  
+  
+
+<meta name="author" content="Поздняков Иван" />
+
+
+<meta name="date" content="2020-11-12" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-vis.html"/>
+<link rel="next" href="тестирование-значимости-нулевой-гипотезы-nhst.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Анализ данных и статистика в R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> О курсе</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Введение в R</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1</b> Установка R и Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>2.2</b> Знакомство с RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#calc"><i class="fa fa-check"></i><b>2.3</b> R как калькулятор</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#func"><i class="fa fa-check"></i><b>2.4</b> Функции</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#google"><i class="fa fa-check"></i><b>2.5</b> В любой непонятной ситуации --- гуглите</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#variables"><i class="fa fa-check"></i><b>2.6</b> Переменные</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#logic"><i class="fa fa-check"></i><b>2.7</b> Логические операторы</a></li>
+<li class="chapter" data-level="2.8" data-path="intro.html"><a href="intro.html#data_types"><i class="fa fa-check"></i><b>2.8</b> Типы данных</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>3</b> Вектор</a><ul>
+<li class="chapter" data-level="3.1" data-path="vector.html"><a href="vector.html#atomic"><i class="fa fa-check"></i><b>3.1</b> Понятие atomic вектора в R</a></li>
+<li class="chapter" data-level="3.2" data-path="vector.html"><a href="vector.html#coercion"><i class="fa fa-check"></i><b>3.2</b> Приведение типов</a></li>
+<li class="chapter" data-level="3.3" data-path="vector.html"><a href="vector.html#vector_op"><i class="fa fa-check"></i><b>3.3</b> Векторизация</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="vector.html"><a href="vector.html#recycling"><i class="fa fa-check"></i><b>3.3.1</b> Ресайклинг</a></li>
+<li class="chapter" data-level="3.3.2" data-path="vector.html"><a href="vector.html#index_atomic"><i class="fa fa-check"></i><b>3.3.2</b> Индексирование векторов</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="vector.html"><a href="vector.html#logic_vectors"><i class="fa fa-check"></i><b>3.4</b> Работа с логическими векторами</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="vector.html"><a href="vector.html#logic_mean_sum"><i class="fa fa-check"></i><b>3.4.1</b> <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</a></li>
+<li class="chapter" data-level="3.4.2" data-path="vector.html"><a href="vector.html#all_any"><i class="fa fa-check"></i><b>3.4.2</b> <code>all()</code> и <code>any()</code></a></li>
+<li class="chapter" data-level="3.4.3" data-path="vector.html"><a href="vector.html#which"><i class="fa fa-check"></i><b>3.4.3</b> Превращение логических значений в индексы: <code>which()</code></a></li>
+<li class="chapter" data-level="3.4.4" data-path="vector.html"><a href="vector.html#in"><i class="fa fa-check"></i><b>3.4.4</b> оператор %in% и match()</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="vector.html"><a href="vector.html#na"><i class="fa fa-check"></i><b>3.5</b> NA - пропущенные значения</a></li>
+<li class="chapter" data-level="3.6" data-path="vector.html"><a href="vector.html#vector_end"><i class="fa fa-check"></i><b>3.6</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="complex-structures.html"><a href="complex-structures.html"><i class="fa fa-check"></i><b>4</b> Сложные структуры данных в R</a><ul>
+<li class="chapter" data-level="4.1" data-path="complex-structures.html"><a href="complex-structures.html#matrix"><i class="fa fa-check"></i><b>4.1</b> Матрица</a></li>
+<li class="chapter" data-level="4.2" data-path="complex-structures.html"><a href="complex-structures.html#arrays"><i class="fa fa-check"></i><b>4.2</b> Массив</a></li>
+<li class="chapter" data-level="4.3" data-path="complex-structures.html"><a href="complex-structures.html#list"><i class="fa fa-check"></i><b>4.3</b> Список</a></li>
+<li class="chapter" data-level="4.4" data-path="complex-structures.html"><a href="complex-structures.html#df"><i class="fa fa-check"></i><b>4.4</b> Датафрейм</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>5</b> Пакеты в R</a><ul>
+<li class="chapter" data-level="5.1" data-path="r-packages.html"><a href="r-packages.html#extra_pack"><i class="fa fa-check"></i><b>5.1</b> Дополнительные пакеты</a></li>
+<li class="chapter" data-level="5.2" data-path="r-packages.html"><a href="r-packages.html#r_built_in"><i class="fa fa-check"></i><b>5.2</b> Встроенные пакеты R</a></li>
+<li class="chapter" data-level="5.3" data-path="r-packages.html"><a href="r-packages.html#install_cran"><i class="fa fa-check"></i><b>5.3</b> Установка пакетов с CRAN</a></li>
+<li class="chapter" data-level="5.4" data-path="r-packages.html"><a href="r-packages.html#package_load"><i class="fa fa-check"></i><b>5.4</b> Загрузка установленного пакета</a></li>
+<li class="chapter" data-level="5.5" data-path="r-packages.html"><a href="r-packages.html#from_package"><i class="fa fa-check"></i><b>5.5</b> Вызов функции из пакета с помощью <code>::</code></a></li>
+<li class="chapter" data-level="5.6" data-path="r-packages.html"><a href="r-packages.html#install_bioc"><i class="fa fa-check"></i><b>5.6</b> Установка пакетов c Bioconductor</a></li>
+<li class="chapter" data-level="5.7" data-path="r-packages.html"><a href="r-packages.html#install_github"><i class="fa fa-check"></i><b>5.7</b> Установка пакетов с Github</a></li>
+<li class="chapter" data-level="5.8" data-path="r-packages.html"><a href="r-packages.html#where_packages"><i class="fa fa-check"></i><b>5.8</b> Где искать нужные пакеты</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>6</b> Импорт и экспорт данных</a><ul>
+<li class="chapter" data-level="6.1" data-path="real-data.html"><a href="real-data.html#wd"><i class="fa fa-check"></i><b>6.1</b> Рабочая папка и проекты RStudio</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.1.1</b> Табличные данные: текстовые и бинарные данные</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="real-data.html"><a href="real-data.html#проверка-импортированных-данных"><i class="fa fa-check"></i><b>6.2</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.3</b> Экспорт данных</a></li>
+<li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.4</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+<li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.5</b> Быстрый импорт данных</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="loops-conditions.html"><a href="loops-conditions.html"><i class="fa fa-check"></i><b>7</b> Условные конструкции и циклы</a><ul>
+<li class="chapter" data-level="7.1" data-path="loops-conditions.html"><a href="loops-conditions.html#if"><i class="fa fa-check"></i><b>7.1</b> Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+<li class="chapter" data-level="7.2" data-path="loops-conditions.html"><a href="loops-conditions.html#for"><i class="fa fa-check"></i><b>7.2</b> Циклы <code>for</code></a></li>
+<li class="chapter" data-level="7.3" data-path="loops-conditions.html"><a href="loops-conditions.html#ifelse"><i class="fa fa-check"></i><b>7.3</b> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>8</b> Функциональное программирование в R</a><ul>
+<li class="chapter" data-level="8.1" data-path="functional.html"><a href="functional.html#create_fun"><i class="fa fa-check"></i><b>8.1</b> Создание функций</a></li>
+<li class="chapter" data-level="8.2" data-path="functional.html"><a href="functional.html#sanity_check"><i class="fa fa-check"></i><b>8.2</b> Проверка на адекватность</a></li>
+<li class="chapter" data-level="8.3" data-path="functional.html"><a href="functional.html#why_functions"><i class="fa fa-check"></i><b>8.3</b> Когда и зачем создавать функции?</a></li>
+<li class="chapter" data-level="8.4" data-path="functional.html"><a href="functional.html#functions_objects"><i class="fa fa-check"></i><b>8.4</b> Функции как объекты первого порядка</a></li>
+<li class="chapter" data-level="8.5" data-path="functional.html"><a href="functional.html#apply_f"><i class="fa fa-check"></i><b>8.5</b> Семейство функций apply()</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="functional.html"><a href="functional.html#apply"><i class="fa fa-check"></i><b>8.5.1</b> Применение <code>apply()</code> для матриц</a></li>
+<li class="chapter" data-level="8.5.2" data-path="functional.html"><a href="functional.html#anon_f"><i class="fa fa-check"></i><b>8.5.2</b> Анонимные функции</a></li>
+<li class="chapter" data-level="8.5.3" data-path="functional.html"><a href="functional.html#apply_other"><i class="fa fa-check"></i><b>8.5.3</b> Другие функции семейства <code>apply()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="tidy-intro.html"><a href="tidy-intro.html"><i class="fa fa-check"></i><b>9</b> Введение в tidyverse</a><ul>
+<li class="chapter" data-level="9.1" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_verse"><i class="fa fa-check"></i><b>9.1</b> Вселенная tidyverse</a></li>
+<li class="chapter" data-level="9.2" data-path="tidy-intro.html"><a href="tidy-intro.html#загрузка-данных-с-помощью-readr"><i class="fa fa-check"></i><b>9.2</b> Загрузка данных с помощью <code>readr</code></a></li>
+<li class="chapter" data-level="9.3" data-path="tidy-intro.html"><a href="tidy-intro.html#tibble"><i class="fa fa-check"></i><b>9.3</b> tibble</a></li>
+<li class="chapter" data-level="9.4" data-path="tidy-intro.html"><a href="tidy-intro.html#pipe"><i class="fa fa-check"></i><b>9.4</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="9.5" data-path="tidy-intro.html"><a href="tidy-intro.html#главные-пакеты-tidyverse-dplyr-и-tidyr"><i class="fa fa-check"></i><b>9.5</b> Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></a></li>
+<li class="chapter" data-level="9.6" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_select_cols"><i class="fa fa-check"></i><b>9.6</b> Работа с колонками тиббла</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="tidy-intro.html"><a href="tidy-intro.html#выбор-колонок-dplyrselect"><i class="fa fa-check"></i><b>9.6.1</b> Выбор колонок: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="9.6.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidyselect"><i class="fa fa-check"></i><b>9.6.2</b> Мини-язык tidyselect для выбора колонок</a></li>
+<li class="chapter" data-level="9.6.3" data-path="tidy-intro.html"><a href="tidy-intro.html#переименование-колонок-dplyrrename"><i class="fa fa-check"></i><b>9.6.3</b> Переименование колонок: <code>dplyr::rename()</code></a></li>
+<li class="chapter" data-level="9.6.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_relocate"><i class="fa fa-check"></i><b>9.6.4</b> Перестановка колонок: <code>dplyr::relocate()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_select_rows"><i class="fa fa-check"></i><b>9.7</b> Работа со строками тиббла</a><ul>
+<li class="chapter" data-level="9.7.1" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_slice"><i class="fa fa-check"></i><b>9.7.1</b> Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
+<li class="chapter" data-level="9.7.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_filter"><i class="fa fa-check"></i><b>9.7.2</b> Выбор строк по условию: <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="9.7.3" data-path="tidy-intro.html"><a href="tidy-intro.html#slice_family"><i class="fa fa-check"></i><b>9.7.3</b> Семейство функций <code>slice()</code></a></li>
+<li class="chapter" data-level="9.7.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_drop_na"><i class="fa fa-check"></i><b>9.7.4</b> Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
+<li class="chapter" data-level="9.7.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_arrange"><i class="fa fa-check"></i><b>9.7.5</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.8" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_mutate"><i class="fa fa-check"></i><b>9.8</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="9.9" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_aggregate"><i class="fa fa-check"></i><b>9.9</b> Агрегация данных в тиббле</a><ul>
+<li class="chapter" data-level="9.9.1" data-path="tidy-intro.html"><a href="tidy-intro.html#summarise"><i class="fa fa-check"></i><b>9.9.1</b> Подытоживание: <code>summarise()</code></a></li>
+<li class="chapter" data-level="9.9.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_group"><i class="fa fa-check"></i><b>9.9.2</b> Группировка: <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.9.3" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_count"><i class="fa fa-check"></i><b>9.9.3</b> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
+<li class="chapter" data-level="9.9.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_distinct"><i class="fa fa-check"></i><b>9.9.4</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="9.9.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_group_mutate"><i class="fa fa-check"></i><b>9.9.5</b> Создание колонок с группировкой</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html"><i class="fa fa-check"></i><b>10</b> Продвинутый tidyverse</a><ul>
+<li class="chapter" data-level="10.1" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#трансформация-нескольких-колонок-dplyracross"><i class="fa fa-check"></i><b>10.1</b> Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_several"><i class="fa fa-check"></i><b>10.2</b> Объединение нескольких датафреймов</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_bind"><i class="fa fa-check"></i><b>10.2.1</b> Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
+<li class="chapter" data-level="10.2.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_join"><i class="fa fa-check"></i><b>10.2.2</b> Реляционные данные: <code>*_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_data"><i class="fa fa-check"></i><b>10.3</b> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
+<li class="chapter" data-level="10.5" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#list_colums_nest"><i class="fa fa-check"></i><b>10.5</b> Колонки-списки и нестинг: <code>nest()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="vdesc.html"><a href="vdesc.html"><i class="fa fa-check"></i><b>11</b> Описательная статистика</a><ul>
+<li class="chapter" data-level="11.1" data-path="vdesc.html"><a href="vdesc.html#desc_infer"><i class="fa fa-check"></i><b>11.1</b> Описательная статистика и статистика вывода</a></li>
+<li class="chapter" data-level="11.2" data-path="vdesc.html"><a href="vdesc.html#cent_tend"><i class="fa fa-check"></i><b>11.2</b> Меры центральной тенденции</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="vdesc.html"><a href="vdesc.html#mean"><i class="fa fa-check"></i><b>11.2.1</b> Арифметическое среднее</a></li>
+<li class="chapter" data-level="11.2.2" data-path="vdesc.html"><a href="vdesc.html#median"><i class="fa fa-check"></i><b>11.2.2</b> Медиана</a></li>
+<li class="chapter" data-level="11.2.3" data-path="vdesc.html"><a href="vdesc.html#trim"><i class="fa fa-check"></i><b>11.2.3</b> Усеченное среднее (trimmed mean)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="vdesc.html"><a href="vdesc.html#mode"><i class="fa fa-check"></i><b>11.2.4</b> Мода</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="vdesc.html"><a href="vdesc.html#vary"><i class="fa fa-check"></i><b>11.3</b> Меры рассеяния</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="vdesc.html"><a href="vdesc.html#размах-range"><i class="fa fa-check"></i><b>11.3.1</b> Размах {range}</a></li>
+<li class="chapter" data-level="11.3.2" data-path="vdesc.html"><a href="vdesc.html#var"><i class="fa fa-check"></i><b>11.3.2</b> Дисперсия</a></li>
+<li class="chapter" data-level="11.3.3" data-path="vdesc.html"><a href="vdesc.html#sd"><i class="fa fa-check"></i><b>11.3.3</b> Стандартное отклонение</a></li>
+<li class="chapter" data-level="11.3.4" data-path="vdesc.html"><a href="vdesc.html#mad"><i class="fa fa-check"></i><b>11.3.4</b> Медианное абсолютное отклонение</a></li>
+<li class="chapter" data-level="11.3.5" data-path="vdesc.html"><a href="vdesc.html#iqr"><i class="fa fa-check"></i><b>11.3.5</b> Межквартильный размах</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="vdesc.html"><a href="vdesc.html#skku"><i class="fa fa-check"></i><b>11.4</b> Ассиметрия и эксцесс</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="vdesc.html"><a href="vdesc.html#skew"><i class="fa fa-check"></i><b>11.4.1</b> Ассиметрия</a></li>
+<li class="chapter" data-level="11.4.2" data-path="vdesc.html"><a href="vdesc.html#kurtosis"><i class="fa fa-check"></i><b>11.4.2</b> Эксцесс</a></li>
+<li class="chapter" data-level="11.4.3" data-path="vdesc.html"><a href="vdesc.html#skewR"><i class="fa fa-check"></i><b>11.4.3</b> Ассиметрия и эксцесс в R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="vdesc.html"><a href="vdesc.html#summary"><i class="fa fa-check"></i><b>11.5</b> А теперь все вместе!</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="vdesc.html"><a href="vdesc.html#datasaurus"><i class="fa fa-check"></i><b>11.5.1</b> Описательных статистик недостаточно</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="r-vis.html"><a href="r-vis.html"><i class="fa fa-check"></i><b>12</b> Визуализация в R</a><ul>
+<li class="chapter" data-level="12.1" data-path="r-vis.html"><a href="r-vis.html#base_vis"><i class="fa fa-check"></i><b>12.1</b> Базовые функции для графики</a></li>
+<li class="chapter" data-level="12.2" data-path="r-vis.html"><a href="r-vis.html#grammar_of_graphics"><i class="fa fa-check"></i><b>12.2</b> История грамматики графики</a></li>
+<li class="chapter" data-level="12.3" data-path="r-vis.html"><a href="r-vis.html#gg_base"><i class="fa fa-check"></i><b>12.3</b> Основы грамматики графики</a></li>
+<li class="chapter" data-level="12.4" data-path="r-vis.html"><a href="r-vis.html#gg_0"><i class="fa fa-check"></i><b>12.4</b> Пример №0: пайчарт с распределение по полу</a></li>
+<li class="chapter" data-level="12.5" data-path="r-vis.html"><a href="r-vis.html#gg_1"><i class="fa fa-check"></i><b>12.5</b> Пример №1: Education and IQ meta-analysis</a></li>
+<li class="chapter" data-level="12.6" data-path="r-vis.html"><a href="r-vis.html#gg_ext"><i class="fa fa-check"></i><b>12.6</b> Расширения <code>ggplot2</code></a></li>
+<li class="chapter" data-level="12.7" data-path="r-vis.html"><a href="r-vis.html#vis_dynamic"><i class="fa fa-check"></i><b>12.7</b> Динамические визуализации в R</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="r-vis.html"><a href="r-vis.html#html_w"><i class="fa fa-check"></i><b>12.7.1</b> Интерфейс для JavaScript фреймворков: пакет <code>htmlwidgets</code></a></li>
+<li class="chapter" data-level="12.7.2" data-path="r-vis.html"><a href="r-vis.html#plotly"><i class="fa fa-check"></i><b>12.7.2</b> Динамические визуализации в <code>plotly</code></a></li>
+<li class="chapter" data-level="12.7.3" data-path="r-vis.html"><a href="r-vis.html#html_other"><i class="fa fa-check"></i><b>12.7.3</b> Другие пакеты для динамической визуализации</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="infer-stats.html"><a href="infer-stats.html"><i class="fa fa-check"></i><b>13</b> Статистика вывода</a><ul>
+<li class="chapter" data-level="13.1" data-path="infer-stats.html"><a href="infer-stats.html#infer_intro"><i class="fa fa-check"></i><b>13.1</b> Введение в статистику вывода</a></li>
+<li class="chapter" data-level="13.2" data-path="infer-stats.html"><a href="infer-stats.html#estimates"><i class="fa fa-check"></i><b>13.2</b> Оценки</a></li>
+<li class="chapter" data-level="13.3" data-path="infer-stats.html"><a href="infer-stats.html#распределения"><i class="fa fa-check"></i><b>13.3</b> Распределения</a></li>
+<li class="chapter" data-level="13.4" data-path="infer-stats.html"><a href="infer-stats.html#sample_estimate"><i class="fa fa-check"></i><b>13.4</b> Точечные оценки</a></li>
+<li class="chapter" data-level="13.5" data-path="infer-stats.html"><a href="infer-stats.html#interval_estimate"><i class="fa fa-check"></i><b>13.5</b> Интервальные оценки</a></li>
+<li class="chapter" data-level="13.6" data-path="infer-stats.html"><a href="infer-stats.html#sample_dist"><i class="fa fa-check"></i><b>13.6</b> Выборочное распределение</a></li>
+<li class="chapter" data-level="13.7" data-path="infer-stats.html"><a href="infer-stats.html#clt"><i class="fa fa-check"></i><b>13.7</b> Центральная предельная теорема</a></li>
+<li class="chapter" data-level="13.8" data-path="infer-stats.html"><a href="infer-stats.html#ci_build"><i class="fa fa-check"></i><b>13.8</b> Строим доверительный интервал</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="тестирование-значимости-нулевой-гипотезы-nhst.html"><a href="тестирование-значимости-нулевой-гипотезы-nhst.html"><i class="fa fa-check"></i><b>14</b> Тестирование значимости нулевой гипотезы (#nhst)</a></li>
+<li class="chapter" data-level="15" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>15</b> Задания</a><ul>
+<li class="chapter" data-level="15.1" data-path="tasks.html"><a href="tasks.html#task_begin"><i class="fa fa-check"></i><b>15.1</b> Начало работы в R</a></li>
+<li class="chapter" data-level="15.2" data-path="tasks.html"><a href="tasks.html#task_new_vecs"><i class="fa fa-check"></i><b>15.2</b> Создание векторов</a></li>
+<li class="chapter" data-level="15.3" data-path="tasks.html"><a href="tasks.html#task_coer"><i class="fa fa-check"></i><b>15.3</b> Приведение типов</a></li>
+<li class="chapter" data-level="15.4" data-path="tasks.html"><a href="tasks.html#task_vec_ion"><i class="fa fa-check"></i><b>15.4</b> Векторизация</a></li>
+<li class="chapter" data-level="15.5" data-path="tasks.html"><a href="tasks.html#task_vec_ind"><i class="fa fa-check"></i><b>15.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="15.6" data-path="tasks.html"><a href="tasks.html#task_na"><i class="fa fa-check"></i><b>15.6</b> Работа с пропущенными значениями</a></li>
+<li class="chapter" data-level="15.7" data-path="tasks.html"><a href="tasks.html#task_matrix"><i class="fa fa-check"></i><b>15.7</b> Матрицы</a></li>
+<li class="chapter" data-level="15.8" data-path="tasks.html"><a href="tasks.html#task_list"><i class="fa fa-check"></i><b>15.8</b> Списки</a></li>
+<li class="chapter" data-level="15.9" data-path="tasks.html"><a href="tasks.html#task_df"><i class="fa fa-check"></i><b>15.9</b> Датафрейм</a></li>
+<li class="chapter" data-level="15.10" data-path="tasks.html"><a href="tasks.html#task_if"><i class="fa fa-check"></i><b>15.10</b> Условные конструкции</a></li>
+<li class="chapter" data-level="15.11" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>15.11</b> Создание функций</a></li>
+<li class="chapter" data-level="15.12" data-path="tasks.html"><a href="tasks.html#task_apply"><i class="fa fa-check"></i><b>15.12</b> Семейство функций apply()</a></li>
+<li class="chapter" data-level="15.13" data-path="tasks.html"><a href="tasks.html#task_pipe"><i class="fa fa-check"></i><b>15.13</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="15.14" data-path="tasks.html"><a href="tasks.html#task_filt"><i class="fa fa-check"></i><b>15.14</b> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="15.15" data-path="tasks.html"><a href="tasks.html#task_select"><i class="fa fa-check"></i><b>15.15</b> Выбор столбцов: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="15.16" data-path="tasks.html"><a href="tasks.html#task_arr"><i class="fa fa-check"></i><b>15.16</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="15.17" data-path="tasks.html"><a href="tasks.html#task_dist"><i class="fa fa-check"></i><b>15.17</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="15.18" data-path="tasks.html"><a href="tasks.html#task_mutate"><i class="fa fa-check"></i><b>15.18</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="15.19" data-path="tasks.html"><a href="tasks.html#task_group_by"><i class="fa fa-check"></i><b>15.19</b> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="15.20" data-path="tasks.html"><a href="tasks.html#task_across"><i class="fa fa-check"></i><b>15.20</b> Операции с несколькими колонками: <code>across()</code></a></li>
+<li class="chapter" data-level="15.21" data-path="tasks.html"><a href="tasks.html#соединение-датафреймов-_join-task_join"><i class="fa fa-check"></i><b>15.21</b> Соединение датафреймов: *_join {#task_join}</a></li>
+<li class="chapter" data-level="15.22" data-path="tasks.html"><a href="tasks.html#task_join"><i class="fa fa-check"></i><b>15.22</b> Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>16</b> Решения заданий</a><ul>
+<li class="chapter" data-level="16.1" data-path="solutions.html"><a href="solutions.html#solution_begin"><i class="fa fa-check"></i><b>16.1</b> Начало работы в R</a></li>
+<li class="chapter" data-level="16.2" data-path="solutions.html"><a href="solutions.html#solution_new_vecs"><i class="fa fa-check"></i><b>16.2</b> Создание векторов</a></li>
+<li class="chapter" data-level="16.3" data-path="solutions.html"><a href="solutions.html#solution_coer"><i class="fa fa-check"></i><b>16.3</b> Приведение типов</a></li>
+<li class="chapter" data-level="16.4" data-path="solutions.html"><a href="solutions.html#solution_vec_ion"><i class="fa fa-check"></i><b>16.4</b> Векторизация</a></li>
+<li class="chapter" data-level="16.5" data-path="solutions.html"><a href="solutions.html#solution_vec_ind"><i class="fa fa-check"></i><b>16.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="16.6" data-path="solutions.html"><a href="solutions.html#solution_na"><i class="fa fa-check"></i><b>16.6</b> Работа с пропущенными значениями</a></li>
+<li class="chapter" data-level="16.7" data-path="solutions.html"><a href="solutions.html#solution_matrix"><i class="fa fa-check"></i><b>16.7</b> Матрицы</a></li>
+<li class="chapter" data-level="16.8" data-path="solutions.html"><a href="solutions.html#solution_list"><i class="fa fa-check"></i><b>16.8</b> Списки</a></li>
+<li class="chapter" data-level="16.9" data-path="solutions.html"><a href="solutions.html#solution_df"><i class="fa fa-check"></i><b>16.9</b> Датафрейм</a></li>
+<li class="chapter" data-level="16.10" data-path="solutions.html"><a href="solutions.html#solution_if"><i class="fa fa-check"></i><b>16.10</b> Условные конструкции</a></li>
+<li class="chapter" data-level="16.11" data-path="solutions.html"><a href="solutions.html#solution_function"><i class="fa fa-check"></i><b>16.11</b> Создание функций</a></li>
+<li class="chapter" data-level="16.12" data-path="solutions.html"><a href="solutions.html#solution_apply"><i class="fa fa-check"></i><b>16.12</b> Семейство функций apply()</a></li>
+<li class="chapter" data-level="16.13" data-path="solutions.html"><a href="solutions.html#solution_pipe"><i class="fa fa-check"></i><b>16.13</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="16.14" data-path="solutions.html"><a href="solutions.html#solution_filt"><i class="fa fa-check"></i><b>16.14</b> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="16.15" data-path="solutions.html"><a href="solutions.html#solution_select"><i class="fa fa-check"></i><b>16.15</b> Выбор столбцов: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="16.16" data-path="solutions.html"><a href="solutions.html#solution_arr"><i class="fa fa-check"></i><b>16.16</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="16.17" data-path="solutions.html"><a href="solutions.html#solution_dist"><i class="fa fa-check"></i><b>16.17</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="16.18" data-path="solutions.html"><a href="solutions.html#solution_mutate"><i class="fa fa-check"></i><b>16.18</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="16.19" data-path="solutions.html"><a href="solutions.html#solution_group_by"><i class="fa fa-check"></i><b>16.19</b> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="16.20" data-path="solutions.html"><a href="solutions.html#solution_across"><i class="fa fa-check"></i><b>16.20</b> Операции с несколькими колонками: <code>across()</code></a></li>
+<li class="chapter" data-level="16.21" data-path="solutions.html"><a href="solutions.html#соединение-датафреймов-_join-solution_join"><i class="fa fa-check"></i><b>16.21</b> Соединение датафреймов: *_join {#solution_join}</a></li>
+<li class="chapter" data-level="16.22" data-path="solutions.html"><a href="solutions.html#solution_join"><i class="fa fa-check"></i><b>16.22</b> Tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ссылки-на-литературу.html"><a href="ссылки-на-литературу.html"><i class="fa fa-check"></i>Ссылки на литературу</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Анализ данных и статистика в R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="infer_stats" class="section level1">
+<h1><span class="header-section-number">13</span> Статистика вывода</h1>
+<div id="infer_intro" class="section level2">
+<h2><span class="header-section-number">13.1</span> Введение в статистику вывода</h2>
+<p><strong>Статистика вывода</strong> (inferential statistics) - это основной раздел статистики, связанный уже не с описанием и суммированием имеющихся данных (<strong>описательная статистика</strong>), а с попытками сделать вывод о <strong>генеральной совокупности</strong> (population) на основе имеющихся данных по <strong>выборке</strong>. Короче говоря, статистика вывода - это о том, как выйти за пределы наших данных. Это именно то, зачем мы проводим исследования - мы не можем собрать информацию обо всей генеральной совокупности, но по тому, что имеем (т.е. по нашей выборке), можем попытаться как-то оценить <strong>параметры</strong> генеральной совокупности.</p>
+<p>Итак, еще раз: генеральной совокупности - параметры (<strong>P</strong>opulation - <strong>P</strong>arameters), а у выборки - статистики (<strong>S</strong>ample - <strong>S</strong>tatistics). Параметры обычно обозначаются греческими буквами: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> (или большими латинскими: <span class="math inline">\(M\)</span>, <span class="math inline">\(S\)</span> ), а статистики - соответствующими латинскими: <span class="math inline">\(m\)</span>, <span class="math inline">\(s\)</span>.</p>
+</div>
+<div id="estimates" class="section level2">
+<h2><span class="header-section-number">13.2</span> Оценки</h2>
+<p>Самая основа статистики вывода - это <strong>оценки</strong>. Как мы уже знаем, у распределений есть определенные параметры, которые описывают данное распределение.</p>
+<p>Возьмем для примера нормальное распределение.</p>
+<p><span class="math display">\[P(x) = \frac{e^{-(x - \mu)^{2}/(2\sigma^{2}) }} {\sigma\sqrt{2\pi}}\]</span></p>
+<p>Например, для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>. Если же <span class="math inline">\(\mu = 0\)</span>, а <span class="math inline">\(\sigma = 1\)</span>, то такое нормальное распределение называется стандартным.</p>
+<div class="figure">
+<img src="images/normalstandard.jpg" width="400" />
+
+</div>
+<p>Наша цель - как-нибудь оценить эти параметры, потому что обычно мы их не знаем. Какой средний рост в популяции? Какого его стандартное отклонение? Для этого мы используем разного рода оценки: точечные и интервальные. В качестве оценок параметров часто используются статистики по выборке. Вот здесь легко запутаться, поэтому покажу картинку:</p>
+<div class="figure">
+<img src="images/InferentialStatistics.GIF" width="400" />
+
+</div>
+<p>Давайте познакомимся поближе с распределениями.</p>
+</div>
+<div id="распределения" class="section level2">
+<h2><span class="header-section-number">13.3</span> Распределения</h2>
+<p>Распределения разделяются на дискретные и непрерывные. По большей части нас будут интересовать именно непрерывные. Хотя для полного их понимания нужен матан (да, именно тот, который calculus), непрерывные распределения довольно интуитивно понятны.</p>
+<p>Для каждого имеющегося в R распределения есть свой набор из четырех функций.</p>
+<div class="figure">
+<img src="images/rdists.PNG" width="400" />
+
+</div>
+<p>Скоро мы разберем их все.</p>
+<p>Возьмем, например, нормальное распределение, про которое мы уже немного говорили (функции <code>rnorm()</code>, <code>dnorm()</code>, <code>pnorm()</code>, <code>qnorm()</code>).</p>
+<p>То, что Вы видите на картинке - это так называемая <strong>функция плотности вероятности (probability density function).</strong> Это аналог probability mass function для дискретных величин - распределение вероятности того, что случайная величина имеет данное значение. Довольно очевидно, да? Тогда почему аналогичная штука для непрерывных распределений называется, черт возьми, по-другому?</p>
+<p>Дело в том, что вероятность получения конкретного значения для непрерывных величин равна нулю. Это немного необычный момент, но тем не менее: если распределение непрерывно, то получить точно 0,000000000000 с бесконечным количеством нулей после запятой невозможно, даже если среднее распределения равно нулю. Тем не менее, мы можем посчитать вероятность того, что случайное значение окажется в определенном промежутке. Чтобы посчитать эту вероятность, надо посчитать площадь соответствующего участка. Соответсвенно, площадь под всей функцией плотности вероятности равна 1.</p>
+<p>Конечно, функцию плотности можно получить в R - это функции <code>d*()</code>, где \* означает соответствующее распределение. Например, функция <code>dnorm()</code>.</p>
+<p>Функция <code>dnorm()</code> имеет следующие основные параметры: <code>x =</code> - вектор принимаемых значений, среднее и стандартное отклонение (<code>mean =</code> и <code>sd =</code>). В качестве параметров по умолчанию используются 0 для среднего и 1 для стандартного отклонения, то есть стандартное нормальное распределение.</p>
+<p>Давайте посмотрим, как работает эта функция, визуализировав результат ее выполнения на вектор от -3 до 3 с небольшим шагом.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vec &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>,<span class="dv">3</span>, <span class="fl">0.1</span>)
+<span class="kw">plot</span>(vec,<span class="kw">dnorm</span>(vec))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-357-1.png" width="672" /></p>
+<p>Вот мы и получили то, что называем стандартным нормальным распределением, точнее, функцию плотности веротности стандартного нормального распределения.</p>
+<p>Давайте теперь возьмем среднее 100 и стандартное отклонение 15 --- нормы для шкалы IQ:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iq &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">50</span>,<span class="dv">150</span>, <span class="fl">0.1</span>)
+<span class="kw">plot</span>(iq, <span class="kw">dnorm</span>(iq, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-358-1.png" width="672" /></p>
+<blockquote>
+<p>Шкала IQ --- это вообще очень удобная шкала. Поскольку в измерениях интеллекта нет никаких объективных метрик (сантиметров, градусов, килограммов), с которыми его можно было бы сравнить, то единственная возможность дать какую-то оценку величины интеллекта у человека --- сравнить его с интеллектом другого человека, например, по количеству решенных заданий за определенное время. Поэтому шкала IQ так сконструирована, чтобы среднее значение количество решенных заданий обозначалось за 100, а стандартное отклонение за 15. Поэтому по баллу IQ (если используется хороший тест, разумеется) можно понять процент людей, которых респондент опережает по интеллекту, по крайней мере, сравнивая с выборкой, на которой был стандартизирован тест. Примерно так же устроены и другие психологические шкалы.</p>
+</blockquote>
+<p>Следующая функция это <strong>функция накопленной плотности распределения (cumulative distribution function; cdf)</strong>.<a href="#fn32" class="footnoteRef" id="fnref32"><sup>32</sup></a> Это функция очень важная, потому что именно на ней основано тестирование уровня значимости нулевой гипотезы, которым мы будем заниматься в дальнейшем. Она означает вероятность того, что полученное случайное значение из распределения будет меньше искомого или равно ему. Для этого используется функция <code>pnorm()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(iq, <span class="kw">pnorm</span>(iq, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-359-1.png" width="672" /></p>
+<p>Какова вероятность того, что полученное случайное значение IQ будет меньше или равно 100?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>)</code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<p>А 130?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pnorm</span>(<span class="dv">130</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>)</code></pre></div>
+<pre><code>## [1] 0.9772499</code></pre>
+<p>Следующая функция --- это <strong>квантильная функция (quantile function)</strong>, или <strong>обратная функция накопленной плотности распределения (inverse cumulative distribution function)</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.01</span>)
+<span class="kw">plot</span>(prob, <span class="kw">qnorm</span>(prob, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>))</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-362-1.png" width="672" /></p>
+<p>Обратная функция означает, что если мы применим сначала одну, а потом другую, то (если не берем особо крайних значений) на выходе получим исходные числа.<a href="#fn33" class="footnoteRef" id="fnref33"><sup>33</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(<span class="kw">pnorm</span>(<span class="op">-</span><span class="dv">4</span><span class="op">:</span><span class="dv">4</span>))</code></pre></div>
+<pre><code>## [1] -4 -3 -2 -1  0  1  2  3  4</code></pre>
+<p>Ну и последняя важная функция - это <code>rnorm()</code> - просто генерирует выборку значений из данного распределения заданной длины <code>n =</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">42</span>)
+samp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>)
+samp</code></pre></div>
+<pre><code>##   [1] 120.56438  91.52953 105.44693 109.49294 106.06402  98.40813 122.67283
+##   [8]  98.58011 130.27636  99.05929 119.57304 134.29968  79.16709  95.81817
+##  [15]  98.00018 109.53926  95.73621  60.15317  63.39300 119.80170  95.40042
+##  [22]  73.28037  97.42124 118.22012 128.42790  93.54296  96.14096  73.55255
+##  [29] 106.90146  90.40008 106.83175 110.57256 115.52655  90.86610 107.57433
+##  [36]  74.24487  88.23311  87.23639  63.78689 100.54184 103.08998  94.58414
+##  [43] 111.37245  89.09943  79.47578 106.49227  87.82910 121.66152  93.52831
+##  [50] 109.83472 104.82888  88.24242 123.63591 109.64349 101.34641 104.14826
+##  [57] 110.18933 101.34749  55.10365 104.27324  94.49148 102.77846 108.72736
+##  [64] 120.99605  89.09062 119.53814 105.03772 115.57759 113.81093 110.81317
+##  [71]  84.35322  98.64720 109.35277  85.69715  91.85757 108.71495 111.52268
+##  [78] 106.95651  86.71336  83.50329 122.69061 103.86882 101.32660  98.18655
+##  [85]  82.08507 109.17995  96.74290  97.25865 114.00019 112.32660 120.88175
+##  [92]  92.85739 109.75523 120.86666  83.33817  87.08811  83.02392  78.11179
+##  [99] 101.19974 109.79807</code></pre>
+<blockquote>
+<p><code>set.seed()</code> - это функция, которая позволяет получить нам воспроизводимые результаты при использовании генератора случайных чисел. Короче говоря, если все мы поставим <code>set.seed(42)</code>,<a href="#fn34" class="footnoteRef" id="fnref34"><sup>34</sup></a> то одна и та же строчка выдаст нам один и тот же результат на разных компьютерах. Как это вообще возможно, это же случайные числа? Дело в том, что... нет. Они &quot;псевдо-случайные&quot;. На самом деле, используются определенные алгоритмы, чтобы генерировать числа, которые выглядят как случайные. Например, можно брать цифры после запятой в числе пи после, например, 42го знака. Реальные алгоритмы создания псевдо-случайных чисел, конечно, гораздо сложнее, но суть примерно такая. Насколько подобные числа действительно получаются случайными - отдельный сложный математический вопрос. Но для нас этого вполне достаточно.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(samp, <span class="dt">breaks =</span> <span class="dv">10</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-365-1.png" width="672" /></p>
+</div>
+<div id="sample_estimate" class="section level2">
+<h2><span class="header-section-number">13.4</span> Точечные оценки</h2>
+<p>Представим, что только что сгенерированные данные с помощью <code>rnorm()</code> - это и есть наша выборка. Перед нами стоит задача оценить IQ популяции по этой выборке. Ну что, давайте попробуем оценить среднее. Здесь все просто и очень очевидно - самой лучшей оценкой среднего в генеральной совокупности будет среднее по выборке.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(samp)</code></pre></div>
+<pre><code>## [1] 100.4877</code></pre>
+<p>Конечно, не совсем точно, но лучше оценки не придумаешь. Что есть, то есть. Чем больше выборка, тем ближе мы будем к популяционному среднему.</p>
+<p>А что с оценкой стандартного отклонения? Давайте воспользуемся нашей предыдущей формулой.</p>
+<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">sum</span>((samp <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(samp))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">length</span>(samp))</code></pre></div>
+<pre><code>## [1] 15.54206</code></pre>
+<p>В данном случае мы несколько промахнулись вверх, но обычно оценка по этой формуле дает небольшое <strong>смещение</strong> <em>(bias)</em> в меньшую сторону. Само по себе это кажется странным, и это нормально. Но этому есть всякие серьезные математические доказательства. Кроме того, есть множество всяких демонстраций, например, <a href="https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/more-standard-deviation/v/simulation-showing-bias-in-sample-variance">от Академии Хана</a>.</p>
+<blockquote>
+<p>Одно из простых объяснений такое: поскольку мы оцениваем стандартное отклонение на основе оценки среднего, среднеквадратичные расстояния счиаются не от реального среднего в генеральной совокупности, а от среднего по выборке, которое немного смещено в ту или иную сторону. Представьте, что так получилось, что в нашей выборке оно оказалось сильно смещено и выборочное среднее получилось около 90 (такое бывает). Это значит, что получилось много довольно низких значений около этого 90, а высчитываться среднеквадратичные разницы будут не от среднего 100 (которое мы не знаем), а от этого 90. Поэтому стандартное отклонение получится сильно меньше, чем должно было получиться.</p>
+</blockquote>
+<p>Короче говоря, чтобы получить <strong>несмещенную (unbiased) оценку</strong> стандартного отклонения или дисперсии, то нам нужно делить не на <span class="math inline">\(n\)</span>, а на <span class="math inline">\(n-1\)</span>.</p>
+<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n-1}\]</span></p>
+<p>Заметьте, что именно так делает дефолтная функция <code>sd()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">sum</span>((samp <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(samp))<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span>(<span class="kw">length</span>(samp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<pre><code>## [1] 15.62035</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(samp)</code></pre></div>
+<pre><code>## [1] 15.62035</code></pre>
+<p>Это называется поправкой Бесселя, и она настолько распространена, что именно скорректированное стандартное отклонение обычно называют стандартным отклонением. Поэтому в дальнейшем будет использоваться именно эта формула или же просто функция <code>sd()</code>.</p>
+<p>Таким образом, у оценки есть два критерия качества - ее точность и ее несмещенность.</p>
+<p>Тем не менее, точечные оценки - это еще не все. Мы еще хотим оценить, в каком интервале находится тот или иной параметр генеральной совокупности.</p>
+</div>
+<div id="interval_estimate" class="section level2">
+<h2><span class="header-section-number">13.5</span> Интервальные оценки</h2>
+<p>Самая распространенная интервальная оценка называется <strong>доверительным интервалом (confidence interval)</strong>. Цель доверительного интервала - &quot;покрыть&quot; параметр генеральной совокупности с определенной степенью уверенности.</p>
+<p>Например, 95% доверительный интервал или просто <span class="math inline">\(CI95\%\)</span> означает, что примерно в 95% случаев подсчитанный на выборках интервал будет ловить значение параметра в популяции. Например, построив <span class="math inline">\(CI95\%\)</span> по нашей сгенерированной выборке, мы хотим чтобы примерно в 95% случаев выборок, построенных таким способом, этот интервал ловил истинное среднее (в данном случае --- 100).</p>
+<p>Для того, чтобы научиться строить такие интервалы, нам нужно разобраться с <strong>выборочным распределение (sampling distribution).</strong></p>
+</div>
+<div id="sample_dist" class="section level2">
+<h2><span class="header-section-number">13.6</span> Выборочное распределение</h2>
+<p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">100</span>, <span class="dv">1000</span>)
+samplemeans &lt;-<span class="st"> </span><span class="kw">sapply</span>(v, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="kw">rnorm</span>(x, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>)))</code></pre></div>
+<p>Каждая выборка состоит из сотни &quot;испытуемых&quot;, всего таких выборок 1000. По каждой мы посчитали среднее. Как распределены эти средние?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(samplemeans, <span class="dt">breaks =</span> <span class="dv">30</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-370-1.png" width="672" /></p>
+<p>Вот это распределение и есть выборочное распределение средних. Точнее, было бы, если бы мы взяли не 1000 выборок, а бесконечное количество выборок. Так что у нас всего лишь апроксимация. При этом мы могли взять другие статистики, не средние выборок, а, например, медианы или стандартные отклонения выборок. Тогда это были бы выборочные распределения медиан и выборочные распределения стандартных отклонений. Но именно выборочное распределение средних обладает уникальными математическими свойствами, про которые мы скоро узнаем.</p>
+<p>Среднее выборочного распределения средних будет близко к популяционному среднему:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(samplemeans)</code></pre></div>
+<pre><code>## [1] 99.93772</code></pre>
+<p>А вот чему будет равно стандартное отклонение средних?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(samplemeans)</code></pre></div>
+<pre><code>## [1] 1.501392</code></pre>
+<p>Очень похоже на стандартное отклонение IQ, но в 10 раз меньше. В действительности, стандартное отклонение выборочного распределения средних равно стандартному отклонению в генеральной совокупности, деленному на корень из размера выборки.</p>
+<p><span class="math display">\[\sigma_{\overline{x}}= \frac{\sigma} {\sqrt{n}}\]</span> Как раз это мы и получили: размер нашей выборки - 100, а корень из 100 равен 10.</p>
+<p>Стандартное отклонение выборочного распределения средних (ох, йо) называется еще <strong>стандартной ошибкой или standard error of the mean (s.e.m.).</strong> Именно стандартную ошибку обычно используют на графиках в качестве error bars. Теперь вы знаете как ее посчитать!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sem &lt;-<span class="st"> </span><span class="dv">15</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">length</span>(samp))
+sem</code></pre></div>
+<pre><code>## [1] 1.5</code></pre>
+<p>Ну а если мы не знаем стандартного отклонения в генеральной совокупности (что обычно и бывает в жизни), то можем оценить стандартную ошибку среднего с помощью оценки стандартного отклонения, посчитанного на выборке:</p>
+<p><span class="math display">\[s_{\overline{x}}= \frac{s} {\sqrt{n}}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(samp)<span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">length</span>(samp))</code></pre></div>
+<pre><code>## [1] 1.562035</code></pre>
+<p>Это означает, что стандартная ошибка тем меньше, чем больше выборка. И это довольно логично: чем больше у нас размер выборок, тем меньше будет расброс их средних.</p>
+</div>
+<div id="clt" class="section level2">
+<h2><span class="header-section-number">13.7</span> Центральная предельная теорема</h2>
+<p>Давайте теперь сделаем много выборок не из нормального, а из логнормального распределения. Что-то похожее представляет собой распределение времени реакции на многие задачи (особенно связанные с выбором и когда нужно подумать перед нажатием кнопки). Одна выборка будет распределена примерно так:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rlnorm</span>(<span class="dv">10000</span>), <span class="dt">breaks =</span> <span class="dv">100</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-375-1.png" width="672" /></p>
+<p>Распределение сильно ассиметрично, но его форма примерно понятна.</p>
+<p>А как будут распределены средние многих выборок, взятых из логнормального распределения? Хочется сказать, что так же, но нет!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">sapply</span>(<span class="kw">rep</span>(<span class="dv">10000</span>,<span class="dv">1000</span>),<span class="cf">function</span>(x)<span class="kw">mean</span>(<span class="kw">rlnorm</span>(x))), <span class="dt">breaks =</span> <span class="dv">100</span>)</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-376-1.png" width="672" /></p>
+<p>Удивительно, но средние по выборкам из логнормального распределения будут выглядеть почти нормально! Более того, для других распределений это тоже будет верно: <strong>согласно центральной предельной теореме <em>(ЦПТ, central limit theorem)</em>, какой бы ни была форма распределения в генеральной совокупности, выборочное распределение средних будет стремиться к нормальному. При этом чем больше размер выборки, тем ближе выборочное распределение средних будет к нормальному.</strong> Это очень важная фишка, на которой основаны многие статистические тесты.</p>
+<div class="figure">
+<img src="images/IllustrationCentralTheorem.png" width="400" />
+
+</div>
+<p>Не верите? Попробуйте сами! Можете поиграться с разными распределениями с помощью кода (можете посмотреть другие распределения в хэлпе: <code>help(&quot;distributions&quot;)</code> ).</p>
+<p>Можете поиграться с интерактивной <a href="https://gallery.shinyapps.io/CLT_mean/">Shiny-демонстрацией магии ЦПТ</a>. Я очень и очень рекомендую поиграться с ней. Попробуйте разные значения, посмотрите что будет.</p>
+<p>Как только наиграетесь, то сразу станет понятно, почему именно нормальное распределение занимает такое важное место в статистике.</p>
+<blockquote>
+<p>Если выходить за рамки выборочного распределения средних, то центральная предельная теорема говорит нам о том, что сумма слабо зависящих случайных величин, имеющих примерно одинаковое влияние, имеет распределение близкое к нормальному. Например, рост является следствием большого количества генетических и средовых факторов, поэтому он распределен примерно нормально. Однако это нормальное распределение портят такие факторы как пол --- он вносит очень сильный вклад в рост, поэтому распределение становится немного &quot;двугорбым&quot;.</p>
+</blockquote>
+</div>
+<div id="ci_build" class="section level2">
+<h2><span class="header-section-number">13.8</span> Строим доверительный интервал</h2>
+<p>Теперь мы знаем достаточно, чтобы построить доверительный интервал своими руками на основе стандартной ошибки. Мы построим самый стандартный вариант - 95% доверительный интервал.</p>
+<p>Давайте еще раз посмотрим на нормальное распределение.</p>
+<div class="figure">
+<img src="images/normalstandard.jpg" width="400" />
+
+</div>
+<p>Мы хотим поймать симметрично 95% от площади под кривой. Для этого нам нужно отбросить по 2.5% с обоих сторон. Эти 2.5% соответствуют примерно двум стандартным отклонениям от среднего. Если быть точнее, то 1.96. Если быть еще точнее:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</code></pre></div>
+<pre><code>## [1] 1.959964</code></pre>
+<p>Почему 0.975? Потому что мы смотрим квантильную функцию по верхней границе: отсекаем правые 0.025:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qnorm</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.95</span>)<span class="op">/</span><span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 1.959964</code></pre>
+<p>Давайте сохраним это число. Назовем его <code>zcr</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zcr &lt;-<span class="st"> </span><span class="kw">qnorm</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.95</span>)<span class="op">/</span><span class="dv">2</span>)</code></pre></div>
+<p>Это количество стандартных отклонений от среднего в нормальном распределении, которое включает в себя ровно 95% площади нормального распределения. Теперь давайте посчитаем стандартную ошибку. Здесь мы знаем стандартное отклонение в генеральной совокупности (это 15), его поделим на корень из размера выборки:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sem &lt;-<span class="st"> </span><span class="dv">15</span><span class="op">/</span><span class="kw">sqrt</span>(<span class="kw">length</span>(samp))</code></pre></div>
+<p>Чтобы посчитать нижнюю и верхнюю границы доверительного интервала, нам нужно вычесть и прибавить соответственно нужное количество стандартных ошибок:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(samp) <span class="op">-</span><span class="st"> </span>sem<span class="op">*</span>zcr <span class="co">#нижняя граница</span></code></pre></div>
+<pre><code>## [1] 97.54778</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(samp) <span class="op">+</span><span class="st"> </span>sem<span class="op">*</span>zcr <span class="co">#верхняя граница</span></code></pre></div>
+<pre><code>## [1] 103.4277</code></pre>
+<p>Давайте теперь нарисуем сотню доверительных интервалов с помощью <code>ggplot2</code>! Цветом обозначим интервалы, которые не поймали истинное значение параметра в центральной совокупности.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)
+sample_size &lt;-<span class="st"> </span><span class="dv">100</span>
+<span class="kw">set.seed</span>(<span class="dv">42</span>)
+ci_simulations &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">m =</span> <span class="kw">replicate</span>(sample_size, <span class="kw">mean</span>(<span class="kw">rnorm</span>(sample_size, <span class="dt">mean =</span> <span class="dv">100</span>, <span class="dt">sd =</span> <span class="dv">15</span>))),
+  <span class="dt">se =</span> <span class="dv">15</span><span class="op">/</span><span class="kw">sqrt</span>(sample_size),
+  <span class="dt">lower =</span> m <span class="op">-</span><span class="st"> </span>se<span class="op">*</span>zcr,
+  <span class="dt">higher =</span> m <span class="op">+</span><span class="st"> </span>se<span class="op">*</span>zcr,
+  <span class="dt">parameter_inside =</span> lower<span class="op">&lt;</span><span class="dv">100</span> <span class="op">&amp;</span><span class="st"> </span>higher<span class="op">&gt;</span><span class="dv">100</span>
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">graph &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> ci_simulations, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span>sample_size,<span class="dt">y =</span> m)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lower,<span class="dt">ymax =</span> higher,<span class="dt">colour =</span> parameter_inside))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">100</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()
+graph</code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-383-1.png" width="672" /></p>
+<p>Примерно 5% не ловят 100 в 95% доверительный интервал! Примерно это и означает доверительный интервал: где-то в 95% он ловит параметр в генеральной совокупности, а в 5% - нет.</p>
+<blockquote>
+<p>Понятие доверительного интервала вызывает кучу недопонимания и ошибок. Очень многие его интерпретируют, например, как интервал, включающий в себя 95% значений популяции, но это неправильно.</p>
+</blockquote>
+<p>Еще я советую посмотреть вот эту визуализацию:</p>
+<p><a href="http://rpsychologist.com/d3/CI/">Доверительные интервалы сыпятся как из мешка</a></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="32">
+<li id="fn32"><p>Иногда эта функция называется <em>интегральной функцией вероятности</em>, а иногда просто <em>функцией вероятности.</em> Последний вариант может запутать, потому что часто под функцией вероятности подразумевают функцию плотности вероятности.<a href="infer-stats.html#fnref32">↩</a></p></li>
+<li id="fn33"><p>Если мы возьмем достаточно большие значения, то этот трюк не сработает, что свзязано с тем, что числа дробные числа в компьютерах хранятся с некоторой погрешностью.<a href="infer-stats.html#fnref33">↩</a></p></li>
+<li id="fn34"><p>А почему именно 42? Ну, можно брать любое число, которое Вам нравится. А 42 - это <a href="https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%B2%D0%B5%D1%82_%D0%BD%D0%B0_%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B9_%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8,_%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D0%B8_%D0%B2%D1%81%D0%B5%D0%B3%D0%BE_%D1%82%D0%B0%D0%BA%D0%BE%D0%B3%D0%BE">ответ на главный вопрос жизни, вселенной и всего такого</a><a href="infer-stats.html#fnref34">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-vis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="тестирование-значимости-нулевой-гипотезы-nhst.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Pozdniakov/tidy_stats/edit/master/04-2-infer_stats.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["tidy_stats.pdf", "tidy_stats.epub"],
+"toc": {
+"collapse": "section"
+},
+"self_contained": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
