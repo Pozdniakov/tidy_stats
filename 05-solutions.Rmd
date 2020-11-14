@@ -963,15 +963,6 @@ prime_numbers(200)
 ```
 
 
-```{r}
-library(tidyverse)
-heroes <- read_csv("data/heroes_information.csv",
-                   na = c("-", "-99"))
-powers <- read_csv("data/super_hero_powers.csv")
-```
-
-
-
 ## magrittr::`%>%` {#solution_pipe}
 
 - Перепишите следующие выражения, используя `%>%`:
@@ -1007,6 +998,16 @@ c("Корень из", 2, "равен", sqrt(2))
 
 
 ##Выбор столбцов: `dplyr::select()` {#solution_select}
+
+Для выполнения следующих заданий нам понадобятся датасеты `heroes` и `powers`, которые можно загрузить, используя следующие команды:
+
+```{r, echo = TRUE}
+library(tidyverse)
+heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv",
+                   na = c("-", "-99"))
+powers <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv")
+```
+
 
 - Выберете первые 4 столбца в `powers`.
 
@@ -1053,7 +1054,7 @@ heroes %>%
   filter(Race == "Human" & Gender == "Female") %>%
   slice(1:5)
 ```
-
+ 
 
 ## Сортировка строк: `dplyr::arrange()` {#solution_arr}
 
@@ -1255,4 +1256,126 @@ powers %>%
   pivot_wider(names_from = hero_names,
               values_from = has)
 ```
+
+## Построение графиков в `ggplot2` {#ggplot2_solutions}
+
+- Нарисуйте столбиковую диаграмму (`geom_bar()`), которая будет отражать количество супергероев издателей `"Marvel Comics"`, `"DC Comics"` и всех остальных (отдельным столбиком) из датасета `heroes`.
+
+```{r}
+heroes %>%
+  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+                            Publisher,
+                            "Other publishers")) %>%
+  #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
+  ggplot(aes(x = Publisher)) +
+  geom_bar()
+```
+
+- Добавьте к этой диаграме заливку цветом (`fill =`) в зависимости от распределения `Gender` внутри каждой группы.
+
+```{r}
+heroes %>%
+  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+                            Publisher,
+                            "Other publishers")) %>%
+  #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
+  ggplot(aes(x = Publisher, fill = Gender)) +
+  geom_bar()
+```
+
+- Сделайте так, чтобы каждый столбик был максимальной высоты (`position = "fill"`).
+
+```{r}
+heroes %>%
+  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+                            Publisher,
+                            "Other publishers")) %>%
+  #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
+  ggplot(aes(x = Publisher, fill = Gender)) +
+  geom_bar(position = "fill")
+```
+
+- Финализируйте график, задав ему описания осей (например, функция `labs()`),
+использовав процентную шкалу (`scale_y_continuous(labels = scales::percent)`)   и задав тему `theme_minimal()`.
+
+```{r}
+heroes %>%
+  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+                            Publisher,
+                            "Other publishers")) %>%
+  #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
+  ggplot(aes(x = Publisher, fill = Gender)) +
+  geom_bar(position = "fill") +
+  labs(title = "Распределение супергероев по полу у разных издателей коммиксов",
+       x = "Издатель",
+       y = "Количество супергероев")+
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal()
+```
+
+Создайте диаграмму рассеяния для датасета `heroes`, для которой координаты по оси *x* будут взяты из колонки `Height`, а координаты по оси *y* --- из колонки `Weight`.
+
+```{r}
+heroes %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point()
+```
+
+- Удалите с графика все экстремальные значения, для которых `Weight` больше или равен 700 или `Height` больше или равен 400. (*Подсказка:* это можно делать как средствами `ggplot2`, так и функцией `filter()` из `dplyr`).
+
+```{r}
+heroes %>%
+  filter(Weight < 700 & Height < 400) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point()
+```
+
+- Раскрасьте точки в зависимости от `Gender`, сделайте их полупрозрачными ( параметр `alpha =`).
+
+```{r}
+heroes %>%
+  filter(Weight < 700 & Height < 400) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point(aes(colour = Gender), alpha = 0.5)
+```
+
+- Сделайте так, чтобы координатная плоскость имела соотношение 1:1 шкал по оси *x* и *y*. Этого можно добиться с помощью функции `coord_fixed()`.
+
+```{r}
+heroes %>%
+  filter(Weight < 700 & Height < 400) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point(aes(colour = Gender), alpha = 0.5) +
+  coord_fixed()
+```
+
+Разделите график (`facet_wrap()`) на три: для `"DC Comics"`,`"Marvel Comics"` и всех остальных. 
+
+```{r}
+heroes %>%
+  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+                            Publisher,
+                            "Other publishers")) %>%
+  filter(Weight < 700 & Height < 400) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point(aes(colour = Gender), alpha = 0.5) +
+  coord_fixed() +
+  facet_wrap(~Publisher)
+```
+
+- Используйте для графика тему `theme_linedraw()`.
+
+```{r}
+heroes %>%
+  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+                            Publisher,
+                            "Other publishers")) %>%
+  filter(Weight < 700 & Height < 400) %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_point(aes(colour = Gender), alpha = 0.5) +
+  coord_fixed() +
+  facet_wrap(~Publisher)+
+  theme_linedraw()
+```
+
 
