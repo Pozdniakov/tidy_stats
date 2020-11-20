@@ -316,7 +316,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="16.2.1" data-path="cov-cor.html"><a href="cov-cor.html#pearson_cor"><i class="fa fa-check"></i><b>16.2.1</b> Коэффициент корреляции Пирсона</a></li>
 <li class="chapter" data-level="16.2.2" data-path="cov-cor.html"><a href="cov-cor.html#nonparam_cor"><i class="fa fa-check"></i><b>16.2.2</b> Непараметрические коэффициенты корреляции</a></li>
 </ul></li>
-<li class="chapter" data-level="16.3" data-path="cov-cor.html"><a href="cov-cor.html#корреляционная-матрица-cor_mat"><i class="fa fa-check"></i><b>16.3</b> Корреляционная матрица {cor_mat}</a></li>
+<li class="chapter" data-level="16.3" data-path="cov-cor.html"><a href="cov-cor.html#cor_mat"><i class="fa fa-check"></i><b>16.3</b> Корреляционная матрица</a></li>
 <li class="chapter" data-level="16.4" data-path="cov-cor.html"><a href="cov-cor.html#hitmap_cor"><i class="fa fa-check"></i><b>16.4</b> Хитмэп корреляций</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="lm.html"><a href="lm.html"><i class="fa fa-check"></i><b>17</b> Линейная регрессия</a><ul>
@@ -624,17 +624,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>До этого мы говорили о <em>различиях</em> между выборками. Теперь мы будем говорить о <em>связи</em> между переменными.</p>
 <div id="cov" class="section level2">
 <h2><span class="header-section-number">16.1</span> Ковариация</h2>
+<p>Самая простая мера связи между двумя переменными --- это ковариация. Если <strong>ковариация положительная</strong>, то чем <em>больше</em> одна переменная, тем <em>больше</em> другая переменная. При <strong>отрицательной ковариации</strong> все наоборот: чем <em>больше</em> одна переменная, тем <em>меньше</em> другая.</p>
 <ul>
-<li>Ковариация:</li>
+<li>Формула ковариации:</li>
 </ul>
 <p><span class="math display">\[\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n}\]</span></p>
 <ul>
 <li>Оценка ковариации по выборке:</li>
 </ul>
 <p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n-1}\]</span></p>
-<ul>
-<li>Ковариация переменной самой с собой --- дисперсия.</li>
-</ul>
+<p>Ковариация переменной самой с собой --- дисперсия.</p>
 <p>В R есть функция <code>cov()</code> для подсчета ковариации. На самом деле, функция <code>var()</code> делает то же самое. Обе эти функции считают сразу <strong>матрицу ковариаций</strong> для всех сочетаний колонок на входе:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">back <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(body_kg, backpack_kg) <span class="op">%&gt;%</span>
@@ -714,8 +713,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </blockquote>
 </div>
 </div>
-<div id="корреляционная-матрица-cor_mat" class="section level2">
-<h2><span class="header-section-number">16.3</span> Корреляционная матрица {cor_mat}</h2>
+<div id="cor_mat" class="section level2">
+<h2><span class="header-section-number">16.3</span> Корреляционная матрица</h2>
 <p>Возможно, вы нашли что-то более интересное для проверки гипотезы о корреляции. Например, вы еще хотите проверить гипотезу о связи количества учебных кредитов и массе рюкзака: логично предположить, что чем больше студент набрал себе курсов, тем тяжелее его рюкзак (из-за большего количества учебников). Или что студенты к старшим курсам худеют и становятся меньше. Или что те, кто набрал себе много курсов, меньше питаются и от того меньше весят. В общем, хотелось бы прокоррелировать все интересующие нас переменные со всеми. Это можно сделать с помощью функции <code>cor()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">back <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(body_kg, backpack_kg, Units, Year) <span class="op">%&gt;%</span>
@@ -725,7 +724,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## backpack_kg  0.18933115  1.00000000  0.09438453  0.05762194
 ## Units       -0.23524088  0.09438453  1.00000000 -0.02946373
 ## Year        -0.09301727  0.05762194 -0.02946373  1.00000000</code></pre>
-<p>Но функция <code>cor()</code>не позволяет посчитать <em>p-value</em> для этих корреляций! Функция <code>cor.plot()</code> позволяет получить <em>p-value</em>, но только для одной пары переменных.</p>
+<p>Но функция <code>cor()</code>не позволяет посчитать <em>p-value</em> для этих корреляций! Функция <code>cor.test()</code> позволяет получить <em>p-value</em>, но только для одной пары переменных.</p>
 <p>На помощь приходит пакет <code>psych</code> с функцией <code>corr.test()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">back <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(body_kg, backpack_kg, Units, Year) <span class="op">%&gt;%</span>
