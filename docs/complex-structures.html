@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#проверка-импортированных-данных"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
 <li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
 <li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
 <li class="chapter" data-level="6.6" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
@@ -490,8 +490,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="matrix" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Матрица</h2>
 <p>Если вдруг вас пугает это слово, то совершенно зря. <strong>Матрица (matrix)</strong> — это всего лишь “двумерный” вектор: вектор, у которого есть не только длина, но и ширина. Создать матрицу можно с помощью функции <code>matrix()</code> из вектора, указав при этом количество строк и столбцов.</p>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="complex-structures.html#cb267-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb267-2"><a href="complex-structures.html#cb267-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="complex-structures.html#cb270-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb270-2"><a href="complex-structures.html#cb270-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    6   11   16
 ## [2,]    2    7   12   17
@@ -502,8 +502,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Заметьте, значения вектора заполняются следующим образом: сначала заполняется первый столбик сверху вниз, потом второй сверху вниз и так до конца, т.е. заполнение значений матрицы идет в первую очередь по вертикали. Это довольно стандартный способ создания матриц, характерный не только для R.</p>
 </blockquote>
 <p>Если мы знаем сколько значений в матрице и сколько мы хотим строк, то количество столбцов указывать необязательно:</p>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="complex-structures.html#cb269-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
-<span id="cb269-2"><a href="complex-structures.html#cb269-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="complex-structures.html#cb272-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
+<span id="cb272-2"><a href="complex-structures.html#cb272-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    6   11   16
 ## [2,]    2    7   12   17
@@ -511,27 +511,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [4,]    4    9   14   19
 ## [5,]    5   10   15   20</code></pre>
 <p>Все остальное так же как и с векторами: внутри находится данные только одного типа. Поскольку матрица — это уже двумерный массив, то у него имеется два индекса. Эти два индекса разделяются запятыми.</p>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="complex-structures.html#cb271-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="complex-structures.html#cb274-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="complex-structures.html#cb273-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="complex-structures.html#cb276-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    7   12
 ## [2,]    3    8   13
 ## [3,]    4    9   14</code></pre>
 <p>Первый индекс — выбор строк, второй индекс — выбор колонок. Если же мы оставляем пустое поле вместо числа, то мы выбираем все строки/колонки в зависимости от того, оставили мы поле пустым до или после запятой:</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="complex-structures.html#cb275-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="complex-structures.html#cb278-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    6   11
 ## [2,]    2    7   12
 ## [3,]    3    8   13
 ## [4,]    4    9   14
 ## [5,]    5   10   15</code></pre>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="complex-structures.html#cb277-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="complex-structures.html#cb280-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    2    7   12   17
 ## [2,]    3    8   13   18
 ## [3,]    4    9   14   19</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="complex-structures.html#cb279-1" aria-hidden="true" tabindex="-1"></a>A[, ]</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="complex-structures.html#cb282-1" aria-hidden="true" tabindex="-1"></a>A[, ]</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    6   11   16
 ## [2,]    2    7   12   17
@@ -539,8 +539,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [4,]    4    9   14   19
 ## [5,]    5   10   15   20</code></pre>
 <p>Так же как и в случае с обычными векторами, часть матрицы можно переписать:</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="complex-structures.html#cb281-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb281-2"><a href="complex-structures.html#cb281-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="complex-structures.html#cb284-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb284-2"><a href="complex-structures.html#cb284-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    1    6   11   16
 ## [2,]    2  100  100  100
@@ -555,8 +555,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="arrays" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Массив</h2>
 <p>Два измерения — это не предел! Структура с одним типом данных внутри, но с тремя измерениями или больше, называется <strong>массивом (array)</strong>. Создание массива очень похоже на создание матрицы: задаем вектор, из которого будет собран массив, и размерность массива.</p>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="complex-structures.html#cb283-1" aria-hidden="true" tabindex="-1"></a>array_3d <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb283-2"><a href="complex-structures.html#cb283-2" aria-hidden="true" tabindex="-1"></a>array_3d</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="complex-structures.html#cb286-1" aria-hidden="true" tabindex="-1"></a>array_3d <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb286-2"><a href="complex-structures.html#cb286-2" aria-hidden="true" tabindex="-1"></a>array_3d</span></code></pre></div>
 <pre><code>## , , 1
 ## 
 ##      [,1] [,2]
@@ -574,8 +574,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="list" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Список</h2>
 <p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим <strong>список (list)</strong>!</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="complex-structures.html#cb285-1" aria-hidden="true" tabindex="-1"></a>simple_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>, <span class="st">&quot;Пам пам&quot;</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb285-2"><a href="complex-structures.html#cb285-2" aria-hidden="true" tabindex="-1"></a>simple_list</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="complex-structures.html#cb288-1" aria-hidden="true" tabindex="-1"></a>simple_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>, <span class="st">&quot;Пам пам&quot;</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb288-2"><a href="complex-structures.html#cb288-2" aria-hidden="true" tabindex="-1"></a>simple_list</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] 42
 ## 
@@ -585,8 +585,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [[3]]
 ## [1] TRUE</code></pre>
 <p>А это значит, что там могут содержаться самые разные данные, в том числе и другие списки и векторы!</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="complex-structures.html#cb287-1" aria-hidden="true" tabindex="-1"></a>complex_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Wow&quot;</span>, <span class="st">&quot;this&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;so&quot;</span>, <span class="st">&quot;big&quot;</span>), <span class="st">&quot;16&quot;</span>, simple_list)</span>
-<span id="cb287-2"><a href="complex-structures.html#cb287-2" aria-hidden="true" tabindex="-1"></a>complex_list</span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="complex-structures.html#cb290-1" aria-hidden="true" tabindex="-1"></a>complex_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Wow&quot;</span>, <span class="st">&quot;this&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;so&quot;</span>, <span class="st">&quot;big&quot;</span>), <span class="st">&quot;16&quot;</span>, simple_list)</span>
+<span id="cb290-2"><a href="complex-structures.html#cb290-2" aria-hidden="true" tabindex="-1"></a>complex_list</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;Wow&quot;  &quot;this&quot; &quot;list&quot; &quot;is&quot;   &quot;so&quot;   &quot;big&quot; 
 ## 
@@ -603,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [[3]][[3]]
 ## [1] TRUE</code></pre>
 <p>Если у нас сложный список, то есть очень классная функция, чтобы посмотреть, как он устроен, под названием <code>str()</code>:</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="complex-structures.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(complex_list)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="complex-structures.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(complex_list)</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ : chr [1:6] &quot;Wow&quot; &quot;this&quot; &quot;list&quot; &quot;is&quot; ...
 ##  $ : chr &quot;16&quot;
@@ -615,8 +615,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Представьте, что список - это такое дерево с ветвистой структурой. А на конце этих ветвей - листья-векторы.</p>
 </blockquote>
 <p>Как и в случае с векторами мы можем давать имена элементам списка:</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="complex-structures.html#cb291-1" aria-hidden="true" tabindex="-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="dv">24</span>, <span class="at">PhDstudent =</span> T, <span class="at">language =</span> <span class="st">&quot;Russian&quot;</span>)</span>
-<span id="cb291-2"><a href="complex-structures.html#cb291-2" aria-hidden="true" tabindex="-1"></a>named_list</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="complex-structures.html#cb294-1" aria-hidden="true" tabindex="-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="dv">24</span>, <span class="at">PhDstudent =</span> T, <span class="at">language =</span> <span class="st">&quot;Russian&quot;</span>)</span>
+<span id="cb294-2"><a href="complex-structures.html#cb294-2" aria-hidden="true" tabindex="-1"></a>named_list</span></code></pre></div>
 <pre><code>## $age
 ## [1] 24
 ## 
@@ -626,21 +626,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## $language
 ## [1] &quot;Russian&quot;</code></pre>
 <p>К списку можно обращаться как с помощью индексов, так и по именам. Начнем с последнего:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="complex-structures.html#cb293-1" aria-hidden="true" tabindex="-1"></a>named_list<span class="sc">$</span>age</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="complex-structures.html#cb296-1" aria-hidden="true" tabindex="-1"></a>named_list<span class="sc">$</span>age</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
 <p>А вот с индексами сложнее, и в этом очень легко запутаться. Давайте попробуем сделать так, как мы делали это раньше:</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="complex-structures.html#cb295-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="complex-structures.html#cb298-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## $age
 ## [1] 24</code></pre>
 <p>Мы, по сути, получили элемент списка — просто как часть списка, т.е. как список длиной один:</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="complex-structures.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="complex-structures.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list)</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="complex-structures.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="complex-structures.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;list&quot;</code></pre>
 <p>А вот чтобы добраться до самого элемента списка (и сделать с ним что-то хорошее), нам нужна не одна, а две квадратных скобочки:</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="complex-structures.html#cb301-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="complex-structures.html#cb304-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="complex-structures.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="complex-structures.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[[<span class="dv">1</span>]])</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 <blockquote class="twitter-tweet" data-lang="en">
 <p lang="en" dir="ltr">
@@ -650,7 +650,7 @@ Indexing lists in <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_s
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p>Как и в случае с вектором, к элементу списка можно обращаться по имени.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="complex-structures.html#cb305-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="st">&#39;age&#39;</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="complex-structures.html#cb308-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="st">&#39;age&#39;</span>]]</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
 <p>Хотя последнее — практически то же самое, что и использование знака $.</p>
 <blockquote>
@@ -661,35 +661,35 @@ Indexing lists in <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_s
 <h2><span class="header-section-number">4.4</span> Датафрейм</h2>
 <p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы (data.frames)</strong>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
 <p>Без векторов мы не смогли бы разобраться с матрицами и списками. А без последних мы не сможем понять, что такое датафрейм.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="complex-structures.html#cb307-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Petr&quot;</span>, <span class="st">&quot;Eugeny&quot;</span>, <span class="st">&quot;Lena&quot;</span>, <span class="st">&quot;Misha&quot;</span>, <span class="st">&quot;Sasha&quot;</span>) </span>
-<span id="cb307-2"><a href="complex-structures.html#cb307-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>) </span>
-<span id="cb307-3"><a href="complex-structures.html#cb307-3" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> <span class="fu">c</span>(F, F, T, T, T) </span>
-<span id="cb307-4"><a href="complex-structures.html#cb307-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, age, student)  </span>
-<span id="cb307-5"><a href="complex-structures.html#cb307-5" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="complex-structures.html#cb310-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Petr&quot;</span>, <span class="st">&quot;Eugeny&quot;</span>, <span class="st">&quot;Lena&quot;</span>, <span class="st">&quot;Misha&quot;</span>, <span class="st">&quot;Sasha&quot;</span>) </span>
+<span id="cb310-2"><a href="complex-structures.html#cb310-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>) </span>
+<span id="cb310-3"><a href="complex-structures.html#cb310-3" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> <span class="fu">c</span>(F, F, T, T, T) </span>
+<span id="cb310-4"><a href="complex-structures.html#cb310-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, age, student)  </span>
+<span id="cb310-5"><a href="complex-structures.html#cb310-5" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Petr","2":"26","3":"FALSE"},{"1":"Eugeny","2":"34","3":"FALSE"},{"1":"Lena","2":"23","3":"TRUE"},{"1":"Misha","2":"27","3":"TRUE"},{"1":"Sasha","2":"26","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="complex-structures.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="complex-structures.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
 ##  $ name   : chr  &quot;Petr&quot; &quot;Eugeny&quot; &quot;Lena&quot; &quot;Misha&quot; ...
 ##  $ age    : num  26 34 23 27 26
 ##  $ student: logi  FALSE FALSE TRUE TRUE TRUE</code></pre>
 <p>Вообще, очень похоже на список, не правда ли? Так и есть, датафрейм — это что-то вроде проименованного списка, каждый элемент которого является <em>atomic</em> вектором фиксированной длины. Скорее всего, вы представляли список “горизонтально.” Если это так, то теперь “переверните” список у себя в голове на 90 градусов. Так, чтобы названия векторов оказались сверху, а элементы списка стали столбцами. Поскольку длина всех этих векторов одинаковая (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут иметь разные типы данных. В нашем случае первая колонка — <code>character</code>, вторая колонка — <code>numeric</code>, третья колонка — <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с проименованным списком, и как с матрицей:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="complex-structures.html#cb310-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="complex-structures.html#cb313-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] 34 23</code></pre>
 <p>Здесь мы сначала ивлекли колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор, из которого мы вытащили кусок, выбрав индексы <code>2</code> и <code>3</code>.</p>
 <p>Используя оператор <code>$</code> и присваивание можно создавать новые колонки датафрейма:</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="complex-structures.html#cb312-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co">#правило recycling - узнали? </span></span>
-<span id="cb312-2"><a href="complex-structures.html#cb312-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="complex-structures.html#cb315-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co">#правило recycling - узнали? </span></span>
+<span id="cb315-2"><a href="complex-structures.html#cb315-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["lovesR"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"Petr","2":"26","3":"FALSE","4":"TRUE"},{"1":"Eugeny","2":"34","3":"FALSE","4":"TRUE"},{"1":"Lena","2":"23","3":"TRUE","4":"TRUE"},{"1":"Misha","2":"27","3":"TRUE","4":"TRUE"},{"1":"Sasha","2":"26","3":"TRUE","4":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Ну а можно просто обращаться с помощью двух индексов через запятую, как мы это делали с матрицей:</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="complex-structures.html#cb313-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="complex-structures.html#cb316-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["age"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[2],"type":["lgl"],"align":["right"]}],"data":[{"1":"23","2":"TRUE","_rn_":"3"},{"1":"27","2":"TRUE","_rn_":"4"},{"1":"26","2":"TRUE","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -697,15 +697,15 @@ Indexing lists in <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_s
 </div>
 <p>Как и с матрицами, первый индекс означает строчки, а второй — столбцы.</p>
 <p>А еще можно использовать названия колонок внутри квадратных скобок:</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="complex-structures.html#cb314-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="complex-structures.html#cb317-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>]</span></code></pre></div>
 <pre><code>## [1] 26 34</code></pre>
 <p>И здесь перед нами открываются невообразимые возможности! Узнаем, любят ли R те, кто моложе среднего возраста в группе:</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="complex-structures.html#cb316-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="complex-structures.html#cb319-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
 <p>Эту же задачу можно выполнить другими способами:</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="complex-structures.html#cb318-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)]</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="complex-structures.html#cb321-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)]</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="complex-structures.html#cb320-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="st">&#39;lovesR&#39;</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="complex-structures.html#cb323-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="st">&#39;lovesR&#39;</span>]</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
 <p>В большинстве случаев подходят сразу несколько способов — тем не менее, стоит овладеть ими всеми.</p>
 <p>Датафреймы удобно просматривать в RStudio. Для это нужно написать команду <code>View(df)</code> или же просто нажать на названии нужной переменной из списка вверху справа (там где Environment). Тогда увидите табличку, очень похожую на Excel и тому подобные программы для работы с таблицами. Там же есть и всякие возможности для фильтрации, сортировки и поиска.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>

@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#проверка-импортированных-данных"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
 <li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
 <li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
 <li class="chapter" data-level="6.6" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
@@ -493,19 +493,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>У дисперсионного анализа очень много разновидностей, для которых придумали множество названий. “Обычная” ANOVA называется One-Way ANOVA, она же межгрупповая ANOVA, это аналог независимого т-теста для нескольких групп.</p>
 <p>Давайте начнем сразу с проведения теста. Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>, на которых мы разбирались с t-тестом (@ref(dep_ttest)).</p>
-<div class="sourceCode" id="cb908"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb908-1"><a href="anova.html#cb908-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb908-2"><a href="anova.html#cb908-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/stcp-Rdataset-Diet.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb916"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb916-1"><a href="anova.html#cb916-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb916-2"><a href="anova.html#cb916-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/stcp-Rdataset-Diet.csv&quot;</span>)</span></code></pre></div>
 <p>Сделаем небольшой препроцессинг данных. Создадим дополнительные “факторные” переменные, создадим переменную, в которой будет разница массы “до” и “после,” удалим <code>NA</code>.</p>
-<div class="sourceCode" id="cb909"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb909-1"><a href="anova.html#cb909-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb909-2"><a href="anova.html#cb909-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight.loss =</span> weight6weeks <span class="sc">-</span> pre.weight,</span>
-<span id="cb909-3"><a href="anova.html#cb909-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Dietf =</span> <span class="fu">factor</span>(Diet, <span class="at">labels =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]),</span>
-<span id="cb909-4"><a href="anova.html#cb909-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Person =</span> <span class="fu">factor</span>(Person)) <span class="sc">%&gt;%</span></span>
-<span id="cb909-5"><a href="anova.html#cb909-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb917"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb917-1"><a href="anova.html#cb917-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb917-2"><a href="anova.html#cb917-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight.loss =</span> weight6weeks <span class="sc">-</span> pre.weight,</span>
+<span id="cb917-3"><a href="anova.html#cb917-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Dietf =</span> <span class="fu">factor</span>(Diet, <span class="at">labels =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]),</span>
+<span id="cb917-4"><a href="anova.html#cb917-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Person =</span> <span class="fu">factor</span>(Person)) <span class="sc">%&gt;%</span></span>
+<span id="cb917-5"><a href="anova.html#cb917-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
 <div id="aov" class="section level3" number="17.0.1">
 <h3><span class="header-section-number">17.0.1</span> Функция aov()</h3>
 <p>Попробуем сразу провести дисперсионных анализ с помощью функции <code>aov()</code>:</p>
-<div class="sourceCode" id="cb910"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb910-1"><a href="anova.html#cb910-1" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span>
-<span id="cb910-2"><a href="anova.html#cb910-2" aria-hidden="true" tabindex="-1"></a>aov_model</span></code></pre></div>
+<div class="sourceCode" id="cb918"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb918-1"><a href="anova.html#cb918-1" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span>
+<span id="cb918-2"><a href="anova.html#cb918-2" aria-hidden="true" tabindex="-1"></a>aov_model</span></code></pre></div>
 <pre><code>## Call:
 ##    aov(formula = weight.loss ~ Dietf, data = diet)
 ## 
@@ -516,14 +516,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Residual standard error: 2.371064
 ## Estimated effects may be unbalanced</code></pre>
-<div class="sourceCode" id="cb912"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb912-1"><a href="anova.html#cb912-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code></pre></div>
+<div class="sourceCode" id="cb920"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb920-1"><a href="anova.html#cb920-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)   
 ## Dietf        2   60.5  30.264   5.383 0.0066 **
 ## Residuals   73  410.4   5.622                  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Мы получили что-то похожее на результат применения функции <code>lm()</code>. Правда, лаконичнее, но с новыми столбцами <code>Sum Sq</code>, <code>Mean Sq</code> и новой статистикой <em>F</em> вместо <em>t</em>. Что будет, если с теми же данными с той же формулой запустить <code>lm()</code> вместо <code>aov()</code>?</p>
-<div class="sourceCode" id="cb914"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb914-1"><a href="anova.html#cb914-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div>
+<div class="sourceCode" id="cb922"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb922-1"><a href="anova.html#cb922-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight.loss ~ Dietf, data = diet)
@@ -603,7 +603,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Именно эту таблицу мы видели, когда использовали функцию <code>aov()</code>:</p>
-<div class="sourceCode" id="cb916"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb916-1"><a href="anova.html#cb916-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code></pre></div>
+<div class="sourceCode" id="cb924"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb924-1"><a href="anova.html#cb924-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code></pre></div>
 <pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)   
 ## Dietf        2   60.5  30.264   5.383 0.0066 **
 ## Residuals   73  410.4   5.622                  
@@ -657,35 +657,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="3" style="list-style-type: decimal">
 <li><strong>Подсчет p-value.</strong> В t-тесте мы смотрели, как статистика распределена при условии верности нулевой гипотезы. То есть что будет, если нулевая гипотеза верна, мы будем повторять эксперимент с точно таким же дизайном (и размером выборок) бесконечное количество раз и считать <em>F</em>.</li>
 </ol>
-<div class="sourceCode" id="cb918"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb918-1"><a href="anova.html#cb918-1" aria-hidden="true" tabindex="-1"></a>betweendf <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb918-2"><a href="anova.html#cb918-2" aria-hidden="true" tabindex="-1"></a>withindf <span class="ot">&lt;-</span> <span class="dv">73</span></span>
-<span id="cb918-3"><a href="anova.html#cb918-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">summary</span>(aov_model)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb918-4"><a href="anova.html#cb918-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb918-5"><a href="anova.html#cb918-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>,<span class="dv">10</span>, <span class="fl">0.01</span>)</span>
-<span id="cb918-6"><a href="anova.html#cb918-6" aria-hidden="true" tabindex="-1"></a>fdist <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fvalues =</span> v, <span class="at">pdf =</span> <span class="fu">df</span>(v, betweendf, withindf))</span>
-<span id="cb918-7"><a href="anova.html#cb918-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb918-8"><a href="anova.html#cb918-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb918-9"><a href="anova.html#cb918-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb918-10"><a href="anova.html#cb918-10" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;F(&quot;</span>, betweendf, <span class="st">&quot;, &quot;</span>, withindf, <span class="st">&quot;) = &quot;</span>, <span class="fu">round</span>(f, <span class="dv">3</span>))</span>
-<span id="cb918-11"><a href="anova.html#cb918-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb918-12"><a href="anova.html#cb918-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fdist, <span class="fu">aes</span>(<span class="at">x =</span> fvalues, <span class="at">y =</span> pdf))<span class="sc">+</span></span>
-<span id="cb918-13"><a href="anova.html#cb918-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb918-14"><a href="anova.html#cb918-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> f)<span class="sc">+</span></span>
-<span id="cb918-15"><a href="anova.html#cb918-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> f<span class="sc">+</span><span class="dv">1</span>, <span class="at">y =</span> <span class="fl">0.2</span>, <span class="at">label =</span> label)<span class="sc">+</span></span>
-<span id="cb918-16"><a href="anova.html#cb918-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb918-17"><a href="anova.html#cb918-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb918-18"><a href="anova.html#cb918-18" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb918-19"><a href="anova.html#cb918-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb918-20"><a href="anova.html#cb918-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb918-21"><a href="anova.html#cb918-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())  </span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-445"></span>
-<img src="tidy_stats_files/figure-html/unnamed-chunk-445-1.png" alt="\label{fig:fig1}F-распределение при верности нулевой гипотезы (см. детали в тексте)" width="60%" />
+<div class="sourceCode" id="cb926"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb926-1"><a href="anova.html#cb926-1" aria-hidden="true" tabindex="-1"></a>betweendf <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb926-2"><a href="anova.html#cb926-2" aria-hidden="true" tabindex="-1"></a>withindf <span class="ot">&lt;-</span> <span class="dv">73</span></span>
+<span id="cb926-3"><a href="anova.html#cb926-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">summary</span>(aov_model)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
+<span id="cb926-4"><a href="anova.html#cb926-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb926-5"><a href="anova.html#cb926-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>,<span class="dv">10</span>, <span class="fl">0.01</span>)</span>
+<span id="cb926-6"><a href="anova.html#cb926-6" aria-hidden="true" tabindex="-1"></a>fdist <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fvalues =</span> v, <span class="at">pdf =</span> <span class="fu">df</span>(v, betweendf, withindf))</span>
+<span id="cb926-7"><a href="anova.html#cb926-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb926-8"><a href="anova.html#cb926-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb926-9"><a href="anova.html#cb926-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb926-10"><a href="anova.html#cb926-10" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;F(&quot;</span>, betweendf, <span class="st">&quot;, &quot;</span>, withindf, <span class="st">&quot;) = &quot;</span>, <span class="fu">round</span>(f, <span class="dv">3</span>))</span>
+<span id="cb926-11"><a href="anova.html#cb926-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb926-12"><a href="anova.html#cb926-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fdist, <span class="fu">aes</span>(<span class="at">x =</span> fvalues, <span class="at">y =</span> pdf))<span class="sc">+</span></span>
+<span id="cb926-13"><a href="anova.html#cb926-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb926-14"><a href="anova.html#cb926-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> f)<span class="sc">+</span></span>
+<span id="cb926-15"><a href="anova.html#cb926-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="at">x =</span> f<span class="sc">+</span><span class="dv">1</span>, <span class="at">y =</span> <span class="fl">0.2</span>, <span class="at">label =</span> label)<span class="sc">+</span></span>
+<span id="cb926-16"><a href="anova.html#cb926-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb926-17"><a href="anova.html#cb926-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb926-18"><a href="anova.html#cb926-18" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb926-19"><a href="anova.html#cb926-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb926-20"><a href="anova.html#cb926-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb926-21"><a href="anova.html#cb926-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())  </span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-449"></span>
+<img src="tidy_stats_files/figure-html/unnamed-chunk-449-1.png" alt="\label{fig:fig1}F-распределение при верности нулевой гипотезы (см. детали в тексте)" width="60%" />
 <p class="caption">
 Рисунок 17.1: F-распределение при верности нулевой гипотезы (см. детали в тексте)
 </p>
 </div>
 <p>Заметьте, распределение <em>F</em> несимметричное<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a>. Это значит, что мы всегда считаем считаем площадь от <em>F</em> до плюс бесконечности (без умножения на 2, как мы это делали в t-тесте):</p>
-<div class="sourceCode" id="cb919"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb919-1"><a href="anova.html#cb919-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(f, betweendf, withindf)</span></code></pre></div>
+<div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb927-1"><a href="anova.html#cb927-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(f, betweendf, withindf)</span></code></pre></div>
 <pre><code>## [1] 0.006595853</code></pre>
 <p>Это и есть наш p-value!</p>
 <ol start="4" style="list-style-type: decimal">
@@ -698,7 +698,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Тем не менее, дисперсионного анализа недостаточно, чтобы решить, какие именно группы между собой различаются. Для этого нужно проводить post-hoc тесты (апостериорные тесты).</p>
 <p>Post-hoc переводится с латыни как “после этого.” Post-hoc тесты или просто “пост-хоки” проводятся, если в результате ANOVA была отвергнута нулевая гипотеза. Собственно, пост-хоки никак не связаны с дисперсионным анализом на уровне расчетов - это абсолютно независимые тесты, но исторически так сложилось, что они известны именно как дополнительный этап ANOVA.</p>
 <p>Самый простой вариант пост-хок теста - это попарные т-тесты<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a> с поправками на множественные сравнения:</p>
-<div class="sourceCode" id="cb921"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb921-1"><a href="anova.html#cb921-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(diet<span class="sc">$</span>weight.loss, diet<span class="sc">$</span>Dietf)</span></code></pre></div>
+<div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb929-1"><a href="anova.html#cb929-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(diet<span class="sc">$</span>weight.loss, diet<span class="sc">$</span>Dietf)</span></code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using t tests with pooled SD 
 ## 
@@ -710,7 +710,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## P value adjustment method: holm</code></pre>
 <p>Второй подход связан с использованием специализированных тестов, таких как тест Тьюки (Tukey Honest Significant Differences = Tukey HSD). Для этого в R есть функция <code>TukeyHSD()</code>, которую нужно применять на объект <code>aov</code>:</p>
-<div class="sourceCode" id="cb923"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb923-1"><a href="anova.html#cb923-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov_model)</span></code></pre></div>
+<div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb931-1"><a href="anova.html#cb931-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov_model)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -725,7 +725,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="aov_as_lm" class="section level2" number="17.3">
 <h2><span class="header-section-number">17.3</span> ANOVA и т-тест как частные случаи линейной регрессии</h2>
 <p>Как мы уже видели, если применить <code>lm()</code> или <code>aov()</code> на одних и тех же данных с одной и той же формулой, то результат будет очень похожим. Но есть одно но: <code>lm()</code> создает из одного фактора две переменных-предиктора:</p>
-<div class="sourceCode" id="cb925"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb925-1"><a href="anova.html#cb925-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div>
+<div class="sourceCode" id="cb933"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb933-1"><a href="anova.html#cb933-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight.loss ~ Dietf, data = diet)
@@ -746,7 +746,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.1285, Adjusted R-squared:  0.1047 
 ## F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 <p>Дело в том, что мы не можем просто так загнать номинативную переменную в качестве предиктора в линейную регрессию. Мы можем это легко сделать, если у нас всего два уровня в номинативном предикторе. Тогда один из уровней можно обозначить за 0, другой - за 1. Такие переменные иногда называются “бинарными.” Тогда это легко использовать в линейной регрессии:</p>
-<div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb927-1"><a href="anova.html#cb927-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> gender, diet))</span></code></pre></div>
+<div class="sourceCode" id="cb935"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb935-1"><a href="anova.html#cb935-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> gender, diet))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight.loss ~ gender, data = diet)
@@ -766,7 +766,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.0005914,  Adjusted R-squared:  -0.01291 
 ## F-statistic: 0.04379 on 1 and 74 DF,  p-value: 0.8348</code></pre>
 <p>Можно ли так делать? Вполне! Допущения линейной регрессии касаются остатков, а не переменных самих по себе. Разве что это немного избыточно: линейная регрессия с бинарным предиктором - это фактически независимый t-тест:</p>
-<div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb929-1"><a href="anova.html#cb929-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb937"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb937-1"><a href="anova.html#cb937-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -779,11 +779,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mean in group 0 mean in group 1 
 ##       -3.893023       -4.015152</code></pre>
 <p>Как видите, p-value совпадают! А <em>t</em> статистика в квадрате - это <em>F</em> (при двух группах):</p>
-<div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb931-1"><a href="anova.html#cb931-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb939-1"><a href="anova.html#cb939-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>##          t 
 ## 0.04378592</code></pre>
 <p>Более того, те же самые результаты можно получить и с помощью коэффициента корреляции Пирсона:</p>
-<div class="sourceCode" id="cb933"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb933-1"><a href="anova.html#cb933-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(diet<span class="sc">$</span>gender, diet<span class="sc">$</span>weight.loss)</span></code></pre></div>
+<div class="sourceCode" id="cb941"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb941-1"><a href="anova.html#cb941-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(diet<span class="sc">$</span>gender, diet<span class="sc">$</span>weight.loss)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -801,24 +801,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="dummy" class="section level2" number="17.4">
 <h2><span class="header-section-number">17.4</span> Dummy coding</h2>
 <p>Тем не менее, вопрос остается открытым: как превратить номинативную переменную в количественную и загнать ее в регрессию? Для этого можно использовать <strong>“фиктивное кодирование” (dummy coding):</strong></p>
-<div class="sourceCode" id="cb935"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb935-1"><a href="anova.html#cb935-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb935-2"><a href="anova.html#cb935-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">isA =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">&quot;A&quot;</span>),</span>
-<span id="cb935-3"><a href="anova.html#cb935-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">isB =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">&quot;B&quot;</span>),</span>
-<span id="cb935-4"><a href="anova.html#cb935-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">isC =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">&quot;C&quot;</span>))</span>
-<span id="cb935-5"><a href="anova.html#cb935-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb935-6"><a href="anova.html#cb935-6" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb935-7"><a href="anova.html#cb935-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf) <span class="sc">%&gt;%</span></span>
-<span id="cb935-8"><a href="anova.html#cb935-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb935-9"><a href="anova.html#cb935-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Dietf, isA<span class="sc">:</span>isC)</span></code></pre></div>
+<div class="sourceCode" id="cb943"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb943-1"><a href="anova.html#cb943-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb943-2"><a href="anova.html#cb943-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">isA =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">&quot;A&quot;</span>),</span>
+<span id="cb943-3"><a href="anova.html#cb943-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">isB =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">&quot;B&quot;</span>),</span>
+<span id="cb943-4"><a href="anova.html#cb943-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">isC =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">&quot;C&quot;</span>))</span>
+<span id="cb943-5"><a href="anova.html#cb943-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb943-6"><a href="anova.html#cb943-6" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
+<span id="cb943-7"><a href="anova.html#cb943-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf) <span class="sc">%&gt;%</span></span>
+<span id="cb943-8"><a href="anova.html#cb943-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb943-9"><a href="anova.html#cb943-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Dietf, isA<span class="sc">:</span>isC)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Dietf"],"name":[1],"type":["fct"],"align":["left"]},{"label":["isA"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["isB"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["isC"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"1","3":"0","4":"0"},{"1":"A","2":"1","3":"0","4":"0"},{"1":"B","2":"0","3":"1","4":"0"},{"1":"B","2":"0","3":"1","4":"0"},{"1":"C","2":"0","3":"0","4":"1"},{"1":"C","2":"0","3":"0","4":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Заметьте, что такое кодирование избыточно. Если мы знаем, что диет 3, а данная диета - это не диета В и не диета С, то это диета А. Значит, одна из созданных нами колонок - “лишняя”:</p>
-<div class="sourceCode" id="cb936"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb936-1"><a href="anova.html#cb936-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>isA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb944-1"><a href="anova.html#cb944-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>isA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
 <p>Используем новую колонки для линейной регрессии и сравним результаты:</p>
-<div class="sourceCode" id="cb937"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb937-1"><a href="anova.html#cb937-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> isB <span class="sc">+</span> isC, diet))</span></code></pre></div>
+<div class="sourceCode" id="cb945"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb945-1"><a href="anova.html#cb945-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> isB <span class="sc">+</span> isC, diet))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight.loss ~ isB + isC, data = diet)
@@ -838,7 +838,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 2.371 on 73 degrees of freedom
 ## Multiple R-squared:  0.1285, Adjusted R-squared:  0.1047 
 ## F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
-<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb939-1"><a href="anova.html#cb939-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div>
+<div class="sourceCode" id="cb947"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb947-1"><a href="anova.html#cb947-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight.loss ~ Dietf, data = diet)
@@ -865,27 +865,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><strong>Нормальность распределения ошибок:</strong></li>
 </ol>
-<div class="sourceCode" id="cb941"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb941-1"><a href="anova.html#cb941-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(aov_model))</span></code></pre></div>
-<p><img src="tidy_stats_files/figure-html/unnamed-chunk-457-1.png" width="672" /></p>
+<div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb949-1"><a href="anova.html#cb949-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(aov_model))</span></code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-461-1.png" width="672" /></p>
 <p>Как мы видим, распределение не сильно далеко от нормального - этого вполне достаточно. ANOVA - это метод достаточно устойчивый к отклонениям от нормальности.</p>
 <ol start="2" style="list-style-type: decimal">
 <li><strong>Гомогенность дисперсий.</strong></li>
 </ol>
 <p>То есть их равенство. Можно посмотреть на распределение остатков:</p>
-<div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb942-1"><a href="anova.html#cb942-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(aov_model)</span>
-<span id="cb942-2"><a href="anova.html#cb942-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diet, <span class="fu">aes</span>(<span class="at">x =</span> Dietf, <span class="at">y =</span> residuals))<span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="tidy_stats_files/figure-html/unnamed-chunk-458-1.png" width="672" /></p>
+<div class="sourceCode" id="cb950"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb950-1"><a href="anova.html#cb950-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(aov_model)</span>
+<span id="cb950-2"><a href="anova.html#cb950-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diet, <span class="fu">aes</span>(<span class="at">x =</span> Dietf, <span class="at">y =</span> residuals))<span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-462-1.png" width="672" /></p>
 <p>Все выглядит неплохо: нет какой-то одной группы, у которой разброс сильно больше или меньше. Есть и более формальные способы проверить равенство дисперсий. Например, с помощью теста Ливиня (Levene’s test). Для того, чтобы его провести, мы воспользуемся новым пакетом <code>ez</code> (читать как “easy”). Этот пакет сильно упрощает проведение дисперсионного анализа, особенно для более сложных дизайнов.</p>
-<div class="sourceCode" id="cb943"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb943-1"><a href="anova.html#cb943-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ez&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb951"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb951-1"><a href="anova.html#cb951-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ez&quot;</span>)</span></code></pre></div>
 <p>Синтаксис довольно простой: нужно указать, данные, зависимую переменную, переменную с ID, факторы. Необходимо прописать фактор в <code>between =</code> или <code>within =</code>. В данном случае - в <code>between =</code>.</p>
-<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb944-1"><a href="anova.html#cb944-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span>
-<span id="cb944-2"><a href="anova.html#cb944-2" aria-hidden="true" tabindex="-1"></a>ez_model <span class="ot">&lt;-</span> <span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
-<span id="cb944-3"><a href="anova.html#cb944-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
-<span id="cb944-4"><a href="anova.html#cb944-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
-<span id="cb944-5"><a href="anova.html#cb944-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf,</span>
-<span id="cb944-6"><a href="anova.html#cb944-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
-<span id="cb944-7"><a href="anova.html#cb944-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span>
-<span id="cb944-8"><a href="anova.html#cb944-8" aria-hidden="true" tabindex="-1"></a>ez_model</span></code></pre></div>
+<div class="sourceCode" id="cb952"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb952-1"><a href="anova.html#cb952-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span>
+<span id="cb952-2"><a href="anova.html#cb952-2" aria-hidden="true" tabindex="-1"></a>ez_model <span class="ot">&lt;-</span> <span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
+<span id="cb952-3"><a href="anova.html#cb952-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
+<span id="cb952-4"><a href="anova.html#cb952-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
+<span id="cb952-5"><a href="anova.html#cb952-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf,</span>
+<span id="cb952-6"><a href="anova.html#cb952-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
+<span id="cb952-7"><a href="anova.html#cb952-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span>
+<span id="cb952-8"><a href="anova.html#cb952-8" aria-hidden="true" tabindex="-1"></a>ez_model</span></code></pre></div>
 <pre><code>## $ANOVA
 ##   Effect DFn DFd      SSn      SSd        F           p p&lt;.05       ges
 ## 1  Dietf   2  73 60.52701 410.4018 5.383104 0.006595853     * 0.1285269
@@ -907,7 +907,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Estimated effects may be unbalanced</code></pre>
 <p>Если при проведении теста Ливиня мы получаем <em>p &lt; .05</em>, то мы отбрасываем нулевую гипотезу о равенстве дисперсий. В данном случае мы не можем ее отбросить и поэтому принимаем<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a></p>
 <p>Полученный объект (если поставить <code>return_aov = T</code>) содержит еще и объект <code>aov()</code> - на случай, если у Вас есть функции, которые работают с этим классом:</p>
-<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb946-1"><a href="anova.html#cb946-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ez_model<span class="sc">$</span>aov)</span></code></pre></div>
+<div class="sourceCode" id="cb954"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb954-1"><a href="anova.html#cb954-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ez_model<span class="sc">$</span>aov)</span></code></pre></div>
 <pre><code>##   Tukey multiple comparisons of means
 ##     95% family-wise confidence level
 ## 
@@ -921,8 +921,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="3" style="list-style-type: decimal">
 <li><strong>Примерно одинаковое количество испытуемых в разных группах.</strong> Здесь у нас все в порядке:</li>
 </ol>
-<div class="sourceCode" id="cb948"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb948-1"><a href="anova.html#cb948-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb948-2"><a href="anova.html#cb948-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Dietf)</span></code></pre></div>
+<div class="sourceCode" id="cb956"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb956-1"><a href="anova.html#cb956-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
+<span id="cb956-2"><a href="anova.html#cb956-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Dietf)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Dietf"],"name":[1],"type":["fct"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"A","2":"24","_rn_":"1"},{"1":"B","2":"25","_rn_":"2"},{"1":"C","2":"27","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -934,31 +934,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">17.6</span> Многофакторный дисперсионный анализ (Factorial ANOVA)</h2>
 <p>На практике можно встретить One-Way ANOVA (однофакторную ANOVA) довольно редко. Обычно в исследованиях встречается многофакторный дисперсионный анализ, в котором проверяется влияние сразу нескольких факторов. В научных статьях это обозначается примерно так: “3х2 ANOVA.” Это означает, что был проведен двухфакторный дисперсионный анализ, причем в одном факторе было три уровня, во втором - два. В нашем случае это будут факторы “Диета” и “Пол.” Это означает, что у нас две гипотезы: о влиянии диеты на потерю веса и о влиянии пола на потерю веса. Кроме того, появляется гипотеза о взаимодействии факторов - то есть о том, что разные диеты по разному влияют на потерю веса для разных полов.</p>
 <p>Взаимодействие двух факторов хорошо видно на графике с линиями: если две линии параллельны, то взаимодействия нет. Если они не параллельны (пересекаются, сходятся, расходятся), то взаимодействие есть.</p>
-<div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb949-1"><a href="anova.html#cb949-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb949-2"><a href="anova.html#cb949-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genderf =</span> <span class="fu">factor</span>(gender, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;ж&quot;</span>, <span class="st">&quot;м&quot;</span>))) <span class="co">#превращаем в бинарную переменную в фактор</span></span>
-<span id="cb949-3"><a href="anova.html#cb949-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb949-4"><a href="anova.html#cb949-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x)) <span class="co">#пишем функцию для стандартной ошибки</span></span>
-<span id="cb949-5"><a href="anova.html#cb949-5" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">=</span> <span class="fu">position_dodge</span>(<span class="fl">0.05</span>) <span class="co">#немного раздвигаем положение точек на будущем графике</span></span>
-<span id="cb949-6"><a href="anova.html#cb949-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb949-7"><a href="anova.html#cb949-7" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb949-8"><a href="anova.html#cb949-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf, genderf) <span class="sc">%&gt;%</span></span>
-<span id="cb949-9"><a href="anova.html#cb949-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">meanloss =</span> <span class="fu">mean</span>(weight.loss),</span>
-<span id="cb949-10"><a href="anova.html#cb949-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="fu">sem</span>(weight.loss)) <span class="sc">%&gt;%</span></span>
-<span id="cb949-11"><a href="anova.html#cb949-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Dietf, </span>
-<span id="cb949-12"><a href="anova.html#cb949-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> meanloss, </span>
-<span id="cb949-13"><a href="anova.html#cb949-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> genderf)) <span class="sc">+</span></span>
-<span id="cb949-14"><a href="anova.html#cb949-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> genderf), <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb949-15"><a href="anova.html#cb949-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> meanloss <span class="sc">-</span> se, </span>
-<span id="cb949-16"><a href="anova.html#cb949-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> meanloss <span class="sc">+</span> se), <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb949-17"><a href="anova.html#cb949-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="tidy_stats_files/figure-html/unnamed-chunk-463-1.png" width="672" /></p>
+<div class="sourceCode" id="cb957"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb957-1"><a href="anova.html#cb957-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb957-2"><a href="anova.html#cb957-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genderf =</span> <span class="fu">factor</span>(gender, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;ж&quot;</span>, <span class="st">&quot;м&quot;</span>))) <span class="co">#превращаем в бинарную переменную в фактор</span></span>
+<span id="cb957-3"><a href="anova.html#cb957-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb957-4"><a href="anova.html#cb957-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x)) <span class="co">#пишем функцию для стандартной ошибки</span></span>
+<span id="cb957-5"><a href="anova.html#cb957-5" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">=</span> <span class="fu">position_dodge</span>(<span class="fl">0.05</span>) <span class="co">#немного раздвигаем положение точек на будущем графике</span></span>
+<span id="cb957-6"><a href="anova.html#cb957-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb957-7"><a href="anova.html#cb957-7" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
+<span id="cb957-8"><a href="anova.html#cb957-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf, genderf) <span class="sc">%&gt;%</span></span>
+<span id="cb957-9"><a href="anova.html#cb957-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">meanloss =</span> <span class="fu">mean</span>(weight.loss),</span>
+<span id="cb957-10"><a href="anova.html#cb957-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="fu">sem</span>(weight.loss)) <span class="sc">%&gt;%</span></span>
+<span id="cb957-11"><a href="anova.html#cb957-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Dietf, </span>
+<span id="cb957-12"><a href="anova.html#cb957-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> meanloss, </span>
+<span id="cb957-13"><a href="anova.html#cb957-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> genderf)) <span class="sc">+</span></span>
+<span id="cb957-14"><a href="anova.html#cb957-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> genderf), <span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb957-15"><a href="anova.html#cb957-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> meanloss <span class="sc">-</span> se, </span>
+<span id="cb957-16"><a href="anova.html#cb957-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> meanloss <span class="sc">+</span> se), <span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb957-17"><a href="anova.html#cb957-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-467-1.png" width="672" /></p>
 <p>Как видно по картинке, разница в эффективности диеты С по сравнению с другими видна только для женщин.</p>
-<div class="sourceCode" id="cb950"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb950-1"><a href="anova.html#cb950-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
-<span id="cb950-2"><a href="anova.html#cb950-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
-<span id="cb950-3"><a href="anova.html#cb950-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
-<span id="cb950-4"><a href="anova.html#cb950-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> .(Dietf, gender),</span>
-<span id="cb950-5"><a href="anova.html#cb950-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
-<span id="cb950-6"><a href="anova.html#cb950-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb958"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb958-1"><a href="anova.html#cb958-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
+<span id="cb958-2"><a href="anova.html#cb958-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
+<span id="cb958-3"><a href="anova.html#cb958-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
+<span id="cb958-4"><a href="anova.html#cb958-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> .(Dietf, gender),</span>
+<span id="cb958-5"><a href="anova.html#cb958-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
+<span id="cb958-6"><a href="anova.html#cb958-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code></pre></div>
 <pre><code>## $ANOVA
 ##         Effect DFn DFd        SSn     SSd          F          p p&lt;.05
 ## 1        Dietf   2  70 60.4172197 376.329 5.61902602 0.00545568     *
@@ -985,17 +985,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rm_aov" class="section level2" number="17.7">
 <h2><span class="header-section-number">17.7</span> Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</h2>
 <p>Если обычный дисперсионный анализ - это аналог независимого т-теста для нескольких групп, то дисперсионный анализ с повторными измерениями - это аналог зависимого т-теста. В функции <code>ezANOVA()</code> для проведения дисперсионного анализа с повторными измерениями нужно просто поставить нужным параметром внутригрупповую переменную. Это означает, что в данном случае мы должны иметь данные в длинном формате, для чего мы воспользуемся функцией <code>pivot_longer()</code>:</p>
-<div class="sourceCode" id="cb952"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb952-1"><a href="anova.html#cb952-1" aria-hidden="true" tabindex="-1"></a>dietlong <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb952-2"><a href="anova.html#cb952-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
-<span id="cb952-3"><a href="anova.html#cb952-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;time&quot;</span>,</span>
-<span id="cb952-4"><a href="anova.html#cb952-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;weight&quot;</span>)</span>
-<span id="cb952-5"><a href="anova.html#cb952-5" aria-hidden="true" tabindex="-1"></a>dietlongC <span class="ot">&lt;-</span> dietlong <span class="sc">%&gt;%</span></span>
-<span id="cb952-6"><a href="anova.html#cb952-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">filter</span>(Dietf <span class="sc">==</span> <span class="st">&quot;C&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb952-7"><a href="anova.html#cb952-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">droplevels</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb953"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb953-1"><a href="anova.html#cb953-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlongC,</span>
-<span id="cb953-2"><a href="anova.html#cb953-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
-<span id="cb953-3"><a href="anova.html#cb953-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
-<span id="cb953-4"><a href="anova.html#cb953-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time)</span></code></pre></div>
+<div class="sourceCode" id="cb960"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb960-1"><a href="anova.html#cb960-1" aria-hidden="true" tabindex="-1"></a>dietlong <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb960-2"><a href="anova.html#cb960-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
+<span id="cb960-3"><a href="anova.html#cb960-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;time&quot;</span>,</span>
+<span id="cb960-4"><a href="anova.html#cb960-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;weight&quot;</span>)</span>
+<span id="cb960-5"><a href="anova.html#cb960-5" aria-hidden="true" tabindex="-1"></a>dietlongC <span class="ot">&lt;-</span> dietlong <span class="sc">%&gt;%</span></span>
+<span id="cb960-6"><a href="anova.html#cb960-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">filter</span>(Dietf <span class="sc">==</span> <span class="st">&quot;C&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb960-7"><a href="anova.html#cb960-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">droplevels</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb961"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb961-1"><a href="anova.html#cb961-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlongC,</span>
+<span id="cb961-2"><a href="anova.html#cb961-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
+<span id="cb961-3"><a href="anova.html#cb961-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
+<span id="cb961-4"><a href="anova.html#cb961-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time)</span></code></pre></div>
 <pre><code>## $ANOVA
 ##   Effect DFn DFd        F            p p&lt;.05       ges
 ## 2   time   1  26 124.6949 2.030459e-11     * 0.0986036</code></pre>
@@ -1003,11 +1003,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mixed_aov" class="section level2" number="17.8">
 <h2><span class="header-section-number">17.8</span> Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</h2>
 <p>Нам никто не мешает совмещать и внутригруппоdые, и межгрупповые факторы вместе. В <code>ezANOVA()</code> это делается просто с помощью прописывания разных факторов в нужных переменных: <code>between =</code> и <code>within =</code>.</p>
-<div class="sourceCode" id="cb955"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb955-1"><a href="anova.html#cb955-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlong,</span>
-<span id="cb955-2"><a href="anova.html#cb955-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
-<span id="cb955-3"><a href="anova.html#cb955-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
-<span id="cb955-4"><a href="anova.html#cb955-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time,</span>
-<span id="cb955-5"><a href="anova.html#cb955-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf)</span></code></pre></div>
+<div class="sourceCode" id="cb963"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb963-1"><a href="anova.html#cb963-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlong,</span>
+<span id="cb963-2"><a href="anova.html#cb963-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
+<span id="cb963-3"><a href="anova.html#cb963-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
+<span id="cb963-4"><a href="anova.html#cb963-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time,</span>
+<span id="cb963-5"><a href="anova.html#cb963-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf)</span></code></pre></div>
 <pre><code>## $ANOVA
 ##       Effect DFn DFd           F            p p&lt;.05         ges
 ## 2      Dietf   2  73   0.8280758 4.409507e-01       0.021710057
@@ -1021,7 +1021,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="krask_aov" class="section level3" number="17.9.1">
 <h3><span class="header-section-number">17.9.1</span> Тест Краскела-Уоллеса</h3>
 <p>Это тест Краскела-Уоллеса - обобщение теста Манна-Уитни на несколько выборок (т.е. аналог межгруппового ANOVA):</p>
-<div class="sourceCode" id="cb957"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb957-1"><a href="anova.html#cb957-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span></code></pre></div>
+<div class="sourceCode" id="cb965"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb965-1"><a href="anova.html#cb965-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span></code></pre></div>
 <pre><code>## 
 ##  Kruskal-Wallis rank sum test
 ## 
@@ -1031,7 +1031,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="friedman_aov" class="section level3" number="17.9.2">
 <h3><span class="header-section-number">17.9.2</span> Тест Фридмана</h3>
 <p>Для зависимых выборок есть тест Фридмана - непараметрический аналог дисперсионного анализа с повторными измерениями:</p>
-<div class="sourceCode" id="cb959"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb959-1"><a href="anova.html#cb959-1" aria-hidden="true" tabindex="-1"></a><span class="fu">friedman.test</span>(weight <span class="sc">~</span> time <span class="sc">|</span> Person, dietlongC)</span></code></pre></div>
+<div class="sourceCode" id="cb967"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb967-1"><a href="anova.html#cb967-1" aria-hidden="true" tabindex="-1"></a><span class="fu">friedman.test</span>(weight <span class="sc">~</span> time <span class="sc">|</span> Person, dietlongC)</span></code></pre></div>
 <pre><code>## 
 ##  Friedman rank sum test
 ## 
@@ -1047,9 +1047,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>тестирование сферичности для дисперсионного анализа с повторноми измерениями с помощью теста сферичности Моучли (Mauchly’s sphericity test). Этот тест проверяет использует матрицу ковариаций разниц каждого условия с каждым: дисперсии разниц между условиями должны быть примерно одинаковыми. Если нулевая гипотеза о сферичности может быть отброшена (p-value &lt; <span class="math inline">\(\alpha\)</span>), то нужно проводить специальные поправки, обычно это поправки Гринхауса-Гейсера (Greenhouse-Geisser corrections). Мы этого не делали, потому что в ситуации RM-ANOVA с всего двумя условиями эта сферичность никогда не нарушается: у нас всего одна дисперсия разниц между условиями, которую просто-напросто не с чем сравнивать. Тест сферичности Моучли вместе с поправками Гринхауса-Гейсера проводятся автоматически для RM-ANOVA с тремя или более группами при использовании функции <code>ezANOVA()</code>, так что особо париться над этим не стоит. Правда, нужно помнить, что как и все подобные статистические тесты допущений, они обладают проблемами, связанными с тем, что это статистические тесты: на маленьких выборках они не заметят даже серьезных отклонений от сферичности, на больших - даже маленькие отклонения, а <span class="math inline">\(p-value &lt; 0.05\)</span>, по сути, не может интерпретироваться как верность нулевой гипотезы. Тем не менее, это довольно стандартная процедура.</p></li>
 <li><p>Как правильно репортить результаты дисперсионного анализа. Здесь все, конечно, зависит от стиля, используемого конкретным журналом. В психологии и близких к ней дисциплинам фактическим lingua franca является стиль Американской Психологической Ассоциации (APA). И тут у меня есть для Вас хорошие новости: есть куча пакетов в R, которые позволяют репортить результаты статистических тестов в APA-стиле! Спасибо дотошным авторам руководства APA по офромлению статей, что этот стиль настолько точно прописывает, как нужно описывать результаты исследований, что это можно запрограммировать. Я лично пользуюсь пакетом <code>apa</code>, он весьма удобен:</p></li>
 </ul>
-<div class="sourceCode" id="cb961"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb961-1"><a href="anova.html#cb961-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;apa&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb962"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb962-1"><a href="anova.html#cb962-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apa)</span>
-<span id="cb962-2"><a href="anova.html#cb962-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_apa</span>(ez_model, <span class="at">format =</span> <span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb969"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb969-1"><a href="anova.html#cb969-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;apa&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb970"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb970-1"><a href="anova.html#cb970-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apa)</span>
+<span id="cb970-2"><a href="anova.html#cb970-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_apa</span>(ez_model, <span class="at">format =</span> <span class="st">&quot;rmarkdown&quot;</span>)</span></code></pre></div>
 <pre><code>## Dietf: *F*(2, 73) = 5.38, *p* = .007, $\eta^2_p$ = .13</code></pre>
 <p>В тексте это будет выглядеть это будет вот так:</p>
 <p>Dietf: <em>F</em>(2, 73) = 5.38, <em>p</em> = .007, <span class="math inline">\(\eta^2_p\)</span> = .13</p>

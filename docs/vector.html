@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#проверка-импортированных-данных"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
 <li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
 <li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
 <li class="chapter" data-level="6.6" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
@@ -513,10 +513,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="vector.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">:-</span><span class="dv">3</span></span></code></pre></div>
 <pre><code>## [1]  5  4  3  2  1  0 -1 -2 -3</code></pre>
 <p>Этот оператор создает вектор от первого числа до второго с шагом 1. Вы не представляете, как часто эта штука нам пригодится… Если же нужно сделать вектор с другим шагом, то есть функция <code>seq()</code>:</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="vector.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>,<span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="vector.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
 <p>Кроме того, можно задавать не шаг, а длину вектора. Тогда функция <code>seq()</code> сама посчитает шаг:</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="vector.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">13</span>, <span class="at">length.out =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="vector.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">13</span>, <span class="at">length.out =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1]  1  5  9 13</code></pre>
 <p>Другая функция — <code>rep()</code> — позволяет создавать вектора с повторяющимися значениями. Первый аргумент — значение, которое нужно повторять, а второй аргумент — сколько раз повторять.</p>
 <div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="vector.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">5</span>)</span></code></pre></div>
@@ -778,39 +778,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>##  [1]  0  1 20  0 NA  0  8 13 21 34</code></pre>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="vector.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(n)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<p>Получается, что наличие <code>NA</code> “заражает” неопределенностью все последующие действия. Что же делать?<br />
-Наверное, надо сравнить вектор с <code>NA</code> и исключить этих пакостников. Давайте попробуем:</p>
+<p>Получается, что наличие <code>NA</code> “заражает” неопределенностью все последующие действия. Что же делать?</p>
+<p>Наверное, надо сравнить вектор с <code>NA</code> и исключить этих пакостников. Давайте попробуем:</p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="vector.html#cb248-1" aria-hidden="true" tabindex="-1"></a>n <span class="sc">==</span> <span class="cn">NA</span></span></code></pre></div>
 <pre><code>##  [1] NA NA NA NA NA NA NA NA NA NA</code></pre>
-<p>Ах да, мы ведь только что узнали, что даже сравнение <code>NA</code> c <code>NA</code> приводит к <code>NA</code>!</p>
-<p>Чтобы выбраться из этой непростой ситуации, используйте функцию <code>is.na()</code>:</p>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="vector.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(n)</span></code></pre></div>
+<p>Ах да, мы ведь только что узнали, что даже сравнение <code>NA</code> c <code>NA</code> приводит к <code>NA</code>! Сначала это может показаться нелогичным: ведь с обоих сторон <code>NA</code>, почему же тогда результат их сравнения — это тоже <code>NA</code>, а не <code>TRUE</code>?</p>
+<p>Дело в том, что сравнивая две неопределенности, вы не можете установить между ними знак равенства. Представим себе двух супергероев: Бэтмена и Спайдермена. Допустим, мы не знаем их рост:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="vector.html#cb250-1" aria-hidden="true" tabindex="-1"></a>Batman <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb250-2"><a href="vector.html#cb250-2" aria-hidden="true" tabindex="-1"></a>Spiderman <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<p>Одинаковый ли у них рост?</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="vector.html#cb251-1" aria-hidden="true" tabindex="-1"></a>Batman <span class="sc">==</span> Spiderman</span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<p>Мы не знаем! Возможно, да, возможно, и нет. Поэтому у нас здесь остается неопределенность.</p>
+<p>Так как же избавиться от <code>NA</code> в данных? Самый простой способ — это функция <code>is.na()</code>:</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="vector.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(n)</span></code></pre></div>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> в тех местах, где у нас числа и <code>TRUE</code> там, где у нас <code>NA</code>. Чтобы вычленить из вектора <code>n</code> все значения кроме <code>NA</code> нам нужно, чтобы было наоборот: <code>TRUE</code>, если это не <code>NA</code>, <code>FALSE</code>, если это <code>NA</code>. Здесь нам понадобится логический оператор НЕ <code>!</code> (мы его уже встречали), который инвертирует логические значения:</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="vector.html#cb252-1" aria-hidden="true" tabindex="-1"></a>n[<span class="sc">!</span><span class="fu">is.na</span>(n)]</span></code></pre></div>
+<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> на тех позициях, где у нас числа (или другие значения), и <code>TRUE</code> там, где у нас <code>NA</code>. Чтобы вычленить из вектора <code>n</code> все значения кроме <code>NA</code> нам нужно, чтобы было наоборот: <code>TRUE</code>, если это не <code>NA</code>, <code>FALSE</code>, если это <code>NA</code>. Здесь нам понадобится логический оператор НЕ <code>!</code> (мы его уже встречали — см. @ref(data_types)), который инвертирует логические значения:</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="vector.html#cb255-1" aria-hidden="true" tabindex="-1"></a>n[<span class="sc">!</span><span class="fu">is.na</span>(n)]</span></code></pre></div>
 <pre><code>## [1]  0  1 20  0  0  8 13 21 34</code></pre>
-<p>Ура, мы можем считать среднее!</p>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="vector.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(n[<span class="sc">!</span><span class="fu">is.na</span>(n)])</span></code></pre></div>
+<p>Ура, мы можем считать среднее без <code>NA</code>!</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="vector.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(n[<span class="sc">!</span><span class="fu">is.na</span>(n)])</span></code></pre></div>
 <pre><code>## [1] 10.77778</code></pre>
 <p>Теперь Вы понимаете, зачем нужно отрицание (<code>!</code>)</p>
 <p>Вообще, есть еще один из способов посчитать среднее, если есть <code>NA</code>. Для этого надо залезть в хэлп по функции <em>mean()</em>:</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="vector.html#cb256-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">mean</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="vector.html#cb259-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">mean</span>()</span></code></pre></div>
 <p>В хэлпе мы найдем параметр <code>na.rm =</code>, который по умолчанию <code>FALSE</code>. Вы знаете, что нужно делать!</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="vector.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(n, <span class="at">na.rm =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="vector.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(n, <span class="at">na.rm =</span> T)</span></code></pre></div>
 <pre><code>## [1] 10.77778</code></pre>
-<blockquote>
-<p><code>NA</code> может появляться в векторах других типов тоже. На самом деле, <code>NA</code> - это специальное значение в логических векторах, тогда как в векторах других типов <code>NA</code> появляется как <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> или <code>NA_character_</code>, но R обычно сам все переводит в нужный формат и показывает как просто <code>NA</code>.</p>
-</blockquote>
+<p><code>NA</code> может появляться в векторах разных типов. На самом деле, <code>NA</code> - это специальное значение в логических векторах, тогда как в векторах других типов <code>NA</code> появляется как <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> или <code>NA_character_</code>, но R обычно сам все переводит в нужный формат и показывает как просто <code>NA</code>. Таким образом, <code>NA</code> в векторах разных типов — это разные <code>NA</code>, хотя на практике эта деталь обычно несущественна.</p>
 <blockquote>
 <p>Кроме <code>NA</code> есть еще <code>NaN</code> — это разные вещи. <code>NaN</code> расшифровывается как <em>Not a Number</em> и получается в результате таких операций как <code>0 / 0</code>. Тем не менее, функция <code>is.na()</code> выдает <code>TRUE</code> на <code>NaN</code>, а вот функция <code>is.nan()</code> выдает <code>TRUE</code> на <code>NaN</code> и <code>FALSE</code> на <code>NA</code>:</p>
 </blockquote>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="vector.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="vector.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="vector.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NaN</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="vector.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NaN</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="vector.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="vector.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="vector.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NaN</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="vector.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.nan</span>(<span class="cn">NaN</span>)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="vector_end" class="section level2" number="3.8">

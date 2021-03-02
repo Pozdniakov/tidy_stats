@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="6.2.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#проверка-импортированных-данных"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
 <li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
 <li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
 <li class="chapter" data-level="6.6" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
@@ -492,45 +492,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Стандратная часть практически любого языка программирования — условные конструкции. R не исключение. Однако и здесь есть свои особенности. Начнем с самого простого варианта с одним условием. Выглядеть условная конcтрукция будет вот так:</p>
 <pre><code>if (условие) выражение</code></pre>
 <p>Вот так это будет работать на практике:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="loops-conditions.html#cb366-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb366-2"><a href="loops-conditions.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="st">&quot;Положительное число&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="loops-conditions.html#cb370-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb370-2"><a href="loops-conditions.html#cb370-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="st">&quot;Положительное число&quot;</span></span></code></pre></div>
 <pre><code>## [1] &quot;Положительное число&quot;</code></pre>
 <p>Если выражение (expression) содержит больше одной строчки, то они объединяются фигурными скобками. Впрочем, использовать их можно, даже если строчка всего в выражении всего одна.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="loops-conditions.html#cb368-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb368-2"><a href="loops-conditions.html#cb368-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb368-3"><a href="loops-conditions.html#cb368-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
-<span id="cb368-4"><a href="loops-conditions.html#cb368-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="loops-conditions.html#cb372-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb372-2"><a href="loops-conditions.html#cb372-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb372-3"><a href="loops-conditions.html#cb372-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
+<span id="cb372-4"><a href="loops-conditions.html#cb372-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Положительное число&quot;</code></pre>
 <p>В рассмотренной нами конструкции происходит проверка на условие. Если условие верно<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>, то происходит то, что записано в последующем выражении. Если же условие неверно<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a>, то ничего не происходит.</p>
 <p>Оператор <code>else</code> позволяет задавать действие на все остальные случаи:</p>
 <pre><code>if (условие) выражение else выражение</code></pre>
 <p>Работает это так:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="loops-conditions.html#cb371-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
-<span id="cb371-2"><a href="loops-conditions.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb371-3"><a href="loops-conditions.html#cb371-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
-<span id="cb371-4"><a href="loops-conditions.html#cb371-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb371-5"><a href="loops-conditions.html#cb371-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Отрицательное число или ноль&quot;</span></span>
-<span id="cb371-6"><a href="loops-conditions.html#cb371-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;Отрицательное число или ноль&quot;</code></pre>
-<p>Иногда нам нужна последовательная проверка на несколько условий. Для этого есть оператор <code>else if</code>. Вот как выглядит ее применение:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="loops-conditions.html#cb373-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb373-2"><a href="loops-conditions.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb373-3"><a href="loops-conditions.html#cb373-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
-<span id="cb373-4"><a href="loops-conditions.html#cb373-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
-<span id="cb373-5"><a href="loops-conditions.html#cb373-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Отрицательное число&quot;</span></span>
-<span id="cb373-6"><a href="loops-conditions.html#cb373-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb373-7"><a href="loops-conditions.html#cb373-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ноль&quot;</span></span>
-<span id="cb373-8"><a href="loops-conditions.html#cb373-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<pre><code>## [1] &quot;Ноль&quot;</code></pre>
-<p>Как мы помним, R — язык, в котором векторизация играет большое значение. Но вот незадача — условные конструкции не векторизованы в R! Давайте попробуем применить эти конструкции для вектора значений и посмотрим, что получится.</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="loops-conditions.html#cb375-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="loops-conditions.html#cb375-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
 <span id="cb375-2"><a href="loops-conditions.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb375-3"><a href="loops-conditions.html#cb375-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
-<span id="cb375-4"><a href="loops-conditions.html#cb375-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
-<span id="cb375-5"><a href="loops-conditions.html#cb375-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Отрицательное число&quot;</span></span>
-<span id="cb375-6"><a href="loops-conditions.html#cb375-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb375-7"><a href="loops-conditions.html#cb375-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ноль&quot;</span></span>
-<span id="cb375-8"><a href="loops-conditions.html#cb375-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb375-4"><a href="loops-conditions.html#cb375-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb375-5"><a href="loops-conditions.html#cb375-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Отрицательное число или ноль&quot;</span></span>
+<span id="cb375-6"><a href="loops-conditions.html#cb375-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Отрицательное число или ноль&quot;</code></pre>
+<p>Иногда нам нужна последовательная проверка на несколько условий. Для этого есть оператор <code>else if</code>. Вот как выглядит ее применение:</p>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="loops-conditions.html#cb377-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb377-2"><a href="loops-conditions.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb377-3"><a href="loops-conditions.html#cb377-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
+<span id="cb377-4"><a href="loops-conditions.html#cb377-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb377-5"><a href="loops-conditions.html#cb377-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Отрицательное число&quot;</span></span>
+<span id="cb377-6"><a href="loops-conditions.html#cb377-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb377-7"><a href="loops-conditions.html#cb377-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ноль&quot;</span></span>
+<span id="cb377-8"><a href="loops-conditions.html#cb377-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;Ноль&quot;</code></pre>
+<p>Как мы помним, R — язык, в котором векторизация играет большое значение. Но вот незадача — условные конструкции не векторизованы в R! Давайте попробуем применить эти конструкции для вектора значений и посмотрим, что получится.</p>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="loops-conditions.html#cb379-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb379-2"><a href="loops-conditions.html#cb379-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb379-3"><a href="loops-conditions.html#cb379-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Положительное число&quot;</span></span>
+<span id="cb379-4"><a href="loops-conditions.html#cb379-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb379-5"><a href="loops-conditions.html#cb379-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Отрицательное число&quot;</span></span>
+<span id="cb379-6"><a href="loops-conditions.html#cb379-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb379-7"><a href="loops-conditions.html#cb379-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Ноль&quot;</span></span>
+<span id="cb379-8"><a href="loops-conditions.html#cb379-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## Warning in if (number &gt; 0) {: длина условия &gt; 1, будет использован только первый
 ## элемент</code></pre>
 <pre><code>## Warning in if (number &lt; 0) {: длина условия &gt; 1, будет использован только первый
@@ -543,15 +543,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Во-первых, можно использовать <code>for</code>. Синтаксис у <code>for</code> похож на синтаксис условных конструкций.</p>
 <pre><code>for(переменная in последовательность) выражение</code></pre>
 <p>Теперь мы можем объединить условные конструкции и <code>for</code>. Немножко монструозно, но это работает:</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="loops-conditions.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
-<span id="cb380-2"><a href="loops-conditions.html#cb380-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb380-3"><a href="loops-conditions.html#cb380-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Положительное число&quot;</span>)</span>
-<span id="cb380-4"><a href="loops-conditions.html#cb380-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
-<span id="cb380-5"><a href="loops-conditions.html#cb380-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Отрицательное число&quot;</span>)</span>
-<span id="cb380-6"><a href="loops-conditions.html#cb380-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb380-7"><a href="loops-conditions.html#cb380-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Ноль&quot;</span>)</span>
-<span id="cb380-8"><a href="loops-conditions.html#cb380-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb380-9"><a href="loops-conditions.html#cb380-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="loops-conditions.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
+<span id="cb384-2"><a href="loops-conditions.html#cb384-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb384-3"><a href="loops-conditions.html#cb384-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Положительное число&quot;</span>)</span>
+<span id="cb384-4"><a href="loops-conditions.html#cb384-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb384-5"><a href="loops-conditions.html#cb384-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Отрицательное число&quot;</span>)</span>
+<span id="cb384-6"><a href="loops-conditions.html#cb384-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb384-7"><a href="loops-conditions.html#cb384-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">&quot;Ноль&quot;</span>)</span>
+<span id="cb384-8"><a href="loops-conditions.html#cb384-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb384-9"><a href="loops-conditions.html#cb384-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] &quot;Отрицательное число&quot;
 ## [1] &quot;Отрицательное число&quot;
 ## [1] &quot;Ноль&quot;
@@ -562,24 +562,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>Здесь стоит отметить, что <code>for</code> используется в R относительно редко. В подавляющем числе ситуаций использование <code>for</code> можно избежать. Обычно мы работаем в R с векторами или датафреймами, которые представляют собой множество относительно независимых наблюдений. Если мы хотим провести какие-нибудь операции с этими наблюдениями, то они обычно могут быть выполнены параллельно. Скажем, вы хотите для каждого испытуемого пересчитать его массу из фунтов в килограммы. Этот пересчет осуществляется по одинаковой формуле для каждого испытуемого. Эта формула не изменится из-за того, что какой-то испытуемый слишком большой или слишком маленький - для следующего испытуемого формула будет прежняя. Если Вы встречаете подобную задачу (где функцию можно применить независимо для всех значений), то без цикла <code>for</code> вполне можно обойтись.</p>
 <p>Даже во многих случаях, где расчеты для одной строчки зависят от расчетов предыдущих строчек, можно обойтись без <code>for</code> векторизованными функциями, например, <code>cumsum()</code> для подсчета кумулятивной суммы.</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="loops-conditions.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="loops-conditions.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##  [1]  1  3  6 10 15 21 28 36 45 55</code></pre>
 <p>Если же нет подходящей векторизованной функции, то можно воспользоваться семейством функций <code>apply()</code> (см. @ref(apply_f) ).</p>
 <blockquote>
 <p>После этих объяснений кому-то может показаться странным, что я вообще упоминаю про эти циклы. Но для кого-то циклы <code>for</code> настолько привычны, что их полное отсутствие в курсе может показаться еще более странным. Поэтому лучше от меня, чем на улице.</p>
 </blockquote>
 <p>Зачем вообще избегать конструкций <code>for</code>? Некоторые говорят, что они слишком медленные, и частично это верно, если мы сравниваем с векторизованными функциями, которые написаны на более низкоуровневых языках. Но в большинстве случаев низкая скорость <code>for</code> связана с неправильным использованием этой конструкции. Например, стоит избегать ситуации, когда на каждой итерации <code>for</code> какой-то объект (вектор, список, что угодно) изменяется в размере. Лучше будет создать заранее объект нужного размера, который затем будет наполняться значениями:</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="loops-conditions.html#cb384-1" aria-hidden="true" tabindex="-1"></a>number_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(number)) <span class="co">#создаем строковый вектор с такой же длиной, как и исходный вектор</span></span>
-<span id="cb384-2"><a href="loops-conditions.html#cb384-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(number)) {</span>
-<span id="cb384-3"><a href="loops-conditions.html#cb384-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (number[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb384-4"><a href="loops-conditions.html#cb384-4" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">&quot;Положительное число&quot;</span></span>
-<span id="cb384-5"><a href="loops-conditions.html#cb384-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (number[i] <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
-<span id="cb384-6"><a href="loops-conditions.html#cb384-6" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">&quot;Отрицательное число&quot;</span></span>
-<span id="cb384-7"><a href="loops-conditions.html#cb384-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb384-8"><a href="loops-conditions.html#cb384-8" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">&quot;Ноль&quot;</span></span>
-<span id="cb384-9"><a href="loops-conditions.html#cb384-9" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb384-10"><a href="loops-conditions.html#cb384-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb384-11"><a href="loops-conditions.html#cb384-11" aria-hidden="true" tabindex="-1"></a>number_descriptions</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="loops-conditions.html#cb388-1" aria-hidden="true" tabindex="-1"></a>number_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(number)) <span class="co">#создаем строковый вектор с такой же длиной, как и исходный вектор</span></span>
+<span id="cb388-2"><a href="loops-conditions.html#cb388-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(number)) {</span>
+<span id="cb388-3"><a href="loops-conditions.html#cb388-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (number[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb388-4"><a href="loops-conditions.html#cb388-4" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">&quot;Положительное число&quot;</span></span>
+<span id="cb388-5"><a href="loops-conditions.html#cb388-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (number[i] <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb388-6"><a href="loops-conditions.html#cb388-6" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">&quot;Отрицательное число&quot;</span></span>
+<span id="cb388-7"><a href="loops-conditions.html#cb388-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb388-8"><a href="loops-conditions.html#cb388-8" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">&quot;Ноль&quot;</span></span>
+<span id="cb388-9"><a href="loops-conditions.html#cb388-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb388-10"><a href="loops-conditions.html#cb388-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb388-11"><a href="loops-conditions.html#cb388-11" aria-hidden="true" tabindex="-1"></a>number_descriptions</span></code></pre></div>
 <pre><code>## [1] &quot;Отрицательное число&quot; &quot;Отрицательное число&quot; &quot;Ноль&quot;               
 ## [4] &quot;Положительное число&quot; &quot;Положительное число&quot;</code></pre>
 <p>В общем, при правильном обращении с <code>for</code> особых проблем со скоростью не будет. Но все равно это будет громоздкая конструкция, в которой легко ошибиться, и которую, скорее всего, можно заменить одной короткой строчкой. Кроме того, без конструкции <code>for</code> код обычно легко превратить в набор функций, последовательно применяющихся к данным, что мы будем по максимуму использовать, работая в tidyverse и применяя пайпы (см. [pipe]).</p>
@@ -587,24 +587,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ifelse" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></h2>
 <p>Альтернатива сочетанию условных конструкций и циклов <code>for</code> является использование встроенной функции <code>ifelse()</code>. Функция <code>ifelse()</code> принимает три аргумента - 1) условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>), 2) что выдавать в случае <code>TRUE</code>, 3) что выдавать в случае <code>FALSE</code>. На выходе получается вектор такой же длины, как и изначальный логический вектор (условие).</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="loops-conditions.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Положительное число&quot;</span>, <span class="st">&quot;Отрицательное число или ноль&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="loops-conditions.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Положительное число&quot;</span>, <span class="st">&quot;Отрицательное число или ноль&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Отрицательное число или ноль&quot; &quot;Отрицательное число или ноль&quot;
 ## [3] &quot;Отрицательное число или ноль&quot; &quot;Положительное число&quot;         
 ## [5] &quot;Положительное число&quot;</code></pre>
 <blockquote>
 <p>Периодически я встречаю у студентов строчку вроде такой: <code>ifelse(условие, TRUE, FALSE)</code>. Эта конструкция избыточна, т.к. получается, что логический вектор из <code>TRUE</code> и <code>FALSE</code> превращается в абсолютно такой же вектор из <code>TRUE</code> и <code>FALSE</code> на тех же самых местах. Выходит, что ничего не меняется!</p>
 </blockquote>
+<p>Пакеты <code>{dplyr}</code> и <code>{data.table}</code> предоставляют более быстрые и более строгие альтернативы для базовой функции <code>ifelse()</code> с аналогичным синтаксисом:</p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="loops-conditions.html#cb392-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">if_else</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Положительное число&quot;</span>, <span class="st">&quot;Отрицательное число или ноль&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Отрицательное число или ноль&quot; &quot;Отрицательное число или ноль&quot;
+## [3] &quot;Отрицательное число или ноль&quot; &quot;Положительное число&quot;         
+## [5] &quot;Положительное число&quot;</code></pre>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="loops-conditions.html#cb394-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">&quot;Положительное число&quot;</span>, <span class="st">&quot;Отрицательное число или ноль&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Отрицательное число или ноль&quot; &quot;Отрицательное число или ноль&quot;
+## [3] &quot;Отрицательное число или ноль&quot; &quot;Положительное число&quot;         
+## [5] &quot;Положительное число&quot;</code></pre>
+<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. @ref(tidy_intro)), то я советую пользоваться соотвествующей функцией вместо базового <code>ifelse()</code>.</p>
+<p>Обе функции будут избегать скрытого приведения типов (см. <a href="vector.html#coercion">3.2</a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="vector.html#na">3.7</a>).</p>
 <p>У <code>ifelse()</code> тоже есть недостаток: он не может включать в себя дополнительных условий по типу <code>else if</code>. В простых ситуациях можно вставлять <code>ifelse()</code> внутри <code>ifelse()</code>:</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="loops-conditions.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb388-2"><a href="loops-conditions.html#cb388-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Положительное число&quot;</span>,</span>
-<span id="cb388-3"><a href="loops-conditions.html#cb388-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;Отрицательное число&quot;</span>, <span class="st">&quot;Ноль&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="loops-conditions.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb396-2"><a href="loops-conditions.html#cb396-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;Положительное число&quot;</span>,</span>
+<span id="cb396-3"><a href="loops-conditions.html#cb396-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">&quot;Отрицательное число&quot;</span>, <span class="st">&quot;Ноль&quot;</span>))</span></code></pre></div>
 <pre><code>## [1] &quot;Отрицательное число&quot; &quot;Отрицательное число&quot; &quot;Ноль&quot;               
 ## [4] &quot;Положительное число&quot; &quot;Положительное число&quot;</code></pre>
-<p>Достаточно симпатичное решение предлогает пакет <code>dplyr</code> (основа tidyverse) — функция <code>case_when()</code>, которая работает с использованием формулы:</p>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="loops-conditions.html#cb390-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb390-2"><a href="loops-conditions.html#cb390-2" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Положительное число&quot;</span>,</span>
-<span id="cb390-3"><a href="loops-conditions.html#cb390-3" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Отрицательное число&quot;</span>,</span>
-<span id="cb390-4"><a href="loops-conditions.html#cb390-4" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Ноль&quot;</span>)</span></code></pre></div>
+<p>Достаточно симпатичное решение есть в пакете <code>dplyr</code> — функция <code>case_when()</code>, которая работает с использованием формулы:</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="loops-conditions.html#cb398-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb398-2"><a href="loops-conditions.html#cb398-2" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Положительное число&quot;</span>,</span>
+<span id="cb398-3"><a href="loops-conditions.html#cb398-3" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Отрицательное число&quot;</span>,</span>
+<span id="cb398-4"><a href="loops-conditions.html#cb398-4" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;Ноль&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Отрицательное число&quot; &quot;Отрицательное число&quot; &quot;Ноль&quot;               
 ## [4] &quot;Положительное число&quot; &quot;Положительное число&quot;</code></pre>
 </div>
