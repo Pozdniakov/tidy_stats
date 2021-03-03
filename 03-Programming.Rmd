@@ -167,6 +167,16 @@ dplyr::case_when(
   number == 0 ~ "Ноль")
 ```
 
+В `data.table` тоже есть свой ([более быстрый](https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/)) аналог `case_when()` --- функция `fcase()`. Синтаксис отличается только тем, что вместо формул используются простые запятые:
+
+```{r}
+data.table::fcase(
+  number > 0, "Положительное число",
+  number < 0, "Отрицательное число",
+  number == 0, "Ноль")
+```
+
+Задача создания вектора или колонки по множественным условиям из другой колонки плавно перетекает в задачу объединения двух датафреймов по единому ключу, и такое решение может оказаться [наиболее быстрым](https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/) (см. \@ref(tidy_join)).
 
 # Функциональное программирование в R {#functional}
 ## Создание функций {#create_fun}
@@ -250,7 +260,7 @@ imt(weight = w, height = h)
 
 ```{r}
 imt <- function(weight, height) {
-  if (height > 3) warning("Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах\n")
+  if (any(height > 3)) warning("Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах\n")
   weight / height ^ 2
 }
 imt(78, 167)
@@ -261,7 +271,7 @@ imt(78, 167)
 ```{r, error=TRUE}
 imt <- function(weight, height) {
   if (any(weight <= 0 | height <= 0)) stop("Индекс массы тела не может быть посчитан для отрицательных значений")
-  if (height > 3) warning("Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах\n")
+  if (any(height > 3)) warning("Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах\n")
   weight / height ^ 2
 }
 imt(-78, 167)
@@ -385,7 +395,7 @@ sqrt(1:10)
 Можно применять функции `lapply()` и `sapply()` на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. \@ref(df)), то итерироваться эти функции будут по колонкам:
 
 ```{r}
-heroes <- read.csv("data/heroes_information.csv", 
+heroes <- read.csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv", 
                    na.strings = c("-", "-99"))
 sapply(heroes, class)
 ```
