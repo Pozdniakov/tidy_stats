@@ -502,15 +502,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cov_cor" class="section level1" number="15">
 <h1><span class="header-section-number">15</span> Ковариация и корреляция</h1>
 <p>Возьмем новый набор данных, на этот раз про американских студентов, вес их рюкзаков и проблемы со спиной. Этот набор данных хранится в пакете <code>Stat2Data</code> — пакет с большим количеством разнообразных данных.</p>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="cov-cor.html#cb848-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Stat2Data&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="cov-cor.html#cb847-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;Stat2Data&quot;</span>)</span></code></pre></div>
 <p>С помощью функции <code>data()</code> загрузим набор данных <code>Backpack</code>:</p>
-<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="cov-cor.html#cb849-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb849-2"><a href="cov-cor.html#cb849-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb849-3"><a href="cov-cor.html#cb849-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span></code></pre></div>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="cov-cor.html#cb848-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb848-2"><a href="cov-cor.html#cb848-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb848-3"><a href="cov-cor.html#cb848-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span></code></pre></div>
 <p>Давайте посмотрим, что внутри этой переменной:</p>
-<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="cov-cor.html#cb850-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(Backpack)</span></code></pre></div>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="cov-cor.html#cb849-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(Backpack)</span></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-418">Таблица 15.1: </span>Data summary</caption>
+<caption><span id="tab:unnamed-chunk-417">Таблица 15.1: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -689,9 +689,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>С помощью <code>?Backpack</code> можно получить подробное описание колонок этого датасета.</p>
 <p>Например, можно заметить, что масса как самих студентов, так и их рюкзаков выражена в фунтах. Давайте создадим новые переменные <code>backpack_kg</code> и <code>body_kg</code>, в которых будет записан вес (рюкзаков и самих студентов соответственно) в понятным для нас килограммах. Новый набор данных сохраним под названием <code>back</code>.</p>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="cov-cor.html#cb851-1" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
-<span id="cb851-2"><a href="cov-cor.html#cb851-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
-<span id="cb851-3"><a href="cov-cor.html#cb851-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code></pre></div>
+<div class="sourceCode" id="cb850"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb850-1"><a href="cov-cor.html#cb850-1" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb850-2"><a href="cov-cor.html#cb850-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb850-3"><a href="cov-cor.html#cb850-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code></pre></div>
 <p>До этого мы говорили о <em>различиях</em> между выборками. Теперь мы будем говорить о <em>связи</em> между переменными.</p>
 <div id="cov" class="section level2" number="15.1">
 <h2><span class="header-section-number">15.1</span> Ковариация</h2>
@@ -706,15 +706,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n-1}\]</span></p>
 <p>Ковариация переменной самой с собой — дисперсия.</p>
 <p>В R есть функция <code>cov()</code> для подсчета ковариации. На самом деле, функция <code>var()</code> делает то же самое. Обе эти функции считают сразу <strong>матрицу ковариаций</strong> для всех сочетаний колонок на входе:</p>
-<div class="sourceCode" id="cb852"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb852-1"><a href="cov-cor.html#cb852-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb852-2"><a href="cov-cor.html#cb852-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
-<span id="cb852-3"><a href="cov-cor.html#cb852-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="cov-cor.html#cb851-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb851-2"><a href="cov-cor.html#cb851-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
+<span id="cb851-3"><a href="cov-cor.html#cb851-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code></pre></div>
 <pre><code>##                body_kg backpack_kg
 ## body_kg     177.807700    6.601954
 ## backpack_kg   6.601954    6.838333</code></pre>
-<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="cov-cor.html#cb854-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb854-2"><a href="cov-cor.html#cb854-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
-<span id="cb854-3"><a href="cov-cor.html#cb854-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">var</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="cov-cor.html#cb853-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb853-2"><a href="cov-cor.html#cb853-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
+<span id="cb853-3"><a href="cov-cor.html#cb853-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">var</span>()</span></code></pre></div>
 <pre><code>##                body_kg backpack_kg
 ## body_kg     177.807700    6.601954
 ## backpack_kg   6.601954    6.838333</code></pre>
@@ -737,14 +737,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n - 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
 <p>Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение z-оценок.</p>
 <p>Корреляцию в R можно посчитать с помощью функции <code>cor()</code>:</p>
-<div class="sourceCode" id="cb856"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb856-1"><a href="cov-cor.html#cb856-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb856-2"><a href="cov-cor.html#cb856-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
-<span id="cb856-3"><a href="cov-cor.html#cb856-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="cov-cor.html#cb855-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb855-2"><a href="cov-cor.html#cb855-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
+<span id="cb855-3"><a href="cov-cor.html#cb855-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div>
 <pre><code>##               body_kg backpack_kg
 ## body_kg     1.0000000   0.1893312
 ## backpack_kg 0.1893312   1.0000000</code></pre>
 <p>Для тестирования уровня значимости нулевой гипотезы для корреляции есть функция <code>cor.test()</code>. В случае с коэффициентами корреляции, нулевая гипотеза формулируется как отсутствие корреляции (т.е. она равна нулю) в генеральной совокупности.</p>
-<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="cov-cor.html#cb858-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg)</span></code></pre></div>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="cov-cor.html#cb857-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg)</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
@@ -761,7 +761,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="nonparam_cor" class="section level3" number="15.2.2">
 <h3><span class="header-section-number">15.2.2</span> Непараметрические коэффициенты корреляции</h3>
 <p>У коэффициента корреляции Пирсона, как и у t-теста, есть свои непараметрические братья: коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла. Из них чаще используется коэффициент корреляции Спирмена. Посчитать его можно с помощью той же функции <code>cor.test()</code>, задав соответствующее значение параметра <code>method =</code>:</p>
-<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="cov-cor.html#cb860-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb859-1"><a href="cov-cor.html#cb859-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Spearman&#39;s rank correlation rho
 ## 
@@ -771,7 +771,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ##       rho 
 ## 0.2108001</code></pre>
-<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="cov-cor.html#cb862-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="cov-cor.html#cb861-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Kendall&#39;s rank correlation tau
 ## 
@@ -789,9 +789,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cor_mat" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Корреляционная матрица</h2>
 <p>Возможно, вы нашли что-то более интересное для проверки гипотезы о корреляции. Например, вы еще хотите проверить гипотезу о связи количества учебных кредитов и массе рюкзака: логично предположить, что чем больше студент набрал себе курсов, тем тяжелее его рюкзак (из-за большего количества учебников). Или что студенты к старшим курсам худеют и становятся меньше. Или что те, кто набрал себе много курсов, меньше питаются и от того меньше весят. В общем, хотелось бы прокоррелировать все интересующие нас переменные со всеми. Это можно сделать с помощью функции <code>cor()</code>:</p>
-<div class="sourceCode" id="cb864"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb864-1"><a href="cov-cor.html#cb864-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb864-2"><a href="cov-cor.html#cb864-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
-<span id="cb864-3"><a href="cov-cor.html#cb864-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb863-1"><a href="cov-cor.html#cb863-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb863-2"><a href="cov-cor.html#cb863-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb863-3"><a href="cov-cor.html#cb863-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div>
 <pre><code>##                 body_kg backpack_kg       Units        Year
 ## body_kg      1.00000000  0.18933115 -0.23524088 -0.09301727
 ## backpack_kg  0.18933115  1.00000000  0.09438453  0.05762194
@@ -799,9 +799,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Year        -0.09301727  0.05762194 -0.02946373  1.00000000</code></pre>
 <p>Но функция <code>cor()</code>не позволяет посчитать <em>p-value</em> для этих корреляций! Функция <code>cor.test()</code> позволяет получить <em>p-value</em>, но только для одной пары переменных.</p>
 <p>На помощь приходит пакет <code>psych</code> с функцией <code>corr.test()</code>:</p>
-<div class="sourceCode" id="cb866"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb866-1"><a href="cov-cor.html#cb866-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb866-2"><a href="cov-cor.html#cb866-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
-<span id="cb866-3"><a href="cov-cor.html#cb866-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="cov-cor.html#cb865-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb865-2"><a href="cov-cor.html#cb865-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb865-3"><a href="cov-cor.html#cb865-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>()</span></code></pre></div>
 <pre><code>## Call:psych::corr.test(x = .)
 ## Correlation matrix 
 ##             body_kg backpack_kg Units  Year
@@ -823,9 +823,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Эта проблема называется <strong>проблемой множественных сравнений (multiple comparisons problem)</strong>.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a> Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода (Family-wise error rate)</strong> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
 <p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.е. в среднем 2-3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
 <p>Поэтому если вы проверяете сразу много гипотез, то необходимо применять <strong>поправки на множественные сравнения (multiple testing correction)</strong>. Эти поправки позволяют контролировать групповую вероятность ошибки первого рода на желаемом уровне. Самая простая и популярная поправка на множественные сравнения — <strong>поправка Бонферрони (Bonferroni correction)</strong>. Она считается очень просто: мы просто умножаем p-value на количество проверяемых гипотез!</p>
-<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="cov-cor.html#cb868-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb868-2"><a href="cov-cor.html#cb868-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
-<span id="cb868-3"><a href="cov-cor.html#cb868-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>(<span class="at">adjust =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb867-1"><a href="cov-cor.html#cb867-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb867-2"><a href="cov-cor.html#cb867-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb867-3"><a href="cov-cor.html#cb867-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>(<span class="at">adjust =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
 <pre><code>## Call:psych::corr.test(x = ., adjust = &quot;bonferroni&quot;)
 ## Correlation matrix 
 ##             body_kg backpack_kg Units  Year
@@ -846,9 +846,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Это очень “дубовая” и излишне консервативная поправка. Да, она гарантирует контроль групповую вероятности ошибки первого рода, но при этом сильно повышает вероятность ошибки второго рода — вероятность пропустить эффект, если он на самом деле существует. Поэтому по умолчанию в R используется более либеральная поправка на множественные сравнения под названием <strong>поправка Холма</strong> или <strong>поправка Холма-Бонферрони (Holm-Bonferroni correction)</strong>, которая, тем не менее, тоже гарантирует контроль групповой вероятности ошибки первого рода.</p>
 <p>Альтернативный подход к решению проблемы множественных сравнений — это контроль <strong>средней доли ложных отклонений (False Discovery Rate; FDR)</strong> на на уровне не выше уровня <span class="math inline">\(\alpha\)</span>. Это более либеральный подход: в данном случае мы контролируем, что ложно-положительных результатов у нас не больше, например, 5%. Такой подход применяется в областях, где происходит масштабное множественное тестирование. Попытка контролировать <em>групповую вероятность ошибки первого уровня</em> не выше уровня <span class="math inline">\(\alpha\)</span> привела бы к чрезвычайно низкой вероятности обнаружить хоть какие-нибудь эффекты (т.е. к низкой статистической мощности).</p>
 <p>Самая известная поправка для контроля <em>средней доли ложных отклонений</em> — это <strong>поправка Бенджамини — Хохберга (Benjamini-Hochberg correction).</strong></p>
-<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb870-1"><a href="cov-cor.html#cb870-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb870-2"><a href="cov-cor.html#cb870-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
-<span id="cb870-3"><a href="cov-cor.html#cb870-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>(<span class="at">adjust =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb869-1"><a href="cov-cor.html#cb869-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb869-2"><a href="cov-cor.html#cb869-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb869-3"><a href="cov-cor.html#cb869-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>(<span class="at">adjust =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
 <pre><code>## Call:psych::corr.test(x = ., adjust = &quot;BH&quot;)
 ## Correlation matrix 
 ##             body_kg backpack_kg Units  Year
@@ -867,17 +867,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 <p>Все перечсиленные поправки (и еще несколько других) доступны не только в функции <code>corr.test()</code>, но и в базовом R с помощью функции <code>p.adjust()</code>. Эта функция принимает вектор из <em>p-value</em> и возвращает результат применения поправок.</p>
-<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb872-1"><a href="cov-cor.html#cb872-1" aria-hidden="true" tabindex="-1"></a>p_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.0001</span>, <span class="fl">0.06</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
-<span id="cb872-2"><a href="cov-cor.html#cb872-2" aria-hidden="true" tabindex="-1"></a>p_vec</span></code></pre></div>
+<div class="sourceCode" id="cb871"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb871-1"><a href="cov-cor.html#cb871-1" aria-hidden="true" tabindex="-1"></a>p_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.0001</span>, <span class="fl">0.06</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
+<span id="cb871-2"><a href="cov-cor.html#cb871-2" aria-hidden="true" tabindex="-1"></a>p_vec</span></code></pre></div>
 <pre><code>##  [1] 0.000100000 0.006755556 0.013411111 0.020066667 0.026722222 0.033377778
 ##  [7] 0.040033333 0.046688889 0.053344444 0.060000000</code></pre>
-<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb874-1"><a href="cov-cor.html#cb874-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec) <span class="co">#по умолчанию используется поправка Холма-Бонферрони</span></span></code></pre></div>
+<div class="sourceCode" id="cb873"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb873-1"><a href="cov-cor.html#cb873-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec) <span class="co">#по умолчанию используется поправка Холма-Бонферрони</span></span></code></pre></div>
 <pre><code>##  [1] 0.0010000 0.0608000 0.1072889 0.1404667 0.1603333 0.1668889 0.1668889
 ##  [8] 0.1668889 0.1668889 0.1668889</code></pre>
-<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb876-1"><a href="cov-cor.html#cb876-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="cov-cor.html#cb875-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec, <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span></code></pre></div>
 <pre><code>##  [1] 0.00100000 0.06755556 0.13411111 0.20066667 0.26722222 0.33377778
 ##  [7] 0.40033333 0.46688889 0.53344444 0.60000000</code></pre>
-<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb878-1"><a href="cov-cor.html#cb878-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec, <span class="at">method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="cov-cor.html#cb877-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec, <span class="at">method =</span> <span class="st">&quot;BH&quot;</span>)</span></code></pre></div>
 <pre><code>##  [1] 0.00100000 0.03377778 0.04470370 0.05016667 0.05344444 0.05562963
 ##  [7] 0.05719048 0.05836111 0.05927160 0.06000000</code></pre>
 </div>

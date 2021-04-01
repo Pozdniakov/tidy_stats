@@ -653,7 +653,6 @@ heroes %>%
   group_by(Gender) %>%
   summarise(across(where(is.numeric), mean, na.rm = TRUE))
 ```
-
 Или длину строк для строковых колонок. Для этого нам понадобится вспомнить, как создавать анонимные функции (\@ref(anon_f)).
 
 ```{r}
@@ -662,7 +661,6 @@ heroes %>%
   summarise(across(where(is.character), 
                    function(x) mean(nchar(x), na.rm = TRUE)))
 ```
-
 Или же даже посчитать и то, и другое внутри одного `summarise()`!
 
 ```{r}
@@ -706,21 +704,15 @@ heroes %>%
   mutate(across(where(is.character), as.factor))
 ```
 
-Менее очевидный способ применения `across()` - использование `across()` внутри `count()` вместе с функцией `n_distinct()`, которая считает количество уникальных значений в векторе. Это позволяет посмотреть таблицу частот для группирующих переменных:
-
-```{r}
-heroes %>%
-  select(where(function(x) n_distinct(x) <= 6))
-```
-
+Конструкция `across()` работает не только внутри `summarise()` и `mutate()`, можно применять `across()` и с другими функциями, которые используют data-masking. Например, можно использовать `across()` внутри `count()` вместе с функцией `n_distinct()`, которая считает количество уникальных значений в векторе. Это позволяет посмотреть таблицу частот для группирующих переменных:
 
 ```{r}
 heroes %>%
   count(across(where(function(x) n_distinct(x) <= 6)))
 ```
 
-
 ## Объединение нескольких датафреймов {#tidy_several}
+
 ### Соединение структурно схожих датафреймов: bind_rows(), bind_cols() {#tidy_bind}
 
 Для начала создадим следующие тибблы и сохраним их как `dc`, `marvel` и `other_publishers`:
