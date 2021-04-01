@@ -1141,59 +1141,6 @@ heroes %>%
   summarise(height_mean = mean(Height, na.rm = TRUE))
 ```
 
-## Операции с несколькими колонками: `across()` {#solution_across}
-
-- Посчитайте количество `NA` в каждой колонке, группируя по полу (`Gender`).
-
-```{r}
-na_n <- function(x) sum(is.na(x))
-heroes %>%
-  group_by(Gender) %>%
-  summarise(across(everything(), na_n))
-```
-
-- Посчитайте количество `NA` в каждой колонке, которая заканчивается на `"color"`, группируя по полу (`Gender`).
-
-```{r}
-na_n <- function(x) sum(is.na(x))
-heroes %>%
-  group_by(Gender) %>%
-  summarise(across(ends_with("color"), na_n))
-```
-
-- Найдите (первую) самую длинную строчку для каждой колонки с `character` типом данных, группируя по полу (`Gender`).
-
-> Для расчета количества значений в строке есть функция `nchar()`, для расчета индекса (первого) максимального значения есть функция `which.max()`.
-
-```{r}
-longest_char <- function(x) x[which.max(nchar(x))]
-heroes %>%
-  group_by(Gender) %>%
-  summarise(across(where(is.character), longest_char))
-```
-
-- Создайте из тиббла `heroes` новый тиббл, в котором числовые значения `Height` и `Weight` заменены на следующие строковые значения: если у супергероя рост или вес выше среднего по колонке, то `"выше среднего"`, если его/ее рост или вес ниже или равен среднему, то `"ниже среднего"`.
-
-```{r}
-higher_than_average <- function(x) ifelse(x > mean(x, na.rm = TRUE),
-                                          "выше среднего",
-                                          "ниже среднего")
-heroes %>%
-  mutate(across(c(Height, Weight), 
-                   higher_than_average))
-```
-
-- Создайте из тиббла `heroes` новый тиббл, в котором числовые значения `Height` и `Weight` заменены на следующие строковые значения: если у супергероя *внутри соответствующей группы по полу* рост или вес выше среднего по колонке, то `"выше среднего по X"`, если его/ее рост или вес ниже или равен среднему *внутри соответствующей группы по полу*, то `"ниже среднего по X"` , где *X* --- соответствующий пол (`Gender`).
-
-```{r}
-heroes %>%
-  group_by(Gender) %>%
-  mutate(across(c(Height, Weight), 
-                   higher_than_average)) %>%
-  ungroup() %>%
-  mutate(across(c(Height, Weight), 
-                   ~paste(., "по", Gender)))
-```
 
 ## Соединение датафреймов: *_join {#solution_join}
 
@@ -1272,6 +1219,61 @@ powers %>%
   pivot_wider(names_from = hero_names,
               values_from = has)
 ```
+
+## Операции с несколькими колонками: `across()` {#solution_across}
+
+- Посчитайте количество `NA` в каждой колонке, группируя по полу (`Gender`).
+
+```{r}
+na_n <- function(x) sum(is.na(x))
+heroes %>%
+  group_by(Gender) %>%
+  summarise(across(everything(), na_n))
+```
+
+- Посчитайте количество `NA` в каждой колонке, которая заканчивается на `"color"`, группируя по полу (`Gender`).
+
+```{r}
+na_n <- function(x) sum(is.na(x))
+heroes %>%
+  group_by(Gender) %>%
+  summarise(across(ends_with("color"), na_n))
+```
+
+- Найдите (первую) самую длинную строчку для каждой колонки с `character` типом данных, группируя по полу (`Gender`).
+
+> Для расчета количества значений в строке есть функция `nchar()`, для расчета индекса (первого) максимального значения есть функция `which.max()`.
+
+```{r}
+longest_char <- function(x) x[which.max(nchar(x))]
+heroes %>%
+  group_by(Gender) %>%
+  summarise(across(where(is.character), longest_char))
+```
+
+- Создайте из тиббла `heroes` новый тиббл, в котором числовые значения `Height` и `Weight` заменены на следующие строковые значения: если у супергероя рост или вес выше среднего по колонке, то `"выше среднего"`, если его/ее рост или вес ниже или равен среднему, то `"ниже среднего"`.
+
+```{r}
+higher_than_average <- function(x) ifelse(x > mean(x, na.rm = TRUE),
+                                          "выше среднего",
+                                          "ниже среднего")
+heroes %>%
+  mutate(across(c(Height, Weight), 
+                   higher_than_average))
+```
+
+- Создайте из тиббла `heroes` новый тиббл, в котором числовые значения `Height` и `Weight` заменены на следующие строковые значения: если у супергероя *внутри соответствующей группы по полу* рост или вес выше среднего по колонке, то `"выше среднего по X"`, если его/ее рост или вес ниже или равен среднему *внутри соответствующей группы по полу*, то `"ниже среднего по X"` , где *X* --- соответствующий пол (`Gender`).
+
+```{r}
+heroes %>%
+  group_by(Gender) %>%
+  mutate(across(c(Height, Weight), 
+                   higher_than_average)) %>%
+  ungroup() %>%
+  mutate(across(c(Height, Weight), 
+                   ~paste(., "по", Gender)))
+```
+
 
 ## Описательная статистика {#desc_tasks}
 
