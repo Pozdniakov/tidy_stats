@@ -1634,11 +1634,26 @@ heroes %>%
 - Сравните распределения частот для переменных `is_human` и `Gender` используя хи-квадрат Пирсона. Проинтерпретируйте результаты.
 
 ```{r}
-
+heroes %>%
+  mutate(is_human = Race == "Human") %>%
+  drop_na(is_human, Gender) %>%
+  select(is_human, Gender) %>%
+  table() %>%
+  chisq.test(correct = FALSE)
 ```
 
+Мы не можем отвергнуть нулевую гипотезу о независимости расы (Человек/не-человек) и пола.
 
 - Постройте мозаичный график для переменных `is_human` и `Gender`.
+
+```{r}
+heroes %>%
+  mutate(is_human = Race == "Human") %>%
+  drop_na(is_human, Gender) %>%
+  select(is_human, Gender) %>%
+  table() %>%
+  mosaicplot(shade = TRUE)
+```
 
 ## Исследование набора данных Backpack {#backpack_solutions}
 
