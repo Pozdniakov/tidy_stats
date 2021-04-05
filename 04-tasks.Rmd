@@ -1527,6 +1527,33 @@ diet <- readr::read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats
 
 - Сравните вес до и после для диеты 2 и диеты 3, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.
 
+## Критерий хи-квадрат Пирсона {#chi_sq_tasks}
+
+- Создайте в `heroes` новую колонку `is_human` логического типа, в которой будет `TRUE`, если супергерой принадлежит расе (`Race`) `"Human"`, и `FALSE` в случае если супергерой принадлежит другой расе.
+
+- Посчитайте долю женщин для `"Human"` и всех остальных (`is_human` равен `TRUE` и `FALSE` соответственно). Перед этим удалите все строчки с `NA` в переменных `is_human` и `Gender`.
+
+```{r}
+heroes %>%
+  mutate(is_human = Race == "Human") %>%
+  drop_na(is_human, Gender) %>%
+  group_by(is_human) %>%
+  summarise(mean(Gender == "Female"))
+```
+
+- Сравните распределения частот для переменных `is_human` и `Gender` используя хи-квадрат Пирсона. Проинтерпретируйте результаты.
+
+```{r}
+heroes %>%
+  mutate(is_human = Race == "Human") %>%
+  drop_na(is_human, Gender) %>%
+  select(is_human, Gender) %>%
+  table() %>%
+  chisq.test()
+```
+
+- Постройте мозаичный график для переменных `is_human` и `Gender`.
+
 ## Исследование набора данных Backpack {#backpack_tasks}
 
 Для следующих тем нам понадобится набор данных `Backpack` из пакета `Stat2Data`.

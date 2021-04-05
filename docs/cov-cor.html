@@ -441,9 +441,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="20.28" data-path="tasks.html"><a href="tasks.html#dep_ttest_tasks"><i class="fa fa-check"></i><b>20.28</b> Двухвыборочный зависимый t-test</a></li>
 <li class="chapter" data-level="20.29" data-path="tasks.html"><a href="tasks.html#ind_ttest_tasks"><i class="fa fa-check"></i><b>20.29</b> Двухвыборочный независимый t-test</a></li>
 <li class="chapter" data-level="20.30" data-path="tasks.html"><a href="tasks.html#nonparam_ttest_tasks"><i class="fa fa-check"></i><b>20.30</b> Непараметрические аналоги t-теста</a></li>
-<li class="chapter" data-level="20.31" data-path="tasks.html"><a href="tasks.html#backpack_tasks"><i class="fa fa-check"></i><b>20.31</b> Исследование набора данных Backpack</a></li>
-<li class="chapter" data-level="20.32" data-path="tasks.html"><a href="tasks.html#cov_tasks"><i class="fa fa-check"></i><b>20.32</b> Ковариация</a></li>
-<li class="chapter" data-level="20.33" data-path="tasks.html"><a href="tasks.html#cor_tasks"><i class="fa fa-check"></i><b>20.33</b> Коэффициент корреляции</a></li>
+<li class="chapter" data-level="20.31" data-path="tasks.html"><a href="tasks.html#chi_sq_tasks"><i class="fa fa-check"></i><b>20.31</b> Критерий хи-квадрат Пирсона</a></li>
+<li class="chapter" data-level="20.32" data-path="tasks.html"><a href="tasks.html#backpack_tasks"><i class="fa fa-check"></i><b>20.32</b> Исследование набора данных Backpack</a></li>
+<li class="chapter" data-level="20.33" data-path="tasks.html"><a href="tasks.html#cov_tasks"><i class="fa fa-check"></i><b>20.33</b> Ковариация</a></li>
+<li class="chapter" data-level="20.34" data-path="tasks.html"><a href="tasks.html#cor_tasks"><i class="fa fa-check"></i><b>20.34</b> Коэффициент корреляции</a></li>
 </ul></li>
 <li class="chapter" data-level="21" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>21</b> Решения заданий</a>
 <ul>
@@ -723,7 +724,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cor" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Корреляция</h2>
 <p><strong>Корреляцией</strong> обычно называют любую связь между двумя переменными, это просто синоним слова “ассоциация.” Если вдруг слово “корреляция” вам еще непривычно, то попробуйте мысленно заменять “корреляцию” на “ассоциацию,” а “коррелирует” на “связано.”
-<strong>Коэффициент корреляции</strong> — это уже конкретная математическая формула, которая позволяет посчитать эту связь и принимает значения от -1 до 1.<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></p>
+<strong>Коэффициент корреляции</strong> — это уже конкретная математическая формула, которая позволяет посчитать эту связь и принимает значения от -1 до 1.<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></p>
 <ul>
 <li><p>Если коэффициент корреляции <strong>положительный</strong>, то чем <strong>больше</strong> значения в одной переменной, тем <strong>больше</strong> значения в другой переменной.</p></li>
 <li><p>Если коэффициент корреляции <strong>отрицательный</strong>, то чем <strong>больше</strong> значения в одной переменной, тем <strong>меньше</strong> значения в другой переменной.</p></li>
@@ -820,7 +821,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 <p>Тем не менее, если у вас много гипотез для тестирования, то у вас появляется проблема: вероятность выпадения статистически значимых результатов сильно повышается. Даже если эти переменные никак не связаны друг с другом.</p>
-<p>Эта проблема называется <strong>проблемой множественных сравнений (multiple comparisons problem)</strong>.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a> Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода (Family-wise error rate)</strong> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
+<p>Эта проблема называется <strong>проблемой множественных сравнений (multiple comparisons problem)</strong>.<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a> Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода (Family-wise error rate)</strong> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
 <p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.е. в среднем 2-3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
 <p>Поэтому если вы проверяете сразу много гипотез, то необходимо применять <strong>поправки на множественные сравнения (multiple testing correction)</strong>. Эти поправки позволяют контролировать групповую вероятность ошибки первого рода на желаемом уровне. Самая простая и популярная поправка на множественные сравнения — <strong>поправка Бонферрони (Bonferroni correction)</strong>. Она считается очень просто: мы просто умножаем p-value на количество проверяемых гипотез!</p>
 <div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb867-1"><a href="cov-cor.html#cb867-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
@@ -888,9 +889,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="footnotes">
 <hr />
-<ol start="40">
-<li id="fn40"><p>Впрочем, это не так уж и важно: на практике часто опускают слово “коэффициент” и называют корреляцией как и просто связь, так и ее способ измерения.<a href="cov-cor.html#fnref40" class="footnote-back">↩︎</a></p></li>
-<li id="fn41"><p>“Проблема множественных сравнений” - это устоявшийся термин, который используется и в случае множественных корреляций, и в случае множественных сравнений средних и в любых других случаях с тестированием нескольких гипотез одновременно.<a href="cov-cor.html#fnref41" class="footnote-back">↩︎</a></p></li>
+<ol start="39">
+<li id="fn39"><p>Впрочем, это не так уж и важно: на практике часто опускают слово “коэффициент” и называют корреляцией как и просто связь, так и ее способ измерения.<a href="cov-cor.html#fnref39" class="footnote-back">↩︎</a></p></li>
+<li id="fn40"><p>“Проблема множественных сравнений” - это устоявшийся термин, который используется и в случае множественных корреляций, и в случае множественных сравнений средних и в любых других случаях с тестированием нескольких гипотез одновременно.<a href="cov-cor.html#fnref40" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
