@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Сложные структуры данных в R | Анализ данных и статистика в R</title>
+  <meta name="description" content="4 Сложные структуры данных в R | Анализ данных и статистика в R" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Сложные структуры данных в R | Анализ данных и статистика в R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Сложные структуры данных в R | Анализ данных и статистика в R" />
+  
+  
+  
+
+<meta name="author" content="Поздняков Иван" />
+
+
+<meta name="date" content="2021-11-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="vector.html"/>
+<link rel="next" href="r_packages.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.16/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Анализ данных и статистика в R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> О курсе</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Введение в R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#install"><i class="fa fa-check"></i><b>2.1</b> Установка R и Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#rstudio"><i class="fa fa-check"></i><b>2.2</b> Знакомство с RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#calc"><i class="fa fa-check"></i><b>2.3</b> R как калькулятор</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#func"><i class="fa fa-check"></i><b>2.4</b> Функции</a></li>
+<li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#google"><i class="fa fa-check"></i><b>2.5</b> В любой непонятной ситуации — гуглите</a></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#variables"><i class="fa fa-check"></i><b>2.6</b> Переменные</a></li>
+<li class="chapter" data-level="2.7" data-path="intro.html"><a href="intro.html#logic"><i class="fa fa-check"></i><b>2.7</b> Логические операторы</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vector.html"><a href="vector.html"><i class="fa fa-check"></i><b>3</b> Вектор</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vector.html"><a href="vector.html#atomic"><i class="fa fa-check"></i><b>3.1</b> Понятие atomic вектора в R</a></li>
+<li class="chapter" data-level="3.2" data-path="vector.html"><a href="vector.html#coercion"><i class="fa fa-check"></i><b>3.2</b> Приведение типов</a></li>
+<li class="chapter" data-level="3.3" data-path="vector.html"><a href="vector.html#vector_op"><i class="fa fa-check"></i><b>3.3</b> Векторизация</a></li>
+<li class="chapter" data-level="3.4" data-path="vector.html"><a href="vector.html#recycling"><i class="fa fa-check"></i><b>3.4</b> Ресайклинг</a></li>
+<li class="chapter" data-level="3.5" data-path="vector.html"><a href="vector.html#index_atomic"><i class="fa fa-check"></i><b>3.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="3.6" data-path="vector.html"><a href="vector.html#logic_vectors"><i class="fa fa-check"></i><b>3.6</b> Работа с логическими векторами</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="vector.html"><a href="vector.html#logic_mean_sum"><i class="fa fa-check"></i><b>3.6.1</b> <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</a></li>
+<li class="chapter" data-level="3.6.2" data-path="vector.html"><a href="vector.html#all_any"><i class="fa fa-check"></i><b>3.6.2</b> <code>all()</code> и <code>any()</code></a></li>
+<li class="chapter" data-level="3.6.3" data-path="vector.html"><a href="vector.html#which"><i class="fa fa-check"></i><b>3.6.3</b> Превращение логических значений в индексы: <code>which()</code></a></li>
+<li class="chapter" data-level="3.6.4" data-path="vector.html"><a href="vector.html#in"><i class="fa fa-check"></i><b>3.6.4</b> оператор %in% и match()</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="vector.html"><a href="vector.html#na"><i class="fa fa-check"></i><b>3.7</b> NA - пропущенные значения</a></li>
+<li class="chapter" data-level="3.8" data-path="vector.html"><a href="vector.html#vector_end"><i class="fa fa-check"></i><b>3.8</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="complex_structures.html"><a href="complex_structures.html"><i class="fa fa-check"></i><b>4</b> Сложные структуры данных в R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="complex_structures.html"><a href="complex_structures.html#matrix"><i class="fa fa-check"></i><b>4.1</b> Матрица</a></li>
+<li class="chapter" data-level="4.2" data-path="complex_structures.html"><a href="complex_structures.html#arrays"><i class="fa fa-check"></i><b>4.2</b> Массив</a></li>
+<li class="chapter" data-level="4.3" data-path="complex_structures.html"><a href="complex_structures.html#list"><i class="fa fa-check"></i><b>4.3</b> Список</a></li>
+<li class="chapter" data-level="4.4" data-path="complex_structures.html"><a href="complex_structures.html#df"><i class="fa fa-check"></i><b>4.4</b> Датафрейм</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r_packages.html"><a href="r_packages.html"><i class="fa fa-check"></i><b>5</b> Пакеты в R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="r_packages.html"><a href="r_packages.html#extra_pack"><i class="fa fa-check"></i><b>5.1</b> Дополнительные пакеты</a></li>
+<li class="chapter" data-level="5.2" data-path="r_packages.html"><a href="r_packages.html#r_built_in"><i class="fa fa-check"></i><b>5.2</b> Встроенные пакеты R</a></li>
+<li class="chapter" data-level="5.3" data-path="r_packages.html"><a href="r_packages.html#install_cran"><i class="fa fa-check"></i><b>5.3</b> Установка пакетов с CRAN</a></li>
+<li class="chapter" data-level="5.4" data-path="r_packages.html"><a href="r_packages.html#package_load"><i class="fa fa-check"></i><b>5.4</b> Загрузка установленного пакета</a></li>
+<li class="chapter" data-level="5.5" data-path="r_packages.html"><a href="r_packages.html#from_package"><i class="fa fa-check"></i><b>5.5</b> Вызов функции из пакета с помощью <code>::</code></a></li>
+<li class="chapter" data-level="5.6" data-path="r_packages.html"><a href="r_packages.html#install_bioc"><i class="fa fa-check"></i><b>5.6</b> Установка пакетов c Bioconductor</a></li>
+<li class="chapter" data-level="5.7" data-path="r_packages.html"><a href="r_packages.html#install_github"><i class="fa fa-check"></i><b>5.7</b> Установка пакетов с Github</a></li>
+<li class="chapter" data-level="5.8" data-path="r_packages.html"><a href="r_packages.html#where_packages"><i class="fa fa-check"></i><b>5.8</b> Где искать нужные пакеты</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="real_data.html"><a href="real_data.html"><i class="fa fa-check"></i><b>6</b> Импорт и экспорт данных</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="real_data.html"><a href="real_data.html#wd"><i class="fa fa-check"></i><b>6.1</b> Рабочая папка и проекты RStudio</a></li>
+<li class="chapter" data-level="6.2" data-path="real_data.html"><a href="real_data.html#project_workflow"><i class="fa fa-check"></i><b>6.2</b> Организация проектов</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="real_data.html"><a href="real_data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="real_data.html"><a href="real_data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.4" data-path="real_data.html"><a href="real_data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
+<li class="chapter" data-level="6.5" data-path="real_data.html"><a href="real_data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+<li class="chapter" data-level="6.6" data-path="real_data.html"><a href="real_data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="loops_conditions.html"><a href="loops_conditions.html"><i class="fa fa-check"></i><b>7</b> Условные конструкции и циклы</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="loops_conditions.html"><a href="loops_conditions.html#if"><i class="fa fa-check"></i><b>7.1</b> Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+<li class="chapter" data-level="7.2" data-path="loops_conditions.html"><a href="loops_conditions.html#for"><i class="fa fa-check"></i><b>7.2</b> Циклы <code>for</code></a></li>
+<li class="chapter" data-level="7.3" data-path="loops_conditions.html"><a href="loops_conditions.html#ifelse"><i class="fa fa-check"></i><b>7.3</b> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>8</b> Функциональное программирование в R</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="functional.html"><a href="functional.html#create_fun"><i class="fa fa-check"></i><b>8.1</b> Создание функций</a></li>
+<li class="chapter" data-level="8.2" data-path="functional.html"><a href="functional.html#sanity_check"><i class="fa fa-check"></i><b>8.2</b> Проверка на адекватность</a></li>
+<li class="chapter" data-level="8.3" data-path="functional.html"><a href="functional.html#why_functions"><i class="fa fa-check"></i><b>8.3</b> Когда и зачем создавать функции?</a></li>
+<li class="chapter" data-level="8.4" data-path="functional.html"><a href="functional.html#functions_objects"><i class="fa fa-check"></i><b>8.4</b> Функции как объекты первого порядка</a></li>
+<li class="chapter" data-level="8.5" data-path="functional.html"><a href="functional.html#apply_f"><i class="fa fa-check"></i><b>8.5</b> Семейство функций apply()</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="functional.html"><a href="functional.html#apply"><i class="fa fa-check"></i><b>8.5.1</b> Применение <code>apply()</code> для матриц</a></li>
+<li class="chapter" data-level="8.5.2" data-path="functional.html"><a href="functional.html#anon_f"><i class="fa fa-check"></i><b>8.5.2</b> Анонимные функции</a></li>
+<li class="chapter" data-level="8.5.3" data-path="functional.html"><a href="functional.html#apply_other"><i class="fa fa-check"></i><b>8.5.3</b> Другие функции семейства <code>apply()</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="tidy_intro.html"><a href="tidy_intro.html"><i class="fa fa-check"></i><b>9</b> Введение в tidyverse</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_verse"><i class="fa fa-check"></i><b>9.1</b> Вселенная tidyverse</a></li>
+<li class="chapter" data-level="9.2" data-path="tidy_intro.html"><a href="tidy_intro.html#загрузка-данных-с-помощью-readr"><i class="fa fa-check"></i><b>9.2</b> Загрузка данных с помощью <code>readr</code></a></li>
+<li class="chapter" data-level="9.3" data-path="tidy_intro.html"><a href="tidy_intro.html#pipe"><i class="fa fa-check"></i><b>9.3</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="9.4" data-path="tidy_intro.html"><a href="tidy_intro.html#главные-пакеты-tidyverse-dplyr-и-tidyr"><i class="fa fa-check"></i><b>9.4</b> Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></a></li>
+<li class="chapter" data-level="9.5" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_select_cols"><i class="fa fa-check"></i><b>9.5</b> Работа с колонками тиббла</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="tidy_intro.html"><a href="tidy_intro.html#выбор-колонок-dplyrselect"><i class="fa fa-check"></i><b>9.5.1</b> Выбор колонок: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="9.5.2" data-path="tidy_intro.html"><a href="tidy_intro.html#tidyselect"><i class="fa fa-check"></i><b>9.5.2</b> Мини-язык tidyselect для выбора колонок</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_select_rows"><i class="fa fa-check"></i><b>9.6</b> Работа со строками тиббла</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_slice"><i class="fa fa-check"></i><b>9.6.1</b> Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
+<li class="chapter" data-level="9.6.2" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_filter"><i class="fa fa-check"></i><b>9.6.2</b> Выбор строк по условию: <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="9.6.3" data-path="tidy_intro.html"><a href="tidy_intro.html#slice_family"><i class="fa fa-check"></i><b>9.6.3</b> Семейство функций <code>slice()</code></a></li>
+<li class="chapter" data-level="9.6.4" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_drop_na"><i class="fa fa-check"></i><b>9.6.4</b> Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
+<li class="chapter" data-level="9.6.5" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_arrange"><i class="fa fa-check"></i><b>9.6.5</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_mutate"><i class="fa fa-check"></i><b>9.7</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="9.8" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_aggregate"><i class="fa fa-check"></i><b>9.8</b> Агрегация данных в тиббле</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="tidy_intro.html"><a href="tidy_intro.html#summarise"><i class="fa fa-check"></i><b>9.8.1</b> Подытоживание: <code>summarise()</code></a></li>
+<li class="chapter" data-level="9.8.2" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_group"><i class="fa fa-check"></i><b>9.8.2</b> Группировка: <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.8.3" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_count"><i class="fa fa-check"></i><b>9.8.3</b> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
+<li class="chapter" data-level="9.8.4" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_distinct"><i class="fa fa-check"></i><b>9.8.4</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="9.8.5" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_group_mutate"><i class="fa fa-check"></i><b>9.8.5</b> Создание колонок с группировкой</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html"><i class="fa fa-check"></i><b>10</b> Продвинутый tidyverse</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_several"><i class="fa fa-check"></i><b>10.1</b> Объединение нескольких датафреймов</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_bind"><i class="fa fa-check"></i><b>10.1.1</b> Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
+<li class="chapter" data-level="10.1.2" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_join"><i class="fa fa-check"></i><b>10.1.2</b> Реляционные данные: <code>*_join()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_data"><i class="fa fa-check"></i><b>10.2</b> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#трансформация-нескольких-колонок-dplyracross"><i class="fa fa-check"></i><b>10.3</b> Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
+<li class="chapter" data-level="10.5" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#list_colums_nest"><i class="fa fa-check"></i><b>10.5</b> Колонки-списки и нестинг: <code>nest()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="vdesc.html"><a href="vdesc.html"><i class="fa fa-check"></i><b>11</b> Описательная статистика</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="vdesc.html"><a href="vdesc.html#desc_infer"><i class="fa fa-check"></i><b>11.1</b> Описательная статистика и статистика вывода</a></li>
+<li class="chapter" data-level="11.2" data-path="vdesc.html"><a href="vdesc.html#типы-шкал"><i class="fa fa-check"></i><b>11.2</b> Типы шкал</a></li>
+<li class="chapter" data-level="11.3" data-path="vdesc.html"><a href="vdesc.html#cent_tend"><i class="fa fa-check"></i><b>11.3</b> Меры центральной тенденции</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="vdesc.html"><a href="vdesc.html#mean"><i class="fa fa-check"></i><b>11.3.1</b> Арифметическое среднее</a></li>
+<li class="chapter" data-level="11.3.2" data-path="vdesc.html"><a href="vdesc.html#median"><i class="fa fa-check"></i><b>11.3.2</b> Медиана</a></li>
+<li class="chapter" data-level="11.3.3" data-path="vdesc.html"><a href="vdesc.html#trim"><i class="fa fa-check"></i><b>11.3.3</b> Усеченное среднее (trimmed mean)</a></li>
+<li class="chapter" data-level="11.3.4" data-path="vdesc.html"><a href="vdesc.html#mode"><i class="fa fa-check"></i><b>11.3.4</b> Мода</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="vdesc.html"><a href="vdesc.html#vary"><i class="fa fa-check"></i><b>11.4</b> Меры рассеяния</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="vdesc.html"><a href="vdesc.html#var"><i class="fa fa-check"></i><b>11.4.1</b> Дисперсия</a></li>
+<li class="chapter" data-level="11.4.2" data-path="vdesc.html"><a href="vdesc.html#sd"><i class="fa fa-check"></i><b>11.4.2</b> Стандартное отклонение</a></li>
+<li class="chapter" data-level="11.4.3" data-path="vdesc.html"><a href="vdesc.html#mad"><i class="fa fa-check"></i><b>11.4.3</b> Медианное абсолютное отклонение</a></li>
+<li class="chapter" data-level="11.4.4" data-path="vdesc.html"><a href="vdesc.html#iqr"><i class="fa fa-check"></i><b>11.4.4</b> Межквартильный размах</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="vdesc.html"><a href="vdesc.html#skku"><i class="fa fa-check"></i><b>11.5</b> Ассиметрия и эксцесс</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="vdesc.html"><a href="vdesc.html#skew"><i class="fa fa-check"></i><b>11.5.1</b> Ассиметрия</a></li>
+<li class="chapter" data-level="11.5.2" data-path="vdesc.html"><a href="vdesc.html#kurtosis"><i class="fa fa-check"></i><b>11.5.2</b> Эксцесс</a></li>
+<li class="chapter" data-level="11.5.3" data-path="vdesc.html"><a href="vdesc.html#skewR"><i class="fa fa-check"></i><b>11.5.3</b> Ассиметрия и эксцесс в R</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="vdesc.html"><a href="vdesc.html#quantiles"><i class="fa fa-check"></i><b>11.6</b> Квантили</a></li>
+<li class="chapter" data-level="11.7" data-path="vdesc.html"><a href="vdesc.html#summary"><i class="fa fa-check"></i><b>11.7</b> А теперь все вместе!</a></li>
+<li class="chapter" data-level="11.8" data-path="vdesc.html"><a href="vdesc.html#grammar_of_graphics"><i class="fa fa-check"></i><b>11.8</b> История грамматики графики</a></li>
+<li class="chapter" data-level="11.9" data-path="vdesc.html"><a href="vdesc.html#gg_base"><i class="fa fa-check"></i><b>11.9</b> Основы грамматики графики</a></li>
+<li class="chapter" data-level="11.10" data-path="vdesc.html"><a href="vdesc.html#gg_0"><i class="fa fa-check"></i><b>11.10</b> Пример №0: пайчарт с распределение по полу</a></li>
+<li class="chapter" data-level="11.11" data-path="vdesc.html"><a href="vdesc.html#gg_1"><i class="fa fa-check"></i><b>11.11</b> Пример №1: Education and IQ meta-analysis</a></li>
+<li class="chapter" data-level="11.12" data-path="vdesc.html"><a href="vdesc.html#gg_ext"><i class="fa fa-check"></i><b>11.12</b> Расширения <code>ggplot2</code></a></li>
+<li class="chapter" data-level="11.13" data-path="vdesc.html"><a href="vdesc.html#vis_dynamic"><i class="fa fa-check"></i><b>11.13</b> Динамические визуализации в R</a>
+<ul>
+<li class="chapter" data-level="11.13.1" data-path="vdesc.html"><a href="vdesc.html#html_w"><i class="fa fa-check"></i><b>11.13.1</b> Интерфейс для JavaScript фреймворков: пакет <code>htmlwidgets</code></a></li>
+<li class="chapter" data-level="11.13.2" data-path="vdesc.html"><a href="vdesc.html#plotly"><i class="fa fa-check"></i><b>11.13.2</b> Динамические визуализации в <code>plotly</code></a></li>
+<li class="chapter" data-level="11.13.3" data-path="vdesc.html"><a href="vdesc.html#html_other"><i class="fa fa-check"></i><b>11.13.3</b> Другие пакеты для динамической визуализации</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>12</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="rmd.html"><a href="rmd.html#rmd_what"><i class="fa fa-check"></i><b>12.1</b> Что такое R Markdown</a></li>
+<li class="chapter" data-level="12.2" data-path="rmd.html"><a href="rmd.html#rmd_begin"><i class="fa fa-check"></i><b>12.2</b> Начало работы в R Markdown</a></li>
+<li class="chapter" data-level="12.3" data-path="rmd.html"><a href="rmd.html#rmd_str"><i class="fa fa-check"></i><b>12.3</b> Структура R Markdown документа</a></li>
+<li class="chapter" data-level="12.4" data-path="rmd.html"><a href="rmd.html#chunk"><i class="fa fa-check"></i><b>12.4</b> Настройки чанка</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="rmd.html"><a href="rmd.html#chunks"><i class="fa fa-check"></i><b>12.4.1</b> Настройка нескольких чанков</a></li>
+<li class="chapter" data-level="12.4.2" data-path="rmd.html"><a href="rmd.html#python"><i class="fa fa-check"></i><b>12.4.2</b> Чанки с Python и другими языками программирования</a></li>
+<li class="chapter" data-level="12.4.3" data-path="rmd.html"><a href="rmd.html#inline"><i class="fa fa-check"></i><b>12.4.3</b> Код вне чанков (inline code)</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="rmd.html"><a href="rmd.html#md"><i class="fa fa-check"></i><b>12.5</b> Синтаксис Markdown (без R)</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="rmd.html"><a href="rmd.html#md_high"><i class="fa fa-check"></i><b>12.5.1</b> Выделение текста</a></li>
+<li class="chapter" data-level="12.5.2" data-path="rmd.html"><a href="rmd.html#headers"><i class="fa fa-check"></i><b>12.5.2</b> Заголовки разных уровней</a></li>
+<li class="chapter" data-level="12.5.3" data-path="rmd.html"><a href="rmd.html#md_lists"><i class="fa fa-check"></i><b>12.5.3</b> Списки</a></li>
+<li class="chapter" data-level="12.5.4" data-path="rmd.html"><a href="rmd.html#md_cite"><i class="fa fa-check"></i><b>12.5.4</b> Цитаты</a></li>
+<li class="chapter" data-level="12.5.5" data-path="rmd.html"><a href="rmd.html#rmd_tables"><i class="fa fa-check"></i><b>12.5.5</b> Таблицы</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="rmd.html"><a href="rmd.html#extra_rmd"><i class="fa fa-check"></i><b>12.6</b> Дополнительные возможности R Markdown</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="rmd.html"><a href="rmd.html#dynamic_tables"><i class="fa fa-check"></i><b>12.6.1</b> Динамические таблицы</a></li>
+<li class="chapter" data-level="12.6.2" data-path="rmd.html"><a href="rmd.html#vis"><i class="fa fa-check"></i><b>12.6.2</b> Графики в R Markdown</a></li>
+<li class="chapter" data-level="12.6.3" data-path="rmd.html"><a href="rmd.html#html_inside"><i class="fa fa-check"></i><b>12.6.3</b> HTML-код</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="infer_stats.html"><a href="infer_stats.html"><i class="fa fa-check"></i><b>13</b> Статистика вывода</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="infer_stats.html"><a href="infer_stats.html#infer_intro"><i class="fa fa-check"></i><b>13.1</b> Введение в статистику вывода</a></li>
+<li class="chapter" data-level="13.2" data-path="infer_stats.html"><a href="infer_stats.html#distributions"><i class="fa fa-check"></i><b>13.2</b> Распределения</a></li>
+<li class="chapter" data-level="13.3" data-path="infer_stats.html"><a href="infer_stats.html#estimates"><i class="fa fa-check"></i><b>13.3</b> Оценки</a></li>
+<li class="chapter" data-level="13.4" data-path="infer_stats.html"><a href="infer_stats.html#sample_estimate"><i class="fa fa-check"></i><b>13.4</b> Точечные оценки</a></li>
+<li class="chapter" data-level="13.5" data-path="infer_stats.html"><a href="infer_stats.html#interval_estimate"><i class="fa fa-check"></i><b>13.5</b> Интервальные оценки</a></li>
+<li class="chapter" data-level="13.6" data-path="infer_stats.html"><a href="infer_stats.html#sample_dist"><i class="fa fa-check"></i><b>13.6</b> Выборочное распределение</a></li>
+<li class="chapter" data-level="13.7" data-path="infer_stats.html"><a href="infer_stats.html#nordm_dist_importance"><i class="fa fa-check"></i><b>13.7</b> Важность нормального распределения</a></li>
+<li class="chapter" data-level="13.8" data-path="infer_stats.html"><a href="infer_stats.html#clt"><i class="fa fa-check"></i><b>13.8</b> Центральная предельная теорема</a></li>
+<li class="chapter" data-level="13.9" data-path="infer_stats.html"><a href="infer_stats.html#ci_build"><i class="fa fa-check"></i><b>13.9</b> Строим доверительный интервал</a></li>
+<li class="chapter" data-level="13.10" data-path="infer_stats.html"><a href="infer_stats.html#тестирование-значимости-нулевой-гипотезы-nhst"><i class="fa fa-check"></i><b>13.10</b> Тестирование значимости нулевой гипотезы (#nhst)</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ttest.html"><a href="ttest.html"><i class="fa fa-check"></i><b>14</b> t-тест</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="ttest.html"><a href="ttest.html#one_ttest"><i class="fa fa-check"></i><b>14.1</b> Одновыборочный t-тест</a></li>
+<li class="chapter" data-level="14.2" data-path="ttest.html"><a href="ttest.html#two_ttest"><i class="fa fa-check"></i><b>14.2</b> Двухвыборочный t-тест</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="ttest.html"><a href="ttest.html#dep_ttest"><i class="fa fa-check"></i><b>14.2.1</b> Двухвыборочный зависимый t-тест</a></li>
+<li class="chapter" data-level="14.2.2" data-path="ttest.html"><a href="ttest.html#ind_ttest"><i class="fa fa-check"></i><b>14.2.2</b> Двухвыборочный независимый t-тест</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="ttest.html"><a href="ttest.html#assumptions_ttest"><i class="fa fa-check"></i><b>14.3</b> Допущения t-теста</a></li>
+<li class="chapter" data-level="14.4" data-path="ttest.html"><a href="ttest.html#nonparam_ttest"><i class="fa fa-check"></i><b>14.4</b> Непараметрические аналоги t-теста</a>
+<ul>
+<li class="chapter" data-level="14.4.1" data-path="ttest.html"><a href="ttest.html#wilcox_test"><i class="fa fa-check"></i><b>14.4.1</b> Тест Уилкоксона</a></li>
+<li class="chapter" data-level="14.4.2" data-path="ttest.html"><a href="ttest.html#mann_test"><i class="fa fa-check"></i><b>14.4.2</b> Тест Манна-Уитни</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="cov_cor.html"><a href="cov_cor.html"><i class="fa fa-check"></i><b>15</b> Ковариация и корреляция</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="cov_cor.html"><a href="cov_cor.html#cov"><i class="fa fa-check"></i><b>15.1</b> Ковариация</a></li>
+<li class="chapter" data-level="15.2" data-path="cov_cor.html"><a href="cov_cor.html#cor"><i class="fa fa-check"></i><b>15.2</b> Корреляция</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="cov_cor.html"><a href="cov_cor.html#pearson_cor"><i class="fa fa-check"></i><b>15.2.1</b> Коэффициент корреляции Пирсона</a></li>
+<li class="chapter" data-level="15.2.2" data-path="cov_cor.html"><a href="cov_cor.html#nonparam_cor"><i class="fa fa-check"></i><b>15.2.2</b> Непараметрические коэффициенты корреляции</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="cov_cor.html"><a href="cov_cor.html#cor_mat"><i class="fa fa-check"></i><b>15.3</b> Корреляционная матрица</a></li>
+<li class="chapter" data-level="15.4" data-path="cov_cor.html"><a href="cov_cor.html#hitmap_cor"><i class="fa fa-check"></i><b>15.4</b> Хитмэп корреляций</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="lm.html"><a href="lm.html"><i class="fa fa-check"></i><b>16</b> Линейная регрессия</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="lm.html"><a href="lm.html#lm_func"><i class="fa fa-check"></i><b>16.1</b> Функция <code>lm()</code></a></li>
+<li class="chapter" data-level="16.2" data-path="lm.html"><a href="lm.html#interpret_lm"><i class="fa fa-check"></i><b>16.2</b> Интерпретация вывода линейной регрессии</a></li>
+<li class="chapter" data-level="16.3" data-path="lm.html"><a href="lm.html#lm_a"><i class="fa fa-check"></i><b>16.3</b> Допущения линейной регрессии</a></li>
+<li class="chapter" data-level="16.4" data-path="lm.html"><a href="lm.html#outliers_lm"><i class="fa fa-check"></i><b>16.4</b> Влияние выбросов на линейную модель</a></li>
+<li class="chapter" data-level="16.5" data-path="lm.html"><a href="lm.html#lm_mult"><i class="fa fa-check"></i><b>16.5</b> Множественная линейная регрессия</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>17</b> Дисперсионный анализ (ANOVA)</a>
+<ul>
+<li class="chapter" data-level="17.0.1" data-path="anova.html"><a href="anova.html#aov"><i class="fa fa-check"></i><b>17.0.1</b> Функция aov()</a></li>
+<li class="chapter" data-level="17.1" data-path="anova.html"><a href="anova.html#anova_nhst"><i class="fa fa-check"></i><b>17.1</b> Тестирование значимости нулевой гипотезы в ANOVA.</a></li>
+<li class="chapter" data-level="17.2" data-path="anova.html"><a href="anova.html#anova_posthoc"><i class="fa fa-check"></i><b>17.2</b> Post-hoc тесты</a></li>
+<li class="chapter" data-level="17.3" data-path="anova.html"><a href="anova.html#aov_as_lm"><i class="fa fa-check"></i><b>17.3</b> ANOVA и т-тест как частные случаи линейной регрессии</a></li>
+<li class="chapter" data-level="17.4" data-path="anova.html"><a href="anova.html#dummy"><i class="fa fa-check"></i><b>17.4</b> Dummy coding</a></li>
+<li class="chapter" data-level="17.5" data-path="anova.html"><a href="anova.html#aova"><i class="fa fa-check"></i><b>17.5</b> Допущения ANOVA</a></li>
+<li class="chapter" data-level="17.6" data-path="anova.html"><a href="anova.html#fact_aov"><i class="fa fa-check"></i><b>17.6</b> Многофакторный дисперсионный анализ (Factorial ANOVA)</a></li>
+<li class="chapter" data-level="17.7" data-path="anova.html"><a href="anova.html#rm_aov"><i class="fa fa-check"></i><b>17.7</b> Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</a></li>
+<li class="chapter" data-level="17.8" data-path="anova.html"><a href="anova.html#mixed_aov"><i class="fa fa-check"></i><b>17.8</b> Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</a></li>
+<li class="chapter" data-level="17.9" data-path="anova.html"><a href="anova.html#nonparam_aov"><i class="fa fa-check"></i><b>17.9</b> Непараметрические аналоги ANOVA</a>
+<ul>
+<li class="chapter" data-level="17.9.1" data-path="anova.html"><a href="anova.html#krask_aov"><i class="fa fa-check"></i><b>17.9.1</b> Тест Краскела-Уоллеса</a></li>
+<li class="chapter" data-level="17.9.2" data-path="anova.html"><a href="anova.html#friedman_aov"><i class="fa fa-check"></i><b>17.9.2</b> Тест Фридмана</a></li>
+</ul></li>
+<li class="chapter" data-level="17.10" data-path="anova.html"><a href="anova.html#aov_final"><i class="fa fa-check"></i><b>17.10</b> Заключение</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="glm_general.html"><a href="glm_general.html"><i class="fa fa-check"></i><b>18</b> Общая линейная модель и ее расширения</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="glm_general.html"><a href="glm_general.html#general_linear_model"><i class="fa fa-check"></i><b>18.1</b> Общая линейная модель</a></li>
+<li class="chapter" data-level="18.2" data-path="glm_general.html"><a href="glm_general.html#glm_model"><i class="fa fa-check"></i><b>18.2</b> Обобщенная линейная модель</a></li>
+<li class="chapter" data-level="18.3" data-path="glm_general.html"><a href="glm_general.html#lme_model"><i class="fa fa-check"></i><b>18.3</b> Модель со смешанными эффектами</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="plan.html"><a href="plan.html"><i class="fa fa-check"></i><b>19</b> Планирования научного исследования</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="plan.html"><a href="plan.html#quest_practices"><i class="fa fa-check"></i><b>19.1</b> Спорные исследовательские практики</a></li>
+<li class="chapter" data-level="19.2" data-path="plan.html"><a href="plan.html#reproducible"><i class="fa fa-check"></i><b>19.2</b> Вопроизводимые исследования</a></li>
+<li class="chapter" data-level="19.3" data-path="plan.html"><a href="plan.html#stat_power"><i class="fa fa-check"></i><b>19.3</b> Статистическая мощность</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="tasks.html"><a href="tasks.html"><i class="fa fa-check"></i><b>20</b> Задания</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="tasks.html"><a href="tasks.html#task_begin"><i class="fa fa-check"></i><b>20.1</b> Начало работы в R</a></li>
+<li class="chapter" data-level="20.2" data-path="tasks.html"><a href="tasks.html#task_new_vecs"><i class="fa fa-check"></i><b>20.2</b> Создание векторов</a></li>
+<li class="chapter" data-level="20.3" data-path="tasks.html"><a href="tasks.html#task_coer"><i class="fa fa-check"></i><b>20.3</b> Приведение типов</a></li>
+<li class="chapter" data-level="20.4" data-path="tasks.html"><a href="tasks.html#task_vec_ion"><i class="fa fa-check"></i><b>20.4</b> Векторизация</a></li>
+<li class="chapter" data-level="20.5" data-path="tasks.html"><a href="tasks.html#task_vec_ind"><i class="fa fa-check"></i><b>20.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="20.6" data-path="tasks.html"><a href="tasks.html#task_na"><i class="fa fa-check"></i><b>20.6</b> Работа с пропущенными значениями</a></li>
+<li class="chapter" data-level="20.7" data-path="tasks.html"><a href="tasks.html#task_matrix"><i class="fa fa-check"></i><b>20.7</b> Матрицы</a></li>
+<li class="chapter" data-level="20.8" data-path="tasks.html"><a href="tasks.html#task_list"><i class="fa fa-check"></i><b>20.8</b> Списки</a></li>
+<li class="chapter" data-level="20.9" data-path="tasks.html"><a href="tasks.html#task_df"><i class="fa fa-check"></i><b>20.9</b> Датафрейм</a></li>
+<li class="chapter" data-level="20.10" data-path="tasks.html"><a href="tasks.html#task_if"><i class="fa fa-check"></i><b>20.10</b> Условные конструкции</a></li>
+<li class="chapter" data-level="20.11" data-path="tasks.html"><a href="tasks.html#task_function"><i class="fa fa-check"></i><b>20.11</b> Создание функций</a></li>
+<li class="chapter" data-level="20.12" data-path="tasks.html"><a href="tasks.html#task_sanity"><i class="fa fa-check"></i><b>20.12</b> Проверка на адекватность</a></li>
+<li class="chapter" data-level="20.13" data-path="tasks.html"><a href="tasks.html#task_apply"><i class="fa fa-check"></i><b>20.13</b> Семейство функций apply()</a></li>
+<li class="chapter" data-level="20.14" data-path="tasks.html"><a href="tasks.html#task_pipe"><i class="fa fa-check"></i><b>20.14</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="20.15" data-path="tasks.html"><a href="tasks.html#task_select"><i class="fa fa-check"></i><b>20.15</b> Выбор столбцов: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="20.16" data-path="tasks.html"><a href="tasks.html#task_filt"><i class="fa fa-check"></i><b>20.16</b> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="20.17" data-path="tasks.html"><a href="tasks.html#task_arr"><i class="fa fa-check"></i><b>20.17</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="20.18" data-path="tasks.html"><a href="tasks.html#task_dist"><i class="fa fa-check"></i><b>20.18</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="20.19" data-path="tasks.html"><a href="tasks.html#task_mutate"><i class="fa fa-check"></i><b>20.19</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="20.20" data-path="tasks.html"><a href="tasks.html#task_group_by"><i class="fa fa-check"></i><b>20.20</b> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="20.21" data-path="tasks.html"><a href="tasks.html#соединение-датафреймов-_join-task_join"><i class="fa fa-check"></i><b>20.21</b> Соединение датафреймов: *_join {#task_join}</a></li>
+<li class="chapter" data-level="20.22" data-path="tasks.html"><a href="tasks.html#task_pivot"><i class="fa fa-check"></i><b>20.22</b> Tidy data</a></li>
+<li class="chapter" data-level="20.23" data-path="tasks.html"><a href="tasks.html#task_across"><i class="fa fa-check"></i><b>20.23</b> Операции с несколькими колонками: <code>across()</code></a></li>
+<li class="chapter" data-level="20.24" data-path="tasks.html"><a href="tasks.html#desc_tasks"><i class="fa fa-check"></i><b>20.24</b> Описательная статистика</a></li>
+<li class="chapter" data-level="20.25" data-path="tasks.html"><a href="tasks.html#ggplot2_tasks"><i class="fa fa-check"></i><b>20.25</b> Построение графиков в <code>ggplot2</code></a></li>
+<li class="chapter" data-level="20.26" data-path="tasks.html"><a href="tasks.html#dist_tasks"><i class="fa fa-check"></i><b>20.26</b> Распределения</a></li>
+<li class="chapter" data-level="20.27" data-path="tasks.html"><a href="tasks.html#one_ttest_tasks"><i class="fa fa-check"></i><b>20.27</b> Одновыборочный t-test</a></li>
+<li class="chapter" data-level="20.28" data-path="tasks.html"><a href="tasks.html#dep_ttest_tasks"><i class="fa fa-check"></i><b>20.28</b> Двухвыборочный зависимый t-test</a></li>
+<li class="chapter" data-level="20.29" data-path="tasks.html"><a href="tasks.html#ind_ttest_tasks"><i class="fa fa-check"></i><b>20.29</b> Двухвыборочный независимый t-test</a></li>
+<li class="chapter" data-level="20.30" data-path="tasks.html"><a href="tasks.html#nonparam_ttest_tasks"><i class="fa fa-check"></i><b>20.30</b> Непараметрические аналоги t-теста</a></li>
+<li class="chapter" data-level="20.31" data-path="tasks.html"><a href="tasks.html#chi_sq_tasks"><i class="fa fa-check"></i><b>20.31</b> Критерий хи-квадрат Пирсона</a></li>
+<li class="chapter" data-level="20.32" data-path="tasks.html"><a href="tasks.html#backpack_tasks"><i class="fa fa-check"></i><b>20.32</b> Исследование набора данных Backpack</a></li>
+<li class="chapter" data-level="20.33" data-path="tasks.html"><a href="tasks.html#cov_tasks"><i class="fa fa-check"></i><b>20.33</b> Ковариация</a></li>
+<li class="chapter" data-level="20.34" data-path="tasks.html"><a href="tasks.html#cor_tasks"><i class="fa fa-check"></i><b>20.34</b> Коэффициент корреляции</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="solutions.html"><a href="solutions.html"><i class="fa fa-check"></i><b>21</b> Решения заданий</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="solutions.html"><a href="solutions.html#solution_begin"><i class="fa fa-check"></i><b>21.1</b> Начало работы в R</a></li>
+<li class="chapter" data-level="21.2" data-path="solutions.html"><a href="solutions.html#solution_new_vecs"><i class="fa fa-check"></i><b>21.2</b> Создание векторов</a></li>
+<li class="chapter" data-level="21.3" data-path="solutions.html"><a href="solutions.html#solution_coer"><i class="fa fa-check"></i><b>21.3</b> Приведение типов</a></li>
+<li class="chapter" data-level="21.4" data-path="solutions.html"><a href="solutions.html#solution_vec_ion"><i class="fa fa-check"></i><b>21.4</b> Векторизация</a></li>
+<li class="chapter" data-level="21.5" data-path="solutions.html"><a href="solutions.html#solution_vec_ind"><i class="fa fa-check"></i><b>21.5</b> Индексирование векторов</a></li>
+<li class="chapter" data-level="21.6" data-path="solutions.html"><a href="solutions.html#solution_na"><i class="fa fa-check"></i><b>21.6</b> Работа с пропущенными значениями</a></li>
+<li class="chapter" data-level="21.7" data-path="solutions.html"><a href="solutions.html#solution_matrix"><i class="fa fa-check"></i><b>21.7</b> Матрицы</a></li>
+<li class="chapter" data-level="21.8" data-path="solutions.html"><a href="solutions.html#solution_list"><i class="fa fa-check"></i><b>21.8</b> Списки</a></li>
+<li class="chapter" data-level="21.9" data-path="solutions.html"><a href="solutions.html#solution_df"><i class="fa fa-check"></i><b>21.9</b> Датафрейм</a></li>
+<li class="chapter" data-level="21.10" data-path="solutions.html"><a href="solutions.html#solution_if"><i class="fa fa-check"></i><b>21.10</b> Условные конструкции</a></li>
+<li class="chapter" data-level="21.11" data-path="solutions.html"><a href="solutions.html#solution_function"><i class="fa fa-check"></i><b>21.11</b> Создание функций</a></li>
+<li class="chapter" data-level="21.12" data-path="solutions.html"><a href="solutions.html#solution_sanity"><i class="fa fa-check"></i><b>21.12</b> Проверка на адекватность</a></li>
+<li class="chapter" data-level="21.13" data-path="solutions.html"><a href="solutions.html#solution_apply"><i class="fa fa-check"></i><b>21.13</b> Семейство функций apply()</a></li>
+<li class="chapter" data-level="21.14" data-path="solutions.html"><a href="solutions.html#solution_pipe"><i class="fa fa-check"></i><b>21.14</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="21.15" data-path="solutions.html"><a href="solutions.html#solution_select"><i class="fa fa-check"></i><b>21.15</b> Выбор столбцов: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="21.16" data-path="solutions.html"><a href="solutions.html#solution_filt"><i class="fa fa-check"></i><b>21.16</b> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="21.17" data-path="solutions.html"><a href="solutions.html#solution_arr"><i class="fa fa-check"></i><b>21.17</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="21.18" data-path="solutions.html"><a href="solutions.html#solution_dist"><i class="fa fa-check"></i><b>21.18</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="21.19" data-path="solutions.html"><a href="solutions.html#solution_mutate"><i class="fa fa-check"></i><b>21.19</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="21.20" data-path="solutions.html"><a href="solutions.html#solution_group_by"><i class="fa fa-check"></i><b>21.20</b> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+<li class="chapter" data-level="21.21" data-path="solutions.html"><a href="solutions.html#соединение-датафреймов-_join-solution_join"><i class="fa fa-check"></i><b>21.21</b> Соединение датафреймов: *_join {#solution_join}</a></li>
+<li class="chapter" data-level="21.22" data-path="solutions.html"><a href="solutions.html#solution_pivot"><i class="fa fa-check"></i><b>21.22</b> Tidy data</a></li>
+<li class="chapter" data-level="21.23" data-path="solutions.html"><a href="solutions.html#solution_across"><i class="fa fa-check"></i><b>21.23</b> Операции с несколькими колонками: <code>across()</code></a></li>
+<li class="chapter" data-level="21.24" data-path="solutions.html"><a href="solutions.html#desc_solutions"><i class="fa fa-check"></i><b>21.24</b> Описательная статистика</a></li>
+<li class="chapter" data-level="21.25" data-path="solutions.html"><a href="solutions.html#ggplot2_solutions"><i class="fa fa-check"></i><b>21.25</b> Построение графиков в <code>ggplot2</code></a></li>
+<li class="chapter" data-level="21.26" data-path="solutions.html"><a href="solutions.html#dist_solutions"><i class="fa fa-check"></i><b>21.26</b> Распределения</a></li>
+<li class="chapter" data-level="21.27" data-path="solutions.html"><a href="solutions.html#one_ttest_solutions"><i class="fa fa-check"></i><b>21.27</b> Одновыборочный t-test</a></li>
+<li class="chapter" data-level="21.28" data-path="solutions.html"><a href="solutions.html#dep_ttest_solutions"><i class="fa fa-check"></i><b>21.28</b> Двухвыборочный зависимый t-test</a></li>
+<li class="chapter" data-level="21.29" data-path="solutions.html"><a href="solutions.html#ind_ttest_solutions"><i class="fa fa-check"></i><b>21.29</b> Двухвыборочный независимый t-test</a></li>
+<li class="chapter" data-level="21.30" data-path="solutions.html"><a href="solutions.html#nonparam_ttest_solutions"><i class="fa fa-check"></i><b>21.30</b> Непараметрические аналоги t-теста</a></li>
+<li class="chapter" data-level="21.31" data-path="solutions.html"><a href="solutions.html#chi_sq_solutions"><i class="fa fa-check"></i><b>21.31</b> Критерий хи-квадрат Пирсона</a></li>
+<li class="chapter" data-level="21.32" data-path="solutions.html"><a href="solutions.html#backpack_solutions"><i class="fa fa-check"></i><b>21.32</b> Исследование набора данных Backpack</a></li>
+<li class="chapter" data-level="21.33" data-path="solutions.html"><a href="solutions.html#cov_solutions"><i class="fa fa-check"></i><b>21.33</b> Ковариация</a></li>
+<li class="chapter" data-level="21.34" data-path="solutions.html"><a href="solutions.html#cor_solutions"><i class="fa fa-check"></i><b>21.34</b> Коэффициент корреляции</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ссылки-на-литературу.html"><a href="ссылки-на-литературу.html"><i class="fa fa-check"></i>Ссылки на литературу</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Анализ данных и статистика в R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="complex_structures" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Сложные структуры данных в R</h1>
+<div id="matrix" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Матрица</h2>
+<p>Если вдруг вас пугает это слово, то совершенно зря. <strong>Матрица (matrix)</strong> — это всего лишь “двумерный” вектор: вектор, у которого есть не только длина, но и ширина. Создать матрицу можно с помощью функции <code>matrix()</code> из вектора, указав при этом количество строк и столбцов.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="complex_structures.html#cb270-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
+<span id="cb270-2"><a href="complex_structures.html#cb270-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<blockquote>
+<p>Заметьте, значения вектора заполняются следующим образом: сначала заполняется первый столбик сверху вниз, потом второй сверху вниз и так до конца, т.е. заполнение значений матрицы идет в первую очередь по вертикали. Это довольно стандартный способ создания матриц, характерный не только для R.</p>
+</blockquote>
+<p>Если мы знаем сколько значений в матрице и сколько мы хотим строк, то количество столбцов указывать необязательно:</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="complex_structures.html#cb272-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>)</span>
+<span id="cb272-2"><a href="complex_structures.html#cb272-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<p>Все остальное так же как и с векторами: внутри находится данные только одного типа. Поскольку матрица — это уже двумерный массив, то у него имеется два индекса. Эти два индекса разделяются запятыми.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="complex_structures.html#cb274-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>,<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="complex_structures.html#cb276-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    7   12
+## [2,]    3    8   13
+## [3,]    4    9   14</code></pre>
+<p>Первый индекс — выбор строк, второй индекс — выбор колонок. Если же мы оставляем пустое поле вместо числа, то мы выбираем все строки/колонки в зависимости от того, оставили мы поле пустым до или после запятой:</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="complex_structures.html#cb278-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    6   11
+## [2,]    2    7   12
+## [3,]    3    8   13
+## [4,]    4    9   14
+## [5,]    5   10   15</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="complex_structures.html#cb280-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    2    7   12   17
+## [2,]    3    8   13   18
+## [3,]    4    9   14   19</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="complex_structures.html#cb282-1" aria-hidden="true" tabindex="-1"></a>A[, ]</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2    7   12   17
+## [3,]    3    8   13   18
+## [4,]    4    9   14   19
+## [5,]    5   10   15   20</code></pre>
+<p>Так же как и в случае с обычными векторами, часть матрицы можно переписать:</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="complex_structures.html#cb284-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb284-2"><a href="complex_structures.html#cb284-2" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    6   11   16
+## [2,]    2  100  100  100
+## [3,]    3  100  100  100
+## [4,]    4  100  100  100
+## [5,]    5   10   15   20</code></pre>
+<p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами.</p>
+<blockquote>
+<p>То, что матрица — это просто двумерный вектор, не является метафорой: в R матрица — это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты — это свойства объектов, своего рода “метаданные.” Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги “R in a Nutshell” <span class="citation">(<a href="#ref-adler2010r" role="doc-biblioref">Adler 2010</a>)</span>.</p>
+</blockquote>
+</div>
+<div id="arrays" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Массив</h2>
+<p>Два измерения — это не предел! Структура с одним типом данных внутри, но с тремя измерениями или больше, называется <strong>массивом (array)</strong>. Создание массива очень похоже на создание матрицы: задаем вектор, из которого будет собран массив, и размерность массива.</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="complex_structures.html#cb286-1" aria-hidden="true" tabindex="-1"></a>array_3d <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb286-2"><a href="complex_structures.html#cb286-2" aria-hidden="true" tabindex="-1"></a>array_3d</span></code></pre></div>
+<pre><code>## , , 1
+## 
+##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6
+## 
+## , , 2
+## 
+##      [,1] [,2]
+## [1,]    7   10
+## [2,]    8   11
+## [3,]    9   12</code></pre>
+</div>
+<div id="list" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Список</h2>
+<p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим <strong>список (list)</strong>!</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="complex_structures.html#cb288-1" aria-hidden="true" tabindex="-1"></a>simple_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>, <span class="st">&quot;Пам пам&quot;</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb288-2"><a href="complex_structures.html#cb288-2" aria-hidden="true" tabindex="-1"></a>simple_list</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 42
+## 
+## [[2]]
+## [1] &quot;Пам пам&quot;
+## 
+## [[3]]
+## [1] TRUE</code></pre>
+<p>А это значит, что там могут содержаться самые разные данные, в том числе и другие списки и векторы!</p>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="complex_structures.html#cb290-1" aria-hidden="true" tabindex="-1"></a>complex_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">&quot;Wow&quot;</span>, <span class="st">&quot;this&quot;</span>, <span class="st">&quot;list&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;so&quot;</span>, <span class="st">&quot;big&quot;</span>), <span class="st">&quot;16&quot;</span>, simple_list)</span>
+<span id="cb290-2"><a href="complex_structures.html#cb290-2" aria-hidden="true" tabindex="-1"></a>complex_list</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;Wow&quot;  &quot;this&quot; &quot;list&quot; &quot;is&quot;   &quot;so&quot;   &quot;big&quot; 
+## 
+## [[2]]
+## [1] &quot;16&quot;
+## 
+## [[3]]
+## [[3]][[1]]
+## [1] 42
+## 
+## [[3]][[2]]
+## [1] &quot;Пам пам&quot;
+## 
+## [[3]][[3]]
+## [1] TRUE</code></pre>
+<p>Если у нас сложный список, то есть очень классная функция, чтобы посмотреть, как он устроен, под названием <code>str()</code>:</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="complex_structures.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(complex_list)</span></code></pre></div>
+<pre><code>## List of 3
+##  $ : chr [1:6] &quot;Wow&quot; &quot;this&quot; &quot;list&quot; &quot;is&quot; ...
+##  $ : chr &quot;16&quot;
+##  $ :List of 3
+##   ..$ : num 42
+##   ..$ : chr &quot;Пам пам&quot;
+##   ..$ : logi TRUE</code></pre>
+<blockquote>
+<p>Представьте, что список - это такое дерево с ветвистой структурой. А на конце этих ветвей - листья-векторы.</p>
+</blockquote>
+<p>Как и в случае с векторами мы можем давать имена элементам списка:</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="complex_structures.html#cb294-1" aria-hidden="true" tabindex="-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="dv">24</span>, <span class="at">PhDstudent =</span> T, <span class="at">language =</span> <span class="st">&quot;Russian&quot;</span>)</span>
+<span id="cb294-2"><a href="complex_structures.html#cb294-2" aria-hidden="true" tabindex="-1"></a>named_list</span></code></pre></div>
+<pre><code>## $age
+## [1] 24
+## 
+## $PhDstudent
+## [1] TRUE
+## 
+## $language
+## [1] &quot;Russian&quot;</code></pre>
+<p>К списку можно обращаться как с помощью индексов, так и по именам. Начнем с последнего:</p>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="complex_structures.html#cb296-1" aria-hidden="true" tabindex="-1"></a>named_list<span class="sc">$</span>age</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>А вот с индексами сложнее, и в этом очень легко запутаться. Давайте попробуем сделать так, как мы делали это раньше:</p>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="complex_structures.html#cb298-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## $age
+## [1] 24</code></pre>
+<p>Мы, по сути, получили элемент списка — просто как часть списка, т.е. как список длиной один:</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="complex_structures.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list)</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="complex_structures.html#cb302-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[<span class="dv">1</span>])</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<p>А вот чтобы добраться до самого элемента списка (и сделать с ним что-то хорошее), нам нужна не одна, а две квадратных скобочки:</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="complex_structures.html#cb304-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="complex_structures.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[[<span class="dv">1</span>]])</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Indexing lists in <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>. Inspired by the Residence Inn <a href="http://t.co/YQ6axb2w7t">pic.twitter.com/YQ6axb2w7t</a>
+</p>
+— Hadley Wickham (<span class="citation">(<a href="#ref-hadleywickham" role="doc-biblioref"><strong>hadleywickham?</strong></a>)</span>) <a href="https://twitter.com/hadleywickham/status/643381054758363136?ref_src=twsrc%5Etfw">September 14, 2015</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Как и в случае с вектором, к элементу списка можно обращаться по имени.</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="complex_structures.html#cb308-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="st">&#39;age&#39;</span>]]</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>Хотя последнее — практически то же самое, что и использование знака $.</p>
+<blockquote>
+<p>Списки довольно часто используются в R, но реже, чем в Python. Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками — к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры — хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
+</blockquote>
+</div>
+<div id="df" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Датафрейм</h2>
+<p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы (data.frames)</strong>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
+<p>Без векторов мы не смогли бы разобраться с матрицами и списками. А без последних мы не сможем понять, что такое датафрейм.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="complex_structures.html#cb310-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Petr&quot;</span>, <span class="st">&quot;Eugeny&quot;</span>, <span class="st">&quot;Lena&quot;</span>, <span class="st">&quot;Misha&quot;</span>, <span class="st">&quot;Sasha&quot;</span>) </span>
+<span id="cb310-2"><a href="complex_structures.html#cb310-2" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>) </span>
+<span id="cb310-3"><a href="complex_structures.html#cb310-3" aria-hidden="true" tabindex="-1"></a>student <span class="ot">&lt;-</span> <span class="fu">c</span>(F, F, T, T, T) </span>
+<span id="cb310-4"><a href="complex_structures.html#cb310-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(name, age, student)  </span>
+<span id="cb310-5"><a href="complex_structures.html#cb310-5" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Petr","2":"26","3":"FALSE"},{"1":"Eugeny","2":"34","3":"FALSE"},{"1":"Lena","2":"23","3":"TRUE"},{"1":"Misha","2":"27","3":"TRUE"},{"1":"Sasha","2":"26","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="complex_structures.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    5 obs. of  3 variables:
+##  $ name   : chr  &quot;Petr&quot; &quot;Eugeny&quot; &quot;Lena&quot; &quot;Misha&quot; ...
+##  $ age    : num  26 34 23 27 26
+##  $ student: logi  FALSE FALSE TRUE TRUE TRUE</code></pre>
+<p>Вообще, очень похоже на список, не правда ли? Так и есть, датафрейм — это что-то вроде проименованного списка, каждый элемент которого является <em>atomic</em> вектором фиксированной длины. Скорее всего, вы представляли список “горизонтально.” Если это так, то теперь “переверните” список у себя в голове на 90 градусов. Так, чтобы названия векторов оказались сверху, а элементы списка стали столбцами. Поскольку длина всех этих векторов одинаковая (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут иметь разные типы данных. В нашем случае первая колонка — <code>character</code>, вторая колонка — <code>numeric</code>, третья колонка — <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с проименованным списком, и как с матрицей:</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="complex_structures.html#cb313-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 34 23</code></pre>
+<p>Здесь мы сначала ивлекли колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор, из которого мы вытащили кусок, выбрав индексы <code>2</code> и <code>3</code>.</p>
+<p>Используя оператор <code>$</code> и присваивание можно создавать новые колонки датафрейма:</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="complex_structures.html#cb315-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co">#правило recycling - узнали? </span></span>
+<span id="cb315-2"><a href="complex_structures.html#cb315-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["lovesR"],"name":[4],"type":["lgl"],"align":["right"]}],"data":[{"1":"Petr","2":"26","3":"FALSE","4":"TRUE"},{"1":"Eugeny","2":"34","3":"FALSE","4":"TRUE"},{"1":"Lena","2":"23","3":"TRUE","4":"TRUE"},{"1":"Misha","2":"27","3":"TRUE","4":"TRUE"},{"1":"Sasha","2":"26","3":"TRUE","4":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Ну а можно просто обращаться с помощью двух индексов через запятую, как мы это делали с матрицей:</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="complex_structures.html#cb316-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["age"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["student"],"name":[2],"type":["lgl"],"align":["right"]}],"data":[{"1":"23","2":"TRUE","_rn_":"3"},{"1":"27","2":"TRUE","_rn_":"4"},{"1":"26","2":"TRUE","_rn_":"5"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Как и с матрицами, первый индекс означает строчки, а второй — столбцы.</p>
+<p>А еще можно использовать названия колонок внутри квадратных скобок:</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="complex_structures.html#cb317-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">&quot;age&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 26 34</code></pre>
+<p>И здесь перед нами открываются невообразимые возможности! Узнаем, любят ли R те, кто моложе среднего возраста в группе:</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="complex_structures.html#cb319-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<p>Эту же задачу можно выполнить другими способами:</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="complex_structures.html#cb321-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)]</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="complex_structures.html#cb323-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="st">&#39;lovesR&#39;</span>]</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE</code></pre>
+<p>В большинстве случаев подходят сразу несколько способов — тем не менее, стоит овладеть ими всеми.</p>
+<p>Датафреймы удобно просматривать в RStudio. Для это нужно написать команду <code>View(df)</code> или же просто нажать на названии нужной переменной из списка вверху справа (там где Environment). Тогда увидите табличку, очень похожую на Excel и тому подобные программы для работы с таблицами. Там же есть и всякие возможности для фильтрации, сортировки и поиска.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></p>
+<p><img src="images/View.png" width="200" /></p>
+<p>Но, конечно, интереснее все эти вещи делать руками, т.е. с помощью написания кода.</p>
+
+</div>
+</div>
+<h3>Ссылки на литературу</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-adler2010r" class="csl-entry">
+Adler, Joseph. 2010. <em>R in a Nutshell: A Desktop Quick Reference</em>. " O’Reilly Media, Inc.".
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="9">
+<li id="fn9"><p>Все, что вы нажмете в этом окошке, никак не повлияет на исходную переменную. Так что можете смело использовать эти функции для исследования содержимого датафрейма.<a href="complex_structures.html#fnref9" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vector.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r_packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/Pozdniakov/tidy_stats/edit/master/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["tidy_stats.pdf", "tidy_stats.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"self_contained": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

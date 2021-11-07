@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>14 t-тест | Анализ данных и статистика в R</title>
   <meta name="description" content="14 t-тест | Анализ данных и статистика в R" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="14 t-тест | Анализ данных и статистика в R" />
   <meta property="og:type" content="book" />
@@ -24,17 +24,18 @@
 <meta name="author" content="Поздняков Иван" />
 
 
-<meta name="date" content="2021-04-07" />
+<meta name="date" content="2021-11-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="infer-stats.html"/>
-<link rel="next" href="cov-cor.html"/>
-<script src="libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link rel="prev" href="infer_stats.html"/>
+<link rel="next" href="cov_cor.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,12 +51,11 @@
 
 
 
-
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
@@ -134,6 +134,29 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -178,41 +201,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="vector.html"><a href="vector.html#na"><i class="fa fa-check"></i><b>3.7</b> NA - пропущенные значения</a></li>
 <li class="chapter" data-level="3.8" data-path="vector.html"><a href="vector.html#vector_end"><i class="fa fa-check"></i><b>3.8</b> Заключение</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="complex-structures.html"><a href="complex-structures.html"><i class="fa fa-check"></i><b>4</b> Сложные структуры данных в R</a>
+<li class="chapter" data-level="4" data-path="complex_structures.html"><a href="complex_structures.html"><i class="fa fa-check"></i><b>4</b> Сложные структуры данных в R</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="complex-structures.html"><a href="complex-structures.html#matrix"><i class="fa fa-check"></i><b>4.1</b> Матрица</a></li>
-<li class="chapter" data-level="4.2" data-path="complex-structures.html"><a href="complex-structures.html#arrays"><i class="fa fa-check"></i><b>4.2</b> Массив</a></li>
-<li class="chapter" data-level="4.3" data-path="complex-structures.html"><a href="complex-structures.html#list"><i class="fa fa-check"></i><b>4.3</b> Список</a></li>
-<li class="chapter" data-level="4.4" data-path="complex-structures.html"><a href="complex-structures.html#df"><i class="fa fa-check"></i><b>4.4</b> Датафрейм</a></li>
+<li class="chapter" data-level="4.1" data-path="complex_structures.html"><a href="complex_structures.html#matrix"><i class="fa fa-check"></i><b>4.1</b> Матрица</a></li>
+<li class="chapter" data-level="4.2" data-path="complex_structures.html"><a href="complex_structures.html#arrays"><i class="fa fa-check"></i><b>4.2</b> Массив</a></li>
+<li class="chapter" data-level="4.3" data-path="complex_structures.html"><a href="complex_structures.html#list"><i class="fa fa-check"></i><b>4.3</b> Список</a></li>
+<li class="chapter" data-level="4.4" data-path="complex_structures.html"><a href="complex_structures.html#df"><i class="fa fa-check"></i><b>4.4</b> Датафрейм</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i><b>5</b> Пакеты в R</a>
+<li class="chapter" data-level="5" data-path="r_packages.html"><a href="r_packages.html"><i class="fa fa-check"></i><b>5</b> Пакеты в R</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="r-packages.html"><a href="r-packages.html#extra_pack"><i class="fa fa-check"></i><b>5.1</b> Дополнительные пакеты</a></li>
-<li class="chapter" data-level="5.2" data-path="r-packages.html"><a href="r-packages.html#r_built_in"><i class="fa fa-check"></i><b>5.2</b> Встроенные пакеты R</a></li>
-<li class="chapter" data-level="5.3" data-path="r-packages.html"><a href="r-packages.html#install_cran"><i class="fa fa-check"></i><b>5.3</b> Установка пакетов с CRAN</a></li>
-<li class="chapter" data-level="5.4" data-path="r-packages.html"><a href="r-packages.html#package_load"><i class="fa fa-check"></i><b>5.4</b> Загрузка установленного пакета</a></li>
-<li class="chapter" data-level="5.5" data-path="r-packages.html"><a href="r-packages.html#from_package"><i class="fa fa-check"></i><b>5.5</b> Вызов функции из пакета с помощью <code>::</code></a></li>
-<li class="chapter" data-level="5.6" data-path="r-packages.html"><a href="r-packages.html#install_bioc"><i class="fa fa-check"></i><b>5.6</b> Установка пакетов c Bioconductor</a></li>
-<li class="chapter" data-level="5.7" data-path="r-packages.html"><a href="r-packages.html#install_github"><i class="fa fa-check"></i><b>5.7</b> Установка пакетов с Github</a></li>
-<li class="chapter" data-level="5.8" data-path="r-packages.html"><a href="r-packages.html#where_packages"><i class="fa fa-check"></i><b>5.8</b> Где искать нужные пакеты</a></li>
+<li class="chapter" data-level="5.1" data-path="r_packages.html"><a href="r_packages.html#extra_pack"><i class="fa fa-check"></i><b>5.1</b> Дополнительные пакеты</a></li>
+<li class="chapter" data-level="5.2" data-path="r_packages.html"><a href="r_packages.html#r_built_in"><i class="fa fa-check"></i><b>5.2</b> Встроенные пакеты R</a></li>
+<li class="chapter" data-level="5.3" data-path="r_packages.html"><a href="r_packages.html#install_cran"><i class="fa fa-check"></i><b>5.3</b> Установка пакетов с CRAN</a></li>
+<li class="chapter" data-level="5.4" data-path="r_packages.html"><a href="r_packages.html#package_load"><i class="fa fa-check"></i><b>5.4</b> Загрузка установленного пакета</a></li>
+<li class="chapter" data-level="5.5" data-path="r_packages.html"><a href="r_packages.html#from_package"><i class="fa fa-check"></i><b>5.5</b> Вызов функции из пакета с помощью <code>::</code></a></li>
+<li class="chapter" data-level="5.6" data-path="r_packages.html"><a href="r_packages.html#install_bioc"><i class="fa fa-check"></i><b>5.6</b> Установка пакетов c Bioconductor</a></li>
+<li class="chapter" data-level="5.7" data-path="r_packages.html"><a href="r_packages.html#install_github"><i class="fa fa-check"></i><b>5.7</b> Установка пакетов с Github</a></li>
+<li class="chapter" data-level="5.8" data-path="r_packages.html"><a href="r_packages.html#where_packages"><i class="fa fa-check"></i><b>5.8</b> Где искать нужные пакеты</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="real-data.html"><a href="real-data.html"><i class="fa fa-check"></i><b>6</b> Импорт и экспорт данных</a>
+<li class="chapter" data-level="6" data-path="real_data.html"><a href="real_data.html"><i class="fa fa-check"></i><b>6</b> Импорт и экспорт данных</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="real-data.html"><a href="real-data.html#wd"><i class="fa fa-check"></i><b>6.1</b> Рабочая папка и проекты RStudio</a></li>
-<li class="chapter" data-level="6.2" data-path="real-data.html"><a href="real-data.html#project_workflow"><i class="fa fa-check"></i><b>6.2</b> Организация проектов</a>
+<li class="chapter" data-level="6.1" data-path="real_data.html"><a href="real_data.html#wd"><i class="fa fa-check"></i><b>6.1</b> Рабочая папка и проекты RStudio</a></li>
+<li class="chapter" data-level="6.2" data-path="real_data.html"><a href="real_data.html#project_workflow"><i class="fa fa-check"></i><b>6.2</b> Организация проектов</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="real-data.html"><a href="real-data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
+<li class="chapter" data-level="6.2.1" data-path="real_data.html"><a href="real_data.html#text_binary"><i class="fa fa-check"></i><b>6.2.1</b> Табличные данные: текстовые и бинарные данные</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="real-data.html"><a href="real-data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
-<li class="chapter" data-level="6.4" data-path="real-data.html"><a href="real-data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
-<li class="chapter" data-level="6.5" data-path="real-data.html"><a href="real-data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
-<li class="chapter" data-level="6.6" data-path="real-data.html"><a href="real-data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
+<li class="chapter" data-level="6.3" data-path="real_data.html"><a href="real_data.html#check_imported"><i class="fa fa-check"></i><b>6.3</b> Проверка импортированных данных</a></li>
+<li class="chapter" data-level="6.4" data-path="real_data.html"><a href="real_data.html#export_data"><i class="fa fa-check"></i><b>6.4</b> Экспорт данных</a></li>
+<li class="chapter" data-level="6.5" data-path="real_data.html"><a href="real_data.html#binary"><i class="fa fa-check"></i><b>6.5</b> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+<li class="chapter" data-level="6.6" data-path="real_data.html"><a href="real_data.html#fastread"><i class="fa fa-check"></i><b>6.6</b> Быстрый импорт данных</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="loops-conditions.html"><a href="loops-conditions.html"><i class="fa fa-check"></i><b>7</b> Условные конструкции и циклы</a>
+<li class="chapter" data-level="7" data-path="loops_conditions.html"><a href="loops_conditions.html"><i class="fa fa-check"></i><b>7</b> Условные конструкции и циклы</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="loops-conditions.html"><a href="loops-conditions.html#if"><i class="fa fa-check"></i><b>7.1</b> Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
-<li class="chapter" data-level="7.2" data-path="loops-conditions.html"><a href="loops-conditions.html#for"><i class="fa fa-check"></i><b>7.2</b> Циклы <code>for</code></a></li>
-<li class="chapter" data-level="7.3" data-path="loops-conditions.html"><a href="loops-conditions.html#ifelse"><i class="fa fa-check"></i><b>7.3</b> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
+<li class="chapter" data-level="7.1" data-path="loops_conditions.html"><a href="loops_conditions.html#if"><i class="fa fa-check"></i><b>7.1</b> Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+<li class="chapter" data-level="7.2" data-path="loops_conditions.html"><a href="loops_conditions.html#for"><i class="fa fa-check"></i><b>7.2</b> Циклы <code>for</code></a></li>
+<li class="chapter" data-level="7.3" data-path="loops_conditions.html"><a href="loops_conditions.html#ifelse"><i class="fa fa-check"></i><b>7.3</b> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="functional.html"><a href="functional.html"><i class="fa fa-check"></i><b>8</b> Функциональное программирование в R</a>
 <ul>
@@ -227,46 +250,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5.3" data-path="functional.html"><a href="functional.html#apply_other"><i class="fa fa-check"></i><b>8.5.3</b> Другие функции семейства <code>apply()</code></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="tidy-intro.html"><a href="tidy-intro.html"><i class="fa fa-check"></i><b>9</b> Введение в tidyverse</a>
+<li class="chapter" data-level="9" data-path="tidy_intro.html"><a href="tidy_intro.html"><i class="fa fa-check"></i><b>9</b> Введение в tidyverse</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_verse"><i class="fa fa-check"></i><b>9.1</b> Вселенная tidyverse</a></li>
-<li class="chapter" data-level="9.2" data-path="tidy-intro.html"><a href="tidy-intro.html#загрузка-данных-с-помощью-readr"><i class="fa fa-check"></i><b>9.2</b> Загрузка данных с помощью <code>readr</code></a></li>
-<li class="chapter" data-level="9.3" data-path="tidy-intro.html"><a href="tidy-intro.html#pipe"><i class="fa fa-check"></i><b>9.3</b> magrittr::<code>%&gt;%</code></a></li>
-<li class="chapter" data-level="9.4" data-path="tidy-intro.html"><a href="tidy-intro.html#главные-пакеты-tidyverse-dplyr-и-tidyr"><i class="fa fa-check"></i><b>9.4</b> Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></a></li>
-<li class="chapter" data-level="9.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_select_cols"><i class="fa fa-check"></i><b>9.5</b> Работа с колонками тиббла</a>
+<li class="chapter" data-level="9.1" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_verse"><i class="fa fa-check"></i><b>9.1</b> Вселенная tidyverse</a></li>
+<li class="chapter" data-level="9.2" data-path="tidy_intro.html"><a href="tidy_intro.html#загрузка-данных-с-помощью-readr"><i class="fa fa-check"></i><b>9.2</b> Загрузка данных с помощью <code>readr</code></a></li>
+<li class="chapter" data-level="9.3" data-path="tidy_intro.html"><a href="tidy_intro.html#pipe"><i class="fa fa-check"></i><b>9.3</b> magrittr::<code>%&gt;%</code></a></li>
+<li class="chapter" data-level="9.4" data-path="tidy_intro.html"><a href="tidy_intro.html#главные-пакеты-tidyverse-dplyr-и-tidyr"><i class="fa fa-check"></i><b>9.4</b> Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></a></li>
+<li class="chapter" data-level="9.5" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_select_cols"><i class="fa fa-check"></i><b>9.5</b> Работа с колонками тиббла</a>
 <ul>
-<li class="chapter" data-level="9.5.1" data-path="tidy-intro.html"><a href="tidy-intro.html#выбор-колонок-dplyrselect"><i class="fa fa-check"></i><b>9.5.1</b> Выбор колонок: <code>dplyr::select()</code></a></li>
-<li class="chapter" data-level="9.5.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidyselect"><i class="fa fa-check"></i><b>9.5.2</b> Мини-язык tidyselect для выбора колонок</a></li>
+<li class="chapter" data-level="9.5.1" data-path="tidy_intro.html"><a href="tidy_intro.html#выбор-колонок-dplyrselect"><i class="fa fa-check"></i><b>9.5.1</b> Выбор колонок: <code>dplyr::select()</code></a></li>
+<li class="chapter" data-level="9.5.2" data-path="tidy_intro.html"><a href="tidy_intro.html#tidyselect"><i class="fa fa-check"></i><b>9.5.2</b> Мини-язык tidyselect для выбора колонок</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_select_rows"><i class="fa fa-check"></i><b>9.6</b> Работа со строками тиббла</a>
+<li class="chapter" data-level="9.6" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_select_rows"><i class="fa fa-check"></i><b>9.6</b> Работа со строками тиббла</a>
 <ul>
-<li class="chapter" data-level="9.6.1" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_slice"><i class="fa fa-check"></i><b>9.6.1</b> Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
-<li class="chapter" data-level="9.6.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_filter"><i class="fa fa-check"></i><b>9.6.2</b> Выбор строк по условию: <code>dplyr::filter()</code></a></li>
-<li class="chapter" data-level="9.6.3" data-path="tidy-intro.html"><a href="tidy-intro.html#slice_family"><i class="fa fa-check"></i><b>9.6.3</b> Семейство функций <code>slice()</code></a></li>
-<li class="chapter" data-level="9.6.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_drop_na"><i class="fa fa-check"></i><b>9.6.4</b> Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
-<li class="chapter" data-level="9.6.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_arrange"><i class="fa fa-check"></i><b>9.6.5</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+<li class="chapter" data-level="9.6.1" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_slice"><i class="fa fa-check"></i><b>9.6.1</b> Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
+<li class="chapter" data-level="9.6.2" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_filter"><i class="fa fa-check"></i><b>9.6.2</b> Выбор строк по условию: <code>dplyr::filter()</code></a></li>
+<li class="chapter" data-level="9.6.3" data-path="tidy_intro.html"><a href="tidy_intro.html#slice_family"><i class="fa fa-check"></i><b>9.6.3</b> Семейство функций <code>slice()</code></a></li>
+<li class="chapter" data-level="9.6.4" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_drop_na"><i class="fa fa-check"></i><b>9.6.4</b> Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
+<li class="chapter" data-level="9.6.5" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_arrange"><i class="fa fa-check"></i><b>9.6.5</b> Сортировка строк: <code>dplyr::arrange()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="9.7" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_mutate"><i class="fa fa-check"></i><b>9.7</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
-<li class="chapter" data-level="9.8" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_aggregate"><i class="fa fa-check"></i><b>9.8</b> Агрегация данных в тиббле</a>
+<li class="chapter" data-level="9.7" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_mutate"><i class="fa fa-check"></i><b>9.7</b> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+<li class="chapter" data-level="9.8" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_aggregate"><i class="fa fa-check"></i><b>9.8</b> Агрегация данных в тиббле</a>
 <ul>
-<li class="chapter" data-level="9.8.1" data-path="tidy-intro.html"><a href="tidy-intro.html#summarise"><i class="fa fa-check"></i><b>9.8.1</b> Подытоживание: <code>summarise()</code></a></li>
-<li class="chapter" data-level="9.8.2" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_group"><i class="fa fa-check"></i><b>9.8.2</b> Группировка: <code>group_by()</code></a></li>
-<li class="chapter" data-level="9.8.3" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_count"><i class="fa fa-check"></i><b>9.8.3</b> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
-<li class="chapter" data-level="9.8.4" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_distinct"><i class="fa fa-check"></i><b>9.8.4</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
-<li class="chapter" data-level="9.8.5" data-path="tidy-intro.html"><a href="tidy-intro.html#tidy_group_mutate"><i class="fa fa-check"></i><b>9.8.5</b> Создание колонок с группировкой</a></li>
+<li class="chapter" data-level="9.8.1" data-path="tidy_intro.html"><a href="tidy_intro.html#summarise"><i class="fa fa-check"></i><b>9.8.1</b> Подытоживание: <code>summarise()</code></a></li>
+<li class="chapter" data-level="9.8.2" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_group"><i class="fa fa-check"></i><b>9.8.2</b> Группировка: <code>group_by()</code></a></li>
+<li class="chapter" data-level="9.8.3" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_count"><i class="fa fa-check"></i><b>9.8.3</b> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
+<li class="chapter" data-level="9.8.4" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_distinct"><i class="fa fa-check"></i><b>9.8.4</b> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+<li class="chapter" data-level="9.8.5" data-path="tidy_intro.html"><a href="tidy_intro.html#tidy_group_mutate"><i class="fa fa-check"></i><b>9.8.5</b> Создание колонок с группировкой</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html"><i class="fa fa-check"></i><b>10</b> Продвинутый tidyverse</a>
+<li class="chapter" data-level="10" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html"><i class="fa fa-check"></i><b>10</b> Продвинутый tidyverse</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_several"><i class="fa fa-check"></i><b>10.1</b> Объединение нескольких датафреймов</a>
+<li class="chapter" data-level="10.1" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_several"><i class="fa fa-check"></i><b>10.1</b> Объединение нескольких датафреймов</a>
 <ul>
-<li class="chapter" data-level="10.1.1" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_bind"><i class="fa fa-check"></i><b>10.1.1</b> Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
-<li class="chapter" data-level="10.1.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_join"><i class="fa fa-check"></i><b>10.1.2</b> Реляционные данные: <code>*_join()</code></a></li>
+<li class="chapter" data-level="10.1.1" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_bind"><i class="fa fa-check"></i><b>10.1.1</b> Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
+<li class="chapter" data-level="10.1.2" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_join"><i class="fa fa-check"></i><b>10.1.2</b> Реляционные данные: <code>*_join()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#tidy_data"><i class="fa fa-check"></i><b>10.2</b> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
-<li class="chapter" data-level="10.3" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#трансформация-нескольких-колонок-dplyracross"><i class="fa fa-check"></i><b>10.3</b> Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
-<li class="chapter" data-level="10.4" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
-<li class="chapter" data-level="10.5" data-path="tidyverse-advanced.html"><a href="tidyverse-advanced.html#list_colums_nest"><i class="fa fa-check"></i><b>10.5</b> Колонки-списки и нестинг: <code>nest()</code></a></li>
+<li class="chapter" data-level="10.2" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#tidy_data"><i class="fa fa-check"></i><b>10.2</b> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
+<li class="chapter" data-level="10.3" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#трансформация-нескольких-колонок-dplyracross"><i class="fa fa-check"></i><b>10.3</b> Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
+<li class="chapter" data-level="10.4" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#purrr"><i class="fa fa-check"></i><b>10.4</b> Функциональное программирование: <code>purrr</code></a></li>
+<li class="chapter" data-level="10.5" data-path="tidyverse_advanced.html"><a href="tidyverse_advanced.html#list_colums_nest"><i class="fa fa-check"></i><b>10.5</b> Колонки-списки и нестинг: <code>nest()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="vdesc.html"><a href="vdesc.html"><i class="fa fa-check"></i><b>11</b> Описательная статистика</a>
 <ul>
@@ -332,18 +355,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.6.3" data-path="rmd.html"><a href="rmd.html#html_inside"><i class="fa fa-check"></i><b>12.6.3</b> HTML-код</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="infer-stats.html"><a href="infer-stats.html"><i class="fa fa-check"></i><b>13</b> Статистика вывода</a>
+<li class="chapter" data-level="13" data-path="infer_stats.html"><a href="infer_stats.html"><i class="fa fa-check"></i><b>13</b> Статистика вывода</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="infer-stats.html"><a href="infer-stats.html#infer_intro"><i class="fa fa-check"></i><b>13.1</b> Введение в статистику вывода</a></li>
-<li class="chapter" data-level="13.2" data-path="infer-stats.html"><a href="infer-stats.html#distributions"><i class="fa fa-check"></i><b>13.2</b> Распределения</a></li>
-<li class="chapter" data-level="13.3" data-path="infer-stats.html"><a href="infer-stats.html#estimates"><i class="fa fa-check"></i><b>13.3</b> Оценки</a></li>
-<li class="chapter" data-level="13.4" data-path="infer-stats.html"><a href="infer-stats.html#sample_estimate"><i class="fa fa-check"></i><b>13.4</b> Точечные оценки</a></li>
-<li class="chapter" data-level="13.5" data-path="infer-stats.html"><a href="infer-stats.html#interval_estimate"><i class="fa fa-check"></i><b>13.5</b> Интервальные оценки</a></li>
-<li class="chapter" data-level="13.6" data-path="infer-stats.html"><a href="infer-stats.html#sample_dist"><i class="fa fa-check"></i><b>13.6</b> Выборочное распределение</a></li>
-<li class="chapter" data-level="13.7" data-path="infer-stats.html"><a href="infer-stats.html#nordm_dist_importance"><i class="fa fa-check"></i><b>13.7</b> Важность нормального распределения</a></li>
-<li class="chapter" data-level="13.8" data-path="infer-stats.html"><a href="infer-stats.html#clt"><i class="fa fa-check"></i><b>13.8</b> Центральная предельная теорема</a></li>
-<li class="chapter" data-level="13.9" data-path="infer-stats.html"><a href="infer-stats.html#ci_build"><i class="fa fa-check"></i><b>13.9</b> Строим доверительный интервал</a></li>
-<li class="chapter" data-level="13.10" data-path="infer-stats.html"><a href="infer-stats.html#тестирование-значимости-нулевой-гипотезы-nhst"><i class="fa fa-check"></i><b>13.10</b> Тестирование значимости нулевой гипотезы (#nhst)</a></li>
+<li class="chapter" data-level="13.1" data-path="infer_stats.html"><a href="infer_stats.html#infer_intro"><i class="fa fa-check"></i><b>13.1</b> Введение в статистику вывода</a></li>
+<li class="chapter" data-level="13.2" data-path="infer_stats.html"><a href="infer_stats.html#distributions"><i class="fa fa-check"></i><b>13.2</b> Распределения</a></li>
+<li class="chapter" data-level="13.3" data-path="infer_stats.html"><a href="infer_stats.html#estimates"><i class="fa fa-check"></i><b>13.3</b> Оценки</a></li>
+<li class="chapter" data-level="13.4" data-path="infer_stats.html"><a href="infer_stats.html#sample_estimate"><i class="fa fa-check"></i><b>13.4</b> Точечные оценки</a></li>
+<li class="chapter" data-level="13.5" data-path="infer_stats.html"><a href="infer_stats.html#interval_estimate"><i class="fa fa-check"></i><b>13.5</b> Интервальные оценки</a></li>
+<li class="chapter" data-level="13.6" data-path="infer_stats.html"><a href="infer_stats.html#sample_dist"><i class="fa fa-check"></i><b>13.6</b> Выборочное распределение</a></li>
+<li class="chapter" data-level="13.7" data-path="infer_stats.html"><a href="infer_stats.html#nordm_dist_importance"><i class="fa fa-check"></i><b>13.7</b> Важность нормального распределения</a></li>
+<li class="chapter" data-level="13.8" data-path="infer_stats.html"><a href="infer_stats.html#clt"><i class="fa fa-check"></i><b>13.8</b> Центральная предельная теорема</a></li>
+<li class="chapter" data-level="13.9" data-path="infer_stats.html"><a href="infer_stats.html#ci_build"><i class="fa fa-check"></i><b>13.9</b> Строим доверительный интервал</a></li>
+<li class="chapter" data-level="13.10" data-path="infer_stats.html"><a href="infer_stats.html#тестирование-значимости-нулевой-гипотезы-nhst"><i class="fa fa-check"></i><b>13.10</b> Тестирование значимости нулевой гипотезы (#nhst)</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="ttest.html"><a href="ttest.html"><i class="fa fa-check"></i><b>14</b> t-тест</a>
 <ul>
@@ -360,20 +383,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.4.2" data-path="ttest.html"><a href="ttest.html#mann_test"><i class="fa fa-check"></i><b>14.4.2</b> Тест Манна-Уитни</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="cov-cor.html"><a href="cov-cor.html"><i class="fa fa-check"></i><b>15</b> Ковариация и корреляция</a>
+<li class="chapter" data-level="15" data-path="cov_cor.html"><a href="cov_cor.html"><i class="fa fa-check"></i><b>15</b> Ковариация и корреляция</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="cov-cor.html"><a href="cov-cor.html#cov"><i class="fa fa-check"></i><b>15.1</b> Ковариация</a></li>
-<li class="chapter" data-level="15.2" data-path="cov-cor.html"><a href="cov-cor.html#cor"><i class="fa fa-check"></i><b>15.2</b> Корреляция</a>
+<li class="chapter" data-level="15.1" data-path="cov_cor.html"><a href="cov_cor.html#cov"><i class="fa fa-check"></i><b>15.1</b> Ковариация</a></li>
+<li class="chapter" data-level="15.2" data-path="cov_cor.html"><a href="cov_cor.html#cor"><i class="fa fa-check"></i><b>15.2</b> Корреляция</a>
 <ul>
-<li class="chapter" data-level="15.2.1" data-path="cov-cor.html"><a href="cov-cor.html#pearson_cor"><i class="fa fa-check"></i><b>15.2.1</b> Коэффициент корреляции Пирсона</a></li>
-<li class="chapter" data-level="15.2.2" data-path="cov-cor.html"><a href="cov-cor.html#nonparam_cor"><i class="fa fa-check"></i><b>15.2.2</b> Непараметрические коэффициенты корреляции</a></li>
+<li class="chapter" data-level="15.2.1" data-path="cov_cor.html"><a href="cov_cor.html#pearson_cor"><i class="fa fa-check"></i><b>15.2.1</b> Коэффициент корреляции Пирсона</a></li>
+<li class="chapter" data-level="15.2.2" data-path="cov_cor.html"><a href="cov_cor.html#nonparam_cor"><i class="fa fa-check"></i><b>15.2.2</b> Непараметрические коэффициенты корреляции</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="cov-cor.html"><a href="cov-cor.html#cor_mat"><i class="fa fa-check"></i><b>15.3</b> Корреляционная матрица</a></li>
-<li class="chapter" data-level="15.4" data-path="cov-cor.html"><a href="cov-cor.html#hitmap_cor"><i class="fa fa-check"></i><b>15.4</b> Хитмэп корреляций</a></li>
+<li class="chapter" data-level="15.3" data-path="cov_cor.html"><a href="cov_cor.html#cor_mat"><i class="fa fa-check"></i><b>15.3</b> Корреляционная матрица</a></li>
+<li class="chapter" data-level="15.4" data-path="cov_cor.html"><a href="cov_cor.html#hitmap_cor"><i class="fa fa-check"></i><b>15.4</b> Хитмэп корреляций</a></li>
 </ul></li>
 <li class="chapter" data-level="16" data-path="lm.html"><a href="lm.html"><i class="fa fa-check"></i><b>16</b> Линейная регрессия</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="lm.html"><a href="lm.html#lm"><i class="fa fa-check"></i><b>16.1</b> Функция <code>lm()</code></a></li>
+<li class="chapter" data-level="16.1" data-path="lm.html"><a href="lm.html#lm_func"><i class="fa fa-check"></i><b>16.1</b> Функция <code>lm()</code></a></li>
 <li class="chapter" data-level="16.2" data-path="lm.html"><a href="lm.html#interpret_lm"><i class="fa fa-check"></i><b>16.2</b> Интерпретация вывода линейной регрессии</a></li>
 <li class="chapter" data-level="16.3" data-path="lm.html"><a href="lm.html#lm_a"><i class="fa fa-check"></i><b>16.3</b> Допущения линейной регрессии</a></li>
 <li class="chapter" data-level="16.4" data-path="lm.html"><a href="lm.html#outliers_lm"><i class="fa fa-check"></i><b>16.4</b> Влияние выбросов на линейную модель</a></li>
@@ -397,11 +420,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="17.10" data-path="anova.html"><a href="anova.html#aov_final"><i class="fa fa-check"></i><b>17.10</b> Заключение</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="glm-general.html"><a href="glm-general.html"><i class="fa fa-check"></i><b>18</b> Общая линейная модель и ее расширения</a>
+<li class="chapter" data-level="18" data-path="glm_general.html"><a href="glm_general.html"><i class="fa fa-check"></i><b>18</b> Общая линейная модель и ее расширения</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="glm-general.html"><a href="glm-general.html#general_linear_model"><i class="fa fa-check"></i><b>18.1</b> Общая линейная модель</a></li>
-<li class="chapter" data-level="18.2" data-path="glm-general.html"><a href="glm-general.html#glm_model"><i class="fa fa-check"></i><b>18.2</b> Обобщенная линейная модель</a></li>
-<li class="chapter" data-level="18.3" data-path="glm-general.html"><a href="glm-general.html#lme_model"><i class="fa fa-check"></i><b>18.3</b> Модель со смешанными эффектами</a></li>
+<li class="chapter" data-level="18.1" data-path="glm_general.html"><a href="glm_general.html#general_linear_model"><i class="fa fa-check"></i><b>18.1</b> Общая линейная модель</a></li>
+<li class="chapter" data-level="18.2" data-path="glm_general.html"><a href="glm_general.html#glm_model"><i class="fa fa-check"></i><b>18.2</b> Обобщенная линейная модель</a></li>
+<li class="chapter" data-level="18.3" data-path="glm_general.html"><a href="glm_general.html#lme_model"><i class="fa fa-check"></i><b>18.3</b> Модель со смешанными эффектами</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="plan.html"><a href="plan.html"><i class="fa fa-check"></i><b>19</b> Планирования научного исследования</a>
 <ul>
@@ -471,13 +494,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="21.21" data-path="solutions.html"><a href="solutions.html#соединение-датафреймов-_join-solution_join"><i class="fa fa-check"></i><b>21.21</b> Соединение датафреймов: *_join {#solution_join}</a></li>
 <li class="chapter" data-level="21.22" data-path="solutions.html"><a href="solutions.html#solution_pivot"><i class="fa fa-check"></i><b>21.22</b> Tidy data</a></li>
 <li class="chapter" data-level="21.23" data-path="solutions.html"><a href="solutions.html#solution_across"><i class="fa fa-check"></i><b>21.23</b> Операции с несколькими колонками: <code>across()</code></a></li>
-<li class="chapter" data-level="21.24" data-path="tasks.html"><a href="tasks.html#desc_tasks"><i class="fa fa-check"></i><b>21.24</b> Описательная статистика</a></li>
+<li class="chapter" data-level="21.24" data-path="solutions.html"><a href="solutions.html#desc_solutions"><i class="fa fa-check"></i><b>21.24</b> Описательная статистика</a></li>
 <li class="chapter" data-level="21.25" data-path="solutions.html"><a href="solutions.html#ggplot2_solutions"><i class="fa fa-check"></i><b>21.25</b> Построение графиков в <code>ggplot2</code></a></li>
 <li class="chapter" data-level="21.26" data-path="solutions.html"><a href="solutions.html#dist_solutions"><i class="fa fa-check"></i><b>21.26</b> Распределения</a></li>
 <li class="chapter" data-level="21.27" data-path="solutions.html"><a href="solutions.html#one_ttest_solutions"><i class="fa fa-check"></i><b>21.27</b> Одновыборочный t-test</a></li>
 <li class="chapter" data-level="21.28" data-path="solutions.html"><a href="solutions.html#dep_ttest_solutions"><i class="fa fa-check"></i><b>21.28</b> Двухвыборочный зависимый t-test</a></li>
 <li class="chapter" data-level="21.29" data-path="solutions.html"><a href="solutions.html#ind_ttest_solutions"><i class="fa fa-check"></i><b>21.29</b> Двухвыборочный независимый t-test</a></li>
-<li class="chapter" data-level="21.30" data-path="tasks.html"><a href="tasks.html#nonparam_ttest_tasks"><i class="fa fa-check"></i><b>21.30</b> Непараметрические аналоги t-теста</a></li>
+<li class="chapter" data-level="21.30" data-path="solutions.html"><a href="solutions.html#nonparam_ttest_solutions"><i class="fa fa-check"></i><b>21.30</b> Непараметрические аналоги t-теста</a></li>
 <li class="chapter" data-level="21.31" data-path="solutions.html"><a href="solutions.html#chi_sq_solutions"><i class="fa fa-check"></i><b>21.31</b> Критерий хи-квадрат Пирсона</a></li>
 <li class="chapter" data-level="21.32" data-path="solutions.html"><a href="solutions.html#backpack_solutions"><i class="fa fa-check"></i><b>21.32</b> Исследование набора данных Backpack</a></li>
 <li class="chapter" data-level="21.33" data-path="solutions.html"><a href="solutions.html#cov_solutions"><i class="fa fa-check"></i><b>21.33</b> Ковариация</a></li>
@@ -511,42 +534,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Иногда это t-распределение называют t-распределением Стьюдента, а соответствующий статистический тест - критерий Стьюдента. Дело в том, что его открыл сотрудник пивоварни Гиннесс Уильям Госсет. Сотрудникам Гиннесса было запрещено публиковать научные работы под своим именем, поэтому он написал свою знаменитую работу про t-распределение под псевдонимом “Ученик” (<em>Student</em>).</p>
 </blockquote>
 <p>Форма этого распределения очень похожа на форму нормального распределения, но имеет более тяжелые “хвосты” распределения. При этом эта форма зависит от размера выборки: чем больше выборка, тем ближе распределение к нормальному. Этот параметр распределения называется <strong>степенями свободы</strong> <em>(degrees of freedom)</em> и вычисляется как <span class="math inline">\(N - 1\)</span>, где <span class="math inline">\(N\)</span> - это размер выборки.</p>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="ttest.html#cb817-1" aria-hidden="true" tabindex="-1"></a>t_normal_pdf_gg <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, .<span class="dv">01</span>),</span>
-<span id="cb817-2"><a href="ttest.html#cb817-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">t_3 =</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">3</span>),</span>
-<span id="cb817-3"><a href="ttest.html#cb817-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">t_10 =</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">10</span>),</span>
-<span id="cb817-4"><a href="ttest.html#cb817-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">t_100 =</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">100</span>),</span>
-<span id="cb817-5"><a href="ttest.html#cb817-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">normal =</span> <span class="fu">dnorm</span>(x)) <span class="sc">%&gt;%</span></span>
-<span id="cb817-6"><a href="ttest.html#cb817-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>x, <span class="at">values_to =</span> <span class="st">&#39;pdf&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;distribution&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb817-7"><a href="ttest.html#cb817-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> pdf, <span class="at">colour =</span> distribution))<span class="sc">+</span></span>
-<span id="cb817-8"><a href="ttest.html#cb817-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb817-9"><a href="ttest.html#cb817-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
-<span id="cb817-10"><a href="ttest.html#cb817-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb817-11"><a href="ttest.html#cb817-11" aria-hidden="true" tabindex="-1"></a>t_normal_pdf_gg</span></code></pre></div>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="ttest.html#cb827-1" aria-hidden="true" tabindex="-1"></a>t_normal_pdf_gg <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, .<span class="dv">01</span>),</span>
+<span id="cb827-2"><a href="ttest.html#cb827-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">t_3 =</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">3</span>),</span>
+<span id="cb827-3"><a href="ttest.html#cb827-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">t_10 =</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">10</span>),</span>
+<span id="cb827-4"><a href="ttest.html#cb827-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">t_100 =</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">100</span>),</span>
+<span id="cb827-5"><a href="ttest.html#cb827-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">normal =</span> <span class="fu">dnorm</span>(x)) <span class="sc">%&gt;%</span></span>
+<span id="cb827-6"><a href="ttest.html#cb827-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>x, <span class="at">values_to =</span> <span class="st">&#39;pdf&#39;</span>, <span class="at">names_to =</span> <span class="st">&#39;distribution&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb827-7"><a href="ttest.html#cb827-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> pdf, <span class="at">colour =</span> distribution))<span class="sc">+</span></span>
+<span id="cb827-8"><a href="ttest.html#cb827-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb827-9"><a href="ttest.html#cb827-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span>
+<span id="cb827-10"><a href="ttest.html#cb827-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb827-11"><a href="ttest.html#cb827-11" aria-hidden="true" tabindex="-1"></a>t_normal_pdf_gg</span></code></pre></div>
 <p><img src="tidy_stats_files/figure-html/unnamed-chunk-400-1.png" width="672" /></p>
 <p>Как видите, чем больше выборка (и количество степеней свободы соответственно), тем ближе t-распределение к стандартному нормальному распределению. При 100 степенях свободы они уже почти не различимы! Поэтому на больших выборках разница между t-тестом и z-тестом будет минимальна, тогда как на маленьких выборках разница может быть значительной.</p>
 <p>Давайте посчитаем t-статистику на тех же симулированных данных:</p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="ttest.html#cb818-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb818-2"><a href="ttest.html#cb818-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
-<span id="cb818-3"><a href="ttest.html#cb818-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
-<span id="cb818-4"><a href="ttest.html#cb818-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
-<span id="cb818-5"><a href="ttest.html#cb818-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> (m <span class="sc">-</span> <span class="dv">100</span>)<span class="sc">/</span>sem</span>
-<span id="cb818-6"><a href="ttest.html#cb818-6" aria-hidden="true" tabindex="-1"></a>t</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="ttest.html#cb828-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb828-2"><a href="ttest.html#cb828-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
+<span id="cb828-3"><a href="ttest.html#cb828-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
+<span id="cb828-4"><a href="ttest.html#cb828-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
+<span id="cb828-5"><a href="ttest.html#cb828-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> (m <span class="sc">-</span> <span class="dv">100</span>)<span class="sc">/</span>sem</span>
+<span id="cb828-6"><a href="ttest.html#cb828-6" aria-hidden="true" tabindex="-1"></a>t</span></code></pre></div>
 <pre><code>## [1] 0.3122351</code></pre>
 <p>Давайте для сравнения еще раз посчитаем z-статистику:</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="ttest.html#cb820-1" aria-hidden="true" tabindex="-1"></a>(m <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">/</span> (<span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="ttest.html#cb830-1" aria-hidden="true" tabindex="-1"></a>(m <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">/</span> (<span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>))</span></code></pre></div>
 <pre><code>## [1] 0.3251482</code></pre>
 <p>Как видите, расчет довольно схожий, разница только в том, откуда мы берем стандартное отклонение. Для z-статистики у нас был заранее известный параметр генеральной совокупности (что обычно не так), для t-статистики мы оценивали стандартное отклонение по выборке.</p>
 <p>Давайте теперь посчитаем p-value. Мы будем пользоваться не функцией <code>pnorm()</code>, а функцией <code>pt()</code>, а в качестве параметра распределения указать количество степеней свобод в <code>df =</code></p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="ttest.html#cb822-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="ttest.html#cb832-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.6222407</code></pre>
 <p>Функция <code>pt()</code> считает от минус бесконечности до <span class="math inline">\(t\)</span>, а нам нужно от <span class="math inline">\(t\)</span> до плюс бесконечности, потому что <span class="math inline">\(t\)</span> больше 0:</p>
-<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="ttest.html#cb824-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="ttest.html#cb834-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3777593</code></pre>
 <p>И не забываем умножать на 2, если мы хотим сделать двусторонний тест.</p>
-<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="ttest.html#cb826-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">*</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="ttest.html#cb836-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">*</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.7555186</code></pre>
 <p>В отличие от z-теста, t-тест есть в базовом R.</p>
-<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="ttest.html#cb828-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(samp, <span class="at">mu =</span> <span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="ttest.html#cb838-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(samp, <span class="at">mu =</span> <span class="dv">100</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
 ## 
@@ -597,11 +620,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Тогда вместо <span class="math inline">\(x\)</span> подставим <span class="math inline">\(d\)</span> — разницу (вектор разниц) между парами значений. Получаем вот что:</p>
 <p><span class="math display">\[t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} = \frac{\overline{d} - (\mu_1 - \mu_2)} {s_d / \sqrt{N}} = \frac{\overline{d} - 0} {s_d / \sqrt{N}}  = \frac{\overline{d}} {s_d / \sqrt{N}}\]</span></p>
 <p>Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>. Мы вытащим оттуда данные по диете номер 1 и посмотрим, действительно ли она помогает сбросить вес.</p>
-<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="ttest.html#cb830-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv&quot;</span>)</span>
-<span id="cb830-2"><a href="ttest.html#cb830-2" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb830-3"><a href="ttest.html#cb830-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb840-1"><a href="ttest.html#cb840-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv&quot;</span>)</span>
+<span id="cb840-2"><a href="ttest.html#cb840-2" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb840-3"><a href="ttest.html#cb840-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Провести двухвыборочный t-тест можно в R двумя базовыми способами. Первый вариант - это дать два вектора значений. Это удобно в случае широкого формата данных.</p>
-<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="ttest.html#cb831-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="ttest.html#cb841-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -614,15 +637,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mean of the differences 
 ##                     3.3</code></pre>
 <p>Второй вариант - используя формулы. Это удобно при длинном формате данных:</p>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="ttest.html#cb833-1" aria-hidden="true" tabindex="-1"></a>diet1_long <span class="ot">&lt;-</span> diet1 <span class="sc">%&gt;%</span></span>
-<span id="cb833-2"><a href="ttest.html#cb833-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb833-3"><a href="ttest.html#cb833-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
-<span id="cb833-4"><a href="ttest.html#cb833-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;when&quot;</span>,</span>
-<span id="cb833-5"><a href="ttest.html#cb833-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;weight&quot;</span></span>
-<span id="cb833-6"><a href="ttest.html#cb833-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb833-7"><a href="ttest.html#cb833-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb833-8"><a href="ttest.html#cb833-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb833-9"><a href="ttest.html#cb833-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="ttest.html#cb843-1" aria-hidden="true" tabindex="-1"></a>diet1_long <span class="ot">&lt;-</span> diet1 <span class="sc">%&gt;%</span></span>
+<span id="cb843-2"><a href="ttest.html#cb843-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb843-3"><a href="ttest.html#cb843-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
+<span id="cb843-4"><a href="ttest.html#cb843-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">&quot;when&quot;</span>,</span>
+<span id="cb843-5"><a href="ttest.html#cb843-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">&quot;weight&quot;</span></span>
+<span id="cb843-6"><a href="ttest.html#cb843-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb843-7"><a href="ttest.html#cb843-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb843-8"><a href="ttest.html#cb843-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb843-9"><a href="ttest.html#cb843-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -634,7 +657,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## sample estimates:
 ## mean of the differences 
 ##                     3.3</code></pre>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="ttest.html#cb835-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1_long<span class="sc">$</span>weight <span class="sc">~</span> diet1_long<span class="sc">$</span>when, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="ttest.html#cb845-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1_long<span class="sc">$</span>weight <span class="sc">~</span> diet1_long<span class="sc">$</span>when, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
 ## 
@@ -676,9 +699,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Выглядит сложно, но по своей сути это что-то вроде усредненного стандартного отклонения (с учетом размеров выборок). Ну а t-статистика затем считается просто:</p>
 <p><span class="math display">\[t = \frac {(m_1 - m_2) - (\mu_1 - \mu_2)} {se_{m_1 - m_2}} = \frac {(m_1 - m_2) - 0} {se_{m_1 - m_2}} = \frac {m_1 - m_2} {se_{m_1 - m_2}}\]</span></p>
 <p>Давайте теперь опробуем независимый t-тест для сравнения веса испытуемых двух групп после диеты. Мы снова воспользуемся функцией <code>t.test()</code>, но теперь уже поставим <code>paired = FALSE</code>:</p>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="ttest.html#cb837-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb837-2"><a href="ttest.html#cb837-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb837-3"><a href="ttest.html#cb837-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="ttest.html#cb847-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb847-2"><a href="ttest.html#cb847-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb847-3"><a href="ttest.html#cb847-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -692,7 +715,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##        69.57500        68.08519</code></pre>
 <p>Если присмотритесь, то увидите, что со степенями свободы что-то странное. Они дробные! Дело в том, что мы провели не совсем “настоящий” t-тест, а его очень близкую альтернативу под названием <strong>тест Уэлча</strong> <em>(Welch test)</em>, который иногда называют <strong>поправкой Уэлча</strong> к t-тесту. Эта поправка позволяет тесту лучше справляться с выборками с разной дисперсией. Даже если у нас нет проблем с разной дисперсией, то от поправки Уэлча хуже не будет, поэтому это вариант по умолчанию в R.</p>
 <p>Но если его хочется отключить, то нужно поставить <code>var.equal = TRUE</code>.</p>
-<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="ttest.html#cb839-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="ttest.html#cb849-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -710,10 +733,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">14.3</span> Допущения t-теста</h2>
 <p>Чтобы подсчет <em>p-value</em> был корректным, некоторые допущения должны быть выполнены.</p>
 <ol style="list-style-type: decimal">
-<li><strong>Нормальное распределение.</strong> Это самое известное допущение, но чуть ли не наименее важное. Часто утверждается, что выборки должны быть взяты из нормального распределения. Это не совсем так: да, верно, это достаточное условие, но не необходимое. В первую очередь, важно именно выборочное распределение (средних разниц или разниц средних), которое достигается за счет центральной предельной теоремы (<a href="infer-stats.html#clt">13.8</a>) особенно при большой выборке <span class="citation">(<a href="ссылки-на-литературу.html#ref-normality" role="doc-biblioref">Lumley et al. 2002</a>)</span>. Отсюда и все правила в духе “для t-теста распределение должно быть нормальным, но если n &gt; 30, то это необязательно.” Откуда именно 30? Да ниоткуда, просто. Как и со всеми точными числами в статистике.</li>
+<li><strong>Нормальное распределение.</strong> Это самое известное допущение, но чуть ли не наименее важное. Часто утверждается, что выборки должны быть взяты из нормального распределения. Это не совсем так: да, верно, это достаточное условие, но не необходимое. В первую очередь, важно именно выборочное распределение (средних разниц или разниц средних), которое достигается за счет центральной предельной теоремы (<a href="infer_stats.html#clt">13.8</a>) особенно при большой выборке <span class="citation">(<a href="#ref-normality" role="doc-biblioref">Lumley et al. 2002</a>)</span>. Отсюда и все правила в духе “для t-теста распределение должно быть нормальным, но если n &gt; 30, то это необязательно.” Откуда именно 30? Да ниоткуда, просто. Как и со всеми точными числами в статистике.</li>
 </ol>
 <p>Для проверки на нормальность существуют различные статистические тесты. Самый известный из них — тест Шапиро-Уилка. Его можно провести в R при помощи функции <code>shapiro.test()</code>.</p>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="ttest.html#cb841-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(samp)</span></code></pre></div>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="ttest.html#cb851-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(samp)</span></code></pre></div>
 <pre><code>## 
 ##  Shapiro-Wilk normality test
 ## 
@@ -734,7 +757,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="wilcox_test" class="section level3" number="14.4.1">
 <h3><span class="header-section-number">14.4.1</span> Тест Уилкоксона</h3>
 <p>Непараметрический аналог двустороннего <em>зависимого</em> t-теста называется <strong>тестом Уилкоксона.</strong> Функция для него называется <code>wilcox.test()</code>, и она имеет такой же синтаксис, как и <code>t.test()</code>.</p>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="ttest.html#cb843-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="ttest.html#cb853-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
 ## 
@@ -748,7 +771,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mann_test" class="section level3" number="14.4.2">
 <h3><span class="header-section-number">14.4.2</span> Тест Манна-Уитни</h3>
 <p>Непараметрическим аналогом двустороннего <em>независимого</em> t-теста является <strong>тест Манна-Уитни.</strong> Для него тоже используется функция <code>wilcox.test()</code>, только в данном случае с параметром <code>paired = FALSE</code>.</p>
-<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="ttest.html#cb845-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="ttest.html#cb855-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -785,17 +808,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+<h3>Ссылки на литературу</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-normality" class="csl-entry">
+Lumley, Thomas, Paula Diehr, Scott Emerson, and Lu Chen. 2002. <span>“The Importance of the Normality Assumption in Large Public Health Data Sets.”</span> <em>Annual Review of Public Health</em> 23 (1): 151–69. <a href="https://doi.org/10.1146/annurev.publhealth.23.100901.140546">https://doi.org/10.1146/annurev.publhealth.23.100901.140546</a>.
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="infer-stats.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cov-cor.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="infer_stats.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cov_cor.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -825,6 +853,10 @@ gitbook.start({
 "text": null
 },
 "download": ["tidy_stats.pdf", "tidy_stats.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 },
