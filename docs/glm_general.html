@@ -24,7 +24,7 @@
 <meta name="author" content="Поздняков Иван" />
 
 
-<meta name="date" content="2021-11-08" />
+<meta name="date" content="2021-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -397,6 +397,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="cov_cor.html"><a href="cov_cor.html#cor_mat"><i class="fa fa-check"></i><b>16.3</b> Корреляционная матрица</a></li>
 <li class="chapter" data-level="16.4" data-path="cov_cor.html"><a href="cov_cor.html#hitmap_cor"><i class="fa fa-check"></i><b>16.4</b> Хитмэп корреляций</a></li>
+<li class="chapter" data-level="16.5" data-path="cov_cor.html"><a href="cov_cor.html#матрица-корреляций-в-виде-графа"><i class="fa fa-check"></i><b>16.5</b> Матрица корреляций в виде графа</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="lm.html"><a href="lm.html"><i class="fa fa-check"></i><b>17</b> Линейная регрессия</a>
 <ul>
@@ -544,11 +545,11 @@ div.csl-indent {
 <p>Общая линейная модель задается формулой <span class="math display">\[Y = XB\]</span></p>
 <p>Обобщенная оборачивает предиктор <span class="math inline">\(XB\)</span> <strong>связывающей функцией (link function),</strong> которая различается для разных типов регрессионных моделей.</p>
 <p>Давайте попробуем построить модель, в которой объясняемой переменной будет то, является ли супергерой хорошим или плохим.</p>
-<div class="sourceCode" id="cb983"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb983-1"><a href="glm_general.html#cb983-1" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>good <span class="ot">&lt;-</span> heroes<span class="sc">$</span>Alignment <span class="sc">==</span> <span class="st">&quot;good&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb993-1"><a href="glm_general.html#cb993-1" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>good <span class="ot">&lt;-</span> heroes<span class="sc">$</span>Alignment <span class="sc">==</span> <span class="st">&quot;good&quot;</span></span></code></pre></div>
 <p>Обычная линейная модель нам не подходит, если распределение наших ошибок далеко от нормального. А это значит, что мы не можем использовать общую линейную модель с бинарной объясняемой переменной. Эту проблему решает логистическая регрессия, которая является частным случаем обобщенной линейной модели.</p>
 <p>Для этого нам понадобится функция <code>glm()</code>, а не <code>lm()</code> как раньше. Ее синтаксис очень похож, но нам теперь нужно задать еще один важный параметр <code>family =</code> для выбора связывающей функции (в данном случае это логит-функция, которая является связующей функцией по умолчанию для биномиального семейства функций в <code>glm()</code>).</p>
-<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb984-1"><a href="glm_general.html#cb984-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Weight <span class="sc">+</span> Gender, heroes, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
-<span id="cb984-2"><a href="glm_general.html#cb984-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm)</span></code></pre></div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb994-1"><a href="glm_general.html#cb994-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Weight <span class="sc">+</span> Gender, heroes, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
+<span id="cb994-2"><a href="glm_general.html#cb994-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = good ~ Weight + Gender, family = binomial(), data = heroes)
@@ -575,8 +576,8 @@ div.csl-indent {
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Результат очень похож по своей структуре на <code>glm()</code>, однако вместо <span class="math inline">\(R^2\)</span> перед нами AIC. AIC расшифровывается как информационный критерий Акаике (Akaike information criterion) — это критерий использующийся для выбора из нескольких моделей. Чем он меньше, тем лучше модель. Как и Adjusted R<sup>2</sup>, AIC “наказывает” за большое количество параметров в модели.</p>
 <p>Поскольку AIC — это относительный показатель качества модели, нам нужно сравнить его с AIC другой, более общей модели. Можно сравнить с моделью без веса супергероев.</p>
-<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb986-1"><a href="glm_general.html#cb986-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm_noweight <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Gender, heroes, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
-<span id="cb986-2"><a href="glm_general.html#cb986-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm_noweight)</span></code></pre></div>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb996-1"><a href="glm_general.html#cb996-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm_noweight <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Gender, heroes, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
+<span id="cb996-2"><a href="glm_general.html#cb996-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm_noweight)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = good ~ Gender, family = binomial(), data = heroes)
@@ -608,41 +609,41 @@ div.csl-indent {
 <p>Для экспериментальных дисциплин это интересно тем, что в таких моделях можно не усреднять показатели по испытуемым или образцам, а учитывать влияние соотвествующей группирующей переменной как случайный эффект. В отличие от обычного фактора как в линейной регрессии или дисперсионном анализе (здесь он называется фиксированным), случайный эффект не интересует нас сам по себе, а его значения считаются случайной переменной.</p>
 <p>Смешанные модели используются в самых разных областях. Они позволяют решить проблему зависимости наблюдений без усреднения значений по испытуемым или группам, что повышает статистическую мощность.</p>
 <p>Для работы со смешанными моделями в R есть два известных пакета: <code>nlme</code> и более современный <code>lme4</code>.</p>
-<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb988-1"><a href="glm_general.html#cb988-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb989"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb989-1"><a href="glm_general.html#cb989-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
+<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb998-1"><a href="glm_general.html#cb998-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;lme4&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="glm_general.html#cb999-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div>
 <p>Для примера возьмем данные исследования влияния депривации сна на время реакции.</p>
-<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb990-1"><a href="glm_general.html#cb990-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sleepstudy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1000"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1000-1"><a href="glm_general.html#cb1000-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sleepstudy&quot;</span>)</span></code></pre></div>
 <p>Данные представлены в длинном формате: каждая строчка — это усредненное время реакции для одного испытуемого в соответствующий день эксперимента.</p>
-<div class="sourceCode" id="cb991"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb991-1"><a href="glm_general.html#cb991-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
-<span id="cb991-2"><a href="glm_general.html#cb991-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
-<span id="cb991-3"><a href="glm_general.html#cb991-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb991-4"><a href="glm_general.html#cb991-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb991-5"><a href="glm_general.html#cb991-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb991-6"><a href="glm_general.html#cb991-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
-<span id="cb991-7"><a href="glm_general.html#cb991-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="tidy_stats_files/figure-html/unnamed-chunk-482-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1001"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1001-1"><a href="glm_general.html#cb1001-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb1001-2"><a href="glm_general.html#cb1001-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb1001-3"><a href="glm_general.html#cb1001-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb1001-4"><a href="glm_general.html#cb1001-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1001-5"><a href="glm_general.html#cb1001-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb1001-6"><a href="glm_general.html#cb1001-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb1001-7"><a href="glm_general.html#cb1001-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-491-1.png" width="672" /></p>
 <p>Можно заметить, что, в среднем, время реакции у испытуемых повышается от первого к последнему дню. С помощью смешанных моделей мы можем проверить, различается ли скорость возрастания времени реакции от дня к дню у разных испытуемых.</p>
 <p>Для этого мы сравниваем две модели, одна из которых является “вложенной” в другую, то есть усложненной версией более общей модели. В данном случае, более общая модель предполагает, что время реакции увеличивается у всех испытуемых одинаково, а испытуемые различаются только средним временем реакции.</p>
-<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb992-1"><a href="glm_general.html#cb992-1" aria-hidden="true" tabindex="-1"></a>sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), sleepstudy)</span>
-<span id="cb992-2"><a href="glm_general.html#cb992-2" aria-hidden="true" tabindex="-1"></a>sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), sleepstudy)</span></code></pre></div>
+<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1002-1"><a href="glm_general.html#cb1002-1" aria-hidden="true" tabindex="-1"></a>sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), sleepstudy)</span>
+<span id="cb1002-2"><a href="glm_general.html#cb1002-2" aria-hidden="true" tabindex="-1"></a>sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), sleepstudy)</span></code></pre></div>
 <p>Визуализируем предсказания двух моделей:</p>
-<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb993-1"><a href="glm_general.html#cb993-1" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme0)</span>
-<span id="cb993-2"><a href="glm_general.html#cb993-2" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme1)</span></code></pre></div>
-<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb994-1"><a href="glm_general.html#cb994-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
-<span id="cb994-2"><a href="glm_general.html#cb994-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">observed_reaction_time =</span> Reaction) <span class="sc">%&gt;%</span></span>
-<span id="cb994-3"><a href="glm_general.html#cb994-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(observed_reaction_time, predicted_by_sleep_lme0, predicted_by_sleep_lme1), <span class="at">names_to =</span> <span class="st">&quot;model&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Reaction&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb994-4"><a href="glm_general.html#cb994-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
-<span id="cb994-5"><a href="glm_general.html#cb994-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> model)) <span class="sc">+</span></span>
-<span id="cb994-6"><a href="glm_general.html#cb994-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(aes(y = predicted_by_M1), colour = &quot;orange&quot;) + </span></span>
-<span id="cb994-7"><a href="glm_general.html#cb994-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(aes(y = predicted_by_M2), colour = &quot;purple&quot;) +   </span></span>
-<span id="cb994-8"><a href="glm_general.html#cb994-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sleepstudy, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb994-9"><a href="glm_general.html#cb994-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb994-10"><a href="glm_general.html#cb994-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
-<span id="cb994-11"><a href="glm_general.html#cb994-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="tidy_stats_files/figure-html/unnamed-chunk-485-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1003-1"><a href="glm_general.html#cb1003-1" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme0)</span>
+<span id="cb1003-2"><a href="glm_general.html#cb1003-2" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme1)</span></code></pre></div>
+<div class="sourceCode" id="cb1004"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1004-1"><a href="glm_general.html#cb1004-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb1004-2"><a href="glm_general.html#cb1004-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">observed_reaction_time =</span> Reaction) <span class="sc">%&gt;%</span></span>
+<span id="cb1004-3"><a href="glm_general.html#cb1004-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(observed_reaction_time, predicted_by_sleep_lme0, predicted_by_sleep_lme1), <span class="at">names_to =</span> <span class="st">&quot;model&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Reaction&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1004-4"><a href="glm_general.html#cb1004-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb1004-5"><a href="glm_general.html#cb1004-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> model)) <span class="sc">+</span></span>
+<span id="cb1004-6"><a href="glm_general.html#cb1004-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(aes(y = predicted_by_M1), colour = &quot;orange&quot;) + </span></span>
+<span id="cb1004-7"><a href="glm_general.html#cb1004-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(aes(y = predicted_by_M2), colour = &quot;purple&quot;) +   </span></span>
+<span id="cb1004-8"><a href="glm_general.html#cb1004-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sleepstudy, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb1004-9"><a href="glm_general.html#cb1004-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb1004-10"><a href="glm_general.html#cb1004-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb1004-11"><a href="glm_general.html#cb1004-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="tidy_stats_files/figure-html/unnamed-chunk-494-1.png" width="672" /></p>
 <p>Зеленая линия (нулевая модель) имеет везде один и тот же наклон, а синяя (альтернативная модель) имеет разный наклон у всех испытуемых.</p>
 <p>Есть несколько способов сравнивать модели, например, уже знакомый нам AIC. Кроме того, можно сравнить две модели с помощью теста хи-квадрат, восполльзовавшись функцией <code>anova()</code>.</p>
-<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb995-1"><a href="glm_general.html#cb995-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(sleep_lme0, sleep_lme1)</span></code></pre></div>
+<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1005-1"><a href="glm_general.html#cb1005-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(sleep_lme0, sleep_lme1)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["npar"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["AIC"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["BIC"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["logLik"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["deviance"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["Chisq"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[8],"type":["dbl"],"align":["right"]}],"data":[{"1":"4","2":"1802.079","3":"1814.850","4":"-897.0393","5":"1794.079","6":"NA","7":"NA","8":"NA","_rn_":"sleep_lme0"},{"1":"6","2":"1763.939","3":"1783.097","4":"-875.9697","5":"1751.939","6":"42.1393","7":"2","8":"7.072413e-10","_rn_":"sleep_lme1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -690,7 +691,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["tidy_stats.pdf", "tidy_stats.epub"],
+"download": ["tidy_stats.epub"],
 "search": {
 "engine": "fuse",
 "options": null

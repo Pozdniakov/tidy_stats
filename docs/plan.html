@@ -24,7 +24,7 @@
 <meta name="author" content="Поздняков Иван" />
 
 
-<meta name="date" content="2021-11-08" />
+<meta name="date" content="2021-11-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -397,6 +397,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="16.3" data-path="cov_cor.html"><a href="cov_cor.html#cor_mat"><i class="fa fa-check"></i><b>16.3</b> Корреляционная матрица</a></li>
 <li class="chapter" data-level="16.4" data-path="cov_cor.html"><a href="cov_cor.html#hitmap_cor"><i class="fa fa-check"></i><b>16.4</b> Хитмэп корреляций</a></li>
+<li class="chapter" data-level="16.5" data-path="cov_cor.html"><a href="cov_cor.html#матрица-корреляций-в-виде-графа"><i class="fa fa-check"></i><b>16.5</b> Матрица корреляций в виде графа</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="lm.html"><a href="lm.html"><i class="fa fa-check"></i><b>17</b> Линейная регрессия</a>
 <ul>
@@ -544,7 +545,7 @@ div.csl-indent {
 </ul>
 <p>Данный список не претендует на полноту. Этих практик стоит избегать и других от этого отучать. Ну а если Вы думаете, что никто не заметит, если Вы так сделаете, то это не так.</p>
 <p>Например, последние две практики можно легко обнаружить с помощью сайта <a href="http://statcheck.io" class="uri">http://statcheck.io</a>. Этот сайт делает магию: нужно кинуть ему статью, он распознает в ней статистические тесты и пересчитывает их. На самом деле, ничего сложного, а это сайт сделан с помощью R и уже знакомых нам инструментов: с помощью специальных пакетов из файлов вытаскивается текст, в тексте с помощью регулярных выражений находятся паттерны вроде “<em>t</em>(18) = -1.91, <em>p</em> = .036” - в большинстве журналов используется очень похожее форматирование статистических результатов. Зная степени свободы и т-статистику, можно пересчитать p-value. В данном случае это можно посчитать вот так:</p>
-<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb996-1"><a href="plan.html#cb996-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.91</span>, <span class="at">df =</span> <span class="dv">18</span>)<span class="sc">*</span><span class="dv">2</span> <span class="co">#умножаем на 2, потому что двусторонний тест</span></span></code></pre></div>
+<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1006-1"><a href="plan.html#cb1006-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.91</span>, <span class="at">df =</span> <span class="dv">18</span>)<span class="sc">*</span><span class="dv">2</span> <span class="co">#умножаем на 2, потому что двусторонний тест</span></span></code></pre></div>
 <pre><code>## [1] 0.07219987</code></pre>
 <p>Ну а дальше остается сравнить это с тем, что написали авторы. Например, бывает как в данном случае, что пересчитанный p-value в два раза больше того, что написали авторы. Это означает, скорее всего, что авторы использовали односторонний критерий. Если они об этом нигде не сказали, то это очень плохо.</p>
 </div>
@@ -556,13 +557,13 @@ div.csl-indent {
 <div id="stat_power" class="section level2" number="20.3">
 <h2><span class="header-section-number">20.3</span> Статистическая мощность</h2>
 <p>Чтобы избежать <em>optional stopping</em>, нужно определять размер выборки заранее. Как это сделать? Наиболее корректный способ предполагает использование анализа статистической мощности (statistical power analysis). Для этого понадобится пакет <code>pwr</code>.</p>
-<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb998-1"><a href="plan.html#cb998-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pwr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1008-1"><a href="plan.html#cb1008-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pwr&quot;</span>)</span></code></pre></div>
 <p>Этот пакет предоставляет семейство функций для расчета мощности, размера эффекта, уровня значимости или нужного размера выборки для разных статистических тестов.</p>
 <p>Статистическая мощность - вероятность обнаружить статистически значимый эффект, если он действительно есть. Размер эффекта - собственно, размер эффекта в исследовании, обычно в универсальных единицах. Например, размер различия средних обычно измеряется в стандартных отклонениях. Это позволяет сравнивать эффекты в разных исследованиях и даже эффекты в разных областях науки.</p>
 <p>Если задать 3 из 4 чисел (статистическая мощность - стандартно это .8, уровень значимости - стандартно .05, размер эффекта, размер выборки), то функция выдаст недостающее число.</p>
 <p>Я очень советую поиграться с этим самостоятельно. Например, если размер эффекта в единицах стандартных отклонений Cohen’s d = 2, то сколько нужно испытуемых, чтобы обнаружить эффект для двухвыборочного т-теста с вероятностью .8?</p>
-<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="plan.html#cb999-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
-<span id="cb999-2"><a href="plan.html#cb999-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1009"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1009-1"><a href="plan.html#cb1009-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
+<span id="cb1009-2"><a href="plan.html#cb1009-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -574,7 +575,7 @@ div.csl-indent {
 ## 
 ## NOTE: n is number in *each* group</code></pre>
 <p>Всеего 6 в каждой группе (округляем в большую сторону)!</p>
-<div class="sourceCode" id="cb1001"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1001-1"><a href="plan.html#cb1001-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">&quot;paired&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1011"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1011-1"><a href="plan.html#cb1011-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">&quot;paired&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Paired t test power calculation 
 ## 
@@ -587,7 +588,7 @@ div.csl-indent {
 ## NOTE: n is number of *pairs*</code></pre>
 <p>Еще меньше, если использовать within-subject дизайн исследования и зависимый т-тест.</p>
 <p>А если эффект маленький - всего d = .2?</p>
-<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1003-1"><a href="plan.html#cb1003-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> .<span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1013"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1013-1"><a href="plan.html#cb1013-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> .<span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">&quot;two.sample&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -600,8 +601,8 @@ div.csl-indent {
 ## NOTE: n is number in *each* group</code></pre>
 <p>394 испытуемых в каждой группе!</p>
 <p>Можно проверить такие расчеты самостоятельно с помощью симуляции данных.</p>
-<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1005-1"><a href="plan.html#cb1005-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">t.test</span>(<span class="fu">rnorm</span>(<span class="dv">394</span>, <span class="dv">100</span>, <span class="dv">15</span>), <span class="fu">rnorm</span>(<span class="dv">394</span>, <span class="dv">103</span>, <span class="dv">15</span>))<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div>
-<pre><code>## [1] 0.792</code></pre>
+<div class="sourceCode" id="cb1015"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1015-1"><a href="plan.html#cb1015-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">t.test</span>(<span class="fu">rnorm</span>(<span class="dv">394</span>, <span class="dv">100</span>, <span class="dv">15</span>), <span class="fu">rnorm</span>(<span class="dv">394</span>, <span class="dv">103</span>, <span class="dv">15</span>))<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>))</span></code></pre></div>
+<pre><code>## [1] 0.786</code></pre>
 <p>Действительно, если много раз делать случайные выборки из двух нормальных распределений с средними, отличающимися на 0.2 стандартных отклонения, то примерно в 80% случаев вы получите статистически значимые различия!</p>
 
 </div>
@@ -644,7 +645,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["tidy_stats.pdf", "tidy_stats.epub"],
+"download": ["tidy_stats.epub"],
 "search": {
 "engine": "fuse",
 "options": null
