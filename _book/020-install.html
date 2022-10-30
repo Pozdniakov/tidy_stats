@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Анализ данных и статистика в R - 2&nbsp; Пакеты в R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./030-import_data.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Пакеты в R</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Анализ данных и статистика в R</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">(PART) Tidyverse</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">(PART) Разведочный анализ и создание отчетов</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#extra_pack" id="toc-extra_pack" class="nav-link active" data-scroll-target="#extra_pack"><span class="toc-section-number">2.1</span>  Дополнительные пакеты</a></li>
+  <li><a href="#r_built_in" id="toc-r_built_in" class="nav-link" data-scroll-target="#r_built_in"><span class="toc-section-number">2.2</span>  Встроенные пакеты R</a></li>
+  <li><a href="#install_cran" id="toc-install_cran" class="nav-link" data-scroll-target="#install_cran"><span class="toc-section-number">2.3</span>  Установка пакетов с CRAN</a></li>
+  <li><a href="#package_load" id="toc-package_load" class="nav-link" data-scroll-target="#package_load"><span class="toc-section-number">2.4</span>  Загрузка установленного пакета</a></li>
+  <li><a href="#from_package" id="toc-from_package" class="nav-link" data-scroll-target="#from_package"><span class="toc-section-number">2.5</span>  Вызов функции из пакета с помощью <code>::</code></a></li>
+  <li><a href="#install_bioc" id="toc-install_bioc" class="nav-link" data-scroll-target="#install_bioc"><span class="toc-section-number">2.6</span>  Установка пакетов c Bioconductor</a></li>
+  <li><a href="#install_github" id="toc-install_github" class="nav-link" data-scroll-target="#install_github"><span class="toc-section-number">2.7</span>  Установка пакетов с Github</a></li>
+  <li><a href="#where_packages" id="toc-where_packages" class="nav-link" data-scroll-target="#where_packages"><span class="toc-section-number">2.8</span>  Где искать нужные пакеты</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="r_packages" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="extra_pack" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="extra_pack"><span class="header-section-number">2.1</span> Дополнительные пакеты</h2>
+<p>R — очень богатый язык с широкими возможностями. Однако очень скоро мы поймем, что этих возможностей нам не хватает. Эти возможности нам могут предоставить дополнительные <strong>пакеты (packages)</strong>.</p>
+<p>В большинстве случаев основным содержанием пакетов является набор дополнительных функций. Кроме функций, пакеты могут содержать наборы данных и новые структуры данных.</p>
+<p>Обычно пакеты посвящены решению какого-то класса задач в определенной области. Например, есть множество пакетов для создания какого-то одного типа визуализации. Еще один пример — пакет <code>beepr</code>, который содержит всего две функции: <code>beep()</code> и <code>beep_on_error()</code> для воспроизведения звукового сигнала. Это может быть удобно, если ваш скрипт работает долго, но вы хотите получить уведомление, когда его выполнение завершится.</p>
+<p>Более крупные пакеты посвящены целому классу задач. Например, пакеты <code>stringi</code> и <code>stringr</code> посвящены работе со строками, значительно расширяя и делая более удобной работу со строковыми данными в R. Еще один пример: пакет <code>igraph</code> для работы с графами (сетями). Этот пакет предоставляет дополнительный класс данных <code>igraph</code> для хранения и работы с сетями.</p>
+<p>Есть и совсем крупные пакеты, которые значительно расширяют базовый функционал R, изменяя основные принципы работы в нем. Это пакеты <code>data.table</code> и <code>tidyverse</code>. Это настолько крупные пакеты, что их даже называют отдельными диалектами R, потому что код, написанный с использованием этих пакетов, довольно сильно отличается от базового R. Кроме того, <code>tidyverse</code> - это не просто пакет, а целая экосистема пакетов, который взаимодополняют друг друга, но для удобства их можно устанавливать и загружать как один пакет <code>tidyverse</code>. Еще один пример крупной экосистемы из пакетов — это пакет <code>mlr3</code> для машинного обучения, который представляет собой большой расширяемый “пакет пакетов”, где отдельные пакеты посвящены отдельным этапам и задачам машинного обучения.</p>
+</section>
+<section id="r_built_in" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="r_built_in"><span class="header-section-number">2.2</span> Встроенные пакеты R</h2>
+<p>Вообще, даже сам R является набором из нескольких пакетов: основного <code>base</code> и нескольких других, таких как <code>stats</code>, <code>utils</code>, <code>graphics</code>. Вот их полный список:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(<span class="fu">installed.packages</span>(<span class="at">priority =</span> <span class="st">"base"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "base"      "compiler"  "datasets"  "graphics"  "grDevices" "grid"     
+ [7] "methods"   "parallel"  "splines"   "stats"     "stats4"    "tcltk"    
+[13] "tools"     "utils"    </code></pre>
+</div>
+</div>
+<p>Чтобы пользоваться этими пакетами ничего дополнительно делать не нужно.</p>
+</section>
+<section id="install_cran" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="install_cran"><span class="header-section-number">2.3</span> Установка пакетов с CRAN</h2>
+<p>Функция <code>install.packages()</code> позволяет скачивать пакеты с Comprehensive R Archive Network (CRAN). На репозитории CRAN собрано более 16000 пакетов. Каждый из этих пакетов проходит проверку перед попаданием в CRAN: он должен быть хорошо задокументирован, стабильно работать и решать какую-то задачу.</p>
+<p>Для примера установим пакет <code>remotes</code>. Это пакет для удобной установки пакетов не с CRAN и скоро нам понадобится.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>При установке вы увидите много непонятных надписей красным шрифтом. Не пугайтесь, это нормально, происходит скачивание и установка пакетов. В конце вы увидите что-то вроде этого:</p>
+<p>!()<span width="400">images/install_success.png</span></p>
+<p>Иногда установка бывает очень долгой, потому что большие пакеты склонны иметь много <strong>зависимостей</strong>: для работы какого-то пакета может понадобиться другие пакеты, а для тех пакетов - еще какие-то пакеты. Таким образом, устанавливая какой-нибудь современный пакет, вы, возможно, установите десятки других пакетов! Зато если они понадобятся сами по себе, то их уже не нужно будет устанавливать.</p>
+</section>
+<section id="package_load" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="package_load"><span class="header-section-number">2.4</span> Загрузка установленного пакета</h2>
+<p>Установить пакет с помощью <code>install.packages()</code> недостаточно, пакет нужно еще загрузить. Для этого есть функция <code>library()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"remotes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В отличие от <code>install.packages()</code>, функция <code>library()</code> принимает название пакета и как строчку в кавычках, и как название без кавычек.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь функции, данные и классы из пакета доступны для работы.</p>
+</section>
+<section id="from_package" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="from_package"><span class="header-section-number">2.5</span> Вызов функции из пакета с помощью <code>::</code></h2>
+<p>Если пакетом нужно воспользоваться всего один-два раза, то имеет смысл не подключать весь пакет, а загрузить отдельную функцию из него. Для этого есть специальный оператор <code>::</code>, который использует функцию (указанную справа от <code>::</code>) из выбранного пакета (указанного слева от <code>::</code>), не загружая пакет полностью.</p>
+<p>Для примера воспользуемся функцией <code>package_deps()</code> из только что установленного пакета <code>remotes</code>, которая возвращает все зависимости пакета:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">package_deps</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Needs update -----------------------------
+ package      installed    available    is_cran remote
+ utf8         1.2.1        1.2.2        TRUE    CRAN  
+ withr        2.4.2        2.5.0        TRUE    CRAN  
+ fansi        0.5.0        1.0.3        TRUE    CRAN  
+ cli          3.2.0        3.4.1        TRUE    CRAN  
+ pillar       1.7.0        1.8.1        TRUE    CRAN  
+ generics     0.1.2        0.1.3        TRUE    CRAN  
+ cpp11        0.4.2        0.4.3        TRUE    CRAN  
+ vctrs        0.4.0        0.5.0        TRUE    CRAN  
+ tidyselect   1.1.2        1.2.0        TRUE    CRAN  
+ tibble       3.1.6        3.1.8        TRUE    CRAN  
+ rlang        1.0.2        1.0.6        TRUE    CRAN  
+ purrr        0.3.4        0.3.5        TRUE    CRAN  
+ magrittr     2.0.1        2.0.3        TRUE    CRAN  
+ lifecycle    1.0.1        1.0.3        TRUE    CRAN  
+ dplyr        1.0.8        1.0.10       TRUE    CRAN  
+ stringi      1.6.2        1.7.8        TRUE    CRAN  
+ sys          3.4          3.4.1        TRUE    CRAN  
+ stringr      1.4.0        1.4.1        TRUE    CRAN  
+ openssl      1.4.5        2.0.4        TRUE    CRAN  
+ jsonlite     1.7.2        1.8.3        TRUE    CRAN  
+ curl         4.3.2        4.3.3        TRUE    CRAN  
+ xml2         1.3.2        1.3.3        TRUE    CRAN  
+ httr         1.4.2        1.4.4        TRUE    CRAN  
+ ps           1.6.0        1.7.2        TRUE    CRAN  
+ digest       0.6.27       0.6.30       TRUE    CRAN  
+ memoise      2.0.0        2.0.1        TRUE    CRAN  
+ cachem       1.0.5        1.0.6        TRUE    CRAN  
+ sass         0.4.0        0.4.2        TRUE    CRAN  
+ tinytex      0.35         0.42         TRUE    CRAN  
+ htmltools    0.5.1.1      0.5.3        TRUE    CRAN  
+ bslib        0.2.5.1      0.4.0        TRUE    CRAN  
+ xfun         0.24         0.34         TRUE    CRAN  
+ yaml         2.2.1        2.3.6        TRUE    CRAN  
+ evaluate     0.14         0.17         TRUE    CRAN  
+ processx     3.5.2        3.8.0        TRUE    CRAN  
+ rstudioapi   0.13         0.14         TRUE    CRAN  
+ rmarkdown    2.11         2.17         TRUE    CRAN  
+ knitr        05ccb074d... 36efc0001... FALSE   GitHub
+ fs           1.5.0        1.5.2        TRUE    CRAN  
+ clipr        0.7.1        0.8.0        TRUE    CRAN  
+ callr        3.7.0        3.7.2        TRUE    CRAN  
+ crayon       1.4.1        1.5.2        TRUE    CRAN  
+ hms          1.1.0        1.1.2        TRUE    CRAN  
+ tzdb         0.1.0        0.3.0        TRUE    CRAN  
+ vroom        1.3.2        1.6.0        TRUE    CRAN  
+ colorspace   2.0-1        2.0-3        TRUE    CRAN  
+ viridisLite  0.4.0        0.4.1        TRUE    CRAN  
+ RColorBrewer 1.1-2        1.1-3        TRUE    CRAN  
+ farver       2.1.0        2.1.1        TRUE    CRAN  
+ scales       1.1.1        1.2.1        TRUE    CRAN  
+ isoband      0.2.4        0.2.6        TRUE    CRAN  
+ gtable       0.3.0        0.3.1        TRUE    CRAN  
+ ggplot2      3.3.5        3.3.6        TRUE    CRAN  
+ backports    1.2.0        1.4.1        TRUE    CRAN  
+ tidyr        1.2.0        1.2.1        TRUE    CRAN  
+ broom        0.8.0        1.0.1        TRUE    CRAN  
+ readr        1.4.0        2.1.3        TRUE    CRAN  
+ forcats      0.5.1        0.5.2        TRUE    CRAN  
+ uuid         0.1-4        1.1-0        TRUE    CRAN  
+ gargle       1.2.0        1.2.1        TRUE    CRAN  
+ data.table   1.14.2       1.14.4       TRUE    CRAN  
+ DBI          1.1.1        1.1.3        TRUE    CRAN  
+ blob         1.2.1        1.2.3        TRUE    CRAN  
+ rvest        1.0.0        1.0.3        TRUE    CRAN  
+ reprex       1.0.0        2.0.2        TRUE    CRAN  
+ readxl       1.3.1        1.4.1        TRUE    CRAN  
+ modelr       0.1.8        0.1.9        TRUE    CRAN  
+ lubridate    1.7.10       1.8.0        TRUE    CRAN  
+ haven        2.3.1        2.5.1        TRUE    CRAN  
+ googleshe... 1.0.0        1.0.1        TRUE    CRAN  
+ dtplyr       NA           1.2.2        TRUE    CRAN  
+ dbplyr       2.0.0        2.2.1        TRUE    CRAN  
+ tidyverse    1.3.0        1.3.2        TRUE    CRAN  </code></pre>
+</div>
+</div>
+<p>В дальнейшем использование оператора <code>::</code> будет иногда использоваться, чтобы указать, из какого пакета взята функция.</p>
+<p>Оператор <code>::</code> полезен еще и в тех случаях, когда в разных пакетах присутствуют функции с одинаковым названием. Например, у основного пакета tidyverse, <code>dplyr</code>, есть функция <code>filter()</code>. Функция с точно таким же названием есть в базовом R в пакете <code>stats</code>, в котором та выполняет совершенно другую задачу. Если у вас уже загружен <code>dplyr</code>, то использование <code>::</code> укажет на то, что вы хотите воспользоваться именно функцией <code>filter()</code> из пакета <code>stats</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">filter</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time Series:
+Start = 1 
+End = 20 
+Frequency = 1 
+ [1] NA  6  9 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 NA</code></pre>
+</div>
+</div>
+<p>Подобные путаницы могут возникнуть, если у вас загружено много пакетов, поэтому старайтесь не загружать слишком много пакетов, а если есть функции с одинаковым названием, то обязательно используйте оператор <code>::</code>. Иначе слишком велик риск загрузить пакеты не в том порядке и получить из-за этого ошибку или некорректный результат. Выгрузить ненужный пакет можно с помощью функции <code>detach()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="install_bioc" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="install_bioc"><span class="header-section-number">2.6</span> Установка пакетов c Bioconductor</h2>
+<p>У биологов есть свой большой репозиторий, который является альтернативой CRAN, — Bioconductor. С него можно скачать множество специализированных пакетов для работы с биологическими данными.</p>
+<p>Для установки пакетов с Bioconductor сначала нужно скачать пакет <code>BiocManager</code> с CRAN.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь можно воспользоваться функцией <code>install()</code> из пакета <code>BiocManager</code> для установки пакета <code>flowCore</code> — пакета для анализа данных проточной цитометрии.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"flowCore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="install_github" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="install_github"><span class="header-section-number">2.7</span> Установка пакетов с Github</h2>
+<p>Некоторых пакетов нет ни на CRAN, ни на Bioconductor. Обычно это касается пакетов, разработчики которых по каким-либо причинам решили не проходить проверки или не прошли проверки на строгие требования CRAN. Иногда бывает, что пакет был удален с CRAN (например, автор давно не занимается им) или же версия пакета на CRAN отстает от последней, а именно в ней реализованы так нужные вам функции. В некоторых случаях пакета может не быть на CRAN, потому что его разработчики активно занимаются его развитием и постоянно переделывают уже имеющийся функционал, добавляя новые возможности и удаляя старые. Это нужно делать с осторожностью, когда пакет уже выложен на CRAN, потому что если функции новой версии пакета будут работать по-другому, то это может вызвать массу проблем.</p>
+<p>Во всех этих случаях пакет обычно можно скачать с репозитория Github. Для этого нам понадобится уже установленный (с CRAN, разумеется) пакет <code>remotes</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"dracor-org/rdracor"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь установленный пакет осталось загрузить, после чего им можно пользоваться.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdracor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: replacing previous import 'igraph::as_data_frame' by
+'tibble::as_data_frame' when loading 'rdracor'</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>godunov <span class="ot">&lt;-</span> <span class="fu">play_igraph</span>(<span class="at">corpus =</span> <span class="st">"rus"</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">play =</span> <span class="st">"pushkin-boris-godunov"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(godunov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="020-install_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Пакет <code>remotes</code> можно так же использовать для загрузки пакетов из Bioconductor:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_bioc</span>(<span class="st">"flowCore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="where_packages" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="where_packages"><span class="header-section-number">2.8</span> Где искать нужные пакеты</h2>
+<p>Мы разобрались с тем, как устанавливать пакеты. А где же их находить?</p>
+<p>Это вопрос гораздо более сложный чем может показаться. Например, можно работать в R и не знать, что существует пакет, который решает нужную для вас задачу. Или же найти такой пакет и не знать, что есть более современный пакет, который делает это еще лучше!</p>
+<p>Здесь нет каких-то готовых решений. CRAN пытается создавать и поддерживать тематические списки <em>(Task View)</em> пакетов с описанием задач, которые они решают:</p>
+<p>https://cran.r-project.org/web/views/</p>
+<p>Безусловно, если вы глубоко занимаетесь какой-либо темой из списка, то стоит изучить соотвестствующий <em>Task View</em>, но начинать знакомство с помощью <em>Task View</em> достаточно тяжело.</p>
+<p>Другой вариант — просто погуглить, найти релевантные статьи или книги. Внимательно смотрите на дату публикации: R — очень быстро развивающийся язык, поэтому с большой вероятностью то, что было написано пять лет назад уже потеряло актуальность. Нет, работать это будет, но, скорее всего, появился более удобный и продвинутый инструмент.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>пакет <code>remotes</code> “откололся” от более старого пакета <code>devtools</code>, а многие функции из <code>remote</code> просто скопированы из <code>devtools</code>. Разработчики <code>devtools</code>/<code>remotes</code> рекомендуют использовать для установки пакетов именно более легковесный <code>remotes</code>, но во многих случаях вы увидите код с <code>devtools::install_github()</code>. Оба варианта будут работать.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./030-import_data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

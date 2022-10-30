@@ -1,0 +1,3059 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Анализ данных и статистика в R - 24&nbsp; Задания</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./920-solutions.html" rel="next">
+<link href="./905-tasks_solutions.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Задания</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Анализ данных и статистика в R</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез {whole_nhst}</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">950-references.html</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#task_begin" id="toc-task_begin" class="nav-link active" data-scroll-target="#task_begin"><span class="toc-section-number">24.1</span>  Начало работы в R</a></li>
+  <li><a href="#task_new_vecs" id="toc-task_new_vecs" class="nav-link" data-scroll-target="#task_new_vecs"><span class="toc-section-number">24.2</span>  Создание векторов</a></li>
+  <li><a href="#task_coer" id="toc-task_coer" class="nav-link" data-scroll-target="#task_coer"><span class="toc-section-number">24.3</span>  Приведение типов</a></li>
+  <li><a href="#task_vec_ion" id="toc-task_vec_ion" class="nav-link" data-scroll-target="#task_vec_ion"><span class="toc-section-number">24.4</span>  Векторизация</a></li>
+  <li><a href="#task_vec_ind" id="toc-task_vec_ind" class="nav-link" data-scroll-target="#task_vec_ind"><span class="toc-section-number">24.5</span>  Индексирование векторов</a></li>
+  <li><a href="#task_na" id="toc-task_na" class="nav-link" data-scroll-target="#task_na"><span class="toc-section-number">24.6</span>  Работа с пропущенными значениями</a></li>
+  <li><a href="#task_matrix" id="toc-task_matrix" class="nav-link" data-scroll-target="#task_matrix"><span class="toc-section-number">24.7</span>  Матрицы</a></li>
+  <li><a href="#task_list" id="toc-task_list" class="nav-link" data-scroll-target="#task_list"><span class="toc-section-number">24.8</span>  Списки</a></li>
+  <li><a href="#task_df" id="toc-task_df" class="nav-link" data-scroll-target="#task_df"><span class="toc-section-number">24.9</span>  Датафрейм</a></li>
+  <li><a href="#task_if" id="toc-task_if" class="nav-link" data-scroll-target="#task_if"><span class="toc-section-number">24.10</span>  Условные конструкции</a></li>
+  <li><a href="#task_function" id="toc-task_function" class="nav-link" data-scroll-target="#task_function"><span class="toc-section-number">24.11</span>  Создание функций</a></li>
+  <li><a href="#task_sanity" id="toc-task_sanity" class="nav-link" data-scroll-target="#task_sanity"><span class="toc-section-number">24.12</span>  Проверка на адекватность</a></li>
+  <li><a href="#task_apply" id="toc-task_apply" class="nav-link" data-scroll-target="#task_apply"><span class="toc-section-number">24.13</span>  Семейство функций apply()</a></li>
+  <li><a href="#task_pipe" id="toc-task_pipe" class="nav-link" data-scroll-target="#task_pipe"><span class="toc-section-number">24.14</span>  magrittr::<code>%&gt;%</code></a></li>
+  <li><a href="#task_select" id="toc-task_select" class="nav-link" data-scroll-target="#task_select"><span class="toc-section-number">24.15</span>  Выбор столбцов: <code>dplyr::select()</code></a></li>
+  <li><a href="#task_filt" id="toc-task_filt" class="nav-link" data-scroll-target="#task_filt"><span class="toc-section-number">24.16</span>  Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+  <li><a href="#task_arr" id="toc-task_arr" class="nav-link" data-scroll-target="#task_arr"><span class="toc-section-number">24.17</span>  Сортировка строк: <code>dplyr::arrange()</code></a></li>
+  <li><a href="#task_dist" id="toc-task_dist" class="nav-link" data-scroll-target="#task_dist"><span class="toc-section-number">24.18</span>  Уникальные значения: <code>dplyr::distinct()</code></a></li>
+  <li><a href="#task_mutate" id="toc-task_mutate" class="nav-link" data-scroll-target="#task_mutate"><span class="toc-section-number">24.19</span>  Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+  <li><a href="#task_group_by" id="toc-task_group_by" class="nav-link" data-scroll-target="#task_group_by"><span class="toc-section-number">24.20</span>  Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+  <li><a href="#task_join" id="toc-task_join" class="nav-link" data-scroll-target="#task_join"><span class="toc-section-number">24.21</span>  Соединение датафреймов: *_join</a></li>
+  <li><a href="#task_pivot" id="toc-task_pivot" class="nav-link" data-scroll-target="#task_pivot"><span class="toc-section-number">24.22</span>  Tidy data</a></li>
+  <li><a href="#task_across" id="toc-task_across" class="nav-link" data-scroll-target="#task_across"><span class="toc-section-number">24.23</span>  Операции с несколькими колонками: <code>across()</code></a></li>
+  <li><a href="#desc_tasks" id="toc-desc_tasks" class="nav-link" data-scroll-target="#desc_tasks"><span class="toc-section-number">24.24</span>  Описательная статистика</a></li>
+  <li><a href="#ggplot2_tasks" id="toc-ggplot2_tasks" class="nav-link" data-scroll-target="#ggplot2_tasks"><span class="toc-section-number">24.25</span>  Построение графиков в <code>ggplot2</code></a></li>
+  <li><a href="#dist_tasks" id="toc-dist_tasks" class="nav-link" data-scroll-target="#dist_tasks"><span class="toc-section-number">24.26</span>  Распределения</a></li>
+  <li><a href="#one_ttest_tasks" id="toc-one_ttest_tasks" class="nav-link" data-scroll-target="#one_ttest_tasks"><span class="toc-section-number">24.27</span>  Одновыборочный t-test</a></li>
+  <li><a href="#dep_ttest_tasks" id="toc-dep_ttest_tasks" class="nav-link" data-scroll-target="#dep_ttest_tasks"><span class="toc-section-number">24.28</span>  Двухвыборочный зависимый t-test</a></li>
+  <li><a href="#ind_ttest_tasks" id="toc-ind_ttest_tasks" class="nav-link" data-scroll-target="#ind_ttest_tasks"><span class="toc-section-number">24.29</span>  Двухвыборочный независимый t-test</a></li>
+  <li><a href="#nonparam_ttest_tasks" id="toc-nonparam_ttest_tasks" class="nav-link" data-scroll-target="#nonparam_ttest_tasks"><span class="toc-section-number">24.30</span>  Непараметрические аналоги t-теста</a></li>
+  <li><a href="#chi_sq_tasks" id="toc-chi_sq_tasks" class="nav-link" data-scroll-target="#chi_sq_tasks"><span class="toc-section-number">24.31</span>  Критерий хи-квадрат Пирсона</a></li>
+  <li><a href="#backpack_tasks" id="toc-backpack_tasks" class="nav-link" data-scroll-target="#backpack_tasks"><span class="toc-section-number">24.32</span>  Исследование набора данных Backpack</a></li>
+  <li><a href="#cov_tasks" id="toc-cov_tasks" class="nav-link" data-scroll-target="#cov_tasks"><span class="toc-section-number">24.33</span>  Ковариация</a></li>
+  <li><a href="#cor_tasks" id="toc-cor_tasks" class="nav-link" data-scroll-target="#cor_tasks"><span class="toc-section-number">24.34</span>  Коэффициент корреляции</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="tasks" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Задания</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Задания, которые помечены звездочкой (*) можно пропускать: это задания повышенной сложности, в них требуется подумать над решением, а не просто применить выученные инструменты.</p>
+<section id="task_begin" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="task_begin"><span class="header-section-number">24.1</span> Начало работы в R</h2>
+<ul>
+<li>Разделите 9801 на 9.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1089</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте логарифм от 2176782336 по основанию 6.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<ul>
+<li>Теперь натуральный логарифм 10 и умножьте его на 5.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.51293</code></pre>
+</div>
+</div>
+<ul>
+<li>С помощью функции <code>sin()</code> посчитайте <span class="math inline">\(\sin (\pi), \sin \left(\frac{\pi}{2}\right), \sin \left(\frac{\pi}{6}\right)\)</span>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Значение <span class="math inline">\(\pi\)</span> - зашитая в R константа (<code>pi</code>).</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.224647e-16</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+</div>
+</section>
+<section id="task_new_vecs" class="level2" data-number="24.2">
+<h2 data-number="24.2" class="anchored" data-anchor-id="task_new_vecs"><span class="header-section-number">24.2</span> Создание векторов</h2>
+<ul>
+<li>Создайте вектор из значений 2, 30 и 4000.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]    2   30 4000</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор от 1 до 20.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор от 20 до 1.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 20 19 18 17 16 15 14 13 12 11 10  9  8  7  6  5  4  3  2  1</code></pre>
+</div>
+</div>
+<p>Функция <code>sum()</code> возвращает сумму элементов вектора на входе. Посчитайте сумму первых 100 натуральных чисел (т.е. всех целых чисел от 1 до 100).</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5050</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор от 1 до 20 и снова до 1. Число 20 должно присутствовать только один раз!</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 19 18 17 16 15
+[26] 14 13 12 11 10  9  8  7  6  5  4  3  2  1</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор значений 5, 4, 3, 2, 2, 3, 4, 5:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5 4 3 2 2 3 4 5</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор 2, 4, 6, … , 18, 20.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор 0.1, 0.2, 0.3, …, 0.9, 1.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+</div>
+</div>
+<ul>
+<li>2020 год – високосный. Следующий високосный год через 4 года – это будет 2024 год. Составьте календарь всех високосных годов XXI века, начиная с 2020 года.</li>
+</ul>
+<blockquote class="blockquote">
+<p>2100 год относится к XXI веку, а не к XXII.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2020 2024 2028 2032 2036 2040 2044 2048 2052 2056 2060 2064 2068 2072 2076
+[16] 2080 2084 2088 2092 2096 2100</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор, состоящий из 20 повторений “Хэй!”.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!"
+[11] "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!" "Хэй!"</code></pre>
+</div>
+</div>
+<ul>
+<li>Как я и говорил, многие функции, работающие с одним значением на входе, так же прекрасно работают и с целыми векторами. Попробуйте посчитать квадратный корень чисел от 1 до 10 с помощью функции <code>sqrt()</code> и сохраните результат в векторе <code>roots</code>. Выведите содержание вектора <code>roots</code> в консоль.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+ [9] 3.000000 3.162278</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте вектор из одной единицы, двух двоек, трех троек, …. , девяти девяток.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5 6 6 6 6 6 6 7 7 7 7 7 7 7 8 8 8 8 8 8 8 8 9 9
+[39] 9 9 9 9 9 9 9</code></pre>
+</div>
+</div>
+</section>
+<section id="task_coer" class="level2" data-number="24.3">
+<h2 data-number="24.3" class="anchored" data-anchor-id="task_coer"><span class="header-section-number">24.3</span> Приведение типов</h2>
+<ul>
+<li>Сделайте вектор <code>vec1</code>, в котором соедините <code>3</code>, а также значения <code>"Мой"</code> и <code>"вектор"</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "3"      "Мой"    "вектор"</code></pre>
+</div>
+</div>
+<ul>
+<li>Попробуйте вычесть <code>TRUE</code> из 10.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<ul>
+<li>Соедините значение <code>10</code> и <code>TRUE</code> в вектор <code>vec2</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10  1</code></pre>
+</div>
+</div>
+<ul>
+<li>Соедините вектор <code>vec2</code> и значение <code>"r"</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "10" "1"  "r" </code></pre>
+</div>
+</div>
+<ul>
+<li>Соедините значения <code>10</code>, <code>TRUE</code>, <code>"r"</code> в вектор.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "10"   "TRUE" "r"   </code></pre>
+</div>
+</div>
+</section>
+<section id="task_vec_ion" class="level2" data-number="24.4">
+<h2 data-number="24.4" class="anchored" data-anchor-id="task_vec_ion"><span class="header-section-number">24.4</span> Векторизация</h2>
+<ul>
+<li>Создайте вектор <code>p</code>, состоящий из значений 4, 5, 6, 7, и вектор <code>q</code>, состоящий из 0, 1, 2, 3.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5 6 7</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0 1 2 3</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте поэлементную сумму векторов <code>p</code> и <code>q</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  4  6  8 10</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте поэлементную разницу <code>p</code> и <code>q</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 4 4 4</code></pre>
+</div>
+</div>
+<ul>
+<li>Поделите каждый элемент вектора <code>p</code> на соответствующий ему элемент вектора <code>q</code>:</li>
+</ul>
+<blockquote class="blockquote">
+<p>О, да, Вам нужно делить на 0!</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]      Inf 5.000000 3.000000 2.333333</code></pre>
+</div>
+</div>
+<ul>
+<li>Возведите каждый элемент вектора <code>p</code> в степень соответствующего ему элемента вектора <code>q</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   1   5  36 343</code></pre>
+</div>
+</div>
+<ul>
+<li>Умножьте каждое значение вектора <code>p</code> на 10.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 50 60 70</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор квадратов чисел от 1 до 10:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор 0, 2, 0, 4, … , 18, 0, 20.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0  2  0  4  0  6  0  8  0 10  0 12  0 14  0 16  0 18  0 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор 1, 0, 3, 0, 5, …, 17, 0, 19, 0.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  0  3  0  5  0  7  0  9  0 11  0 13  0 15  0 17  0 19  0</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте вектор, в котором будут содержаться первые 20 степеней двойки.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]       2       4       8      16      32      64     128     256     512
+[10]    1024    2048    4096    8192   16384   32768   65536  131072  262144
+[19]  524288 1048576</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте вектор из чисел 1, 10, 100, 1000, 10000:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]     1    10   100  1000 10000</code></pre>
+</div>
+</div>
+<ul>
+<li>*Посчитать сумму последовательности <span class="math inline">\(\frac{1}{1 \cdot 2}+\frac{1}{2 \cdot 3}+\frac{1}{3 \cdot 4}+\ldots+\frac{1}{50 \cdot 51}\)</span>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9803922</code></pre>
+</div>
+</div>
+<ul>
+<li>*Посчитать сумму последовательности <span class="math inline">\(\frac{1}{2^{0}}+\frac{1}{2^{1}}+\frac{1}{2^{2}}+\frac{1}{2^{3}}+\ldots \frac{1}{2^{20}}\)</span>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.999999</code></pre>
+</div>
+</div>
+<ul>
+<li>*Посчитать сумму последовательности <span class="math inline">\(1+\frac{4}{3}+\frac{7}{9}+\frac{10}{27}+\frac{13}{81}+\ldots+\frac{28}{19683}\)</span>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.749174</code></pre>
+</div>
+</div>
+<ul>
+<li>*Сколько чисел из последовательности <span class="math inline">\(1+\frac{4}{3}+\frac{7}{9}+\frac{10}{27}+\frac{13}{81}+\ldots+\frac{28}{19683}\)</span> больше чем 0.5?</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+<section id="task_vec_ind" class="level2" data-number="24.5">
+<h2 data-number="24.5" class="anchored" data-anchor-id="task_vec_ind"><span class="header-section-number">24.5</span> Индексирование векторов</h2>
+<ul>
+<li>Создайте вектор <code>troiki</code> со значениями 3, 6, 9, …, 24, 27.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  6  9 12 15 18 21 24 27</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките 2, 5 и 7 значения вектора <code>troiki</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6 15 21</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките <em>предпоследнее</em> значение вектора <code>troiki</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките все значения вектора <code>troiki</code> <em>кроме</em> предпоследнего:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  6  9 12 15 18 21 27</code></pre>
+</div>
+</div>
+<p>Создайте вектор <code>vec3</code>, скопировав следующий код:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>vec3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">11</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Найдите второй элемент вектора <code>vec3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<ul>
+<li>Верните второй и пятый элемент вектора <code>vec3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5 8</code></pre>
+</div>
+</div>
+<ul>
+<li>Попробуйте извлечь сотое значение вектора <code>vec3</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<ul>
+<li>Верните все элементы вектора <code>vec3</code> <em>кроме</em> второго элемента.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  3  2  1  8  4  9 10  3 15  1 11</code></pre>
+</div>
+</div>
+<ul>
+<li>Верните все элементы вектора <code>vec3</code> <em>кроме</em> второго и пятого элемента.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  3  2  1  4  9 10  3 15  1 11</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите последний элемент вектора <code>vec3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+<ul>
+<li>Верните все значения вектора <code>vec3</code> кроме первого и последнего.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  5  2  1  8  4  9 10  3 15  1</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите все значения вектора <code>vec3</code>, которые больше 4.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5  8  9 10 15 11</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите все значения вектора <code>vec3</code>, которые больше 4, но меньше 10.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Если хотите сделать это в одну строчку, то вам помогут логические операторы!</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5 8 9</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите все значения вектора <code>vec3</code>, которые меньше 4 или больше 10.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  2  1  3 15  1 11</code></pre>
+</div>
+</div>
+<ul>
+<li>Возведите в квадрат каждое значение вектора <code>vec3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   9  25   4   1  64  16  81 100   9 225   1 121</code></pre>
+</div>
+</div>
+<ul>
+<li>*Возведите в квадрат каждое значение вектора на нечетной позиции и извлеките корень из каждого значения на четной позиции вектора <code>vec3</code>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Извлечение корня - это то же самое, что и возведение в степень 0.5.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  9.000000  2.236068  4.000000  1.000000 64.000000  2.000000 81.000000
+ [8]  3.162278  9.000000  3.872983  1.000000  3.316625</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте вектор 2, 4, 6, … , 18, 20 как минимум 2 новыми способами.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Знаю, это задание может показаться бессмысленным, но это очень базовая операция, с помощью которой можно, например, разделить данные на две части. Чем больше способов Вы знаете, тем лучше!</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
+</div>
+</div>
+</section>
+<section id="task_na" class="level2" data-number="24.6">
+<h2 data-number="24.6" class="anchored" data-anchor-id="task_na"><span class="header-section-number">24.6</span> Работа с пропущенными значениями</h2>
+<ul>
+<li>Создайте вектор <code>vec4</code> со значениями 300, 15, 8, 2, 0, 1, 110, скопировав следующий код:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">110</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>vec4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 300  15   8  20   0   1 110</code></pre>
+</div>
+</div>
+<ul>
+<li>Замените все значения <code>vec4</code>, которые больше 20 на <code>NA</code>.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте полученный вектор <code>vec4</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA 15  8 20  0  1 NA</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте сумму <code>vec4</code> с помощью функции <code>sum()</code>. Ответ <code>NA</code> не считается!</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 44</code></pre>
+</div>
+</div>
+</section>
+<section id="task_matrix" class="level2" data-number="24.7">
+<h2 data-number="24.7" class="anchored" data-anchor-id="task_matrix"><span class="header-section-number">24.7</span> Матрицы</h2>
+<ul>
+<li>Создайте матрицу 4х4, состоящую из единиц. Назовите ее <code>M1</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    1    1    1
+[2,]    1    1    1    1
+[3,]    1    1    1    1
+[4,]    1    1    1    1</code></pre>
+</div>
+</div>
+<ul>
+<li>Поменяйте все некрайние значения матрицы <code>M1</code> (то есть значения на позициях [2,2], [2,3], [3,2] и [3,3]) на число 2.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    1    1    1
+[2,]    1    2    2    1
+[3,]    1    2    2    1
+[4,]    1    1    1    1</code></pre>
+</div>
+</div>
+<ul>
+<li>Выделите второй и третий столбик из матрицы <code>M1</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    1    1
+[2,]    2    2
+[3,]    2    2
+[4,]    1    1</code></pre>
+</div>
+</div>
+<ul>
+<li>Сравните (<code>==</code>) вторую колонку и вторую строчку матрицы <code>M1</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте таблицу умножения (9х9) в виде матрицы. Сохраните ее в переменную <code>mult_tab</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+ [1,]    1    2    3    4    5    6    7    8    9
+ [2,]    2    4    6    8   10   12   14   16   18
+ [3,]    3    6    9   12   15   18   21   24   27
+ [4,]    4    8   12   16   20   24   28   32   36
+ [5,]    5   10   15   20   25   30   35   40   45
+ [6,]    6   12   18   24   30   36   42   48   54
+ [7,]    7   14   21   28   35   42   49   56   63
+ [8,]    8   16   24   32   40   48   56   64   72
+ [9,]    9   18   27   36   45   54   63   72   81</code></pre>
+</div>
+</div>
+<ul>
+<li>*Из матрицы <code>mult_tab</code> выделите подматрицу, включающую в себя только строчки с 6 по 8 и столбцы с 3 по 7.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]   18   24   30   36   42
+[2,]   21   28   35   42   49
+[3,]   24   32   40   48   56</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте матрицу с логическими значениями, где <code>TRUE</code>, если в этом месте в таблице умножения (<code>mult_tab</code>) двузначное число и <code>FALSE</code>, если однозначное.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Матрица - это почти вектор. К нему можно обращаться с единственным индексом.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9]
+ [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+ [2,] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [3,] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [4,] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [5,] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [6,] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [7,] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [8,] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+ [9,] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте матрицу <code>mult_tab2</code>, в которой все значения <code>tab</code> меньше 10 заменены на 0.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+ [1,]    0    0    0    0    0    0    0    0    0
+ [2,]    0    0    0    0   10   12   14   16   18
+ [3,]    0    0    0   12   15   18   21   24   27
+ [4,]    0    0   12   16   20   24   28   32   36
+ [5,]    0   10   15   20   25   30   35   40   45
+ [6,]    0   12   18   24   30   36   42   48   54
+ [7,]    0   14   21   28   35   42   49   56   63
+ [8,]    0   16   24   32   40   48   56   64   72
+ [9,]    0   18   27   36   45   54   63   72   81</code></pre>
+</div>
+</div>
+</section>
+<section id="task_list" class="level2" data-number="24.8">
+<h2 data-number="24.8" class="anchored" data-anchor-id="task_list"><span class="header-section-number">24.8</span> Списки</h2>
+<p>Дан список <code>list1</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">=</span> <span class="fu">list</span>(<span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">letters =</span> letters, <span class="at">logic =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>list1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$numbers
+[1] 1 2 3 4 5
+
+$letters
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+$logic
+[1] TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите первый элемент списка <code>list1</code>. Ответ должен быть списком длиной один.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$numbers
+[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+<ul>
+<li>Теперь найдите содержание первого элемента списка <code>list1</code> двумя разными способами. Ответ должен быть вектором.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+<ul>
+<li>Теперь возьмите первый элемент содержания первого элемента списка <code>list1</code>. Ответ должен быть вектором.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте список <code>list2</code>, содержащий в себе два списка <code>list1</code>. Один из них будет иметь имя <code>pupa</code>, а другой – <code>lupa</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$pupa
+$pupa$numbers
+[1] 1 2 3 4 5
+
+$pupa$letters
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+$pupa$logic
+[1] TRUE
+
+
+$lupa
+$lupa$numbers
+[1] 1 2 3 4 5
+
+$lupa$letters
+ [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"
+
+$lupa$logic
+[1] TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>*Извлеките первый элемент списка <code>list2</code>, из него – второй полэлемент, а из него – третье значение.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "c"</code></pre>
+</div>
+</div>
+</section>
+<section id="task_df" class="level2" data-number="24.9">
+<h2 data-number="24.9" class="anchored" data-anchor-id="task_df"><span class="header-section-number">24.9</span> Датафрейм</h2>
+<ul>
+<li>Запустите команду <code>data(mtcars)</code> чтобы загрузить встроенный датафрейм с информацией про автомобили. Каждая строчка датафрейма - модель автомобиля, каждая колонка - отдельная характеристика. Подробнее см. <code>?mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+</div>
+<ul>
+<li>Изучите структуру датафрейма <code>mtcars</code> с помощью функции <code>str()</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   32 obs. of  11 variables:
+ $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+ $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+ $ disp: num  160 160 108 258 360 ...
+ $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+ $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+ $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+ $ qsec: num  16.5 17 18.6 19.4 17 ...
+ $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+ $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+ $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+ $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите значение третьей строчки четвертого столбца датафрейма <code>mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 93</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките первые шесть строчек и первые шесть столбцов датафрейма <code>mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                   mpg cyl disp  hp drat    wt
+Mazda RX4         21.0   6  160 110 3.90 2.620
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875
+Datsun 710        22.8   4  108  93 3.85 2.320
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215
+Hornet Sportabout 18.7   8  360 175 3.15 3.440
+Valiant           18.1   6  225 105 2.76 3.460</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките колонку <code>wt</code> датафрейма <code>mtcars</code> - массу автомобиля в тысячах фунтов.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2.620 2.875 2.320 3.215 3.440 3.460 3.570 3.190 3.150 3.440 3.440 4.070
+[13] 3.730 3.780 5.250 5.424 5.345 2.200 1.615 1.835 2.465 3.520 3.435 3.840
+[25] 3.845 1.935 2.140 1.513 3.170 2.770 3.570 2.780</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките колонки из <code>mtcars</code> в следующем порядке: <code>hp</code>, <code>mpg</code>, <code>cyl</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     hp  mpg cyl
+Mazda RX4           110 21.0   6
+Mazda RX4 Wag       110 21.0   6
+Datsun 710           93 22.8   4
+Hornet 4 Drive      110 21.4   6
+Hornet Sportabout   175 18.7   8
+Valiant             105 18.1   6
+Duster 360          245 14.3   8
+Merc 240D            62 24.4   4
+Merc 230             95 22.8   4
+Merc 280            123 19.2   6
+Merc 280C           123 17.8   6
+Merc 450SE          180 16.4   8
+Merc 450SL          180 17.3   8
+Merc 450SLC         180 15.2   8
+Cadillac Fleetwood  205 10.4   8
+Lincoln Continental 215 10.4   8
+Chrysler Imperial   230 14.7   8
+Fiat 128             66 32.4   4
+Honda Civic          52 30.4   4
+Toyota Corolla       65 33.9   4
+Toyota Corona        97 21.5   4
+Dodge Challenger    150 15.5   8
+AMC Javelin         150 15.2   8
+Camaro Z28          245 13.3   8
+Pontiac Firebird    175 19.2   8
+Fiat X1-9            66 27.3   4
+Porsche 914-2        91 26.0   4
+Lotus Europa        113 30.4   4
+Ford Pantera L      264 15.8   8
+Ferrari Dino        175 19.7   6
+Maserati Bora       335 15.0   8
+Volvo 142E          109 21.4   4</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте <em>количество</em> автомобилей с 4 цилиндрами (<code>cyl</code>) в датафрейме <code>mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте <em>долю</em> автомобилей с 4 цилиндрами (<code>cyl</code>) в датафрейме <code>mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.34375</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите все автомобили мощностью не менее 100 лошадиных сил (<code>hp</code>) в датафрейме <code>mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите все автомобили мощностью не менее 100 лошадиных сил (<code>hp</code>) и 4 цилиндрами (<code>cyl</code>) в датафрейме <code>mtcars</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>              mpg cyl  disp  hp drat    wt qsec vs am gear carb
+Lotus Europa 30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2
+Volvo 142E   21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте максимальную массу (<code>wt</code>) автомобиля в выборке, воспользовавшись функцией <code>max()</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.424</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте минимальную массу (<code>wt</code>) автомобиля в выборке, воспользовавшись функцией <code>min()</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.513</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите строчку датафрейма <code>mtcars</code> с самым легким автомобилем.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>              mpg cyl disp  hp drat    wt qsec vs am gear carb
+Lotus Europa 30.4   4 95.1 113 3.77 1.513 16.9  1  1    5    2</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките строчки датафрейма <code>mtcars</code> с автомобилями, масса которых ниже средней массы.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4      21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona  21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino   19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+</div>
+<ul>
+<li>Масса автомобиля указана в тысячах фунтов. Создайте колонку <code>wt_kg</code> с массой автомобиля в килограммах. Результат округлите до целых значений с помощью функции <code>round()</code>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>1 фунт = 0.45359237 кг.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb wt_kg
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4  1188
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4  1304
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1  1052
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1  1458
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2  1560
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1  1569
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4  1619
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2  1447
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2  1429
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4  1560
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4  1560
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3  1846
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3  1692
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3  1715
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4  2381
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4  2460
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4  2424
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1   998
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2   733
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1   832
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1  1118
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2  1597
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2  1558
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4  1742
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2  1744
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1   878
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2   971
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2   686
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4  1438
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6  1256
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8  1619
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</code></pre>
+</div>
+</div>
+</section>
+<section id="task_if" class="level2" data-number="24.10">
+<h2 data-number="24.10" class="anchored" data-anchor-id="task_if"><span class="header-section-number">24.10</span> Условные конструкции</h2>
+<ul>
+<li>Создайте вектор <code>vec5</code>, скопировав следующий код:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Создайте новый строковый вектор, где на месте чисел больше 10 в <code>vec5</code> будет стоять “большое число”, а на месте остальных чисел – “маленькое число”.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "маленькое число" "большое число"   "большое число"   "маленькое число"
+[5] "маленькое число" "маленькое число"</code></pre>
+</div>
+</div>
+<ul>
+<li>Загрузите файл heroes_information.csv в переменную <code>heroes</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Создайте новою колонку <code>hair</code> в <code>heroes</code>, в которой будет значение <code>"Bold"</code> для тех супергероев, у которых в колонке <code>Hair.color</code> стоит <code>"No Hair"</code>, и значение <code>"Hairy"</code> во всех остальных случаях.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  X          name Gender Eye.color              Race Hair.color Height
+1 0        A-Bomb   Male    yellow             Human    No Hair    203
+2 1    Abe Sapien   Male      blue     Icthyo Sapien    No Hair    191
+3 2      Abin Sur   Male      blue           Ungaran    No Hair    185
+4 3   Abomination   Male     green Human / Radiation    No Hair    203
+5 4       Abraxas   Male      blue     Cosmic Entity      Black     NA
+6 5 Absorbing Man   Male      blue             Human    No Hair    193
+          Publisher Skin.color Alignment Weight  hair
+1     Marvel Comics       &lt;NA&gt;      good    441  Bold
+2 Dark Horse Comics       blue      good     65  Bold
+3         DC Comics        red      good     90  Bold
+4     Marvel Comics       &lt;NA&gt;       bad    441  Bold
+5     Marvel Comics       &lt;NA&gt;       bad     NA Hairy
+6     Marvel Comics       &lt;NA&gt;       bad    122  Bold</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте новою колонку <code>tall</code> в <code>heroes</code>, в которой будет значение <code>"tall"</code> для тех супергероев, у которых в колонке <code>Height</code> стоит число больше 190, значение <code>"short"</code> для тех супергероев, у которых в колонке <code>Height</code> стоит число меньше 170, и значение <code>"middle"</code> во всех остальных случаях.</li>
+</ul>
+<div class="cell">
+
+</div>
+</section>
+<section id="task_function" class="level2" data-number="24.11">
+<h2 data-number="24.11" class="anchored" data-anchor-id="task_function"><span class="header-section-number">24.11</span> Создание функций</h2>
+<ul>
+<li>Создайте функцию <code>plus_one()</code>, которая принимает число и возвращает это же число + 1.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте функцию <code>plus_one()</code> на числе 41.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plus_one</span>(<span class="dv">41</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 42</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте функцию <code>circle_area()</code>, которая вычисляет площадь круга по радиусу согласно формуле <span class="math inline">\(\pi r^2\)</span>.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Посчитайте площадь круга с радиусом 5.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 78.53982</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте функцию <code>cels2fahr()</code>, которая будет превращать градусы по Цельсию в градусы по Фаренгейту.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте на значениях -100, -40 и 0, что функция <code>cels2fahr()</code> работает корректно.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cels2fahr</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -148  -40   32</code></pre>
+</div>
+</div>
+<ul>
+<li>Напишите функцию <code>highlight()</code>, которая принимает на входе строковый вектор, а возвращает тот же вектор, но дополненный значением <code>"***"</code> в начале и конце вектора. Лучше всего это рассмотреть на примере:</li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "***"     "Я"       "Бэтмен!" "***"    </code></pre>
+</div>
+</div>
+<ul>
+<li>Теперь сделайте функцию <code>highlight</code> более гибкой. Добавьте в нее параметр <code>wrapper =</code>, который по умолчанию равен <code>"***"</code>. Значение параметра <code>wrapper =</code> и будет вставлено в начало и конец вектора.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте написанную функцию на векторе <code>c("Я", "Бэтмен!")</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "***"     "Я"       "Бэтмен!" "***"    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>), <span class="at">wrapper =</span> <span class="st">"__"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "__"      "Я"       "Бэтмен!" "__"     </code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте функцию <code>na_n()</code>, которая будет возвращать количество <code>NA</code> в векторе.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте функцию <code>na_n()</code> на векторе:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">na_n</span>(<span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<ul>
+<li>Напишите функцию <code>factors()</code>, которая будет возвращать все делители числа в виде числового вектора.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Здесь может понадобиться оператор для получения остатка от деления: <code>%%</code>.</p>
+</blockquote>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте функцию <code>factors()</code> на простых и сложных числах:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">161</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   1   7  23 161</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">1984</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]    1    2    4    8   16   31   32   62   64  124  248  496  992 1984</code></pre>
+</div>
+</div>
+<ul>
+<li>*Напишите функцию <code>is_prime()</code>, которая проверяет, является ли число простым.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Здесь может пригодиться функция <code>any()</code> - она возвращает <code>TRUE</code>, если в векторе есть хотя бы один <code>TRUE</code>.</p>
+</blockquote>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте какие года были для нас простыми, а какие нет:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2017</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2019</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2019</span><span class="sc">/</span><span class="dv">3</span> <span class="co">#2019 делится на 3 без остатка</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 673</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2021</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте функцию <code>monotonic()</code>, которая возвращает <code>TRUE</code>, если значения в векторе не убывают (то есть каждое следующее - больше или равно предыдущему) или не возврастают.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Полезная функция для этого – <code>diff()</code> – возвращает разницу соседних значений.</p>
+</blockquote>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="dv">6</span><span class="sc">:-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">rep</span>(<span class="dv">5</span>, <span class="dv">10</span>), <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Бинарные операторы типа <code>+</code> или <code>%in%</code> тоже представляют собой функции. Более того, мы можем создавать свои бинарные операторы! В этом нет особой сложности – нужно все так же создавать функцию (для двух переменных), главное окружать их <code>%</code> и название обрамлять обратными штрихами `. Например, можно сделать свой бинарный оператор <code>%notin%</code>, который будет выдавать <code>TRUE</code>, если значения слева <em>нет</em> в векторе справа:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">%notin%</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="sc">!</span> (x <span class="sc">%in%</span> y)</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте бинарный оператор <code>%without%</code>, который будет возвращать все значения вектора слева без значений вектора справа.</li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"а"</span>, <span class="st">"и"</span>, <span class="st">"б"</span>, <span class="st">"сидели"</span>, <span class="st">"на"</span>, <span class="st">"трубе"</span>) <span class="sc">%without%</span> <span class="fu">c</span>(<span class="st">"а"</span>, <span class="st">"б"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "и"      "сидели" "на"     "трубе" </code></pre>
+</div>
+</div>
+<ul>
+<li>*Создайте бинарный оператор <code>%between%</code>, который будет возвращать <code>TRUE</code>, если значение в векторе слева накходится в <em>диапазоне</em> значений вектора справа:</li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb139"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb139-1"><a href="#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="task_sanity" class="level2" data-number="24.12">
+<h2 data-number="24.12" class="anchored" data-anchor-id="task_sanity"><span class="header-section-number">24.12</span> Проверка на адекватность</h2>
+<ul>
+<li>Создайте функцию <code>trim()</code>, которая будет возвращать вектор без первого и последнего значения (вне зависимости от типа данных).</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте, что функция <code>trim()</code> работает корректно:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href="#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 4 5 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
+[20] "u" "v" "w" "x" "y"</code></pre>
+</div>
+</div>
+<ul>
+<li>Теперь добавьте в функцию <code>trim()</code> параметр <code>n =</code> со значением по умолчанию 1. Этот параметр будет обозначать сколько значений нужно отрезать слева и справа от вектора.</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте полученную функцию:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href="#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
+[20] "u" "v" "w" "x" "y"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u"
+[20] "v" "w" "x"</code></pre>
+</div>
+</div>
+<ul>
+<li>Сделайте так, чтобы функция <code>trim()</code> работала корректно с <code>n = 0</code>, т.е. функция возвращала бы исходный вектор без изменений.</li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters, <span class="at">n =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
+[20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
+</div>
+</div>
+<ul>
+<li>*Теперь добавьте проверку на адекватность входных данных: функция <code>trim()</code> должна выдавать ошибку, если <code>n =</code> меньше нуля или если <code>n =</code> слишком большой и отрезает все значения вектора:</li>
+</ul>
+<div class="cell">
+
+</div>
+<ul>
+<li>*Проверьте полученную функцию <code>trim()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in trim(1:6, 3): n слишком большой!</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in trim(1:6, -1): n не может быть меньше нуля!</code></pre>
+</div>
+</div>
+</section>
+<section id="task_apply" class="level2" data-number="24.13">
+<h2 data-number="24.13" class="anchored" data-anchor-id="task_apply"><span class="header-section-number">24.13</span> Семейство функций apply()</h2>
+<ul>
+<li>Создайте матрицу <code>M2</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">11</span>, <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb155-2"><a href="#cb155-2" aria-hidden="true" tabindex="-1"></a>M2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]   20   15   11   16
+[2,]   19   14   12   17
+[3,]   18   13   13   18
+[4,]   17   12   14   19
+[5,]   16   11   15   20</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте максимальное значение матрицы <code>M2</code> по каждой строчке.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20 19 18 19 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте максимальное значение матрицы <code>M2</code> по каждому столбцу.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20 15 15 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте среднее значение матрицы <code>M2</code> по каждой строке.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.5 15.5 15.5 15.5 15.5</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте среднее значение матрицы <code>M2</code> по каждому столбцу.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18 13 13 18</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте список <code>list3</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a>list3 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">24</span>,</span>
+<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">e =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">25</span></span>
+<span id="cb161-7"><a href="#cb161-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Найдите максимальное значение каждого вектора списка <code>list3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> a  b  c  d  e 
+ 5 20 24  6 25 </code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте сумму каждого вектора списка <code>list3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  a   b   c   d   e 
+ 15 210 294  18 310 </code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте длину каждого вектора списка <code>list3</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> a  b  c  d  e 
+ 5 21 21  4 20 </code></pre>
+</div>
+</div>
+<ul>
+<li>Напишите функцию <code>max_item()</code>, которая будет принимать на входе список, а возвращать - (первый) самый длинный его элемент.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Для этого вам может понадобиться функция <code>which.max()</code>, которая возвращает индекс максимального значения (первого, если их несколько).</p>
+</blockquote>
+<div class="cell">
+
+</div>
+<ul>
+<li>Проверьте функцию <code>max_item()</code> на списке <code>list3</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max_item</span>(list3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+</div>
+<ul>
+<li>Теперь мы сделаем сложный список <code>list4</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>list4 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">40</span>, list3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Посчитайте длину каждого вектора в списке, в т.ч. для списка внутри. Результат должен быть списком с такой же структорой, как и изначальный список <code>list4</code>.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Для этого может понадобиться функция <code>rapply()</code>: <strong>recursive lapply</strong></p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] 3
+
+[[2]]
+[1] 38
+
+[[3]]
+[[3]]$a
+[1] 5
+
+[[3]]$b
+[1] 21
+
+[[3]]$c
+[1] 21
+
+[[3]]$d
+[1] 4
+
+[[3]]$e
+[1] 20</code></pre>
+</div>
+</div>
+<ul>
+<li>*Загрузите набор данных <code>heroes</code> и посчитайте, сколько <code>NA</code> в каждом из столбцов.</li>
+</ul>
+<blockquote class="blockquote">
+<p>Для этого удобно использовать ранее написанную функцию <code>na_n()</code>.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>         X       name     Gender  Eye.color       Race Hair.color     Height 
+         0          0         29        172        304        172        217 
+ Publisher Skin.color  Alignment     Weight       hair       tall 
+         0        662          7        239        172        217 </code></pre>
+</div>
+</div>
+<ul>
+<li>*Используя ранее написанную функцию <code>is_prime()</code>, напишите функцию <code>prime_numbers()</code>, которая будет возвращать все простые числа до выбранного числа.</li>
+</ul>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prime_numbers</span>(<span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]   3   5   7  11  13  17  19  23  29  31  37  41  43  47  53  59  61  67  71
+[20]  73  79  83  89  97 101 103 107 109 113 127 131 137 139 149 151 157 163 167
+[39] 173 179 181 191 193 197 199</code></pre>
+</div>
+</div>
+</section>
+<section id="task_pipe" class="level2" data-number="24.14">
+<h2 data-number="24.14" class="anchored" data-anchor-id="task_pipe"><span class="header-section-number">24.14</span> magrittr::<code>%&gt;%</code></h2>
+<div class="cell">
+
+</div>
+<ul>
+<li>Перепишите следующие выражения, используя <code>%&gt;%</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.416198</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.416198</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="fu">min</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"Корень из"</span>, <span class="dv">2</span>, <span class="st">"равен"</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Корень из"       "2"               "равен"           "1.4142135623731"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Корень из"       "2"               "равен"           "1.4142135623731"</code></pre>
+</div>
+</div>
+</section>
+<section id="task_select" class="level2" data-number="24.15">
+<h2 data-number="24.15" class="anchored" data-anchor-id="task_select"><span class="header-section-number">24.15</span> Выбор столбцов: <code>dplyr::select()</code></h2>
+<p>Для выполнения следующих заданий нам понадобятся датасеты <code>heroes</code> и <code>powers</code>, которые можно загрузить, используя следующие команды:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
+<span id="cb181-3"><a href="#cb181-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
+<span id="cb181-4"><a href="#cb181-4" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Выберете первые 4 столбца в <code>powers</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 667 × 4
+   hero_names    Agility `Accelerated Healing` `Lantern Power Ring`
+   &lt;chr&gt;         &lt;lgl&gt;   &lt;lgl&gt;                 &lt;lgl&gt;               
+ 1 3-D Man       TRUE    FALSE                 FALSE               
+ 2 A-Bomb        FALSE   TRUE                  FALSE               
+ 3 Abe Sapien    TRUE    TRUE                  FALSE               
+ 4 Abin Sur      FALSE   FALSE                 TRUE                
+ 5 Abomination   FALSE   TRUE                  FALSE               
+ 6 Abraxas       FALSE   FALSE                 FALSE               
+ 7 Absorbing Man FALSE   FALSE                 FALSE               
+ 8 Adam Monroe   FALSE   TRUE                  FALSE               
+ 9 Adam Strange  FALSE   FALSE                 FALSE               
+10 Agent Bob     FALSE   FALSE                 FALSE               
+# … with 657 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберите все столбцы от <code>Reflexes</code> до <code>Empathy</code> в тиббле <code>powers</code>:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 667 × 7
+   Reflexes Invulnerability `Energy Constructs` `Force Fields` `Self-Sustenance`
+   &lt;lgl&gt;    &lt;lgl&gt;           &lt;lgl&gt;               &lt;lgl&gt;          &lt;lgl&gt;            
+ 1 FALSE    FALSE           FALSE               FALSE          FALSE            
+ 2 FALSE    FALSE           FALSE               FALSE          TRUE             
+ 3 TRUE     FALSE           FALSE               FALSE          FALSE            
+ 4 FALSE    FALSE           FALSE               FALSE          FALSE            
+ 5 FALSE    TRUE            FALSE               FALSE          FALSE            
+ 6 FALSE    TRUE            FALSE               FALSE          FALSE            
+ 7 FALSE    TRUE            FALSE               FALSE          FALSE            
+ 8 FALSE    FALSE           FALSE               FALSE          FALSE            
+ 9 FALSE    FALSE           FALSE               FALSE          FALSE            
+10 FALSE    FALSE           FALSE               FALSE          FALSE            
+# … with 657 more rows, and 2 more variables: `Anti-Gravity` &lt;lgl&gt;,
+#   Empathy &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберите все столбцы тиббла <code>powers</code> кроме первого (<code>hero_names</code>):</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 667 × 167
+   Agility `Accelerated Hea…` `Lantern Power…` `Dimensional A…` `Cold Resistan…`
+   &lt;lgl&gt;   &lt;lgl&gt;              &lt;lgl&gt;            &lt;lgl&gt;            &lt;lgl&gt;           
+ 1 TRUE    FALSE              FALSE            FALSE            FALSE           
+ 2 FALSE   TRUE               FALSE            FALSE            FALSE           
+ 3 TRUE    TRUE               FALSE            FALSE            TRUE            
+ 4 FALSE   FALSE              TRUE             FALSE            FALSE           
+ 5 FALSE   TRUE               FALSE            FALSE            FALSE           
+ 6 FALSE   FALSE              FALSE            TRUE             FALSE           
+ 7 FALSE   FALSE              FALSE            FALSE            TRUE            
+ 8 FALSE   TRUE               FALSE            FALSE            FALSE           
+ 9 FALSE   FALSE              FALSE            FALSE            FALSE           
+10 FALSE   FALSE              FALSE            FALSE            FALSE           
+# … with 657 more rows, and 162 more variables: Durability &lt;lgl&gt;,
+#   Stealth &lt;lgl&gt;, `Energy Absorption` &lt;lgl&gt;, Flight &lt;lgl&gt;,
+#   `Danger Sense` &lt;lgl&gt;, `Underwater breathing` &lt;lgl&gt;, Marksmanship &lt;lgl&gt;,
+#   `Weapons Master` &lt;lgl&gt;, `Power Augmentation` &lt;lgl&gt;,
+#   `Animal Attributes` &lt;lgl&gt;, Longevity &lt;lgl&gt;, Intelligence &lt;lgl&gt;,
+#   `Super Strength` &lt;lgl&gt;, Cryokinesis &lt;lgl&gt;, Telepathy &lt;lgl&gt;,
+#   `Energy Armor` &lt;lgl&gt;, `Energy Blasts` &lt;lgl&gt;, Duplication &lt;lgl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="task_filt" class="level2" data-number="24.16">
+<h2 data-number="24.16" class="anchored" data-anchor-id="task_filt"><span class="header-section-number">24.16</span> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></h2>
+<ul>
+<li>Выберите только те строчки, в которых содержится информация о супергероях тяжелее 500 кг.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+     X1 name       Gender `Eye color` Race         `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   203 Darkseid   Male   red         New God      No Hair       267   DC Comics
+2   283 Giganta    Female green       &lt;NA&gt;         Red            62.5 DC Comics
+3   331 Hulk       Male   green       Human / Rad… Green         244   Marvel C…
+4   373 Juggernaut Male   blue        Human        Red           287   Marvel C…
+5   549 Red Hulk   Male   yellow      Human / Rad… Black         213   Marvel C…
+6   575 Sasquatch  Male   red         &lt;NA&gt;         Orange        305   Marvel C…
+# … with 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберите только те строчки, в которых содержится информация о <em>женщинах</em>-супергероях тяжелее 500 кг.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 11
+     X1 name    Gender `Eye color` Race  `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   283 Giganta Female green       &lt;NA&gt;  Red            62.5 DC Comics
+# … with 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберите только те строчки, в которых содержится информация о супергероях человеческой расы (<code>"Human"</code>) женского пола. Из этих супергероев возьмите первые 5.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 11
+     X1 name         Gender `Eye color` Race  `Hair color` Height Publisher    
+  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
+1    38 Arachne      Female blue        Human Blond           175 Marvel Comics
+2    63 Batgirl      Female green       Human Red             170 DC Comics    
+3    65 Batgirl IV   Female green       Human Black           165 DC Comics    
+4    72 Batwoman V   Female green       Human Red             178 DC Comics    
+5    96 Black Canary Female blue        Human Blond           165 DC Comics    
+# … with 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="task_arr" class="level2" data-number="24.17">
+<h2 data-number="24.17" class="anchored" data-anchor-id="task_arr"><span class="header-section-number">24.17</span> Сортировка строк: <code>dplyr::arrange()</code></h2>
+<ul>
+<li>Выберите из тиббла <code>heroes</code> колонки <code>name</code>, <code>Gender</code>, <code>Height</code> и отсортируйте строчки <em>по возрастанию</em> <code>Height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 3
+   name            Gender Height
+   &lt;chr&gt;           &lt;chr&gt;   &lt;dbl&gt;
+ 1 Utgard-Loki     Male     15.2
+ 2 Bloodwraith     Male     30.5
+ 3 King Kong       Male     30.5
+ 4 Anti-Monitor    Male     61  
+ 5 Giganta         Female   62.5
+ 6 Krypto          Male     64  
+ 7 Yoda            Male     66  
+ 8 Jack-Jack       Male     71  
+ 9 Howard the Duck Male     79  
+10 Godzilla        &lt;NA&gt;    108  
+# … with 724 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберите из тиббла <code>heroes</code> колонки <code>name</code>, <code>Gender</code>, <code>Height</code> и отсортируйте строчки <em>по убыванию</em> <code>Height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 3
+   name          Gender Height
+   &lt;chr&gt;         &lt;chr&gt;   &lt;dbl&gt;
+ 1 Fin Fang Foom Male     975 
+ 2 Galactus      Male     876 
+ 3 Groot         Male     701 
+ 4 MODOK         Male     366 
+ 5 Wolfsbane     Female   366 
+ 6 Onslaught     Male     305 
+ 7 Sasquatch     Male     305 
+ 8 Ymir          Male     305.
+ 9 Rey           Female   297 
+10 Juggernaut    Male     287 
+# … with 724 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Выберите из тиббла <code>heroes</code> колонки <code>name</code>, <code>Gender</code>, <code>Height</code> и отсортируйте строчки сначала по <code>Gender</code>, затем <em>по убыванию</em> <code>Height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 3
+   name      Gender Height
+   &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;
+ 1 Wolfsbane Female    366
+ 2 Rey       Female    297
+ 3 Bloodaxe  Female    218
+ 4 Thundra   Female    218
+ 5 Hela      Female    213
+ 6 Frenzy    Female    211
+ 7 She-Hulk  Female    201
+ 8 Ardina    Female    193
+ 9 Starfire  Female    193
+10 Valkyrie  Female    191
+# … with 724 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="task_dist" class="level2" data-number="24.18">
+<h2 data-number="24.18" class="anchored" data-anchor-id="task_dist"><span class="header-section-number">24.18</span> Уникальные значения: <code>dplyr::distinct()</code></h2>
+<ul>
+<li>Извлеките уникальные значения столбца <code>Eye color</code> из тиббла <code>heroes</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 23 × 1
+   `Eye color`
+   &lt;chr&gt;      
+ 1 yellow     
+ 2 blue       
+ 3 green      
+ 4 brown      
+ 5 &lt;NA&gt;       
+ 6 red        
+ 7 violet     
+ 8 white      
+ 9 purple     
+10 black      
+# … with 13 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Извлеките уникальные значения столбца <code>Hair color</code> из тиббла <code>heroes</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 1
+   `Hair color`
+   &lt;chr&gt;       
+ 1 No Hair     
+ 2 Black       
+ 3 Blond       
+ 4 Brown       
+ 5 &lt;NA&gt;        
+ 6 White       
+ 7 Purple      
+ 8 Orange      
+ 9 Pink        
+10 Red         
+# … with 20 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="task_mutate" class="level2" data-number="24.19">
+<h2 data-number="24.19" class="anchored" data-anchor-id="task_mutate"><span class="header-section-number">24.19</span> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></h2>
+<ul>
+<li>Создайте колонку <code>height_m</code> с ростом супергероев в метрах, затем выберите только колонки <code>name</code> и <code>height_m</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 2
+   name          height_m
+   &lt;chr&gt;            &lt;dbl&gt;
+ 1 A-Bomb            2.03
+ 2 Abe Sapien        1.91
+ 3 Abin Sur          1.85
+ 4 Abomination       2.03
+ 5 Abraxas          NA   
+ 6 Absorbing Man     1.93
+ 7 Adam Monroe      NA   
+ 8 Adam Strange      1.85
+ 9 Agent 13          1.73
+10 Agent Bob         1.78
+# … with 724 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте новою колонку <code>hair</code> в heroes, в которой будет значение <code>"Bold"</code> для тех супергероев, у которых в колонке <code>Hair.color</code> стоит <code>"No Hair"</code>, и значение <code>"Hairy"</code> во всех остальных случаях. Затем выберите только колонки <code>name</code>, <code>Hair color</code>, <code>hair</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 3
+   name          `Hair color` hair 
+   &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;
+ 1 A-Bomb        No Hair      Bold 
+ 2 Abe Sapien    No Hair      Bold 
+ 3 Abin Sur      No Hair      Bold 
+ 4 Abomination   No Hair      Bold 
+ 5 Abraxas       Black        Hairy
+ 6 Absorbing Man No Hair      Bold 
+ 7 Adam Monroe   Blond        Hairy
+ 8 Adam Strange  Blond        Hairy
+ 9 Agent 13      Blond        Hairy
+10 Agent Bob     Brown        Hairy
+# … with 724 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="task_group_by" class="level2" data-number="24.20">
+<h2 data-number="24.20" class="anchored" data-anchor-id="task_group_by"><span class="header-section-number">24.20</span> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></h2>
+<ul>
+<li>Посчитайте количество супергероев по расам и отсортируйте по убыванию. Извлеките первые 5 строк.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  Race              n
+  &lt;chr&gt;         &lt;int&gt;
+1 &lt;NA&gt;            304
+2 Human           208
+3 Mutant           63
+4 God / Eternal    14
+5 Cyborg           11</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте средний пост по полу.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Gender height_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        175.
+2 Male          192.
+3 &lt;NA&gt;          177.</code></pre>
+</div>
+</div>
+</section>
+<section id="task_join" class="level2" data-number="24.21">
+<h2 data-number="24.21" class="anchored" data-anchor-id="task_join"><span class="header-section-number">24.21</span> Соединение датафреймов: *_join</h2>
+<ul>
+<li>Создайте тиббл <code>web_creators</code>, в котором будут супергерои, которые могут плести паутину, т.е. у них стоит <code>TRUE</code> в колонке <code>Web Creation</code> в тиббле <code>powers</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 12
+      X1 name             Gender `Eye color` Race  `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1    33 Anti-Venom       Male   blue        Symb… Blond           229 Marvel C…
+ 2    38 Arachne          Female blue        Human Blond           175 Marvel C…
+ 3   161 Carnage          Male   green       Symb… Red             185 Marvel C…
+ 4   335 Hybrid           Male   brown       Symb… Black           175 Marvel C…
+ 5   479 Mysterio         Male   brown       Human No Hair         180 Marvel C…
+ 6   580 Scarlet Spider … Male   brown       Clone Brown           193 Marvel C…
+ 7   597 Silk             Female brown       Human Black            NA Marvel C…
+ 8   620 Spider-Girl      Female blue        Human Brown           170 Marvel C…
+ 9   621 Spider-Gwen      Female blue        Human Blond           165 Marvel C…
+10   622 Spider-Man       Male   hazel       Human Brown           178 Marvel C…
+11   623 Spider-Man       &lt;NA&gt;   red         Human Brown           178 Marvel C…
+12   624 Spider-Man       Male   brown       Human Black           157 Marvel C…
+13   673 Toxin            Male   blue        Symb… Brown           188 Marvel C…
+14   674 Toxin            Male   black       Symb… Blond           191 Marvel C…
+15   689 Venom            Male   blue        Symb… Strawberry …    191 Marvel C…
+16   692 Venompool        Male   &lt;NA&gt;        Symb… &lt;NA&gt;            226 Marvel C…
+# … with 4 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;,
+#   `Web Creation` &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите всех супергероев, которые присутствуют в <code>heroes</code>, но отсутствуют в <code>powers</code>. Ответом должен быть строковый вектор с именами супергероев.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Agent 13"          "Alfred Pennyworth" "Arsenal"          
+ [4] "Batgirl III"       "Batgirl V"         "Beetle"           
+ [7] "Black Goliath"     "Black Widow II"    "Blaquesmith"      
+[10] "Bolt"              "Boomer"            "Box"              
+[13] "Box III"           "Captain Mar-vell"  "Cat II"           
+[16] "Cecilia Reyes"     "Clea"              "Clock King"       
+[19] "Colin Wagner"      "Colossal Boy"      "Corsair"          
+[22] "Cypher"            "Danny Cooper"      "Darkside"         
+[25] "ERG-1"             "Fixer"             "Franklin Storm"   
+[28] "Giant-Man"         "Giant-Man II"      "Goliath"          
+[31] "Goliath"           "Goliath"           "Guardian"         
+[34] "Hawkwoman"         "Hawkwoman II"      "Hawkwoman III"    
+[37] "Howard the Duck"   "Jack Bauer"        "Jesse Quick"      
+[40] "Jessica Sanders"   "Jigsaw"            "Jyn Erso"         
+[43] "Kid Flash II"      "Kingpin"           "Meteorite"        
+[46] "Mister Zsasz"      "Mogo"              "Moloch"           
+[49] "Morph"             "Nite Owl II"       "Omega Red"        
+[52] "Paul Blart"        "Penance"           "Penance I"        
+[55] "Plastic Lad"       "Power Man"         "Renata Soliz"     
+[58] "Ronin"             "Shrinking Violet"  "Snake-Eyes"       
+[61] "Spider-Carnage"    "Spider-Woman II"   "Stacy X"          
+[64] "Thunderbird II"    "Two-Face"          "Vagabond"         
+[67] "Vision II"         "Vulcan"            "Warbird"          
+[70] "White Queen"       "Wiz Kid"           "Wondra"           
+[73] "Wyatt Wingfoot"    "Yellow Claw"      </code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите всех супергероев, которые присутствуют в <code>powers</code>, но отсутствуют в <code>heroes</code>. Ответом должен быть строковый вектор с именами супергероев.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "3-D Man"           "Bananaman"         "Bizarro-Girl"     
+ [4] "Black Vulcan"      "Blue Streak"       "Bradley"          
+ [7] "Clayface"          "Concrete"          "Dementor"         
+[10] "Doctor Poison"     "Fire"              "Hellgramite"      
+[13] "Lara Croft"        "Little Epic"       "Lord Voldemort"   
+[16] "Orion"             "Peek-a-Boo"        "Queen Hippolyta"  
+[19] "Reactron"          "SHDB"              "Stretch Armstrong"
+[22] "TEST"              "Tommy Clarke"      "Tyrant"           </code></pre>
+</div>
+</div>
+</section>
+<section id="task_pivot" class="level2" data-number="24.22">
+<h2 data-number="24.22" class="anchored" data-anchor-id="task_pivot"><span class="header-section-number">24.22</span> Tidy data</h2>
+<ul>
+<li>Для начала создайте тиббл <code>heroes_weight</code>, скопировав код:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href="#cb200-1" aria-hidden="true" tabindex="-1"></a>heroes_weight <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb200-2"><a href="#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DC Comics"</span>, <span class="st">"Marvel Comics"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb200-3"><a href="#cb200-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender, Publisher) <span class="sc">%&gt;%</span></span>
+<span id="cb200-4"><a href="#cb200-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb200-5"><a href="#cb200-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb200-6"><a href="#cb200-6" aria-hidden="true" tabindex="-1"></a>heroes_weight </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   Gender [2]
+  Gender Publisher     weight_mean
+  &lt;chr&gt;  &lt;chr&gt;               &lt;dbl&gt;
+1 Female DC Comics            76.8
+2 Female Marvel Comics        80.1
+3 Male   DC Comics           113. 
+4 Male   Marvel Comics       134. </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Функция <code>drop_na()</code> позволяет выбросить все строчки, в которых встречается <code>NA</code>.</p>
+</blockquote>
+<ul>
+<li>Превратите тиббл <code>heroes_weight</code> в широкий тиббл:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+# Groups:   Gender [2]
+  Gender `DC Comics` `Marvel Comics`
+  &lt;chr&gt;        &lt;dbl&gt;           &lt;dbl&gt;
+1 Female        76.8            80.1
+2 Male         113.            134. </code></pre>
+</div>
+</div>
+<ul>
+<li>Затем превратите его обратно в длинный тиббл:</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   Gender [2]
+  Gender Publisher     weight_mean
+  &lt;chr&gt;  &lt;chr&gt;               &lt;dbl&gt;
+1 Female DC Comics            76.8
+2 Female Marvel Comics        80.1
+3 Male   DC Comics           113. 
+4 Male   Marvel Comics       134. </code></pre>
+</div>
+</div>
+<ul>
+<li>Сделайте <code>powers</code> длинным тибблом с тремя колонками: <code>hero_names</code>, <code>power</code> (названгие суперсилы) и <code>has</code> (наличие суперсилы у данного супергероя).</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 111,389 × 3
+   hero_names power                 has  
+   &lt;chr&gt;      &lt;chr&gt;                 &lt;lgl&gt;
+ 1 3-D Man    Agility               TRUE 
+ 2 3-D Man    Accelerated Healing   FALSE
+ 3 3-D Man    Lantern Power Ring    FALSE
+ 4 3-D Man    Dimensional Awareness FALSE
+ 5 3-D Man    Cold Resistance       FALSE
+ 6 3-D Man    Durability            FALSE
+ 7 3-D Man    Stealth               FALSE
+ 8 3-D Man    Energy Absorption     FALSE
+ 9 3-D Man    Flight                FALSE
+10 3-D Man    Danger Sense          FALSE
+# … with 111,379 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li>Сделайте тиббл <code>powers</code> обратно широким, но с новой структурой: каждая строчка означает суперсилу, а каждая колонка - супергероя (за исключением первой колонки - названия суперсилы).</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 167 × 668
+   power          `3-D Man` `A-Bomb` `Abe Sapien` `Abin Sur` Abomination Abraxas
+   &lt;chr&gt;          &lt;lgl&gt;     &lt;lgl&gt;    &lt;lgl&gt;        &lt;lgl&gt;      &lt;lgl&gt;       &lt;lgl&gt;  
+ 1 Agility        TRUE      FALSE    TRUE         FALSE      FALSE       FALSE  
+ 2 Accelerated H… FALSE     TRUE     TRUE         FALSE      TRUE        FALSE  
+ 3 Lantern Power… FALSE     FALSE    FALSE        TRUE       FALSE       FALSE  
+ 4 Dimensional A… FALSE     FALSE    FALSE        FALSE      FALSE       TRUE   
+ 5 Cold Resistan… FALSE     FALSE    TRUE         FALSE      FALSE       FALSE  
+ 6 Durability     FALSE     TRUE     TRUE         FALSE      FALSE       FALSE  
+ 7 Stealth        FALSE     FALSE    FALSE        FALSE      FALSE       FALSE  
+ 8 Energy Absorp… FALSE     FALSE    FALSE        FALSE      FALSE       FALSE  
+ 9 Flight         FALSE     FALSE    FALSE        FALSE      FALSE       TRUE   
+10 Danger Sense   FALSE     FALSE    FALSE        FALSE      FALSE       FALSE  
+# … with 157 more rows, and 661 more variables: `Absorbing Man` &lt;lgl&gt;,
+#   `Adam Monroe` &lt;lgl&gt;, `Adam Strange` &lt;lgl&gt;, `Agent Bob` &lt;lgl&gt;,
+#   `Agent Zero` &lt;lgl&gt;, `Air-Walker` &lt;lgl&gt;, Ajax &lt;lgl&gt;, `Alan Scott` &lt;lgl&gt;,
+#   `Alex Mercer` &lt;lgl&gt;, `Alex Woolsly` &lt;lgl&gt;, Alien &lt;lgl&gt;,
+#   `Allan Quatermain` &lt;lgl&gt;, Amazo &lt;lgl&gt;, Ammo &lt;lgl&gt;, `Ando Masahashi` &lt;lgl&gt;,
+#   Angel &lt;lgl&gt;, `Angel Dust` &lt;lgl&gt;, `Angel Salvadore` &lt;lgl&gt;, Angela &lt;lgl&gt;,
+#   `Animal Man` &lt;lgl&gt;, Annihilus &lt;lgl&gt;, `Ant-Man` &lt;lgl&gt;, `Ant-Man II` &lt;lgl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="task_across" class="level2" data-number="24.23">
+<h2 data-number="24.23" class="anchored" data-anchor-id="task_across"><span class="header-section-number">24.23</span> Операции с несколькими колонками: <code>across()</code></h2>
+<ul>
+<li>Посчитайте количество <code>NA</code> в каждой колонке, группируя по полу (<code>Gender</code>).</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 11
+  Gender    X1  name `Eye color`  Race `Hair color` Height Publisher
+  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;       &lt;int&gt; &lt;int&gt;        &lt;int&gt;  &lt;int&gt;     &lt;int&gt;
+1 Female     0     0          41    98           38     56         0
+2 Male       0     0         121   184          123    147         0
+3 &lt;NA&gt;       0     0          10    22           11     14         0
+# … with 3 more variables: `Skin color` &lt;int&gt;, Alignment &lt;int&gt;, Weight &lt;int&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте количество <code>NA</code> в каждой колонке, которая заканчивается на <code>"color"</code>, группируя по полу (<code>Gender</code>).</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  Gender `Eye color` `Hair color` `Skin color`
+  &lt;chr&gt;        &lt;int&gt;        &lt;int&gt;        &lt;int&gt;
+1 Female          41           38          186
+2 Male           121          123          449
+3 &lt;NA&gt;            10           11           27</code></pre>
+</div>
+</div>
+<ul>
+<li>Найдите (первую) самую длинную строчку для каждой колонки с <code>character</code> типом данных, группируя по полу (<code>Gender</code>).</li>
+</ul>
+<blockquote class="blockquote">
+<p>Для расчета количества значений в строке есть функция <code>nchar()</code>, для расчета индекса (первого) максимального значения есть функция <code>which.max()</code>.</p>
+</blockquote>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 8
+  Gender name    `Eye color` Race  `Hair color` Publisher `Skin color` Alignment
+  &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;        &lt;chr&gt;    
+1 Female Negaso… yellow (wi… Huma… Strawberry … Dark Hor… orange       neutral  
+2 Male   Drax t… yellow / r… Dath… Strawberry … Dark Hor… orange / wh… neutral  
+3 &lt;NA&gt;   Captai… yellow (wi… God … Orange / Wh… Marvel C… grey         neutral  </code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте из тиббла <code>heroes</code> новый тиббл, в котором числовые значения <code>Height</code> и <code>Weight</code> заменены на следующие строковые значения: если у супергероя рост или вес выше среднего по колонке, то <code>"выше среднего"</code>, если его/ее рост или вес ниже или равен среднему, то <code>"ниже среднего"</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 11
+      X1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair      выше … Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair      выше … Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair      ниже … DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair      выше … Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black        &lt;NA&gt;   Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair      выше … Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond        &lt;NA&gt;   NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond        ниже … DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond        ниже … Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown        ниже … Marvel C…
+# … with 724 more rows, and 3 more variables: `Skin color` &lt;chr&gt;,
+#   Alignment &lt;chr&gt;, Weight &lt;chr&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Создайте из тиббла <code>heroes</code> новый тиббл, в котором числовые значения <code>Height</code> и <code>Weight</code> заменены на следующие строковые значения: если у супергероя <em>внутри соответствующей группы по полу</em> рост или вес выше среднего по колонке, то <code>"выше среднего по X"</code>, если его/ее рост или вес ниже или равен среднему <em>внутри соответствующей группы по полу</em>, то <code>"ниже среднего по X"</code> , где <em>X</em> – соответствующий пол (<code>Gender</code>).</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 11
+      X1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair      выше … Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair      ниже … Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair      ниже … DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair      выше … Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black        NA по… Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair      выше … Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond        NA по… NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond        ниже … DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond        ниже … Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown        ниже … Marvel C…
+# … with 724 more rows, and 3 more variables: `Skin color` &lt;chr&gt;,
+#   Alignment &lt;chr&gt;, Weight &lt;chr&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="desc_tasks" class="level2" data-number="24.24">
+<h2 data-number="24.24" class="anchored" data-anchor-id="desc_tasks"><span class="header-section-number">24.24</span> Описательная статистика</h2>
+<p>Для выполнения задания создайте вектор <code>height</code> из колонки <code>Height</code> датасета <code>heroes</code>, удалив в нем <code>NA</code>.</p>
+<div class="cell">
+
+</div>
+<ul>
+<li>Посчитайте среднее в векторе <code>height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 186.7263</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте усеченное среднее в векторе <code>height</code> с усечением 5% значений с обоих сторон.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 182.5846</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте медиану в векторе <code>height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 183</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте стандартное отклонение в векторе <code>height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 59.25189</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте межквартильный размах в векторе <code>height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18</code></pre>
+</div>
+</div>
+<ul>
+<li>Посчитайте ассиметрию в векторе <code>height</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.843432</code></pre>
+</div>
+</div>
+<p>Посчитайте эксцесс в векторе <code>height</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 105.0297</code></pre>
+</div>
+</div>
+<p>Примените функции для получения множественных статистик на векторе <code>height</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   15.2   173.0   183.0   186.7   191.0   975.0 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars   n   mean    sd median trimmed   mad  min max range skew kurtosis   se
+X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61</code></pre>
+</div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">height</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">517</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">data</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">186.73</td>
+<td style="text-align: right;">59.25</td>
+<td style="text-align: right;">15.2</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">191</td>
+<td style="text-align: right;">975</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="ggplot2_tasks" class="level2" data-number="24.25">
+<h2 data-number="24.25" class="anchored" data-anchor-id="ggplot2_tasks"><span class="header-section-number">24.25</span> Построение графиков в <code>ggplot2</code></h2>
+<ul>
+<li>Нарисуйте столбиковую диаграмму (<code>geom_bar()</code>), которая будет отражать количество супергероев издателей <code>"Marvel Comics"</code>, <code>"DC Comics"</code> и всех остальных (отдельным столбиком) из датасета <code>heroes</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-372-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Добавьте к этой диаграме заливку цветом (<code>fill =</code>) в зависимости от распределения <code>Gender</code> внутри каждой группы.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-374-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Сделайте так, чтобы каждый столбик был максимальной высоты (<code>position = "fill"</code>).</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-376-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Финализируйте график, задав ему описания осей (например, функция <code>labs()</code>), использовав процентную шкалу (<code>scale_y_continuous(labels = scales::percent)</code>) и задав тему <code>theme_minimal()</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-378-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Создайте диаграмму рассеяния для датасета <code>heroes</code>, для которой координаты по оси <em>x</em> будут взяты из колонки <code>Height</code>, а координаты по оси <em>y</em> – из колонки <code>Weight</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-380-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Удалите с графика все экстремальные значения, для которых <code>Weight</code> больше или равен 700 или <code>Height</code> больше или равен 400. (<em>Подсказка:</em> это можно делать как средствами <code>ggplot2</code>, так и функцией <code>filter()</code> из <code>dplyr</code>).</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-382-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Раскрасьте точки в зависимости от <code>Gender</code>, сделайте их полупрозрачными ( параметр <code>alpha =</code>).</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-384-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Сделайте так, чтобы координатная плоскость имела соотношение 1:1 шкал по оси <em>x</em> и <em>y</em>. Этого можно добиться с помощью функции <code>coord_fixed()</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-386-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Разделите график (<code>facet_wrap()</code>) на три: для <code>"DC Comics"</code>,<code>"Marvel Comics"</code> и всех остальных.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-388-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Используйте для графика тему <code>theme_linedraw()</code>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-390-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><ul>
+<li>Постройте новый график (или возьмите старый) по датасетам <code>heroes</code> и/или <code>powers</code> и сделайте его некрасивым! Чем <em>хуже</em> у вас получится график, тем лучше. Желательно, чтобы этот график был по-прежнему графиком, а не <a href="https://twitter.com/accidental__art?lang=en">произведением абстрактного искусства</a>. Разница очень тонкая, но она есть.</li>
+</ul></li>
+</ul>
+<p>Вот несколько подсказок для этого задания:</p>
+<ol type="1">
+<li><p>Для вдохновения посмотрите на <a href="https://twitter.com/drdrewsteen/status/1172547837046820864">вот эти графики</a>.</p></li>
+<li><p>Для реально плохих графиков вам придется покопаться с настройками темы. Посмотрите подсказку по темам <code>?theme</code>, попытайтесь что-то поменять в теме.</p></li>
+<li><p>Экспериментируйте с разными геомами и необычными их применениями.</p></li>
+<li><p>По изучайте дополнения к <code>gpplot2</code>.</p></li>
+<li><p>Попробуйте подготовить интересные данные для этого графика.</p></li>
+</ol>
+</section>
+<section id="dist_tasks" class="level2" data-number="24.26">
+<h2 data-number="24.26" class="anchored" data-anchor-id="dist_tasks"><span class="header-section-number">24.26</span> Распределения</h2>
+<p>Выберите любое непрерывное распределение из представленных в базовом пакете <code>stats</code> или же в любом другом пакете. Найти все распределения пакета <code>stats</code> можно с помощью <code>?Distributions</code>. Подберите для него какие-нибудь параметры или используйте параметры по умолчанию.</p>
+<blockquote class="blockquote">
+<p>Я возьму F-распределение с параметрами <code>df1 = 4</code> и <code>df = 10</code>, но вы можете выбрать другое распределение.</p>
+</blockquote>
+<ul>
+<li>Визуализируйте функцию плотности вероятности для выбранного распределения.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-392-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Визуализируйте функцию накопленной плотности распределения для выбранной функции.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-394-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Визуализируйте квантильную функцию для выбранного распределения.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-396-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Сделайте выборку из 100 случайных значений из выбранного распределения и постройте гистограмму (функция <code>hist()</code>) для полученной выборки.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-398-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="one_ttest_tasks" class="level2" data-number="24.27">
+<h2 data-number="24.27" class="anchored" data-anchor-id="one_ttest_tasks"><span class="header-section-number">24.27</span> Одновыборочный t-test</h2>
+<ul>
+<li><p>Представьте, что наши супергерои из набора данных <code>heroes</code> – это выборка из генеральной совокупности всех написанных и ненаписанных супергероев. Проведите одновыборочный t-тест для веса супергероев и числа 100 – предположительного среднего веса в генеральной совокупности всех супергероев. Проинтерпретируйте результат.</p></li>
+<li><p>Проведите одновыборочный t-тест для роста супергероев и числа 185 – предположительного среднего роста в генеральной совокупности всех супергероев. Проинтерпретируйте результат.</p></li>
+</ul>
+</section>
+<section id="dep_ttest_tasks" class="level2" data-number="24.28">
+<h2 data-number="24.28" class="anchored" data-anchor-id="dep_ttest_tasks"><span class="header-section-number">24.28</span> Двухвыборочный зависимый t-test</h2>
+<p>Для дальнейших заданий понадобится набор данных о результативности трех диет, который мы использовали во время занятия.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href="#cb220-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Посчитайте двухвыборочный зависимый т-тест для остальных диет: для диеты 2 и диеты 3. Проинтерпретируйте полученные результаты.</li>
+</ul>
+</section>
+<section id="ind_ttest_tasks" class="level2" data-number="24.29">
+<h2 data-number="24.29" class="anchored" data-anchor-id="ind_ttest_tasks"><span class="header-section-number">24.29</span> Двухвыборочный независимый t-test</h2>
+<ul>
+<li><p>Сделайте независимый t-тест для сравнения веса испытуемых двух групп после диеты, сравнив вторую и третью группу. Проинтерпретируйте результаты.</p></li>
+<li><p>Сделайте независимый t-тест для сравнения веса испытуемых двух групп после диеты, сравнив первую и третью группу. Проинтерпретируйте результаты.</p></li>
+</ul>
+</section>
+<section id="nonparam_ttest_tasks" class="level2" data-number="24.30">
+<h2 data-number="24.30" class="anchored" data-anchor-id="nonparam_ttest_tasks"><span class="header-section-number">24.30</span> Непараметрические аналоги t-теста</h2>
+<ul>
+<li><p>Сравните вес первой и второй группы после диеты, используя тест Манна-Уитни. Сравните результаты теста Манна-Уитни с результатами t-теста? Проинтерпретируйте полученные результаты.</p></li>
+<li><p>Повторите задание для второй и третьей группы, а так же для первой и третьей группы.</p></li>
+<li><p>Сравните вес до и после для диеты 1, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</p></li>
+<li><p>Сравните вес до и после для диеты 2 и диеты 3, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</p></li>
+</ul>
+</section>
+<section id="chi_sq_tasks" class="level2" data-number="24.31">
+<h2 data-number="24.31" class="anchored" data-anchor-id="chi_sq_tasks"><span class="header-section-number">24.31</span> Критерий хи-квадрат Пирсона</h2>
+<ul>
+<li><p>Создайте в <code>heroes</code> новую колонку <code>is_human</code> логического типа, в которой будет <code>TRUE</code>, если супергерой принадлежит расе (<code>Race</code>) <code>"Human"</code>, и <code>FALSE</code> в случае если супергерой принадлежит другой расе.</p></li>
+<li><p>Посчитайте долю женщин для <code>"Human"</code> и всех остальных (<code>is_human</code> равен <code>TRUE</code> и <code>FALSE</code> соответственно). Перед этим удалите все строчки с <code>NA</code> в переменных <code>is_human</code> и <code>Gender</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  is_human `mean(Gender == "Female")`
+  &lt;lgl&gt;                         &lt;dbl&gt;
+1 FALSE                         0.241
+2 TRUE                          0.242</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Сравните распределения частот для переменных <code>is_human</code> и <code>Gender</code> используя хи-квадрат Пирсона. Проинтерпретируйте результаты.</p></li>
+<li><p>Постройте мозаичный график для переменных <code>is_human</code> и <code>Gender</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-404-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="backpack_tasks" class="level2" data-number="24.32">
+<h2 data-number="24.32" class="anchored" data-anchor-id="backpack_tasks"><span class="header-section-number">24.32</span> Исследование набора данных Backpack</h2>
+<p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
+<span id="cb222-2"><a href="#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb222-3"><a href="#cb222-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
+<span id="cb222-4"><a href="#cb222-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb222-5"><a href="#cb222-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb222-6"><a href="#cb222-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Как различается вес рюкзака в зависимости от пола? Кто весит больше?</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  Sex    `mean(backpack_kg)`
+  &lt;fct&gt;                &lt;dbl&gt;
+1 Female                5.01
+2 Male                  5.63</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Если допустить, что выборка репрезентативна, то можно ли сделать вывод о различии по среднему весу рюкзаков в генеральной совокупности?</p></li>
+<li><p>Повторите пунктs 2 и 3 для веса самих студентов.</p></li>
+<li><p>Визуализируйте распределение этих двух переменных в зависимости от пола (используя <code>ggplot2</code>)</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-410-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Постройте диаграмму рассеяния с помощью <code>ggplot2</code>. Цветом закодируйте пол респондента.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-412-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="cov_tasks" class="level2" data-number="24.33">
+<h2 data-number="24.33" class="anchored" data-anchor-id="cov_tasks"><span class="header-section-number">24.33</span> Ковариация</h2>
+<ul>
+<li>Посчитайте матрицу ковариаций для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета ковариации этих двух переменных от результатов подсчета ковариаций веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
+</ul>
+</section>
+<section id="cor_tasks" class="level2" data-number="24.34">
+<h2 data-number="24.34" class="anchored" data-anchor-id="cor_tasks"><span class="header-section-number">24.34</span> Коэффициент корреляции</h2>
+<ul>
+<li><p>Посчитайте коэффициент корреляции Пирсона для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета коэффициента корреляции Пирсона (сам коэффициент, p-value) этих двух переменных от результатов подсчета корреляции Пирсона веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</p></li>
+<li><p>Посчитайте коэффициент корреляции Пирсона для веса и роста супергероев из датасета <code>heroes</code>. Проинтерпретируйте результат.</p></li>
+<li><p>Теперь посчитайте коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла для веса и роста супергероев из датасета <code>heroes</code>. Различаются ли результаты по сравнению с коэффициентом корреляции Пирсона? Почему?</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./905-tasks_solutions.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Задачник</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./920-solutions.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Решения заданий</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Анализ данных и статистика в R - 16&nbsp; Статистика вывода</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./320-ttest.html" rel="next">
+<link href="./305-hyp_test.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Анализ данных и статистика в R</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез {whole_nhst}</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link">(PART) Задачник</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">950-references.html</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#infer_intro" id="toc-infer_intro" class="nav-link active" data-scroll-target="#infer_intro"><span class="toc-section-number">16.1</span>  Введение в статистику вывода</a></li>
+  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="toc-section-number">16.2</span>  Распределения</a></li>
+  <li><a href="#estimates" id="toc-estimates" class="nav-link" data-scroll-target="#estimates"><span class="toc-section-number">16.3</span>  Оценки</a></li>
+  <li><a href="#sample_estimate" id="toc-sample_estimate" class="nav-link" data-scroll-target="#sample_estimate"><span class="toc-section-number">16.4</span>  Точечные оценки</a></li>
+  <li><a href="#interval_estimate" id="toc-interval_estimate" class="nav-link" data-scroll-target="#interval_estimate"><span class="toc-section-number">16.5</span>  Интервальные оценки</a></li>
+  <li><a href="#sample_dist" id="toc-sample_dist" class="nav-link" data-scroll-target="#sample_dist"><span class="toc-section-number">16.6</span>  Выборочное распределение</a></li>
+  <li><a href="#nordm_dist_importance" id="toc-nordm_dist_importance" class="nav-link" data-scroll-target="#nordm_dist_importance"><span class="toc-section-number">16.7</span>  Важность нормального распределения</a></li>
+  <li><a href="#clt" id="toc-clt" class="nav-link" data-scroll-target="#clt"><span class="toc-section-number">16.8</span>  Центральная предельная теорема</a></li>
+  <li><a href="#ci_build" id="toc-ci_build" class="nav-link" data-scroll-target="#ci_build"><span class="toc-section-number">16.9</span>  Строим доверительный интервал</a></li>
+  <li><a href="#тестирование-значимости-нулевой-гипотезы-nhst" id="toc-тестирование-значимости-нулевой-гипотезы-nhst" class="nav-link" data-scroll-target="#тестирование-значимости-нулевой-гипотезы-nhst"><span class="toc-section-number">16.10</span>  Тестирование значимости нулевой гипотезы (#nhst)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="infer_stats" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="infer_intro" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="infer_intro"><span class="header-section-number">16.1</span> Введение в статистику вывода</h2>
+<p><strong>Статистика вывода</strong> (inferential statistics) - это основной раздел статистики, связанный уже не с описанием и суммированием имеющихся данных (<strong>описательная статистика</strong>), а с попытками сделать вывод о <strong>генеральной совокупности</strong> (population) на основе имеющихся данных по <strong>выборке</strong>. Короче говоря, статистика вывода - это о том, как выйти за пределы наших данных. Это именно то, зачем мы проводим исследования - мы не можем собрать информацию обо всей генеральной совокупности, но по тому, что имеем (т.е. по нашей выборке), можем попытаться как-то оценить <strong>параметры</strong> распределения в генеральной совокупности.</p>
+<p>Итак, еще раз: генеральной совокупности - параметры (<strong>P</strong>opulation - <strong>P</strong>arameters), а у выборки - статистики (<strong>S</strong>ample - <strong>S</strong>tatistics). Параметры обычно обозначаются греческими буквами: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> (или большими латинскими: <span class="math inline">\(M\)</span>, <span class="math inline">\(S\)</span> ), а статистики - соответствующими латинскими: <span class="math inline">\(m\)</span>, <span class="math inline">\(s\)</span>.</p>
+</section>
+<section id="distributions" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="distributions"><span class="header-section-number">16.2</span> Распределения</h2>
+<p>Случайная переменная (<em>random variable</em>) – это переменная значения которой в зависимости от случая принимают различные значения. Представьте себе машину, которая по требованию выдает какое-то случайное число (или даже несколько). Это и будет случайная переменная. Какие это могут быть значения, какие-то конкретные или любые в каком-то диапазоне? Могут ли какие-то значения выпадать чаще других? Очевидно, случайные переменные могут быть разными в зависимости от закона, который стоит за тем, какие значения она может принимать и с какой частотой. Этот закон называется распределением вероятности.</p>
+<p>Если случайная переменная может принимать только какие-то конкретные значения (например, 3, 10, 0.25 или число пи), то случайная переменная имеет <strong>дискретное распределение</strong>. Если же случайная переменная может принимать любые значения (в каком-то диапазоне или же вообще любые), то такая случайная переменная будет иметь <strong>непрерывное распределение</strong>. По большей части нас будут интересовать именно непрерывные. Хотя для полного их понимания нужен матан (да, именно тот, который calculus), непрерывные распределения довольно интуитивно понятны.</p>
+<p>Может ли случайная переменная принимать значения с разной частотой? Если нет, то речь идет о <strong>равномерном распределении</strong> (<em>uniform distribution</em>). Пример случайной величины с дискретным равномерным распределением – игральный кубик, с вероятностью <span class="math inline">\(\frac{1}{6}\)</span> возвращает одно из значений: 1, 2, 3, 4, 5 или 6. Однако равномерное распределение может быть как дискретным, так и непрерывным.</p>
+<p>Все остальные распределения (кроме равномерного распределения) обозначают, что какие-то значения имеют больший шанс выпадения, чем другие. Разные распределения могут быть описаны с помощью <strong>функций распределения</strong>. В R есть свой набор из трех основных функций для каждого распределения и еще одна функция: генератор случайных чисел из выбранного распределения.</p>
+<p>Вот эти функции:</p>
+<ul>
+<li><code>d*()</code> – <strong>функция вероятности</strong> (<em>probability mass function</em>) для дискретных распределений и <strong>функция плотности вероятности</strong> для непрерывных распределений.</li>
+<li><code>p*()</code> – <strong>функция накопленной плотности распределения</strong> (<em>cumulative distribution function; cdf</em>)</li>
+<li><code>q*()</code> – <strong>квантильная функция</strong> (<em>quantile function</em>), или <strong>обратная функция накопленной плотности распределения</strong> (<em>inverse cumulative distribution function</em>)</li>
+</ul>
+<p>Ну и функция <code>r*()</code> для создания случайных выборок из выбранного распределения.</p>
+<p>Во всех четырех случаях, вместо звездочки нужно поставить название соотвествующего распределения в R. Таким образом, для каждого распределения в R есть четыре функции (с похожими названиями, различающимися первой буквой), и таких семейств функций в базовом R (точнее, во встроенном пакете <code>{stats}</code>) очень много. Вот лишь некоторые из них:</p>
+<p><img src="images/rdists.PNG" class="img-fluid" width="400"></p>
+<p>Скоро мы разберем их все.</p>
+<p>Возьмем, например, нормальное распределение, и разберем на его примере все эти функции: <code>dnorm()</code>, <code>pnorm()</code>, <code>qnorm()</code> и <code>rnorm()</code>.</p>
+<p>Вот формула нормального распределения:</p>
+<p><span class="math display">\[P(x) = \frac{e^{-(x - \mu)^{2}/(2\sigma^{2}) }} {\sigma\sqrt{2\pi}}\]</span></p>
+<p>Для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>. Если же <span class="math inline">\(\mu = 0\)</span>, а <span class="math inline">\(\sigma = 1\)</span>, то такое нормальное распределение называется стандартным. Заметьте, здесь мы говорим о <em>параметрах</em> распределения в генеральной совокупности, а не о статистиках в конкретной выборке, хотя называются они одинаково.</p>
+<p>Я думаю, все видели, как выглядит нормальное распределение. Это та самая “колоколообразная кривая”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p><img src="images/normalstandard.jpg" class="img-fluid" width="400"></p>
+<p>То, что Вы видите на картинке - это так называемая <strong>функция плотности вероятности (probability density function).</strong> Это аналог probability mass function для дискретных величин - распределение вероятности того, что случайная величина имеет данное значение. Довольно очевидно, да? Тогда почему аналогичная функция для непрерывных распределений называется по-другому?</p>
+<p>Дело в том, что вероятность получения конкретного значения для непрерывных величин равна нулю. Это немного необычный момент, но тем не менее: если распределение непрерывно, то получить точно 0,000000000000 с бесконечным количеством нулей после запятой невозможно, даже если среднее распределения равно нулю. Тем не менее, мы можем посчитать вероятность того, что случайное значение окажется в определенном промежутке. Чтобы посчитать эту вероятность, надо посчитать площадь соответствующего участка. Соответсвенно, площадь под всей функцией плотности вероятности равна 1.</p>
+<p>Конечно, функцию плотности можно получить в R - это функции <code>d*()</code>, где <code>*</code> означает соответствующее распределение. Например, функция <code>dnorm()</code> для нормального распределения.</p>
+<p>Функция <code>dnorm()</code> имеет следующие основные параметры: <code>x =</code> - вектор принимаемых значений, среднее и стандартное отклонение (<code>mean =</code> и <code>sd =</code>). В качестве параметров по умолчанию используются 0 для среднего и 1 для стандартного отклонения, то есть стандартное нормальное распределение. Для других распределений параметры будут отличаться (например, вместо <code>mean =</code> и <code>sd =</code> будет параметр <code>df =</code> – “степени совободы”).</p>
+<p>Давайте посмотрим, как работает эта функция, визуализировав результат ее выполнения на вектор от -3 до 3 с небольшим шагом (0.1). С помощью базовой функции <code>plot()</code> мы построим диаграмму рассеяния, где по оси <em>x</em> используем исходный вектор с последвательностью от -3 до 3 с шагом 0.1, а по оси <em>y</em> – результат применения функции <code>dnorm()</code> на исходном векторе. Каждое отдельное значение – это плотность вероятности для конкретного значения <em>x</em>. Поскольку таких значений много, и они находятся близко друг к другу, то практически получается график кривой линии.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>, <span class="fl">0.1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vec,<span class="fu">dnorm</span>(vec))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Вот мы и получили то, что называем стандартным нормальным распределением, точнее, функцию плотности вероятности стандартного нормального распределения.</p>
+<p>Давайте теперь возьмем другое нормальное распределение с другими параметрами. Например, среднее будет равно 100, а стандартное отклонение – 15. Это нормы для шкалы IQ:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>iq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">50</span>,<span class="dv">150</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iq, <span class="fu">dnorm</span>(iq, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Шкала IQ — это вообще очень удобная шкала. Поскольку в измерениях интеллекта нет никаких объективных метрик (сантиметров, градусов, килограммов), с которыми его можно было бы сравнить, то единственная возможность дать какую-то оценку величины интеллекта у человека — сравнить его с интеллектом другого человека, например, по количеству решенных заданий за определенное время. Поэтому шкала IQ так сконструирована, чтобы среднее значение количество решенных заданий обозначалось за 100, а стандартное отклонение за 15. Поэтому по баллу IQ (если используется хороший тест, разумеется) можно понять процент людей, которых респондент опережает по интеллекту, по крайней мере, сравнивая с выборкой, на которой был стандартизирован тест. Примерно так же устроены и другие психологические шкалы.</p>
+</blockquote>
+<p>Следующая функция это <strong>функция накопленной плотности распределения (cumulative distribution function; cdf)</strong> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Это функция очень важная, потому что именно на ней основано тестирование уровня значимости нулевой гипотезы, которым мы будем заниматься в дальнейшем. Она означает вероятность того, что полученное случайное значение из распределения будет меньше искомого или равно ему. Для этого используется функция <code>pnorm()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iq, <span class="fu">pnorm</span>(iq, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Какова вероятность того, что полученное случайное значение IQ будет меньше или равно 100?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+</div>
+<p>А меньше или равно 130?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">130</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9772499</code></pre>
+</div>
+</div>
+<p>Следующая функция — это <strong>квантильная функция (quantile function)</strong>, или <strong>обратная функция накопленной плотности распределения (inverse cumulative distribution function)</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.01</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob, <span class="fu">qnorm</span>(prob, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Обратная функция означает, что если мы применим сначала одну, а потом другую, то (если не берем особо крайних значений) на выходе получим исходные числа <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Квантильная функция возвращает значение, которое по заданной вероятности случайная переменная не будет превышать. Поскольку квантильная функция – это функция от вероятности, квантильная функция определена на отрезке от 0 до 1.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">4</span><span class="sc">:</span><span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -4 -3 -2 -1  0  1  2  3  4</code></pre>
+</div>
+</div>
+<p>Ну и последняя важная функция - это <code>rnorm()</code> - просто генерирует выборку значений из данного распределения заданной длины <code>n =</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>samp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] 120.56438  91.52953 105.44693 109.49294 106.06402  98.40813 122.67283
+  [8]  98.58011 130.27636  99.05929 119.57304 134.29968  79.16709  95.81817
+ [15]  98.00018 109.53926  95.73621  60.15317  63.39300 119.80170  95.40042
+ [22]  73.28037  97.42124 118.22012 128.42790  93.54296  96.14096  73.55255
+ [29] 106.90146  90.40008 106.83175 110.57256 115.52655  90.86610 107.57433
+ [36]  74.24487  88.23311  87.23639  63.78689 100.54184 103.08998  94.58414
+ [43] 111.37245  89.09943  79.47578 106.49227  87.82910 121.66152  93.52831
+ [50] 109.83472 104.82888  88.24242 123.63591 109.64349 101.34641 104.14826
+ [57] 110.18933 101.34749  55.10365 104.27324  94.49148 102.77846 108.72736
+ [64] 120.99605  89.09062 119.53814 105.03772 115.57759 113.81093 110.81317
+ [71]  84.35322  98.64720 109.35277  85.69715  91.85757 108.71495 111.52268
+ [78] 106.95651  86.71336  83.50329 122.69061 103.86882 101.32660  98.18655
+ [85]  82.08507 109.17995  96.74290  97.25865 114.00019 112.32660 120.88175
+ [92]  92.85739 109.75523 120.86666  83.33817  87.08811  83.02392  78.11179
+ [99] 101.19974 109.79807</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><code>set.seed()</code> - это функция, которая позволяет получить нам воспроизводимые результаты при использовании генератора случайных чисел. Короче говоря, если все мы поставим <code>set.seed(42)</code> <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, то одна и та же строчка выдаст нам один и тот же результат на разных компьютерах. Как это вообще возможно, это же случайные числа? Дело в том, что… нет. Они “псевдо-случайные”. На самом деле, используются определенные алгоритмы, чтобы генерировать числа, которые выглядят как случайные. Например, можно брать цифры после запятой в числе пи после, например, 42го знака. Реальные алгоритмы создания псевдо-случайных чисел, конечно, гораздо сложнее, но суть примерно такая. Насколько подобные числа действительно получаются случайными - отдельный сложный математический вопрос. Но для нас этого вполне достаточно.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samp, <span class="at">breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="estimates" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="estimates"><span class="header-section-number">16.3</span> Оценки</h2>
+<p>Самая основа статистики вывода - это <strong>оценки</strong>. Как мы уже знаем, у распределений есть определенные параметры, которые описывают данное распределение.</p>
+<p>Например, для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>.</p>
+<p>Наша цель - как-нибудь оценить эти параметры, потому что обычно мы их не знаем. Допустим, человеческий рост распределен нормально [^isnotnormal]. Какой средний рост в популяции? Какое у него стандартное отклонение? Для этого мы используем разного рода оценки: точечные и интервальные. В качестве оценок параметров часто используются статистики по выборке. Вот здесь легко запутаться, поэтому покажу картинку:<br>
+[^isnotnormal]: На самом деле, “чистое” нормальное распределение, так же как и любое другое “чистое” распределение, в природе встречается достаточно редко. Но довольно многие процессы могут апроксимироваться нормальным распределением благодаря центральной предельной теореме @ref(clt).</p>
+<p><img src="images/InferentialStatistics.GIF" class="img-fluid" width="400"></p>
+</section>
+<section id="sample_estimate" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="sample_estimate"><span class="header-section-number">16.4</span> Точечные оценки</h2>
+<p>Представим, что только что сгенерированные данные с помощью <code>rnorm()</code> - это и есть наша выборка. Перед нами стоит задача оценить IQ популяции по этой выборке. Ну что, давайте попробуем оценить среднее. Здесь все просто и очень очевидно - самой лучшей оценкой среднего в генеральной совокупности будет среднее по выборке.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100.4877</code></pre>
+</div>
+</div>
+<p>Конечно, не совсем точно, но лучше оценки не придумаешь. Что есть, то есть. Чем больше выборка, тем в ближе оценка будет к популяционному среднему. То есть чем больше выборка, тем выше <strong>точность</strong> оценки.</p>
+<p>А что с оценкой стандартного отклонения? Давайте воспользуемся нашей предыдущей формулой.</p>
+<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((samp <span class="sc">-</span> <span class="fu">mean</span>(samp))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">length</span>(samp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.54206</code></pre>
+</div>
+</div>
+<p>В данном случае мы несколько промахнулись вверх, но обычно оценка по этой формуле дает небольшое <strong>смещение</strong> <em>(bias)</em> в меньшую сторону. В отличие от выборочного среднего как оценки среднего в генеральной совокупности, использование выборочного стандартного отклонения по выборке приводит к смещенной оценке! Само по себе это кажется странным, и это нормально. Но этому есть всякие серьезные математические доказательства. Кроме того, есть множество всяких демонстраций, например, <a href="https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/more-standard-deviation/v/simulation-showing-bias-in-sample-variance">от Академии Хана</a>.</p>
+<blockquote class="blockquote">
+<p>Одно из простых объяснений такое: поскольку мы оцениваем стандартное отклонение на основе оценки среднего, среднеквадратичные расстояния счиаются не от реального среднего в генеральной совокупности, а от среднего по выборке, которое немного смещено в ту или иную сторону. Представьте, что так получилось, что в нашей выборке оно оказалось сильно смещено и выборочное среднее получилось около 90 (такое бывает). Это значит, что получилось много довольно низких значений около этого 90, а высчитываться среднеквадратичные разницы будут не от среднего 100 (которое мы не знаем), а от этого 90. Поэтому стандартное отклонение получится сильно меньше, чем должно было получиться.</p>
+</blockquote>
+<p>Чтобы получить <strong>несмещенную (unbiased) оценку</strong> стандартного отклонения или дисперсии, то нам нужно делить не на <span class="math inline">\(n\)</span>, а на <span class="math inline">\(n-1\)</span>.</p>
+<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n-1}\]</span> Заметьте, что именно так делает стандартная функция <code>sd()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((samp <span class="sc">-</span> <span class="fu">mean</span>(samp))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.62035</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.62035</code></pre>
+</div>
+</div>
+<p>Это называется поправкой Бесселя, и она настолько распространена, что именно скорректированное стандартное отклонение обычно называют стандартным отклонением. Поэтому в дальнейшем будет использоваться именно эта формула или же просто функция <code>sd()</code>.</p>
+<p>Таким образом, у оценки есть два критерия качества - ее точность и ее несмещенность.</p>
+</section>
+<section id="interval_estimate" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="interval_estimate"><span class="header-section-number">16.5</span> Интервальные оценки</h2>
+<p>Другой подход к оцениванию параметра распределения в генеральной совокупности заключается в использовании интервалов. Вместо того, чтобы дать одну оценку, которая будет заведома неточна, можно попробовать оценить интервал, в котором находится истинное среднее генеральной совокупности.</p>
+<p>Самая распространенная интервальная оценка называется <strong>доверительным интервалом (confidence interval)</strong>. Цель доверительного интервала - “покрыть” параметр генеральной совокупности с определенной степенью уверенности.</p>
+<p>Например, 95% доверительный интервал или просто <span class="math inline">\(CI95\%\)</span> означает, что примерно в 95% случаев подсчитанный на выборках интервал будет ловить значение параметра в популяции. Например, построив <span class="math inline">\(CI95\%\)</span> по нашей сгенерированной выборке, мы хотим чтобы примерно в 95% случаев выборок, построенных таким способом, этот интервал ловил истинное среднее (в данном случае — 100).</p>
+<p>Для того, чтобы научиться строить такие интервалы, нам нужно разобраться с <strong>выборочным распределение (sampling distribution).</strong></p>
+</section>
+<section id="sample_dist" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="sample_dist"><span class="header-section-number">16.6</span> Выборочное распределение</h2>
+<p>Чтобы разобраться с тем, что стоит за доверительными интервалами и тестированием уровня значимости нулевой гипотезы (короче говоря, с основными инструментами статистики вывода), нам надо разобраться с очень абстрактной концепцией – выборочными распределениями.</p>
+<p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>samplemeans <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Каждая выборка состоит из сотни “испытуемых”, всего таких выборок 1000. По каждой мы посчитали среднее.</p>
+<p>Как распределены эти средние?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samplemeans, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Вот это распределение и есть выборочное распределение средних. Точнее, было бы, если бы мы взяли не 1000 выборок, а бесконечное количество выборок. Так что у нас всего лишь апроксимация. При этом мы могли взять другие статистики, не средние выборок, а, например, медианы или стандартные отклонения выборок. Тогда это были бы выборочные распределения медиан и выборочные распределения стандартных отклонений. Но именно выборочное распределение средних обладает уникальными математическими свойствами, про которые мы скоро узнаем.</p>
+<p>Среднее выборочного распределения средних будет близко к популяционному среднему:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samplemeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 99.93772</code></pre>
+</div>
+</div>
+<p>А вот чему будет равно стандартное отклонение средних?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(samplemeans)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.501392</code></pre>
+</div>
+</div>
+<p>Очень похоже на стандартное отклонение IQ, но в 10 раз меньше. В действительности, стандартное отклонение выборочного распределения средних равно стандартному отклонению в генеральной совокупности, деленному на корень из размера выборки.</p>
+<p><span class="math display">\[\sigma_{\overline{x}}= \frac{\sigma} {\sqrt{n}}\]</span> Как раз это мы и получили: размер нашей выборки - 100, а корень из 100 равен 10.</p>
+<p>Стандартное отклонение выборочного распределения средних (ох, йо) называется еще <strong>стандартной ошибкой или standard error of the mean (s.e.m.).</strong> Именно стандартную ошибку обычно используют на графиках в качестве error bars. Теперь вы знаете как ее посчитать!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>sem</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.5</code></pre>
+</div>
+</div>
+<p>Ну а если мы не знаем стандартного отклонения в генеральной совокупности (что обычно и бывает в жизни), то можем оценить стандартную ошибку среднего с помощью оценки стандартного отклонения, посчитанного на выборке:</p>
+<p><span class="math display">\[s_{\overline{x}}= \frac{s} {\sqrt{n}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.562035</code></pre>
+</div>
+</div>
+<p>Это означает, что стандартная ошибка тем меньше, чем больше выборка. И это довольно логично: чем больше у нас размер выборок, тем меньше будет расброс их средних.</p>
+</section>
+<section id="nordm_dist_importance" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="nordm_dist_importance"><span class="header-section-number">16.7</span> Важность нормального распределения</h2>
+<p>В математике все числа равны, но некоторые все-таки заметно равнее других. Например, есть 0 и 1 - и очевидно, что это очень важные числа. Даже гугл выдает больше страниц по числам 0 и 1, чем по другим числам, например, 8 и 23218974. Не только целые числа могут быть важными. Вот, например, число пи и число Эйлера: они очень часто встречаются в самых разных, подчас неожиданных местах. Например, в тех же формулах распределений. На эти числа завязано очень интересные и важные свойтсва, поэтому такая зацикленность на них неудивительна. Например, число пи связывает радиус круг с длиной его окружности и площадью, поэтому когда перед нами что-то круглое, то и пи появится с большой вероятностью.</p>
+<p>В статистике тоже есть распределения, которые “главнее” других распределений. Есть, например, равномерное распределение. Например, равномерно распределены исходы одного броска кубика.</p>
+<p>Но есть и распределение, которое смело можно называть королем всех распределений - это уже знакомое нам нормальное распределение.</p>
+<p>Нормальное распределение - это что-то в духе единицы из мира распределений. Это не просто одно из распределений, а это фундаментально важная штуковина, которая обладает почти магической силой. И сила эта зовется “Центральная Пределельная Теорема”.</p>
+</section>
+<section id="clt" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="clt"><span class="header-section-number">16.8</span> Центральная предельная теорема</h2>
+<p>Давайте теперь сделаем много выборок не из нормального, а из логнормального распределения. Что-то похожее представляет собой распределение времени реакции на многие задачи (особенно связанные с выбором и когда нужно подумать перед нажатием кнопки). Одна выборка будет распределена примерно так:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rlnorm</span>(<span class="dv">10000</span>), <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Распределение сильно ассиметрично, но его форма примерно понятна.</p>
+<p>А как будут распределены средние многих выборок, взятых из логнормального распределения? Хочется сказать, что так же, но нет!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>many_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rlnorm</span>(<span class="dv">10000</span>)))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(many_means, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Удивительно, но средние по выборкам из логнормального распределения будут выглядеть почти нормально! Более того, для других распределений это тоже будет верно: <strong>согласно центральной предельной теореме <em>(ЦПТ, central limit theorem)</em>, какой бы ни была форма распределения в генеральной совокупности, выборочное распределение средних будет стремиться к нормальному. При этом чем больше размер выборки, тем ближе выборочное распределение средних будет к нормальному.</strong> Это очень важная фишка, на которой основаны многие статистические тесты.</p>
+<p><img src="images/IllustrationCentralTheorem.png" class="img-fluid" width="400"></p>
+<p>Не верите? Попробуйте сами! Можете поиграться с разными распределениями с помощью кода (можете посмотреть другие распределения в хэлпе: <code>?Distributions</code> ).</p>
+<p>Можете поиграться с интерактивной <a href="https://gallery.shinyapps.io/CLT_mean/">Shiny-демонстрацией магии ЦПТ</a>. Я очень и очень рекомендую поиграться с ней. Попробуйте разные значения, посмотрите что будет.</p>
+<p>Как только наиграетесь, то сразу станет понятно, почему именно нормальное распределение занимает такое важное место в статистике.</p>
+<blockquote class="blockquote">
+<p>Если выходить за рамки выборочного распределения средних, то центральная предельная теорема говорит нам о том, что сумма слабо зависящих случайных величин, имеющих примерно одинаковое влияние, имеет распределение близкое к нормальному. Например, рост является следствием большого количества генетических и средовых факторов, поэтому он распределен примерно нормально. Однако это нормальное распределение портят такие факторы как пол — он вносит очень сильный вклад в рост, поэтому распределение становится немного “двугорбым”.</p>
+</blockquote>
+</section>
+<section id="ci_build" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="ci_build"><span class="header-section-number">16.9</span> Строим доверительный интервал</h2>
+<p>Теперь мы знаем достаточно, чтобы построить доверительный интервал своими руками на основе стандартной ошибки. Мы построим самый стандартный вариант - 95% доверительный интервал.</p>
+<p>Давайте еще раз посмотрим на нормальное распределение.</p>
+<p><img src="images/normalstandard.jpg" class="img-fluid" width="400"></p>
+<p>Мы хотим поймать симметрично 95% от площади под кривой. Для этого нам нужно отбросить по 2.5% с обоих сторон. Эти 2.5% соответствуют примерно двум стандартным отклонениям от среднего. Если быть точнее, то 1.96. Если быть еще точнее:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+</div>
+<p>Почему 0.975? Потому что мы смотрим квантильную функцию по верхней границе: отсекаем правые 0.025:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>)<span class="sc">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.959964</code></pre>
+</div>
+</div>
+<p>Давайте сохраним это число. Назовем его <code>zcr</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>zcr <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>)<span class="sc">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Это количество стандартных отклонений от среднего в нормальном распределении, которое включает в себя ровно 95% площади нормального распределения. Теперь давайте посчитаем стандартную ошибку. Здесь мы знаем стандартное отклонение в генеральной совокупности (это 15), его поделим на корень из размера выборки:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Чтобы посчитать нижнюю и верхнюю границы доверительного интервала, нам нужно вычесть и прибавить соответственно нужное количество стандартных ошибок:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samp) <span class="sc">-</span> sem<span class="sc">*</span>zcr <span class="co">#нижняя граница</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 97.54778</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samp) <span class="sc">+</span> sem<span class="sc">*</span>zcr <span class="co">#верхняя граница</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103.4277</code></pre>
+</div>
+</div>
+<p>Давайте теперь нарисуем сотню доверительных интервалов с помощью <code>ggplot2</code>! Цветом обозначим интервалы, которые не поймали истинное значение параметра в центральной совокупности.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.8
+✓ tidyr   1.2.0     ✓ stringr 1.4.0
+✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>sample_size <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>ci_simulations <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">m =</span> <span class="fu">replicate</span>(sample_size, <span class="fu">mean</span>(<span class="fu">rnorm</span>(sample_size, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))),</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">se =</span> <span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(sample_size),</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower =</span> m <span class="sc">-</span> se<span class="sc">*</span>zcr,</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">higher =</span> m <span class="sc">+</span> se<span class="sc">*</span>zcr,</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">parameter_inside =</span> lower<span class="sc">&lt;</span><span class="dv">100</span> <span class="sc">&amp;</span> higher<span class="sc">&gt;</span><span class="dv">100</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>many_ci_gg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> ci_simulations, <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span>sample_size,<span class="at">y =</span> m)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower,<span class="at">ymax =</span> higher,<span class="at">colour =</span> parameter_inside))<span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">100</span>)<span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>many_ci_gg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="310-infer_stats_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Примерно 5% не ловят 100 в 95% доверительный интервал! Примерно это и означает доверительный интервал: где-то в 95% он ловит параметр в генеральной совокупности, а в 5% - нет.</p>
+<blockquote class="blockquote">
+<p>Понятие доверительного интервала вызывает кучу недопонимания и ошибок. Очень многие его интерпретируют, например, как интервал, включающий в себя 95% значений популяции, но это неправильно.</p>
+</blockquote>
+<p>Еще я советую посмотреть вот эту визуализацию:</p>
+<p><a href="http://rpsychologist.com/d3/CI/">Доверительные интервалы сыпятся как из мешка</a></p>
+</section>
+<section id="тестирование-значимости-нулевой-гипотезы-nhst" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="тестирование-значимости-нулевой-гипотезы-nhst"><span class="header-section-number">16.10</span> Тестирование значимости нулевой гипотезы (#nhst)</h2>
+<p><strong>Тестирование значимости нулевой гипотезы (null hypothesis significance testing)</strong> — это основной подход в статистике вывода. Вы про него точно слышали (хотя, возможно, не знали, что он так называется), потому что де-факто он является стандартом в психологии, биологии, медицине и многих других науках.</p>
+<p>Мы сейчас детально его проведем на примере одного из самых простых статистических тестов - z-тестов. Однако та же самая логика стоит и за остальными статистическими тестами.</p>
+<p><strong>1. Формулирование нулевой и альтернативной гипотезы.</strong></p>
+<p>Сначала мы задаем две гипотезы о параметрах распределения. Одна из них называется нулевой: она обычно включает положение о том, что различий или связи нет или что это различие/связь равно определенному числу. Если мы хотим применить тестирование значимости к нашей “выборке”, то нулевую гипотезу можно будет сформулировать так: <span class="math display">\[H_0: \mu = 100\]</span>. Альтернативная или ненулевая гипотеза либо говорит о том, что среднее в генеральной совокупности на самом деле не равно какому-то конкретному числу (в нашем случае — 100) или что две выборки взяты из групп с различным средним и т.п.</p>
+<p><span class="math display">\[H_1: \mu \ne 100\]</span></p>
+<p>Тестирование нулевой гипотезы предполагает подсчет какой-то статистики, а потом вычисление того, какова вероятность получить такой или более радикальный результат при условии, что верна нулевая гипотеза.</p>
+<p>Заметьте, мы формулируем гипотезу не про <em>статистики</em> в выборке, а про <em>параметры</em> в генеральной совокупности, поэтому пользуемся греческими (или большими латинскими) буквами.</p>
+<p>Вся дальнейшая логика расчетов будет строиться именно на нулевой гипотезе: мы будем пытаться понять, насколько реалистичны наши результаты при верности нулевой гипотезы, которую мы заранее обозначили. Это похоже на “доказательство от обратного” в геометрии: мы исходим из того, что эффекта не существует и пытаемся прийти к противоречию с данными, чтобы отбросить эту нулевую гипотезу и принять альтернативную гипотезу.</p>
+<p><strong>2. Подсчет тестовой статистики по выборке</strong></p>
+<p>Следующий этап тестирования значимости нулевой гипотезы — подсчет тестовой статистики. Тестовые статистики по своей сути не отличаются от описательных статистик, с которыми мы уже познакомились, но имеют другую функцию. Как и в случае описательных статистик, мы пытаемся выразить информацию о выборке в виде одного числа, но делаем это для того, чтобы сравнить это значение с другими <em>возможными</em> значениями, которые мы могли бы получить, если бы наша нулевая гипотеза была верна.</p>
+<p>Если мы знаем стандартное отклонение в генеральной совокупности, то можем посчитать <span class="math inline">\(z\)</span>-статистику по формуле:</p>
+<p><span class="math display">\[z = \frac{\overline{x} - \mu} {\sigma / \sqrt{N}} \]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (m <span class="sc">-</span> <span class="dv">100</span>)<span class="sc">/</span>sem</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3251482</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(z\)</span>-статистика — это выборочное среднее, из которого вычтено среднее в генеральной совокупносности согласно нашей гипотезе. Получившуюся разницу мы делим на стандартную ошибку.</p>
+<p><strong>3. Расчет p-value</strong></p>
+<p>И вот мы подобрались к самому важному этапу – расчет <strong>p-value</strong>. p-value – это вероятность получить такую и более отклоняющуюся тестовую статистику при условии верности нулевой гипотезы. Очень важно понять, как именно оно расчитывается, потому что на этом основывается сама идея тестирования значимости нулевой гипотезы! Для этого нам нужно вернуться к идее выборочного распределения, только теперь уже не среднего, а <span class="math inline">\(z\)</span>-статистики. Впрочем, выглядеть оно будет абсолютно так же – нормально! Благодаря тому, что мы вычли среднее и поделили на стандартное отклонение, среднее этого нормального распределения будет равно 0, а стандартное отклонение – 1. То есть перед нами снова стандартное нормальное распределение.</p>
+<p>Благодаря ЦПТ, даже если распределение в генеральной совокупности несколько отличается от нормального, а выборка достаточно большая, то выборочное распределение z-статистик при верности нулевой гипотезы будет (примерно) нормальным.</p>
+<p>Теперь нам нужно соотнести нашу <span class="math inline">\(z\)</span>-статистику с теоретическим выборочным распределением <span class="math inline">\(z\)</span>-статистик. Это позволит нам оценить вероятность получить такие и более отличающиеся результаты при допущении верности нулевой гипотезы, т.е. p-value.</p>
+<p>Какая вероятность получить <span class="math inline">\(z\)</span>-статистику 0.3251482, если на самом деле нулевая гипотеза верна? Это вопрос с подвохом: как мы выяснили ранее, для непрерывных распределений вероятность получить отдельное число равна 0. Но мы можем посчитать, какая вероятность получить такую же или большую <span class="math inline">\(z\)</span>-статистику!</p>
+<p>Графически эту вероятность можно представить как площадь под кривой функции плотности распределения от полученной <span class="math inline">\(z\)</span>-статистики до плюс бесконечности или от минус бесконечности до полученной <span class="math inline">\(z\)</span>-статистики, если <span class="math inline">\(z\)</span>-статистика отрицательная.</p>
+<p><img src="images/explanationsPValue.png" class="img-fluid" width="400"> Или же можем воспользоваться функцией накопленной плотности распределения. Для нормального распределения это можно сделать с помощью уже знакомой нам функции <code>pnorm()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6274655</code></pre>
+</div>
+</div>
+<p><code>pnorm()</code> считает от минус бесконечности до заданного числа, а нам нужно наоборот — от заданного числа до плюс бесконечности, потому что <span class="math inline">\(z\)</span> отличается от 0 в большую сторону. Этого можно добиться вычетанием из 1 <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3725345</code></pre>
+</div>
+</div>
+<p>Обычно это число еще и умножают на 2, потому что мы заранее не знаем, в какую сторону будет отклоняться среднее по нашей выборке. Вернемся к шагу 1: мы сформулировали ненулевую гипотезу таким образом, что среднее генеральной совокупности не равно 100:</p>
+<p><span class="math display">\[H_1: \mu \ne 100\]</span></p>
+<p>Это означает, что <span class="math inline">\(H_1\)</span> включает в себя как случаи, когда среднее отклоняется в большую сторону, так и случаи когда среднее отклоняется в меньшую сторону.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z))<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7450689</code></pre>
+</div>
+</div>
+<p>Вот эта число и есть <strong>p-value — вероятность получения такого же и более экстремального значения тестовой статистики при условии, что нулевая гипотеза верна.</strong></p>
+<p><strong>4. Принятие решения о гипотезах</strong></p>
+<p>Отлично, мы посчитали <em>p-value</em>. В данном конкретном случае он оказался равен 0.7450689. Это много или мало? Фактически это означает, что если нулевая гипотеза верна, то в большинстве случаев мы будем получать z-статистики больше нашей. Короче говоря, это вполне реалистичный случай, если нулевая гипотеза верна.</p>
+<p>Значит ли это, что нулевая гипотеза верна? Нет, не значит. При тестировании значимости нулевой гипотезы мы в принципе ничего не можем сказать про верность альтернативной гипотезы. Например, возможно, настоящее среднее в генеральной совокупности, из которой мы взяли выборку, очень мало отличается от 100.</p>
+<p>Поэтому если <em>p-value</em> достаточно большой, мы не можем сделать выводов про верность нулевой и альтернативной гипотезы. Мы можем лишь сказать, что у нас нет оснований отклонить нулевую гипотезу.</p>
+<p>Если же <em>p-value</em> очень маленький, то здесь у нас появляется больше однозначности. Например, если <em>p-value</em> равен .02, мы можем сказать, что ситуация малореалистичная: такие и более сильные отклонения от среднего мы можем получить только раз в 50 случаев, если <span class="math inline">\(H_0\)</span> верна. Поэтому мы отклоняем <span class="math inline">\(H_0\)</span> и принимаем <span class="math inline">\(H_1\)</span>.</p>
+<p>Насколько маленьким должен быть <em>p-value</em>, чтобы отклонить нулевую гипотезу? <strong>Критическое значение <em>p-value</em>, при котором отклоняют нулевую гипотезу, называется уровнем</strong> <span class="math inline">\(\alpha\)</span>. Это максимальный уровень ошибки, который мы допускаем в исследовании.</p>
+<p>Так получилось исторически, что стандартный уровень <span class="math inline">\(\alpha\)</span> равен .05. Нужно помнить, что .05 — это просто общепринятая условность, за этим числом не стоит никакого сакрального знания. Просто так получилось.</p>
+<p>Очевидно, что такой статистический подход к принятию решений будет периодически приводить к нас ошибкам. Если <span class="math inline">\(H_0\)</span> на самом деле верна, а мы ее отвергли и приняли <span class="math inline">\(H_1\)</span>, то это <strong>ошибка первого рода</strong> (<em>type I error</em>). Вероятность этой ошибки и есть наше критическое значение <span class="math inline">\(\alpha\)</span>. Однако есть вероятность ошибиться и в другую сторону, т.е. ошибочно не отклонить <span class="math inline">\(H_0\)</span> — это <strong>ошибка второго рода</strong> (<em>type II error</em>), эта вероятность обозначается буквой <span class="math inline">\(\beta\)</span>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Принятое решение &nbsp;Реальность</th>
+<th><span class="math inline">\(H_0\)</span> верна</th>
+<th><span class="math inline">\(H_1\)</span> верна</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Не отклоняем <span class="math inline">\(H_0\)</span></td>
+<td>Верный пропуск</td>
+<td>Ошибка 2 рода (type II error)</td>
+</tr>
+<tr class="even">
+<td>Отклоняем <span class="math inline">\(H_0\)</span></td>
+<td>Ошибка 1 рода (type I error)</td>
+<td>Верное попадание</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Если распределение имеет колоколообразнуюю форму, то это еще не значит, что оно нормальное. Есть очень много похожих по форме распределений, которые, тем не менее, значительно отличаются от нормального, в том числе своими свойствами. Например, распределение Коши тоже внешне похоже на колокол, но у него нет среднего и стандартного отклонения!<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Иногда эта функция называется <em>интегральной функцией вероятности</em>, а иногда просто <em>функцией вероятности.</em> Последний вариант может запутать, потому что часто под функцией вероятности подразумевают функцию плотности вероятности.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Если мы возьмем достаточно большие значения, то этот трюк не сработает, что свзязано с тем, что числа дробные числа в компьютерах хранятся с ограниченной точностью.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>А почему именно 42? Ну, можно брать любое число, которое Вам нравится. А 42 - это <a href="https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%B2%D0%B5%D1%82_%D0%BD%D0%B0_%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B9_%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8,_%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D0%B8_%D0%B2%D1%81%D0%B5%D0%B3%D0%BE_%D1%82%D0%B0%D0%BA%D0%BE%D0%B3%D0%BE">ответ на главный вопрос жизни, вселенной и всего такого</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Конечно, на практике никто не будет собирать тысячу выборок. Но нам важно понимать, чтобы было, если бы мы повторяли один и тот же эксперимент в одинаковых условиях, даже если это и невозможно сделать. Это позволит нам понять, какие выводы мы можем сделать на основе тех данных, что мы имеем на самом деле.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>или же можно поставить параметру <code>lower.tail =</code> функции <code>pnorm()</code> значение <code>FALSE</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./305-hyp_test.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Тестирование статистических гипотез {whole_nhst}</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./320-ttest.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">t-тест</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

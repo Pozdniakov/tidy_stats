@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>tidy_stats2 - 4&nbsp; Продвинутый tidyverse</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./210-desc_stats.html" rel="next">
+<link href="./110-tidyverse_basic.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">tidy_stats2</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">(PART) Tidyverse</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">(PART) Разведочный анализ и создание отчетов</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tidy_several" id="toc-tidy_several" class="nav-link active" data-scroll-target="#tidy_several"><span class="toc-section-number">4.1</span>  Объединение нескольких датафреймов</a>
+  <ul class="collapse">
+  <li><a href="#tidy_bind" id="toc-tidy_bind" class="nav-link" data-scroll-target="#tidy_bind"><span class="toc-section-number">4.1.1</span>  Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
+  <li><a href="#tidy_join" id="toc-tidy_join" class="nav-link" data-scroll-target="#tidy_join"><span class="toc-section-number">4.1.2</span>  Реляционные данные: <code>*_join()</code></a></li>
+  </ul></li>
+  <li><a href="#tidy_data" id="toc-tidy_data" class="nav-link" data-scroll-target="#tidy_data"><span class="toc-section-number">4.2</span>  Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
+  <li><a href="#трансформация-нескольких-колонок-dplyracross" id="toc-трансформация-нескольких-колонок-dplyracross" class="nav-link" data-scroll-target="#трансформация-нескольких-колонок-dplyracross"><span class="toc-section-number">4.3</span>  Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
+  <li><a href="#purrr" id="toc-purrr" class="nav-link" data-scroll-target="#purrr"><span class="toc-section-number">4.4</span>  Функциональное программирование: <code>purrr</code></a></li>
+  <li><a href="#list_colums_nest" id="toc-list_colums_nest" class="nav-link" data-scroll-target="#list_colums_nest"><span class="toc-section-number">4.5</span>  Колонки-списки и нестинг: <code>nest()</code></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="tidyverse_advanced" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="tidy_several" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="tidy_several"><span class="header-section-number">4.1</span> Объединение нескольких датафреймов</h2>
+<section id="tidy_bind" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="tidy_bind"><span class="header-section-number">4.1.1</span> Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</h3>
+<p>Для начала подключим <code>tidyverse</code> и возьмем уже знакомый нам датасет про супергероев:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.8
+✓ tidyr   1.2.0     ✓ stringr 1.4.0
+✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Missing column names filled in: 'X1' [1]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  X1 = col_double(),
+  name = col_character(),
+  Gender = col_character(),
+  `Eye color` = col_character(),
+  Race = col_character(),
+  `Hair color` = col_character(),
+  Height = col_double(),
+  Publisher = col_character(),
+  `Skin color` = col_character(),
+  Alignment = col_character(),
+  Weight = col_double()
+)</code></pre>
+</div>
+</div>
+<p>Теперь создадим следующие тибблы и сохраним их как <code>dc</code>, <code>marvel</code> и <code>other_publishers</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">==</span> <span class="st">"DC Comics"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>dc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Gender weight_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        76.8
+2 Male         113. 
+3 &lt;NA&gt;         NaN  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>marvel <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">==</span> <span class="st">"Marvel Comics"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>marvel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Gender weight_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        80.1
+2 Male         134. 
+3 &lt;NA&gt;         129. </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>other_publishers <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DC Comics"</span>,<span class="st">"Marvel Comics"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>other_publishers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Gender weight_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        70.8
+2 Male         111. 
+3 &lt;NA&gt;         NaN  </code></pre>
+</div>
+</div>
+<p>Несколько тибблов можно объединить вертикально с помощью функции <code>bind_rows()</code>. Для корректного объединения тибблы должны иметь одинаковые названия колонок.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(dc, marvel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  Gender weight_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        76.8
+2 Male         113. 
+3 &lt;NA&gt;         NaN  
+4 Female        80.1
+5 Male         134. 
+6 &lt;NA&gt;         129. </code></pre>
+</div>
+</div>
+<p>Чтобы соединить тибблы горизонтально, воспользуйтесь функцией <code>bind_cols()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_cols</span>(dc, marvel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `Gender` -&gt; `Gender...1`
+• `weight_mean` -&gt; `weight_mean...2`
+• `Gender` -&gt; `Gender...3`
+• `weight_mean` -&gt; `weight_mean...4`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  Gender...1 weight_mean...2 Gender...3 weight_mean...4
+  &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;                &lt;dbl&gt;
+1 Female                76.8 Female                80.1
+2 Male                 113.  Male                 134. 
+3 &lt;NA&gt;                 NaN   &lt;NA&gt;                 129. </code></pre>
+</div>
+</div>
+<p>Функции <code>bind_rows()</code> и <code>bind_cols()</code> могут работать не только с двумя, но сразу с несколькими датафреймами.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(dc, marvel, other_publishers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  Gender weight_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        76.8
+2 Male         113. 
+3 &lt;NA&gt;         NaN  
+4 Female        80.1
+5 Male         134. 
+6 &lt;NA&gt;         129. 
+7 Female        70.8
+8 Male         111. 
+9 &lt;NA&gt;         NaN  </code></pre>
+</div>
+</div>
+<p>На входе в функции <code>bind_rows()</code> и <code>bind_cold()</code> можно подавать как сами датафреймы или тибблы через запятую, так и список из датафреймов/тибблов.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>heroes_list_of_df <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">DC =</span> dc, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Marvel =</span> marvel, </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Other =</span> other_publishers)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(heroes_list_of_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  Gender weight_mean
+  &lt;chr&gt;        &lt;dbl&gt;
+1 Female        76.8
+2 Male         113. 
+3 &lt;NA&gt;         NaN  
+4 Female        80.1
+5 Male         134. 
+6 &lt;NA&gt;         129. 
+7 Female        70.8
+8 Male         111. 
+9 &lt;NA&gt;         NaN  </code></pre>
+</div>
+</div>
+<p>Чтобы не потерять, из какого датафрейма какие данные, можно указать любое строковое значение (название будущей колонки) для необязательного аргумента <code>.id =</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(heroes_list_of_df, <span class="at">.id =</span> <span class="st">"Publisher"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  Publisher Gender weight_mean
+  &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;
+1 DC        Female        76.8
+2 DC        Male         113. 
+3 DC        &lt;NA&gt;         NaN  
+4 Marvel    Female        80.1
+5 Marvel    Male         134. 
+6 Marvel    &lt;NA&gt;         129. 
+7 Other     Female        70.8
+8 Other     Male         111. 
+9 Other     &lt;NA&gt;         NaN  </code></pre>
+</div>
+</div>
+<p><code>bind_rows()</code> обычно используется, когда ваши данные находятся в разных файлах с одинаковой структурой. Тогда вы можете прочитать все таблицы в папке, сохранить их в качестве списка из датафреймов и объединить в один датафрейм с помощью <code>bind_rows()</code>.</p>
+</section>
+<section id="tidy_join" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="tidy_join"><span class="header-section-number">4.1.2</span> Реляционные данные: <code>*_join()</code></h3>
+<p>В реальности иногда возникает ситуация, когда нужно соединить две таблички, у которых есть общий столбец (или несколько столбцов), но все остальные столбцы различаются. Табличек может быть и больше, это может быть целая сеть таблиц, некоторые из которых содержат основные данные, а некоторые - дополнительные, которые необходимо на определенном этапе “включить” в анализ. Например, таблица с расшифровкой аббревиатур или сокращений вроде коротких названий стран или таблица телефонных кодов разных стран. Совокупность нескольких связанных друг с другом таблиц называют реляционными данными.</p>
+<p>В случае с реляционными данными простых <code>bind_rows()</code> и <code>bind_cols()</code> становится недостаточно.</p>
+<p>Эти две таблички нужно объединить (<em>join</em>). Эта задача обычно возникает не очень часто, обычно это происходит один-два раза в одном проекте, когда нужно дополнить имеющиеся данные дополнительной информацией извне или объединить два набора данных, обрабатывавшихся в разных программах. Всякий раз, когда такая задача возникает, это доставляет много боли. <code>dplyr</code> предлагает интуитивно понятный инструмент для объединения реляционных данных - семейство функций <code>*_join()</code>.</p>
+<p>Возьмем для примера два тиббла <code>band_members</code> и <code>band_instruments</code>, встроенных в <code>dplyr</code> специально для демонстрации работы функций <code>*_join()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>band_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 Mick  Stones 
+2 John  Beatles
+3 Paul  Beatles</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>band_instruments</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name  plays 
+  &lt;chr&gt; &lt;chr&gt; 
+1 John  guitar
+2 Paul  bass  
+3 Keith guitar</code></pre>
+</div>
+</div>
+<p>У этих двух тибблов есть колонка с одинаковым названием, которая по своему смыслу соединяет данные обоих тибблов. Такая колонка называется <strong>ключом</strong>. Ключ должен однозначно идентифицировать наблюдения<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Давайте попробуем посоединять <code>band_members</code> и <code>band_instruments</code> разными вариантами <code>*_join()</code> и посмотрим, что у нас получится. Все эти функции имеют на входе два обязательных аргумента (<code>x =</code> и <code>y =</code>) в которые мы должны подставить два датафрейма/тиббла которые мы хотим объединить. Главное различие между этими функциями заключается в том, что они будут делать, если уникальные значения в ключах <code>x</code> и <code>y</code> не соответствуют друг другу.</p>
+<p><img src="images/joins.png" class="img-fluid" width="400"></p>
+<ul>
+<li><code>left_join()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "name"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+<p><code>left_join()</code> - это самая простая для понимания и самая используемая функция из семейства <code>*_join()</code>. Она как бы “дополняет” информацию из первого тиббла вторым тибблом. В этом случае сохраняются все уникальные наблюдения в <code>x</code>, но отбрасываются лишние наблюдения в тиббле <code>y</code>. Тем значениям, которым не нашлось соотвествия в <code>y</code>, в колонках, взятых их <code>y</code>, ставятся значения <code>NA</code>.</p>
+<p>Вы можете сами задать колонки-ключи параметром <code>by =</code>, по умолчанию это все колонки с одинаковыми названиями в двух тибблах.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(band_instruments, <span class="at">by =</span> <span class="st">"name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+<p>Часто случается, что колонки-ключи называются по-разному в двух тибблах. Их необязательно переименовывать, можно поставить соответстие вручную используя проименованный вектор:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(band_instruments2, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span> <span class="ot">=</span> <span class="st">"artist"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+<ul>
+<li><code>right_join()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "name"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 John  Beatles guitar
+2 Paul  Beatles bass  
+3 Keith &lt;NA&gt;    guitar</code></pre>
+</div>
+</div>
+<p><code>right_join()</code> отбрасывает строчки в <code>x</code>, которых не было в <code>y</code>, но сохраняет соответствующие строчки <code>y</code> - <code>left_join()</code> наоборот.</p>
+<ul>
+<li><code>full_join()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "name"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 Mick  Stones  &lt;NA&gt;  
+2 John  Beatles guitar
+3 Paul  Beatles bass  
+4 Keith &lt;NA&gt;    guitar</code></pre>
+</div>
+</div>
+<p>Функция <code>full_join()</code> сохраняет все строчки и из <code>x</code> и <code>y</code>. Пожалуй, наиболее используемая функция после <code>left_join()</code> — благодаря <code>full_join()</code> вы точно ничего не потеряете при объединении.</p>
+<ul>
+<li><code>inner_join()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "name"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  name  band    plays 
+  &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+1 John  Beatles guitar
+2 Paul  Beatles bass  </code></pre>
+</div>
+</div>
+<p>Функция <code>full_join()</code> сохраняет только строчки, которые присутствуют и в <code>x</code>, и в <code>y</code>.</p>
+<ul>
+<li><code>semi_join()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "name"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  name  band   
+  &lt;chr&gt; &lt;chr&gt;  
+1 John  Beatles
+2 Paul  Beatles</code></pre>
+</div>
+</div>
+<ul>
+<li><code>anti_join()</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>band_members <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(band_instruments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining, by = "name"</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  name  band  
+  &lt;chr&gt; &lt;chr&gt; 
+1 Mick  Stones</code></pre>
+</div>
+</div>
+<p>Функции <code>semi_join()</code> и <code>anti_join()</code> не присоединяют второй датафрейм/тиббл (<code>y</code>) к первому. Вместо этого они используются как некоторый словарь-фильтр для отделения только тех значений в <code>x</code>, которые есть в <code>y</code> (<code>semi_join()</code>) или, наоборот, которых нет в <code>y</code> (<code>anti_join()</code>).</p>
+</section>
+</section>
+<section id="tidy_data" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="tidy_data"><span class="header-section-number">4.2</span> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></h2>
+<p>Принцип tidy data предполагает, что каждая строчка содержит в себе одно измерение, а каждая колонка - одну характеристику. Тем не менее, это не говорит однозначно о том, как именно хранить повторные измерения. Их можно хранить как одну колонку для каждого измерения (широкий формат) и как две колонки: одна колонка - для идентификатора измерения, другая колонка - для записи самого измерения.</p>
+<p>Это лучше понять на примере. Например, вес до и после прохождения курса. Как это лучше записать - как два числовых столбца (один испытуемый - одна строка) или же создать отдельную “группирующую” колонку, в которой будет написано время измерения, а в другой - измеренные значения (одно измерение - одна строка)?</p>
+<ul>
+<li><strong>Широкий формат:</strong></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Студент</th>
+<th>До курса по R</th>
+<th>После курса по R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Маша</td>
+<td>70</td>
+<td>63</td>
+</tr>
+<tr class="even">
+<td>Рома</td>
+<td>80</td>
+<td>74</td>
+</tr>
+<tr class="odd">
+<td>Антонина</td>
+<td>86</td>
+<td>71</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Длинный” формат:</strong></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Студент</th>
+<th>Время измерения</th>
+<th>Масса (кг)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Маша</td>
+<td>До курса по R</td>
+<td>70</td>
+</tr>
+<tr class="even">
+<td>Рома</td>
+<td>До курса по R</td>
+<td>80</td>
+</tr>
+<tr class="odd">
+<td>Антонина</td>
+<td>До курса по R</td>
+<td>86</td>
+</tr>
+<tr class="even">
+<td>Маша</td>
+<td>После курса по R</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td>Рома</td>
+<td>После курса по R</td>
+<td>74</td>
+</tr>
+<tr class="even">
+<td>Антонина</td>
+<td>После курса по R</td>
+<td>71</td>
+</tr>
+</tbody>
+</table>
+<p>На самом деле, оба варианта приемлимы, оба варианта возможны в реальных данных, а разные функции и статистические пакеты могут требовать от вас как длинный, так и широкий форматы.</p>
+<p>Таким образом, нам нужно научиться переводить из широкого формата в длинный и наоборот.</p>
+<ul>
+<li><p><code>tidyr::pivot_longer()</code>: из <em>широкого</em> в <em>длинный</em> формат</p></li>
+<li><p><code>tidyr::pivot_wider()</code>: из <em>длинного</em> в <em>широкий</em> формат</p></li>
+</ul>
+<p><img src="images/tidyr-longer-wider.gif" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>new_diet <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="fu">c</span>(<span class="st">"Маша"</span>, <span class="st">"Рома"</span>, <span class="st">"Антонина"</span>),</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">before_r_course =</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">86</span>),</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">after_r_course =</span> <span class="fu">c</span>(<span class="dv">63</span>, <span class="dv">74</span>, <span class="dv">71</span>)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>new_diet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  student  before_r_course after_r_course
+  &lt;chr&gt;              &lt;dbl&gt;          &lt;dbl&gt;
+1 Маша                  70             63
+2 Рома                  80             74
+3 Антонина              86             71</code></pre>
+</div>
+</div>
+<p>Тиббл <code>new_diet</code> - это пример широкого формата данных.</p>
+<p>Превратим тиббл <code>new_diet</code> длинный:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>new_diet <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> before_r_course<span class="sc">:</span>after_r_course,</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"measurement_time"</span>, </span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"weight_kg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  student  measurement_time weight_kg
+  &lt;chr&gt;    &lt;chr&gt;                &lt;dbl&gt;
+1 Маша     before_r_course         70
+2 Маша     after_r_course          63
+3 Рома     before_r_course         80
+4 Рома     after_r_course          74
+5 Антонина before_r_course         86
+6 Антонина after_r_course          71</code></pre>
+</div>
+</div>
+<p>А теперь обратно в короткий:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>new_diet <span class="sc">%&gt;%</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> before_r_course<span class="sc">:</span>after_r_course,</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"measurement_time"</span>, </span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"weight_kg"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"measurement_time"</span>,</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">"weight_kg"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  student  before_r_course after_r_course
+  &lt;chr&gt;              &lt;dbl&gt;          &lt;dbl&gt;
+1 Маша                  70             63
+2 Рома                  80             74
+3 Антонина              86             71</code></pre>
+</div>
+</div>
+</section>
+<section id="трансформация-нескольких-колонок-dplyracross" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="трансформация-нескольких-колонок-dplyracross"><span class="header-section-number">4.3</span> Трансформация нескольких колонок: <code>dplyr::across()</code></h2>
+<p>Допустим, вы хотите посчитать среднюю массу и рост, группируя по полу супергероев. Можно посчитать это внутри одного <code>summarise()</code>, использую запятую:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">height =</span> <span class="fu">mean</span>(Height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">weight =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Gender height weight
+  &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 Female   175.   78.8
+2 Male     192.  126. 
+3 &lt;NA&gt;     177.  129. </code></pre>
+</div>
+</div>
+<p>Если таких колонок будет много, то это уже станет сильно неудобным, нам придется много копировать код, а это чревато ошибками и очень скучно.</p>
+<p>Поэтому в <code>dplyr</code> есть функция для операций над несколькими колонками сразу: <code>dplyr::across()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Эта функция работает похожим образом на функции семейства <code>apply()</code> и использует tidyselect для выбора колонок.</p>
+<p>Таким образом, конструкции с функцией <code>across()</code> можно разбить на три части:</p>
+<ol type="1">
+<li>Выбор колонок с помощью tidyselect. Здесь работают все те приемы, которые мы изучили при выборе колонок (@ref(tidyselect)).</li>
+<li>Собственно применение функции <code>across()</code>. Первый аргумент <code>.col</code> — колонки, выбранные на первом этапе с помощью tidyselect, по умолчанию это <code>everything()</code>, т.е. все колонки. Второй аргумент <code>.fns</code> — это функция или целый список из функций, которые будут применены к выбранным колонкам. Если функции требуют дополнительных аргументов, то они могут быть перечислены внутри <code>across()</code>.</li>
+<li>Использование <code>summarise()</code> или другой функции <code>dplyr</code>. В этом случае в качестве аргумента для функции используется результат работы функции <code>across()</code>.</li>
+</ol>
+<p>Вот такой вот бутерброд выходит. Давайте посмотрим, как это работает на практике и посчитаем среднее значение по колонкам <code>Height</code> и <code>Weight</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(Height,Weight), mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Gender Height Weight
+  &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 Female     NA     NA
+2 Male       NA     NA
+3 &lt;NA&gt;       NA     NA</code></pre>
+</div>
+</div>
+<p>Здесь мы столкнулись с уже известной нам проблемой: функция <code>mean()</code> при столкновении хотя бы с одним <code>NA</code> будет возвращать <code>NA</code>, если мы не изменим параметр <code>na.rm =</code>. Как и в случае с функциями семейства <code>apply()</code> (@ref(apply_f)), дополнительные параметры для функции можно перечислить через запятую после самой функции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(Height, Weight), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  Gender Height Weight
+  &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 Female   175.   78.8
+2 Male     192.  126. 
+3 &lt;NA&gt;     177.  129. </code></pre>
+</div>
+</div>
+<p>До этого мы просто использовали выбор колонок по их названию. Но именно внутри <code>across()</code> использование tidyselect раскрывается как удивительно элегантный и мощный инструмент. Например, можно посчитать среднее для всех numeric колонок:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Height, Weight) <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  Gender    X1 Height Weight
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 Female  394.   174.   78.3
+2 Male    369.   193.  126. 
+3 &lt;NA&gt;    375.   182   129. </code></pre>
+</div>
+</div>
+<p>Или длину строк для строковых колонок. Для этого нам понадобится вспомнить, как создавать анонимные функции (@ref(anon_f)).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">nchar</span>(x), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 8
+  Gender  name `Eye color`  Race `Hair color` Publisher `Skin color` Alignment
+  &lt;chr&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+1 Female  9.04        4.68  6.42         5.05      11.5         4.57      3.88
+2 Male    9.05        4.53  6.75         5.48      11.4         5.02      3.78
+3 &lt;NA&gt;    9.48        5.16 10.1          6.44      11.9         4         3.96</code></pre>
+</div>
+</div>
+<p>Или же даже посчитать и то, и другое внутри одного <code>summarise()</code>!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">across</span>(<span class="fu">where</span>(is.character), </span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">nchar</span>(x), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 11
+  Gender    X1 Height Weight  name `Eye color`  Race `Hair color` Publisher
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+1 Female  395.   175.   78.8  9.04        4.68  6.42         5.05      11.5
+2 Male    357.   192.  126.   9.05        4.53  6.75         5.48      11.4
+3 &lt;NA&gt;    329    177.  129.   9.48        5.16 10.1          6.44      11.9
+# … with 2 more variables: `Skin color` &lt;dbl&gt;, Alignment &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Внутри одного <code>across()</code> можно применить не одну функцию к каждой из выбранных колонок, а сразу несколько функций для каждой из колонок. Для этого нам нужно использовать список функций (желательно - проименованный).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(Height, Weight), </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">minimum =</span> min,</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">average =</span> mean,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">maximum =</span> max), </span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  Gender Height_minimum Height_average Height_maximum Weight_minimum
+  &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1 Female           62.5           175.            366             41
+2 Male             15.2           192.            975              2
+3 &lt;NA&gt;            108             177.            198             39
+# … with 2 more variables: Weight_average &lt;dbl&gt;, Weight_maximum &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Вот нам и понадобился список функций (@ref(functions_objects))!</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(Height, Weight),</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">min =</span> <span class="cf">function</span>(x) <span class="fu">min</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">mean =</span> <span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">max =</span> <span class="cf">function</span>(x) <span class="fu">max</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na_n =</span> <span class="cf">function</span>(x, ...) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>                   )</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 9
+  Gender Height_min Height_mean Height_max Height_na_n Weight_min Weight_mean
+  &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;int&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1 Female       62.5        175.        366          56         41        78.8
+2 Male         15.2        192.        975         147          2       126. 
+3 &lt;NA&gt;        108          177.        198          14         39       129. 
+# … with 2 more variables: Weight_max &lt;dbl&gt;, Weight_na_n &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Хотя основное применение функции <code>across()</code> — это массовое подытоживание с помощью <code>summarise()</code>, <code>across()</code> можно использовать и с другими функциями <code>dplyr</code>. Например, можно делать массовые операции с колонками с помощью <code>mutate()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 11
+      X1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;  &lt;fct&gt;       &lt;fct&gt;    &lt;fct&gt;         &lt;dbl&gt; &lt;fct&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# … with 724 more rows, and 3 more variables: `Skin color` &lt;fct&gt;,
+#   Alignment &lt;fct&gt;, Weight &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Конструкция <code>across()</code> работает не только внутри <code>summarise()</code> и <code>mutate()</code>, можно применять <code>across()</code> и с другими функциями, которые используют data-masking. Например, можно использовать <code>across()</code> внутри <code>count()</code> вместе с функцией <code>n_distinct()</code>, которая считает количество уникальных значений в векторе. Это позволяет посмотреть таблицу частот для группирующих переменных:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(<span class="fu">across</span>(<span class="fu">where</span>(<span class="cf">function</span>(x) <span class="fu">n_distinct</span>(x) <span class="sc">&lt;=</span> <span class="dv">6</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 3
+   Gender Alignment     n
+   &lt;chr&gt;  &lt;chr&gt;     &lt;int&gt;
+ 1 Female bad          35
+ 2 Female good        161
+ 3 Female neutral       4
+ 4 Male   bad         165
+ 5 Male   good        316
+ 6 Male   neutral      18
+ 7 Male   &lt;NA&gt;          6
+ 8 &lt;NA&gt;   bad           7
+ 9 &lt;NA&gt;   good         19
+10 &lt;NA&gt;   neutral       2
+11 &lt;NA&gt;   &lt;NA&gt;          1</code></pre>
+</div>
+</div>
+</section>
+<section id="purrr" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="purrr"><span class="header-section-number">4.4</span> Функциональное программирование: <code>purrr</code></h2>
+<p><code>purrr</code> — это пакет для функционального программирования в tidyverse. Как и многие пакеты tidyverse, <code>purrr</code> пытается заменить собой базовый функционал R на более понятный и удобный. В данном случае, речь в первую очередь идет о функциях семейства <code>apply()</code>, с которыми мы работали ранее (@ref(apply_f)).</p>
+<p>Давайте вспомним, как работает <code>lapply()</code>. В качестве первого аргумента функция <code>lapply()</code> принимает список (или то, что может быть в него превращено, например, датафрейм), в качестве второго - функцию, которая будет применена к каждому элементу списка. На выходе мы получим список такой же длины.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(heroes, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$X1
+[1] "numeric"
+
+$name
+[1] "character"
+
+$Gender
+[1] "character"
+
+$`Eye color`
+[1] "character"
+
+$Race
+[1] "character"
+
+$`Hair color`
+[1] "character"
+
+$Height
+[1] "numeric"
+
+$Publisher
+[1] "character"
+
+$`Skin color`
+[1] "character"
+
+$Alignment
+[1] "character"
+
+$Weight
+[1] "numeric"</code></pre>
+</div>
+</div>
+<p>Функция <code>purrr::map()</code> работает по тому же принципу: можно просто заменить <code>lapply()</code> на <code>map()</code>, и мы получим тот же результат.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(heroes, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$X1
+[1] "numeric"
+
+$name
+[1] "character"
+
+$Gender
+[1] "character"
+
+$`Eye color`
+[1] "character"
+
+$Race
+[1] "character"
+
+$`Hair color`
+[1] "character"
+
+$Height
+[1] "numeric"
+
+$Publisher
+[1] "character"
+
+$`Skin color`
+[1] "character"
+
+$Alignment
+[1] "character"
+
+$Weight
+[1] "numeric"</code></pre>
+</div>
+</div>
+<p><code>map()</code> можно встроить в канал с пайпом (впрочем, как и <code>lapply()</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$X1
+[1] "numeric"
+
+$name
+[1] "character"
+
+$Gender
+[1] "character"
+
+$`Eye color`
+[1] "character"
+
+$Race
+[1] "character"
+
+$`Hair color`
+[1] "character"
+
+$Height
+[1] "numeric"
+
+$Publisher
+[1] "character"
+
+$`Skin color`
+[1] "character"
+
+$Alignment
+[1] "character"
+
+$Weight
+[1] "numeric"</code></pre>
+</div>
+</div>
+<p>Как и <code>lapply()</code>, <code>map()</code> всегда возвращает список. Из-за этого мы больше пользовались функцией <code>sapply()</code>, а не <code>lapply()</code>. Функция <code>sapply()</code> упрощала результат до вектора, если это возможно. Подобное упрощение может показаться удобным пока не сталкиваешься с тем, что иногда очень сложно предсказать, какой тип данных получится на выходе. Есть функция <code>vapply()</code> в которой можно управлять типом данных на выходе, но она не очень удобная. В <code>purrr</code> эта проблема решена просто: есть множество функций <code>map_*()</code>, где вместо звездочки - нужный формат на выходе.</p>
+<p>Например, если мы хотим получить строковый вектор на выходе, то нам нужна функция <code>map_chr()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_chr</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         X1        name      Gender   Eye color        Race  Hair color 
+  "numeric" "character" "character" "character" "character" "character" 
+     Height   Publisher  Skin color   Alignment      Weight 
+  "numeric" "character" "character" "character"   "numeric" </code></pre>
+</div>
+</div>
+<p>Можно превратить результат в датафрейм с помощью <code>map_df()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 11
+  X1      name      Gender    `Eye color` Race     `Hair color` Height Publisher
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;    
+1 numeric character character character   charact… character    numer… character
+# … with 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>Так же как и функции семейства <code>apply()</code>, функции <code>map_*()</code> отлично сочетаются с анонимными функциями.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_int</span>(<span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        X1       name     Gender  Eye color       Race Hair color     Height 
+         0          0         29        172        304        172        217 
+ Publisher Skin color  Alignment     Weight 
+         0        662          7        239 </code></pre>
+</div>
+</div>
+<p>Однако у <code>purrr</code> есть свой, более короткий способ записи анонимных функций: <code>function(arg)</code> заменяется на <code>~</code>, а <code>arg</code> на <code>.</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_int</span>(<span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        X1       name     Gender  Eye color       Race Hair color     Height 
+         0          0         29        172        304        172        217 
+ Publisher Skin color  Alignment     Weight 
+         0        662          7        239 </code></pre>
+</div>
+</div>
+<p>Если нужно итерироваться сразу по нескольким спискам, то есть функции <code>map2_*()</code> (для двух списков) и <code>pmap_*()</code> (для нескольких списков).</p>
+</section>
+<section id="list_colums_nest" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="list_colums_nest"><span class="header-section-number">4.5</span> Колонки-списки и нестинг: <code>nest()</code></h2>
+<p>Ранее мы говорили о том, что датафрейм — это по своей сути список из векторов разной длины. На самом деле, это не совсем так: колонки обычного датафрейма вполне могут быть списками. Однако делать так обычно не рекомендуется, пусть R это и не запрещает создавать такие колонки: многие функции предполагают, что все колонки датафрейма являются векторами.</p>
+<p><code>tidyverse</code> гораздо дружелюбнее относится к использовании списка в качестве колонки. Такие колонки называются <strong>колонками-списками (list columns)</strong>. Основной способ их создания - использования функции <code>tidyr::nest()</code>. С помощью tidyselect нужно выбрать сжимаемые колонки, которые будут агрегированы по невыбранным колонками. Это и называется нестингом.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>(<span class="sc">!</span>Gender)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: All elements of `...` must be named.
+Did you want `data = !Gender`?</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  Gender data               
+  &lt;chr&gt;  &lt;list&gt;             
+1 Male   &lt;tibble [505 × 10]&gt;
+2 Female &lt;tibble [200 × 10]&gt;
+3 &lt;NA&gt;   &lt;tibble [29 × 10]&gt; </code></pre>
+</div>
+</div>
+<p>Заметьте, у нас появилась колонка <code>data</code>, в которой содержатся тибблы. Туда и спрятались все наши данные.</p>
+<p>Нестинг похож на агрегирование с помощью <code>group_by()</code>. Если сделать нестинг сгруппированного с помощью <code>group_by()</code> тиббла, то сожмутся все колонки кроме тех, которые выступают в качестве групп:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+# Groups:   Gender [3]
+  Gender data               
+  &lt;chr&gt;  &lt;list&gt;             
+1 Male   &lt;tibble [505 × 10]&gt;
+2 Female &lt;tibble [200 × 10]&gt;
+3 &lt;NA&gt;   &lt;tibble [29 × 10]&gt; </code></pre>
+</div>
+</div>
+<p>Теперь можно работать с колонкой-списком как с обычной колонкой. Например, применять функцию для каждой строчки (то есть для каждого тиббла) с помощью <code>map()</code> и записывать результат в новую колонку с помощью <code>mutate()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dim =</span> <span class="fu">map</span>(data, dim))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+# Groups:   Gender [3]
+  Gender data                dim      
+  &lt;chr&gt;  &lt;list&gt;              &lt;list&gt;   
+1 Male   &lt;tibble [505 × 10]&gt; &lt;int [2]&gt;
+2 Female &lt;tibble [200 × 10]&gt; &lt;int [2]&gt;
+3 &lt;NA&gt;   &lt;tibble [29 × 10]&gt;  &lt;int [2]&gt;</code></pre>
+</div>
+</div>
+<p>В конце концов нам нужно “разжать” сжатую колонку-список. Сделать это можно с помощью <code>unnest()</code>, выбрав с помощью tidyselect нужные колонки.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dim =</span> <span class="fu">map</span>(data, dim)) <span class="sc">%&gt;%</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(dim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+# Groups:   Gender [3]
+  Gender data                  dim
+  &lt;chr&gt;  &lt;list&gt;              &lt;int&gt;
+1 Male   &lt;tibble [505 × 10]&gt;   505
+2 Male   &lt;tibble [505 × 10]&gt;    10
+3 Female &lt;tibble [200 × 10]&gt;   200
+4 Female &lt;tibble [200 × 10]&gt;    10
+5 &lt;NA&gt;   &lt;tibble [29 × 10]&gt;     29
+6 &lt;NA&gt;   &lt;tibble [29 × 10]&gt;     10</code></pre>
+</div>
+</div>
+<p>Разжатая колонка обычно больше сжатой, поэтому разжатие привело к удлинению тиббла. Вместо удлинения тиббла, его можно расширить с помощью <code>unnest_wider()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dim =</span> <span class="fu">map</span>(data, dim)) <span class="sc">%&gt;%</span></span>
+<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(dim, <span class="at">names_sep =</span> <span class="st">"_"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+# Groups:   Gender [3]
+  Gender data                dim_1 dim_2
+  &lt;chr&gt;  &lt;list&gt;              &lt;int&gt; &lt;int&gt;
+1 Male   &lt;tibble [505 × 10]&gt;   505    10
+2 Female &lt;tibble [200 × 10]&gt;   200    10
+3 &lt;NA&gt;   &lt;tibble [29 × 10]&gt;     29    10</code></pre>
+</div>
+</div>
+<p>Нестинг - это мощный инструмент tidyverse, хотя во многих случаях можно обойтись и без него. Наиболее эффективна эта конструкция именно в тех ситуациях, где вы делаете операции над целыми тибблами. Поэтому наибольшее распространение нестинг получил в смычке с пакетом <code>broom</code> для расчета множественных статистических моделей.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Если ключи будут неуникальными, то функции <code>*_join()</code> не будут выдавать ошибку. Вместо этого они добавят в итоговую таблицу все возможные пересечения повторяющихся ключей. С этим нужно быть очень осторожным, поэтому рекомендуется, во-первых, проверять уникальность ключей на входе и, во-вторых, проверять тиббл на выходе. Ну или использовать эту особенность работы функции <code>*_join()</code> себе во благо.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Функция <code>across()</code> появилась в пакете <code>dplyr</code> относительно недавно, до этого для работы с множественными колонками в tidyverse использовались многочисленные функции <code>*_at()</code>, <code>*_if()</code>, <code>*_all()</code>, например, <code>summarise_at()</code>, <code>summarise_if()</code>, <code>summarize_all()</code>. Эти функции до сих пор присутствуют в <code>dplyr</code>, но считаются устаревшими. Другая альтернатива - использование пакета <code>purrr</code> (@ref(purrr)) или семейства функций <code>apply()</code> (@ref(apply_f)).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./110-tidyverse_basic.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">(PART) Tidyverse</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./210-desc_stats.html" class="pagination-link">
+        <span class="nav-page-text">(PART) Разведочный анализ и создание отчетов</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Анализ данных и статистика в R - 18&nbsp; Ковариация и корреляция</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./340-lm.html" rel="next">
+<link href="./320-ttest.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Анализ данных и статистика в R</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез {whole_nhst}</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">950-references.html</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cov" id="toc-cov" class="nav-link active" data-scroll-target="#cov"><span class="toc-section-number">18.1</span>  Ковариация</a></li>
+  <li><a href="#cor" id="toc-cor" class="nav-link" data-scroll-target="#cor"><span class="toc-section-number">18.2</span>  Корреляция</a>
+  <ul class="collapse">
+  <li><a href="#pearson_cor" id="toc-pearson_cor" class="nav-link" data-scroll-target="#pearson_cor"><span class="toc-section-number">18.2.1</span>  Коэффициент корреляции Пирсона</a></li>
+  <li><a href="#nonparam_cor" id="toc-nonparam_cor" class="nav-link" data-scroll-target="#nonparam_cor"><span class="toc-section-number">18.2.2</span>  Непараметрические коэффициенты корреляции</a></li>
+  </ul></li>
+  <li><a href="#cor_mat" id="toc-cor_mat" class="nav-link" data-scroll-target="#cor_mat"><span class="toc-section-number">18.3</span>  Корреляционная матрица</a></li>
+  <li><a href="#hitmap_cor" id="toc-hitmap_cor" class="nav-link" data-scroll-target="#hitmap_cor"><span class="toc-section-number">18.4</span>  Хитмэп корреляций</a></li>
+  <li><a href="#матрица-корреляций-в-виде-графа" id="toc-матрица-корреляций-в-виде-графа" class="nav-link" data-scroll-target="#матрица-корреляций-в-виде-графа"><span class="toc-section-number">18.5</span>  Матрица корреляций в виде графа</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="cov_cor" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Возьмем новый набор данных, на этот раз про американских студентов, вес их рюкзаков и проблемы со спиной. Этот набор данных хранится в пакете <code>Stat2Data</code> — пакет с большим количеством разнообразных данных.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Stat2Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>С помощью функции <code>data()</code> загрузим набор данных <code>Backpack</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+✓ tibble  3.1.6     ✓ dplyr   1.0.8
+✓ tidyr   1.2.0     ✓ stringr 1.4.0
+✓ readr   1.4.0     ✓ forcats 0.5.1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.0.5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Давайте посмотрим, что внутри этой переменной:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(Backpack)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Backpack</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Major</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">41</td>
+<td style="text-align: left;">Bio: 9, Bus: 8, LS: 7, ME: 6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sex</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Fem: 55, Mal: 45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Status</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">U: 97, G: 3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BackpackWeight</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11.66</td>
+<td style="text-align: right;">5.77</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">8.00</td>
+<td style="text-align: right;">11.00</td>
+<td style="text-align: right;">14.25</td>
+<td style="text-align: right;">35.00</td>
+<td style="text-align: left;">▅▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BodyWeight</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">153.05</td>
+<td style="text-align: right;">29.40</td>
+<td style="text-align: right;">105.00</td>
+<td style="text-align: right;">130.00</td>
+<td style="text-align: right;">147.50</td>
+<td style="text-align: right;">170.00</td>
+<td style="text-align: right;">270.00</td>
+<td style="text-align: left;">▆▇▂▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ratio</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">0.07</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.18</td>
+<td style="text-align: left;">▆▇▆▃▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BackProblems</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: left;">▇▁▁▁▃</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.20</td>
+<td style="text-align: right;">1.39</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">3.00</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">6.00</td>
+<td style="text-align: left;">▃▆▇▆▆</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Units</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">14.27</td>
+<td style="text-align: right;">2.81</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">13.00</td>
+<td style="text-align: right;">15.00</td>
+<td style="text-align: right;">16.00</td>
+<td style="text-align: right;">19.00</td>
+<td style="text-align: left;">▁▁▁▇▆</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>С помощью <code>?Backpack</code> можно получить подробное описание колонок этого датасета.</p>
+<p>Например, можно заметить, что масса как самих студентов, так и их рюкзаков выражена в фунтах. Давайте создадим новые переменные <code>backpack_kg</code> и <code>body_kg</code>, в которых будет записан вес (рюкзаков и самих студентов соответственно) в понятным для нас килограммах. Новый набор данных сохраним под названием <code>back</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>До этого мы говорили о <em>различиях</em> между выборками. Теперь мы будем говорить о <em>связи</em> между переменными.</p>
+<section id="cov" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="cov"><span class="header-section-number">18.1</span> Ковариация</h2>
+<p>Самая простая мера связи между двумя переменными — это ковариация. Если <strong>ковариация положительная</strong>, то чем <em>больше</em> одна переменная, тем <em>больше</em> другая переменная. При <strong>отрицательной ковариации</strong> все наоборот: чем <em>больше</em> одна переменная, тем <em>меньше</em> другая.</p>
+<ul>
+<li>Формула ковариации:</li>
+</ul>
+<p><span class="math display">\[\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n}\]</span></p>
+<ul>
+<li>Оценка ковариации по выборке:</li>
+</ul>
+<p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n-1}\]</span></p>
+<p>Ковариация переменной самой с собой — дисперсия.</p>
+<p>В R есть функция <code>cov()</code> для подсчета ковариации. На самом деле, функция <code>var()</code> делает то же самое. Обе эти функции считают сразу <strong>матрицу ковариаций</strong> для всех сочетаний колонок на входе:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               body_kg backpack_kg
+body_kg     177.807700    6.601954
+backpack_kg   6.601954    6.838333</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">var</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               body_kg backpack_kg
+body_kg     177.807700    6.601954
+backpack_kg   6.601954    6.838333</code></pre>
+</div>
+</div>
+<p>Ну а по углам этой матрицы – дисперсии!</p>
+<p>Однако у ковариации есть серьезное ограничение – ее размер привязан к исходной шкале, поэтому сложно оценить, насколько ковариация большая или маленькая. Поэтому на практике гораздо больше используются коэффициенты корреляции.</p>
+</section>
+<section id="cor" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="cor"><span class="header-section-number">18.2</span> Корреляция</h2>
+<p><strong>Корреляцией</strong> обычно называют любую связь между двумя переменными, это просто синоним слова “ассоциация”. Если вдруг слово “корреляция” вам еще непривычно, то попробуйте мысленно заменять “корреляцию” на “ассоциацию”, а “коррелирует” на “связано”. <strong>Коэффициент корреляции</strong> — это уже конкретная математическая формула, которая позволяет посчитать эту связь и принимает значения от -1 до 1.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<ul>
+<li><p>Если коэффициент корреляции <strong>положительный</strong>, то чем <strong>больше</strong> значения в одной переменной, тем <strong>больше</strong> значения в другой переменной.</p></li>
+<li><p>Если коэффициент корреляции <strong>отрицательный</strong>, то чем <strong>больше</strong> значения в одной переменной, тем <strong>меньше</strong> значения в другой переменной.</p></li>
+<li><p>Если коэффициент корреляции равен 0, то изменения одной переменной не связано с изменениями в другой переменной.</p></li>
+</ul>
+<section id="pearson_cor" class="level3" data-number="18.2.1">
+<h3 data-number="18.2.1" class="anchored" data-anchor-id="pearson_cor"><span class="header-section-number">18.2.1</span> Коэффициент корреляции Пирсона</h3>
+<p>Самый известный коэффициент корреляции - коэффициент корреляции Пирсона:</p>
+<p><span class="math display">\[\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
+<p>Оценка коэффициента корреляции Пирсона по выборке: <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n - 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
+<p>Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение z-оценок.</p>
+<p>Корреляцию в R можно посчитать с помощью функции <code>cor()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              body_kg backpack_kg
+body_kg     1.0000000   0.1893312
+backpack_kg 0.1893312   1.0000000</code></pre>
+</div>
+</div>
+<p>Для тестирования уровня значимости нулевой гипотезы для корреляции есть функция <code>cor.test()</code>. В случае с коэффициентами корреляции, нулевая гипотеза формулируется как отсутствие корреляции (т.е. она равна нулю) в генеральной совокупности.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  back$backpack_kg and back$body_kg
+t = 1.9088, df = 98, p-value = 0.05921
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.007360697  0.371918344
+sample estimates:
+      cor 
+0.1893312 </code></pre>
+</div>
+</div>
+<p>Результат выполнения этой функции очень похож на то, что мы получали при проведении t-теста.</p>
+</section>
+<section id="nonparam_cor" class="level3" data-number="18.2.2">
+<h3 data-number="18.2.2" class="anchored" data-anchor-id="nonparam_cor"><span class="header-section-number">18.2.2</span> Непараметрические коэффициенты корреляции</h3>
+<p>У коэффициента корреляции Пирсона, как и у t-теста, есть свои непараметрические братья: коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла. Из них чаще используется коэффициент корреляции Спирмена. Посчитать его можно с помощью той же функции <code>cor.test()</code>, задав соответствующее значение параметра <code>method =</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in cor.test.default(back$backpack_kg, back$body_kg, method =
+"spearman"): Cannot compute exact p-value with ties</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Spearman's rank correlation rho
+
+data:  back$backpack_kg and back$body_kg
+S = 131520, p-value = 0.03527
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.2108001 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Kendall's rank correlation tau
+
+data:  back$backpack_kg and back$body_kg
+z = 2.083, p-value = 0.03725
+alternative hypothesis: true tau is not equal to 0
+sample estimates:
+      tau 
+0.1478736 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Заметьте, в данном случае два метода хотя и привели к схожим размерам корреляции, но в одном случае <em>p-value</em> оказался больше 0.05, а в другом случае - меньше 0.05. Выбирать тест <em>a posteriori</em> на основе того, какие результаты вам нравятся больше, — плохая практика (@ref(bad_practice)). Не надо так делать.</p>
+</blockquote>
+</section>
+</section>
+<section id="cor_mat" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="cor_mat"><span class="header-section-number">18.3</span> Корреляционная матрица</h2>
+<p>Возможно, вы нашли что-то более интересное для проверки гипотезы о корреляции. Например, вы еще хотите проверить гипотезу о связи количества учебных кредитов и массе рюкзака: логично предположить, что чем больше студент набрал себе курсов, тем тяжелее его рюкзак (из-за большего количества учебников). Или что студенты к старшим курсам худеют и становятся меньше. Или что те, кто набрал себе много курсов, меньше питаются и от того меньше весят. В общем, хотелось бы прокоррелировать все интересующие нас переменные со всеми. Это можно сделать с помощью функции <code>cor()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                body_kg backpack_kg       Units        Year
+body_kg      1.00000000  0.18933115 -0.23524088 -0.09301727
+backpack_kg  0.18933115  1.00000000  0.09438453  0.05762194
+Units       -0.23524088  0.09438453  1.00000000 -0.02946373
+Year        -0.09301727  0.05762194 -0.02946373  1.00000000</code></pre>
+</div>
+</div>
+<p>Но функция <code>cor()</code>не позволяет посчитать <em>p-value</em> для этих корреляций! Функция <code>cor.test()</code> позволяет получить <em>p-value</em>, но только для одной пары переменных.</p>
+<p>На помощь приходит пакет <code>psych</code> с функцией <code>corr.test()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:psych::corr.test(x = .)
+Correlation matrix 
+            body_kg backpack_kg Units  Year
+body_kg        1.00        0.19 -0.24 -0.09
+backpack_kg    0.19        1.00  0.09  0.06
+Units         -0.24        0.09  1.00 -0.03
+Year          -0.09        0.06 -0.03  1.00
+Sample Size 
+[1] 100
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+            body_kg backpack_kg Units Year
+body_kg        0.00        0.30  0.11    1
+backpack_kg    0.06        0.00  1.00    1
+Units          0.02        0.35  0.00    1
+Year           0.36        0.57  0.77    0
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<p>Тем не менее, если у вас много гипотез для тестирования, то у вас появляется проблема: вероятность выпадения статистически значимых результатов сильно повышается. Даже если эти переменные никак не связаны друг с другом.</p>
+<p>Эта проблема называется <strong>проблемой множественных сравнений (multiple comparisons problem)</strong> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода (Family-wise error rate)</strong> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
+<p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.е. в среднем 2-3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
+<p>Поэтому если вы проверяете сразу много гипотез, то необходимо применять <strong>поправки на множественные сравнения (multiple testing correction)</strong>. Эти поправки позволяют контролировать групповую вероятность ошибки первого рода на желаемом уровне. Самая простая и популярная поправка на множественные сравнения — <strong>поправка Бонферрони (Bonferroni correction)</strong>. Она считается очень просто: мы просто умножаем p-value на количество проверяемых гипотез!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>(<span class="at">adjust =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:psych::corr.test(x = ., adjust = "bonferroni")
+Correlation matrix 
+            body_kg backpack_kg Units  Year
+body_kg        1.00        0.19 -0.24 -0.09
+backpack_kg    0.19        1.00  0.09  0.06
+Units         -0.24        0.09  1.00 -0.03
+Year          -0.09        0.06 -0.03  1.00
+Sample Size 
+[1] 100
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+            body_kg backpack_kg Units Year
+body_kg        0.00        0.36  0.11    1
+backpack_kg    0.06        0.00  1.00    1
+Units          0.02        0.35  0.00    1
+Year           0.36        0.57  0.77    0
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<p>Это очень “дубовая” и излишне консервативная поправка. Да, она гарантирует контроль групповую вероятности ошибки первого рода, но при этом сильно повышает вероятность ошибки второго рода — вероятность пропустить эффект, если он на самом деле существует. Поэтому по умолчанию в R используется более либеральная поправка на множественные сравнения под названием <strong>поправка Холма</strong> или <strong>поправка Холма-Бонферрони (Holm-Bonferroni correction)</strong>, которая, тем не менее, тоже гарантирует контроль групповой вероятности ошибки первого рода.</p>
+<p>Альтернативный подход к решению проблемы множественных сравнений — это контроль <strong>средней доли ложных отклонений (False Discovery Rate; FDR)</strong> на на уровне не выше уровня <span class="math inline">\(\alpha\)</span>. Это более либеральный подход: в данном случае мы контролируем, что ложно-положительных результатов у нас не больше, например, 5%. Такой подход применяется в областях, где происходит масштабное множественное тестирование. Попытка контролировать <em>групповую вероятность ошибки первого уровня</em> не выше уровня <span class="math inline">\(\alpha\)</span> привела бы к чрезвычайно низкой вероятности обнаружить хоть какие-нибудь эффекты (т.е. к низкой статистической мощности).</p>
+<p>Самая известная поправка для контроля <em>средней доли ложных отклонений</em> — это <strong>поправка Бенджамини — Хохберга (Benjamini-Hochberg correction).</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  psych<span class="sc">::</span><span class="fu">corr.test</span>(<span class="at">adjust =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:psych::corr.test(x = ., adjust = "BH")
+Correlation matrix 
+            body_kg backpack_kg Units  Year
+body_kg        1.00        0.19 -0.24 -0.09
+backpack_kg    0.19        1.00  0.09  0.06
+Units         -0.24        0.09  1.00 -0.03
+Year          -0.09        0.06 -0.03  1.00
+Sample Size 
+[1] 100
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+            body_kg backpack_kg Units Year
+body_kg        0.00        0.18  0.11 0.54
+backpack_kg    0.06        0.00  0.54 0.68
+Units          0.02        0.35  0.00 0.77
+Year           0.36        0.57  0.77 0.00
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<p>Все перечсиленные поправки (и еще несколько других) доступны не только в функции <code>corr.test()</code>, но и в базовом R с помощью функции <code>p.adjust()</code>. Эта функция принимает вектор из <em>p-value</em> и возвращает результат применения поправок.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.0001</span>, <span class="fl">0.06</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>p_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.000100000 0.006755556 0.013411111 0.020066667 0.026722222 0.033377778
+ [7] 0.040033333 0.046688889 0.053344444 0.060000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec) <span class="co">#по умолчанию используется поправка Холма-Бонферрони</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.0010000 0.0608000 0.1072889 0.1404667 0.1603333 0.1668889 0.1668889
+ [8] 0.1668889 0.1668889 0.1668889</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec, <span class="at">method =</span> <span class="st">"bonferroni"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.00100000 0.06755556 0.13411111 0.20066667 0.26722222 0.33377778
+ [7] 0.40033333 0.46688889 0.53344444 0.60000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec, <span class="at">method =</span> <span class="st">"BH"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.00100000 0.03377778 0.04470370 0.05016667 0.05344444 0.05562963
+ [7] 0.05719048 0.05836111 0.05927160 0.06000000</code></pre>
+</div>
+</div>
+</section>
+<section id="hitmap_cor" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="hitmap_cor"><span class="header-section-number">18.4</span> Хитмэп корреляций</h2>
+<p>Как видите, почти все коррелирует друг с другом, даже с учетом поправок. Такие множественные корреляции лучше всего смотреть с помощью хитмап-визуализации.</p>
+<p>В качестве примера возьмем встроенный датасет <code>mtcars</code>, в котором есть множество количественных переменных.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+</div>
+<p>Для визуализации возьмем пакет <code>{corrplot}</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrplot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Для начала нам нужно построить матрицу корреляций. Уже знакомая нам функция <code>cor()</code> для это вполне подойдет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>corrplot 0.92 loaded</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            mpg        cyl       disp         hp        drat         wt
+mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.68117191 -0.8676594
+cyl  -0.8521620  1.0000000  0.9020329  0.8324475 -0.69993811  0.7824958
+disp -0.8475514  0.9020329  1.0000000  0.7909486 -0.71021393  0.8879799
+hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.44875912  0.6587479
+drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.00000000 -0.7124406
+wt   -0.8676594  0.7824958  0.8879799  0.6587479 -0.71244065  1.0000000
+qsec  0.4186840 -0.5912421 -0.4336979 -0.7082234  0.09120476 -0.1747159
+vs    0.6640389 -0.8108118 -0.7104159 -0.7230967  0.44027846 -0.5549157
+am    0.5998324 -0.5226070 -0.5912270 -0.2432043  0.71271113 -0.6924953
+gear  0.4802848 -0.4926866 -0.5555692 -0.1257043  0.69961013 -0.5832870
+carb -0.5509251  0.5269883  0.3949769  0.7498125 -0.09078980  0.4276059
+            qsec         vs          am       gear        carb
+mpg   0.41868403  0.6640389  0.59983243  0.4802848 -0.55092507
+cyl  -0.59124207 -0.8108118 -0.52260705 -0.4926866  0.52698829
+disp -0.43369788 -0.7104159 -0.59122704 -0.5555692  0.39497686
+hp   -0.70822339 -0.7230967 -0.24320426 -0.1257043  0.74981247
+drat  0.09120476  0.4402785  0.71271113  0.6996101 -0.09078980
+wt   -0.17471588 -0.5549157 -0.69249526 -0.5832870  0.42760594
+qsec  1.00000000  0.7445354 -0.22986086 -0.2126822 -0.65624923
+vs    0.74453544  1.0000000  0.16834512  0.2060233 -0.56960714
+am   -0.22986086  0.1683451  1.00000000  0.7940588  0.05753435
+gear -0.21268223  0.2060233  0.79405876  1.0000000  0.27407284
+carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
+</div>
+</div>
+<p>Основная функция пакета <code>{corrplot}</code> – функция <code>corrplot()</code>. Давайте теперь попробуем ее применить на нашей матрице корреляций.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="330-cov_cor_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>По умолчанию значение корреляций кодируется цветом и размером круга. У функции <code>corrplot()</code> есть множество параметров, позволяющих довольно тонко настраивать хитмэп корреляций. Например, можнокодировать только цветом, а переменные сгруппировать на основе кластеризации.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars), <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="330-cov_cor_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="матрица-корреляций-в-виде-графа" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="матрица-корреляций-в-виде-графа"><span class="header-section-number">18.5</span> Матрица корреляций в виде графа</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Функционал пакета {corrr} позволяет работать с корреляционными матрицами в духе tidyverse, возвращая тиббл вместо матрицы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Correlation method: 'pearson'
+Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 12
+   term     mpg    cyl   disp     hp    drat     wt    qsec     vs      am
+   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1 mpg   NA     -0.852 -0.848 -0.776  0.681  -0.868  0.419   0.664  0.600 
+ 2 cyl   -0.852 NA      0.902  0.832 -0.700   0.782 -0.591  -0.811 -0.523 
+ 3 disp  -0.848  0.902 NA      0.791 -0.710   0.888 -0.434  -0.710 -0.591 
+ 4 hp    -0.776  0.832  0.791 NA     -0.449   0.659 -0.708  -0.723 -0.243 
+ 5 drat   0.681 -0.700 -0.710 -0.449 NA      -0.712  0.0912  0.440  0.713 
+ 6 wt    -0.868  0.782  0.888  0.659 -0.712  NA     -0.175  -0.555 -0.692 
+ 7 qsec   0.419 -0.591 -0.434 -0.708  0.0912 -0.175 NA       0.745 -0.230 
+ 8 vs     0.664 -0.811 -0.710 -0.723  0.440  -0.555  0.745  NA      0.168 
+ 9 am     0.600 -0.523 -0.591 -0.243  0.713  -0.692 -0.230   0.168 NA     
+10 gear   0.480 -0.493 -0.556 -0.126  0.700  -0.583 -0.213   0.206  0.794 
+11 carb  -0.551  0.527  0.395  0.750 -0.0908  0.428 -0.656  -0.570  0.0575
+# … with 2 more variables: gear &lt;dbl&gt;, carb &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Нас же интересует в первую очередь представление матрицы корреляций в виде графа.</p>
+<p>Делается это следующим образом: мы устанавливаем минимальное значение для корреляций с помощью параметра <code>min_cor =</code>, которые будут отображены в качестве связи между переменными. Если мы этого не сделаем, то мы просто получим полностью связанный граф, потому что все переменные хотя бы немного коррелируют со всеми. По умолчанию этот параметр равен 0.3, но мы можем изменить это значение на собственное усмотрение. В данном случае установим <code>min_cor = 0.7</code>, потому что в нашей матрице очень много сильных корреляций.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars) <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  corrr<span class="sc">::</span><span class="fu">network_plot</span>(<span class="at">min_cor =</span> <span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Correlation method: 'pearson'
+Missing treated using: 'pairwise.complete.obs'</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="330-cov_cor_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Впрочем, это не так уж и важно: на практике часто опускают слово “коэффициент” и называют корреляцией как и просто связь, так и ее способ измерения.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>“Проблема множественных сравнений” - это устоявшийся термин, который используется и в случае множественных корреляций, и в случае множественных сравнений средних и в любых других случаях с тестированием нескольких гипотез одновременно.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./320-ttest.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">t-тест</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./340-lm.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

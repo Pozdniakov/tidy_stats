@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>tidy_stats2 - 3&nbsp; Импорт и экспорт данных</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./040-programming.html" rel="next">
+<link href="./020-install.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">tidy_stats2</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-programming.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">(PART) Tidyverse</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">(PART) Разведочный анализ и создание отчетов</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#wd" id="toc-wd" class="nav-link active" data-scroll-target="#wd"><span class="toc-section-number">3.1</span>  Рабочая папка и проекты RStudio</a></li>
+  <li><a href="#project_workflow" id="toc-project_workflow" class="nav-link" data-scroll-target="#project_workflow"><span class="toc-section-number">3.2</span>  Организация проектов</a>
+  <ul class="collapse">
+  <li><a href="#text_binary" id="toc-text_binary" class="nav-link" data-scroll-target="#text_binary"><span class="toc-section-number">3.2.1</span>  Табличные данные: текстовые и бинарные данные</a></li>
+  </ul></li>
+  <li><a href="#check_imported" id="toc-check_imported" class="nav-link" data-scroll-target="#check_imported"><span class="toc-section-number">3.3</span>  Проверка импортированных данных</a></li>
+  <li><a href="#export_data" id="toc-export_data" class="nav-link" data-scroll-target="#export_data"><span class="toc-section-number">3.4</span>  Экспорт данных</a></li>
+  <li><a href="#binary" id="toc-binary" class="nav-link" data-scroll-target="#binary"><span class="toc-section-number">3.5</span>  Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+  <li><a href="#fastread" id="toc-fastread" class="nav-link" data-scroll-target="#fastread"><span class="toc-section-number">3.6</span>  Быстрый импорт данных</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="real_data" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Итак, пришло время перейти к реальным данным. Мы начнем с использования датасета (так мы будем называть любой набор данных) по супергероям. Этот датасет представляет собой табличку, каждая строка которой - отдельный супергерой, а столбик — какая-либо информация о нем. Например, цвет глаз, цвет волос, вселенная супергероя<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, рост, вес, пол и так далее. Несложно заметить, что этот датасет идеально подходит под структуру датафрейма: прямоугольная табличка, внутри которой есть разные колонки, каждая из которой имеет свой тип (числовой или строковый).</p>
+<section id="wd" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="wd"><span class="header-section-number">3.1</span> Рабочая папка и проекты RStudio</h2>
+<p>Для начала скачайте файл по <a href="https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv">ссылке</a></p>
+<p>Он, скорее всего, появился у Вас в папке “Загрузки”. Если мы будем просто пытаться прочитать этот файл (например, с помощью <code>read.csv()</code> — мы к этой функцией очень скоро перейдем), указав его имя и разрешение, то наткнемся на такую ошибку:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">"heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in file(file, "rt"): cannot open file 'heroes_information.csv': No such
+file or directory</code></pre>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
+</div>
+</div>
+<p>Это означает, что R не может найти нужный файл. Вообще-то мы даже не сказали, где искать. Нам нужно как-то совместить место, где R ищет загружаемые файлы и сами файлы. Для этого есть несколько способов.</p>
+<ul>
+<li>Магомет идет к горе: перемещение файлов в рабочую папку.</li>
+</ul>
+<p>Для этого нужно узнать, какая папка является рабочей с помощью функции <code>getwd()</code> (без аргументов), найти эту папку в проводнике и переместить туда файл. После этого можно использовать просто название файла с разрешением:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Кроме того, путь к рабочей папке можно увидеть в RStudio во вкладке с консолью, в самой верхней части (прямо под надписью “Console”):</p>
+<p><img src="images/Console_wd.png" class="img-fluid" width="400"></p>
+<ul>
+<li>Гора идет к Магомету: изменение рабочей папки.</li>
+</ul>
+<p>Можно просто сменить рабочую папку с помощью <code>setwd()</code> на ту, где сейчас лежит файл, прописав путь до этой папки. Теперь файл находится в рабочей папке:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Этот вариант использовать <a href="https://www.tidyverse.org/blog/2017/12/workflow-vs-script/">не рекомендуется</a>! Как минимум, это сразу делает невозможным запустить скрипт на другом компьютере. Ну а если все-таки вдруг повезет и получится, то ваш коллега будет очень недоволен, что ваш скрипт изменяет рабочую директорию.</p>
+<ul>
+<li>Гора находит Магомета по месту прописки: указание полного пути файла.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/Username/Some_Folder/heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Этот вариант страдает теми же проблемами, что и предыдущий, поэтому тоже не рекомендуется!</p>
+<blockquote class="blockquote">
+<p>Для пользователей Windows есть дополнительная сложность: знак <code>/</code> является особым знаком для R, поэтому вместо него нужно использовать двойной <code>//</code>.</p>
+</blockquote>
+<ul>
+<li>Магомет использует кнопочный интерфейс: Import Dataset.</li>
+</ul>
+<p>Во вкладке Environment справа в окне RStudio есть кнопка “Import Dataset”. Возможно, у Вас возникло непреодолимое желание отдохнуть от написания кода и понажимать кнопочки — сопротивляйтесь этому всеми силами, но не вините себя, если не сдержитесь.</p>
+<ul>
+<li>Гора находит Магомета в интернете.</li>
+</ul>
+<p>Многие функции в R, предназначенные для чтения файлов, могут прочитать файл не только на Вашем компьютере, но и сразу из интернета. Для этого просто используйте ссылку вместо пути:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/agricolamz/2020-2021-ds4dh/master/data/heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Каждый Магомет получает по своей горе: использование проектов в RStudio.</li>
+</ul>
+<p>На первый взгляд это кажется чем-то очень сложным, но это не так. Это очень просто и ОЧЕНЬ удобно. При создании проекта создается отдельная папка, где у вас лежат данные, хранятся скрипты, вспомогательные файлы и отчеты. Кроме папки создается файл формата .Rproj, в котором хранятся настройки проекта. Если нужно вернуться к другому проекту — просто открываете другой проект, с другими файлами и скриптами. Можно даже иметь открытыми несколько окон RStudio таким образом. Это еще помогает не пересекаться переменным из разных проектов — а то, знаете, использование двух переменных <code>data</code> в разных скриптах чревато ошибками. Поэтому очень удобным решением будет выделение отдельного проекта под этот курс.</p>
+<blockquote class="blockquote">
+<p>При закрытии проекта все переменные по умолчанию тоже будут сохраняться, а при открытии — восстанавливаться (а вот пакеты все равно придется подгружать заново). Это очень удобно, хотя некоторые <a href="https://r4ds.had.co.nz/workflow-projects.html">рекомендуют от этого отказаться</a>. Это можно сделать во вкладке <code>Tool - Global Options...</code></p>
+</blockquote>
+</section>
+<section id="project_workflow" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="project_workflow"><span class="header-section-number">3.2</span> Организация проектов</h2>
+<p>Даже если не пользоваться проектами RStudio (но я настоятельно рекомендую, это очень удобно), то все равно имеет смысл разделять различные свои проекты по отдельным папкам. Для небольших проектов этого уже может быть достаточно, но я рекомендую делать немного более сложную структуру папок внутри проекта. Например, такую:</p>
+<pre><code>.
+└── my_project 
+    ├── R 
+    ├── data
+    │   ├── raw
+    │   ├── temp
+    │   └── processed
+    ├── figures
+    ├── main_script.R 
+    ├── my_project.Rproj
+    ├── output
+    └── README.txt</code></pre>
+<p>В основной папке содержится автоматически созданный RStudio файл .Rproj, основной скрипт с формат .R (или же это может быть .Rmd файл — см. @ref(rmd)). Вспомогательные скрипты (например, с функциями) могут храниться в папке R. Если скриптов несколько, то их порядок стоит обозначить числами:</p>
+<pre><code>.
+├── 01_first_script_preposcessing.R
+├── 02_second_script_statistics.R
+└── 03_third_script_figures.R </code></pre>
+<p>Данные стоит держать в отдельной папке, причем в некоторых ситуациях вы захотите создать отдельные подпапки, например, отдельные подпапки для данных на входе, временных файлов и данных на выходе. Результаты работы, например, отчеты, сгенерированные с помощью R Markdown (см. @ref(rmd)). Туда же можно поместить папку с графиками или же можно поместить эту папку в корневую директорию.</p>
+<p>Это лишь пример структуры организации проектов, детали могут различаться, но такая структура позволит не заблудиться в собственных файлах, если тех накопилось достаточно много. Кроме того, другому человеку в такой структуре проекта будет разобраться значительно проще</p>
+<p>При создании папок внутри основного проекта важно помнить о том, что теперь ваши файлы больше нельзя найти в вашей корневой директории: нужно искать их в соответствующих папках. Это значит, что путь до файла теперь будет не <code>"heroes_information.csv"</code>, а <code>"data/heroes_information.csv"</code> или даже <code>"data/raw/heroes_information.csv"</code>.</p>
+<p>Пакет <code>{here}</code> позволяет удобно работать с путями на любых операционных системах, создавая путь в зависимости от вашей корневой директории проекта.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/ivan/R/tidy_stats2/data/heroes_information.csv"</code></pre>
+</div>
+</div>
+<p>Созданный путь можно использовать для чтения файлов:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"heroes_information.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Сами скрипты тоже лучше разделять на смысловые части. Для этого есть горячие клавиши <code>Cmd + Shift + R</code>. Это сочетание клавиш выведет окно, в котором вам нужно вписать название, после чего появится вот такой аккуратный комментарий:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Meaningful part of the script -------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Разделенный на такие части скрипт (да еще и с подробными комментариями) гораздо удобнее читать!</p>
+<section id="text_binary" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="text_binary"><span class="header-section-number">3.2.1</span> Табличные данные: текстовые и бинарные данные</h3>
+<p>Как Вы уже поняли, импортирование данных - одна из самых муторных и неприятных вещей в R. Если у Вас получится с этим справится, то все остальное - ерунда. Мы уже разобрались с первой частью этого процесса - нахождением файла с данными, осталось научиться их читать.</p>
+<p>Здесь стоит сделать небольшую ремарку. Довольно часто данные представляют собой табличку. Или же их можно свести к табличке. Такая табличка, как мы уже выяснили, удобно репрезентируется в виде датафрейма. Но как эти данные хранятся на компьютере? Есть два варианта: в <em>бинарном</em> и в <em>текстовом</em> файле.</p>
+<p>Текстовый файл означает, что такой файл можно открыть в программе “Блокнот” или аналоге (например, TextEdit на macOS) и увидеть напечатанный текст: скрипт, роман или упорядоченный набор цифр и букв. Нас сейчас интересует именно последний случай. Таблица может быть представлена как текст: отдельные строчки в файле будут разделять разные строчки таблицы, а какой-нибудь знак-разделитель отделять колонки друг от друга.</p>
+<p>Для чтения данных из текстового файла есть довольно удобная функция <code>read.table()</code>. Почитайте хэлп по ней и ужаснитесь: столько разных параметров на входе! Но там же вы увидете функции <code>read.csv()</code>, <code>read.csv2()</code> и некоторые другие — по сути, это тот же <code>read.table()</code>, но с другими параметрами по умолчанию, соответствующие формату файла, который мы загружаем. В данном случае используется формат .csv, что означает “Comma Separated Values” (Значения, Разделенные Запятыми). Формат .csv — это самый известный способ хранения табличных данных в файде на сегодняшний день. Файлы с расширением .csv можно легко открыть в любой программе, работающей с таблицами, в том числе Microsoft Excel и его аналогах.</p>
+<p>Файл с расширением .csv — это просто текстовый файл, в котором “закодирована” таблица: разные строчки разделяют разные строчки таблицы, а столбцы отделяются запятыми (отсюда и название). Вы можете вручную создать такие файлы в Блокноте и сохранять их с форматом .csv - и такая табличка будет нормально открываться в Microsoft Excel и других программах для работы с таблицами. Можете попробовать это сделать самостоятельно!</p>
+<p>Как говорилось ранее, в качестве разделителя ячеек по горизонтали — то есть разделителя между столбцами — используется запятая. С этим связана одна проблема: в некоторых странах (в т.ч. и России) принято использовать запятую для разделения дробной части числа, а не точку, как это делается в большинстве стран мира. Поэтому есть альтернативный вариант формата .csv, где значения разделены точкой с запятой (<code>;</code>), а дробные значения - запятой (<code>,</code>). В этом и различие функций <code>read.csv()</code> и <code>read.csv2()</code> — первая функция предназначена для “международного” формата, вторая - для (условно) “Российского”. Оба варианта формата имеют расширение .csv, поэтому заранее понять какой именно будет вариант довольно сложно, приходится либо пробовать оба, либо заранее открывать файл в текстовом редакторе.</p>
+<p>В первой строчке обычно содержатся названия столбцов - и это чертовски удобно, функции <code>read.csv()</code> и <code>read.csv2()</code> по умолчанию считают первую строчку именно как название для колонок.</p>
+<p>Кроме .csv формата есть и другие варианты хранения таблиц в виде текста. Например, .tsv — тоже самое, что и .csv, но разделитель - знак табуляции. Для чтения таких файлов есть функция <code>read.delim()</code> и <code>read.delim2()</code>. Впрочем, даже если бы ее и не было, можно было бы просто подобрать нужные параметры для функции <code>read.table()</code>. Есть даже функции, которые пытаются сами “угадать” нужные параметры для чтения — часто они справляются с этим довольно удачно. Но не всегда. Поэтому стоит научиться справляться с любого рода данными на входе.</p>
+<p>Итак, прочитаем наш файл. Для этого используем только параметр <code>file =</code>, который идет первым, и для параметра <code>stringsAsFactors =</code> поставим значение <code>FALSE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>Параметр <code>stringsAsFactors =</code> задает то, как будут прочитаны строковые значения - как уже знакомые нам строки или как факторы. По сути, факторы - это примерно то же самое, что и character, но закодированные числами. Когда-то это было придумано для экономии используемых времени и памяти, сейчас же обычно становится просто лишней морокой. Но некоторые функции требуют именно character, некоторые factor, в большинстве случаев это без разницы. Но иногда непонимание может привести к дурацким ошибкам. В данном случае мы просто пока обойдемся без факторов. Если у вас версия R выше 4.0.0, то <code>stringsAsFactors =</code> будет <code>FALSE</code> по умолчанию.</p>
+</blockquote>
+<p>Можете проверить с помощью <code>View(heroes)</code>: все работает! Если же вылезает какая-то странная ерунда или же просто ошибка - попробуйте другие функции (<code>read.table()</code>, <code>read.delim()</code>) и покопаться с параметрами. Для этого читайте <code>Help</code>.</p>
+</section>
+</section>
+<section id="check_imported" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="check_imported"><span class="header-section-number">3.3</span> Проверка импортированных данных</h2>
+<p>При импорте данных обратите внимания на предупреждения (если таковые появляются), в большинстве случаев они указывают на то, что данные импортированы некорректно.</p>
+<p>Проверим, что все прочиталось нормально с помощью уже известной нам функции <code>str()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(heroes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   734 obs. of  11 variables:
+ $ X         : int  0 1 2 3 4 5 6 7 8 9 ...
+ $ name      : chr  "A-Bomb" "Abe Sapien" "Abin Sur" "Abomination" ...
+ $ Gender    : chr  "Male" "Male" "Male" "Male" ...
+ $ Eye.color : chr  "yellow" "blue" "blue" "green" ...
+ $ Race      : chr  "Human" "Icthyo Sapien" "Ungaran" "Human / Radiation" ...
+ $ Hair.color: chr  "No Hair" "No Hair" "No Hair" "No Hair" ...
+ $ Height    : num  203 191 185 203 -99 193 -99 185 173 178 ...
+ $ Publisher : chr  "Marvel Comics" "Dark Horse Comics" "DC Comics" "Marvel Comics" ...
+ $ Skin.color: chr  "-" "blue" "red" "-" ...
+ $ Alignment : chr  "good" "good" "good" "bad" ...
+ $ Weight    : int  441 65 90 441 -99 122 -99 88 61 81 ...</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Всегда проверяйте данные на входе и никогда не верьте на слово, если вам говорят, что данные вычищенные и не содержат никаких ошибок.</p>
+</blockquote>
+<p>На что нужно обращать внимание?</p>
+<ol type="1">
+<li><p>Прочитаны ли пропущенные значения как <code>NA</code>. По умолчанию пропущенные значения обозначаются пропущенной строчкой или “NA”, но встречаются самые разнообразные варианты. Возможные варианты кодирования пропущенных значений можно задать в параметре <code>na.strings =</code> функции <code>read.table()</code> и ее вариантов. В нашем датасете как раз такая ситуация, где нужно самостоятельно задавать, какие значения будут прочитаны как <code>NA</code>. Попытайтесь самостоятельно догадаться, как именно.</p></li>
+<li><p>Прочитаны ли те столбики, которые должны быть числовыми, как <code>int</code> или <code>num</code>. Если в колонке содержатся числа, а написано <code>chr</code> (= <code>"character"</code>) или <code>Factor</code> (в случае если <code>stringsAsFactors = TRUE</code>), то, скорее всего, одна из строчек содержит в себе нечисловые знаки, которые не были прочитаны как <code>NA</code>.</p></li>
+<li><p>Странные названия колонок. Это может случиться по самым разным причинам, но в таких случаях стоит открывать файл в другой программе и смотреть первые строчки. Например, может оказаться, что первые несколько строчек — пустые или что первая строчка не содержит название столбцов (тогда для параметра <code>header =</code> нужно поставить <code>FALSE</code>)</p></li>
+<li><p>Вместо строковых данных у вас кракозябры. Это означает проблемы с кодировкой. В первую очередь попробуйте выставить значение <code>"UTF-8"</code> для параметра <code>encoding =</code> в функции для чтения файла:</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">encoding =</span> <span class="st">"UTF-8"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В случае если это не помогает, попробуйте <a href="https://www.artlebedev.ru/decoder/">разобрать</a>, что это за кодировка.</p>
+<ol start="5" type="1">
+<li><p>Все прочиталось как одна колонка. В этом случае, скорее всего, неправильно подобран разделить колонок — параметр <code>sep =</code>. Откройте файл в текстовом редакторе, чтобы понять какой нужно использовать.</p></li>
+<li><p>В отдельных строчках все прочиталось как одна колонка, а в остальных нормально. Скорее всего, в файле есть значения типа <code>\</code> или <code>"</code>, которые в функциях <code>read.csv()</code>, <code>read.delim()</code>, <code>read.csv2()</code>, <code>read.delim2()</code> читаются как символы для закавычивания значений. Это может понадобиться, если у вас в таблице есть строковые значения со знаками <code>,</code> или <code>;</code>, которые могут восприниматься как разделитель столбцов.</p></li>
+<li><p>Появились какие-то новые числовые колонки. Возможно неправильно поставлен разделитель дробной части. Обычно это либо <code>.</code> (<code>read.table()</code>, <code>read.csv()</code>, <code>read.delim()</code>), либо <code>,</code> (<code>read.csv2()</code>, <code>read.delim2()</code>).</p></li>
+</ol>
+<p>Конкретно в нашем случае все прочиталось хорошо с помощью функции <code>read.csv()</code>, но в строковых переменных есть много прочерков, которые обозначают отсутствие информации по данному параметру супергероя, т.е. пропущенное значение. А вот с числовыми значениями все не так просто: для всех супергероев прописано какое-то число, но во многих случаях это -99. Очевидно, отрицательного роста и массы не бывает, это просто обозначение пропущенных значений (такое часто используется). Таким образом, чтобы адекватно прочитать файл, нам нужно поменять параметр <code>na.strings =</code> функции <code>read.csv()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="export_data" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="export_data"><span class="header-section-number">3.4</span> Экспорт данных</h2>
+<p>Представим, что вы хотите сохранить табличку с данными про супергероев из вселенной DC в виде отдельного файла .csv.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> heroes[heroes<span class="sc">$</span>Publisher <span class="sc">==</span> <span class="st">"DC Comics"</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Функция <code>write.csv()</code> позволит записать датафрейм в файл формата .csv:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Обычно названия строк не используются, и их лучше не записывать, поставив для <code>row.names =</code> значение <code>FALSE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>По аналогии с <code>read.csv2()</code>, <code>write.csv2()</code> позволит записать файлы формата .csv с разделителем <code>;</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="binary" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="binary"><span class="header-section-number">3.5</span> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</h2>
+<p>Тем не менее, далеко не всегда таблицы представлены в виде текстового файла. Самый распространенный пример таблицы в бинарном виде — родные форматы Microsoft Excel. Если Вы попробуете открыть .xlsx файл в Блокноте, то увидите кракозябры. Это делает работу с этим файлами гораздо менее удобной, поэтому стоит избегать экселевских форматов и стараться все сохранять в .csv.</p>
+<p>Такие файлы не получится прочитать при помощи базового инструментария R. Тем не менее, для чтения таких файлов есть много дополнительных пакетов:</p>
+<ul>
+<li><p>файлы Microsoft Excel: лучше всего справляется пакет <code>readxl</code> (является частью расширенного tidyverse), у него есть много альтернатив (<code>xlsx</code>, <code>openxlsx</code>).</p></li>
+<li><p>файлы SPSS, SAS, Stata: существуют два основных пакета — <code>haven</code> (часть расширенного tidyverse) и <code>foreign</code>.</p></li>
+</ul>
+<p>Что такое пакеты и как их устанавливать мы изучим очень скоро.</p>
+</section>
+<section id="fastread" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="fastread"><span class="header-section-number">3.6</span> Быстрый импорт данных</h2>
+<p>Чтение табличных данных обычно происходит очень быстро. По крайней мере, до тех пор пока ваши данные не содержат очень много значений. Если вы попробуете прочитать с помощью <code>read.csv()</code> таблицу с миллионами строчками, то заметите, что это происходит довольно медленно. Впрочем, эта проблема эффективно решается дополнительными пакетами.</p>
+<ul>
+<li>Пакет <code>readr</code> (часть базового tidyverse) предлагает функции, очень похожие на стандартные <code>read.csv()</code>, <code>read.csv2()</code> и тому подобные, только в названиях используется нижнее подчеркивание: <code>read_csv()</code> и <code>read_csv2()</code>. Они быстрее и немного удобнее, особенно если вы работаете в tidyverse.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/heroes_information.csv"</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Missing column names filled in: 'X1' [1]</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+── Column specification ────────────────────────────────────────────────────────
+cols(
+  X1 = col_double(),
+  name = col_character(),
+  Gender = col_character(),
+  `Eye color` = col_character(),
+  Race = col_character(),
+  `Hair color` = col_character(),
+  Height = col_double(),
+  Publisher = col_character(),
+  `Skin color` = col_character(),
+  Alignment = col_character(),
+  Weight = col_double()
+)</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 11
+      X1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# … with 724 more rows, and 3 more variables: `Skin color` &lt;chr&gt;,
+#   Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Пакет <code>vroom</code> - это часть расширенного tidyverse. Это такая альтернатива <code>readr</code> из того же tidyverse, но еще быстрее (отсюда и название).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>vroom<span class="sc">::</span><span class="fu">vroom</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+Rows: 734 Columns: 11 Delimiter: "," chr [8]: name, Gender, Eye color, Race,
+Hair color, Publisher, Skin color, Alignment dbl [3]: ...1, Height, Weight
+
+Use `spec()` to retrieve the guessed column specification Pass a specification
+to the `col_types` argument to quiet this message
+• `` -&gt; `...1`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 734 × 11
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black           -99 Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        -        Blond           -99 NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        -        Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# … with 724 more rows, and 3 more variables: `Skin color` &lt;chr&gt;,
+#   Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>Пакет <code>data.table</code> - это не просто пакет, а целый фреймворк для работы с R, основной конкурент tidyverse. Одна из основных фишек <code>data.table</code> - быстрота работы. Это касается не только процессинга данных, но и их загрузки и записи. Поэтому некоторые используют функции <code>data.table</code> для чтения и записи данных в отдельности от всего остального пакета - они даже и называются соответствующе: <code>fread()</code> и <code>fwrite()</code>, где <strong>f</strong> означет <strong>f</strong>ast<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      V1            name Gender Eye color              Race       Hair color
+  1:   0          A-Bomb   Male    yellow             Human          No Hair
+  2:   1      Abe Sapien   Male      blue     Icthyo Sapien          No Hair
+  3:   2        Abin Sur   Male      blue           Ungaran          No Hair
+  4:   3     Abomination   Male     green Human / Radiation          No Hair
+  5:   4         Abraxas   Male      blue     Cosmic Entity            Black
+ ---                                                                        
+730: 729 Yellowjacket II Female      blue             Human Strawberry Blond
+731: 730            Ymir   Male     white       Frost Giant          No Hair
+732: 731            Yoda   Male     brown    Yoda's species            White
+733: 732         Zatanna Female      blue             Human            Black
+734: 733            Zoom   Male       red                 -            Brown
+     Height         Publisher Skin color Alignment Weight
+  1:  203.0     Marvel Comics          -      good    441
+  2:  191.0 Dark Horse Comics       blue      good     65
+  3:  185.0         DC Comics        red      good     90
+  4:  203.0     Marvel Comics          -       bad    441
+  5:  -99.0     Marvel Comics          -       bad    -99
+ ---                                                     
+730:  165.0     Marvel Comics          -      good     52
+731:  304.8     Marvel Comics      white      good    -99
+732:   66.0      George Lucas      green      good     17
+733:  170.0         DC Comics          -      good     57
+734:  185.0         DC Comics          -       bad     81</code></pre>
+</div>
+</div>
+<p>Чем же пользоваться среди всего этого многообразия? <a href="https://www.danielecook.com/speeding-up-reading-and-writing-in-r/">Бенчмарки</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> показывают, что быстрее всех <code>vroom</code> и <code>data.table</code>. Если же у вас нет задачи ускорить работу кода на несколько миллисекунд или прочитать датасет на много миллионов строк, то стандартного <code>read.csv()</code> (если вы работаете в базовом R) и <code>readr::read_csv()</code> (если вы работаете в tidyverse) должно быть достаточно.</p>
+<p>Все перечисленные пакеты повзоляют не только быстро импортировать данные, но и быстро (и удобно!) экспортировать их:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_excel_csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>) <span class="co">#Если в Excel возникают проблемы с кодировками при открытии созданного .csv файла, то эта функция решает эти проблемы</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>vroom<span class="sc">::</span><span class="fu">vroom_write</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В плане скорости записи файлов соотношение сил примерно такое же, как и для чтения: <code>vroom</code> и <code>data.table</code> обгоняют всех, затем идет <code>readr</code>, и только после него - базовые функции R.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>супергерои в комиксах, фильмах и телесериалах часто взаимодействуют друг с другом, однако обычно это взаимодействие происходит между супергероями одного издателя. Два крупнейших издателя комиксов — DC и Marvel, поэтому принято говорить о вселенной DC и Marvel.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>А еще <strong>f</strong>riendly: <code>fread()</code> обычно самостоятельно хорошо угадывает формат таблицы на входе. <code>vroom</code> тоже так умеет.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>бенчмаркинг — это тест производительности, в данном случае — сравнение скорости работы конкурирующих пакетов.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./020-install.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./040-programming.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

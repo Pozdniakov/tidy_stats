@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Анализ данных и статистика в R - 4&nbsp; Условные конструкции и циклы</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./110-tidyverse_basic.html" rel="next">
+<link href="./030-import_data.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Анализ данных и статистика в R</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040-programming.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">(PART) Tidyverse</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">(PART) Разведочный анализ и создание отчетов</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Markdown</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#if" id="toc-if" class="nav-link active" data-scroll-target="#if"><span class="toc-section-number">4.1</span>  Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+  <li><a href="#for" id="toc-for" class="nav-link" data-scroll-target="#for"><span class="toc-section-number">4.2</span>  Циклы <code>for</code></a></li>
+  <li><a href="#ifelse" id="toc-ifelse" class="nav-link" data-scroll-target="#ifelse"><span class="toc-section-number">4.3</span>  Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
+  <li><a href="#functional" id="toc-functional" class="nav-link" data-scroll-target="#functional"><span class="toc-section-number">5</span>  Функциональное программирование в R</a>
+  <ul class="collapse">
+  <li><a href="#create_fun" id="toc-create_fun" class="nav-link" data-scroll-target="#create_fun"><span class="toc-section-number">5.1</span>  Создание функций</a></li>
+  <li><a href="#sanity_check" id="toc-sanity_check" class="nav-link" data-scroll-target="#sanity_check"><span class="toc-section-number">5.2</span>  Проверка на адекватность</a></li>
+  <li><a href="#why_functions" id="toc-why_functions" class="nav-link" data-scroll-target="#why_functions"><span class="toc-section-number">5.3</span>  Когда и зачем создавать функции?</a></li>
+  <li><a href="#functions_objects" id="toc-functions_objects" class="nav-link" data-scroll-target="#functions_objects"><span class="toc-section-number">5.4</span>  Функции как объекты первого порядка</a></li>
+  <li><a href="#apply_f" id="toc-apply_f" class="nav-link" data-scroll-target="#apply_f"><span class="toc-section-number">5.5</span>  Семейство функций apply()</a>
+  <ul class="collapse">
+  <li><a href="#apply" id="toc-apply" class="nav-link" data-scroll-target="#apply"><span class="toc-section-number">5.5.1</span>  Применение <code>apply()</code> для матриц</a></li>
+  <li><a href="#anon_f" id="toc-anon_f" class="nav-link" data-scroll-target="#anon_f"><span class="toc-section-number">5.5.2</span>  Анонимные функции</a></li>
+  <li><a href="#apply_other" id="toc-apply_other" class="nav-link" data-scroll-target="#apply_other"><span class="toc-section-number">5.5.3</span>  Другие функции семейства <code>apply()</code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="loops_conditions" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="if" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="if"><span class="header-section-number">4.1</span> Выражения <code>if</code>, <code>else</code>, <code>else if</code></h2>
+<p>Стандратная часть практически любого языка программирования — условные конструкции. R не исключение. Однако и здесь есть свои особенности. Начнем с самого простого варианта с одним условием. Выглядеть условная конcтрукция будет вот так:</p>
+<pre><code>if (условие) выражение</code></pre>
+<p>Вот так это будет работать на практике:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="st">"Положительное число"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Положительное число"</code></pre>
+</div>
+</div>
+<p>Если выражение (expression) содержит больше одной строчки, то они объединяются фигурными скобками. Впрочем, использовать их можно, даже если строчка всего в выражении всего одна.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Положительное число"</code></pre>
+</div>
+</div>
+<p>В рассмотренной нами конструкции происходит проверка на условие. Если условие верно<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, то происходит то, что записано в последующем выражении. Если же условие неверно<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, то ничего не происходит.</p>
+<p>Оператор <code>else</code> позволяет задавать действие на все остальные случаи:</p>
+<pre><code>if (условие) выражение else выражение</code></pre>
+<p>Работает это так:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число или ноль"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число или ноль"</code></pre>
+</div>
+</div>
+<p>Иногда нам нужна последовательная проверка на несколько условий. Для этого есть оператор <code>else if</code>. Вот как выглядит ее применение:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ноль"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ноль"</code></pre>
+</div>
+</div>
+<p>Как мы помним, R — язык, в котором векторизация играет большое значение. Но вот незадача — условные конструкции не векторизованы в R! Давайте попробуем применить эти конструкции для вектора значений и посмотрим, что получится.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ноль"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in if (number &gt; 0) {: the condition has length &gt; 1 and only the first
+element will be used</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in if (number &lt; 0) {: the condition has length &gt; 1 and only the first
+element will be used</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число"</code></pre>
+</div>
+</div>
+<p>R выдает сообщение, что используется только первое значение логического вектора внутри условия. Остальные просто игнорируются. Как же посчитать для всего вектора сразу?</p>
+</section>
+<section id="for" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="for"><span class="header-section-number">4.2</span> Циклы <code>for</code></h2>
+<p>Во-первых, можно использовать <code>for</code>. Синтаксис у <code>for</code> похож на синтаксис условных конструкций.</p>
+<pre><code>for(переменная in последовательность) выражение</code></pre>
+<p>Теперь мы можем объединить условные конструкции и <code>for</code>. Немножко монструозно, но это работает:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Положительное число"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Отрицательное число"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Ноль"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число"
+[1] "Отрицательное число"
+[1] "Ноль"
+[1] "Положительное число"
+[1] "Положительное число"</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Чтобы выводить в консоль результат вычислений внутри <code>for</code>, нужно использовать <code>print()</code>.</p>
+</blockquote>
+<p>Здесь стоит отметить, что <code>for</code> используется в R относительно редко. В подавляющем числе ситуаций использование <code>for</code> можно избежать. Обычно мы работаем в R с векторами или датафреймами, которые представляют собой множество относительно независимых наблюдений. Если мы хотим провести какие-нибудь операции с этими наблюдениями, то они обычно могут быть выполнены параллельно. Скажем, вы хотите для каждого испытуемого пересчитать его массу из фунтов в килограммы. Этот пересчет осуществляется по одинаковой формуле для каждого испытуемого. Эта формула не изменится из-за того, что какой-то испытуемый слишком большой или слишком маленький - для следующего испытуемого формула будет прежняя. Если Вы встречаете подобную задачу (где функцию можно применить независимо для всех значений), то без цикла <code>for</code> вполне можно обойтись.</p>
+<p>Даже во многих случаях, где расчеты для одной строчки зависят от расчетов предыдущих строчек, можно обойтись без <code>for</code> векторизованными функциями, например, <code>cumsum()</code> для подсчета кумулятивной суммы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  3  6 10 15 21 28 36 45 55</code></pre>
+</div>
+</div>
+<p>Если же нет подходящей векторизованной функции, то можно воспользоваться семейством функций <code>apply()</code> (см. @ref(apply_f) ).</p>
+<blockquote class="blockquote">
+<p>После этих объяснений кому-то может показаться странным, что я вообще упоминаю про эти циклы. Но для кого-то циклы <code>for</code> настолько привычны, что их полное отсутствие в курсе может показаться еще более странным. Поэтому лучше от меня, чем на улице.</p>
+</blockquote>
+<p>Зачем вообще избегать конструкций <code>for</code>? Некоторые говорят, что они слишком медленные, и частично это верно, если мы сравниваем с векторизованными функциями, которые написаны на более низкоуровневых языках. Но в большинстве случаев низкая скорость <code>for</code> связана с неправильным использованием этой конструкции. Например, стоит избегать ситуации, когда на каждой итерации <code>for</code> какой-то объект (вектор, список, что угодно) изменяется в размере. Лучше будет создать заранее объект нужного размера, который затем будет наполняться значениями:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>number_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(number)) <span class="co">#создаем строковый вектор с такой же длиной, как и исходный вектор</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(number)) {</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (number[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Положительное число"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (number[i] <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Отрицательное число"</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Ноль"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>number_descriptions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
+[4] "Положительное число" "Положительное число"</code></pre>
+</div>
+</div>
+<p>В общем, при правильном обращении с <code>for</code> особых проблем со скоростью не будет. Но все равно это будет громоздкая конструкция, в которой легко ошибиться, и которую, скорее всего, можно заменить одной короткой строчкой. Кроме того, без конструкции <code>for</code> код обычно легко превратить в набор функций, последовательно применяющихся к данным, что мы будем по максимуму использовать, работая в tidyverse и применяя пайпы (см. [pipe]).</p>
+</section>
+<section id="ifelse" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="ifelse"><span class="header-section-number">4.3</span> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></h2>
+<p>Альтернатива сочетанию условных конструкций и циклов <code>for</code> является использование встроенной функции <code>ifelse()</code>. Функция <code>ifelse()</code> принимает три аргумента - 1) условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>), 2) что выдавать в случае <code>TRUE</code>, 3) что выдавать в случае <code>FALSE</code>. На выходе получается вектор такой же длины, как и изначальный логический вектор (условие).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
+[3] "Отрицательное число или ноль" "Положительное число"         
+[5] "Положительное число"         </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Периодически я встречаю у студентов строчку вроде такой: <code>ifelse(условие, TRUE, FALSE)</code>. Эта конструкция избыточна, т.к. получается, что логический вектор из <code>TRUE</code> и <code>FALSE</code> превращается в абсолютно такой же вектор из <code>TRUE</code> и <code>FALSE</code> на тех же самых местах. Выходит, что ничего не меняется!</p>
+</blockquote>
+<p>Пакеты <code>{dplyr}</code> и <code>{data.table}</code> предоставляют более быстрые и более строгие альтернативы для базовой функции <code>ifelse()</code> с аналогичным синтаксисом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">if_else</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
+[3] "Отрицательное число или ноль" "Положительное число"         
+[5] "Положительное число"         </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
+[3] "Отрицательное число или ноль" "Положительное число"         
+[5] "Положительное число"         </code></pre>
+</div>
+</div>
+<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. @ref(tidy_intro)), то я советую пользоваться соотвествующей функцией вместо базового <code>ifelse()</code>.</p>
+<p>Обе функции будут избегать скрытого приведения типов (см. @ref(coercion)) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. @ref(na)).</p>
+<p>У <code>ifelse()</code> тоже есть недостаток: он не может включать в себя дополнительных условий по типу <code>else if</code>. В простых ситуациях можно вставлять <code>ifelse()</code> внутри <code>ifelse()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Положительное число"</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
+[4] "Положительное число" "Положительное число"</code></pre>
+</div>
+</div>
+<p>Достаточно симпатичное решение есть в пакете <code>dplyr</code> — функция <code>case_when()</code>, которая работает с использованием формулы:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Положительное число"</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Отрицательное число"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Ноль"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
+[4] "Положительное число" "Положительное число"</code></pre>
+</div>
+</div>
+<p>В <code>data.table</code> тоже есть свой (<a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">более быстрый</a>) аналог <code>case_when()</code> — функция <code>fcase()</code>. Синтаксис отличается только тем, что вместо формул используются простые запятые:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fcase</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Ноль"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
+[4] "Положительное число" "Положительное число"</code></pre>
+</div>
+</div>
+<p>Задача создания вектора или колонки по множественным условиям из другой колонки плавно перетекает в задачу объединения двух датафреймов по единому ключу, и такое решение может оказаться <a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">наиболее быстрым</a> (см. @ref(tidy_join)).</p>
+</section>
+<section id="functional" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Функциональное программирование в R</h1>
+<section id="create_fun" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="create_fun"><span class="header-section-number">5.1</span> Создание функций</h2>
+<p>Поздравляю, сейчас мы выйдем на качественно новый уровень владения R. Вместо того, чтобы пользоваться теми функциями, которые уже написали за нас, мы можем сами создавать свои функции! В этом нет ничего сложного.</p>
+<p>Синтаксис создания функции внешне похож на создание циклов или условных конструкций. Мы пишем ключевое слово <code>function</code>, в круглых скобках обозначаем переменные, с которыми собираемся что-то делать. Внутри фигурных скобок пишем выражения, которые будут выполняться при запуске функции. У функции есть свое собственное окружение — место, где хранятся переменные. Именно те объекты, которые мы передаем в скобочках, и будут в окружении, так же как и “обычные” переменные для нас в глобальном окружении. Это означает, что функция будет искать переменные в первую очередь среди объектов, которые переданы в круглых скобочках. С ними функция и будет работать. На выходе функция выдаст то, что вычисляется внутри функции <code>return()</code>. Если <code>return()</code> появляется в теле функции несколько раз, то до результат будет возвращаться из той функции <code>return()</code>, до которой выполнение дошло первым.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  power <span class="ot">&lt;-</span> x <span class="sc">^</span> p</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(power)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>Если функция проработала до конца, а функция <code>return()</code> так и не встретилась, то возвращается последнее посчитанное значение.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">^</span> p</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="dv">3</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>Если в последней строчке будет присвоение, то функция ничего не вернет обратно. Это очень распространенная ошибка: функция вроде бы работает правильно, но ничего не возвращает. Нужно писать так, как будто бы в последней строчке результат выполнения выводится в консоль.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  power <span class="ot">&lt;-</span> x <span class="sc">^</span> p <span class="co">#Функция ничего не вернет, потому что в последней строчке присвоение!</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="dv">3</span>, <span class="dv">2</span>) <span class="co">#ничего не возвращается из функции</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Если функция небольшая, то ее можно записать в одну строчку без фигурных скобок.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) x <span class="sc">^</span> p</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="dv">3</span>, <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>Вообще, фигурные скобки используются для того, чтобы выполнить серию выражений, но вернуть только результат выполнения последнего выражения. Это можно использовать, чтобы не создавать лишних временных переменных в глобальном окружении.</p>
+<p>Мы можем оставить в функции параметры по умолчанию.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="dv">2</span>) x <span class="sc">^</span> p</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="dv">3</span>, <span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 27</code></pre>
+</div>
+</div>
+<p>В R работают <strong>ленивые вычисления (lazy evaluations)</strong>. Это означает, что параметры функций будут только когда они понадобятся, а не заранее. R будет как самый ленивый прокрастинатор откладывать чтение данных, пока они не понадобятся в вычислениях. Это приводит к тому, что если параметр никак не задан, то обнаружится это только при его непосредственном использовании. Например, эта функция не будет выдавать ошибку, если мы не зададим параметр <code>we_will_not_use_this_parameter =</code>, потому что он нигде не используется в расчетах.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="dv">2</span>, we_will_not_use_this_parameter) x <span class="sc">^</span> p</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="at">x =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+</section>
+<section id="sanity_check" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sanity_check"><span class="header-section-number">5.2</span> Проверка на адекватность</h2>
+<p>Лучший способ не бояться ошибок и предупреждений — научиться прописывать их самостоятельно в собственных функциях. Это позволит понять, что за текстом предупреждений и ошибок, которые у вас возникают, стоит забота разработчиков о пользователях, которые хотят максимально обезопасить нас от наших непродуманных действий.</p>
+<p>Хорошо написанные функции не только выдают правильный результат на все возможные адекватные данные на входе, но и не дают получить правдоподобные результаты при неадекватных входных данных. Как вы уже знаете, если на входе у вас имеются пропущенные значения, то многие функции будут в ответ тоже выдавать пропущенные значения. И это вполне осознанное решение, которое позволяет избегать ситуаций вроде той, когда <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7">около одной пятой научных статей по генетике содержало ошибки в приложенных данных</a> и замечать пропущенные значения на ранней стадии. Кроме того, можно проводить проверки на адекватность входящих данных (sanity check).</p>
+<p>Разберем это на примере самодельной функции <code>imt()</code>, которая выдает индекс массы тела, если на входе задать вес (аргумент <code>weight =</code>) в килограммах и рост (аргумент <code>height =</code>) в метрах.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>imt <span class="ot">&lt;-</span> <span class="cf">function</span>(weight, height) weight <span class="sc">/</span> height <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Проверим, что функция работает верно:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">120</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.6</span>, <span class="fl">1.7</span>, <span class="fl">1.8</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imt</span>(<span class="at">weight =</span> w, <span class="at">height =</span> h)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23.43750 27.68166 37.03704</code></pre>
+</div>
+</div>
+<p>Очень легко перепутать и написать рост в сантиметрах. Было бы здорово предупредить об этом пользователя, показав ему предупреждающее сообщение, если рост больше, чем, например, 3. Это можно сделать с помощью функции <code>warning()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>imt <span class="ot">&lt;-</span> <span class="cf">function</span>(weight, height) {</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(height <span class="sc">&gt;</span> <span class="dv">3</span>)) <span class="fu">warning</span>(<span class="st">"Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  weight <span class="sc">/</span> height <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">imt</span>(<span class="dv">78</span>, <span class="dv">167</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in imt(78, 167): Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002796802</code></pre>
+</div>
+</div>
+<p>В некоторых случаях ответ будет совершенно точно некорректным, хотя функция все посчитает и выдаст ответ, как будто так и надо. Например, если какой-то из аргументов функции <code>imt()</code> будет меньше или равен 0. В этом случае нужно прописать проверку на это условие, и если это действительно так, то выдать пользователю ошибку.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>imt <span class="ot">&lt;-</span> <span class="cf">function</span>(weight, height) {</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(weight <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">|</span> height <span class="sc">&lt;=</span> <span class="dv">0</span>)) <span class="fu">stop</span>(<span class="st">"Индекс массы тела не может быть посчитан для отрицательных значений"</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(height <span class="sc">&gt;</span> <span class="dv">3</span>)) <span class="fu">warning</span>(<span class="st">"Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  weight <span class="sc">/</span> height <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="fu">imt</span>(<span class="sc">-</span><span class="dv">78</span>, <span class="dv">167</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in imt(-78, 167): Индекс массы тела не может быть посчитан для отрицательных значений</code></pre>
+</div>
+</div>
+<p>Когда вы попробуете самостоятельно прописывать предупреждения и ошибки в функциях, то быстро поймете, что ошибки - это вовсе не обязательно результат того, что где-то что-то сломалось и нужно паниковать. Совсем даже наоборот, прописанная ошибка - чья-то забота о пользователях, которых пытаются максимально проинформировать о том, что и почему пошло не так.</p>
+<p>Это естественно в начале работы с R (и вообще с программированием) избегать ошибок, конечно, в самом начале обучения большая часть из них остается непонятной. Но постарайтесь понять текст ошибки, вспомнить в каких случаях у вас возникала похожая ошибка. Очень часто этого оказывается достаточно чтобы понять причину ошибки даже если вы только-только начали изучать R.</p>
+<p>Ну а в дальнейшем я советую ознакомиться со <a href="https://adv-r.hadley.nz/debugging.html">средствами отладки кода в R</a> для того, чтобы научиться справляться с ошибками в своем коде на более продвинутом уровне.</p>
+</section>
+<section id="why_functions" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="why_functions"><span class="header-section-number">5.3</span> Когда и зачем создавать функции?</h2>
+<p>Когда стоит создавать функции? Существует <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">“правило трех”</a> — если у вас есть три куска очень похожего кода, то самое время превратить код в функцию. Это очень условное правило, но, действительно, стоит избегать копипастинга в коде. В этом случае очень легко ошибиться, а сам код становится нечитаемым.</p>
+<p>Есть и другой подход к созданию функций: их стоит создавать не столько для того, чтобы использовать тот же код снова, сколько для абстрагирования от того, что происходит в отдельных строчках кода. Если несколько строчек кода были написаны для того, чтобы решить одну задачу, которой можно дать понятное название (например, подсчет какой-то особенной метрики, для которой нет готовой функции в R), то этот код стоит обернуть в функцию. Если функция работает корректно, то теперь не нужно думать над тем, что происходит внутри нее. Вы ее можете мысленно представить как операцию, которая имеет определенный вход и выход — как и встроенные функции в R.</p>
+<p>Отсюда следует важный вывод, что хорошее название для функции — это очень важно. Очень, очень, очень важно.</p>
+</section>
+<section id="functions_objects" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="functions_objects"><span class="header-section-number">5.4</span> Функции как объекты первого порядка</h2>
+<p>Ранее мы убедились, что арифметические операторы — это тоже функции. На самом деле, практически все в R — это функции. Даже <code>function</code> — это функция <code>function()</code>. Даже скобочки <code>(</code>, <code>{</code> — это функции!</p>
+<p>А сами функции — это объекты первого порядка в R. Это означает, что с функциями вы можете делать практически все то же самое, что и с другими объектами в R (векторами, датафреймами и т.д.). Небольшой пример, который может взорвать ваш мозг:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(mean, min, <span class="st">`</span><span class="at">{</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+function (x, ...) 
+UseMethod("mean")
+&lt;bytecode: 0x7f947bc1d360&gt;
+&lt;environment: namespace:base&gt;
+
+[[2]]
+function (..., na.rm = FALSE)  .Primitive("min")
+
+[[3]]
+.Primitive("{")</code></pre>
+</div>
+</div>
+<p>Мы можем создать список из функций! Зачем — это другой вопрос, но ведь можем же!</p>
+<p>Еще можно создавать функции внутри функций <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, использовать функции в качестве аргументов функций, сохранять функции как переменные. Пожалуй, самое важное из этого всего - это то, что функция может быть аргументом в функции. Не просто название функции как строковая переменная, не результат выполнения функции, а именно сама функция. Это лежит в основе использования семейства функций <code>apply()</code> (@ref(apply_f) и многих фишек tidyverse.</p>
+<blockquote class="blockquote">
+<p>В Python дело обстоит похожим образом: функции там тоже являются объектами первого порядка, поэтому все эти фишки функционального программирования (с поправкой на синтаксис, конечно) будут работать и там.</p>
+</blockquote>
+</section>
+<section id="apply_f" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="apply_f"><span class="header-section-number">5.5</span> Семейство функций apply()</h2>
+<section id="apply" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="apply"><span class="header-section-number">5.5.1</span> Применение <code>apply()</code> для матриц</h3>
+<p>Семейство? Да, их целое множество: <code>apply()</code>, <code>lapply()</code>,<code>sapply()</code>, <code>vapply()</code>,<code>tapply()</code>,<code>mapply()</code>, <code>rapply()</code>… Ладно, не пугайтесь, всех их знать не придется. Обычно достаточно первых двух-трех. Проще всего пояснить как они работают на простой матрице с числами:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>A </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Функция <code>apply()</code> предназначена для работы с матрицами (или многомерными массивами). Если вы скормите функции <code>apply()</code> датафрейм, то этот датафрейм будет сначала превращен в матрицу. Главное отличие матрицы от датафрейма в том, что в матрице все значения одного типа, поэтому будьте готовы, что сработает имплицитное приведение к общему типу данных. Например, если среди колонок датафрейма есть хотя бы одна строковая колонка, то все колонки станут строковыми.</p>
+</blockquote>
+<p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code>apply()</code> вы можете в буквальном смысле “применить” функцию к матрице или датафрейму. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> — данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.е. для каждого элемента по отдельности), а <code>FUN</code> — это функция, которую вы хотите применить! <code>apply()</code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Apply_function.png" class="img-fluid figure-img" width="400"></p>
+<p></p><figcaption class="figure-caption">apply</figcaption><p></p>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>Заметьте, мы вставляем функцию без скобок и кавычек как аргумент в функцию. Это как раз тот случай, когда аргументом в функции выступает сама функция, а не ее название или результат ее выполнения.</p>
+</blockquote>
+<p>Давайте разберем на примере:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, sum) <span class="co">#сумма по каждой строчке</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22 26 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">2</span>, sum) <span class="co">#сумма по каждой колонке</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6 15 24 33</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), sum) <span class="co">#кхм... сумма каждого элемента</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2    5    8   11
+[3,]    3    6    9   12</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Конкретно для подсчета сумм и средних по столбцам и строкам в R есть функции <code>colSums()</code>, <code>rowSums()</code>, <code>colMeans()</code> и <code>rowMeans()</code>, которые можно использовать как альтернативы <code>apply()</code> в данном случае.</p>
+</blockquote>
+<p>Если же мы хотим прописать дополнительные аргументы для функции, то их можно перечислить через запятую после функции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22 26 30</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, weighted.mean, <span class="at">w =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0.1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.9 5.9 6.9</code></pre>
+</div>
+</div>
+</section>
+<section id="anon_f" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="anon_f"><span class="header-section-number">5.5.2</span> Анонимные функции</h3>
+<p>Что делать, если мы хотим сделать что-то более сложное, чем просто применить одну функцию? А если функция принимает не первым, а вторым аргументом данные из матрицы? В этом случае нам помогут <strong>анонимные функции</strong>.</p>
+<p>Анонимные функции - это функции, которые будут использоваться один раз и без названия.</p>
+<blockquote class="blockquote">
+<p>Питонистам знакомо понятие <strong>лямбда-функций</strong>. Да, это то же самое.</p>
+</blockquote>
+<p>Например, мы можем посчитать сумму квадратичных отклонений от среднего без называния этой функции:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)) <span class="co">#отклонения от среднего по строчке</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45 45 45</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)) <span class="co">#отклонения от среднего по столбцу</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 2 2 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)) <span class="co">#отклонения от одного значения, т.е. ноль</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    0    0    0    0
+[2,]    0    0    0    0
+[3,]    0    0    0    0</code></pre>
+</div>
+</div>
+<p>Как и в случае с обычной функцией, в качестве <code>x</code> выступает объект, с которым мы хотим что-то сделать, а дальше следует функция, которую мы собираемся применить к <code>х</code>. Можно использовать не <code>х</code>, а что угодно, как и в обычных функциях:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(whatevername) <span class="fu">sum</span>((whatevername <span class="sc">-</span> <span class="fu">mean</span>(whatevername))<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45 45 45</code></pre>
+</div>
+</div>
+</section>
+<section id="apply_other" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="apply_other"><span class="header-section-number">5.5.3</span> Другие функции семейства <code>apply()</code></h3>
+<p>Ок, с <code>apply()</code> разобрались. А что с остальными? Некоторые из них еще проще и не требуют индексов, например, <code>lapply</code> (для применения к каждому элементу списка) и <code>sapply()</code> - упрощенная версия <code>lapply()</code>, которая пытается по возможности “упростить” результат до вектора или матрицы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>some_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">some =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">list =</span> letters)</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(some_list, length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$some
+[1] 10
+
+$list
+[1] 26</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(some_list, length)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>some list 
+  10   26 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Достаточно сложно предсказать, в каких именно случаях будет произведено упрощение, а в каких нет. Поэтому <code>sapply()</code> удобен в исследовании данных, но использовать эту функцию в скриптах не очень рекомендуется. Один из вариантов решения этой проблемы — это функция <code>vapply()</code>, которая позволяет управлять результатом <code>lapply()</code>, но гораздо более красиво эта проблема решена в пакете <code>{purrr}</code> (см. @ref(purrr)).</p>
+</blockquote>
+<p>Использование <code>sapply()</code> на векторе приводит к тем же результатам, что и просто применить векторизованную функцию обычным способом.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, sqrt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+ [9] 3.000000 3.162278</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+ [9] 3.000000 3.162278</code></pre>
+</div>
+</div>
+<p>Зачем вообще тогда нужен <code>sapply()</code>, если мы можем просто применить векторизованную функцию? Ключевое слово здесь <em>векторизованная</em> функция. Если функция не векторизована, то <code>sapply()</code> становится удобным вариантом для того, чтобы избежать итерирования с помощью циклов <code>for</code>.</p>
+<blockquote class="blockquote">
+<p>Еще одна альтернатива - это векторизация невекторизованной функции с помощью <code>Vectorize()</code>. Эта функция просто оборачивает функцию одним из вариантов <code>apply()</code>.</p>
+</blockquote>
+<p>Можно применять функции <code>lapply()</code> и <code>sapply()</code> на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. @ref(df)), то итерироваться эти функции будут по колонкам:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, </span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(heroes, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          X        name      Gender   Eye.color        Race  Hair.color 
+  "integer" "character" "character" "character" "character" "character" 
+     Height   Publisher  Skin.color   Alignment      Weight 
+  "numeric" "character" "character" "character"   "integer" </code></pre>
+</div>
+</div>
+<p>Еще одна функция из семейства <code>apply()</code> - функция <code>replicate()</code> - самый простой способ повторить одну и ту же операцию много раз. Обычно эта функция используется при симуляции данных и моделировании. Например, давайте сделаем выборку из логнормального распределения:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">30</span>)</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="040-programming_files/figure-html/unnamed-chunk-68-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>А теперь давайте сделаем 1000 таких выборок и из каждой возьмем среднее:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>sampdist <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rlnorm</span>(<span class="dv">30</span>)))</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sampdist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="040-programming_files/figure-html/unnamed-chunk-70-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Про функции для генерации случайных чисел и про визуализацию мы поговорим в следующие дни.</p>
+</blockquote>
+<p>Если хотите познакомиться с семейством <code>apply()</code> чуточку ближе, то рекомендую <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">вот этот туториал</a>.</p>
+<p>В заключение стоит сказать, что семейство функций <code>apply()</code> — это очень сильное колдунство, но в tidyverse оно практически полностью перекрывается функциями из пакета <code>purrr</code>. Впрочем, если вы поняли логику <code>apply()</code>, то при желании вы легко сможете переключиться на альтернативы из пакета <code>purrr</code> (см. @ref(purrr))</p>
+
+
+</section>
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>В принципе, необязательно внутри должна быть проверка условий, достаточно просто значения <code>TRUE</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Аналогично, достаточно просто значения <code>FALSE</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Функция, которая создает другие функции, называется <strong>фабрикой функций</strong>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./030-import_data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./110-tidyverse_basic.html" class="pagination-link">
+        <span class="nav-page-text">(PART) Tidyverse</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
