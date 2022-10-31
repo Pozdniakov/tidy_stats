@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -345,15 +345,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#wd" id="toc-wd" class="nav-link active" data-scroll-target="#wd"><span class="toc-section-number">6.1</span>  Рабочая папка и проекты RStudio</a></li>
-  <li><a href="#project_workflow" id="toc-project_workflow" class="nav-link" data-scroll-target="#project_workflow"><span class="toc-section-number">6.2</span>  Организация проектов</a>
+  <li><a href="#sec-wd" id="toc-sec-wd" class="nav-link active" data-scroll-target="#sec-wd"><span class="toc-section-number">6.1</span>  Рабочая папка и проекты RStudio</a></li>
+  <li><a href="#sec-project_workflow" id="toc-sec-project_workflow" class="nav-link" data-scroll-target="#sec-project_workflow"><span class="toc-section-number">6.2</span>  Организация проектов</a>
   <ul class="collapse">
-  <li><a href="#text_binary" id="toc-text_binary" class="nav-link" data-scroll-target="#text_binary"><span class="toc-section-number">6.2.1</span>  Табличные данные: текстовые и бинарные данные</a></li>
+  <li><a href="#sec-text_binary" id="toc-sec-text_binary" class="nav-link" data-scroll-target="#sec-text_binary"><span class="toc-section-number">6.2.1</span>  Табличные данные: текстовые и бинарные данные</a></li>
   </ul></li>
-  <li><a href="#check_imported" id="toc-check_imported" class="nav-link" data-scroll-target="#check_imported"><span class="toc-section-number">6.3</span>  Проверка импортированных данных</a></li>
-  <li><a href="#export_data" id="toc-export_data" class="nav-link" data-scroll-target="#export_data"><span class="toc-section-number">6.4</span>  Экспорт данных</a></li>
-  <li><a href="#binary" id="toc-binary" class="nav-link" data-scroll-target="#binary"><span class="toc-section-number">6.5</span>  Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
-  <li><a href="#fastread" id="toc-fastread" class="nav-link" data-scroll-target="#fastread"><span class="toc-section-number">6.6</span>  Быстрый импорт данных</a></li>
+  <li><a href="#sec-check_imported" id="toc-sec-check_imported" class="nav-link" data-scroll-target="#sec-check_imported"><span class="toc-section-number">6.3</span>  Проверка импортированных данных</a></li>
+  <li><a href="#sec-export_data" id="toc-sec-export_data" class="nav-link" data-scroll-target="#sec-export_data"><span class="toc-section-number">6.4</span>  Экспорт данных</a></li>
+  <li><a href="#sec-binary" id="toc-sec-binary" class="nav-link" data-scroll-target="#sec-binary"><span class="toc-section-number">6.5</span>  Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+  <li><a href="#sec-fastread" id="toc-sec-fastread" class="nav-link" data-scroll-target="#sec-fastread"><span class="toc-section-number">6.6</span>  Быстрый импорт данных</a></li>
   </ul>
 </nav>
     </div>
@@ -362,7 +362,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="real_data" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></h1>
+<h1 class="title"><span id="sec-real_data" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></h1>
 </div>
 
 
@@ -377,8 +377,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <p>Итак, пришло время перейти к реальным данным. Мы начнем с использования датасета (так мы будем называть любой набор данных) по супергероям. Этот датасет представляет собой табличку, каждая строка которой - отдельный супергерой, а столбик — какая-либо информация о нем. Например, цвет глаз, цвет волос, вселенная супергероя<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, рост, вес, пол и так далее. Несложно заметить, что этот датасет идеально подходит под структуру датафрейма: прямоугольная табличка, внутри которой есть разные колонки, каждая из которой имеет свой тип (числовой или строковый).</p>
-<section id="wd" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="wd"><span class="header-section-number">6.1</span> Рабочая папка и проекты RStudio</h2>
+<section id="sec-wd" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-wd"><span class="header-section-number">6.1</span> Рабочая папка и проекты RStudio</h2>
 <p>Для начала скачайте файл по <a href="https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv">ссылке</a></p>
 <p>Он, скорее всего, появился у Вас в папке “Загрузки”. Если мы будем просто пытаться прочитать этот файл (например, с помощью <code>read.csv()</code> — мы к этой функцией очень скоро перейдем), указав его имя и разрешение, то наткнемся на такую ошибку:</p>
 <div class="cell">
@@ -438,8 +438,8 @@ file or directory</code></pre>
 <p>При закрытии проекта все переменные по умолчанию тоже будут сохраняться, а при открытии — восстанавливаться (а вот пакеты все равно придется подгружать заново). Это очень удобно, хотя некоторые <a href="https://r4ds.had.co.nz/workflow-projects.html">рекомендуют от этого отказаться</a>. Это можно сделать во вкладке <code>Tool - Global Options...</code></p>
 </blockquote>
 </section>
-<section id="project_workflow" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="project_workflow"><span class="header-section-number">6.2</span> Организация проектов</h2>
+<section id="sec-project_workflow" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-project_workflow"><span class="header-section-number">6.2</span> Организация проектов</h2>
 <p>Даже если не пользоваться проектами RStudio (но я настоятельно рекомендую, это очень удобно), то все равно имеет смысл разделять различные свои проекты по отдельным папкам. Для небольших проектов этого уже может быть достаточно, но я рекомендую делать немного более сложную структуру папок внутри проекта. Например, такую:</p>
 <pre><code>.
 └── my_project 
@@ -477,8 +477,8 @@ file or directory</code></pre>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Meaningful part of the script -------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Разделенный на такие части скрипт (да еще и с подробными комментариями) гораздо удобнее читать!</p>
-<section id="text_binary" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="text_binary"><span class="header-section-number">6.2.1</span> Табличные данные: текстовые и бинарные данные</h3>
+<section id="sec-text_binary" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="sec-text_binary"><span class="header-section-number">6.2.1</span> Табличные данные: текстовые и бинарные данные</h3>
 <p>Как Вы уже поняли, импортирование данных - одна из самых муторных и неприятных вещей в R. Если у Вас получится с этим справится, то все остальное - ерунда. Мы уже разобрались с первой частью этого процесса - нахождением файла с данными, осталось научиться их читать.</p>
 <p>Здесь стоит сделать небольшую ремарку. Довольно часто данные представляют собой табличку. Или же их можно свести к табличке. Такая табличка, как мы уже выяснили, удобно репрезентируется в виде датафрейма. Но как эти данные хранятся на компьютере? Есть два варианта: в <em>бинарном</em> и в <em>текстовом</em> файле.</p>
 <p>Текстовый файл означает, что такой файл можно открыть в программе “Блокнот” или аналоге (например, TextEdit на macOS) и увидеть напечатанный текст: скрипт, роман или упорядоченный набор цифр и букв. Нас сейчас интересует именно последний случай. Таблица может быть представлена как текст: отдельные строчки в файле будут разделять разные строчки таблицы, а какой-нибудь знак-разделитель отделять колонки друг от друга.</p>
@@ -497,8 +497,8 @@ file or directory</code></pre>
 <p>Можете проверить с помощью <code>View(heroes)</code>: все работает! Если же вылезает какая-то странная ерунда или же просто ошибка - попробуйте другие функции (<code>read.table()</code>, <code>read.delim()</code>) и покопаться с параметрами. Для этого читайте <code>Help</code>.</p>
 </section>
 </section>
-<section id="check_imported" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="check_imported"><span class="header-section-number">6.3</span> Проверка импортированных данных</h2>
+<section id="sec-check_imported" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-check_imported"><span class="header-section-number">6.3</span> Проверка импортированных данных</h2>
 <p>При импорте данных обратите внимания на предупреждения (если таковые появляются), в большинстве случаев они указывают на то, что данные импортированы некорректно.</p>
 <p>Проверим, что все прочиталось нормально с помощью уже известной нам функции <code>str()</code>:</p>
 <div class="cell">
@@ -546,8 +546,8 @@ file or directory</code></pre>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="export_data" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="export_data"><span class="header-section-number">6.4</span> Экспорт данных</h2>
+<section id="sec-export_data" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-export_data"><span class="header-section-number">6.4</span> Экспорт данных</h2>
 <p>Представим, что вы хотите сохранить табличку с данными про супергероев из вселенной DC в виде отдельного файла .csv.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dc <span class="ot">&lt;-</span> heroes[heroes<span class="sc">$</span>Publisher <span class="sc">==</span> <span class="st">"DC Comics"</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -565,8 +565,8 @@ file or directory</code></pre>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="binary" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="binary"><span class="header-section-number">6.5</span> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</h2>
+<section id="sec-binary" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="sec-binary"><span class="header-section-number">6.5</span> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</h2>
 <p>Тем не менее, далеко не всегда таблицы представлены в виде текстового файла. Самый распространенный пример таблицы в бинарном виде — родные форматы Microsoft Excel. Если Вы попробуете открыть .xlsx файл в Блокноте, то увидите кракозябры. Это делает работу с этим файлами гораздо менее удобной, поэтому стоит избегать экселевских форматов и стараться все сохранять в .csv.</p>
 <p>Такие файлы не получится прочитать при помощи базового инструментария R. Тем не менее, для чтения таких файлов есть много дополнительных пакетов:</p>
 <ul>
@@ -575,8 +575,8 @@ file or directory</code></pre>
 </ul>
 <p>Что такое пакеты и как их устанавливать мы изучим очень скоро.</p>
 </section>
-<section id="fastread" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="fastread"><span class="header-section-number">6.6</span> Быстрый импорт данных</h2>
+<section id="sec-fastread" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="sec-fastread"><span class="header-section-number">6.6</span> Быстрый импорт данных</h2>
 <p>Чтение табличных данных обычно происходит очень быстро. По крайней мере, до тех пор пока ваши данные не содержат очень много значений. Если вы попробуете прочитать с помощью <code>read.csv()</code> таблицу с миллионами строчками, то заметите, что это происходит довольно медленно. Впрочем, эта проблема эффективно решается дополнительными пакетами.</p>
 <ul>
 <li>Пакет <code>readr</code> (часть базового tidyverse) предлагает функции, очень похожие на стандартные <code>read.csv()</code>, <code>read.csv2()</code> и тому подобные, только в названиях используется нижнее подчеркивание: <code>read_csv()</code> и <code>read_csv2()</code>. Они быстрее и немного удобнее, особенно если вы работаете в tidyverse.</li>

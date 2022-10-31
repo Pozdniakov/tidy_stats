@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -345,15 +345,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#create_fun" id="toc-create_fun" class="nav-link active" data-scroll-target="#create_fun"><span class="toc-section-number">8.1</span>  Создание функций</a></li>
-  <li><a href="#sanity_check" id="toc-sanity_check" class="nav-link" data-scroll-target="#sanity_check"><span class="toc-section-number">8.2</span>  Проверка на адекватность</a></li>
-  <li><a href="#why_functions" id="toc-why_functions" class="nav-link" data-scroll-target="#why_functions"><span class="toc-section-number">8.3</span>  Когда и зачем создавать функции?</a></li>
-  <li><a href="#functions_objects" id="toc-functions_objects" class="nav-link" data-scroll-target="#functions_objects"><span class="toc-section-number">8.4</span>  Функции как объекты первого порядка</a></li>
-  <li><a href="#apply_f" id="toc-apply_f" class="nav-link" data-scroll-target="#apply_f"><span class="toc-section-number">8.5</span>  Семейство функций apply()</a>
+  <li><a href="#sec-create_fun" id="toc-sec-create_fun" class="nav-link active" data-scroll-target="#sec-create_fun"><span class="toc-section-number">8.1</span>  Создание функций</a></li>
+  <li><a href="#sec-sanity_check" id="toc-sec-sanity_check" class="nav-link" data-scroll-target="#sec-sanity_check"><span class="toc-section-number">8.2</span>  Проверка на адекватность</a></li>
+  <li><a href="#sec-why_functions" id="toc-sec-why_functions" class="nav-link" data-scroll-target="#sec-why_functions"><span class="toc-section-number">8.3</span>  Когда и зачем создавать функции?</a></li>
+  <li><a href="#sec-functions_objects" id="toc-sec-functions_objects" class="nav-link" data-scroll-target="#sec-functions_objects"><span class="toc-section-number">8.4</span>  Функции как объекты первого порядка</a></li>
+  <li><a href="#sec-apply_f" id="toc-sec-apply_f" class="nav-link" data-scroll-target="#sec-apply_f"><span class="toc-section-number">8.5</span>  Семейство функций apply()</a>
   <ul class="collapse">
-  <li><a href="#apply" id="toc-apply" class="nav-link" data-scroll-target="#apply"><span class="toc-section-number">8.5.1</span>  Применение <code>apply()</code> для матриц</a></li>
-  <li><a href="#anon_f" id="toc-anon_f" class="nav-link" data-scroll-target="#anon_f"><span class="toc-section-number">8.5.2</span>  Анонимные функции</a></li>
-  <li><a href="#apply_other" id="toc-apply_other" class="nav-link" data-scroll-target="#apply_other"><span class="toc-section-number">8.5.3</span>  Другие функции семейства <code>apply()</code></a></li>
+  <li><a href="#sec-apply" id="toc-sec-apply" class="nav-link" data-scroll-target="#sec-apply"><span class="toc-section-number">8.5.1</span>  Применение <code>apply()</code> для матриц</a></li>
+  <li><a href="#sec-anon_f" id="toc-sec-anon_f" class="nav-link" data-scroll-target="#sec-anon_f"><span class="toc-section-number">8.5.2</span>  Анонимные функции</a></li>
+  <li><a href="#sec-apply_other" id="toc-sec-apply_other" class="nav-link" data-scroll-target="#sec-apply_other"><span class="toc-section-number">8.5.3</span>  Другие функции семейства <code>apply()</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="functional" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></h1>
+<h1 class="title"><span id="sec-functional" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></h1>
 </div>
 
 
@@ -377,8 +377,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="create_fun" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="create_fun"><span class="header-section-number">8.1</span> Создание функций</h2>
+<section id="sec-create_fun" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-create_fun"><span class="header-section-number">8.1</span> Создание функций</h2>
 <p>Поздравляю, сейчас мы выйдем на качественно новый уровень владения R. Вместо того, чтобы пользоваться теми функциями, которые уже написали за нас, мы можем сами создавать свои функции! В этом нет ничего сложного.</p>
 <p>Синтаксис создания функции внешне похож на создание циклов или условных конструкций. Мы пишем ключевое слово <code>function</code>, в круглых скобках обозначаем переменные, с которыми собираемся что-то делать. Внутри фигурных скобок пишем выражения, которые будут выполняться при запуске функции. У функции есть свое собственное окружение — место, где хранятся переменные. Именно те объекты, которые мы передаем в скобочках, и будут в окружении, так же как и “обычные” переменные для нас в глобальном окружении. Это означает, что функция будет искать переменные в первую очередь среди объектов, которые переданы в круглых скобочках. С ними функция и будет работать. На выходе функция выдаст то, что вычисляется внутри функции <code>return()</code>. Если <code>return()</code> появляется в теле функции несколько раз, то до результат будет возвращаться из той функции <code>return()</code>, до которой выполнение дошло первым.</p>
 <div class="cell">
@@ -438,8 +438,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="sanity_check" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="sanity_check"><span class="header-section-number">8.2</span> Проверка на адекватность</h2>
+<section id="sec-sanity_check" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-sanity_check"><span class="header-section-number">8.2</span> Проверка на адекватность</h2>
 <p>Лучший способ не бояться ошибок и предупреждений — научиться прописывать их самостоятельно в собственных функциях. Это позволит понять, что за текстом предупреждений и ошибок, которые у вас возникают, стоит забота разработчиков о пользователях, которые хотят максимально обезопасить нас от наших непродуманных действий.</p>
 <p>Хорошо написанные функции не только выдают правильный результат на все возможные адекватные данные на входе, но и не дают получить правдоподобные результаты при неадекватных входных данных. Как вы уже знаете, если на входе у вас имеются пропущенные значения, то многие функции будут в ответ тоже выдавать пропущенные значения. И это вполне осознанное решение, которое позволяет избегать ситуаций вроде той, когда <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7">около одной пятой научных статей по генетике содержало ошибки в приложенных данных</a> и замечать пропущенные значения на ранней стадии. Кроме того, можно проводить проверки на адекватность входящих данных (sanity check).</p>
 <p>Разберем это на примере самодельной функции <code>imt()</code>, которая выдает индекс массы тела, если на входе задать вес (аргумент <code>weight =</code>) в килограммах и рост (аргумент <code>height =</code>) в метрах.</p>
@@ -485,14 +485,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Это естественно в начале работы с R (и вообще с программированием) избегать ошибок, конечно, в самом начале обучения большая часть из них остается непонятной. Но постарайтесь понять текст ошибки, вспомнить в каких случаях у вас возникала похожая ошибка. Очень часто этого оказывается достаточно чтобы понять причину ошибки даже если вы только-только начали изучать R.</p>
 <p>Ну а в дальнейшем я советую ознакомиться со <a href="https://adv-r.hadley.nz/debugging.html">средствами отладки кода в R</a> для того, чтобы научиться справляться с ошибками в своем коде на более продвинутом уровне.</p>
 </section>
-<section id="why_functions" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="why_functions"><span class="header-section-number">8.3</span> Когда и зачем создавать функции?</h2>
+<section id="sec-why_functions" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-why_functions"><span class="header-section-number">8.3</span> Когда и зачем создавать функции?</h2>
 <p>Когда стоит создавать функции? Существует <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">“правило трех”</a> — если у вас есть три куска очень похожего кода, то самое время превратить код в функцию. Это очень условное правило, но, действительно, стоит избегать копипастинга в коде. В этом случае очень легко ошибиться, а сам код становится нечитаемым.</p>
 <p>Есть и другой подход к созданию функций: их стоит создавать не столько для того, чтобы использовать тот же код снова, сколько для абстрагирования от того, что происходит в отдельных строчках кода. Если несколько строчек кода были написаны для того, чтобы решить одну задачу, которой можно дать понятное название (например, подсчет какой-то особенной метрики, для которой нет готовой функции в R), то этот код стоит обернуть в функцию. Если функция работает корректно, то теперь не нужно думать над тем, что происходит внутри нее. Вы ее можете мысленно представить как операцию, которая имеет определенный вход и выход — как и встроенные функции в R.</p>
 <p>Отсюда следует важный вывод, что хорошее название для функции — это очень важно. Очень, очень, очень важно.</p>
 </section>
-<section id="functions_objects" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="functions_objects"><span class="header-section-number">8.4</span> Функции как объекты первого порядка</h2>
+<section id="sec-functions_objects" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-functions_objects"><span class="header-section-number">8.4</span> Функции как объекты первого порядка</h2>
 <p>Ранее мы убедились, что арифметические операторы — это тоже функции. На самом деле, практически все в R — это функции. Даже <code>function</code> — это функция <code>function()</code>. Даже скобочки <code>(</code>, <code>{</code> — это функции!</p>
 <p>А сами функции — это объекты первого порядка в R. Это означает, что с функциями вы можете делать практически все то же самое, что и с другими объектами в R (векторами, датафреймами и т.д.). Небольшой пример, который может взорвать ваш мозг:</p>
 <div class="cell">
@@ -501,7 +501,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x7fd2306006d0&gt;
+&lt;bytecode: 0x7f7cbd97e8d0&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -517,10 +517,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 <p>В Python дело обстоит похожим образом: функции там тоже являются объектами первого порядка, поэтому все эти фишки функционального программирования (с поправкой на синтаксис, конечно) будут работать и там.</p>
 </blockquote>
 </section>
-<section id="apply_f" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="apply_f"><span class="header-section-number">8.5</span> Семейство функций apply()</h2>
-<section id="apply" class="level3" data-number="8.5.1">
-<h3 data-number="8.5.1" class="anchored" data-anchor-id="apply"><span class="header-section-number">8.5.1</span> Применение <code>apply()</code> для матриц</h3>
+<section id="sec-apply_f" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="sec-apply_f"><span class="header-section-number">8.5</span> Семейство функций apply()</h2>
+<section id="sec-apply" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="sec-apply"><span class="header-section-number">8.5.1</span> Применение <code>apply()</code> для матриц</h3>
 <p>Семейство? Да, их целое множество: <code>apply()</code>, <code>lapply()</code>,<code>sapply()</code>, <code>vapply()</code>,<code>tapply()</code>,<code>mapply()</code>, <code>rapply()</code>… Ладно, не пугайтесь, всех их знать не придется. Обычно достаточно первых двух-трех. Проще всего пояснить как они работают на простой матрице с числами:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
@@ -580,8 +580,8 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </div>
 </div>
 </section>
-<section id="anon_f" class="level3" data-number="8.5.2">
-<h3 data-number="8.5.2" class="anchored" data-anchor-id="anon_f"><span class="header-section-number">8.5.2</span> Анонимные функции</h3>
+<section id="sec-anon_f" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="sec-anon_f"><span class="header-section-number">8.5.2</span> Анонимные функции</h3>
 <p>Что делать, если мы хотим сделать что-то более сложное, чем просто применить одну функцию? А если функция принимает не первым, а вторым аргументом данные из матрицы? В этом случае нам помогут <strong>анонимные функции</strong>.</p>
 <p>Анонимные функции - это функции, которые будут использоваться один раз и без названия.</p>
 <blockquote class="blockquote">
@@ -613,8 +613,8 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </div>
 </div>
 </section>
-<section id="apply_other" class="level3" data-number="8.5.3">
-<h3 data-number="8.5.3" class="anchored" data-anchor-id="apply_other"><span class="header-section-number">8.5.3</span> Другие функции семейства <code>apply()</code></h3>
+<section id="sec-apply_other" class="level3" data-number="8.5.3">
+<h3 data-number="8.5.3" class="anchored" data-anchor-id="sec-apply_other"><span class="header-section-number">8.5.3</span> Другие функции семейства <code>apply()</code></h3>
 <p>Ок, с <code>apply()</code> разобрались. А что с остальными? Некоторые из них еще проще и не требуют индексов, например, <code>lapply</code> (для применения к каждому элементу списка) и <code>sapply()</code> - упрощенная версия <code>lapply()</code>, которая пытается по возможности “упростить” результат до вектора или матрицы.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>some_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">some =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">list =</span> letters)</span>

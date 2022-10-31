@@ -242,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -346,15 +346,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#infer_intro" id="toc-infer_intro" class="nav-link active" data-scroll-target="#infer_intro"><span class="toc-section-number">16.1</span>  Введение в статистику вывода</a></li>
-  <li><a href="#distributions" id="toc-distributions" class="nav-link" data-scroll-target="#distributions"><span class="toc-section-number">16.2</span>  Распределения</a></li>
-  <li><a href="#estimates" id="toc-estimates" class="nav-link" data-scroll-target="#estimates"><span class="toc-section-number">16.3</span>  Оценки</a></li>
-  <li><a href="#sample_estimate" id="toc-sample_estimate" class="nav-link" data-scroll-target="#sample_estimate"><span class="toc-section-number">16.4</span>  Точечные оценки</a></li>
-  <li><a href="#interval_estimate" id="toc-interval_estimate" class="nav-link" data-scroll-target="#interval_estimate"><span class="toc-section-number">16.5</span>  Интервальные оценки</a></li>
-  <li><a href="#sample_dist" id="toc-sample_dist" class="nav-link" data-scroll-target="#sample_dist"><span class="toc-section-number">16.6</span>  Выборочное распределение</a></li>
-  <li><a href="#nordm_dist_importance" id="toc-nordm_dist_importance" class="nav-link" data-scroll-target="#nordm_dist_importance"><span class="toc-section-number">16.7</span>  Важность нормального распределения</a></li>
-  <li><a href="#clt" id="toc-clt" class="nav-link" data-scroll-target="#clt"><span class="toc-section-number">16.8</span>  Центральная предельная теорема</a></li>
-  <li><a href="#ci_build" id="toc-ci_build" class="nav-link" data-scroll-target="#ci_build"><span class="toc-section-number">16.9</span>  Строим доверительный интервал</a></li>
+  <li><a href="#sec-infer_intro" id="toc-sec-infer_intro" class="nav-link active" data-scroll-target="#sec-infer_intro"><span class="toc-section-number">16.1</span>  Введение в статистику вывода</a></li>
+  <li><a href="#sec-distributions" id="toc-sec-distributions" class="nav-link" data-scroll-target="#sec-distributions"><span class="toc-section-number">16.2</span>  Распределения</a></li>
+  <li><a href="#sec-estimates" id="toc-sec-estimates" class="nav-link" data-scroll-target="#sec-estimates"><span class="toc-section-number">16.3</span>  Оценки</a></li>
+  <li><a href="#sec-sample_estimate" id="toc-sec-sample_estimate" class="nav-link" data-scroll-target="#sec-sample_estimate"><span class="toc-section-number">16.4</span>  Точечные оценки</a></li>
+  <li><a href="#sec-interval_estimate" id="toc-sec-interval_estimate" class="nav-link" data-scroll-target="#sec-interval_estimate"><span class="toc-section-number">16.5</span>  Интервальные оценки</a></li>
+  <li><a href="#sec-sample_dist" id="toc-sec-sample_dist" class="nav-link" data-scroll-target="#sec-sample_dist"><span class="toc-section-number">16.6</span>  Выборочное распределение</a></li>
+  <li><a href="#sec-nordm_dist_importance" id="toc-sec-nordm_dist_importance" class="nav-link" data-scroll-target="#sec-nordm_dist_importance"><span class="toc-section-number">16.7</span>  Важность нормального распределения</a></li>
+  <li><a href="#sec-clt" id="toc-sec-clt" class="nav-link" data-scroll-target="#sec-clt"><span class="toc-section-number">16.8</span>  Центральная предельная теорема</a></li>
+  <li><a href="#sec-ci_build" id="toc-sec-ci_build" class="nav-link" data-scroll-target="#sec-ci_build"><span class="toc-section-number">16.9</span>  Строим доверительный интервал</a></li>
   <li><a href="#тестирование-значимости-нулевой-гипотезы-nhst" id="toc-тестирование-значимости-нулевой-гипотезы-nhst" class="nav-link" data-scroll-target="#тестирование-значимости-нулевой-гипотезы-nhst"><span class="toc-section-number">16.10</span>  Тестирование значимости нулевой гипотезы (#nhst)</a></li>
   </ul>
 </nav>
@@ -364,7 +364,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="infer_stats" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></h1>
+<h1 class="title"><span id="sec-infer_stats" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></h1>
 </div>
 
 
@@ -378,13 +378,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="infer_intro" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="infer_intro"><span class="header-section-number">16.1</span> Введение в статистику вывода</h2>
+<section id="sec-infer_intro" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="sec-infer_intro"><span class="header-section-number">16.1</span> Введение в статистику вывода</h2>
 <p><strong>Статистика вывода</strong> (inferential statistics) - это основной раздел статистики, связанный уже не с описанием и суммированием имеющихся данных (<strong>описательная статистика</strong>), а с попытками сделать вывод о <strong>генеральной совокупности</strong> (population) на основе имеющихся данных по <strong>выборке</strong>. Короче говоря, статистика вывода - это о том, как выйти за пределы наших данных. Это именно то, зачем мы проводим исследования - мы не можем собрать информацию обо всей генеральной совокупности, но по тому, что имеем (т.е. по нашей выборке), можем попытаться как-то оценить <strong>параметры</strong> распределения в генеральной совокупности.</p>
 <p>Итак, еще раз: генеральной совокупности - параметры (<strong>P</strong>opulation - <strong>P</strong>arameters), а у выборки - статистики (<strong>S</strong>ample - <strong>S</strong>tatistics). Параметры обычно обозначаются греческими буквами: <span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma\)</span> (или большими латинскими: <span class="math inline">\(M\)</span>, <span class="math inline">\(S\)</span> ), а статистики - соответствующими латинскими: <span class="math inline">\(m\)</span>, <span class="math inline">\(s\)</span>.</p>
 </section>
-<section id="distributions" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="distributions"><span class="header-section-number">16.2</span> Распределения</h2>
+<section id="sec-distributions" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="sec-distributions"><span class="header-section-number">16.2</span> Распределения</h2>
 <p>Случайная переменная (<em>random variable</em>) – это переменная значения которой в зависимости от случая принимают различные значения. Представьте себе машину, которая по требованию выдает какое-то случайное число (или даже несколько). Это и будет случайная переменная. Какие это могут быть значения, какие-то конкретные или любые в каком-то диапазоне? Могут ли какие-то значения выпадать чаще других? Очевидно, случайные переменные могут быть разными в зависимости от закона, который стоит за тем, какие значения она может принимать и с какой частотой. Этот закон называется распределением вероятности.</p>
 <p>Если случайная переменная может принимать только какие-то конкретные значения (например, 3, 10, 0.25 или число пи), то случайная переменная имеет <strong>дискретное распределение</strong>. Если же случайная переменная может принимать любые значения (в каком-то диапазоне или же вообще любые), то такая случайная переменная будет иметь <strong>непрерывное распределение</strong>. По большей части нас будут интересовать именно непрерывные. Хотя для полного их понимания нужен матан (да, именно тот, который calculus), непрерывные распределения довольно интуитивно понятны.</p>
 <p>Может ли случайная переменная принимать значения с разной частотой? Если нет, то речь идет о <strong>равномерном распределении</strong> (<em>uniform distribution</em>). Пример случайной величины с дискретным равномерным распределением – игральный кубик, с вероятностью <span class="math inline">\(\frac{1}{6}\)</span> возвращает одно из значений: 1, 2, 3, 4, 5 или 6. Однако равномерное распределение может быть как дискретным, так и непрерывным.</p>
@@ -498,16 +498,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="estimates" class="level2" data-number="16.3">
-<h2 data-number="16.3" class="anchored" data-anchor-id="estimates"><span class="header-section-number">16.3</span> Оценки</h2>
+<section id="sec-estimates" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="sec-estimates"><span class="header-section-number">16.3</span> Оценки</h2>
 <p>Самая основа статистики вывода - это <strong>оценки</strong>. Как мы уже знаем, у распределений есть определенные параметры, которые описывают данное распределение.</p>
 <p>Например, для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>.</p>
 <p>Наша цель - как-нибудь оценить эти параметры, потому что обычно мы их не знаем. Допустим, человеческий рост распределен нормально [^isnotnormal]. Какой средний рост в популяции? Какое у него стандартное отклонение? Для этого мы используем разного рода оценки: точечные и интервальные. В качестве оценок параметров часто используются статистики по выборке. Вот здесь легко запутаться, поэтому покажу картинку:<br>
 [^isnotnormal]: На самом деле, “чистое” нормальное распределение, так же как и любое другое “чистое” распределение, в природе встречается достаточно редко. Но довольно многие процессы могут апроксимироваться нормальным распределением благодаря центральной предельной теореме @ref(clt).</p>
 <p><img src="images/InferentialStatistics.GIF" class="img-fluid" width="400"></p>
 </section>
-<section id="sample_estimate" class="level2" data-number="16.4">
-<h2 data-number="16.4" class="anchored" data-anchor-id="sample_estimate"><span class="header-section-number">16.4</span> Точечные оценки</h2>
+<section id="sec-sample_estimate" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="sec-sample_estimate"><span class="header-section-number">16.4</span> Точечные оценки</h2>
 <p>Представим, что только что сгенерированные данные с помощью <code>rnorm()</code> - это и есть наша выборка. Перед нами стоит задача оценить IQ популяции по этой выборке. Ну что, давайте попробуем оценить среднее. Здесь все просто и очень очевидно - самой лучшей оценкой среднего в генеральной совокупности будет среднее по выборке.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -543,15 +543,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Это называется поправкой Бесселя, и она настолько распространена, что именно скорректированное стандартное отклонение обычно называют стандартным отклонением. Поэтому в дальнейшем будет использоваться именно эта формула или же просто функция <code>sd()</code>.</p>
 <p>Таким образом, у оценки есть два критерия качества - ее точность и ее несмещенность.</p>
 </section>
-<section id="interval_estimate" class="level2" data-number="16.5">
-<h2 data-number="16.5" class="anchored" data-anchor-id="interval_estimate"><span class="header-section-number">16.5</span> Интервальные оценки</h2>
+<section id="sec-interval_estimate" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="sec-interval_estimate"><span class="header-section-number">16.5</span> Интервальные оценки</h2>
 <p>Другой подход к оцениванию параметра распределения в генеральной совокупности заключается в использовании интервалов. Вместо того, чтобы дать одну оценку, которая будет заведома неточна, можно попробовать оценить интервал, в котором находится истинное среднее генеральной совокупности.</p>
 <p>Самая распространенная интервальная оценка называется <strong>доверительным интервалом (confidence interval)</strong>. Цель доверительного интервала - “покрыть” параметр генеральной совокупности с определенной степенью уверенности.</p>
 <p>Например, 95% доверительный интервал или просто <span class="math inline">\(CI95\%\)</span> означает, что примерно в 95% случаев подсчитанный на выборках интервал будет ловить значение параметра в популяции. Например, построив <span class="math inline">\(CI95\%\)</span> по нашей сгенерированной выборке, мы хотим чтобы примерно в 95% случаев выборок, построенных таким способом, этот интервал ловил истинное среднее (в данном случае — 100).</p>
 <p>Для того, чтобы научиться строить такие интервалы, нам нужно разобраться с <strong>выборочным распределение (sampling distribution).</strong></p>
 </section>
-<section id="sample_dist" class="level2" data-number="16.6">
-<h2 data-number="16.6" class="anchored" data-anchor-id="sample_dist"><span class="header-section-number">16.6</span> Выборочное распределение</h2>
+<section id="sec-sample_dist" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="sec-sample_dist"><span class="header-section-number">16.6</span> Выборочное распределение</h2>
 <p>Чтобы разобраться с тем, что стоит за доверительными интервалами и тестированием уровня значимости нулевой гипотезы (короче говоря, с основными инструментами статистики вывода), нам надо разобраться с очень абстрактной концепцией – выборочными распределениями.</p>
 <p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <div class="cell">
@@ -600,15 +600,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Это означает, что стандартная ошибка тем меньше, чем больше выборка. И это довольно логично: чем больше у нас размер выборок, тем меньше будет расброс их средних.</p>
 </section>
-<section id="nordm_dist_importance" class="level2" data-number="16.7">
-<h2 data-number="16.7" class="anchored" data-anchor-id="nordm_dist_importance"><span class="header-section-number">16.7</span> Важность нормального распределения</h2>
+<section id="sec-nordm_dist_importance" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="sec-nordm_dist_importance"><span class="header-section-number">16.7</span> Важность нормального распределения</h2>
 <p>В математике все числа равны, но некоторые все-таки заметно равнее других. Например, есть 0 и 1 - и очевидно, что это очень важные числа. Даже гугл выдает больше страниц по числам 0 и 1, чем по другим числам, например, 8 и 23218974. Не только целые числа могут быть важными. Вот, например, число пи и число Эйлера: они очень часто встречаются в самых разных, подчас неожиданных местах. Например, в тех же формулах распределений. На эти числа завязано очень интересные и важные свойтсва, поэтому такая зацикленность на них неудивительна. Например, число пи связывает радиус круг с длиной его окружности и площадью, поэтому когда перед нами что-то круглое, то и пи появится с большой вероятностью.</p>
 <p>В статистике тоже есть распределения, которые “главнее” других распределений. Есть, например, равномерное распределение. Например, равномерно распределены исходы одного броска кубика.</p>
 <p>Но есть и распределение, которое смело можно называть королем всех распределений - это уже знакомое нам нормальное распределение.</p>
 <p>Нормальное распределение - это что-то в духе единицы из мира распределений. Это не просто одно из распределений, а это фундаментально важная штуковина, которая обладает почти магической силой. И сила эта зовется “Центральная Пределельная Теорема”.</p>
 </section>
-<section id="clt" class="level2" data-number="16.8">
-<h2 data-number="16.8" class="anchored" data-anchor-id="clt"><span class="header-section-number">16.8</span> Центральная предельная теорема</h2>
+<section id="sec-clt" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="sec-clt"><span class="header-section-number">16.8</span> Центральная предельная теорема</h2>
 <p>Давайте теперь сделаем много выборок не из нормального, а из логнормального распределения. Что-то похожее представляет собой распределение времени реакции на многие задачи (особенно связанные с выбором и когда нужно подумать перед нажатием кнопки). Одна выборка будет распределена примерно так:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rlnorm</span>(<span class="dv">10000</span>), <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -634,8 +634,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Если выходить за рамки выборочного распределения средних, то центральная предельная теорема говорит нам о том, что сумма слабо зависящих случайных величин, имеющих примерно одинаковое влияние, имеет распределение близкое к нормальному. Например, рост является следствием большого количества генетических и средовых факторов, поэтому он распределен примерно нормально. Однако это нормальное распределение портят такие факторы как пол — он вносит очень сильный вклад в рост, поэтому распределение становится немного “двугорбым”.</p>
 </blockquote>
 </section>
-<section id="ci_build" class="level2" data-number="16.9">
-<h2 data-number="16.9" class="anchored" data-anchor-id="ci_build"><span class="header-section-number">16.9</span> Строим доверительный интервал</h2>
+<section id="sec-ci_build" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="sec-ci_build"><span class="header-section-number">16.9</span> Строим доверительный интервал</h2>
 <p>Теперь мы знаем достаточно, чтобы построить доверительный интервал своими руками на основе стандартной ошибки. Мы построим самый стандартный вариант - 95% доверительный интервал.</p>
 <p>Давайте еще раз посмотрим на нормальное распределение.</p>
 <p><img src="images/normalstandard.jpg" class="img-fluid" width="400"></p>

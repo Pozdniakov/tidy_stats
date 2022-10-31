@@ -260,7 +260,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -364,11 +364,11 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#grammar_of_graphics" id="toc-grammar_of_graphics" class="nav-link active" data-scroll-target="#grammar_of_graphics"><span class="toc-section-number">13.1</span>  История грамматики графики</a></li>
-  <li><a href="#gg_base" id="toc-gg_base" class="nav-link" data-scroll-target="#gg_base"><span class="toc-section-number">13.2</span>  Основы грамматики графики</a></li>
-  <li><a href="#gg_0" id="toc-gg_0" class="nav-link" data-scroll-target="#gg_0"><span class="toc-section-number">13.3</span>  Пример №0: пайчарт с распределение по полу</a></li>
-  <li><a href="#gg_1" id="toc-gg_1" class="nav-link" data-scroll-target="#gg_1"><span class="toc-section-number">13.4</span>  Пример №1: Education and IQ meta-analysis</a></li>
-  <li><a href="#gg_ext" id="toc-gg_ext" class="nav-link" data-scroll-target="#gg_ext"><span class="toc-section-number">13.5</span>  Расширения <code>ggplot2</code></a></li>
+  <li><a href="#sec-grammar_of_graphics" id="toc-sec-grammar_of_graphics" class="nav-link active" data-scroll-target="#sec-grammar_of_graphics"><span class="toc-section-number">13.1</span>  История грамматики графики</a></li>
+  <li><a href="#sec-gg_base" id="toc-sec-gg_base" class="nav-link" data-scroll-target="#sec-gg_base"><span class="toc-section-number">13.2</span>  Основы грамматики графики</a></li>
+  <li><a href="#sec-gg_0" id="toc-sec-gg_0" class="nav-link" data-scroll-target="#sec-gg_0"><span class="toc-section-number">13.3</span>  Пример №0: пайчарт с распределение по полу</a></li>
+  <li><a href="#sec-gg_1" id="toc-sec-gg_1" class="nav-link" data-scroll-target="#sec-gg_1"><span class="toc-section-number">13.4</span>  Пример №1: Education and IQ meta-analysis</a></li>
+  <li><a href="#sec-gg_ext" id="toc-sec-gg_ext" class="nav-link" data-scroll-target="#sec-gg_ext"><span class="toc-section-number">13.5</span>  Расширения <code>ggplot2</code></a></li>
   </ul>
 </nav>
     </div>
@@ -377,7 +377,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="gg_ggplot2" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></span></h1>
+<h1 class="title"><span id="sec-gg_ggplot2" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></span></h1>
 </div>
 
 
@@ -391,15 +391,15 @@ div.csl-indent {
 
 </header>
 
-<section id="grammar_of_graphics" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="grammar_of_graphics"><span class="header-section-number">13.1</span> История грамматики графики</h2>
+<section id="sec-grammar_of_graphics" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="sec-grammar_of_graphics"><span class="header-section-number">13.1</span> История грамматики графики</h2>
 <p>Встроенные возможности для визуализации в R довольно обширны, но дополнительные пакеты значительно ее расширяют. Среди этих пакетов, есть один, который занимает совершенно особенное место – <code>ggplot2</code>.</p>
 <p><code>ggplot2</code> — это не просто пакет, который рисует красивые графики. Красивые графики можно рисовать и в базовом R. Чтобы понять, почему пакет <code>ggplot2</code> занимает особенное место среди пакетов для визуализации (и не только среди пакетов для R, а вообще!), нужно расшифровать <code>gg</code> в его названии. <code>gg</code> означает грамматику графики (Grammar of Graphics), язык для описания графиков, изложенный в одноименной книге Леланда Уилкинсона <span class="citation" data-cites="gg">(<a href="950-references.html#ref-gg" role="doc-biblioref">Wilkinson 2005</a>)</span>.</p>
 <p>Грамматика графики позволяет описывать графики не в терминах типологии (вот есть пайчарт, есть барплот, есть гистограмма, а есть ящик с усами), а с помощью специального разработанного языка. Этот язык позволяет с помощью грамматики и небольшого количества “слов” языка описывать и создавать практически любые графики и даже придумывать новые! Это дает огромную свободу в создании именно той визуализации, что необходима для текущей задачи.</p>
 <p>Хэдли Уикхэм (да, снова он) немного дополнил идею грамматики графики в статье “A Layered grammar of graphics” <span class="citation" data-cites="layered-grammar">(<a href="950-references.html#ref-layered-grammar" role="doc-biblioref">Wickham 2010</a>)</span>, которую сопроводил пакетом <code>ggplot2</code> с реализацией идей Уилкинсона и своих.</p>
 </section>
-<section id="gg_base" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="gg_base"><span class="header-section-number">13.2</span> Основы грамматики графики</h2>
+<section id="sec-gg_base" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="sec-gg_base"><span class="header-section-number">13.2</span> Основы грамматики графики</h2>
 <p>Каждый график состоит из одного или нескольких <strong>слоев (layers)</strong>. Если слоев несколько, то они располагаются один над другим, при этом верхние слои “перекрывают” нижние, примерно как это происходит в программах вроде Adobe Photoshop. У каждого слоя есть три обязательных элемента: <strong>данные (data)</strong>, <strong>геом (geom)</strong>, <strong>эстетики (aestetics)</strong>; и два вспомогательных: <strong>статистические трансформации (stat).</strong> и <strong>регулировка положения (position adjustment).</strong></p>
 <p><img src="images/ggplot2_scheme.png" class="img-fluid"></p>
 <ul>
@@ -424,8 +424,8 @@ div.csl-indent {
 <li><p><strong>Значения по умолчанию (defaults).</strong> Если в графике используется несколько слоев, то часто все они используют одни и те же данные и эстетики. Можно задать данные и эстетики по умолчанию для всего графика, чтобы не повторять код.</p></li>
 </ul>
 </section>
-<section id="gg_0" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="gg_0"><span class="header-section-number">13.3</span> Пример №0: пайчарт с распределение по полу</h2>
+<section id="sec-gg_0" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="sec-gg_0"><span class="header-section-number">13.3</span> Пример №0: пайчарт с распределение по полу</h2>
 <p>Сейчас мы попробуем сделать простой пример в <code>ggplot2</code>, похожий на пример, который использует в своей книге Леланд Уилкинсон, чтобы показать мощь грамматики графики <span class="citation" data-cites="gg">(<a href="950-references.html#ref-gg" role="doc-biblioref">Wilkinson 2005</a>)</span>. Приготовьтесь, этот пример перевернет ваши представления о графиках!</p>
 <p>Но сначала взглянем на структуру кода в <code>ggplot()</code>.</p>
 <p><img src="images/ggplot_code.png" class="img-fluid" width="400"></p>
@@ -543,8 +543,8 @@ cols(
 </div>
 <p>Это был интересный, но немного шуточный пример. Все-таки пайчарт — это довольно спорный способ визуализировать данные, вызывающий много вполне справедливой критики. Поэтому сейчас мы перейдем к гораздо более реалистичному примеру.</p>
 </section>
-<section id="gg_1" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="gg_1"><span class="header-section-number">13.4</span> Пример №1: Education and IQ meta-analysis</h2>
+<section id="sec-gg_1" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="sec-gg_1"><span class="header-section-number">13.4</span> Пример №1: Education and IQ meta-analysis</h2>
 <p>Для этого примера мы возьмем мета-анализ связи количества лет обучения и интеллекта: <em>“How Much Does Education Improve Intelligence? A Meta-Analysis”</em> <span class="citation" data-cites="eduiq">(<a href="950-references.html#ref-eduiq" role="doc-biblioref">Ritchie and Tucker-Drob 2018</a>)</span>. Мета-анализ — это группа статистических методов, которые позволяют объединить результаты нескольких исследований с похожим планом исследованием и тематикой, чтобы посчитать средний эффект между несколькими статьями сразу.</p>
 <p>Данные и скрипт для анализа данных в этой статье находятся в открытом доступе: https://osf.io/r8a24/</p>
 <p>Полный текст статьи доступен по <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6088505/">ссылке</a>.</p>
@@ -990,8 +990,8 @@ cols(
 </div>
 </div>
 </section>
-<section id="gg_ext" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="gg_ext"><span class="header-section-number">13.5</span> Расширения <code>ggplot2</code></h2>
+<section id="sec-gg_ext" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="sec-gg_ext"><span class="header-section-number">13.5</span> Расширения <code>ggplot2</code></h2>
 <p><code>ggplot2</code> стал очень популярным пакетом и быстро обзавелся расширениями - пакетами R, которые являются надстройками над <code>ggplot2</code>. Эти расширения бывают самого разного рода, например, добавляющие дополнительные геомы или просто реализующие отдельные типы графиков на языке <code>ggplot2</code>.</p>
 <p>Я рекомендую посмотреть самостоятельно галерею расширений <code>ggplot2</code>: https://exts.ggplot2.tidyverse.org/gallery/</p>
 <p>Для примера мы возьмем пакет <code>hrbrthemes</code>, который предоставляет дополнительные темы для <code>ggplot2</code>, компоненты тем и шкалы.</p>
@@ -1134,7 +1134,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./220-base_viz.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

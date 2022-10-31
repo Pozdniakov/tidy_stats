@@ -260,7 +260,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -364,10 +364,10 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#matrix" id="toc-matrix" class="nav-link active" data-scroll-target="#matrix"><span class="toc-section-number">4.1</span>  Матрица</a></li>
-  <li><a href="#arrays" id="toc-arrays" class="nav-link" data-scroll-target="#arrays"><span class="toc-section-number">4.2</span>  Массив</a></li>
-  <li><a href="#list" id="toc-list" class="nav-link" data-scroll-target="#list"><span class="toc-section-number">4.3</span>  Список</a></li>
-  <li><a href="#df" id="toc-df" class="nav-link" data-scroll-target="#df"><span class="toc-section-number">4.4</span>  Датафрейм</a></li>
+  <li><a href="#sec-matrix" id="toc-sec-matrix" class="nav-link active" data-scroll-target="#sec-matrix"><span class="toc-section-number">4.1</span>  Матрица</a></li>
+  <li><a href="#sec-arrays" id="toc-sec-arrays" class="nav-link" data-scroll-target="#sec-arrays"><span class="toc-section-number">4.2</span>  Массив</a></li>
+  <li><a href="#sec-list" id="toc-sec-list" class="nav-link" data-scroll-target="#sec-list"><span class="toc-section-number">4.3</span>  Список</a></li>
+  <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="toc-section-number">4.4</span>  Датафрейм</a></li>
   </ul>
 </nav>
     </div>
@@ -376,7 +376,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="complex_structures" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></h1>
+<h1 class="title"><span id="sec-complex_structures" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></h1>
 </div>
 
 
@@ -390,8 +390,8 @@ div.csl-indent {
 
 </header>
 
-<section id="matrix" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="matrix"><span class="header-section-number">4.1</span> Матрица</h2>
+<section id="sec-matrix" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-matrix"><span class="header-section-number">4.1</span> Матрица</h2>
 <p>Если вдруг вас пугает это слово, то совершенно зря. <strong>Матрица (matrix)</strong> – это всего лишь “двумерный” вектор: вектор, у которого есть не только длина, но и ширина. Создать матрицу можно с помощью функции <code>matrix()</code> из вектора, указав при этом количество строк и столбцов.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow=</span><span class="dv">5</span>,<span class="at">ncol=</span><span class="dv">4</span>)</span>
@@ -481,8 +481,8 @@ div.csl-indent {
 <p>То, что матрица – это просто двумерный вектор, не является метафорой: в R матрица – это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты – это свойства объектов, своего рода “метаданные”. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги “R in a Nutshell” <span class="citation" data-cites="adler2010r">(<a href="950-references.html#ref-adler2010r" role="doc-biblioref">Adler 2010</a>)</span>.</p>
 </blockquote>
 </section>
-<section id="arrays" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="arrays"><span class="header-section-number">4.2</span> Массив</h2>
+<section id="sec-arrays" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-arrays"><span class="header-section-number">4.2</span> Массив</h2>
 <p>Два измерения – это не предел! Структура с одним типом данных внутри, но с тремя измерениями или больше, называется <strong>массивом (array)</strong>. Создание массива очень похоже на создание матрицы: задаем вектор, из которого будет собран массив, и размерность массива.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>array_3d <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
@@ -504,8 +504,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="list" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="list"><span class="header-section-number">4.3</span> Список</h2>
+<section id="sec-list" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-list"><span class="header-section-number">4.3</span> Список</h2>
 <p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим <strong>список (list)</strong>!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>simple_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>, <span class="st">"Пам пам"</span>, <span class="cn">TRUE</span>)</span>
@@ -630,8 +630,8 @@ $language
 <p>Списки довольно часто используются в R, но реже, чем в Python. Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками – к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры – хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
 </blockquote>
 </section>
-<section id="df" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="df"><span class="header-section-number">4.4</span> Датафрейм</h2>
+<section id="sec-df" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-df"><span class="header-section-number">4.4</span> Датафрейм</h2>
 <p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы (data.frames)</strong>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
 <p>Без векторов мы не смогли бы разобраться с матрицами и списками. А без последних мы не сможем понять, что такое датафрейм.</p>
 <div class="cell">

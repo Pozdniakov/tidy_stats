@@ -242,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -264,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез {whole_nhst}</a>
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -334,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">950-references.html</span></a>
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Библиография</span></a>
   </div>
 </li>
     </ul>
@@ -346,11 +346,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lm_func" id="toc-lm_func" class="nav-link active" data-scroll-target="#lm_func"><span class="toc-section-number">19.1</span>  Функция <code>lm()</code></a></li>
-  <li><a href="#interpret_lm" id="toc-interpret_lm" class="nav-link" data-scroll-target="#interpret_lm"><span class="toc-section-number">19.2</span>  Интерпретация вывода линейной регрессии</a></li>
-  <li><a href="#lm_a" id="toc-lm_a" class="nav-link" data-scroll-target="#lm_a"><span class="toc-section-number">19.3</span>  Допущения линейной регрессии</a></li>
-  <li><a href="#outliers_lm" id="toc-outliers_lm" class="nav-link" data-scroll-target="#outliers_lm"><span class="toc-section-number">19.4</span>  Влияние выбросов на линейную модель</a></li>
-  <li><a href="#lm_mult" id="toc-lm_mult" class="nav-link" data-scroll-target="#lm_mult"><span class="toc-section-number">19.5</span>  Множественная линейная регрессия</a></li>
+  <li><a href="#sec-lm_func" id="toc-sec-lm_func" class="nav-link active" data-scroll-target="#sec-lm_func"><span class="toc-section-number">19.1</span>  Функция <code>lm()</code></a></li>
+  <li><a href="#sec-interpret_lm" id="toc-sec-interpret_lm" class="nav-link" data-scroll-target="#sec-interpret_lm"><span class="toc-section-number">19.2</span>  Интерпретация вывода линейной регрессии</a></li>
+  <li><a href="#sec-lm_a" id="toc-sec-lm_a" class="nav-link" data-scroll-target="#sec-lm_a"><span class="toc-section-number">19.3</span>  Допущения линейной регрессии</a></li>
+  <li><a href="#sec-outliers_lm" id="toc-sec-outliers_lm" class="nav-link" data-scroll-target="#sec-outliers_lm"><span class="toc-section-number">19.4</span>  Влияние выбросов на линейную модель</a></li>
+  <li><a href="#sec-lm_mult" id="toc-sec-lm_mult" class="nav-link" data-scroll-target="#sec-lm_mult"><span class="toc-section-number">19.5</span>  Множественная линейная регрессия</a></li>
   </ul>
 </nav>
     </div>
@@ -359,7 +359,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="lm" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></h1>
+<h1 class="title"><span id="sec-lm" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></h1>
 </div>
 
 
@@ -426,8 +426,8 @@ sample estimates:
 <p>Если видите эту волнистую линию - тильду (<code>~</code>), это значит, что перед вами формула. Мы уже сталкивались с формулами ранее, они иногда используются для задания отношений между переменными, например, для определения фасеток на графике (@ref(gg_base)).</p>
 <p>Давайте исследуем зависимость размера рюкзака от массы тела. В простой линейной регрессии, в отличие от корреляции, есть направленность: одна переменная является как бы независимой переменной или предиктором, другая - как бы объясняемой переменной (outcome). В формуле предикторы находятся справа от тильды, а объясняемая переменная - слева.</p>
 <p>Я специально написал “как бы”: если одна переменная предиктор, а другая объясняется этим предиктором, то кажется, что они должны быть обязательно связаны причинно-следственной связью. Это не так: обозначения условны, более того, вы можете поменять переменные местами и ничего не изменится! Короче говоря, линейная регрессия не дает никакой магической каузальной силы исследуемым переменным.</p>
-<section id="lm_func" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="lm_func"><span class="header-section-number">19.1</span> Функция <code>lm()</code></h2>
+<section id="sec-lm_func" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="sec-lm_func"><span class="header-section-number">19.1</span> Функция <code>lm()</code></h2>
 <p>Давайте посчитаем линейную регрессию функцией <code>lm()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(backpack_kg <span class="sc">~</span> body_kg, <span class="at">data =</span> back)</span>
@@ -478,8 +478,8 @@ Coefficients:
 </div>
 <p>Здесь бессмысленность происходящего еще очевиднее. Конечно, вес студента не может быть равен нулю, иначе это не студент вовсе. Однако это позволяет понять, что такое intercept модели - это значение зависимой переменой в случае, если предиктор равен нулю. А коэффициент предиктора означает, насколько килограммов увеличивается вес рюкзака при увеличении веса студента на 1 кг: на 0.0371297. Не очень много!</p>
 </section>
-<section id="interpret_lm" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="interpret_lm"><span class="header-section-number">19.2</span> Интерпретация вывода линейной регрессии</h2>
+<section id="sec-interpret_lm" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="sec-interpret_lm"><span class="header-section-number">19.2</span> Интерпретация вывода линейной регрессии</h2>
 <p>Гораздо более подробные результаты мы получим, если применим уже известную нам generic функцию <code>summary()</code> на нашу модель.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -671,8 +671,8 @@ F-statistic: 3.644 on 1 and 98 DF,  p-value: 0.05921</code></pre>
 </div>
 </div>
 </section>
-<section id="lm_a" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="lm_a"><span class="header-section-number">19.3</span> Допущения линейной регрессии</h2>
+<section id="sec-lm_a" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="sec-lm_a"><span class="header-section-number">19.3</span> Допущения линейной регрессии</h2>
 <p>Как и в случае с другими параметрическими методами, линейная регрессия имеет определенные допущения относительно используемых данных. Если они не соблюдаются, то все наши расчеты уровня значимости могут некорректными.</p>
 <blockquote class="blockquote">
 <p>Очень важно ставить вопрос о том, насколько результаты будут некорректными. Как сильно нарушения допущений будет влиять на модель? Ответ на этот вопрос может быть контринтуитивен. Например, достаточно большие отклонения от нормальности нам обычно не страшны при условии того, что выборка достаточно большая.</p>
@@ -701,8 +701,8 @@ F-statistic: 3.644 on 1 and 98 DF,  p-value: 0.05921</code></pre>
 </div>
 </div>
 </section>
-<section id="outliers_lm" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="outliers_lm"><span class="header-section-number">19.4</span> Влияние выбросов на линейную модель</h2>
+<section id="sec-outliers_lm" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="sec-outliers_lm"><span class="header-section-number">19.4</span> Влияние выбросов на линейную модель</h2>
 <p>Давайте теперь попробуем посмотреть, как изменится модель, если выкинуть <em>high leverage points</em> (экстремальные значения по предиктору - body) и что будет, если выкинуть экстремальные значения по у. Обычная линия - регрессионная прямая для модели со всеми точками, штрихованная линия - регрессионная прямая для модели без экстремальных значений по предиктору, пунктирная линия - регрессионная прямая для модели без экстремальных значений по предсказываемой переменной.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>is_outlier <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">2</span>, <span class="at">centr =</span> mean, <span class="at">vary =</span> sd) {</span>
@@ -776,8 +776,8 @@ F-statistic: 1.416 on 1 and 93 DF,  p-value: 0.2372</code></pre>
 </div>
 <p>Таким образом, именно экстремальные значения по предиктору, а не по объяснияемой переменной имеют особенно сильное значение на регрессионную модель.</p>
 </section>
-<section id="lm_mult" class="level2" data-number="19.5">
-<h2 data-number="19.5" class="anchored" data-anchor-id="lm_mult"><span class="header-section-number">19.5</span> Множественная линейная регрессия</h2>
+<section id="sec-lm_mult" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="sec-lm_mult"><span class="header-section-number">19.5</span> Множественная линейная регрессия</h2>
 <p>В множественной линейной регрессионной регрессии у нас появляется несколько предикторов. Какая модель лучше: где есть много предикторов или где мало предикторов? С одной стороны, чем больше предикторов, тем лучше: каждый новый предиктор может объяснить чуть больше необъясненной дисперсиии. С другой стороны, если эта прибавка маленькая (а она всегда будет не меньше нуля), то, возможно, новый предиктор просто объясняет “случайный шум”. В действительности, если у нас будет достаточно много предикторов, то мы сможем объяснить любые данные! Парадоксальным образом такая модель будет давать очень хорошие результаты на той выборке, по которой мы считаем коэффициенты, но делать очень плохие предсказания на новой выборке - это то, что в машинном обучении называют переобучением (<em>overfitting</em>). Идеальная модель будет включать минимум предикторов, которые лучше всего объясненяют исследуемую переменную. Это что-то вроде <a href="https://ru.wikipedia.org/wiki/Бритва_Оккама">бритвы Оккама</a> в статистике.</p>
 <p>Поэтому часто используются показатели качества модели, которые “наказывают” модель за большое количество предикторов. Например, adjusted R<sup>2</sup>:</p>
 <p><span class="math display">\[R_{adj} = 1 - (1 - R^2) \frac{n -1}{n - p - 1}\]</span></p>

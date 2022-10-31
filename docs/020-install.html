@@ -241,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Визуализация в R</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -345,14 +345,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#extra_pack" id="toc-extra_pack" class="nav-link active" data-scroll-target="#extra_pack"><span class="toc-section-number">5.1</span>  Дополнительные пакеты</a></li>
-  <li><a href="#r_built_in" id="toc-r_built_in" class="nav-link" data-scroll-target="#r_built_in"><span class="toc-section-number">5.2</span>  Встроенные пакеты R</a></li>
-  <li><a href="#install_cran" id="toc-install_cran" class="nav-link" data-scroll-target="#install_cran"><span class="toc-section-number">5.3</span>  Установка пакетов с CRAN</a></li>
-  <li><a href="#package_load" id="toc-package_load" class="nav-link" data-scroll-target="#package_load"><span class="toc-section-number">5.4</span>  Загрузка установленного пакета</a></li>
-  <li><a href="#from_package" id="toc-from_package" class="nav-link" data-scroll-target="#from_package"><span class="toc-section-number">5.5</span>  Вызов функции из пакета с помощью <code>::</code></a></li>
-  <li><a href="#install_bioc" id="toc-install_bioc" class="nav-link" data-scroll-target="#install_bioc"><span class="toc-section-number">5.6</span>  Установка пакетов c Bioconductor</a></li>
-  <li><a href="#install_github" id="toc-install_github" class="nav-link" data-scroll-target="#install_github"><span class="toc-section-number">5.7</span>  Установка пакетов с Github</a></li>
-  <li><a href="#where_packages" id="toc-where_packages" class="nav-link" data-scroll-target="#where_packages"><span class="toc-section-number">5.8</span>  Где искать нужные пакеты</a></li>
+  <li><a href="#sec-extra_pack" id="toc-sec-extra_pack" class="nav-link active" data-scroll-target="#sec-extra_pack"><span class="toc-section-number">5.1</span>  Дополнительные пакеты</a></li>
+  <li><a href="#sec-r_built_in" id="toc-sec-r_built_in" class="nav-link" data-scroll-target="#sec-r_built_in"><span class="toc-section-number">5.2</span>  Встроенные пакеты R</a></li>
+  <li><a href="#sec-install_cran" id="toc-sec-install_cran" class="nav-link" data-scroll-target="#sec-install_cran"><span class="toc-section-number">5.3</span>  Установка пакетов с CRAN</a></li>
+  <li><a href="#sec-package_load" id="toc-sec-package_load" class="nav-link" data-scroll-target="#sec-package_load"><span class="toc-section-number">5.4</span>  Загрузка установленного пакета</a></li>
+  <li><a href="#sec-from_package" id="toc-sec-from_package" class="nav-link" data-scroll-target="#sec-from_package"><span class="toc-section-number">5.5</span>  Вызов функции из пакета с помощью <code>::</code></a></li>
+  <li><a href="#sec-install_bioc" id="toc-sec-install_bioc" class="nav-link" data-scroll-target="#sec-install_bioc"><span class="toc-section-number">5.6</span>  Установка пакетов c Bioconductor</a></li>
+  <li><a href="#sec-install_github" id="toc-sec-install_github" class="nav-link" data-scroll-target="#sec-install_github"><span class="toc-section-number">5.7</span>  Установка пакетов с Github</a></li>
+  <li><a href="#sec-where_packages" id="toc-sec-where_packages" class="nav-link" data-scroll-target="#sec-where_packages"><span class="toc-section-number">5.8</span>  Где искать нужные пакеты</a></li>
   </ul>
 </nav>
     </div>
@@ -361,7 +361,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="r_packages" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></h1>
+<h1 class="title"><span id="sec-r_packages" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></h1>
 </div>
 
 
@@ -375,16 +375,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="extra_pack" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="extra_pack"><span class="header-section-number">5.1</span> Дополнительные пакеты</h2>
+<section id="sec-extra_pack" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-extra_pack"><span class="header-section-number">5.1</span> Дополнительные пакеты</h2>
 <p>R — очень богатый язык с широкими возможностями. Однако очень скоро мы поймем, что этих возможностей нам не хватает. Эти возможности нам могут предоставить дополнительные <strong>пакеты (packages)</strong>.</p>
 <p>В большинстве случаев основным содержанием пакетов является набор дополнительных функций. Кроме функций, пакеты могут содержать наборы данных и новые структуры данных.</p>
 <p>Обычно пакеты посвящены решению какого-то класса задач в определенной области. Например, есть множество пакетов для создания какого-то одного типа визуализации. Еще один пример — пакет <code>beepr</code>, который содержит всего две функции: <code>beep()</code> и <code>beep_on_error()</code> для воспроизведения звукового сигнала. Это может быть удобно, если ваш скрипт работает долго, но вы хотите получить уведомление, когда его выполнение завершится.</p>
 <p>Более крупные пакеты посвящены целому классу задач. Например, пакеты <code>stringi</code> и <code>stringr</code> посвящены работе со строками, значительно расширяя и делая более удобной работу со строковыми данными в R. Еще один пример: пакет <code>igraph</code> для работы с графами (сетями). Этот пакет предоставляет дополнительный класс данных <code>igraph</code> для хранения и работы с сетями.</p>
 <p>Есть и совсем крупные пакеты, которые значительно расширяют базовый функционал R, изменяя основные принципы работы в нем. Это пакеты <code>data.table</code> и <code>tidyverse</code>. Это настолько крупные пакеты, что их даже называют отдельными диалектами R, потому что код, написанный с использованием этих пакетов, довольно сильно отличается от базового R. Кроме того, <code>tidyverse</code> - это не просто пакет, а целая экосистема пакетов, который взаимодополняют друг друга, но для удобства их можно устанавливать и загружать как один пакет <code>tidyverse</code>. Еще один пример крупной экосистемы из пакетов — это пакет <code>mlr3</code> для машинного обучения, который представляет собой большой расширяемый “пакет пакетов”, где отдельные пакеты посвящены отдельным этапам и задачам машинного обучения.</p>
 </section>
-<section id="r_built_in" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="r_built_in"><span class="header-section-number">5.2</span> Встроенные пакеты R</h2>
+<section id="sec-r_built_in" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-r_built_in"><span class="header-section-number">5.2</span> Встроенные пакеты R</h2>
 <p>Вообще, даже сам R является набором из нескольких пакетов: основного <code>base</code> и нескольких других, таких как <code>stats</code>, <code>utils</code>, <code>graphics</code>. Вот их полный список:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(<span class="fu">installed.packages</span>(<span class="at">priority =</span> <span class="st">"base"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -396,8 +396,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Чтобы пользоваться этими пакетами ничего дополнительно делать не нужно.</p>
 </section>
-<section id="install_cran" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="install_cran"><span class="header-section-number">5.3</span> Установка пакетов с CRAN</h2>
+<section id="sec-install_cran" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-install_cran"><span class="header-section-number">5.3</span> Установка пакетов с CRAN</h2>
 <p>Функция <code>install.packages()</code> позволяет скачивать пакеты с Comprehensive R Archive Network (CRAN). На репозитории CRAN собрано более 16000 пакетов. Каждый из этих пакетов проходит проверку перед попаданием в CRAN: он должен быть хорошо задокументирован, стабильно работать и решать какую-то задачу.</p>
 <p>Для примера установим пакет <code>remotes</code>. Это пакет для удобной установки пакетов не с CRAN и скоро нам понадобится.</p>
 <div class="cell">
@@ -407,8 +407,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>!()<span width="400">images/install_success.png</span></p>
 <p>Иногда установка бывает очень долгой, потому что большие пакеты склонны иметь много <strong>зависимостей</strong>: для работы какого-то пакета может понадобиться другие пакеты, а для тех пакетов - еще какие-то пакеты. Таким образом, устанавливая какой-нибудь современный пакет, вы, возможно, установите десятки других пакетов! Зато если они понадобятся сами по себе, то их уже не нужно будет устанавливать.</p>
 </section>
-<section id="package_load" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="package_load"><span class="header-section-number">5.4</span> Загрузка установленного пакета</h2>
+<section id="sec-package_load" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-package_load"><span class="header-section-number">5.4</span> Загрузка установленного пакета</h2>
 <p>Установить пакет с помощью <code>install.packages()</code> недостаточно, пакет нужно еще загрузить. Для этого есть функция <code>library()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"remotes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -419,8 +419,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Теперь функции, данные и классы из пакета доступны для работы.</p>
 </section>
-<section id="from_package" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="from_package"><span class="header-section-number">5.5</span> Вызов функции из пакета с помощью <code>::</code></h2>
+<section id="sec-from_package" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-from_package"><span class="header-section-number">5.5</span> Вызов функции из пакета с помощью <code>::</code></h2>
 <p>Если пакетом нужно воспользоваться всего один-два раза, то имеет смысл не подключать весь пакет, а загрузить отдельную функцию из него. Для этого есть специальный оператор <code>::</code>, который использует функцию (указанную справа от <code>::</code>) из выбранного пакета (указанного слева от <code>::</code>), не загружая пакет полностью.</p>
 <p>Для примера воспользуемся функцией <code>package_deps()</code> из только что установленного пакета <code>remotes</code>, которая возвращает все зависимости пакета:</p>
 <div class="cell">
@@ -520,8 +520,8 @@ Frequency = 1
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="install_bioc" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="install_bioc"><span class="header-section-number">5.6</span> Установка пакетов c Bioconductor</h2>
+<section id="sec-install_bioc" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="sec-install_bioc"><span class="header-section-number">5.6</span> Установка пакетов c Bioconductor</h2>
 <p>У биологов есть свой большой репозиторий, который является альтернативой CRAN, — Bioconductor. С него можно скачать множество специализированных пакетов для работы с биологическими данными.</p>
 <p>Для установки пакетов с Bioconductor сначала нужно скачать пакет <code>BiocManager</code> с CRAN.</p>
 <div class="cell">
@@ -532,8 +532,8 @@ Frequency = 1
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"flowCore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="install_github" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="install_github"><span class="header-section-number">5.7</span> Установка пакетов с Github</h2>
+<section id="sec-install_github" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sec-install_github"><span class="header-section-number">5.7</span> Установка пакетов с Github</h2>
 <p>Некоторых пакетов нет ни на CRAN, ни на Bioconductor. Обычно это касается пакетов, разработчики которых по каким-либо причинам решили не проходить проверки или не прошли проверки на строгие требования CRAN. Иногда бывает, что пакет был удален с CRAN (например, автор давно не занимается им) или же версия пакета на CRAN отстает от последней, а именно в ней реализованы так нужные вам функции. В некоторых случаях пакета может не быть на CRAN, потому что его разработчики активно занимаются его развитием и постоянно переделывают уже имеющийся функционал, добавляя новые возможности и удаляя старые. Это нужно делать с осторожностью, когда пакет уже выложен на CRAN, потому что если функции новой версии пакета будут работать по-другому, то это может вызвать массу проблем.</p>
 <p>Во всех этих случаях пакет обычно можно скачать с репозитория Github. Для этого нам понадобится уже установленный (с CRAN, разумеется) пакет <code>remotes</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell">
@@ -558,8 +558,8 @@ Frequency = 1
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_bioc</span>(<span class="st">"flowCore"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="where_packages" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="where_packages"><span class="header-section-number">5.8</span> Где искать нужные пакеты</h2>
+<section id="sec-where_packages" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="sec-where_packages"><span class="header-section-number">5.8</span> Где искать нужные пакеты</h2>
 <p>Мы разобрались с тем, как устанавливать пакеты. А где же их находить?</p>
 <p>Это вопрос гораздо более сложный чем может показаться. Например, можно работать в R и не знать, что существует пакет, который решает нужную для вас задачу. Или же найти такой пакет и не знать, что есть более современный пакет, который делает это еще лучше!</p>
 <p>Здесь нет каких-то готовых решений. CRAN пытается создавать и поддерживать тематические списки <em>(Task View)</em> пакетов с описанием задач, которые они решают:</p>
