@@ -59,7 +59,7 @@ heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/mast
 
 Подробнее про импорт данных, в том числе в tidyverse, смотри в \@ref(real_data).
 
-##tibble
+## tibble {#sec-tibble}
 
 Когда мы загрузили данные с помощью `read_csv()`, то мы получили `tibble`, а не `data.frame`:
 
@@ -197,7 +197,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  select(!X1)
+  select(!...1)
 heroes %>%
   select(!(Gender:Height))
 ```
@@ -265,14 +265,14 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  select(id = X1)
+  select(id = ...1)
 ```
 
 Однако удобнее для этого использовать специальную функцию `dplyr::rename()`. Синтаксис у нее такой же, как и у `select()`, но `rename()` не выбрасывает колонки, которые не были упомянуты.
 
 ```{r}
 heroes %>%
-  rename(id = X1)
+  rename(id = ...1)
 ```
 
 Для массового переименования колонок можно использовать функцию `rename_with()`. Эта функция так же использует tidyselect синтаксис для выбора колонок (по умолчанию выбираются все колонки) и применяет функцию в качестве аргумента, которая изменяет
