@@ -1950,6 +1950,8 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb181"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb181-1"><a href="#cb181-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">39</span>, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb181-2"><a href="#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(B, <span class="dv">1</span>, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22.5 23.5 24.5 25.5 26.5</code></pre>
 </div>
@@ -1959,10 +1961,10 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <h2 data-number="24.15" class="anchored" data-anchor-id="sec-task_select"><span class="header-section-number">24.15</span> Выбор столбцов: <code>dplyr::select()</code></h2>
 <p>Для выполнения следующих заданий нам понадобятся датасеты <code>heroes</code> и <code>powers</code>, которые можно загрузить, используя следующие команды:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
-<span id="cb182-3"><a href="#cb182-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
-<span id="cb182-4"><a href="#cb182-4" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
+<span id="cb183-3"><a href="#cb183-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
+<span id="cb183-4"><a href="#cb183-4" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Выберете первые 4 столбца в <code>powers</code>.</li>
@@ -2358,12 +2360,12 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Для начала создайте тиббл <code>heroes_weight</code>, скопировав код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb201"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a>heroes_weight <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
-<span id="cb201-2"><a href="#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DC Comics"</span>, <span class="st">"Marvel Comics"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb201-3"><a href="#cb201-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender, Publisher) <span class="sc">%&gt;%</span></span>
-<span id="cb201-4"><a href="#cb201-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb201-5"><a href="#cb201-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
-<span id="cb201-6"><a href="#cb201-6" aria-hidden="true" tabindex="-1"></a>heroes_weight </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb202"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href="#cb202-1" aria-hidden="true" tabindex="-1"></a>heroes_weight <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb202-2"><a href="#cb202-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DC Comics"</span>, <span class="st">"Marvel Comics"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb202-3"><a href="#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender, Publisher) <span class="sc">%&gt;%</span></span>
+<span id="cb202-4"><a href="#cb202-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb202-5"><a href="#cb202-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
+<span id="cb202-6"><a href="#cb202-6" aria-hidden="true" tabindex="-1"></a>heroes_weight </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
 # Groups:   Gender [2]
@@ -2847,7 +2849,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="24.28" class="anchored" data-anchor-id="sec-dep_ttest_tasks"><span class="header-section-number">24.28</span> Двухвыборочный зависимый t-test</h2>
 <p>Для дальнейших заданий понадобится набор данных о результативности трех диет, который мы использовали во время занятия.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb221"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb221-1"><a href="#cb221-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href="#cb222-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Посчитайте двухвыборочный зависимый т-тест для остальных диет: для диеты 2 и диеты 3. Проинтерпретируйте полученные результаты.</li>
@@ -2898,12 +2900,12 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="24.32" class="anchored" data-anchor-id="sec-backpack_tasks"><span class="header-section-number">24.32</span> Исследование набора данных Backpack</h2>
 <p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb223"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb223-1"><a href="#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
-<span id="cb223-2"><a href="#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb223-3"><a href="#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
-<span id="cb223-4"><a href="#cb223-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
-<span id="cb223-5"><a href="#cb223-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
-<span id="cb223-6"><a href="#cb223-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
+<span id="cb224-2"><a href="#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb224-3"><a href="#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
+<span id="cb224-4"><a href="#cb224-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb224-5"><a href="#cb224-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb224-6"><a href="#cb224-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Как различается вес рюкзака в зависимости от пола? Кто весит больше?</li>
