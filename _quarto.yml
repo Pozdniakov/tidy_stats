@@ -2,11 +2,12 @@ project:
   type: book
   output-dir: docs
 
+lang: ru
+
 book:
   title: "Анализ данных и статистика в R"
   author: "Иван Поздняков"
   date: "10/26/2022"
-  lang: ru
   chapters:
     - index.qmd
     
@@ -57,7 +58,20 @@ format:
   html:
     theme: cosmo
   pdf:
-    documentclass: scrreprt
+    documentclass: book
+    #template: template.tex
+    # include-in-header:
+    #   text: |
+    #     \usepackage{fontspec}
+    #     \usepackage{polyglossia}
+    #     \setmainlanguage{russian} 
+    #     \setotherlanguage{english}
+
+mainfont: "PT Serif"
+
+pdf-engine: lualatex
+
+prefer-html: false
 
 editor: visual
 

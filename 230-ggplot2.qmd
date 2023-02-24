@@ -62,6 +62,12 @@ heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/mast
                    na = c("-", "-99"))
 ```
 
+```{r, echo = FALSE, message = FALSE}
+library(showtext)
+showtext_auto()
+```
+
+
 Итак, запустим функцию `ggplot()`, задав наш тиббл `heroes` в качестве данных.
 
 ```{r}
@@ -144,17 +150,12 @@ ggplot(data = heroes) +
 
 Мы сфокусируемся на нижней картинке с "Policy change" --- это как раз исследования, в которых изучается изменения интеллекта в возрастных группах после изменения количества лет обучения в школе.
 
-![](images/meta_analysis_ggplot2.png)
-
-Мы полностью воспроизведем код
-
-```{r}
-library(tidyverse)
-```
+Мы полностью воспроизведем код построчно, посмотрим, как эта картинка создавалась шаг за шагом.
 
 Заметьте, данный датасет использует немного непривычный для нас формат хранения данных. Попытайтесь самостоятельно прочитать его.
 
 ```{r}
+library(tidyverse)
 df <- read_tsv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/meta_dataset.txt")
 ```
 
@@ -454,8 +455,8 @@ meta_2_gg
 install.packages("hrbrthemes")
 ```
 
-```{r}
+```{r, eval = FALSE}
 library(hrbrthemes)
 meta_2_gg +
-  theme_ipsum_tw()
+  theme_ipsum()
 ```

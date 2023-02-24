@@ -191,7 +191,15 @@ band_members %>%
 
 -   `tidyr::pivot_wider()`: из *длинного* в *широкий* формат
 
-![](images/tidyr-longer-wider.gif)
+```{r, echo = FALSE, results = 'asis'}
+if (knitr:::is_latex_output()) {
+  cat("\n\nК сожалению, в PDF нельзя вставить .gif анимацию, посмотреть
+      ее можно по [ссылке](https://github.com/Pozdniakov/tidy_stats/blob/master/images/tidyr-longer-wider.gif)")
+} else {
+  knitr::include_graphics("images/tidyr-longer-wider.gif")
+}
+```
+
 
 ```{r}
 new_diet <- tibble(
@@ -488,4 +496,3 @@ films %>%
   pivot_wider(names_from = "genres",
               values_from = "value", values_fill = FALSE)
 ```
-

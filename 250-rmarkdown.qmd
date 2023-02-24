@@ -27,7 +27,7 @@ R Markdown представляет собой текстовый докумен
 
 Чтобы начать работать с R Markdown, нужно создать новый .Rmd файл с помощью `File - New File - R Markdown..`. Перед вами появится меню выбора формата R Markdown документа, названия и имени автора.
 
-![Меню выбора формата R Markdown документа](rmd_choose.png){width="400"}
+![Меню выбора формата R Markdown документа](images/rmd_choose.png){width="400"}
 
 Выбирайте что угодно, все это можно потом изменить вручную.
 
@@ -276,8 +276,12 @@ ggplotly(height_weight_gg)
 
 Если вы выбрали HTML форматом итогового документа, то можете использовать все его фишки, включая форматирование с помощью HTML-тегов (в дополнение к обычному Markdown). Еще вы можете вставлять куски HTML-кода, например, вставить видео с YouTube или отдельный пост из Twitter.
 
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+```{r, echo = FALSE, results = 'asis'}
+if (knitr:::is_latex_output()) {
+  cat("\n\nК сожалению, в PDF нельзя вставить никакой интерактивности, смотрите онлайн-версию книги)")
+} else {
+  cat('\n\n     <iframe width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-
-</iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>') 
+}
+```
