@@ -378,7 +378,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-check_imported" id="toc-sec-check_imported" class="nav-link" data-scroll-target="#sec-check_imported"><span class="toc-section-number">6.3</span>  Проверка импортированных данных</a></li>
   <li><a href="#sec-export_data" id="toc-sec-export_data" class="nav-link" data-scroll-target="#sec-export_data"><span class="toc-section-number">6.4</span>  Экспорт данных</a></li>
   <li><a href="#sec-binary" id="toc-sec-binary" class="nav-link" data-scroll-target="#sec-binary"><span class="toc-section-number">6.5</span>  Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
-  <li><a href="#sec-fastread" id="toc-sec-fastread" class="nav-link" data-scroll-target="#sec-fastread"><span class="toc-section-number">6.6</span>  Быстрый импорт данных</a></li>
+  <li><a href="#import_googlesheets" id="toc-import_googlesheets" class="nav-link" data-scroll-target="#import_googlesheets"><span class="toc-section-number">6.6</span>  Импорт данных из Google Sheets</a></li>
+  <li><a href="#sec-fastread" id="toc-sec-fastread" class="nav-link" data-scroll-target="#sec-fastread"><span class="toc-section-number">6.7</span>  Быстрый импорт данных</a></li>
   </ul>
 </nav>
     </div>
@@ -601,15 +602,32 @@ file or directory</code></pre>
 </ul>
 <p>Что такое пакеты и как их устанавливать мы изучим очень скоро.</p>
 </section>
-<section id="sec-fastread" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="sec-fastread"><span class="header-section-number">6.6</span> Быстрый импорт данных</h2>
+<section id="import_googlesheets" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="import_googlesheets"><span class="header-section-number">6.6</span> Импорт данных из Google Sheets</h2>
+<p>Все чаще “кнопочная” работа с данными переезжает из Excel в облачный Google Sheets, который обладает схожим интерфейсом и функционалом, но позволяет удобно работать нескольким пользователям одновременно.</p>
+<p>Оттуда данные можно легко выгрузить в нужном формате. Конечно, и в .csv тоже. Но было бы удобно загружать данные из Google Sheets напрямую, по ссылке. И это вполне возможно и даже не очень трудно! Лучший пакет для этого – <code>googlesheets4</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"googlesheets"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Основная функция – read_sheet(), в ней нужно прописать ссылку, которую можно получить в “Настройках доступа” (или которую вам уже прислали).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>heroes_form_gsh <span class="ot">&lt;-</span> googlesheets4<span class="sc">::</span><span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1JnkftX8H2n383V6wFBTKBqiMmj79hravsYcSeClSeo8/edit?usp=sharing"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>После этого в консоли нужно будет выбрать Google-аккаунт:</p>
+<p><img src="images/030-_import_data_google_choose.png" class="img-fluid"></p>
+<p>Выбираете (в данном случае у меня только один аккаунт, поэтому пишу <em><code>1</code></em> и жму <em><code>Enter</code></em>).</p>
+<p>После этого откроется окно в веб-браузере, в котором Google будет спрашивать, доверяете ли вы R и готовы ли дать ему доступ к чтению таблицы (разумеется, отвечаем, что да). Это нужно будет сделать всего один раз, так что в дальнейшем нажимать в веб-браузере ничего будет не нужно.</p>
+<p>После этого таблица загрузится.</p>
+</section>
+<section id="sec-fastread" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="sec-fastread"><span class="header-section-number">6.7</span> Быстрый импорт данных</h2>
 <p>Чтение табличных данных обычно происходит очень быстро. По крайней мере, до тех пор пока ваши данные не содержат очень много значений. Если вы попробуете прочитать с помощью <code>read.csv()</code> таблицу с миллионами строчками, то заметите, что это происходит довольно медленно. Впрочем, эта проблема эффективно решается дополнительными пакетами.</p>
 <ul>
 <li>Пакет <code>readr</code> (часть базового tidyverse) предлагает функции, очень похожие на стандартные <code>read.csv()</code>, <code>read.csv2()</code> и тому подобные, только в названиях используется нижнее подчеркивание: <code>read_csv()</code> и <code>read_csv2()</code>. Они быстрее и немного удобнее, особенно если вы работаете в tidyverse.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/heroes_information.csv"</span>,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/heroes_information.csv"</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 • `` -&gt; `...1`</code></pre>
@@ -652,7 +670,7 @@ dbl (3): ...1, Height, Weight
 <li>Пакет <code>vroom</code> - это часть расширенного tidyverse. Это такая альтернатива <code>readr</code> из того же tidyverse, но еще быстрее (отсюда и название).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>vroom<span class="sc">::</span><span class="fu">vroom</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>vroom<span class="sc">::</span><span class="fu">vroom</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 Rows: 734 Columns: 11
@@ -686,7 +704,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <li>Пакет <code>data.table</code> - это не просто пакет, а целый фреймворк для работы с R, основной конкурент tidyverse. Одна из основных фишек <code>data.table</code> - быстрота работы. Это касается не только процессинга данных, но и их загрузки и записи. Поэтому некоторые используют функции <code>data.table</code> для чтения и записи данных в отдельности от всего остального пакета - они даже и называются соответствующе: <code>fread()</code> и <code>fwrite()</code>, где <strong>f</strong> означет <strong>f</strong>ast<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      V1            name Gender Eye color              Race       Hair color
   1:   0          A-Bomb   Male    yellow             Human          No Hair
@@ -717,10 +735,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <p>Чем же пользоваться среди всего этого многообразия? <a href="https://www.danielecook.com/speeding-up-reading-and-writing-in-r/">Бенчмарки</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> показывают, что быстрее всех <code>vroom</code> и <code>data.table</code>. Если же у вас нет задачи ускорить работу кода на несколько миллисекунд или прочитать датасет на много миллионов строк, то стандартного <code>read.csv()</code> (если вы работаете в базовом R) и <code>readr::read_csv()</code> (если вы работаете в tidyverse) должно быть достаточно.</p>
 <p>Все перечисленные пакеты повзоляют не только быстро импортировать данные, но и быстро (и удобно!) экспортировать их:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_excel_csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>) <span class="co">#Если в Excel возникают проблемы с кодировками при открытии созданного .csv файла, то эта функция решает эти проблемы</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>vroom<span class="sc">::</span><span class="fu">vroom_write</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_excel_csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>) <span class="co">#Если в Excel возникают проблемы с кодировками при открытии созданного .csv файла, то эта функция решает эти проблемы</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>vroom<span class="sc">::</span><span class="fu">vroom_write</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">delim =</span> <span class="st">","</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>В плане скорости записи файлов соотношение сил примерно такое же, как и для чтения: <code>vroom</code> и <code>data.table</code> обгоняют всех, затем идет <code>readr</code>, и только после него - базовые функции R.</p>
 
