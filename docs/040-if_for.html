@@ -449,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Как мы помним, R — язык, в котором векторизация играет большое значение. Но вот незадача — условные конструкции не векторизованы в R! Давайте попробуем применить эти конструкции для вектора значений и посмотрим, что получится.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (numbers <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число"</span></span>
@@ -458,7 +458,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ноль"</span></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in if (number &gt; 0) {: the condition has length &gt; 1</code></pre>
+<pre><code>Error in if (numbers &gt; 0) {: the condition has length &gt; 1</code></pre>
 </div>
 </div>
 <p>Ошибка! Однако если у вас более старая версия R (до 4.2.0, апрель 2022), то вместо ошибки будет учитываться только первое значение вектора условий: остальные будут игнорироваться, при этом будет выводиться предупреждение. Как же посчитать для всего вектора сразу?</p>
@@ -469,7 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>for(переменная in последовательность) выражение</code></pre>
 <p>Теперь мы можем объединить условные конструкции и <code>for</code>. Немножко монструозно, но это работает:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> number) {</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> numbers) {</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Положительное число"</span>)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
@@ -503,17 +503,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </blockquote>
 <p>Зачем вообще избегать конструкций <code>for</code>? Некоторые говорят, что они слишком медленные, и частично это верно, если мы сравниваем с векторизованными функциями, которые написаны на более низкоуровневых языках. Но в большинстве случаев низкая скорость <code>for</code> связана с неправильным использованием этой конструкции. Например, стоит избегать ситуации, когда на каждой итерации <code>for</code> какой-то объект (вектор, список, что угодно) изменяется в размере. Лучше будет создать заранее объект нужного размера, который затем будет наполняться значениями:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>number_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(number)) <span class="co">#создаем строковый вектор с такой же длиной, как и исходный вектор</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(number)) {</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (number[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Положительное число"</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (number[i] <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Отрицательное число"</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(numbers)) <span class="co">#создаем строковый вектор с такой же длиной, как и исходный вектор</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(numbers)) {</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (numbers[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Положительное число"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (numbers[i] <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Отрицательное число"</span></span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    number_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Ноль"</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Ноль"</span></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>number_descriptions</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>numbers_descriptions</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
@@ -523,9 +523,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sec-ifelse" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="sec-ifelse"><span class="header-section-number">7.3</span> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></h2>
-<p>Альтернатива сочетанию условных конструкций и циклов <code>for</code> является использование встроенной функции <code>ifelse()</code>. Функция <code>ifelse()</code> принимает три аргумента - 1) условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>), 2) что выдавать в случае <code>TRUE</code>, 3) что выдавать в случае <code>FALSE</code>. На выходе получается вектор такой же длины, как и изначальный логический вектор (условие).</p>
+<p>Из-за того, что конструкция if else не векторизованная, она редко используется непосредственно в операциях с данными, обычно она используется при написании функций (<a href="050-functional.html#sec-create_fun"><span>Глава&nbsp;8.1</span></a>) и разработке пакетов.</p>
+<p>Альтернативой сочетанию условных конструкций и циклов <code>for</code> является использование встроенной функции <code>ifelse()</code>. Функция <code>ifelse()</code> принимает три аргумента - 1) условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>), 2) что выдавать в случае <code>TRUE</code>, 3) что выдавать в случае <code>FALSE</code>. На выходе получается вектор такой же длины, как и изначальный логический вектор (условие). Это очень похоже на ЕСЛИ() в <em>Excel</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
@@ -535,50 +536,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote class="blockquote">
 <p>Периодически я встречаю у студентов строчку вроде такой: <code>ifelse(условие, TRUE, FALSE)</code>. Эта конструкция избыточна, т.к. получается, что логический вектор из <code>TRUE</code> и <code>FALSE</code> превращается в абсолютно такой же вектор из <code>TRUE</code> и <code>FALSE</code> на тех же самых местах. Выходит, что ничего не меняется!</p>
 </blockquote>
+<div class="callout callout-style-default callout-warning callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>NA</code> в условии в <code>ifelse()</code> возвращает <code>NA</code>.</p>
+</div>
+</div>
 <p>Пакеты <code>{dplyr}</code> и <code>{data.table}</code> предоставляют более быстрые и более строгие альтернативы для базовой функции <code>ifelse()</code> с аналогичным синтаксисом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">if_else</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">if_else</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
 </div>
-<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. @ref(tidy_intro)), то я советую пользоваться соотвествующей функцией вместо базового <code>ifelse()</code>.</p>
-<p>Обе функции будут избегать скрытого приведения типов (см. <a href="013-vector.html#sec-coercion"><span>Глава&nbsp;3.2</span></a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="013-vector.html#sec-na"><span>Глава&nbsp;3.7</span></a>).</p>
+<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. <a href="110-tidyverse_basic.html#sec-tidy_verse"><span>Глава&nbsp;9.1</span></a> ), то я советую пользоваться соотвествующей функцией вместо базового <code>ifelse()</code>.</p>
+<p>Обе функции будут избегать скрытого приведения типов (см. <a href="013-vector.html#sec-coercion"><span>Глава&nbsp;3.2</span></a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="013-vector.html#sec-na"><span>Глава&nbsp;3.7</span></a>).</p>
 <p>У <code>ifelse()</code> тоже есть недостаток: он не может включать в себя дополнительных условий по типу <code>else if</code>. В простых ситуациях можно вставлять <code>ifelse()</code> внутри <code>ifelse()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(number <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Положительное число"</span>,</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
+<pre><code>[1] "Ноль"                "Ноль"                "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
 <p>Достаточно симпатичное решение есть в пакете <code>dplyr</code> — функция <code>case_when()</code>, которая работает с использованием формулы:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Положительное число"</span>,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Отрицательное число"</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Положительное число"</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Отрицательное число"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
-<p>В <code>data.table</code> тоже есть свой (<a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">более быстрый</a>) аналог <code>case_when()</code> — функция <code>fcase()</code>. Синтаксис отличается только тем, что вместо формул используются простые запятые:</p>
+<p>Функция <code>case_when()</code> по той же логике, что и <code>if else</code> конструкция: сначала идет проверка на первое условие (как первое <strong>if</strong> в конструкции <strong>if else</strong>). Если она проходит (то есть в условие получается TRUE), то это значение возвращается, а остальные условия не проверяются. Если же первое условие не выполняется, то идет проверка на следующее условие (аналог <code>else if</code>). Если же и оно не выполняется, то идет проверка на следующее (следующее else if), пока проверка не пройдет до последнего условия. Можно поставить значение по умолчанию с помощью параметра <code>.default =</code>, которое будет возвращаться, если все проверки выдали <code>FALSE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fcase</span>(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>,</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  number <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>weight_group <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">~</span> <span class="st">"overweight"</span>, <span class="co"># "if"</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">~</span> <span class="st">"somewhat overweight"</span>, <span class="co"># "else if"</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"underweight"</span>, <span class="co"># next "else if"</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"typical weight"</span> <span class="co"># final "else" </span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-caution callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Осторожность
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Будьте внимательны с запятыми!</p>
+</div>
+</div>
+<p>Важный момент: если <code>ifelse()</code> возвращает <code>NA</code> на <code>NA</code> в условии, что обычно нас устраивает (у нас нет данных, что у нас на входе, следовательно, не знаем, что на выходе), то <code>case_when()</code> такого не делает. <code>NA</code> в условии считается как <code>FALSE</code>, поэтому нужно дополнительно обрабатывать условие для него. Чтобы на место <code>NA</code> поставить NA, нужно записать вот так:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>weight_group <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">~</span> <span class="st">"overweight"</span>, <span class="co"># "if"</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">~</span> <span class="st">"somewhat overweight"</span>, <span class="co"># "else if"</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"underweight"</span>, <span class="co"># next "else if"</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(heroes<span class="sc">$</span>Weight) <span class="sc">~</span> <span class="cn">NA</span>, <span class="co"># one more "else if", maps NA to NA</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"typical weight"</span> <span class="co"># final "else" </span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># final "else" </span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>В <code>{data.table}</code> тоже есть свой (<a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">более быстрый</a>) аналог <code>case_when()</code> — функция <code>fcase()</code>. Синтаксис отличается только тем, что вместо формул используются простые запятые. То есть первый аргумент – условие, второй – значение, которое возвращается при верности первого аргумента, третий аргумент – условие, четвертый – возвращаемое значение при верности третьего аргумента и т.д.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fcase</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
@@ -593,6 +641,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol>
 <li id="fn1"><p>В принципе, необязательно внутри должна быть проверка условий, достаточно просто значения <code>TRUE</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Аналогично, достаточно просто значения <code>FALSE</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>В более свежих версиях пакета <code>{dplyr}</code> разработчики отказались от этой “строгости”, поэтому <code>NA</code> все-таки будут приводиться к нужному типу. Однако <code>data.table::fifelse()</code> остался строгим.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
