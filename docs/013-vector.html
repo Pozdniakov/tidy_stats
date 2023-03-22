@@ -442,13 +442,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1]  TRUE FALSE</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> ошибка с кириллической “с”
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Одна из самых мерзких и раздражающих причин ошибок в коде – это использование <code>с</code> из кириллицы вместо <code>c</code> из латиницы. Видите разницу? И я не вижу. А R видит. И об этом сообщает:</p>
-</blockquote>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>с(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in с(3, 4, 5): could not find function "с"</code></pre>
+</div>
+</div>
 </div>
 </div>
 <p>Для создания числовых векторов есть удобный оператор <code>:</code>.</p>
@@ -483,15 +493,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 1 1 1 1 1</code></pre>
 </div>
 </div>
-<p>И первый, и второй аргумент могут быть векторами!</p>
+<p>И первый, и второй аргумент могут быть векторами! Если второй агрумент – вектор такой же длины, то каждое значение первого вектора будет повторено соответствующее количество раз из второго вектора.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3 1 2 3 1 2 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">2</span>, <span class="dv">30</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 2 3 3 3</code></pre>
+<pre><code> [1] 1 1 1 1 1 1 1 1 1 1 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+[39] 3 3 3 3</code></pre>
 </div>
 </div>
 <p>Еще можно объединять вектора (что мы, по сути, и делали, просто с векторами длиной 1):</p>
@@ -541,16 +552,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "TRUE" "3"    "hi"  </code></pre>
 </div>
 </div>
+<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Время мемов
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Здесь все значения были приведены сразу к строковому типу данных.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/013-vector_coercion.jpeg" class="img-fluid figure-img" style="width:56.0%"></p>
 </figure>
 </div>
+</div>
+</div>
 <p>У R есть иерархия приведения типов:</p>
 <p><code>NULL &lt; raw &lt; logical &lt; integer &lt; double &lt; complex &lt; character &lt; list &lt; expression</code>.</p>
 <p>Мы из этого списка еще многого не знаем, сейчас важно запомнить, что логические данные – <code>TRUE</code> и <code>FALSE</code> – превращаются в <code>0</code> и <code>1</code> соответственно, а <code>0</code> и <code>1</code> в строчки <code>"0"</code> и <code>"1"</code>.</p>
-<p>Если Вы боитесь полагаться на приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных</code> для явного приведения типов (<strong>explicit coercion</strong>):</p>
+<p>Если Вы боитесь полагаться на приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных()</code> для явного приведения типов (<strong>explicit coercion</strong>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -561,7 +584,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "1" "0" "0"</code></pre>
 </div>
 </div>
-<p>Можно превращать и обратно, например, строковые значения в числовые. Если среди числа встретится буква или другой неподходящий знак, то мы получим предупреждение <code>NA</code> – пропущенное значение (мы очень скоро научимся с ними работать).</p>
+<p>Можно превращать и обратно, например, строковые значения в числовые. Если среди числа встретится буква или другой неподходящий знак, то мы получим предупреждение <code>NA</code> – пропущенное значение (мы очень скоро научимся с ними работать, см. <a href="index.html"><span>Глава&nbsp;1</span></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"три"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -571,9 +594,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1]  1  2 NA</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Один из распространенных примеров использования неявного приведения типов – использования функций <code>sum()</code> и <code>mean()</code> для подсчета в логическом векторе количества и доли <code>TRUE</code> соответсвенно. Мы будем много раз пользоваться этим приемом в дальнейшем!</p>
-</blockquote>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> подсчет количества и доли
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Один из распространенных примеров использования неявного приведения типов – использования функций <code>sum()</code> и <code>mean()</code> для подсчета в логическом векторе количества и доли <code>TRUE</code> соответственно. Мы будем много раз пользоваться этим приемом в дальнейшем!</p>
+</div>
+</div>
 </section>
 <section id="sec-vector_op" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="sec-vector_op"><span class="header-section-number">3.3</span> Векторизация</h2>
@@ -904,18 +937,31 @@ object length</code></pre>
 <pre><code>[1] "green" "blue"  "blue"  "green" "blue" </code></pre>
 </div>
 </div>
-<p>Основное преимущество оператора <code>%in%</code> в его простоте и понятности. У оператора <code>%in%</code> есть старший брат, более сложный и более мощный. Функция <code>match()</code> работает похожим образом на <code>%in%</code>, но при совпадении значения в левом векторе с одним из значений в правом выдает индекс соответствующего значения вместо <code>TRUE</code>. Если же совпадений нет, то вместо <code>FALSE</code> функция <code>match()</code> выдает <code>NA</code> (что можно поменять параметром <code>nomatch =</code>).</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> <code>match()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Основное преимущество оператора <code>%in%</code> в его простоте и понятности. У оператора <code>%in%</code> есть старший брат, более сложный и более мощный.</p>
+<p>Функция <code>match()</code> работает похожим образом на <code>%in%</code>, но при совпадении значения в левом векторе с одним из значений в правом выдает индекс соответствующего значения вместо <code>TRUE</code>. Если же совпадений нет, то вместо <code>FALSE</code> функция <code>match()</code> выдает <code>NA</code> (что можно поменять параметром <code>nomatch =</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">match</span>(eyes, <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  2  2 NA  1  2</code></pre>
 </div>
 </div>
-<p>Зачем это может понадобиться? Во-первых, это способ соединить два набора данных (хотя для этого есть и более подходящие инструменты), во-вторых, так можно заменить все значения кроме выбранных заменить на <code>NA</code>.</p>
+<p>Зачем это может понадобиться? Во-первых, это способ соединить два набора данных (хотя для этого есть и более подходящие инструменты), во-вторых, так можно заменить все значения кроме выбранных заменить на <code>NA</code> (для чего тоже есть альтернативы).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>)[<span class="fu">match</span>(eyes, <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>))]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "blue"  NA      "green" "blue" </code></pre>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -980,7 +1026,7 @@ object length</code></pre>
 <pre><code> [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 </div>
 </div>
-<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> на тех позициях, где у нас числа (или другие значения), и <code>TRUE</code> там, где у нас <code>NA</code>. Чтобы вычленить из вектора <code>n</code> все значения кроме <code>NA</code> нам нужно, чтобы было наоборот: <code>TRUE</code>, если это не <code>NA</code>, <code>FALSE</code>, если это <code>NA</code>. Здесь нам понадобится логический оператор НЕ <code>!</code> (мы его уже встречали – см. @ref(data_types)), который инвертирует логические значения:</p>
+<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> на тех позициях, где у нас числа (или другие значения), и <code>TRUE</code> там, где у нас <code>NA</code>. Чтобы вычленить из вектора <code>n</code> все значения кроме <code>NA</code> нам нужно, чтобы было наоборот: <code>TRUE</code>, если это не <code>NA</code>, <code>FALSE</code>, если это <code>NA</code>. Здесь нам понадобится логический оператор НЕ <code>!</code> (мы его уже встречали – см. <a href="010-intro.html#sec-type_logical"><span>Глава&nbsp;2.8.3</span></a>), который инвертирует логические значения:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a>n[<span class="sc">!</span><span class="fu">is.na</span>(n)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -995,7 +1041,17 @@ object length</code></pre>
 </div>
 </div>
 <p>Теперь Вы понимаете, зачем нужно отрицание (<code>!</code>)</p>
-<p>Вообще, есть еще один из способов посчитать среднее, если есть <code>NA</code>. Для этого надо залезть в хэлп по функции <em>mean()</em>:</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> <code>na.rm = TRUE</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вообще, есть еще один способ посчитать среднее, если есть <code>NA</code>. Для этого надо залезть в хэлп по функции <em>mean()</em>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">mean</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1007,9 +1063,19 @@ object length</code></pre>
 </div>
 </div>
 <p><code>NA</code> может появляться в векторах разных типов. На самом деле, <code>NA</code> - это специальное значение в логических векторах, тогда как в векторах других типов <code>NA</code> появляется как <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> или <code>NA_character_</code>, но R обычно сам все переводит в нужный формат и показывает как просто <code>NA</code>. Таким образом, <code>NA</code> в векторах разных типов – это разные <code>NA</code>, хотя на практике эта деталь обычно несущественна.</p>
-<blockquote class="blockquote">
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> <code>NA</code> против <code>NaN</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Кроме <code>NA</code> есть еще <code>NaN</code> – это разные вещи. <code>NaN</code> расшифровывается как <em>Not a Number</em> и получается в результате таких операций как <code>0 / 0</code>. Тем не менее, функция <code>is.na()</code> выдает <code>TRUE</code> на <code>NaN</code>, а вот функция <code>is.nan()</code> выдает <code>TRUE</code> на <code>NaN</code> и <code>FALSE</code> на <code>NA</code>:</p>
-</blockquote>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(<span class="cn">NA</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1028,10 +1094,12 @@ object length</code></pre>
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
+</div>
+</div>
 </section>
 <section id="sec-vector_end" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="sec-vector_end"><span class="header-section-number">3.8</span> Заключение</h2>
-<p>Итак, с векторами мы более-менее разобрались. Помните, что вектора – это один из краеугольных камней вашей работы в R. Если вы хорошо с ними разобрались, то дальше все будет довольно несложно. Тем не менее, вектора – это не все. Есть еще два важных типа данных: <strong>списки</strong> <strong><em>(list)</em></strong> и <strong>матрицы</strong> <strong><em>(matrix)</em></strong>. Их можно рассматривать как своеобразное “расширение” векторов, каждый в свою сторону. Ну а списки и матрицы нужны чтобы понять основной тип данных в R – <strong>датафрейм <em>(data.frame)</em></strong>.</p>
+<p>Итак, с векторами мы более-менее разобрались. Помните, что вектора – это один из краеугольных камней вашей работы в R. Если вы хорошо с ними разобрались, то дальше все будет довольно несложно. Тем не менее, вектора – это не все. Есть еще два важных типа данных: <strong>списки</strong> <strong><em>(list)</em></strong> и <strong>матрицы</strong> <strong><em>(matrix)</em></strong>. Их можно рассматривать как своеобразное “расширение” векторов, каждый в свою сторону. Ну а списки и матрицы нужны чтобы понять основной тип данных в R – <strong>датафрейм <em>(dataframe)</em></strong>.</p>
 <p><img src="images/New-Mind-Map.jpg" class="img-fluid" width="400"></p>
 
 

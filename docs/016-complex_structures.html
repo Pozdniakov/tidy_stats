@@ -399,6 +399,7 @@ div.csl-indent {
   <li><a href="#sec-arrays" id="toc-sec-arrays" class="nav-link" data-scroll-target="#sec-arrays"><span class="toc-section-number">4.2</span>  Массив</a></li>
   <li><a href="#sec-list" id="toc-sec-list" class="nav-link" data-scroll-target="#sec-list"><span class="toc-section-number">4.3</span>  Список</a></li>
   <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="toc-section-number">4.4</span>  Датафрейм</a></li>
+  <li><a href="#sec-attr_class" id="toc-sec-attr_class" class="nav-link" data-scroll-target="#sec-attr_class"><span class="toc-section-number">4.5</span>  Атрибуты и классы</a></li>
   </ul>
 </nav>
     </div>
@@ -451,10 +452,20 @@ div.csl-indent {
 [5,]    5   10   15   20</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> порядок заполнения матрицы
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Заметьте, значения вектора заполняются следующим образом: сначала заполняется первый столбик сверху вниз, потом второй сверху вниз и так до конца, т.е. заполнение значений матрицы идет в первую очередь по вертикали. Это довольно стандартный способ создания матриц, характерный не только для R.</p>
-</blockquote>
 <!--# ###Drawing needed###  -->
+</div>
+</div>
 <p>Если мы знаем сколько значений в матрице и сколько мы хотим строк, то количество столбцов указывать необязательно:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
@@ -474,6 +485,10 @@ div.csl-indent {
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12</code></pre>
 </div>
+</div>
+<p>Первый индекс – выбор строк, второй индекс – выбор колонок<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Результат – пересечение выбранных строк и столбцов.</p>
+<p>Так же как и с векторами, матрицы можно индексировать числовыми векторами:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
@@ -482,11 +497,18 @@ div.csl-indent {
 [3,]    4    9   14</code></pre>
 </div>
 </div>
-<p>Первый индекс – выбор строк, второй индекс – выбор колонок<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Результат – пересечение выбранных строк и столбцов.</p>
 <!--# ###Drawing needed###  -->
+<p>И даже логическими матрицами (матрицы имеют такие же типы, как и вектора):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>A[A <span class="sc">&gt;</span> <span class="dv">10</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+</div>
+<p>В этом случае матрица упростится до вектора.</p>
 <p>Если же мы оставляем пустое поле вместо числа, то мы выбираем все строки/колонки в зависимости от того, оставили мы поле пустым до или после запятой:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
 [1,]    1    6   11
@@ -495,14 +517,14 @@ div.csl-indent {
 [4,]    4    9   14
 [5,]    5   10   15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    2    7   12   17
 [2,]    3    8   13   18
 [3,]    4    9   14   19</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>A[, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>A[, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    6   11   16
@@ -514,8 +536,8 @@ div.csl-indent {
 </div>
 <p>Так же как и в случае с обычными векторами, часть матрицы можно переписать:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]    1    6   11   16
@@ -525,17 +547,27 @@ div.csl-indent {
 [5,]    5   10   15   20</code></pre>
 </div>
 </div>
-<p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами.</p>
-<blockquote class="blockquote">
+<p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами (см. <a href="#sec-df"><span>Глава&nbsp;4.4</span></a>).</p>
+<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> матрица как вектор
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>То, что матрица – это просто двумерный вектор, не является метафорой: в R матрица – это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты – это свойства объектов, своего рода “метаданные”. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги “R in a Nutshell” <span class="citation" data-cites="adler2010r">(<a href="950-references.html#ref-adler2010r" role="doc-biblioref">Adler 2010</a>)</span>.</p>
-</blockquote>
+</div>
+</div>
 </section>
 <section id="sec-arrays" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="sec-arrays"><span class="header-section-number">4.2</span> Массив</h2>
 <p>Два измерения – это не предел! Структура с одним типом данных внутри, но с тремя измерениями или больше, называется <strong>массивом (array)</strong>. Создание массива очень похоже на создание матрицы: задаем вектор, из которого будет собран массив, и размерность массива.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>array_3d <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>array_3d</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>array_3d <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>array_3d</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>, , 1
 
@@ -557,8 +589,8 @@ div.csl-indent {
 <h2 data-number="4.3" class="anchored" data-anchor-id="sec-list"><span class="header-section-number">4.3</span> Список</h2>
 <p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим <strong>список (list)</strong>!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>simple_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>, <span class="st">"Пам пам"</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>simple_list</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>simple_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">42</span>, <span class="st">"Пам пам"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>simple_list</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 42
@@ -572,8 +604,8 @@ div.csl-indent {
 </div>
 <p>А это значит, что там могут содержаться самые разные данные, в том числе и другие списки, векторы и матрицы (и другие объекты, которые нам еще не знакомы)!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>complex_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"Wow"</span>, <span class="st">"this"</span>, <span class="st">"list"</span>, <span class="st">"is"</span>, <span class="st">"so"</span>, <span class="st">"big"</span>), <span class="st">"16"</span>, simple_list, A)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>complex_list</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>complex_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">c</span>(<span class="st">"Wow"</span>, <span class="st">"this"</span>, <span class="st">"list"</span>, <span class="st">"is"</span>, <span class="st">"so"</span>, <span class="st">"big"</span>), <span class="st">"16"</span>, simple_list, A)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>complex_list</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] "Wow"  "this" "list" "is"   "so"   "big" 
@@ -603,7 +635,7 @@ div.csl-indent {
 </div>
 <p>Если у нас сложный список, то есть очень классная функция <code>str()</code>, чтобы посмотреть, как он устроен:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(complex_list)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(complex_list)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 4
  $ : chr [1:6] "Wow" "this" "list" "is" ...
@@ -620,8 +652,8 @@ div.csl-indent {
 </blockquote>
 <p>Как и в случае с векторами мы можем давать имена элементам списка:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Veronika"</span>, <span class="at">age =</span> <span class="dv">26</span>, <span class="at">student =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>named_list</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">"Veronika"</span>, <span class="at">age =</span> <span class="dv">26</span>, <span class="at">student =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>named_list</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 [1] "Veronika"
@@ -635,14 +667,14 @@ $student
 </div>
 <p>К списку можно обращаться как с помощью индексов, так и по именам. Начнем с последнего:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>named_list<span class="sc">$</span>age</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>named_list<span class="sc">$</span>age</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26</code></pre>
 </div>
 </div>
 <p>А вот с индексами сложнее, и в этом очень легко запутаться. Давайте попробуем сделать так, как мы делали это раньше:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="dv">1</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="dv">1</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 [1] "Veronika"</code></pre>
@@ -650,52 +682,62 @@ $student
 </div>
 <p>Мы, по сути, получили элемент списка – просто как часть списка, т.е. как список длиной один:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[<span class="dv">1</span>])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[<span class="dv">1</span>])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "list"</code></pre>
 </div>
 </div>
 <p>А вот чтобы добраться до самого элемента списка (и сделать с ним что-то хорошее), нам нужна не одна, а две квадратных скобочки:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="dv">1</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="dv">1</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Veronika"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[[<span class="dv">1</span>]])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(named_list[[<span class="dv">1</span>]])</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <p>Как и в случае с вектором, к элементу списка можно обращаться по имени. Здесь тоже будет иметь значение, одинарные или двойные квадратные скобки вы используете:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="st">"age"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>named_list[<span class="st">"age"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$age
 [1] 26</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="st">"age"</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>named_list[[<span class="st">"age"</span>]]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26</code></pre>
 </div>
 </div>
-<p>Хотя последнее – практически то же самое, что и использование знака $.</p>
-<blockquote class="blockquote">
-<p>Списки довольно часто используются в R, но реже, чем в Python. Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками – к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры – хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
-</blockquote>
+<p>Хотя последнее – практически то же самое, что и использование знака <code>$</code>.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> зачем нужны списки
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Списки довольно часто используются в R, но реже, чем в <em>Python.</em> Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками – к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры – хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
+</div>
+</div>
 </section>
 <section id="sec-df" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="sec-df"><span class="header-section-number">4.4</span> Датафрейм</h2>
-<p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы (data.frames)</strong>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
+<p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы (dataframes)</strong>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
 <p>Без векторов мы не смогли бы разобраться с матрицами и списками. А без последних мы не сможем понять, что такое датафрейм.</p>
 <p>Представьте себе, что мы хотим записать различную информацию о нескольких респондентах. Мы могли бы записать это в список из векторов.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">name =</span>  <span class="fu">c</span>(<span class="st">"Veronika"</span>, <span class="st">"Eugeny"</span>, <span class="st">"Lena"</span>, <span class="st">"Misha"</span>, <span class="st">"Sasha"</span>), </span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>), </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">student =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">name =</span>  <span class="fu">c</span>(<span class="st">"Veronika"</span>, <span class="st">"Eugeny"</span>, <span class="st">"Lena"</span>, <span class="st">"Misha"</span>, <span class="st">"Sasha"</span>), </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>), </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">student =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$name
 [1] "Veronika" "Eugeny"   "Lena"     "Misha"    "Sasha"   
@@ -709,17 +751,17 @@ $student
 </div>
 <p>Датафрейм очень похож на список. Просто поменяем в команде выше list() на data.frame() и посмотрим, что изменится:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span>  <span class="fu">c</span>(<span class="st">"Veronika"</span>, <span class="st">"Eugeny"</span>, <span class="st">"Lena"</span>, <span class="st">"Misha"</span>, <span class="st">"Sasha"</span>), </span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>), </span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">student =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">name =</span>  <span class="fu">c</span>(<span class="st">"Veronika"</span>, <span class="st">"Eugeny"</span>, <span class="st">"Lena"</span>, <span class="st">"Misha"</span>, <span class="st">"Sasha"</span>), </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">26</span>, <span class="dv">34</span>, <span class="dv">23</span>, <span class="dv">27</span>, <span class="dv">26</span>), </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">student =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   5 obs. of  3 variables:
  $ name   : chr  "Veronika" "Eugeny" "Lena" "Misha" ...
  $ age    : num  26 34 23 27 26
  $ student: logi  FALSE FALSE TRUE TRUE TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      name age student
 1 Veronika  26   FALSE
@@ -733,17 +775,14 @@ $student
 <!--# ###Drawing needed###  -->
 <p>Поскольку длина всех этих векторов одинаковая (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут иметь разные типы данных. В нашем случае первая колонка – <code>character</code>, вторая колонка – <code>numeric</code>, третья колонка – <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с проименованным списком, и как с матрицей:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26 34 23 27 26</code></pre>
 </div>
 </div>
-<p>Здесь мы сначала извлекли колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор.</p>
-<blockquote class="blockquote">
-<p>Колонки датафрейма – это и есть векторы.</p>
-</blockquote>
+<p>Здесь мы сначала извлекли колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор. Колонки датафрейма – это и есть векторы!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 34 23</code></pre>
 </div>
@@ -751,8 +790,8 @@ $student
 <p>Теперь с ним можно работать как с обычным вектором: мы вытащили кусок, выбрав индексы <code>2</code> и <code>3</code>.</p>
 <p>Используя оператор <code>$</code> и присваивание можно создавать новые колонки датафрейма:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co">#правило recycling - узнали? </span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co">#правило recycling - узнали? согласны?</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      name age student lovesR
 1 Veronika  26   FALSE   TRUE
@@ -764,7 +803,7 @@ $student
 </div>
 <p>Ну а можно просто обращаться с помощью двух индексов через запятую, как мы это делали с матрицей:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  age student
 3  23    TRUE
@@ -775,11 +814,11 @@ $student
 <p>Как и с матрицами, первый индекс означает строчки, а второй – столбцы.</p>
 <p>А еще можно использовать названия колонок внутри квадратных скобок:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">"age"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">"age"</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26 34</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"name"</span>)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"name"</span>)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  age     name
 1  26 Veronika
@@ -788,28 +827,28 @@ $student
 </div>
 <p>И здесь перед нами открываются невообразимые возможности! Узнаем, любят ли R те, кто моложе среднего возраста в группе:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 </div>
 </div>
 <p>Обратите внимание, как удобно нам здесь пригодилось то, что мы научились делать с векторами (<a href="013-vector.html"><span>Глава&nbsp;3</span></a>). Сначала мы посчитали среднее значение абсолютно так же, как мы делали это с векторами:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>age)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>age)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 27.2</code></pre>
 </div>
 </div>
 <p>Полученное среднее поэлементно сравнили с каждым значением колонки (т.е. вектора) <code>df$age</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
 </div>
 </div>
 <p>Мы получили логический вектор, длина которого совпадает с длиной датафрейма. При этом <code>TRUE</code> стоит на тех позициях, где в соответствующей строчке в датафрейме возраст респондента больше среднего, а <code>FALSE</code> – в остальных случаях. Теперь этот логический вектор мы используем для выбора строк в исходном датафрейме:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      name age student lovesR
 1 Veronika  26   FALSE   TRUE
@@ -820,18 +859,18 @@ $student
 </div>
 <p>Наконец, тут же мы можем вытащить нужные колонки, по номеру колонки или ее названию:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="dv">4</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 </div>
 </div>
 <p>Эту же задачу можно выполнить другими способами:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>lovesR[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="st">'lovesR'</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="fu">mean</span>(df<span class="sc">$</span>age), <span class="st">'lovesR'</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 </div>
@@ -840,7 +879,10 @@ $student
 <p>Датафреймы удобно просматривать в RStudio. Для это нужно написать команду <code>View(df)</code> или же просто нажать на названии нужной переменной из списка вверху справа (там где Environment). Тогда увидите табличку, очень похожую на Excel и тому подобные программы для работы с таблицами. Там же есть и всякие возможности для фильтрации, сортировки и поиска <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p><img src="images/View.png" class="img-fluid" width="200"></p>
 <p>Но, конечно, интереснее все эти вещи делать руками, т.е. с помощью написания кода.</p>
-<p>Датафреймы – это структура, которая будет встречаться вам чаще всего при работе с данными в R. С одной стороны, кажется, что она все равно довольно ограниченная: в каждой колонке должно быть одинаковое количество значений, внутри колонки только один тип данных. Но именно так обычно и представлены наши данные. Например, если вы загрузите результаты опроса Google Forms в виде таблицы, то каждая строчка будет респондентом, а каждая колонка – ответом на какой-то вопрос. Поэтому количество значений в каждой колонке будет одинаковым (хотя значения могут быть пропущенными), а каждая колонка – имеет свой тип. Например, год рождения – и это должна быть числовая колонка, с которой вы сможете делать все, что вы умеете делать с числовыми колонками. Например, посчитать возраст. Если в колонке с годом рождения оказалось что-то кроме чисел, то это повод для исследования данных</p>
+<p>Датафреймы – это структура, которая будет встречаться вам чаще всего при работе с данными в R. С одной стороны, кажется, что она все равно довольно ограниченная: в каждой колонке должно быть одинаковое количество значений, внутри колонки только один тип данных. Но именно так обычно и представлены наши данные. Например, если вы загрузите результаты опроса Google Forms в виде таблицы, то каждая строчка будет респондентом, а каждая колонка – ответом на какой-то вопрос. Поэтому количество значений в каждой колонке будет одинаковым (хотя значения могут быть пропущенными), а каждая колонка – имеет свой тип. Например, год рождения – и это должна быть числовая колонка, с которой вы сможете делать все, что вы умеете делать с числовыми колонками. Например, посчитать возраст. Если в колонке с годом рождения оказалось что-то кроме чисел, то это повод для исследования данных.</p>
+</section>
+<section id="sec-attr_class" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-attr_class"><span class="header-section-number">4.5</span> Атрибуты и классы</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
