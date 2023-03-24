@@ -419,7 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>В большинстве случаев основным содержанием пакетов является набор дополнительных функций. Кроме функций, пакеты могут содержать наборы данных и новые структуры данных.</p>
 <p>Обычно пакеты посвящены решению какого-то класса задач в определенной области. Например, есть множество пакетов для создания какого-то одного типа визуализации. Еще один пример — пакет <code>beepr</code>, который содержит всего две функции: <code>beep()</code> и <code>beep_on_error()</code> для воспроизведения звукового сигнала. Это может быть удобно, если ваш скрипт работает долго, но вы хотите получить уведомление, когда его выполнение завершится.</p>
 <p>Более крупные пакеты посвящены целому классу задач. Например, пакеты <code>stringi</code> и <code>stringr</code> посвящены работе со строками, значительно расширяя и делая более удобной работу со строковыми данными в R. Еще один пример: пакет <code>igraph</code> для работы с графами (сетями). Этот пакет предоставляет дополнительный класс данных <code>igraph</code> для хранения и работы с сетями.</p>
-<p>Есть и совсем крупные пакеты, которые значительно расширяют базовый функционал R, изменяя основные принципы работы в нем. Это пакеты <code>data.table</code> и <code>tidyverse</code>. Это настолько крупные пакеты, что их даже называют отдельными диалектами R, потому что код, написанный с использованием этих пакетов, довольно сильно отличается от базового R. Кроме того, <code>tidyverse</code> - это не просто пакет, а целая экосистема пакетов, который взаимодополняют друг друга, но для удобства их можно устанавливать и загружать как один пакет <code>tidyverse</code>. Еще один пример крупной экосистемы из пакетов — это пакет <code>mlr3</code> для машинного обучения, который представляет собой большой расширяемый “пакет пакетов”, где отдельные пакеты посвящены отдельным этапам и задачам машинного обучения.</p>
+<p>Есть и совсем крупные пакеты, которые значительно расширяют базовый функционал R, изменяя основные принципы работы в нем. Это пакеты <code>data.table</code> и <code>tidyverse</code>. Это настолько крупные пакеты, что их даже называют отдельными диалектами R, потому что код, написанный с использованием этих пакетов, довольно сильно отличается от базового R. Кроме того, <em>tidyverse</em> - это не просто пакет, а целая экосистема пакетов, который взаимодополняют друг друга, но для удобства их можно устанавливать и загружать как один пакет <code>tidyverse</code>. Еще один пример крупной экосистемы из пакетов — это пакеты <code>mlr3</code> и <code>tidymodels</code> для машинного обучения, который представляет собой большой расширяемый “пакет пакетов”, где отдельные пакеты посвящены отдельным этапам и задачам машинного обучения.</p>
 </section>
 <section id="sec-r_built_in" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="sec-r_built_in"><span class="header-section-number">5.2</span> Встроенные пакеты R</h2>
@@ -436,12 +436,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sec-install_cran" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="sec-install_cran"><span class="header-section-number">5.3</span> Установка пакетов с CRAN</h2>
-<p>Функция <code>install.packages()</code> позволяет скачивать пакеты с <a href="https://cran.r-project.org">Comprehensive R Archive Network (CRAN)</a>. На репозитории CRAN собрано более 19000 пакетов (число постоянно меняется, как в большую, так и меньшую сторону). Каждый из этих пакетов проходит проверку перед попаданием в CRAN: он должен быть хорошо задокументирован, стабильно работать и решать какую-то задачу.</p>
-<p>Для примера установим пакет <code>remotes</code>. Это пакет для удобной установки пакетов не с CRAN и скоро нам понадобится.</p>
+<p>Функция <code>install.packages()</code> позволяет скачивать пакеты с <a href="https://cran.r-project.org">Comprehensive R Archive Network (CRAN)</a>. На репозитории <em>CRAN</em> собрано более 19000 пакетов (число постоянно меняется, как в большую, так и меньшую сторону). Каждый из этих пакетов проходит проверку перед попаданием в <em>CRAN</em>: он должен быть хорошо задокументирован, стабильно работать и решать какую-то задачу.</p>
+<p>Для примера установим пакет <code>remotes</code>. Это пакет для удобной установки пакетов не с <em>CRAN</em> и скоро нам понадобится.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>При установке вы увидите много непонятных надписей красным шрифтом. Не пугайтесь, это нормально, происходит скачивание и установка пакетов. Скорее всего, если нигде нет слова <em>Error</em>, то пакет успешно установился.</p>
+<p>При установке вы увидите много непонятных надписей красным (или черным) шрифтом. Не пугайтесь, это нормально, происходит скачивание и установка пакетов. Скорее всего, если нигде нет слова <em>Error</em>, то пакет успешно установился.</p>
 <p>Иногда установка бывает очень долгой, потому что большие пакеты склонны иметь много <strong>зависимостей</strong>: для работы какого-то пакета может понадобиться другие пакеты, а для тех пакетов - еще какие-то пакеты. Таким образом, устанавливая какой-нибудь современный пакет, вы, возможно, установите десятки других пакетов! Зато если они понадобятся сами по себе, то их уже не нужно будет устанавливать.</p>
 </section>
 <section id="sec-package_load" class="level2" data-number="5.4">
@@ -455,6 +455,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Теперь функции, данные и классы из пакета доступны для работы.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> аналогия с <em>Python</em>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если сравнивать с <em>Python</em>, то <code>install.packages()</code> – это аналог установки библиотек, например, с помощью <em>pip</em>, а <code>library()</code> – это аналог <code>import</code> (например, <code>import pandas as pd</code>).</p>
+</div>
+</div>
 </section>
 <section id="sec-from_package" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="sec-from_package"><span class="header-section-number">5.5</span> Вызов функции из пакета с помощью <code>::</code></h2>
@@ -464,28 +477,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">package_deps</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Needs update -----------------------------
- package    installed available is_cran remote
- vctrs      0.5.2     0.6.0     TRUE    CRAN  
- tibble     3.1.8     3.2.1     TRUE    CRAN  
- rlang      1.0.6     1.1.0     TRUE    CRAN  
- openssl    2.0.5     2.0.6     TRUE    CRAN  
- httr       1.4.4     1.4.5     TRUE    CRAN  
- ps         1.7.2     1.7.3     TRUE    CRAN  
- fastmap    1.1.0     1.1.1     TRUE    CRAN  
- cachem     1.0.6     1.0.7     TRUE    CRAN  
- hms        1.1.2     1.1.3     TRUE    CRAN  
- broom      1.0.3     1.0.4     TRUE    CRAN  
- readr      2.1.3     2.1.4     TRUE    CRAN  
- gtable     0.3.1     0.3.3     TRUE    CRAN  
- blob       1.2.3     1.2.4     TRUE    CRAN  
- readxl     1.4.1     1.4.2     TRUE    CRAN  
- lubridate  1.9.1     1.9.2     TRUE    CRAN  
- haven      2.5.1     2.5.2     TRUE    CRAN  
- ggplot2    3.4.0     3.4.1     TRUE    CRAN  
- dtplyr     1.2.2     1.3.0     TRUE    CRAN  
- dbplyr     2.3.0     2.3.2     TRUE    CRAN  
- conflicted NA        1.2.0     TRUE    CRAN  
- tidyverse  1.3.2     2.0.0     TRUE    CRAN  </code></pre>
+ package      installed available is_cran remote
+ pillar       1.8.1     1.9.0     TRUE    CRAN  
+ vctrs        0.5.2     0.6.1     TRUE    CRAN  
+ tibble       3.1.8     3.2.1     TRUE    CRAN  
+ rlang        1.0.6     1.1.0     TRUE    CRAN  
+ dplyr        1.1.0     1.1.1     TRUE    CRAN  
+ cli          3.6.0     3.6.1     TRUE    CRAN  
+ openssl      2.0.5     2.0.6     TRUE    CRAN  
+ httr         1.4.4     1.4.5     TRUE    CRAN  
+ ps           1.7.2     1.7.3     TRUE    CRAN  
+ fastmap      1.1.0     1.1.1     TRUE    CRAN  
+ cachem       1.0.6     1.0.7     TRUE    CRAN  
+ htmltools    0.5.4     0.5.5     TRUE    CRAN  
+ xfun         0.37      0.38      TRUE    CRAN  
+ hms          1.1.2     1.1.3     TRUE    CRAN  
+ broom        1.0.3     1.0.4     TRUE    CRAN  
+ readr        2.1.3     2.1.4     TRUE    CRAN  
+ googledrive  2.0.0     2.1.0     TRUE    CRAN  
+ gtable       0.3.1     0.3.3     TRUE    CRAN  
+ blob         1.2.3     1.2.4     TRUE    CRAN  
+ readxl       1.4.1     1.4.2     TRUE    CRAN  
+ modelr       0.1.10    0.1.11    TRUE    CRAN  
+ lubridate    1.9.1     1.9.2     TRUE    CRAN  
+ haven        2.5.1     2.5.2     TRUE    CRAN  
+ googleshe... 1.0.1     1.1.0     TRUE    CRAN  
+ ggplot2      3.4.0     3.4.1     TRUE    CRAN  
+ dtplyr       1.2.2     1.3.1     TRUE    CRAN  
+ dbplyr       2.3.0     2.3.2     TRUE    CRAN  
+ conflicted   NA        1.2.0     TRUE    CRAN  
+ tidyverse    1.3.2     2.0.0     TRUE    CRAN  </code></pre>
 </div>
 </div>
 <p>В дальнейшем использование оператора <code>::</code> будет иногда использоваться, чтобы указать, из какого пакета взята функция.</p>
@@ -500,14 +521,28 @@ Frequency = 1
  [1] NA  6  9 12 15 18 21 24 27 30 33 36 39 42 45 48 51 54 57 NA</code></pre>
 </div>
 </div>
-<p>Подобные путаницы могут возникнуть, если у вас загружено много пакетов, поэтому старайтесь не загружать слишком много пакетов, а если есть функции с одинаковым названием, то обязательно используйте оператор <code>::</code>. Иначе слишком велик риск загрузить пакеты не в том порядке и получить из-за этого ошибку или некорректный результат. Выгрузить ненужный пакет можно с помощью функции <code>detach()</code>.</p>
+<p>Подобные путаницы могут возникнуть, если у вас загружено много пакетов, поэтому старайтесь не загружать слишком много пакетов, а если есть функции с одинаковым названием, то обязательно используйте оператор <code>::</code>. Иначе слишком велик риск загрузить пакеты не в том порядке и получить из-за этого ошибку или некорректный результат.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> оператор <code>::</code> для указания используемого пакета
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В дальнейшем я буду иногда использовать <code>::</code>, чтобы было понятно, из какого пакета взята та или иная функция</p>
+</div>
+</div>
+<p>Выгрузить ненужный пакет можно с помощью функции <code>detach()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>remotes)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-install_bioc" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="sec-install_bioc"><span class="header-section-number">5.6</span> Установка пакетов c Bioconductor</h2>
-<p>У биологов есть свой большой репозиторий, который является альтернативой CRAN, — Bioconductor. С него можно скачать множество специализированных пакетов для работы с биологическими данными.</p>
+<p>У биологов есть свой большой репозиторий, который является альтернативой <em>CRAN</em>, — <em>Bioconductor</em>. С него можно скачать множество специализированных пакетов для работы с биологическими данными.</p>
 <p>Для установки пакетов с Bioconductor сначала нужно скачать пакет <code>BiocManager</code> с CRAN.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -519,8 +554,8 @@ Frequency = 1
 </section>
 <section id="sec-install_github" class="level2" data-number="5.7">
 <h2 data-number="5.7" class="anchored" data-anchor-id="sec-install_github"><span class="header-section-number">5.7</span> Установка пакетов с Github</h2>
-<p>Некоторых пакетов нет ни на CRAN, ни на Bioconductor. Обычно это касается пакетов, разработчики которых по каким-либо причинам решили не проходить проверки или не прошли проверки на строгие требования CRAN. Иногда бывает, что пакет был удален с CRAN (например, автор давно не занимается им) или же версия пакета на CRAN отстает от последней, а именно в ней реализованы так нужные вам функции. В некоторых случаях пакета может не быть на CRAN, потому что его разработчики активно занимаются его развитием и постоянно переделывают уже имеющийся функционал, добавляя новые возможности и удаляя старые. Это нужно делать с осторожностью, когда пакет уже выложен на CRAN, потому что если функции новой версии пакета будут работать по-другому, то это может вызвать массу проблем.</p>
-<p>Во всех этих случаях пакет обычно можно скачать с репозитория Github. Для этого нам понадобится уже установленный (с CRAN, разумеется) пакет <code>remotes</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Некоторых пакетов нет ни на <em>CRAN,</em> ни на <em>Bioconductor.</em> Обычно это касается пакетов, разработчики которых по каким-либо причинам решили не проходить проверки или не прошли проверки на строгие требования <em>CRAN.</em> Иногда бывает, что пакет был удален с <em>CRAN</em> (например, автор давно не занимается им) или же версия пакета на <em>CRAN</em> отстает от последней, а именно в ней реализованы так нужные вам функции. В некоторых случаях пакета может не быть на <em>CRAN</em>, потому что его разработчики активно занимаются его развитием и постоянно переделывают уже имеющийся функционал, добавляя новые возможности и удаляя старые. Это нужно делать с осторожностью, когда пакет уже выложен на <em>CRAN,</em> потому что если функции новой версии пакета будут работать по-другому, то это может вызвать массу проблем.</p>
+<p>Во всех этих случаях пакет обычно можно скачать с репозитория <em>Github.</em> Для этого нам понадобится уже установленный (с <em>CRAN,</em> разумеется) пакет <code>remotes</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"dracor-org/rdracor"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -543,7 +578,7 @@ Frequency = 1
 <h2 data-number="5.8" class="anchored" data-anchor-id="sec-where_packages"><span class="header-section-number">5.8</span> Где искать нужные пакеты</h2>
 <p>Мы разобрались с тем, как устанавливать пакеты. А где же их находить?</p>
 <p>Это вопрос гораздо более сложный чем может показаться. Например, можно работать в R и не знать, что существует пакет, который решает нужную для вас задачу. Или же найти такой пакет и не знать, что есть более современный пакет, который делает это еще лучше!</p>
-<p>Здесь нет каких-то готовых решений. CRAN пытается создавать и поддерживать тематические списки <em>(Task View)</em> пакетов с описанием задач, которые они решают:</p>
+<p>Здесь нет каких-то готовых решений. <em>CRAN</em> пытается создавать и поддерживать тематические списки <em>(Task View)</em> пакетов с описанием задач, которые они решают:</p>
 <p><a href="https://cran.r-project.org/web/views/" class="uri">https://cran.r-project.org/web/views/</a></p>
 <p>Безусловно, если вы глубоко занимаетесь какой-либо темой из списка, то стоит изучить соотвестствующий <em>Task View</em>, но начинать знакомство с помощью <em>Task View</em> достаточно тяжело.</p>
 <p>Другой вариант — просто погуглить, найти релевантные статьи или книги. Внимательно смотрите на дату публикации: R — очень быстро развивающийся язык, поэтому с большой вероятностью то, что было написано пять лет назад уже потеряло актуальность. Нет, работать это будет, но, скорее всего, появился более удобный и продвинутый инструмент.</p>

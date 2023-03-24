@@ -400,6 +400,7 @@ div.csl-indent {
   <li><a href="#sec-list" id="toc-sec-list" class="nav-link" data-scroll-target="#sec-list"><span class="toc-section-number">4.3</span>  Список</a></li>
   <li><a href="#sec-df" id="toc-sec-df" class="nav-link" data-scroll-target="#sec-df"><span class="toc-section-number">4.4</span>  Датафрейм</a></li>
   <li><a href="#sec-attr_class" id="toc-sec-attr_class" class="nav-link" data-scroll-target="#sec-attr_class"><span class="toc-section-number">4.5</span>  Атрибуты и классы</a></li>
+  <li><a href="#sec-formula" id="toc-sec-formula" class="nav-link" data-scroll-target="#sec-formula"><span class="toc-section-number">4.6</span>  Формулы</a></li>
   </ul>
 </nav>
     </div>
@@ -883,6 +884,30 @@ $student
 </section>
 <section id="sec-attr_class" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="sec-attr_class"><span class="header-section-number">4.5</span> Атрибуты и классы</h2>
+<p>…</p>
+</section>
+<section id="sec-formula" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sec-formula"><span class="header-section-number">4.6</span> Формулы</h2>
+<p>Формулы – это специальный класс в R, который используется в первую очередь для статистических моделей.</p>
+<p>Выглядит формула следующим образом:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">~</span> x</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y ~ x</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y <span class="sc">~</span> x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "formula"</code></pre>
+</div>
+</div>
+<p>Как видите, здесь нет никаких кавычек, т.е. это не строковое значение, а отдельный класс. В каждой формуле должна быть тильда (<code>~</code>), которая имеет смысл знака равно (=) в уравнениях (например, для уравнений линейной регрессии). Слева от <code>~</code> обычно находится зависимая переменная, а справа – независимые (предикторы).</p>
+<p>Кроме статистических моделей, формулы используются много где как служебная конструкция, чтобы задать соответствующие пары значений. Вот несколько примеров:</p>
+<ul>
+<li><code>case_when()</code> для задания множественных условий (см. <a href="040-if_for.html#sec-ifelse"><span>Глава&nbsp;7.3</span></a>),</li>
+<li>визуализация ящиков с усами в базовом R (см. <a href="220-base_viz.html"><span>Глава&nbsp;13</span></a>),</li>
+<li>статистические тесты для сравнения двух (см. <a href="320-ttest.html"><span>Глава&nbsp;18</span></a>) и более (см. <a href="350-anova.html"><span>Глава&nbsp;21</span></a>) групп,</li>
+<li>задание фасеток в {ggplot2} (см. <a href="230-ggplot2.html"><span>Глава&nbsp;14</span></a>).</li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
