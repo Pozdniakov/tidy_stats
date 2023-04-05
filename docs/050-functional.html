@@ -380,7 +380,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-sanity_check" id="toc-sec-sanity_check" class="nav-link" data-scroll-target="#sec-sanity_check"><span class="toc-section-number">8.2</span>  Проверка на адекватность</a></li>
   <li><a href="#sec-why_functions" id="toc-sec-why_functions" class="nav-link" data-scroll-target="#sec-why_functions"><span class="toc-section-number">8.3</span>  Когда и зачем создавать функции?</a></li>
   <li><a href="#sec-functions_objects" id="toc-sec-functions_objects" class="nav-link" data-scroll-target="#sec-functions_objects"><span class="toc-section-number">8.4</span>  Функции как объекты первого порядка</a></li>
-  <li><a href="#sec-apply_f" id="toc-sec-apply_f" class="nav-link" data-scroll-target="#sec-apply_f"><span class="toc-section-number">8.5</span>  Семейство функций apply()</a>
+  <li><a href="#sec-apply_f" id="toc-sec-apply_f" class="nav-link" data-scroll-target="#sec-apply_f"><span class="toc-section-number">8.5</span>  Семейство функций <code>apply()</code></a>
   <ul class="collapse">
   <li><a href="#sec-apply" id="toc-sec-apply" class="nav-link" data-scroll-target="#sec-apply"><span class="toc-section-number">8.5.1</span>  Применение <code>apply()</code> для матриц</a></li>
   <li><a href="#sec-anon_f" id="toc-sec-anon_f" class="nav-link" data-scroll-target="#sec-anon_f"><span class="toc-section-number">8.5.2</span>  Анонимные функции</a></li>
@@ -454,7 +454,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 9</code></pre>
 </div>
 </div>
-<p>Вообще, фигурные скобки используются для того, чтобы выполнить серию выражений, но вернуть только результат выполнения последнего выражения. Это можно использовать, чтобы не создавать лишних временных переменных в глобальном окружении.</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> <code>{}</code> – блок инструкций
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вообще, фигурные скобки используются для того, чтобы выполнить серию команд, но вернуть только результат выполнения последней команды. Такой набор команд называется <strong>блоком инструкций <em>(statements block)</em>.</strong> Это можно использовать, чтобы не создавать лишних временных переменных в глобальном окружении.</p>
+</div>
+</div>
 <p>Мы можем оставить в функции параметры по умолчанию.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="dv">2</span>) x <span class="sc">^</span> p</span>
@@ -467,12 +479,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 27</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> ленивые вычисления
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>В R работают <strong>ленивые вычисления (lazy evaluations)</strong>. Это означает, что параметры функций будут только когда они понадобятся, а не заранее. R будет как самый ленивый прокрастинатор откладывать чтение данных, пока они не понадобятся в вычислениях. Это приводит к тому, что если параметр никак не задан, то обнаружится это только при его непосредственном использовании. Например, эта функция не будет выдавать ошибку, если мы не зададим параметр <code>we_will_not_use_this_parameter =</code>, потому что он нигде не используется в расчетах.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="dv">2</span>, we_will_not_use_this_parameter) x <span class="sc">^</span> p</span>
@@ -483,13 +499,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="sec-sanity_check" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-sanity_check"><span class="header-section-number">8.2</span> Проверка на адекватность</h2>
 <p>Лучший способ не бояться ошибок и предупреждений — научиться прописывать их самостоятельно в собственных функциях. Это позволит понять, что за текстом предупреждений и ошибок, которые у вас возникают, стоит забота разработчиков о пользователях, которые хотят максимально обезопасить нас от наших непродуманных действий.</p>
-<p>Хорошо написанные функции не только выдают правильный результат на все возможные адекватные данные на входе, но и не дают получить правдоподобные результаты при неадекватных входных данных. Как вы уже знаете, если на входе у вас имеются пропущенные значения, то многие функции будут в ответ тоже выдавать пропущенные значения. И это вполне осознанное решение, которое позволяет избегать ситуаций вроде той, когда <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7">около одной пятой научных статей по генетике содержало ошибки в приложенных данных</a> и замечать пропущенные значения на ранней стадии. Кроме того, можно проводить проверки на адекватность входящих данных (sanity check).</p>
-<p>Разберем это на примере самодельной функции <code>imt()</code>, которая выдает индекс массы тела, если на входе задать вес (аргумент <code>weight =</code>) в килограммах и рост (аргумент <code>height =</code>) в метрах.</p>
+<p>Хорошо написанные функции не только выдают правильный результат на все возможные адекватные данные на входе, но и не дают получить правдоподобные результаты при неадекватных входных данных. Как вы уже знаете, если на входе у вас имеются пропущенные значения, то многие функции будут в ответ тоже выдавать пропущенные значения. И это вполне осознанное решение, которое позволяет избегать ситуаций вроде той, когда <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7">около одной пятой научных статей по генетике содержало ошибки в приложенных данных</a> и замечать пропущенные значения на ранней стадии. Кроме того, можно проводить <strong>проверки на адекватность входящих данных <em>(sanity check).</em></strong></p>
+<p>Разберем <strong>проверку на адекватность входящих</strong> данных на примере самодельной функции <code>imt()</code>, которая выдает индекс массы тела, если на входе задать вес (аргумент <code>weight =</code>) в килограммах и рост (аргумент <code>height =</code>) в метрах.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>imt <span class="ot">&lt;-</span> <span class="cf">function</span>(weight, height) weight <span class="sc">/</span> height <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -502,7 +517,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 23.43750 27.68166 37.03704</code></pre>
 </div>
 </div>
-<p>Очень легко перепутать и написать рост в сантиметрах. Было бы здорово предупредить об этом пользователя, показав ему предупреждающее сообщение, если рост больше, чем, например, 3. Это можно сделать с помощью функции <code>warning()</code></p>
+<p>Очень легко перепутать и написать рост в сантиметрах. Было бы здорово предупредить об этом пользователя, показав ему предупреждающее сообщение, если рост больше, чем, например, 3. Это можно сделать с помощью функции <code>warning()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>imt <span class="ot">&lt;-</span> <span class="cf">function</span>(weight, height) {</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(height <span class="sc">&gt;</span> <span class="dv">3</span>)) <span class="fu">warning</span>(<span class="st">"Рост в аргументе height больше 3: возможно, указан рост в сантиметрах, а не в метрах</span><span class="sc">\n</span><span class="st">"</span>)</span>
@@ -516,7 +531,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.002796802</code></pre>
 </div>
 </div>
-<p>В некоторых случаях ответ будет совершенно точно некорректным, хотя функция все посчитает и выдаст ответ, как будто так и надо. Например, если какой-то из аргументов функции <code>imt()</code> будет меньше или равен 0. В этом случае нужно прописать проверку на это условие, и если это действительно так, то выдать пользователю ошибку.</p>
+<p>В некоторых случаях ответ будет совершенно точно некорректным, хотя функция все посчитает и выдаст ответ, как будто так и надо. Например, если какой-то из аргументов функции <code>imt()</code> будет меньше или равен 0. В этом случае нужно прописать проверку на это условие. Если это действительно так, то можно поступить еще строже: выдать пользователю ошибку.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>imt <span class="ot">&lt;-</span> <span class="cf">function</span>(weight, height) {</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(weight <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">|</span> height <span class="sc">&lt;=</span> <span class="dv">0</span>)) <span class="fu">stop</span>(<span class="st">"Индекс массы тела не может быть посчитан для отрицательных значений"</span>)</span>
@@ -529,7 +544,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Когда вы попробуете самостоятельно прописывать предупреждения и ошибки в функциях, то быстро поймете, что ошибки - это вовсе не обязательно результат того, что где-то что-то сломалось и нужно паниковать. Совсем даже наоборот, прописанная ошибка - чья-то забота о пользователях, которых пытаются максимально проинформировать о том, что и почему пошло не так.</p>
-<p>Это естественно в начале работы с R (и вообще с программированием) избегать ошибок, конечно, в самом начале обучения большая часть из них остается непонятной. Но постарайтесь понять текст ошибки, вспомнить в каких случаях у вас возникала похожая ошибка. Очень часто этого оказывается достаточно чтобы понять причину ошибки даже если вы только-только начали изучать R.</p>
+<p>Это естественно в начале работы с R (и вообще с программированием) избегать ошибок и пугаться их. Конечно, в самом начале обучения большая часть из них остается непонятной. Но постарайтесь понять текст ошибки, вспомнить в каких случаях у вас возникала похожая ошибка. Очень часто этого оказывается достаточно чтобы понять причину ошибки даже если вы только-только начали изучать R.</p>
 <p>Ну а в дальнейшем я советую ознакомиться со <a href="https://adv-r.hadley.nz/debugging.html">средствами отладки кода в R</a> для того, чтобы научиться справляться с ошибками в своем коде на более продвинутом уровне.</p>
 </section>
 <section id="sec-why_functions" class="level2" data-number="8.3">
@@ -548,7 +563,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x12980bbd8&gt;
+&lt;bytecode: 0x128946858&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -558,14 +573,24 @@ function (..., na.rm = FALSE)  .Primitive("min")
 .Primitive("{")</code></pre>
 </div>
 </div>
-<p>Мы можем создать список из функций! Зачем — это другой вопрос, но ведь можем же!</p>
-<p>Еще можно создавать функции внутри функций <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, использовать функции в качестве аргументов функций, сохранять функции как переменные. Пожалуй, самое важное из этого всего - это то, что функция может быть аргументом в функции. Не просто название функции как строковая переменная, не результат выполнения функции, а именно сама функция. Это лежит в основе использования семейства функций <code>apply()</code> (@ref(apply_f) и многих фишек tidyverse.</p>
-<blockquote class="blockquote">
+<p>Мы можем создать список из функций! Зачем — это другой вопрос, но ведь можем же! Например, создавать списки из функций может быть удобным для продвинутых операций в <code>across()</code> в пакете {dplyr} (см. <a href="120-tidyverse_advanced.html#sec-tidy_across"><span>Глава&nbsp;11.3</span></a>).</p>
+<p>Еще можно создавать функции внутри функций<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, использовать функции в качестве аргументов функций, сохранять функции как переменные. Пожалуй, самое важное из этого всего - это то, что функция может быть аргументом в функции. Не просто название функции как строковая переменная, не результат выполнения функции, а именно сама функция как объект! Это лежит в основе использования семейства функций <code>apply()</code>, о которых пойдет речь далее, и многих фишек <em>tidyverse.</em></p>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> а как в Python?
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>В Python дело обстоит похожим образом: функции там тоже являются объектами первого порядка, поэтому все эти фишки функционального программирования (с поправкой на синтаксис, конечно) будут работать и там.</p>
-</blockquote>
+</div>
+</div>
 </section>
 <section id="sec-apply_f" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="sec-apply_f"><span class="header-section-number">8.5</span> Семейство функций apply()</h2>
+<h2 data-number="8.5" class="anchored" data-anchor-id="sec-apply_f"><span class="header-section-number">8.5</span> Семейство функций <code>apply()</code></h2>
 <section id="sec-apply" class="level3" data-number="8.5.1">
 <h3 data-number="8.5.1" class="anchored" data-anchor-id="sec-apply"><span class="header-section-number">8.5.1</span> Применение <code>apply()</code> для матриц</h3>
 <p>Семейство? Да, их целое множество: <code>apply()</code>, <code>lapply()</code>,<code>sapply()</code>, <code>vapply()</code>,<code>tapply()</code>,<code>mapply()</code>, <code>rapply()</code>… Ладно, не пугайтесь, всех их знать не придется. Обычно достаточно первых двух-трех. Проще всего пояснить как они работают на простой матрице с числами:</p>
@@ -579,14 +604,24 @@ function (..., na.rm = FALSE)  .Primitive("min")
 [3,]    3    6    9   12</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> <code>apply()</code> не работает с датафреймами
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Функция <code>apply()</code> предназначена для работы с матрицами (или многомерными массивами). Если вы скормите функции <code>apply()</code> датафрейм, то этот датафрейм будет сначала превращен в матрицу. Главное отличие матрицы от датафрейма в том, что в матрице все значения одного типа, поэтому будьте готовы, что сработает имплицитное приведение к общему типу данных. Например, если среди колонок датафрейма есть хотя бы одна строковая колонка, то все колонки станут строковыми.</p>
-</blockquote>
+</div>
+</div>
 <p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code>apply()</code> вы можете в буквальном смысле “применить” функцию к матрице или датафрейму. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> — данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.е. для каждого элемента по отдельности), а <code>FUN</code> — это функция, которую вы хотите применить! <code>apply()</code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Apply_function.png" class="img-fluid figure-img" width="400"></p>
-<p></p><figcaption class="figure-caption">apply</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Визуальное представление функции apply(): выбираем матрицу, задаем способ итерации (по строкам или столбцам, выбираем функцию, которая будет применяться на каждом элементе.</figcaption><p></p>
 </figure>
 </div>
 <div class="callout callout-style-simple callout-important no-icon">
@@ -617,67 +652,83 @@ function (..., na.rm = FALSE)  .Primitive("min")
 [3,]    3    6    9   12</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> специальные функции для операций над всеми строками/столбцами
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Конкретно для подсчета сумм и средних по столбцам и строкам в R есть функции <code>colSums()</code>, <code>rowSums()</code>, <code>colMeans()</code> и <code>rowMeans()</code>, которые можно использовать как альтернативы <code>apply()</code> в данном случае.</p>
-</blockquote>
+</div>
+</div>
 <p>Если же мы хотим прописать дополнительные аргументы для функции, то их можно перечислить через запятую после функции:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 22 26 30</code></pre>
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1    4    7   10
+[2,]    2   NA    8   11
+[3,]    3    6    9   12</code></pre>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, weighted.mean, <span class="at">w =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0.1</span>)) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, sum)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.9 5.9 6.9</code></pre>
+<pre><code>[1] 22 NA 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, sum, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22 21 30</code></pre>
 </div>
 </div>
 </section>
 <section id="sec-anon_f" class="level3" data-number="8.5.2">
 <h3 data-number="8.5.2" class="anchored" data-anchor-id="sec-anon_f"><span class="header-section-number">8.5.2</span> Анонимные функции</h3>
-<p>Что делать, если мы хотим сделать что-то более сложное, чем просто применить одну функцию? А если функция принимает не первым, а вторым аргументом данные из матрицы? В этом случае нам помогут <strong>анонимные функции</strong>.</p>
+<p>Что делать, если мы хотим сделать что-то более сложное, чем просто применить одну функцию? А если функция принимает не первым, а вторым аргументом данные из матрицы? В этом случае нам помогут <strong>анонимные функции <em>(anonymous function)</em></strong><em>.</em></p>
 <p>Анонимные функции - это функции, которые будут использоваться один раз и без названия.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> а как в Python?
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Питонистам знакомо понятие <strong>лямбда-функций</strong>. Да, это то же самое.</p>
 </div>
 </div>
-</div>
-<p>Например, мы можем посчитать сумму квадратичных отклонений от среднего без называния этой функции:</p>
+<p>Например, мы можем посчитать общее количество знаков по строкам и столбцам без называния этой функции:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)) <span class="co">#отклонения от среднего по строчке</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">"Всем"</span>, <span class="st">"привет"</span>, <span class="st">"Я"</span>, <span class="st">"строковая"</span>, <span class="st">"матрица"</span>, <span class="st">"и"</span>, <span class="st">"такое"</span>, <span class="st">"тоже"</span>, <span class="st">"бывает"</span>), <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(B, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">nchar</span>(x)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 45 45 45</code></pre>
+<pre><code>[1] 18 17  8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)) <span class="co">#отклонения от среднего по столбцу</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(B, <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">nchar</span>(x)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 2 2 2</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)) <span class="co">#отклонения от одного значения, т.е. ноль</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    0    0    0    0
-[2,]    0    0    0    0
-[3,]    0    0    0    0</code></pre>
+<pre><code>[1] 11 17 15</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> аргументы анонимной функции
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Как и в случае с обычной функцией, в качестве <code>x</code> выступает объект, с которым мы хотим что-то сделать, а дальше следует функция, которую мы собираемся применить к <code>х</code>. Можно использовать не <code>х</code>, а что угодно, как и в обычных функциях:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(A, <span class="dv">1</span>, <span class="cf">function</span>(whatevername) <span class="fu">sum</span>((whatevername <span class="sc">-</span> <span class="fu">mean</span>(whatevername))<span class="sc">^</span><span class="dv">2</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(B, <span class="dv">1</span>, <span class="cf">function</span>(whatevername) <span class="fu">sum</span>(<span class="fu">nchar</span>(whatevername)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 45 45 45</code></pre>
-</div>
+<pre><code>[1] 18 17  8</code></pre>
 </div>
 </div>
 </div>
@@ -685,7 +736,7 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </section>
 <section id="sec-apply_other" class="level3" data-number="8.5.3">
 <h3 data-number="8.5.3" class="anchored" data-anchor-id="sec-apply_other"><span class="header-section-number">8.5.3</span> Другие функции семейства <code>apply()</code></h3>
-<p>Ок, с <code>apply()</code> разобрались. А что с остальными? Некоторые из них еще проще и не требуют индексов, например, <code>lapply</code> (для применения к каждому элементу списка) и <code>sapply()</code> - упрощенная версия <code>lapply()</code>, которая пытается по возможности “упростить” результат до вектора или матрицы.</p>
+<p>Ок, с <code>apply()</code> разобрались. А что с остальными? Некоторые из них еще проще и не требуют индексов, например, <code>lapply()</code> (для применения к каждому элементу списка) и <code>sapply()</code> - упрощенная версия <code>lapply()</code>, которая пытается по возможности “упростить” результат до вектора или матрицы.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>some_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">some =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">list =</span> letters)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(some_list, length)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -702,18 +753,19 @@ $list
   10   26 </code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<div class="callout callout-style-simple callout-caution no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> такой непредсказуемый <code>sapply()</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Достаточно сложно предсказать, в каких именно случаях будет произведено упрощение, а в каких нет. Поэтому <code>sapply()</code> удобен в исследовании данных, но использовать эту функцию в скриптах не очень рекомендуется. Один из вариантов решения этой проблемы — это функция <code>vapply()</code>, которая позволяет управлять результатом <code>lapply()</code>, но гораздо более красиво эта проблема решена в пакете <code>{purrr}</code> (см. <a href="120-tidyverse_advanced.html#sec-purrr"><span>Глава&nbsp;11.4</span></a> ).</p>
 </div>
 </div>
-</div>
-</blockquote>
 <p>Использование <code>sapply()</code> на векторе приводит к тем же результатам, что и просто применить векторизованную функцию обычным способом.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, sqrt)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -728,14 +780,17 @@ $list
 </div>
 </div>
 <p>Зачем вообще тогда нужен <code>sapply()</code>, если мы можем просто применить векторизованную функцию? Ключевое слово здесь <em>векторизованная</em> функция. Если функция не векторизована, то <code>sapply()</code> становится удобным вариантом для того, чтобы избежать итерирования с помощью циклов <code>for</code>.</p>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>Еще одна альтернатива - это векторизация невекторизованной функции с помощью <code>Vectorize()</code>. Эта функция просто оборачивает функцию одним из вариантов <code>apply()</code>.</p>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> <code>Vectorize()</code>
 </div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Еще одна альтернатива - это векторизация невекторизованной функции с помощью <code>Vectorize()</code>. Эта функция просто оборачивает функцию одним из вариантов <code>apply()</code>. Обратите внимание: функция <code>Vectorize()</code> в качестве аргумента принимает функцию и возвращает тоже функцию!</p>
 </div>
 </div>
 <p>Можно применять функции <code>lapply()</code> и <code>sapply()</code> на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. <a href="016-complex_structures.html#sec-df"><span>Глава&nbsp;4.4</span></a>), то итерироваться эти функции будут по колонкам:</p>
@@ -755,7 +810,7 @@ $list
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">30</span>)</span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="050-functional_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="050-functional_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>А теперь давайте сделаем 1000 таких выборок и из каждой возьмем среднее:</p>
@@ -763,21 +818,24 @@ $list
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>sampdist <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rlnorm</span>(<span class="dv">30</span>)))</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sampdist)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="050-functional_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="050-functional_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon">
-<div class="callout-body d-flex">
+<p>Про функции для генерации случайных чисел и про визуализацию будет в следующих главах: <a href="310-infer_stats.html#sec-distributions"><span>Глава&nbsp;17.2</span></a> и <a href="220-base_viz.html"><span>Глава&nbsp;13</span></a> соответственно.</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>Про функции для генерации случайных чисел и про визуализацию будет в следующих главах: <a href="310-infer_stats.html#sec-distributions"><span>Глава&nbsp;17.2</span></a> и <a href="220-base_viz.html"><span>Глава&nbsp;13</span></a> соответственно.</p>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> больше <code>apply()</code>
 </div>
 </div>
-</div>
+<div class="callout-body-container callout-body">
 <p>Если хотите познакомиться с семейством <code>apply()</code> чуточку ближе, то рекомендую <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">вот этот туториал</a>.</p>
-<p>В заключение стоит сказать, что семейство функций <code>apply()</code> — это очень сильное колдунство, но в <em>tidyverse</em> оно практически полностью перекрывается функциями из пакета <code>{purrr}</code>. Впрочем, если вы поняли логику <code>apply()</code>, то при желании вы легко сможете переключиться на альтернативы из пакета <code>{purrr}</code> (см. <a href="120-tidyverse_advanced.html#sec-purrr"><span>Глава&nbsp;11.4</span></a>)</p>
+</div>
+</div>
+<p>В заключение стоит сказать, что семейство функций <code>apply()</code> — это очень сильное колдунство, но в <em>tidyverse</em> оно практически полностью перекрывается функциями из пакета <code>{purrr}</code>, за исключением самого <code>apply()</code> и некоторых других функций, которые работают с матрицами и массивами (<em>tidyverse</em> с ними принципиально не дружит). Впрочем, если вы поняли логику <code>apply()</code>, то при желании вы легко сможете переключиться на альтернативы из пакета <code>{purrr}</code> (см. <a href="120-tidyverse_advanced.html#sec-purrr"><span>Глава&nbsp;11.4</span></a>).</p>
 
 
 </section>
