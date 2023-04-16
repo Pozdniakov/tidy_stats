@@ -472,7 +472,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ✔ ggplot2 3.4.0     ✔ purrr   1.0.1
-✔ tibble  3.1.8     ✔ dplyr   1.1.0
+✔ tibble  3.2.1     ✔ dplyr   1.1.0
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -525,20 +525,20 @@ dbl (3): ...1, Height, Weight
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>heroes</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Выводятся только первые 10 строк, если какие-то колонки не влезают на экран, то они просто перечислены внизу. Ну а тип данных написан прямо под названием колонки.</p>
@@ -552,20 +552,20 @@ dbl (3): ...1, Height, Weight
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(heroes_df) <span class="co">#превращаем обратно в тиббл</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -655,7 +655,7 @@ dbl (3): ...1, Height, Weight
  8     7 Human            
  9     8 &lt;NA&gt;             
 10     9 Human            
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -675,7 +675,7 @@ dbl (3): ...1, Height, Weight
  8 Adam Strange  Human             DC Comics         Blond       
  9 Agent 13      &lt;NA&gt;              Marvel Comics     Blond       
 10 Agent Bob     Human             Marvel Comics     Brown       
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Обратите внимание, если в названии колонки присутствует пробел или, например, колонка начинается с цифры или точки и цифры, то это синтаксически невалидное имя (@ref(variables)). Это не значит, что такие названия колонок недопустимы. Но такие названия колонок нужно обособлять ` грависом (правый штрих, на клавиатуре находится там же где и буква ё и ~).</p>
@@ -698,7 +698,7 @@ dbl (3): ...1, Height, Weight
  8 Adam Strange  Human             DC Comics         Blond       
  9 Agent 13      &lt;NA&gt;              Marvel Comics     Blond       
 10 Agent Bob     Human             Marvel Comics     Brown       
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 </section>
@@ -711,20 +711,19 @@ dbl (3): ...1, Height, Weight
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span>Publisher)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 7
-   name          Gender `Eye color` Race              Hair colo…¹ Height Publi…²
-   &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;  
- 1 A-Bomb        Male   yellow      Human             No Hair        203 Marvel…
- 2 Abe Sapien    Male   blue        Icthyo Sapien     No Hair        191 Dark H…
- 3 Abin Sur      Male   blue        Ungaran           No Hair        185 DC Com…
- 4 Abomination   Male   green       Human / Radiation No Hair        203 Marvel…
- 5 Abraxas       Male   blue        Cosmic Entity     Black           NA Marvel…
- 6 Absorbing Man Male   blue        Human             No Hair        193 Marvel…
- 7 Adam Monroe   Male   blue        &lt;NA&gt;              Blond           NA NBC - …
- 8 Adam Strange  Male   blue        Human             Blond          185 DC Com…
- 9 Agent 13      Female blue        &lt;NA&gt;              Blond          173 Marvel…
-10 Agent Bob     Male   brown       Human             Brown          178 Marvel…
-# … with 724 more rows, and abbreviated variable names ¹​`Hair color`,
-#   ²​Publisher</code></pre>
+   name          Gender `Eye color` Race           `Hair color` Height Publisher
+   &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1 A-Bomb        Male   yellow      Human          No Hair         203 Marvel C…
+ 2 Abe Sapien    Male   blue        Icthyo Sapien  No Hair         191 Dark Hor…
+ 3 Abin Sur      Male   blue        Ungaran        No Hair         185 DC Comics
+ 4 Abomination   Male   green       Human / Radia… No Hair         203 Marvel C…
+ 5 Abraxas       Male   blue        Cosmic Entity  Black            NA Marvel C…
+ 6 Absorbing Man Male   blue        Human          No Hair         193 Marvel C…
+ 7 Adam Monroe   Male   blue        &lt;NA&gt;           Blond            NA NBC - He…
+ 8 Adam Strange  Male   blue        Human          Blond           185 DC Comics
+ 9 Agent 13      Female blue        &lt;NA&gt;           Blond           173 Marvel C…
+10 Agent Bob     Male   brown       Human          Brown           178 Marvel C…
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -732,20 +731,19 @@ dbl (3): ...1, Height, Weight
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span><span class="st">`</span><span class="at">Eye color</span><span class="st">`</span>, Publisher<span class="sc">:</span>Weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 7
-   name          Gender `Eye color` Publisher         Skin colo…¹ Align…² Weight
-   &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;             &lt;chr&gt;       &lt;chr&gt;    &lt;dbl&gt;
- 1 A-Bomb        Male   yellow      Marvel Comics     &lt;NA&gt;        good       441
- 2 Abe Sapien    Male   blue        Dark Horse Comics blue        good        65
- 3 Abin Sur      Male   blue        DC Comics         red         good        90
- 4 Abomination   Male   green       Marvel Comics     &lt;NA&gt;        bad        441
- 5 Abraxas       Male   blue        Marvel Comics     &lt;NA&gt;        bad         NA
- 6 Absorbing Man Male   blue        Marvel Comics     &lt;NA&gt;        bad        122
- 7 Adam Monroe   Male   blue        NBC - Heroes      &lt;NA&gt;        good        NA
- 8 Adam Strange  Male   blue        DC Comics         &lt;NA&gt;        good        88
- 9 Agent 13      Female blue        Marvel Comics     &lt;NA&gt;        good        61
-10 Agent Bob     Male   brown       Marvel Comics     &lt;NA&gt;        good        81
-# … with 724 more rows, and abbreviated variable names ¹​`Skin color`,
-#   ²​Alignment</code></pre>
+   name          Gender `Eye color` Publisher      `Skin color` Alignment Weight
+   &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;
+ 1 A-Bomb        Male   yellow      Marvel Comics  &lt;NA&gt;         good         441
+ 2 Abe Sapien    Male   blue        Dark Horse Co… blue         good          65
+ 3 Abin Sur      Male   blue        DC Comics      red          good          90
+ 4 Abomination   Male   green       Marvel Comics  &lt;NA&gt;         bad          441
+ 5 Abraxas       Male   blue        Marvel Comics  &lt;NA&gt;         bad           NA
+ 6 Absorbing Man Male   blue        Marvel Comics  &lt;NA&gt;         bad          122
+ 7 Adam Monroe   Male   blue        NBC - Heroes   &lt;NA&gt;         good          NA
+ 8 Adam Strange  Male   blue        DC Comics      &lt;NA&gt;         good          88
+ 9 Agent 13      Female blue        Marvel Comics  &lt;NA&gt;         good          61
+10 Agent Bob     Male   brown       Marvel Comics  &lt;NA&gt;         good          81
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Используя <code>!</code> можно вырезать ненужные колонки.</p>
@@ -754,20 +752,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>...<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 10
-   name       Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-   &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
- 1 A-Bomb     Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good       441
- 2 Abe Sapien Male   blue    Icth… No Hair    191 Dark H… blue    good        65
- 3 Abin Sur   Male   blue    Unga… No Hair    185 DC Com… red     good        90
- 4 Abominati… Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad        441
- 5 Abraxas    Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad         NA
- 6 Absorbing… Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad        122
- 7 Adam Monr… Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good        NA
- 8 Adam Stra… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good        88
- 9 Agent 13   Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good        61
-10 Agent Bob  Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good        81
-# … with 724 more rows, and abbreviated variable names ¹​`Eye color`,
-#   ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   name      Gender `Eye color` Race  `Hair color` Height Publisher `Skin color`
+   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       
+ 1 A-Bomb    Male   yellow      Human No Hair         203 Marvel C… &lt;NA&gt;        
+ 2 Abe Sapi… Male   blue        Icth… No Hair         191 Dark Hor… blue        
+ 3 Abin Sur  Male   blue        Unga… No Hair         185 DC Comics red         
+ 4 Abominat… Male   green       Huma… No Hair         203 Marvel C… &lt;NA&gt;        
+ 5 Abraxas   Male   blue        Cosm… Black            NA Marvel C… &lt;NA&gt;        
+ 6 Absorbin… Male   blue        Human No Hair         193 Marvel C… &lt;NA&gt;        
+ 7 Adam Mon… Male   blue        &lt;NA&gt;  Blond            NA NBC - He… &lt;NA&gt;        
+ 8 Adam Str… Male   blue        Human Blond           185 DC Comics &lt;NA&gt;        
+ 9 Agent 13  Female blue        &lt;NA&gt;  Blond           173 Marvel C… &lt;NA&gt;        
+10 Agent Bob Male   brown       Human Brown           178 Marvel C… &lt;NA&gt;        
+# ℹ 724 more rows
+# ℹ 2 more variables: Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>(Gender<span class="sc">:</span>Height))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -785,7 +783,7 @@ dbl (3): ...1, Height, Weight
  8     7 Adam Strange  DC Comics         &lt;NA&gt;         good          88
  9     8 Agent 13      Marvel Comics     &lt;NA&gt;         good          61
 10     9 Agent Bob     Marvel Comics     &lt;NA&gt;         good          81
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Другие известные нам логические операторы (<code>&amp;</code> и <code>|</code>) тоже работают в tidyselect.</p>
@@ -796,20 +794,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span><span class="fu">last_col</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 10
-   name       Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-   &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
- 1 A-Bomb     Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good       441
- 2 Abe Sapien Male   blue    Icth… No Hair    191 Dark H… blue    good        65
- 3 Abin Sur   Male   blue    Unga… No Hair    185 DC Com… red     good        90
- 4 Abominati… Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad        441
- 5 Abraxas    Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad         NA
- 6 Absorbing… Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad        122
- 7 Adam Monr… Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good        NA
- 8 Adam Stra… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good        88
- 9 Agent 13   Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good        61
-10 Agent Bob  Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good        81
-# … with 724 more rows, and abbreviated variable names ¹​`Eye color`,
-#   ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   name      Gender `Eye color` Race  `Hair color` Height Publisher `Skin color`
+   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;       
+ 1 A-Bomb    Male   yellow      Human No Hair         203 Marvel C… &lt;NA&gt;        
+ 2 Abe Sapi… Male   blue        Icth… No Hair         191 Dark Hor… blue        
+ 3 Abin Sur  Male   blue        Unga… No Hair         185 DC Comics red         
+ 4 Abominat… Male   green       Huma… No Hair         203 Marvel C… &lt;NA&gt;        
+ 5 Abraxas   Male   blue        Cosm… Black            NA Marvel C… &lt;NA&gt;        
+ 6 Absorbin… Male   blue        Human No Hair         193 Marvel C… &lt;NA&gt;        
+ 7 Adam Mon… Male   blue        &lt;NA&gt;  Blond            NA NBC - He… &lt;NA&gt;        
+ 8 Adam Str… Male   blue        Human Blond           185 DC Comics &lt;NA&gt;        
+ 9 Agent 13  Female blue        &lt;NA&gt;  Blond           173 Marvel C… &lt;NA&gt;        
+10 Agent Bob Male   brown       Human Brown           178 Marvel C… &lt;NA&gt;        
+# ℹ 724 more rows
+# ℹ 2 more variables: Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>А функция <code>everything()</code> позволяет выбрать все колонки.</p>
@@ -818,20 +816,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">everything</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>При этом <code>everything()</code> не будет дублировать выбранные колонки, поэтому можно использовать <code>everything()</code> для перестановки колонок в тиббле:</p>
@@ -840,20 +838,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Publisher, <span class="fu">everything</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-   name        Publi…¹  ...1 Gender Eye c…² Race  Hair …³ Height Skin …⁴ Align…⁵
-   &lt;chr&gt;       &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
- 1 A-Bomb      Marvel…     0 Male   yellow  Human No Hair    203 &lt;NA&gt;    good   
- 2 Abe Sapien  Dark H…     1 Male   blue    Icth… No Hair    191 blue    good   
- 3 Abin Sur    DC Com…     2 Male   blue    Unga… No Hair    185 red     good   
- 4 Abomination Marvel…     3 Male   green   Huma… No Hair    203 &lt;NA&gt;    bad    
- 5 Abraxas     Marvel…     4 Male   blue    Cosm… Black       NA &lt;NA&gt;    bad    
- 6 Absorbing … Marvel…     5 Male   blue    Human No Hair    193 &lt;NA&gt;    bad    
- 7 Adam Monroe NBC - …     6 Male   blue    &lt;NA&gt;  Blond       NA &lt;NA&gt;    good   
- 8 Adam Stran… DC Com…     7 Male   blue    Human Blond      185 &lt;NA&gt;    good   
- 9 Agent 13    Marvel…     8 Female blue    &lt;NA&gt;  Blond      173 &lt;NA&gt;    good   
-10 Agent Bob   Marvel…     9 Male   brown   Human Brown      178 &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​Publisher, ²​`Eye color`, ³​`Hair color`, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   name          Publisher     ...1 Gender `Eye color` Race  `Hair color` Height
+   &lt;chr&gt;         &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;
+ 1 A-Bomb        Marvel Comi…     0 Male   yellow      Human No Hair         203
+ 2 Abe Sapien    Dark Horse …     1 Male   blue        Icth… No Hair         191
+ 3 Abin Sur      DC Comics        2 Male   blue        Unga… No Hair         185
+ 4 Abomination   Marvel Comi…     3 Male   green       Huma… No Hair         203
+ 5 Abraxas       Marvel Comi…     4 Male   blue        Cosm… Black            NA
+ 6 Absorbing Man Marvel Comi…     5 Male   blue        Human No Hair         193
+ 7 Adam Monroe   NBC - Heroes     6 Male   blue        &lt;NA&gt;  Blond            NA
+ 8 Adam Strange  DC Comics        7 Male   blue        Human Blond           185
+ 9 Agent 13      Marvel Comi…     8 Female blue        &lt;NA&gt;  Blond           173
+10 Agent Bob     Marvel Comi…     9 Male   brown       Human Brown           178
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Впрочем, для перестановки колонок удобнее использовать специальную функцию <code>relocate()</code> (@ref(tidy_relocate)) Можно даже выбирать колонки по паттернам в названиях. Например, с помощью <code>ends_with()</code> можно выбрать все колонки, заканчивающиеся одинаковым суффиксом:</p>
@@ -874,7 +872,7 @@ dbl (3): ...1, Height, Weight
  8 blue        Blond        &lt;NA&gt;        
  9 blue        Blond        &lt;NA&gt;        
 10 brown       Brown        &lt;NA&gt;        
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Аналогично, с помощью функции <code>starts_with()</code> можно найти колонки с одинаковым префиксом, с помощью <code>contains()</code> — все колонки с выбранным паттерном в любой части названия колонки<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
@@ -895,7 +893,7 @@ dbl (3): ...1, Height, Weight
  8 blue       
  9 blue       
 10 brown      
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"eight"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -913,7 +911,7 @@ dbl (3): ...1, Height, Weight
  8    185     88
  9    173     61
 10    178     81
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Ну и наконец, можно выбирать по содержимому колонок с помощью <code>where()</code>. Это напоминает применение <code>sapply()</code>(@ref(apply_other)) на датафрейме для индексирования колонок: в качестве аргумента для <code>where</code> принимается функция, которая применяется для каждой из колонок, после чего выбираются только те колонки, для которых было получено <code>TRUE</code>.</p>
@@ -934,7 +932,7 @@ dbl (3): ...1, Height, Weight
  8     7    185     88
  9     8    173     61
 10     9    178     81
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Функция <code>where()</code> дает невиданную мощь. Например, можно выбрать все колонки без <code>NA</code>:</p>
@@ -955,7 +953,7 @@ dbl (3): ...1, Height, Weight
  8     7 Adam Strange  DC Comics        
  9     8 Agent 13      Marvel Comics    
 10     9 Agent Bob     Marvel Comics    
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>###Переименование колонок: <code>dplyr::rename()</code></p>
@@ -977,7 +975,7 @@ dbl (3): ...1, Height, Weight
  8     7
  9     8
 10     9
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Однако удобнее для этого использовать специальную функцию <code>dplyr::rename()</code>. Синтаксис у нее такой же, как и у <code>select()</code>, но <code>rename()</code> не выбрасывает колонки, которые не были упомянуты.</p>
@@ -986,20 +984,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> ...<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-      id name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+      id name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Для массового переименования колонок можно использовать функцию <code>rename_with()</code>. Эта функция так же использует tidyselect синтаксис для выбора колонок (по умолчанию выбираются все колонки) и применяет функцию в качестве аргумента, которая изменяет</p>
@@ -1008,20 +1006,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(make.names)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye.c…¹ Race  Hair.…² Height Publi…³ Skin.…⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​Eye.color, ²​Hair.color, ³​Publisher, ⁴​Skin.color, ⁵​Alignment</code></pre>
+    ...1 name      Gender Eye.color Race  Hair.color Height Publisher Skin.color
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     
+ 1     0 A-Bomb    Male   yellow    Human No Hair       203 Marvel C… &lt;NA&gt;      
+ 2     1 Abe Sapi… Male   blue      Icth… No Hair       191 Dark Hor… blue      
+ 3     2 Abin Sur  Male   blue      Unga… No Hair       185 DC Comics red       
+ 4     3 Abominat… Male   green     Huma… No Hair       203 Marvel C… &lt;NA&gt;      
+ 5     4 Abraxas   Male   blue      Cosm… Black          NA Marvel C… &lt;NA&gt;      
+ 6     5 Absorbin… Male   blue      Human No Hair       193 Marvel C… &lt;NA&gt;      
+ 7     6 Adam Mon… Male   blue      &lt;NA&gt;  Blond          NA NBC - He… &lt;NA&gt;      
+ 8     7 Adam Str… Male   blue      Human Blond         185 DC Comics &lt;NA&gt;      
+ 9     8 Agent 13  Female blue      &lt;NA&gt;  Blond         173 Marvel C… &lt;NA&gt;      
+10     9 Agent Bob Male   brown     Human Brown         178 Marvel C… &lt;NA&gt;      
+# ℹ 724 more rows
+# ℹ 2 more variables: Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>###Перестановка колонок: <code>dplyr::relocate()</code> {#sec-tidy_relocate}</p>
@@ -1031,20 +1029,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-   Publisher      ...1 name  Gender Eye c…¹ Race  Hair …² Height Skin …³ Align…⁴
-   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
- 1 Marvel Comics     0 A-Bo… Male   yellow  Human No Hair    203 &lt;NA&gt;    good   
- 2 Dark Horse C…     1 Abe … Male   blue    Icth… No Hair    191 blue    good   
- 3 DC Comics         2 Abin… Male   blue    Unga… No Hair    185 red     good   
- 4 Marvel Comics     3 Abom… Male   green   Huma… No Hair    203 &lt;NA&gt;    bad    
- 5 Marvel Comics     4 Abra… Male   blue    Cosm… Black       NA &lt;NA&gt;    bad    
- 6 Marvel Comics     5 Abso… Male   blue    Human No Hair    193 &lt;NA&gt;    bad    
- 7 NBC - Heroes      6 Adam… Male   blue    &lt;NA&gt;  Blond       NA &lt;NA&gt;    good   
- 8 DC Comics         7 Adam… Male   blue    Human Blond      185 &lt;NA&gt;    good   
- 9 Marvel Comics     8 Agen… Female blue    &lt;NA&gt;  Blond      173 &lt;NA&gt;    good   
-10 Marvel Comics     9 Agen… Male   brown   Human Brown      178 &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​`Skin color`, ⁴​Alignment</code></pre>
+   Publisher          ...1 name     Gender `Eye color` Race  `Hair color` Height
+   &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;
+ 1 Marvel Comics         0 A-Bomb   Male   yellow      Human No Hair         203
+ 2 Dark Horse Comics     1 Abe Sap… Male   blue        Icth… No Hair         191
+ 3 DC Comics             2 Abin Sur Male   blue        Unga… No Hair         185
+ 4 Marvel Comics         3 Abomina… Male   green       Huma… No Hair         203
+ 5 Marvel Comics         4 Abraxas  Male   blue        Cosm… Black            NA
+ 6 Marvel Comics         5 Absorbi… Male   blue        Human No Hair         193
+ 7 NBC - Heroes          6 Adam Mo… Male   blue        &lt;NA&gt;  Blond            NA
+ 8 DC Comics             7 Adam St… Male   blue        Human Blond           185
+ 9 Marvel Comics         8 Agent 13 Female blue        &lt;NA&gt;  Blond           173
+10 Marvel Comics         9 Agent B… Male   brown       Human Brown           178
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>При этом <code>relocate()</code> имеет дополнительные параметры <code>.after =</code> и <code>.before =</code>, которые позволяют выбирать, куда поместить выбранные колонки.</p>
@@ -1053,20 +1051,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher, <span class="at">.after =</span> name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Publi…¹ Gender Eye c…² Race  Hair …³ Height Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Marvel… Male   yellow  Human No Hair    203 &lt;NA&gt;    good   
- 2     1 Abe Sapien  Dark H… Male   blue    Icth… No Hair    191 blue    good   
- 3     2 Abin Sur    DC Com… Male   blue    Unga… No Hair    185 red     good   
- 4     3 Abomination Marvel… Male   green   Huma… No Hair    203 &lt;NA&gt;    bad    
- 5     4 Abraxas     Marvel… Male   blue    Cosm… Black       NA &lt;NA&gt;    bad    
- 6     5 Absorbing … Marvel… Male   blue    Human No Hair    193 &lt;NA&gt;    bad    
- 7     6 Adam Monroe NBC - … Male   blue    &lt;NA&gt;  Blond       NA &lt;NA&gt;    good   
- 8     7 Adam Stran… DC Com… Male   blue    Human Blond      185 &lt;NA&gt;    good   
- 9     8 Agent 13    Marvel… Female blue    &lt;NA&gt;  Blond      173 &lt;NA&gt;    good   
-10     9 Agent Bob   Marvel… Male   brown   Human Brown      178 &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​Publisher, ²​`Eye color`, ³​`Hair color`, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Publisher    Gender `Eye color` Race  `Hair color` Height
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;
+ 1     0 A-Bomb        Marvel Comi… Male   yellow      Human No Hair         203
+ 2     1 Abe Sapien    Dark Horse … Male   blue        Icth… No Hair         191
+ 3     2 Abin Sur      DC Comics    Male   blue        Unga… No Hair         185
+ 4     3 Abomination   Marvel Comi… Male   green       Huma… No Hair         203
+ 5     4 Abraxas       Marvel Comi… Male   blue        Cosm… Black            NA
+ 6     5 Absorbing Man Marvel Comi… Male   blue        Human No Hair         193
+ 7     6 Adam Monroe   NBC - Heroes Male   blue        &lt;NA&gt;  Blond            NA
+ 8     7 Adam Strange  DC Comics    Male   blue        Human Blond           185
+ 9     8 Agent 13      Marvel Comi… Female blue        &lt;NA&gt;  Blond           173
+10     9 Agent Bob     Marvel Comi… Male   brown       Human Brown           178
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p><code>relocate()</code> очень хорошо работает в сочетании с выбором колонок с помощью tidyselect. Например, можно передвинуть в одно место все колонки с одним типом данных:</p>
@@ -1075,20 +1073,20 @@ dbl (3): ...1, Height, Weight
 <span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher, <span class="fu">where</span>(is.numeric), <span class="at">.after =</span> name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-   name         Publi…¹  ...1 Height Weight Gender Eye c…² Race  Hair …³ Skin …⁴
-   &lt;chr&gt;        &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  
- 1 A-Bomb       Marvel…     0    203    441 Male   yellow  Human No Hair &lt;NA&gt;   
- 2 Abe Sapien   Dark H…     1    191     65 Male   blue    Icth… No Hair blue   
- 3 Abin Sur     DC Com…     2    185     90 Male   blue    Unga… No Hair red    
- 4 Abomination  Marvel…     3    203    441 Male   green   Huma… No Hair &lt;NA&gt;   
- 5 Abraxas      Marvel…     4     NA     NA Male   blue    Cosm… Black   &lt;NA&gt;   
- 6 Absorbing M… Marvel…     5    193    122 Male   blue    Human No Hair &lt;NA&gt;   
- 7 Adam Monroe  NBC - …     6     NA     NA Male   blue    &lt;NA&gt;  Blond   &lt;NA&gt;   
- 8 Adam Strange DC Com…     7    185     88 Male   blue    Human Blond   &lt;NA&gt;   
- 9 Agent 13     Marvel…     8    173     61 Female blue    &lt;NA&gt;  Blond   &lt;NA&gt;   
-10 Agent Bob    Marvel…     9    178     81 Male   brown   Human Brown   &lt;NA&gt;   
-# … with 724 more rows, 1 more variable: Alignment &lt;chr&gt;, and abbreviated
-#   variable names ¹​Publisher, ²​`Eye color`, ³​`Hair color`, ⁴​`Skin color`</code></pre>
+   name      Publisher  ...1 Height Weight Gender `Eye color` Race  `Hair color`
+   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;       
+ 1 A-Bomb    Marvel C…     0    203    441 Male   yellow      Human No Hair     
+ 2 Abe Sapi… Dark Hor…     1    191     65 Male   blue        Icth… No Hair     
+ 3 Abin Sur  DC Comics     2    185     90 Male   blue        Unga… No Hair     
+ 4 Abominat… Marvel C…     3    203    441 Male   green       Huma… No Hair     
+ 5 Abraxas   Marvel C…     4     NA     NA Male   blue        Cosm… Black       
+ 6 Absorbin… Marvel C…     5    193    122 Male   blue        Human No Hair     
+ 7 Adam Mon… NBC - He…     6     NA     NA Male   blue        &lt;NA&gt;  Blond       
+ 8 Adam Str… DC Comics     7    185     88 Male   blue        Human Blond       
+ 9 Agent 13  Marvel C…     8    173     61 Female blue        &lt;NA&gt;  Blond       
+10 Agent Bob Marvel C…     9    178     81 Male   brown       Human Brown       
+# ℹ 724 more rows
+# ℹ 2 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>Последняя важная функция для выбора колонок — <code>pull()</code>. Эта функция делает то же самое, что и индексирование с помощью <code>$</code>, т.е. вытаскивает из тиббла вектор с выбранным названием. Это лучше вписывается в логику tidyverse, поскольку позволяет извлечь колонку из тиббла с использованием пайпа:</p>
@@ -1132,13 +1130,12 @@ Absorbing Man
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name  Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
-1     0 A-Bo… Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good       441
-2     1 Abe … Male   blue    Icth… No Hair    191 Dark H… blue    good        65
-3     2 Abin… Male   blue    Unga… No Hair    185 DC Com… red     good        90
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   ...1 name       Gender `Eye color` Race         `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1     0 A-Bomb     Male   yellow      Human        No Hair         203 Marvel C…
+2     1 Abe Sapien Male   blue        Icthyo Sapi… No Hair         191 Dark Hor…
+3     2 Abin Sur   Male   blue        Ungaran      No Hair         185 DC Comics
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1150,20 +1147,20 @@ Absorbing Man
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">==</span> <span class="st">"DC Comics"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 215 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 2     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 3    13 Alan Scott  Male   blue    &lt;NA&gt;  Blond      180 DC Com… &lt;NA&gt;    good   
- 4    16 Alfred Pen… Male   blue    Human Black      178 DC Com… &lt;NA&gt;    good   
- 5    19 Amazo       Male   red     Andr… &lt;NA&gt;       257 DC Com… &lt;NA&gt;    bad    
- 6    27 Animal Man  Male   blue    Human Blond      183 DC Com… &lt;NA&gt;    good   
- 7    31 Anti-Monit… Male   yellow  God … No Hair     61 DC Com… &lt;NA&gt;    bad    
- 8    35 Aquababy    Male   blue    &lt;NA&gt;  Blond       NA DC Com… &lt;NA&gt;    good   
- 9    36 Aqualad     Male   blue    Atla… Black      178 DC Com… &lt;NA&gt;    good   
-10    37 Aquaman     Male   blue    Atla… Blond      185 DC Com… &lt;NA&gt;    good   
-# … with 205 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name             Gender `Eye color` Race  `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     2 Abin Sur         Male   blue        Unga… No Hair         185 DC Comics
+ 2     7 Adam Strange     Male   blue        Human Blond           185 DC Comics
+ 3    13 Alan Scott       Male   blue        &lt;NA&gt;  Blond           180 DC Comics
+ 4    16 Alfred Pennywor… Male   blue        Human Black           178 DC Comics
+ 5    19 Amazo            Male   red         Andr… &lt;NA&gt;            257 DC Comics
+ 6    27 Animal Man       Male   blue        Human Blond           183 DC Comics
+ 7    31 Anti-Monitor     Male   yellow      God … No Hair          61 DC Comics
+ 8    35 Aquababy         Male   blue        &lt;NA&gt;  Blond            NA DC Comics
+ 9    36 Aqualad          Male   blue        Atla… Black           178 DC Comics
+10    37 Aquaman          Male   blue        Atla… Blond           185 DC Comics
+# ℹ 205 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1175,25 +1172,23 @@ Absorbing Man
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(Weight, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name  Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
-1   575 Sasq… Male   red     &lt;NA&gt;  Orange     305 Marvel… &lt;NA&gt;    good       900
-2   373 Jugg… Male   blue    Human Red        287 Marvel… &lt;NA&gt;    neutral    855
-3   203 Dark… Male   red     New … No Hair    267 DC Com… grey    bad        817
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   ...1 name       Gender `Eye color` Race    `Hair color` Height Publisher    
+  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
+1   575 Sasquatch  Male   red         &lt;NA&gt;    Orange          305 Marvel Comics
+2   373 Juggernaut Male   blue        Human   Red             287 Marvel Comics
+3   203 Darkseid   Male   red         New God No Hair         267 DC Comics    
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(Weight, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name  Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
-1   346 Iron… Male   blue    &lt;NA&gt;  No Hair     NA Marvel… &lt;NA&gt;    bad          2
-2   302 Groot Male   yellow  Flor… &lt;NA&gt;       701 Marvel… &lt;NA&gt;    good         4
-3   350 Jack… Male   blue    Human Brown       71 Dark H… &lt;NA&gt;    good        14
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   ...1 name        Gender `Eye color` Race        `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   346 Iron Monger Male   blue        &lt;NA&gt;        No Hair          NA Marvel C…
+2   302 Groot       Male   yellow      Flora Colo… &lt;NA&gt;            701 Marvel C…
+3   350 Jack-Jack   Male   blue        Human       Brown            71 Dark Hor…
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Функция <code>slice_sample()</code> позволяет выбирать заданное количество случайных строчек:</p>
@@ -1202,13 +1197,12 @@ Absorbing Man
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name  Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
-1   221 Doct… Male   brown   Human Brown      201 Marvel… &lt;NA&gt;    bad        187
-2   465 Mohi… Male   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;        NA NBC - … &lt;NA&gt;    good        NA
-3   390 King… Male   black   Anim… No Hair     NA DC Com… &lt;NA&gt;    bad         NA
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   ...1 name     Gender `Eye color` Race      `Hair color` Height Publisher    
+  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
+1   258 Firestar Female green       Mutant    Red             173 Marvel Comics
+2   661 Thor     Male   blue        Asgardian Blond           198 Marvel Comics
+3   164 Catwoman Female green       Human     Black           175 DC Comics    
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Или же долю строчек:</p>
@@ -1217,17 +1211,16 @@ Absorbing Man
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 11
-   ...1 name  Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
-1   370 Jolt  Female blue    &lt;NA&gt;  Black      165 Marvel… &lt;NA&gt;    good        49
-2   541 Rach… Female &lt;NA&gt;    Alpha &lt;NA&gt;        NA SyFy    &lt;NA&gt;    good        NA
-3   229 Doom… Male   red     Alien White      244 DC Com… &lt;NA&gt;    bad        412
-4   276 Gary… Male   &lt;NA&gt;    Alpha &lt;NA&gt;        NA SyFy    &lt;NA&gt;    good        NA
-5   439 Maxi… Female brown   &lt;NA&gt;  Red        180 DC Com… &lt;NA&gt;    bad         72
-6   149 Capt… Male   blue    Huma… Silver     193 DC Com… silver  good        90
-7    98 Blac… Female green   Human Blond      178 Marvel… &lt;NA&gt;    good        54
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+   ...1 name          Gender `Eye color` Race    `Hair color` Height Publisher  
+  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      
+1   586 Shadow King   &lt;NA&gt;   red         &lt;NA&gt;    &lt;NA&gt;            185 Marvel Com…
+2   249 Fabian Cortez &lt;NA&gt;   blue        &lt;NA&gt;    Brown           196 Marvel Com…
+3   379 Karate Kid    Male   brown       Human   Brown           173 DC Comics  
+4   293 Gorilla Grodd Male   yellow      Gorilla Black           198 DC Comics  
+5   309 Harry Potter  Male   green       Human   Black            NA J. K. Rowl…
+6   397 Kyle Rayner   Male   green       Human   Black           180 DC Comics  
+7   151 Captain Cold  Male   brown       Human   Brown            NA DC Comics  
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Если поставить значение параметра <code>prop =</code> равным <code>1</code>, то таким образом можно перемешать порядок строчек в тиббле:</p>
@@ -1236,20 +1229,20 @@ Absorbing Man
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1   712 Weapon XI   Male   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;        NA Marvel… &lt;NA&gt;    bad    
- 2   680 Two-Face    Male   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;       183 DC Com… &lt;NA&gt;    bad    
- 3   382 Kevin 11    Male   &lt;NA&gt;    Human Black       NA DC Com… &lt;NA&gt;    good   
- 4   361 Jessica Sa… Female &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;        NA NBC - … &lt;NA&gt;    good   
- 5   455 Miss Marti… Female red     &lt;NA&gt;  Red        178 DC Com… &lt;NA&gt;    good   
- 6   180 Clock King  Male   blue    Human Black      178 DC Com… &lt;NA&gt;    bad    
- 7   717 Wiz Kid     &lt;NA&gt;   brown   &lt;NA&gt;  Black      140 Marvel… &lt;NA&gt;    good   
- 8   423 Magneto     Male   grey    Muta… White      188 Marvel… &lt;NA&gt;    bad    
- 9    16 Alfred Pen… Male   blue    Human Black      178 DC Com… &lt;NA&gt;    good   
-10   648 Swarm       Male   yellow  Muta… No Hair    196 Marvel… yellow  bad    
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name         Gender `Eye color` Race      `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   620 Spider-Girl  Female blue        Human     Brown           170 Marvel C…
+ 2   685 Valerie Hart Female hazel       &lt;NA&gt;      Black           175 Team Epi…
+ 3   164 Catwoman     Female green       Human     Black           175 DC Comics
+ 4    74 Beast        Male   blue        Mutant    Blue            180 Marvel C…
+ 5    36 Aqualad      Male   blue        Atlantean Black           178 DC Comics
+ 6   633 Stardust     Male   &lt;NA&gt;        &lt;NA&gt;      &lt;NA&gt;             NA Marvel C…
+ 7   534 Pyro         Male   blue        &lt;NA&gt;      Blond           178 Marvel C…
+ 8   538 Quicksilver  Male   blue        Mutant    Silver          183 Marvel C…
+ 9   210 Dazzler      Female blue        Mutant    Blond           173 Marvel C…
+10   508 Ozymandias   Male   blue        Human     Blond            NA DC Comics
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1261,20 +1254,20 @@ Absorbing Man
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 50 × 11
-    ...1 name       Gender Eye co…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     1 Abe Sapien Male   blue     Icth… No Hair    191 Dark H… blue    good   
- 2     2 Abin Sur   Male   blue     Unga… No Hair    185 DC Com… red     good   
- 3    34 Apocalypse Male   red      Muta… Black      213 Marvel… grey    bad    
- 4    39 Archangel  Male   blue     Muta… Blond      183 Marvel… blue    good   
- 5    41 Ardina     Female white    Alien Orange     193 Marvel… gold    good   
- 6    56 Azazel     Male   yellow   Neya… Black      183 Marvel… red     bad    
- 7    74 Beast      Male   blue     Muta… Blue       180 Marvel… blue    good   
- 8    75 Beast Boy  Male   green    Human Green      173 DC Com… green   good   
- 9    92 Bizarro    Male   black    Biza… Black      191 DC Com… white   neutral
-10   108 Blackout   Male   red      Demon White      191 Marvel… white   bad    
-# … with 40 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name       Gender `Eye color` Race        `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     1 Abe Sapien Male   blue        Icthyo Sap… No Hair         191 Dark Hor…
+ 2     2 Abin Sur   Male   blue        Ungaran     No Hair         185 DC Comics
+ 3    34 Apocalypse Male   red         Mutant      Black           213 Marvel C…
+ 4    39 Archangel  Male   blue        Mutant      Blond           183 Marvel C…
+ 5    41 Ardina     Female white       Alien       Orange          193 Marvel C…
+ 6    56 Azazel     Male   yellow      Neyaphem    Black           183 Marvel C…
+ 7    74 Beast      Male   blue        Mutant      Blue            180 Marvel C…
+ 8    75 Beast Boy  Male   green       Human       Green           173 DC Comics
+ 9    92 Bizarro    Male   black       Bizarro     Black           191 DC Comics
+10   108 Blackout   Male   red         Demon       White           191 Marvel C…
+# ℹ 40 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Можно выбрать колонки, наличие <code>NA</code> в которых будет приводить к удалению соответствующих строчек (не затрагивая другие строчки, в которых есть <code>NA</code> в остальных столбцах).</p>
@@ -1283,20 +1276,20 @@ Absorbing Man
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 495 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 6     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 7     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
- 8     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
- 9    10 Agent Zero  Male   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;       191 Marvel… &lt;NA&gt;    good   
-10    11 Air-Walker  Male   blue    &lt;NA&gt;  White      188 Marvel… &lt;NA&gt;    bad    
-# … with 485 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 6     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 7     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+ 8     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+ 9    10 Agent Zero    Male   &lt;NA&gt;        &lt;NA&gt;     &lt;NA&gt;            191 Marvel C…
+10    11 Air-Walker    Male   blue        &lt;NA&gt;     White           188 Marvel C…
+# ℹ 485 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Для выбора колонок в <code>drop_na()</code> используется tidyselect, с которым мы недавно познакомились (@ref(tidyselect)).</p>
@@ -1309,20 +1302,20 @@ Absorbing Man
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1   346 Iron Monger Male   blue    &lt;NA&gt;  No Hair     NA Marvel… &lt;NA&gt;    bad    
- 2   302 Groot       Male   yellow  Flor… &lt;NA&gt;       701 Marvel… &lt;NA&gt;    good   
- 3   350 Jack-Jack   Male   blue    Human Brown       71 Dark H… &lt;NA&gt;    good   
- 4   272 Galactus    Male   black   Cosm… Black      876 Marvel… &lt;NA&gt;    neutral
- 5   731 Yoda        Male   brown   Yoda… White       66 George… green   good   
- 6   255 Fin Fang F… Male   red     Kaka… No Hair    975 Marvel… green   good   
- 7   330 Howard the… Male   brown   &lt;NA&gt;  Yellow      79 Marvel… &lt;NA&gt;    good   
- 8   396 Krypto      Male   blue    Kryp… White       64 DC Com… &lt;NA&gt;    good   
- 9   568 Rocket Rac… Male   brown   Anim… Brown      122 Marvel… &lt;NA&gt;    good   
-10   208 Dash        Male   blue    Human Blond      122 Dark H… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name            Gender `Eye color` Race   `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   346 Iron Monger     Male   blue        &lt;NA&gt;   No Hair          NA Marvel C…
+ 2   302 Groot           Male   yellow      Flora… &lt;NA&gt;            701 Marvel C…
+ 3   350 Jack-Jack       Male   blue        Human  Brown            71 Dark Hor…
+ 4   272 Galactus        Male   black       Cosmi… Black           876 Marvel C…
+ 5   731 Yoda            Male   brown       Yoda'… White            66 George L…
+ 6   255 Fin Fang Foom   Male   red         Kakar… No Hair         975 Marvel C…
+ 7   330 Howard the Duck Male   brown       &lt;NA&gt;   Yellow           79 Marvel C…
+ 8   396 Krypto          Male   blue        Krypt… White            64 DC Comics
+ 9   568 Rocket Raccoon  Male   brown       Animal Brown           122 Marvel C…
+10   208 Dash            Male   blue        Human  Blond           122 Dark Hor…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Чтобы отсортировать в обратном порядке, воспользуйтесь функцией <code>desc()</code>.</p>
@@ -1331,20 +1324,20 @@ Absorbing Man
 <span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Weight))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name       Gender Eye co…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1   575 Sasquatch  Male   red      &lt;NA&gt;  Orange   305   Marvel… &lt;NA&gt;    good   
- 2   373 Juggernaut Male   blue     Human Red      287   Marvel… &lt;NA&gt;    neutral
- 3   203 Darkseid   Male   red      New … No Hair  267   DC Com… grey    bad    
- 4   283 Giganta    Female green    &lt;NA&gt;  Red       62.5 DC Com… &lt;NA&gt;    bad    
- 5   331 Hulk       Male   green    Huma… Green    244   Marvel… green   good   
- 6   549 Red Hulk   Male   yellow   Huma… Black    213   Marvel… red     neutral
- 7   119 Bloodaxe   Female blue     Human Brown    218   Marvel… &lt;NA&gt;    bad    
- 8   718 Wolfsbane  Female green    &lt;NA&gt;  Auburn   366   Marvel… &lt;NA&gt;    good   
- 9   657 Thanos     Male   red      Eter… No Hair  201   Marvel… purple  bad    
-10     0 A-Bomb     Male   yellow   Human No Hair  203   Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name       Gender `Eye color` Race        `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   575 Sasquatch  Male   red         &lt;NA&gt;        Orange        305   Marvel C…
+ 2   373 Juggernaut Male   blue        Human       Red           287   Marvel C…
+ 3   203 Darkseid   Male   red         New God     No Hair       267   DC Comics
+ 4   283 Giganta    Female green       &lt;NA&gt;        Red            62.5 DC Comics
+ 5   331 Hulk       Male   green       Human / Ra… Green         244   Marvel C…
+ 6   549 Red Hulk   Male   yellow      Human / Ra… Black         213   Marvel C…
+ 7   119 Bloodaxe   Female blue        Human       Brown         218   Marvel C…
+ 8   718 Wolfsbane  Female green       &lt;NA&gt;        Auburn        366   Marvel C…
+ 9   657 Thanos     Male   red         Eternal     No Hair       201   Marvel C…
+10     0 A-Bomb     Male   yellow      Human       No Hair       203   Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Можно сортировать по нескольким колонкам сразу. В таких случаях удобно в качестве первой переменной выбирать переменную, обозначающую принадлежность к группе, а в качестве второй — континуальную числовую переменную:</p>
@@ -1353,20 +1346,20 @@ Absorbing Man
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Gender, <span class="fu">desc</span>(Weight))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name      Gender Eye col…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1   283 Giganta   Female green     &lt;NA&gt;  Red       62.5 DC Com… &lt;NA&gt;    bad    
- 2   119 Bloodaxe  Female blue      Human Brown    218   Marvel… &lt;NA&gt;    bad    
- 3   718 Wolfsbane Female green     &lt;NA&gt;  Auburn   366   Marvel… &lt;NA&gt;    good   
- 4   591 She-Hulk  Female green     Human Green    201   Marvel… &lt;NA&gt;    good   
- 5   320 Hela      Female green     Asga… Black    213   Marvel… &lt;NA&gt;    bad    
- 6   686 Valkyrie  Female blue      &lt;NA&gt;  Blond    191   Marvel… &lt;NA&gt;    good   
- 7   596 Sif       Female blue      Asga… Black    188   Marvel… &lt;NA&gt;    good   
- 8   271 Frigga    Female blue      &lt;NA&gt;  White    180   Marvel… &lt;NA&gt;    good   
- 9   667 Thundra   Female green     &lt;NA&gt;  Red      218   Marvel… &lt;NA&gt;    good   
-10   592 She-Thing Female blue      Huma… No Hair  183   Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name      Gender `Eye color` Race         `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   283 Giganta   Female green       &lt;NA&gt;         Red            62.5 DC Comics
+ 2   119 Bloodaxe  Female blue        Human        Brown         218   Marvel C…
+ 3   718 Wolfsbane Female green       &lt;NA&gt;         Auburn        366   Marvel C…
+ 4   591 She-Hulk  Female green       Human        Green         201   Marvel C…
+ 5   320 Hela      Female green       Asgardian    Black         213   Marvel C…
+ 6   686 Valkyrie  Female blue        &lt;NA&gt;         Blond         191   Marvel C…
+ 7   596 Sif       Female blue        Asgardian    Black         188   Marvel C…
+ 8   271 Frigga    Female blue        &lt;NA&gt;         White         180   Marvel C…
+ 9   667 Thundra   Female green       &lt;NA&gt;         Red           218   Marvel C…
+10   592 She-Thing Female blue        Human / Rad… No Hair       183   Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1393,7 +1386,7 @@ Absorbing Man
  8 A-Bomb       107.
  9 Abomination  107.
 10 Hulk         106.
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p><code>dplyr::transmute()</code> - это аналог <code>mutate()</code>, который не только создает новые колонки, но и сразу же выкидывает все старые:</p>
@@ -1414,7 +1407,7 @@ Absorbing Man
  8  25.7
  9  20.4
 10  25.6
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Внутри <code>mutate()</code> и <code>transmute()</code> мы можем использовать либо векторизованные операции (длина новой колонки должна равняться длине датафрейма), либо операции, которые возвращают одно значение. В последнем случае значение будет одинаковым на всю колонку, т.е. будет работать правило ресайклинга (@ref(recycling)):</p>
@@ -1435,7 +1428,7 @@ Absorbing Man
  8 Adam Strange         112.
  9 Agent 13             112.
 10 Agent Bob            112.
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Однако в функциях <code>mutate()</code> и <code>transmute()</code> правило ресайклинга не будет работать в остальных случаях: если полученный вектор будет не равен 1 или длине датафрейма, то мы получим ошибку.</p>
@@ -1455,21 +1448,21 @@ Caused by error:
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">one_and_two =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(.)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 12
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 2 more variables: Weight &lt;dbl&gt;, one_and_two &lt;int&gt;, and
-#   abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 4 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;,
+#   one_and_two &lt;int&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1536,20 +1529,20 @@ dplyr 1.1.0.
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
 # Groups:   Gender [3]
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Если после этого применить на тиббле функцию <code>summarise()</code>, то мы получим не тиббл длиной один, а тиббл со значением для каждой из групп.</p>
@@ -1608,7 +1601,7 @@ dplyr 1.1.0.
  8 Agent Zero    &lt;NA&gt;             
  9 Air-Walker    &lt;NA&gt;             
 10 Ajax          Cyborg           
-# … with 601 more rows</code></pre>
+# ℹ 601 more rows</code></pre>
 </div>
 </div>
 <p>или же наоборот, выделить только маленькие группы:</p>
@@ -1632,7 +1625,7 @@ dplyr 1.1.0.
  8 Fin Fang Foom Kakarantharaian   
  9 Gamora        Zen-Whoberian     
 10 Gladiator     Strontian         
-# … with 24 more rows</code></pre>
+# ℹ 24 more rows</code></pre>
 </div>
 </div>
 <p>Таблицу частот можно создать без <code>group_by()</code> и <code>summarise(n = n())</code>. Функция <code>count()</code> заменяет эту конструкцию:</p>
@@ -1697,7 +1690,7 @@ dplyr 1.1.0.
  8 Male   Cyborg           
  9 Male   Xenomorph XX121  
 10 Male   Android          
-# … with 71 more rows</code></pre>
+# ℹ 71 more rows</code></pre>
 </div>
 </div>
 <p>Иногда нужно аггрегировать данные, но при этом сохранить исходную структуру тиббла. Например, нужно посчитать размер групп или посчитать средние значения по группе для последующего сравнения с индивидуальными значениями.</p>
@@ -1725,7 +1718,7 @@ dplyr 1.1.0.
  8 Human             Adam Strange  Male      208
  9 &lt;NA&gt;              Agent 13      Female    304
 10 Human             Agent Bob     Male      208
-# … with 724 more rows</code></pre>
+# ℹ 724 more rows</code></pre>
 </div>
 </div>
 <p>Результаты аггрегации были записаны в отдельную колонку, при этом значения этой колонки внутри одной группы повторяются:</p>

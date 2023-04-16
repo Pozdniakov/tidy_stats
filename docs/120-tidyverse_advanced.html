@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ✔ ggplot2 3.4.0     ✔ purrr   1.0.1
-✔ tibble  3.1.8     ✔ dplyr   1.1.0
+✔ tibble  3.2.1     ✔ dplyr   1.1.0
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -1001,13 +1001,12 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>                   <span class="cf">function</span>(x) <span class="fu">mean</span>(<span class="fu">nchar</span>(x), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-  Gender  ...1 Height Weight  name Eye c…¹  Race Hair …² Publi…³ Skin …⁴ Align…⁵
-  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 Female  395.   175.   78.8  9.04    4.68  6.42    5.05    11.5    4.57    3.88
-2 Male    357.   192.  126.   9.05    4.53  6.75    5.48    11.4    5.02    3.78
-3 &lt;NA&gt;    329    177.  129.   9.48    5.16 10.1     6.44    11.9    4       3.96
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+  Gender  ...1 Height Weight  name `Eye color`  Race `Hair color` Publisher
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt; &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+1 Female  395.   175.   78.8  9.04        4.68  6.42         5.05      11.5
+2 Male    357.   192.  126.   9.05        4.53  6.75         5.48      11.4
+3 &lt;NA&gt;    329    177.  129.   9.48        5.16 10.1          6.44      11.9
+# ℹ 2 more variables: `Skin color` &lt;dbl&gt;, Alignment &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Внутри одного <code>across()</code> можно применить не одну функцию к каждой из выбранных колонок, а сразу несколько функций для каждой из колонок. Для этого нам нужно использовать список функций (желательно - проименованный).</p>
@@ -1021,13 +1020,12 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 7
-  Gender Height_minimum Height_average Height_maximum Weight_m…¹ Weigh…² Weigh…³
-  &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 Female           62.5           175.            366         41    78.8     630
-2 Male             15.2           192.            975          2   126.      900
-3 &lt;NA&gt;            108             177.            198         39   129.      383
-# … with abbreviated variable names ¹​Weight_minimum, ²​Weight_average,
-#   ³​Weight_maximum</code></pre>
+  Gender Height_minimum Height_average Height_maximum Weight_minimum
+  &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;          &lt;dbl&gt;
+1 Female           62.5           175.            366             41
+2 Male             15.2           192.            975              2
+3 &lt;NA&gt;            108             177.            198             39
+# ℹ 2 more variables: Weight_average &lt;dbl&gt;, Weight_maximum &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -1045,13 +1043,12 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>            )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 9
-  Gender Height_min Height_mean Height…¹ Heigh…² Weigh…³ Weigh…⁴ Weigh…⁵ Weigh…⁶
-  &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
-1 Female       62.5        175.      366      56      41    78.8     630      58
-2 Male         15.2        192.      975     147       2   126.      900     166
-3 &lt;NA&gt;        108          177.      198      14      39   129.      383      15
-# … with abbreviated variable names ¹​Height_max, ²​Height_na_n, ³​Weight_min,
-#   ⁴​Weight_mean, ⁵​Weight_max, ⁶​Weight_na_n</code></pre>
+  Gender Height_min Height_mean Height_max Height_na_n Weight_min Weight_mean
+  &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;int&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+1 Female       62.5        175.        366          56         41        78.8
+2 Male         15.2        192.        975         147          2       126. 
+3 &lt;NA&gt;        108          177.        198          14         39       129. 
+# ℹ 2 more variables: Weight_max &lt;dbl&gt;, Weight_na_n &lt;int&gt;</code></pre>
 </div>
 </div>
 <p>Хотя основное применение функции <code>across()</code> – это массовое подытоживание с помощью <code>summarise()</code>, <code>across()</code> можно использовать и с другими функциями <code>dplyr</code>. Например, можно делать массовые операции с колонками с помощью <code>mutate()</code>:</p>
@@ -1060,20 +1057,20 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name        Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵
-   &lt;dbl&gt; &lt;fct&gt;       &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;  
- 1     0 A-Bomb      Male   yellow  Human No Hair    203 Marvel… &lt;NA&gt;    good   
- 2     1 Abe Sapien  Male   blue    Icth… No Hair    191 Dark H… blue    good   
- 3     2 Abin Sur    Male   blue    Unga… No Hair    185 DC Com… red     good   
- 4     3 Abomination Male   green   Huma… No Hair    203 Marvel… &lt;NA&gt;    bad    
- 5     4 Abraxas     Male   blue    Cosm… Black       NA Marvel… &lt;NA&gt;    bad    
- 6     5 Absorbing … Male   blue    Human No Hair    193 Marvel… &lt;NA&gt;    bad    
- 7     6 Adam Monroe Male   blue    &lt;NA&gt;  Blond       NA NBC - … &lt;NA&gt;    good   
- 8     7 Adam Stran… Male   blue    Human Blond      185 DC Com… &lt;NA&gt;    good   
- 9     8 Agent 13    Female blue    &lt;NA&gt;  Blond      173 Marvel… &lt;NA&gt;    good   
-10     9 Agent Bob   Male   brown   Human Brown      178 Marvel… &lt;NA&gt;    good   
-# … with 724 more rows, 1 more variable: Weight &lt;dbl&gt;, and abbreviated variable
-#   names ¹​`Eye color`, ²​`Hair color`, ³​Publisher, ⁴​`Skin color`, ⁵​Alignment</code></pre>
+    ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;fct&gt;         &lt;fct&gt;  &lt;fct&gt;       &lt;fct&gt;    &lt;fct&gt;         &lt;dbl&gt; &lt;fct&gt;    
+ 1     0 A-Bomb        Male   yellow      Human    No Hair         203 Marvel C…
+ 2     1 Abe Sapien    Male   blue        Icthyo … No Hair         191 Dark Hor…
+ 3     2 Abin Sur      Male   blue        Ungaran  No Hair         185 DC Comics
+ 4     3 Abomination   Male   green       Human /… No Hair         203 Marvel C…
+ 5     4 Abraxas       Male   blue        Cosmic … Black            NA Marvel C…
+ 6     5 Absorbing Man Male   blue        Human    No Hair         193 Marvel C…
+ 7     6 Adam Monroe   Male   blue        &lt;NA&gt;     Blond            NA NBC - He…
+ 8     7 Adam Strange  Male   blue        Human    Blond           185 DC Comics
+ 9     8 Agent 13      Female blue        &lt;NA&gt;     Blond           173 Marvel C…
+10     9 Agent Bob     Male   brown       Human    Brown           178 Marvel C…
+# ℹ 724 more rows
+# ℹ 3 more variables: `Skin color` &lt;fct&gt;, Alignment &lt;fct&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Конструкция <code>across()</code> работает не только внутри <code>summarise()</code> и <code>mutate()</code>, можно применять <code>across()</code> и с другими функциями, которые используют data-masking. Например, можно использовать <code>across()</code> внутри <code>count()</code> вместе с функцией <code>n_distinct()</code>, которая считает количество уникальных значений в векторе. Это позволяет посмотреть таблицу частот для группирующих переменных:</p>
@@ -1234,11 +1231,10 @@ $Weight
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(class)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 11
-  ...1  name  Gender Eye c…¹ Race  Hair …² Height Publi…³ Skin …⁴ Align…⁵ Weight
-  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; 
-1 nume… char… chara… charac… char… charac… numer… charac… charac… charac… numer…
-# … with abbreviated variable names ¹​`Eye color`, ²​`Hair color`, ³​Publisher,
-#   ⁴​`Skin color`, ⁵​Alignment</code></pre>
+  ...1    name      Gender    `Eye color` Race     `Hair color` Height Publisher
+  &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;    
+1 numeric character character character   charact… character    numer… character
+# ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p>Так же как и функции семейства <code>apply()</code>, функции <code>map_*()</code> отлично сочетаются с анонимными функциями.</p>

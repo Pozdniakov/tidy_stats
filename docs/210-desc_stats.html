@@ -395,9 +395,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-mad" id="toc-sec-mad" class="nav-link" data-scroll-target="#sec-mad"><span class="toc-section-number">12.5.4</span>  Медианное абсолютное отклонение</a></li>
   <li><a href="#sec-iqr" id="toc-sec-iqr" class="nav-link" data-scroll-target="#sec-iqr"><span class="toc-section-number">12.5.5</span>  Межквартильный размах</a></li>
   </ul></li>
-  <li><a href="#sec-skku" id="toc-sec-skku" class="nav-link" data-scroll-target="#sec-skku"><span class="toc-section-number">12.6</span>  Ассиметрия и эксцесс</a>
+  <li><a href="#sec-skku" id="toc-sec-skku" class="nav-link" data-scroll-target="#sec-skku"><span class="toc-section-number">12.6</span>  Асимметрия и эксцесс</a>
   <ul class="collapse">
-  <li><a href="#sec-skew" id="toc-sec-skew" class="nav-link" data-scroll-target="#sec-skew"><span class="toc-section-number">12.6.1</span>  Ассиметрия</a></li>
+  <li><a href="#sec-skew" id="toc-sec-skew" class="nav-link" data-scroll-target="#sec-skew"><span class="toc-section-number">12.6.1</span>  Асимметрия</a></li>
   <li><a href="#sec-kurtosis" id="toc-sec-kurtosis" class="nav-link" data-scroll-target="#sec-kurtosis"><span class="toc-section-number">12.6.2</span>  Эксцесс</a></li>
   <li><a href="#sec-skewR" id="toc-sec-skewR" class="nav-link" data-scroll-target="#sec-skewR"><span class="toc-section-number">12.6.3</span>  Ассиметрия и эксцесс в R</a></li>
   </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ✔ ggplot2 3.4.0     ✔ purrr   1.0.1
-✔ tibble  3.1.8     ✔ dplyr   1.1.0
+✔ tibble  3.2.1     ✔ dplyr   1.1.0
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -686,24 +686,26 @@ dbl (3): ...1, Height, Weight
 </section>
 </section>
 <section id="sec-skku" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="sec-skku"><span class="header-section-number">12.6</span> Ассиметрия и эксцесс</h2>
+<h2 data-number="12.6" class="anchored" data-anchor-id="sec-skku"><span class="header-section-number">12.6</span> Асимметрия и эксцесс</h2>
 <section id="sec-skew" class="level3" data-number="12.6.1">
-<h3 data-number="12.6.1" class="anchored" data-anchor-id="sec-skew"><span class="header-section-number">12.6.1</span> Ассиметрия</h3>
-<p><strong>Ассиметрия (skewness)</strong> измеряет симметричность распределения. Положительный показатель ассиметрии (“Right-skewed” или positive skewness) означает, что хвосты с правой части распределения длиннее. Негативный показатель ассиметрии (“Left-skewed” или negative skewness) означает, что левый хвост длиннее.</p>
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="sec-skew"><span class="header-section-number">12.6.1</span> Асимметрия</h3>
+<p><strong>Асимметрия <em>(skewness)</em></strong> измеряет симметричность распределения. <strong>Положительный показатель асимметрии</strong> <strong><em>(“Right-skewed”</em></strong> или <strong><em>positive skewness)</em></strong> означает, что хвосты с правой части распределения длиннее. <strong>Негативный показатель асимметрии (<em>“Left-skewed”</em></strong> или <strong><em>negative skewness)</em></strong> означает, что левый хвост длиннее. Нулевой показатель асимметрии означает симметричное распределение.</p>
 <p><img src="images/7180OS_01_180.jpg" class="img-fluid" width="400"></p>
-<blockquote class="blockquote">
-<p>Например, в психологии положительная ассиметрия встречается очень часто. Например, время реакции: оно ограничено снизу 0 мс (а по факту не меньше 100 мс - быстрее сигнал не успеет по нервной системе пройти до пальцев), а вот с другой стороны оно никак не ограничено. Испытуемый может на полчаса перед монитором затупить, ага.</p>
-</blockquote>
+<p>В целом, распределения с положительным показателем асимметрии на практике встречаются чаще, чем с отрицательным: очень часто мы сталкиваемся со шкалами, которые ограничены снизу, но не ограничены сверху.</p>
+<ul>
+<li><p>В когнитивистике положительная асимметрия встречается очень часто. Например, время реакции: оно ограничено снизу 0 мс (а по факту не меньше 100 мс – быстрее сигнал не успеет по нервной системе пройти до пальцев), а вот с другой стороны оно никак не ограничено. Испытуемый может на полчаса перед монитором затупить, ага.</p></li>
+<li><p>Если мы анализируем размеры индивидуальные доходы, то они не могут быть меньше 0, но могут быть невероятно большими для относительно небольшого количества миллионеров и миллиардеров. Доходы остальных людей находятся в относительно небольшом диапазоне (который гораздо ближе к нулю, чем к доходам миллиардеров)</p></li>
+</ul>
 </section>
 <section id="sec-kurtosis" class="level3" data-number="12.6.2">
 <h3 data-number="12.6.2" class="anchored" data-anchor-id="sec-kurtosis"><span class="header-section-number">12.6.2</span> Эксцесс</h3>
-<p><strong>Эксцесс (kurtosis)</strong> - это мера “вытянутости” распределения:</p>
+<p><strong>Эксцесс <em>(kurtosis)</em></strong> - это мера “вытянутости” распределения:</p>
 <p><img src="images/page-64.png" class="img-fluid"></p>
 <p>Положительные показатели эксцесса означают “вытянутое” распределение, а отрицательные - “плоское”.</p>
 </section>
 <section id="sec-skewR" class="level3" data-number="12.6.3">
 <h3 data-number="12.6.3" class="anchored" data-anchor-id="sec-skewR"><span class="header-section-number">12.6.3</span> Ассиметрия и эксцесс в R</h3>
-<p>К сожалению, в базовом R нет функций для ассиметрии и эксцесса. Зато есть замечательный пакет <code>psych</code> (да-да, специально для психологов).</p>
+<p>К сожалению, в базовом R нет функций для асимметрии и эксцесса. Зато есть замечательный пакет <code>{psych}</code> (да-да, специально для психологов).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"psych"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -730,7 +732,7 @@ Attaching package: 'psych'</code></pre>
 <pre><code>[1] 19.45699</code></pre>
 </div>
 </div>
-<p>Ассиметрия положительная, это значит что распределение выборки асимметричное, хвосты с правой части длиннее. Эксцесс значительно выше нуля - значит распределение довольно “вытянутое”.</p>
+<p>Асимметрия положительная, это значит что распределение выборки асимметричное, хвосты с правой части длиннее. Эксцесс значительно выше нуля - значит распределение довольно “вытянутое”.</p>
 </section>
 </section>
 <section id="sec-summary" class="level2" data-number="12.7">
@@ -743,9 +745,7 @@ Attaching package: 'psych'</code></pre>
     2.0    61.0    81.0   112.3   108.0   900.0 </code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Функция <code>summary()</code> - это универсальная (generic) функция. Это означает, что Вы можете ее применять для разных объектов и получать разные результаты. Попробуйте применить ее к векторам с разными типами данных и даже к дата.фреймам и дата.тейблам. Посмотрите, что получится.</p>
-</blockquote>
+<p>Функция <code>summary()</code> - это <strong>универсальная <em>(generic)</em></strong> функция (см. <a href="016-complex_structures.html#sec-attr_class"><span>Глава&nbsp;4.5</span></a>). Это означает, что Вы можете ее применять для разных объектов и получать разные результаты. Попробуйте применить ее к векторам с разными типами данных и даже к датафреймам. Посмотрите, что получится.</p>
 <p>В пакете <code>psych</code> есть еще и замечательная функция <code>describe()</code>, которая даст Вам еще больше статистик, включая ассиметрию и куртозис:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -754,7 +754,7 @@ Attaching package: 'psych'</code></pre>
 X1    1 495 112.25 104.15     81   89.56 32.62   2 900   898 3.87    19.46 4.68</code></pre>
 </div>
 </div>
-<p>Даже усеченное (trimmed) среднее есть (с <code>trim = 0.1</code>)! Все кроме <code>se</code> мы уже знаем. А про этот <code>se</code> узнаем немного позже.</p>
+<p>Даже <strong>усеченное <em>(trimmed)</em> среднее</strong> есть (с <code>trim = 0.1</code>)! Все кроме <code>se</code> мы уже знаем. А про этот <code>se</code> узнаем немного позже (см. <a href="310-infer_stats.html#sec-sample_dist"><span>Глава&nbsp;17.6</span></a>).</p>
 <p>Эта функция хорошо работает в сочетании с <code>group_by()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
@@ -767,14 +767,14 @@ X1    1 495 112.25 104.15     81   89.56 32.62   2 900   898 3.87    19.46 4.68<
 1 Female     1   142  78.8  77.0     58    60.9  7.41    41   630   589  4.97
 2 Male       1   339 126.  111.      90   103.  23.7      2   900   898  3.76
 3 &lt;NA&gt;       1    14 129.  107.      94   115.  43.0     39   383   344  1.55
-# … with 2 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</code></pre>
+# ℹ 2 more variables: kurtosis &lt;dbl&gt;, se &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Другой интересный пакет для получения описательных статистик для всего датафрейма — <code>skimr</code>.</p>
+<p>Другой интересный пакет для получения описательных статистик для всего датафрейма — <code>{skimr}</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"skimr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Его основная функция — <code>skim()</code>, выводит симпатичную сводную таблицу для датафрейма.</p>
+<p>Его основная функция — <code>skim()</code>, выводит в консоли симпатичную сводную таблицу:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>skimr<span class="sc">::</span><span class="fu">skim</span>(heroes)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1000,7 +1000,15 @@ X1    1 495 112.25 104.15     81   89.56 32.62   2 900   898 3.87    19.46 4.68<
 </table>
 </div>
 </div>
-<p>Здесь количество и доля пропущенных значений, среднее, стандартное отклонение, минимальное и максимальное значение (<em>p0</em> и <em>p100</em> соответственно), квартили. Ну и вишенкой на торте выступает маленькая гистограмма для каждой колонки!</p>
+<p>В зависимости от типа данных колонки функция skim() показывает различные статистики. Для числовых колонок мы можем увидеть количество и долю пропущенных значений, среднее и стандартное отклонение. А еще мы видим некие <em>p0, p25, p50, p75</em> и <em>p100.</em> Это процентили! И совсем не с потолка взятые:</p>
+<ul>
+<li><p>p0 – минимальное значение,</p></li>
+<li><p>p25 – первый квартиль (Q1),</p></li>
+<li><p>p50 – второй квартиль (Q2), т.е. медиана,</p></li>
+<li><p>p75 – третий квартиль (Q3),</p></li>
+<li><p>p100 – максимальное значение.</p></li>
+</ul>
+<p>Ну и вишенкой на торте выступает маленькая гистограмма (см. для каждой колонки!</p>
 <p>Кроме того, <code>skimr</code> адаптирован под tidyverse. В нем можно выбирать колонки с помощью tidyselect (@ref(tidyselect)) прямо внутри функции <code>skim()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
