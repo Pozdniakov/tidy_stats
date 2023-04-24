@@ -972,25 +972,121 @@ carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
 <p><img src="330-cov_cor_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>По умолчанию значение корреляций кодируется цветом и размером круга. У функции <code>corrplot()</code> есть множество параметров, позволяющих довольно тонко настраивать хитмэп корреляций. Например, можнокодировать только цветом, а переменные сгруппировать на основе кластеризации.</p>
+<p>По умолчанию значение корреляций кодируется цветом и размером круга. У функции <code>corrplot()</code> есть множество параметров, позволяющих довольно тонко настраивать хитмэп корреляций. Например, можно кодировать только цветом, а переменные сгруппировать на основе кластеризации.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars), <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="330-cov_cor_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Можно сделать еще интереснее: добавить крестики, которые будут означать наличие или отсутствие статистической значимости. В этом случае нам понадобится не только матрица корреляций, но соответствующая матрица с <em>p-value</em>. Для этого нам нужно обратиться к уже знакомой нам функции <code>corr.test()</code> из пакета <code>{psych}</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mtcars_cor_p <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">corr.test</span>(mtcars)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>mtcars_cor_p</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:psych::corr.test(x = mtcars)
+Correlation matrix 
+       mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
+disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
+hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
+drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
+wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
+qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
+vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
+am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
+gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
+carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
+Sample Size 
+[1] 32
+Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+      mpg cyl disp   hp drat   wt qsec   vs   am gear carb
+mpg  0.00   0 0.00 0.00 0.00 0.00 0.22 0.00 0.01 0.10 0.02
+cyl  0.00   0 0.00 0.00 0.00 0.00 0.01 0.00 0.04 0.08 0.04
+disp 0.00   0 0.00 0.00 0.00 0.00 0.20 0.00 0.01 0.02 0.30
+hp   0.00   0 0.00 0.00 0.17 0.00 0.00 0.00 1.00 1.00 0.00
+drat 0.00   0 0.00 0.01 0.00 0.00 1.00 0.19 0.00 0.00 1.00
+wt   0.00   0 0.00 0.00 0.00 0.00 1.00 0.02 0.00 0.01 0.20
+qsec 0.02   0 0.01 0.00 0.62 0.34 0.00 0.00 1.00 1.00 0.00
+vs   0.00   0 0.00 0.00 0.01 0.00 0.00 0.00 1.00 1.00 0.02
+am   0.00   0 0.00 0.18 0.00 0.00 0.21 0.36 0.00 0.00 1.00
+gear 0.01   0 0.00 0.49 0.00 0.00 0.24 0.26 0.00 0.00 1.00
+carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
+
+ To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+</div>
+<p>Нам нужно разворошить полученную переменную mtcars_cor_p</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_cor_p)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 14
+ $ r     : num [1:11, 1:11] 1 -0.852 -0.848 -0.776 0.681 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+ $ n     : num 32
+ $ t     : num [1:11, 1:11] Inf -8.92 -8.75 -6.74 5.1 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+ $ p     : num [1:11, 1:11] 0.00 6.11e-10 9.38e-10 1.79e-07 1.78e-05 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+ $ p.adj : num [1:55] 3.18e-08 4.78e-08 9.92e-11 8.05e-06 1.74e-07 ...
+ $ se    : num [1:11, 1:11] 0 0.0955 0.0969 0.1151 0.1337 ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+ $ sef   : num 0.186
+ $ adjust: chr "holm"
+ $ sym   : logi TRUE
+ $ ci    :'data.frame': 55 obs. of  4 variables:
+  ..$ lower: num [1:55] -0.926 -0.923 -0.885 0.436 -0.934 ...
+  ..$ r    : num [1:55] -0.852 -0.848 -0.776 0.681 -0.868 ...
+  ..$ upper: num [1:55] -0.716 -0.708 -0.586 0.832 -0.744 ...
+  ..$ p    : num [1:55] 6.11e-10 9.38e-10 1.79e-07 1.78e-05 1.29e-10 ...
+ $ ci2   :'data.frame': 55 obs. of  5 variables:
+  ..$ lower: num [1:55] -0.926 -0.923 -0.885 0.436 -0.934 ...
+  ..$ r    : num [1:55] -0.852 -0.848 -0.776 0.681 -0.868 ...
+  ..$ upper: num [1:55] -0.716 -0.708 -0.586 0.832 -0.744 ...
+  ..$ p    : num [1:55] 6.11e-10 9.38e-10 1.79e-07 1.78e-05 1.29e-10 ...
+  ..$ p.adj: num [1:55] 3.18e-08 4.78e-08 8.05e-06 5.86e-04 6.86e-09 ...
+ $ ci.adj:'data.frame': 55 obs. of  2 variables:
+  ..$ lower.adj: num [1:55] -0.954 -0.953 -0.928 0.238 -0.959 ...
+  ..$ upper.adj: num [1:55] -0.572 -0.562 -0.405 0.89 -0.61 ...
+ $ stars : chr [1:11, 1:11] "1***" "-0.85***" "-0.85***" "-0.78***" ...
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
+ $ Call  : language psych::corr.test(x = mtcars)
+ - attr(*, "class")= chr [1:2] "psych" "corr.test"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="at">corr =</span> mtcars_cor_p<span class="sc">$</span>r,</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.mat =</span> mtcars_cor_p<span class="sc">$</span>p,</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"color"</span>,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="330-cov_cor_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Крестиками отмечены статистические незначимые (с <em>p.value &lt; .05),</em> а без крестиков – статистически значимые коэффициенты корреляции. Обратите внимание, матрица несимметричная: <code>psych::corr.test()</code> возвращает скорректированные <em>p-value</em> в верхнем правом треугольнике в матрице корреляций.</p>
 </section>
 <section id="матрица-корреляций-в-виде-графа" class="level2" data-number="19.5">
 <h2 data-number="19.5" class="anchored" data-anchor-id="матрица-корреляций-в-виде-графа"><span class="header-section-number">19.5</span> Матрица корреляций в виде графа</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrr"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Функционал пакета {corrr} позволяет работать с корреляционными матрицами в духе tidyverse, возвращая тиббл вместо матрицы.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Correlation computed with
 • Method: 'pearson'
@@ -1017,15 +1113,15 @@ carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
 <p>Нас же интересует в первую очередь представление матрицы корреляций в виде графа.</p>
 <p>Делается это следующим образом: мы устанавливаем минимальное значение для корреляций с помощью параметра <code>min_cor =</code>, которые будут отображены в качестве связи между переменными. Если мы этого не сделаем, то мы просто получим полностью связанный граф, потому что все переменные хотя бы немного коррелируют со всеми. По умолчанию этот параметр равен 0.3, но мы можем изменить это значение на собственное усмотрение. В данном случае установим <code>min_cor = 0.7</code>, потому что в нашей матрице очень много сильных корреляций.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars) <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  corrr<span class="sc">::</span><span class="fu">network_plot</span>(<span class="at">min_cor =</span> <span class="fl">0.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars) <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  corrr<span class="sc">::</span><span class="fu">network_plot</span>(<span class="at">min_cor =</span> <span class="fl">0.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Correlation computed with
 • Method: 'pearson'
 • Missing treated using: 'pairwise.complete.obs'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="330-cov_cor_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="330-cov_cor_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

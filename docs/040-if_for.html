@@ -464,7 +464,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (numbers <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (numbers <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число"</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ноль"</span></span>
@@ -643,9 +643,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Положительное число"</span>,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(number <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(numbers <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Ноль"                "Ноль"                "Ноль"               
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
@@ -681,7 +681,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Будьте внимательны с запятыми! Несмотря на довольно экстравагантный синтаксис,</p>
+<p>Будьте внимательны с запятыми! Несмотря на довольно экстравагантный синтаксис, <code>case_when()</code> – это по-прежнему функция, а различные условия, которые вы прописываете внутри этой функции – это аргументы этой функции.</p>
 </div>
 </div>
 <p>Важный момент: если <code>ifelse()</code> возвращает <code>NA</code> на <code>NA</code> в условии, что обычно нас устраивает (у нас нет данных, что у нас на входе, следовательно, не знаем, что на выходе), то <code>case_when()</code> такого не делает. <code>NA</code> в условии считается как <code>FALSE</code>, поэтому нужно дополнительно обрабатывать условие для него. Чтобы на место <code>NA</code> поставить NA, нужно записать вот так:</p>
