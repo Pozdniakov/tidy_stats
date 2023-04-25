@@ -1355,12 +1355,14 @@ skimr::skim(height)
 
 -   Нарисуйте столбиковую диаграмму (`geom_bar()`), которая будет отражать количество супергероев издателей `"Marvel Comics"`, `"DC Comics"` и всех остальных (отдельным столбиком) из датасета `heroes`.
 
+
 ```{r}
 #| echo: true
 heroes <- heroes %>%
   mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
                             Publisher,
                             "Other publishers"))
+  #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
 ```
 
 
