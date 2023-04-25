@@ -2748,8 +2748,14 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li>Нарисуйте столбиковую диаграмму (<code>geom_bar()</code>), которая будет отражать количество супергероев издателей <code>"Marvel Comics"</code>, <code>"DC Comics"</code> и всех остальных (отдельным столбиком) из датасета <code>heroes</code>.</li>
 </ul>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb227"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb227-2"><a href="#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Publisher =</span> <span class="fu">ifelse</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Marvel Comics"</span>, <span class="st">"DC Comics"</span>), </span>
+<span id="cb227-3"><a href="#cb227-3" aria-hidden="true" tabindex="-1"></a>                            Publisher,</span>
+<span id="cb227-4"><a href="#cb227-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Other publishers"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-192-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-193-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2757,7 +2763,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-193-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-194-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2765,7 +2771,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-194-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-195-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2773,13 +2779,13 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-195-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-196-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Создайте диаграмму рассеяния для датасета <code>heroes</code>, для которой координаты по оси <em>x</em> будут взяты из колонки <code>Height</code>, а координаты по оси <em>y</em> – из колонки <code>Weight</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-196-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-197-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2787,7 +2793,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-197-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-198-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2795,7 +2801,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-198-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-199-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2803,13 +2809,13 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-199-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-200-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Разделите график (<code>facet_wrap()</code>) на три: для <code>"DC Comics"</code>,<code>"Marvel Comics"</code> и всех остальных.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-200-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-201-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2817,7 +2823,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-201-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-202-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2845,7 +2851,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-202-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-203-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2853,7 +2859,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-203-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-204-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2861,7 +2867,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-204-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-205-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2869,7 +2875,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-205-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-206-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2884,7 +2890,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="25.28" class="anchored" data-anchor-id="sec-dep_ttest_tasks"><span class="header-section-number">25.28</span> Двухвыборочный зависимый t-test</h2>
 <p>Для дальнейших заданий понадобится набор данных о результативности трех диет, который мы использовали во время занятия.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb227"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb228"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb228-1"><a href="#cb228-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Посчитайте двухвыборочный зависимый т-тест для остальных диет: для диеты 2 и диеты 3. Проинтерпретируйте полученные результаты.</li>
@@ -2927,7 +2933,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-208-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-209-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2935,12 +2941,12 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="25.32" class="anchored" data-anchor-id="sec-backpack_tasks"><span class="header-section-number">25.32</span> Исследование набора данных Backpack</h2>
 <p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb229"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
-<span id="cb229-2"><a href="#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb229-3"><a href="#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
-<span id="cb229-4"><a href="#cb229-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
-<span id="cb229-5"><a href="#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
-<span id="cb229-6"><a href="#cb229-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb230"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb230-1"><a href="#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
+<span id="cb230-2"><a href="#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb230-3"><a href="#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
+<span id="cb230-4"><a href="#cb230-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb230-5"><a href="#cb230-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb230-6"><a href="#cb230-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Как различается вес рюкзака в зависимости от пола? Кто весит больше?</li>
@@ -2961,7 +2967,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-211-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-212-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2969,7 +2975,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-212-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-213-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
