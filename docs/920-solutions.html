@@ -3313,6 +3313,9 @@ mean difference
 </div>
 </div>
 <p>p-value меньше .05, поэтому мы можем отклонить нулевую гипотезу о том, что масса до и после диеты одинаковая. Мы принимаем альтернативную гипотезу о различии средних в генеральной совокупности.</p>
+<ul>
+<li>Сделайте независимый t-тест для сравнения массы испытуемых двух групп после диеты, сравнив первую и третью группу. Проинтерпретируйте результаты.</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb409"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb409-1"><a href="#cb409-1" aria-hidden="true" tabindex="-1"></a>diet3 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
 <span id="cb409-2"><a href="#cb409-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">3</span>)</span>
@@ -3332,6 +3335,30 @@ mean difference
 </div>
 </div>
 <p>p-value меньше .05, поэтому мы можем отклонить нулевую гипотезу о том, что масса до и после диеты одинаковая. Мы принимаем альтернативную гипотезу о различии средних в генеральной совокупности.</p>
+<ul>
+<li>Проведите независимый t-тест для сравнения массы супергероев с черными и белыми глазами.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb411"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb411-1"><a href="#cb411-1" aria-hidden="true" tabindex="-1"></a>heroes_white_black <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb411-2"><a href="#cb411-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Eye color</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb412"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb412-1"><a href="#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(heroes_white_black<span class="sc">$</span>Weight <span class="sc">~</span> heroes_white_black<span class="sc">$</span><span class="st">`</span><span class="at">Eye color</span><span class="st">`</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  heroes_white_black$Weight by heroes_white_black$`Eye color`
+t = -0.16381, df = 19.842, p-value = 0.8715
+alternative hypothesis: true difference in means between group black and group white is not equal to 0
+95 percent confidence interval:
+ -88.69024  75.78115
+sample estimates:
+mean in group black mean in group white 
+           108.0000            114.4545 </code></pre>
+</div>
+</div>
+<p>p-value больше .05, поэтому мы не можем отклонить нулевую гипотезу о том, что массы супергероев с черными и белыми глазами одинаковые.</p>
 </section>
 <section id="sec-ind_ttest_solutions" class="level2" data-number="26.29">
 <h2 data-number="26.29" class="anchored" data-anchor-id="sec-ind_ttest_solutions"><span class="header-section-number">26.29</span> Двухвыборочный независимый t-test</h2>
@@ -3339,9 +3366,9 @@ mean difference
 <li>Сделайте независимый t-тест для сравнения веса испытуемых двух групп после диеты, сравнив вторую и третью группу. Проинтерпретируйте результаты.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb411"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb411-1"><a href="#cb411-1" aria-hidden="true" tabindex="-1"></a>diet23 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb411-2"><a href="#cb411-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb411-3"><a href="#cb411-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet23, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb414"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb414-1"><a href="#cb414-1" aria-hidden="true" tabindex="-1"></a>diet23 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb414-2"><a href="#cb414-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb414-3"><a href="#cb414-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet23, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -3361,9 +3388,9 @@ mean in group 2 mean in group 3
 <li>Сделайте независимый t-тест для сравнения веса испытуемых двух групп после диеты, сравнив первую и третью группу. Проинтерпретируйте результаты.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb413"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb413-1"><a href="#cb413-1" aria-hidden="true" tabindex="-1"></a>diet13 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb413-2"><a href="#cb413-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
-<span id="cb413-3"><a href="#cb413-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet13, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb416"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb416-1"><a href="#cb416-1" aria-hidden="true" tabindex="-1"></a>diet13 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb416-2"><a href="#cb416-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span>
+<span id="cb416-3"><a href="#cb416-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet13, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -3386,9 +3413,9 @@ mean in group 1 mean in group 3
 <li>Сравните вес первой и второй группы после диеты, используя тест Манна-Уитни. Сравните результаты теста Манна-Уитни с результатами t-теста? Проинтерпретируйте полученные результаты.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb415"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb415-1"><a href="#cb415-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb415-2"><a href="#cb415-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb415-3"><a href="#cb415-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb418"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb418-1"><a href="#cb418-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb418-2"><a href="#cb418-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb418-3"><a href="#cb418-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -3403,7 +3430,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>Повторите задание для второй и третьей группы, а так же для первой и третьей группы.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb417"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb417-1"><a href="#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet23, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb420"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb420-1"><a href="#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet23, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -3412,7 +3439,7 @@ data:  weight6weeks by Diet
 W = 340.5, p-value = 0.6843
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb419"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb419-1"><a href="#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet13, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb422"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb422-1"><a href="#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet13, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon rank sum test with continuity correction
@@ -3427,9 +3454,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>Сравните вес до и после для диеты 1, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb421"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb421-1"><a href="#cb421-1" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb421-2"><a href="#cb421-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb421-3"><a href="#cb421-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb424"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb424-1"><a href="#cb424-1" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb424-2"><a href="#cb424-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb424-3"><a href="#cb424-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -3444,7 +3471,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>Сравните вес до и после для диеты 2 и диеты 3, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb423"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb423-1"><a href="#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet2<span class="sc">$</span>pre.weight, diet2<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb426"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb426-1"><a href="#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet2<span class="sc">$</span>pre.weight, diet2<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -3453,7 +3480,7 @@ data:  diet2$pre.weight and diet2$weight6weeks
 V = 313, p-value = 5.419e-05
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb425"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb425-1"><a href="#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet3<span class="sc">$</span>pre.weight, diet3<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb428"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb428-1"><a href="#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet3<span class="sc">$</span>pre.weight, diet3<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -3471,8 +3498,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>Создайте в <code>heroes</code> новую колонку <code>is_human</code> логического типа, в которой будет <code>TRUE</code>, если супергерой принадлежит расе (<code>Race</code>) <code>"Human"</code>, и <code>FALSE</code> в случае если супергерой принадлежит другой расе.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb427"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb427-1"><a href="#cb427-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb427-2"><a href="#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb430"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb430-1"><a href="#cb430-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb430-2"><a href="#cb430-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 12
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -3496,11 +3523,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>Посчитайте долю женщин для <code>"Human"</code> и всех остальных (<code>is_human</code> равен <code>TRUE</code> и <code>FALSE</code> соответственно). Перед этим удалите все строчки с <code>NA</code> в переменных <code>is_human</code> и <code>Gender</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb429"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb429-1"><a href="#cb429-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb429-2"><a href="#cb429-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb429-3"><a href="#cb429-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb429-4"><a href="#cb429-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(is_human) <span class="sc">%&gt;%</span></span>
-<span id="cb429-5"><a href="#cb429-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(Gender <span class="sc">==</span> <span class="st">"Female"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb432"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb432-1"><a href="#cb432-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb432-2"><a href="#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb432-3"><a href="#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb432-4"><a href="#cb432-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(is_human) <span class="sc">%&gt;%</span></span>
+<span id="cb432-5"><a href="#cb432-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(Gender <span class="sc">==</span> <span class="st">"Female"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   is_human `mean(Gender == "Female")`
@@ -3513,12 +3540,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <li>Сравните распределения частот для переменных <code>is_human</code> и <code>Gender</code> используя хи-квадрат Пирсона. Проинтерпретируйте результаты.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb431"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb431-1"><a href="#cb431-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb431-2"><a href="#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb431-3"><a href="#cb431-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb431-4"><a href="#cb431-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb431-5"><a href="#cb431-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb431-6"><a href="#cb431-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chisq.test</span>(<span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb434"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb434-1"><a href="#cb434-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb434-2"><a href="#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb434-3"><a href="#cb434-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb434-4"><a href="#cb434-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb434-5"><a href="#cb434-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb434-6"><a href="#cb434-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">chisq.test</span>(<span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -3532,14 +3559,14 @@ X-squared = 0.00037447, df = 1, p-value = 0.9846</code></pre>
 <li>Постройте мозаичный график для переменных <code>is_human</code> и <code>Gender</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb433"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb433-1"><a href="#cb433-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb433-2"><a href="#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb433-3"><a href="#cb433-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb433-4"><a href="#cb433-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb433-5"><a href="#cb433-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb433-6"><a href="#cb433-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mosaicplot</span>(<span class="at">shade =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb436"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb436-1"><a href="#cb436-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb436-2"><a href="#cb436-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_human =</span> Race <span class="sc">==</span> <span class="st">"Human"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb436-3"><a href="#cb436-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb436-4"><a href="#cb436-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(is_human, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb436-5"><a href="#cb436-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb436-6"><a href="#cb436-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mosaicplot</span>(<span class="at">shade =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="920-solutions_files/figure-html/unnamed-chunk-217-1.png" class="img-fluid" width="672"></p>
+<p><img src="920-solutions_files/figure-html/unnamed-chunk-219-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -3547,20 +3574,20 @@ X-squared = 0.00037447, df = 1, p-value = 0.9846</code></pre>
 <h2 data-number="26.32" class="anchored" data-anchor-id="sec-backpack_solutions"><span class="header-section-number">26.32</span> Исследование набора данных Backpack</h2>
 <p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb434"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb434-1"><a href="#cb434-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
-<span id="cb434-2"><a href="#cb434-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb434-3"><a href="#cb434-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
-<span id="cb434-4"><a href="#cb434-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
-<span id="cb434-5"><a href="#cb434-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
-<span id="cb434-6"><a href="#cb434-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb437"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb437-1"><a href="#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
+<span id="cb437-2"><a href="#cb437-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb437-3"><a href="#cb437-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
+<span id="cb437-4"><a href="#cb437-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb437-5"><a href="#cb437-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb437-6"><a href="#cb437-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Как различается вес рюкзака в зависимости от пола? Кто весит больше?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb435"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb435-1"><a href="#cb435-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb435-2"><a href="#cb435-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span></span>
-<span id="cb435-3"><a href="#cb435-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(backpack_kg))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb438"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb438-1"><a href="#cb438-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb438-2"><a href="#cb438-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span></span>
+<span id="cb438-3"><a href="#cb438-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(backpack_kg))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   Sex    `mean(backpack_kg)`
@@ -3573,7 +3600,7 @@ X-squared = 0.00037447, df = 1, p-value = 0.9846</code></pre>
 <li>Если допустить, что выборка репрезентативна, то можно ли сделать вывод о различии по среднему весу рюкзаков в генеральной совокупности?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb437"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb437-1"><a href="#cb437-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(backpack_kg <span class="sc">~</span> Sex, <span class="at">data =</span> back)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb440"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb440-1"><a href="#cb440-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(backpack_kg <span class="sc">~</span> Sex, <span class="at">data =</span> back)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -3593,9 +3620,9 @@ mean in group Female   mean in group Male
 <li>Повторите пунктs 2 и 3 для веса самих студентов.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb439"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb439-1"><a href="#cb439-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb439-2"><a href="#cb439-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span></span>
-<span id="cb439-3"><a href="#cb439-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(body_kg))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb442"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb442-1"><a href="#cb442-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb442-2"><a href="#cb442-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Sex) <span class="sc">%&gt;%</span></span>
+<span id="cb442-3"><a href="#cb442-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(body_kg))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   Sex    `mean(body_kg)`
@@ -3603,7 +3630,7 @@ mean in group Female   mean in group Male
 1 Female            62.3
 2 Male              78.1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb441"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb441-1"><a href="#cb441-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(body_kg <span class="sc">~</span> Sex, <span class="at">data =</span> back)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb444"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb444-1"><a href="#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(body_kg <span class="sc">~</span> Sex, <span class="at">data =</span> back)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -3623,21 +3650,21 @@ mean in group Female   mean in group Male
 <li>Визуализируйте распределение этих двух переменных в зависимости от пола (используя <code>ggplot2</code>)</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb443"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb443-1"><a href="#cb443-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb443-2"><a href="#cb443-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(back)<span class="sc">+</span></span>
-<span id="cb443-3"><a href="#cb443-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> body_kg, <span class="at">fill =</span> Sex), <span class="at">bins =</span> <span class="dv">15</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb446"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb446-1"><a href="#cb446-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb446-2"><a href="#cb446-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(back)<span class="sc">+</span></span>
+<span id="cb446-3"><a href="#cb446-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> body_kg, <span class="at">fill =</span> Sex), <span class="at">bins =</span> <span class="dv">15</span>, <span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="920-solutions_files/figure-html/unnamed-chunk-222-1.png" class="img-fluid" width="672"></p>
+<p><img src="920-solutions_files/figure-html/unnamed-chunk-224-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
 <li>Постройте диаграмму рассеяния с помощью <code>ggplot2</code>. Цветом закодируйте пол респондента.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb444"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb444-1"><a href="#cb444-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(back, <span class="fu">aes</span>(<span class="at">x =</span> body_kg, <span class="at">y =</span> backpack_kg))<span class="sc">+</span></span>
-<span id="cb444-2"><a href="#cb444-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Sex), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb447"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb447-1"><a href="#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(back, <span class="fu">aes</span>(<span class="at">x =</span> body_kg, <span class="at">y =</span> backpack_kg))<span class="sc">+</span></span>
+<span id="cb447-2"><a href="#cb447-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> Sex), <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="920-solutions_files/figure-html/unnamed-chunk-223-1.png" class="img-fluid" width="672"></p>
+<p><img src="920-solutions_files/figure-html/unnamed-chunk-225-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -3647,9 +3674,9 @@ mean in group Female   mean in group Male
 <li>Посчитайте матрицу ковариаций для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета ковариации этих двух переменных от результатов подсчета ковариаций веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb445"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb445-1"><a href="#cb445-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
-<span id="cb445-2"><a href="#cb445-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(BodyWeight, BackpackWeight) <span class="sc">%&gt;%</span></span>
-<span id="cb445-3"><a href="#cb445-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb448"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb448-1"><a href="#cb448-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
+<span id="cb448-2"><a href="#cb448-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(BodyWeight, BackpackWeight) <span class="sc">%&gt;%</span></span>
+<span id="cb448-3"><a href="#cb448-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               BodyWeight BackpackWeight
 BodyWeight      864.20960       32.08788
@@ -3664,7 +3691,7 @@ BackpackWeight   32.08788       33.23677</code></pre>
 <li>Посчитайте коэффициент корреляции Пирсона для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета коэффициента корреляции Пирсона (сам коэффициент, p-value) этих двух переменных от результатов подсчета корреляции Пирсона веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb447"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb447-1"><a href="#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>BackpackWeight, back<span class="sc">$</span>BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb450"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb450-1"><a href="#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>BackpackWeight, back<span class="sc">$</span>BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -3684,7 +3711,7 @@ sample estimates:
 <li>Посчитайте коэффициент корреляции Пирсона для веса и роста супергероев из датасета <code>heroes</code>. Проинтерпретируйте результат.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb449"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb449-1"><a href="#cb449-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(heroes<span class="sc">$</span>Weight, heroes<span class="sc">$</span>Height)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb452"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb452-1"><a href="#cb452-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(heroes<span class="sc">$</span>Weight, heroes<span class="sc">$</span>Height)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -3704,7 +3731,7 @@ sample estimates:
 <li>Теперь посчитайте коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла для веса и роста супергероев из датасета <code>heroes</code>. Различаются ли результаты по сравнению с коэффициентом корреляции Пирсона? Почему?</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb451"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb451-1"><a href="#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(heroes<span class="sc">$</span>Weight, heroes<span class="sc">$</span>Height, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb454"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb454-1"><a href="#cb454-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(heroes<span class="sc">$</span>Weight, heroes<span class="sc">$</span>Height, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Spearman's rank correlation rho
@@ -3718,7 +3745,7 @@ sample estimates:
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb453"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb453-1"><a href="#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(heroes<span class="sc">$</span>Weight, heroes<span class="sc">$</span>Height, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb456"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb456-1"><a href="#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(heroes<span class="sc">$</span>Weight, heroes<span class="sc">$</span>Height, <span class="at">method =</span> <span class="st">"kendall"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kendall's rank correlation tau
