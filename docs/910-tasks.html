@@ -2921,6 +2921,15 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <section id="sec-chi_sq_tasks" class="level2" data-number="25.31">
 <h2 data-number="25.31" class="anchored" data-anchor-id="sec-chi_sq_tasks"><span class="header-section-number">25.31</span> Критерий хи-квадрат Пирсона</h2>
 <ul>
+<li>Связаны ли переменные Alignment и Gender? Используйте критерий хи-квадрат для проверки и проинтерпретируйте результаты</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb230"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb230-1"><a href="#cb230-1" aria-hidden="true" tabindex="-1"></a>pub_good <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb230-2"><a href="#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Alignment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"good"</span>, <span class="st">"bad"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb230-3"><a href="#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Alignment, Gender) <span class="sc">%&gt;%</span></span>
+<span id="cb230-4"><a href="#cb230-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
 <li><p>Создайте в <code>heroes</code> новую колонку <code>is_human</code> логического типа, в которой будет <code>TRUE</code>, если супергерой принадлежит расе (<code>Race</code>) <code>"Human"</code>, и <code>FALSE</code> в случае если супергерой принадлежит другой расе.</p></li>
 <li><p>Посчитайте долю женщин для <code>"Human"</code> и всех остальных (<code>is_human</code> равен <code>TRUE</code> и <code>FALSE</code> соответственно). Перед этим удалите все строчки с <code>NA</code> в переменных <code>is_human</code> и <code>Gender</code>.</p></li>
 </ul>
@@ -2939,7 +2948,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-210-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-211-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -2947,12 +2956,12 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="25.32" class="anchored" data-anchor-id="sec-backpack_tasks"><span class="header-section-number">25.32</span> Исследование набора данных Backpack</h2>
 <p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb231"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
-<span id="cb231-2"><a href="#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
-<span id="cb231-3"><a href="#cb231-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
-<span id="cb231-4"><a href="#cb231-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
-<span id="cb231-5"><a href="#cb231-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
-<span id="cb231-6"><a href="#cb231-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
+<span id="cb232-2"><a href="#cb232-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
+<span id="cb232-3"><a href="#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
+<span id="cb232-4"><a href="#cb232-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
+<span id="cb232-5"><a href="#cb232-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
+<span id="cb232-6"><a href="#cb232-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Как различается вес рюкзака в зависимости от пола? Кто весит больше?</li>
@@ -2973,7 +2982,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-213-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-214-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2981,7 +2990,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-214-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-215-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>

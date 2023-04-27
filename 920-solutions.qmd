@@ -1634,6 +1634,23 @@ wilcox.test(diet3$pre.weight, diet3$weight6weeks, paired = TRUE)
 
 ## Критерий хи-квадрат Пирсона {#sec-chi_sq_solutions}
 
+-   Связаны ли переменные Alignment и Gender? Используйте критерий хи-квадрат для проверки и проинтерпретируйте результаты
+
+```{r}
+#| echo: true
+pub_good <- heroes %>%
+  filter(Alignment %in% c("good", "bad")) %>%
+  select(Alignment, Gender) %>%
+  drop_na()
+```
+
+```{r}
+table(pub_good) %>%
+  summary()
+```
+
+
+
 -   Создайте в `heroes` новую колонку `is_human` логического типа, в которой будет `TRUE`, если супергерой принадлежит расе (`Race`) `"Human"`, и `FALSE` в случае если супергерой принадлежит другой расе.
 
 ```{r}
