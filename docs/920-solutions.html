@@ -411,6 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-backpack_solutions" id="toc-sec-backpack_solutions" class="nav-link" data-scroll-target="#sec-backpack_solutions"><span class="toc-section-number">26.32</span>  Исследование набора данных Backpack</a></li>
   <li><a href="#sec-cov_solutions" id="toc-sec-cov_solutions" class="nav-link" data-scroll-target="#sec-cov_solutions"><span class="toc-section-number">26.33</span>  Ковариация</a></li>
   <li><a href="#sec-cor_solutions" id="toc-sec-cor_solutions" class="nav-link" data-scroll-target="#sec-cor_solutions"><span class="toc-section-number">26.34</span>  Коэффициент корреляции</a></li>
+  <li><a href="#sec-anova_solutions" id="toc-sec-anova_solutions" class="nav-link" data-scroll-target="#sec-anova_solutions"><span class="toc-section-number">26.35</span>  ANOVA</a></li>
   </ul>
 </nav>
     </div>
@@ -3778,6 +3779,178 @@ sample estimates:
 </div>
 </div>
 <p>В обоих случаях p-value меньше 0.05, поэтому мы можем отклонить нулевую гипотезу об отсутствии связи между ростом и весом и принять альтернативную гипотезу о том, что такая связь есть. Сильное различие между коэффициентами корреляции указывает на нелинейность этой связи, либо же на наличие значительных выбросов в данных.</p>
+</section>
+<section id="sec-anova_solutions" class="level2" data-number="26.35">
+<h2 data-number="26.35" class="anchored" data-anchor-id="sec-anova_solutions"><span class="header-section-number">26.35</span> ANOVA</h2>
+<p>Загрузите пингвиний датасет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb461"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb461-1"><a href="#cb461-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb461-2"><a href="#cb461-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb461-3"><a href="#cb461-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="co">#добавляем id</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Давайте посчитаем арифметические средние по группам для различных признаков:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb462"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb462-1"><a href="#cb462-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb462-2"><a href="#cb462-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb462-3"><a href="#cb462-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"_mm"</span>) <span class="sc">|</span> <span class="fu">ends_with</span>(<span class="st">"_g"</span>),</span>
+<span id="cb462-4"><a href="#cb462-4" aria-hidden="true" tabindex="-1"></a>                   mean,</span>
+<span id="cb462-5"><a href="#cb462-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  species   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+1 Adelie              38.8          18.3              190.       3701.
+2 Chinstrap           48.8          18.4              196.       3733.
+3 Gentoo              47.5          15.0              217.       5076.</code></pre>
+</div>
+</div>
+<ul>
+<li>Есть ли статистически значимые различия между видами пингвинов по массе тела (<code>body_mass_g</code>)? Если да, то между какими?<br>
+</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb464"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb464-1"><a href="#cb464-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(body_mass_g <span class="sc">~</span> species, <span class="at">data =</span> penguins) <span class="sc">%&gt;%</span></span>
+<span id="cb464-2"><a href="#cb464-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df    Sum Sq  Mean Sq F value Pr(&gt;F)    
+species       2 146864214 73432107   343.6 &lt;2e-16 ***
+Residuals   339  72443483   213698                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+2 observations deleted due to missingness</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb466"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb466-1"><a href="#cb466-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(body_mass_g <span class="sc">~</span> species, <span class="at">data =</span> penguins) <span class="sc">%&gt;%</span></span>
+<span id="cb466-2"><a href="#cb466-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">TukeyHSD</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = body_mass_g ~ species, data = penguins)
+
+$species
+                       diff       lwr       upr     p adj
+Chinstrap-Adelie   32.42598 -126.5002  191.3522 0.8806666
+Gentoo-Adelie    1375.35401 1243.1786 1507.5294 0.0000000
+Gentoo-Chinstrap 1342.92802 1178.4810 1507.3750 0.0000000</code></pre>
+</div>
+</div>
+<ul>
+<li>Есть ли статистически значимые различия между видами пингвинов по длине ласт (<code>flipper_length_mm</code>)? Если да, то между какими?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb468"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb468-1"><a href="#cb468-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(flipper_length_mm <span class="sc">~</span> species, <span class="at">data =</span> penguins) <span class="sc">%&gt;%</span></span>
+<span id="cb468-2"><a href="#cb468-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+species       2  52473   26237   594.8 &lt;2e-16 ***
+Residuals   339  14953      44                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+2 observations deleted due to missingness</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb470"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb470-1"><a href="#cb470-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(flipper_length_mm <span class="sc">~</span> species, <span class="at">data =</span> penguins) <span class="sc">%&gt;%</span></span>
+<span id="cb470-2"><a href="#cb470-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">TukeyHSD</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = flipper_length_mm ~ species, data = penguins)
+
+$species
+                      diff       lwr       upr p adj
+Chinstrap-Adelie  5.869887  3.586583  8.153191     0
+Gentoo-Adelie    27.233349 25.334376 29.132323     0
+Gentoo-Chinstrap 21.363462 19.000841 23.726084     0</code></pre>
+</div>
+</div>
+<ul>
+<li>Есть ли взаимодействие между полом (<code>sex</code>) и видом (<code>species</code>) для длины ласт <code>flipper_length_mm</code>? Если да, то между какими группами?</li>
+</ul>
+<p>Решение с помощью <code>aov()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb472"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb472-1"><a href="#cb472-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(flipper_length_mm <span class="sc">~</span> species <span class="sc">*</span> sex, <span class="at">data =</span> penguins) <span class="sc">%&gt;%</span></span>
+<span id="cb472-2"><a href="#cb472-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">TukeyHSD</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = flipper_length_mm ~ species * sex, data = penguins)
+
+$species
+                     diff      lwr       upr p adj
+Chinstrap-Adelie  5.72079  3.76593  7.675649     0
+Gentoo-Adelie    27.13255 25.48814 28.776974     0
+Gentoo-Chinstrap 21.41176 19.38766 23.435867     0
+
+$sex
+                diff      lwr      upr p adj
+male-female 6.849169 5.629796 8.068542     0
+
+$`species:sex`
+                                       diff        lwr        upr     p adj
+Chinstrap:female-Adelie:female    3.9407736   0.574682   7.306865 0.0113141
+Gentoo:female-Adelie:female      24.9123760  22.060733  27.764019 0.0000000
+Adelie:male-Adelie:female         4.6164384   1.933019   7.299857 0.0000191
+Chinstrap:male-Adelie:female     12.1172442   8.751153  15.483336 0.0000000
+Gentoo:male-Adelie:female        33.7464631  30.934167  36.558759 0.0000000
+Gentoo:female-Chinstrap:female   20.9716024  17.469931  24.473274 0.0000000
+Adelie:male-Chinstrap:female      0.6756648  -2.690427   4.041756 0.9925701
+Chinstrap:male-Chinstrap:female   8.1764706   4.244498  12.108443 0.0000001
+Gentoo:male-Chinstrap:female     29.8056895  26.335986  33.275393 0.0000000
+Adelie:male-Gentoo:female       -20.2959376 -23.147581 -17.444295 0.0000000
+Chinstrap:male-Gentoo:female    -12.7951318 -16.296803  -9.293460 0.0000000
+Gentoo:male-Gentoo:female         8.8340871   5.860850  11.807324 0.0000000
+Chinstrap:male-Adelie:male        7.5008058   4.134714  10.866897 0.0000000
+Gentoo:male-Adelie:male          29.1300247  26.317729  31.942320 0.0000000
+Gentoo:male-Chinstrap:male       21.6292189  18.159515  25.098922 0.0000000</code></pre>
+</div>
+</div>
+<p>Решение с помощью пакета <code>{ez}</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb474"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb474-1"><a href="#cb474-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span>
+<span id="cb474-2"><a href="#cb474-2" aria-hidden="true" tabindex="-1"></a>ez_species_sex <span class="ot">&lt;-</span> <span class="fu">ezANOVA</span>(<span class="at">data =</span> penguins <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>(flipper_length_mm, species, sex), </span>
+<span id="cb474-3"><a href="#cb474-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> .(flipper_length_mm),</span>
+<span id="cb474-4"><a href="#cb474-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> .(id),</span>
+<span id="cb474-5"><a href="#cb474-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> .(species, sex),</span>
+<span id="cb474-6"><a href="#cb474-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb475"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb475-1"><a href="#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ez_species_sex<span class="sc">$</span>aov)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = formula(aov_formula), data = data)
+
+$species
+                     diff      lwr       upr p adj
+Chinstrap-Adelie  5.72079  3.76593  7.675649     0
+Gentoo-Adelie    27.13255 25.48814 28.776974     0
+Gentoo-Chinstrap 21.41176 19.38766 23.435867     0
+
+$sex
+                diff      lwr      upr p adj
+male-female 6.849169 5.629796 8.068542     0
+
+$`species:sex`
+                                       diff        lwr        upr     p adj
+Chinstrap:female-Adelie:female    3.9407736   0.574682   7.306865 0.0113141
+Gentoo:female-Adelie:female      24.9123760  22.060733  27.764019 0.0000000
+Adelie:male-Adelie:female         4.6164384   1.933019   7.299857 0.0000191
+Chinstrap:male-Adelie:female     12.1172442   8.751153  15.483336 0.0000000
+Gentoo:male-Adelie:female        33.7464631  30.934167  36.558759 0.0000000
+Gentoo:female-Chinstrap:female   20.9716024  17.469931  24.473274 0.0000000
+Adelie:male-Chinstrap:female      0.6756648  -2.690427   4.041756 0.9925701
+Chinstrap:male-Chinstrap:female   8.1764706   4.244498  12.108443 0.0000001
+Gentoo:male-Chinstrap:female     29.8056895  26.335986  33.275393 0.0000000
+Adelie:male-Gentoo:female       -20.2959376 -23.147581 -17.444295 0.0000000
+Chinstrap:male-Gentoo:female    -12.7951318 -16.296803  -9.293460 0.0000000
+Gentoo:male-Gentoo:female         8.8340871   5.860850  11.807324 0.0000000
+Chinstrap:male-Adelie:male        7.5008058   4.134714  10.866897 0.0000000
+Gentoo:male-Adelie:male          29.1300247  26.317729  31.942320 0.0000000
+Gentoo:male-Chinstrap:male       21.6292189  18.159515  25.098922 0.0000000</code></pre>
+</div>
+</div>
 
 
 </section>

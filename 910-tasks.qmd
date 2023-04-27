@@ -1660,3 +1660,40 @@ ggplot(back, aes(x = body_kg, y = backpack_kg))+
 -   Посчитайте коэффициент корреляции Пирсона для веса и роста супергероев из датасета `heroes`. Проинтерпретируйте результат.
 
 -   Теперь посчитайте коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла для веса и роста супергероев из датасета `heroes`. Различаются ли результаты по сравнению с коэффициентом корреляции Пирсона? Почему?
+
+## ANOVA {#sec-anova_tasks}
+
+Загрузите пингвиний датасет:
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+penguins <- readr::read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv") %>%
+  mutate(id = row_number()) #добавляем id
+```
+
+Давайте посчитаем арифметические средние по группам для различных признаков:
+
+```{r}
+#| echo: true
+#| warning: false
+penguins %>%
+  group_by(species) %>%
+  summarise(across(ends_with("_mm") | ends_with("_g"),
+                   mean,
+                   na.rm = TRUE))
+```
+
+-   Есть ли статистически значимые различия между видами пингвинов по массе тела (`body_mass_g`)? Если да, то между какими?\
+
+```{r}
+aov(body_mass_g ~ species, data = penguins) %>%
+  summary()
+aov(body_mass_g ~ species, data = penguins) %>%
+  TukeyHSD()
+```
+
+-   Есть ли статистически значимые различия между видами пингвинов по длине ласт (`flipper_length_mm`)? Если да, то между какими?
+
+-   Есть ли взаимодействие между полом (`sex`) и видом (`species`) для длины ласт `flipper_length_mm`? Если да, то между какими группами?

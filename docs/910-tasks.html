@@ -411,6 +411,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-backpack_tasks" id="toc-sec-backpack_tasks" class="nav-link" data-scroll-target="#sec-backpack_tasks"><span class="toc-section-number">25.32</span>  Исследование набора данных Backpack</a></li>
   <li><a href="#sec-cov_tasks" id="toc-sec-cov_tasks" class="nav-link" data-scroll-target="#sec-cov_tasks"><span class="toc-section-number">25.33</span>  Ковариация</a></li>
   <li><a href="#sec-cor_tasks" id="toc-sec-cor_tasks" class="nav-link" data-scroll-target="#sec-cor_tasks"><span class="toc-section-number">25.34</span>  Коэффициент корреляции</a></li>
+  <li><a href="#sec-anova_tasks" id="toc-sec-anova_tasks" class="nav-link" data-scroll-target="#sec-anova_tasks"><span class="toc-section-number">25.35</span>  ANOVA</a></li>
   </ul>
 </nav>
     </div>
@@ -3006,6 +3007,61 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li><p>Посчитайте коэффициент корреляции Пирсона для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета коэффициента корреляции Пирсона (сам коэффициент, p-value) этих двух переменных от результатов подсчета корреляции Пирсона веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</p></li>
 <li><p>Посчитайте коэффициент корреляции Пирсона для веса и роста супергероев из датасета <code>heroes</code>. Проинтерпретируйте результат.</p></li>
 <li><p>Теперь посчитайте коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла для веса и роста супергероев из датасета <code>heroes</code>. Различаются ли результаты по сравнению с коэффициентом корреляции Пирсона? Почему?</p></li>
+</ul>
+</section>
+<section id="sec-anova_tasks" class="level2" data-number="25.35">
+<h2 data-number="25.35" class="anchored" data-anchor-id="sec-anova_tasks"><span class="header-section-number">25.35</span> ANOVA</h2>
+<p>Загрузите пингвиний датасет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href="#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb234-2"><a href="#cb234-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb234-3"><a href="#cb234-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="co">#добавляем id</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Давайте посчитаем арифметические средние по группам для различных признаков:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb235"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb235-1"><a href="#cb235-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb235-2"><a href="#cb235-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
+<span id="cb235-3"><a href="#cb235-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"_mm"</span>) <span class="sc">|</span> <span class="fu">ends_with</span>(<span class="st">"_g"</span>),</span>
+<span id="cb235-4"><a href="#cb235-4" aria-hidden="true" tabindex="-1"></a>                   mean,</span>
+<span id="cb235-5"><a href="#cb235-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  species   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+  &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+1 Adelie              38.8          18.3              190.       3701.
+2 Chinstrap           48.8          18.4              196.       3733.
+3 Gentoo              47.5          15.0              217.       5076.</code></pre>
+</div>
+</div>
+<ul>
+<li>Есть ли статистически значимые различия между видами пингвинов по массе тела (<code>body_mass_g</code>)? Если да, то между какими?<br>
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df    Sum Sq  Mean Sq F value Pr(&gt;F)    
+species       2 146864214 73432107   343.6 &lt;2e-16 ***
+Residuals   339  72443483   213698                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+2 observations deleted due to missingness</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = body_mass_g ~ species, data = penguins)
+
+$species
+                       diff       lwr       upr     p adj
+Chinstrap-Adelie   32.42598 -126.5002  191.3522 0.8806666
+Gentoo-Adelie    1375.35401 1243.1786 1507.5294 0.0000000
+Gentoo-Chinstrap 1342.92802 1178.4810 1507.3750 0.0000000</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Есть ли статистически значимые различия между видами пингвинов по длине ласт (<code>flipper_length_mm</code>)? Если да, то между какими?</p></li>
+<li><p>Есть ли взаимодействие между полом (<code>sex</code>) и видом (<code>species</code>) для длины ласт <code>flipper_length_mm</code>? Если да, то между какими группами?</p></li>
 </ul>
 
 

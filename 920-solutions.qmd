@@ -1788,3 +1788,70 @@ cor.test(heroes$Weight, heroes$Height, method = "kendall")
 ```
 
 В обоих случаях p-value меньше 0.05, поэтому мы можем отклонить нулевую гипотезу об отсутствии связи между ростом и весом и принять альтернативную гипотезу о том, что такая связь есть. Сильное различие между коэффициентами корреляции указывает на нелинейность этой связи, либо же на наличие значительных выбросов в данных.
+
+## ANOVA {#sec-anova_solutions}
+
+Загрузите пингвиний датасет:
+
+```{r}
+#| echo: true
+#| message: false
+library(tidyverse)
+penguins <- readr::read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv") %>%
+  mutate(id = row_number()) #добавляем id
+```
+
+Давайте посчитаем арифметические средние по группам для различных признаков:
+
+```{r}
+#| echo: true
+#| warning: false
+penguins %>%
+  group_by(species) %>%
+  summarise(across(ends_with("_mm") | ends_with("_g"),
+                   mean,
+                   na.rm = TRUE))
+```
+
+-   Есть ли статистически значимые различия между видами пингвинов по массе тела (`body_mass_g`)? Если да, то между какими?\
+
+```{r}
+aov(body_mass_g ~ species, data = penguins) %>%
+  summary()
+aov(body_mass_g ~ species, data = penguins) %>%
+  TukeyHSD()
+```
+
+-   Есть ли статистически значимые различия между видами пингвинов по длине ласт (`flipper_length_mm`)? Если да, то между какими?
+
+```{r}
+aov(flipper_length_mm ~ species, data = penguins) %>%
+  summary()
+aov(flipper_length_mm ~ species, data = penguins) %>%
+  TukeyHSD()
+```
+
+-   Есть ли взаимодействие между полом (`sex`) и видом (`species`) для длины ласт `flipper_length_mm`? Если да, то между какими группами?
+
+Решение с помощью `aov()`:
+
+```{r}
+aov(flipper_length_mm ~ species * sex, data = penguins) %>%
+  TukeyHSD()
+```
+
+Решение с помощью пакета `{ez}`
+
+```{r}
+library(ez)
+ez_species_sex <- ezANOVA(data = penguins %>% drop_na(flipper_length_mm, species, sex), 
+        dv = .(flipper_length_mm),
+        wid = .(id),
+        between = .(species, sex),
+        return_aov = TRUE)
+```
+
+```{r}
+TukeyHSD(ez_species_sex$aov)
+```
+
