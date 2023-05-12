@@ -307,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -437,12 +437,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Во всех четырех случаях, вместо звездочки нужно поставить название соответствующего распределения в R. Таким образом, для каждого распределения в R есть четыре функции (с похожими названиями, различающимися первой буквой), и таких семейств функций в базовом R (точнее, во встроенном пакете <code>{stats}</code>) очень много (посмотреть можно с помощью <code>?Distributions</code>). Вот лишь некоторые из них:</p>
 <p><img src="images/rdists.PNG" class="img-fluid" width="400"></p>
 <p>Возьмем, например, нормальное распределение, и разберем на его примере все эти функции: <code>dnorm()</code>, <code>pnorm()</code>, <code>qnorm()</code> и <code>rnorm()</code>.</p>
-<p>Вот формула <strong>нормального распределения <em>(normal distribution):</em></strong></p>
-<p><span class="math display">\[P(x) = \frac{e^{-(x - \mu)^{2}/(2\sigma^{2}) }} {\sigma\sqrt{2\pi}}\]</span></p>
-<p>Для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>. Если же <span class="math inline">\(\mu = 0\)</span>, а <span class="math inline">\(\sigma = 1\)</span>, то такое <strong>нормальное распределение</strong> называется <strong>стандартным.</strong> Заметьте, здесь мы говорим о <em>параметрах</em> распределения в генеральной совокупности, а не о статистиках в конкретной выборке, хотя называются они одинаково.</p>
+<p>Для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>. Если же <span class="math inline">\(\mu = 0\)</span>, а <span class="math inline">\(\sigma = 1\)</span>, то такое <strong>нормальное распределение</strong> называется <strong>стандартным <em>(standard normal distribution).</em></strong> Заметьте, здесь мы говорим о <em>параметрах</em> распределения в генеральной совокупности, а не о <em>статистиках</em> в конкретной выборке, хотя называются они одинаково.</p>
 <p>Я думаю, все видели, как выглядит нормальное распределение. Это та самая “колоколообразная кривая”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <p><img src="images/normalstandard.jpg" class="img-fluid" width="400"></p>
-<p>То, что Вы видите на картинке - это так называемая <strong>функция плотности вероятности <em>(probability density function).</em></strong> Это аналог <strong><em>probability mass function</em></strong> для дискретных величин - распределение вероятности того, что случайная величина имеет данное значение. Довольно очевидно, да? Тогда почему аналогичная функция для непрерывных распределений называется по-другому?</p>
+<p>То, что Вы видите на картинке - это так называемая <strong>функция плотности вероятности <em>(probability density function).</em></strong> Вот ее формула для <strong>нормального распределения <em>(normal distribution):</em></strong> <span class="math display">\[P(x) = \frac{e^{-(x - \mu)^{2}/(2\sigma^{2}) }} {\sigma\sqrt{2\pi}}\]</span></p>
+<p>Это аналог <strong><em>probability mass function</em></strong> для дискретных величин - распределение вероятности того, что случайная величина имеет данное значение. Довольно очевидно, да? Тогда почему аналогичная функция для непрерывных распределений называется по-другому?</p>
 <p>Дело в том, что вероятность получения конкретного значения для непрерывных величин равна нулю. Это немного необычный момент, но тем не менее: если распределение непрерывно, то получить точно 0,000000000000… с бесконечным количеством нулей после запятой невозможно, даже если среднее распределения равно нулю. Тем не менее, мы можем посчитать вероятность того, что случайное значение окажется в определенном промежутке. <strong>Функция плотности вероятности</strong> как раз и позволяет это сделать. Чтобы посчитать эту вероятность, надо посчитать площадь соответствующего участка под функцией. Соответственно, площадь под всей функцией плотности вероятности равна 1.</p>
 <!--# Здесь картинку с интервалом! -->
 <p>Конечно, функцию плотности можно получить в R - это функции <code>d*()</code>, где <code>*</code> означает соответствующее распределение. Для нормального распределения это будет функция <code>dnorm()</code>.</p>
@@ -502,7 +501,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.9772499</code></pre>
 </div>
 </div>
-<p>Следующая функция — это <strong>квантильная функция (quantile function)</strong>, или <strong>обратная функция накопленной плотности распределения (inverse cumulative distribution function)</strong>:</p>
+<p>Следующая функция — это <strong>квантильная функция <em>(quantile function)</em></strong><em>,</em> или <strong>обратная функция накопленной плотности распределения <em>(inverse cumulative distribution function):</em></strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.01</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prob, <span class="fu">qnorm</span>(prob, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -552,35 +551,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sec-estimates" class="level2" data-number="17.3">
 <h2 data-number="17.3" class="anchored" data-anchor-id="sec-estimates"><span class="header-section-number">17.3</span> Оценки</h2>
-<p>Самая основа статистики вывода - это <strong>оценки</strong>. Как мы уже знаем, у распределений есть определенные параметры, которые описывают данное распределение.</p>
+<p>Самая основа статистики вывода - это <strong>оценки <em>(estimates)</em></strong><em>.</em> Как мы уже знаем, у распределений есть определенные параметры, которые описывают данное распределение.</p>
 <p>Например, для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>.</p>
 <p>Наша цель - как-нибудь оценить эти параметры, потому что обычно мы их не знаем. Допустим, человеческий рост распределен нормально [^isnotnormal]. Какой средний рост в популяции? Какое у него стандартное отклонение? Для этого мы используем разного рода оценки: точечные и интервальные. В качестве оценок параметров часто используются статистики по выборке. Вот здесь легко запутаться, поэтому покажу картинку:<br>
 [^isnotnormal]: На самом деле, “чистое” нормальное распределение, так же как и любое другое “чистое” распределение, в природе встречается достаточно редко. Но довольно многие процессы могут апроксимироваться нормальным распределением благодаря центральной предельной теореме <a href="#sec-clt"><span>Глава&nbsp;17.8</span></a>.</p>
 </section>
 <section id="sec-sample_estimate" class="level2" data-number="17.4">
 <h2 data-number="17.4" class="anchored" data-anchor-id="sec-sample_estimate"><span class="header-section-number">17.4</span> Точечные оценки</h2>
-<p>Представим, что только что сгенерированные данные с помощью <code>rnorm()</code> - это и есть наша выборка. Перед нами стоит задача оценить IQ популяции по этой выборке. Ну что, давайте попробуем оценить среднее. Здесь все просто и очень очевидно - самой лучшей оценкой среднего в генеральной совокупности будет среднее по выборке.</p>
+<p>Представим, что только что сгенерированные данные с помощью <code>rnorm()</code> - это и есть наша выборка. Перед нами стоит задача оценить IQ популяции по этой выборке. Попробуем <strong>оценить <em>(estimate)</em></strong> среднее в генеральной совокупности.</p>
+<p>Здесь все просто и очень очевидно - самой лучшей оценкой среднего в генеральной совокупности будет среднее по выборке:</p>
+<p><span class="math display">\[\hat{\mu}=\frac{\sum_{i=1}^n x_i}{n}\]</span></p>
+<p>Оценки обозначаются значком домика: <span class="math inline">\(\hat{}\)</span>. <span class="math inline">\(\sum_{i=1}^n x_i\)</span> означает сумму всех элементов <span class="math inline">\(x\)</span> от <span class="math inline">\(1\)</span> до <span class="math inline">\(n\)</span>. Подобная запись с <span class="math inline">\(\sum_{i=1}^n\)</span> нам будет встречаться очень часто!</p>
+<p>Посчитаем оценку среднего в генеральной совокупности с помощью уже знакомой нам функции для выборочного среднего:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100.4877</code></pre>
 </div>
 </div>
-<p>Конечно, не совсем точно, но лучше оценки не придумаешь. Что есть, то есть. Чем больше выборка, тем в ближе оценка будет к популяционному среднему. То есть чем больше выборка, тем выше <strong>точность</strong> оценки.</p>
+<p>Конечно, не совсем точно, но лучше оценки не придумаешь. Что есть, то есть. Чем больше выборка, тем в ближе оценка будет к популяционному среднему, т.е. тем выше <strong>точность <em>(efficiency)</em></strong> оценки.</p>
 <p>А что с оценкой стандартного отклонения? Давайте воспользуемся нашей предыдущей формулой.</p>
-<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
+<p><span class="math display">\[\hat{\sigma}= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((samp <span class="sc">-</span> <span class="fu">mean</span>(samp))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">length</span>(samp))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 15.54206</code></pre>
 </div>
 </div>
-<p>В данном случае мы несколько промахнулись вверх, но обычно оценка по этой формуле дает небольшое <strong>смещение</strong> <em>(bias)</em> в меньшую сторону. В отличие от выборочного среднего как оценки среднего в генеральной совокупности, использование выборочного стандартного отклонения по выборке приводит к смещенной оценке! Само по себе это кажется странным, и это нормально. Но этому есть всякие серьезные математические доказательства. Кроме того, есть множество всяких демонстраций, например, <a href="https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/more-standard-deviation/v/simulation-showing-bias-in-sample-variance">от Академии Хана</a>.</p>
-<blockquote class="blockquote">
-<p>Одно из простых объяснений такое: поскольку мы оцениваем стандартное отклонение на основе оценки среднего, среднеквадратичные расстояния счиаются не от реального среднего в генеральной совокупности, а от среднего по выборке, которое немного смещено в ту или иную сторону. Представьте, что так получилось, что в нашей выборке оно оказалось сильно смещено и выборочное среднее получилось около 90 (такое бывает). Это значит, что получилось много довольно низких значений около этого 90, а высчитываться среднеквадратичные разницы будут не от среднего 100 (которое мы не знаем), а от этого 90. Поэтому стандартное отклонение получится сильно меньше, чем должно было получиться.</p>
-</blockquote>
+<p>В данном случае мы несколько промахнулись вверх, но обычно оценка по этой формуле дает небольшое <strong>смещение</strong> <strong><em>(bias)</em></strong> в меньшую сторону. В отличие от выборочного среднего как оценки среднего в генеральной совокупности, использование выборочного стандартного отклонения по выборке приводит к смещенной оценке! Само по себе это кажется странным, и это нормально. Но этому есть всякие серьезные математические доказательства. Кроме того, есть множество всяких демонстраций, например, <a href="https://www.khanacademy.org/math/ap-statistics/summarizing-quantitative-data-ap/more-standard-deviation/v/simulation-showing-bias-in-sample-variance">от Академии Хана</a>.</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> откуда смещение оценки?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Одно из простых объяснений такое: поскольку мы оцениваем стандартное отклонение на основе оценки среднего, среднеквадратичные расстояния счиnаются не от реального среднего в генеральной совокупности, а от среднего по выборке, которое немного смещено в ту или иную сторону. Представьте, что так получилось, что в нашей выборке оно оказалось сильно смещено и выборочное среднее получилось около 90 (такое бывает). Это значит, что получилось много довольно низких значений около этого 90, а высчитываться среднеквадратичные разницы будут не от среднего 100 (которое мы не знаем), а от этого 90. Поэтому стандартное отклонение получится сильно меньше, чем должно было получиться.</p>
+</div>
+</div>
 <p>Чтобы получить <strong>несмещенную (unbiased) оценку</strong> стандартного отклонения или дисперсии, то нам нужно делить не на <span class="math inline">\(n\)</span>, а на <span class="math inline">\(n-1\)</span>.</p>
-<p><span class="math display">\[s= \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n-1}\]</span> Заметьте, что именно так делает стандартная функция <code>sd()</code>:</p>
+<p><span class="math display">\[\hat{\sigma} = \sqrt\frac{\sum\limits_{i=1}^{n} (x_{i} - \overline{x})^2} {n-1}\]</span> Заметьте, что именно так делает стандартная функция <code>sd()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>((samp <span class="sc">-</span> <span class="fu">mean</span>(samp))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -592,68 +605,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Это называется поправкой Бесселя, и она настолько распространена, что именно скорректированное стандартное отклонение обычно называют стандартным отклонением. Поэтому в дальнейшем будет использоваться именно эта формула или же просто функция <code>sd()</code>.</p>
-<p>Таким образом, у оценки есть два критерия качества - ее точность и ее несмещенность.</p>
+<p>Таким образом, у оценки есть два критерия качества – ее <strong>точность</strong> и ее <strong>несмещенность.</strong></p>
 </section>
 <section id="sec-interval_estimate" class="level2" data-number="17.5">
 <h2 data-number="17.5" class="anchored" data-anchor-id="sec-interval_estimate"><span class="header-section-number">17.5</span> Интервальные оценки</h2>
-<p>Другой подход к оцениванию параметра распределения в генеральной совокупности заключается в использовании интервалов. Вместо того, чтобы дать одну оценку, которая будет заведома неточна, можно попробовать оценить интервал, в котором находится истинное среднее генеральной совокупности.</p>
-<p>Самая распространенная интервальная оценка называется <strong>доверительным интервалом (confidence interval)</strong>. Цель доверительного интервала - “покрыть” параметр генеральной совокупности с определенной степенью уверенности.</p>
+<p>Другой подход к оцениванию параметра распределения в генеральной совокупности заключается в использовании интервалов. Вместо того, чтобы дать одну точечную оценку, которая будет заведомо неточна, можно попробовать оценить интервал, в котором находится истинное среднее генеральной совокупности.</p>
+<p>Самая распространенная интервальная оценка называется <strong>доверительным интервалом (confidence interval)</strong>. Цель доверительного интервала – “покрыть” параметр генеральной совокупности с определенной степенью уверенности.</p>
 <p>Например, 95% доверительный интервал или просто <span class="math inline">\(CI95\%\)</span> означает, что примерно в 95% случаев подсчитанный на выборках интервал будет ловить значение параметра в популяции. Например, построив <span class="math inline">\(CI95\%\)</span> по нашей сгенерированной выборке, мы хотим чтобы примерно в 95% случаев выборок, построенных таким способом, этот интервал ловил истинное среднее (в данном случае — 100).</p>
 <p>Для того, чтобы научиться строить такие интервалы, нам нужно разобраться с <strong>выборочным распределение (sampling distribution).</strong></p>
 </section>
 <section id="sec-sample_dist" class="level2" data-number="17.6">
 <h2 data-number="17.6" class="anchored" data-anchor-id="sec-sample_dist"><span class="header-section-number">17.6</span> Выборочное распределение</h2>
-<p>Чтобы разобраться с тем, что стоит за доверительными интервалами и тестированием уровня значимости нулевой гипотезы (короче говоря, с основными инструментами статистики вывода), нам надо разобраться с очень абстрактной концепцией – выборочными распределениями.</p>
-<p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<p>Чтобы разобраться с тем, что стоит за <strong>доверительными интервалами</strong> и <strong>тестированием уровня значимости нулевой гипотезы</strong> (короче говоря, с основными инструментами статистики вывода), нам надо разобраться с очень абстрактной концепцией – выборочными распределениями.</p>
+<p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>samplemeans <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Каждая выборка состоит из сотни “испытуемых”, всего таких выборок 1000. По каждой мы посчитали среднее.</p>
-<p>Как распределены эти средние?</p>
+<p>Каждая выборка состоит из сотни “испытуемых”, всего таких выборок 1000. По каждой мы посчитали среднее. Как распределены эти средние?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samplemeans, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sample_means, <span class="at">breaks =</span> <span class="dv">30</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="310-infer_stats_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Вот это распределение и есть выборочное распределение средних. Точнее, было бы, если бы мы взяли не 1000 выборок, а бесконечное количество выборок. Так что у нас всего лишь апроксимация. При этом мы могли взять другие статистики, не средние выборок, а, например, медианы или стандартные отклонения выборок. Тогда это были бы выборочные распределения медиан и выборочные распределения стандартных отклонений. Но именно выборочное распределение средних обладает уникальными математическими свойствами, про которые мы скоро узнаем.</p>
-<p>Среднее выборочного распределения средних будет близко к популяционному среднему:</p>
+<p>Вот это распределение и есть <strong>выборочное распределение средних <em>(sampling distribution of means).</em></strong> Точнее, было бы, если бы мы взяли не 1000 выборок, а бесконечное количество выборок. Так что у нас всего лишь аппроксимация выборочного распределения средних, к сожалению.</p>
+<p>Мы могли взять другие статистики, не средние выборок, а, например, медианы или стандартные отклонения выборок. Тогда это были бы выборочные распределения медиан и выборочные распределения стандартных отклонений соответственно. Но именно выборочное распределение средних обладает уникальными математическими свойствами, про которые мы скоро узнаем.</p>
+<p>Например, среднее выборочного распределения средних будет равно популяционному среднему:</p>
+<p><span class="math display">\[
+\mu_{\overline{x}} = \mu
+\]</span></p>
+<p>То есть если бы у нас было много выборок, то среднее их средних все больше бы приближалось к популяционному среднему:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(samplemeans)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sample_means)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 99.93772</code></pre>
 </div>
 </div>
-<p>А вот чему будет равно стандартное отклонение средних?</p>
+<p>Жаль, что мы не можем позволить себе симулировать бесконечное количество выборок, ведь тогда их среднее было бы равно популяционному среднему!</p>
+<p>Теперь перейдем к стандартному отклонению выборочного распределения средних. Звучит очень громоздко, не правда ли? Поэтому стандартное отклонение выборочного распределения обычно называют <strong>стандартной ошибкой <em>(standard error),</em></strong> а стандартное отклонение выборочного распределения средних называют <strong>стандартной ошибкой среднего</strong> <strong><em>(standard error of the mean; s.e.m.).</em></strong></p>
+<p>Чему будет равна <strong>стандартная ошибка среднего?</strong> Давайте посмотрим на стандартное отклонение в нашей симуляции выборочного распределения средних:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(samplemeans)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(sample_means)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.501392</code></pre>
 </div>
 </div>
-<p>Очень похоже на стандартное отклонение IQ, но в 10 раз меньше. В действительности, стандартное отклонение выборочного распределения средних равно стандартному отклонению в генеральной совокупности, деленному на корень из размера выборки.</p>
-<p><span class="math display">\[\sigma_{\overline{x}}= \frac{\sigma} {\sqrt{n}}\]</span> Как раз это мы и получили: размер нашей выборки - 100, а корень из 100 равен 10.</p>
-<p>Стандартное отклонение выборочного распределения средних (ох, йо) называется еще <strong>стандартной ошибкой или standard error of the mean (s.e.m.).</strong> Именно стандартную ошибку обычно используют на графиках в качестве error bars. Теперь вы знаете как ее посчитать!</p>
+<p>Очень похоже на стандартное отклонение в шкале IQ (15), но в 10 раз меньше. Это не случайно: <strong>стандартная ошибка среднего</strong> равна стандартному отклонению в генеральной совокупности, деленному на корень из размера выборки.</p>
+<p><span class="math display">\[\sigma_{\overline{x}}= \frac{\sigma} {\sqrt{n}}\]</span></p>
+<p>Как раз это мы и получили: размер нашей выборки - 100, а корень из 100 равен 10:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>sem</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.5</code></pre>
 </div>
 </div>
+<p>Из этой формулы следует, что стандартная ошибка тем меньше, чем больше выборка. И это довольно логично: чем больше у нас размер выборок, тем меньше будет разброс их средних. При этом уменьшение разброса не будет линейным: чтобы уменьшить его в 2 раза, нужно увеличить выборку в 4 раза, а чтобы уменьшить его в 10 раз, нужно увеличить выборку в 100 раз.</p>
 <p>Ну а если мы не знаем стандартного отклонения в генеральной совокупности (что обычно и бывает в жизни), то можем оценить стандартную ошибку среднего с помощью оценки стандартного отклонения, посчитанного на выборке:</p>
-<p><span class="math display">\[s_{\overline{x}}= \frac{s} {\sqrt{n}}\]</span></p>
+<p><span class="math display">\[\hat{\sigma_\overline{x}}= \frac{\hat{\sigma}} {\sqrt{n}}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.562035</code></pre>
 </div>
 </div>
-<p>Это означает, что стандартная ошибка тем меньше, чем больше выборка. И это довольно логично: чем больше у нас размер выборок, тем меньше будет расброс их средних.</p>
+<p>Именно <strong>оценку</strong> <strong>стандартной ошибки среднего</strong> обычно используют на графиках в научных статьях в качестве <strong>усов</strong> <strong><em>(error bars)</em></strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a><strong><em>.</em></strong></p>
 </section>
 <section id="sec-nordm_dist_importance" class="level2" data-number="17.7">
 <h2 data-number="17.7" class="anchored" data-anchor-id="sec-nordm_dist_importance"><span class="header-section-number">17.7</span> Важность нормального распределения</h2>
-<p>В математике все числа равны, но некоторые все-таки заметно равнее других. Например, есть 0 и 1 - и очевидно, что это очень важные числа. Даже гугл выдает больше страниц по числам 0 и 1, чем по другим числам, например, 8 и 23218974. Не только целые числа могут быть важными. Вот, например, число пи и число Эйлера: они очень часто встречаются в самых разных, подчас неожиданных местах. Например, в тех же формулах распределений. На эти числа завязано очень интересные и важные свойтсва, поэтому такая зацикленность на них неудивительна. Например, число пи связывает радиус круг с длиной его окружности и площадью, поэтому когда перед нами что-то круглое, то и пи появится с большой вероятностью.</p>
+<p>В математике все числа равны, но некоторые все-таки заметно равнее других. Например, есть 0 и 1 - и очевидно, что это очень важные числа. Даже гугл выдает больше страниц по числам 0 и 1, чем по другим числам, например, 8 и 23218974. Не только целые числа могут быть важными. Вот, например, число пи и число Эйлера: они очень часто встречаются в самых разных, подчас неожиданных местах. Например, в тех же функциях распределений. На эти числа завязано очень интересные и важные свойства, поэтому такая зацикленность на них неудивительна. Например, число пи связывает радиус круг с длиной его окружности и площадью, поэтому когда перед нами что-то круглое, то и пи появится с большой вероятностью.</p>
 <p>В статистике тоже есть распределения, которые “главнее” других распределений. Есть, например, равномерное распределение. Например, равномерно распределены исходы одного броска кубика.</p>
 <p>Но есть и распределение, которое смело можно называть королем всех распределений - это уже знакомое нам нормальное распределение.</p>
 <p>Нормальное распределение - это что-то в духе единицы из мира распределений. Это не просто одно из распределений, а это фундаментально важная штуковина, которая обладает почти магической силой. И сила эта зовется “Центральная Пределельная Теорема”.</p>
@@ -678,12 +697,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Удивительно, но средние по выборкам из логнормального распределения будут выглядеть почти нормально! Более того, для других распределений это тоже будет верно: <strong>согласно центральной предельной теореме <em>(ЦПТ, central limit theorem)</em>, какой бы ни была форма распределения в генеральной совокупности, выборочное распределение средних будет стремиться к нормальному. При этом чем больше размер выборки, тем ближе выборочное распределение средних будет к нормальному.</strong> Это очень важная фишка, на которой основаны многие статистические тесты.</p>
 <p><img src="images/IllustrationCentralTheorem.png" class="img-fluid" width="400"></p>
-<p>Не верите? Попробуйте сами! Можете поиграться с разными распределениями с помощью кода (можете посмотреть другие распределения в хэлпе: <code>?Distributions</code> ).</p>
-<p>Можете поиграться с интерактивной <a href="https://gallery.shinyapps.io/CLT_mean/">Shiny-демонстрацией магии ЦПТ</a>. Я очень и очень рекомендую поиграться с ней. Попробуйте разные значения, посмотрите что будет.</p>
+<p>Не верите? Попробуйте сами! Можете поиграться с разными распределениями с помощью кода (можете посмотреть другие распределения в хэлпе: <code>?Distributions</code> ). А еще можно потыкать интерактивную <a href="https://gallery.shinyapps.io/CLT_mean/">Shiny-демонстрацию магии ЦПТ</a>. Я очень рекомендую поиграться с ней. Попробуйте разные значения, посмотрите что будет.</p>
 <p>Как только наиграетесь, то сразу станет понятно, почему именно нормальное распределение занимает такое важное место в статистике.</p>
-<blockquote class="blockquote">
-<p>Если выходить за рамки выборочного распределения средних, то центральная предельная теорема говорит нам о том, что сумма слабо зависящих случайных величин, имеющих примерно одинаковое влияние, имеет распределение близкое к нормальному. Например, рост является следствием большого количества генетических и средовых факторов, поэтому он распределен примерно нормально. Однако это нормальное распределение портят такие факторы как пол — он вносит очень сильный вклад в рост, поэтому распределение становится немного “двугорбым”.</p>
-</blockquote>
+<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> ЦПТ в реальной жизни
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если выходить за рамки выборочного распределения средних, то центральная предельная теорема говорит нам о том, что сумма слабо зависящих случайных величин, имеющих примерно одинаковое влияние, имеет распределение близкое к нормальному. Например, рост является следствием большого количества генетических и средовых факторов, поэтому он распределен примерно нормально. Однако это нормальное распределение портят такие факторы как пол — он вносит очень сильный вклад в рост, поэтому распределение становится более плоским, т.к. это смесь двух похожих на нормальное распределений. И даже внутри этих распределений есть более и менее влияющие факторы. Поэтому какую бы более узкую генеральную совокупность мы ни рассматривали, распределение никогда не будет идеально нормальным. За исключением, возможно, фундаментальных физических процессов.</p>
+</div>
+</div>
 </section>
 <section id="sec-ci_build" class="level2" data-number="17.9">
 <h2 data-number="17.9" class="anchored" data-anchor-id="sec-ci_build"><span class="header-section-number">17.9</span> Строим доверительный интервал</h2>
@@ -758,24 +786,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Примерно 5% не ловят 100 в 95% доверительный интервал! Примерно это и означает доверительный интервал: где-то в 95% он ловит параметр в генеральной совокупности, а в 5% - нет.</p>
-<blockquote class="blockquote">
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> определение доверительного интервала
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Понятие доверительного интервала вызывает кучу недопонимания и ошибок. Очень многие его интерпретируют, например, как интервал, включающий в себя 95% значений популяции, но это неправильно.</p>
-</blockquote>
-<p>Еще я советую посмотреть вот эту визуализацию:</p>
-<p><a href="http://rpsychologist.com/d3/CI/">Доверительные интервалы сыпятся как из мешка</a></p>
+</div>
+</div>
+<p>Еще я советую посмотреть вот эту визуализацию: <a href="http://rpsychologist.com/d3/CI/">Доверительные интервалы сыпятся как из мешка</a></p>
 </section>
 <section id="sec-nhst" class="level2" data-number="17.10">
 <h2 data-number="17.10" class="anchored" data-anchor-id="sec-nhst"><span class="header-section-number">17.10</span> Тестирование значимости нулевой гипотезы</h2>
 <p><strong>Тестирование значимости нулевой гипотезы (null hypothesis significance testing)</strong> — это основной подход в статистике вывода. Вы про него точно слышали (хотя, возможно, не знали, что он так называется), потому что де-факто он является стандартом в психологии, биологии, медицине и многих других науках.</p>
-<p>Мы сейчас детально его проведем на примере одного из самых простых статистических тестов - z-тестов. Однако та же самая логика стоит и за остальными статистическими тестами.</p>
+<p>Мы сейчас детально его проведем на примере одного из самых простых статистических тестов - <strong>z-тестов <em>(z-test).</em></strong> Однако та же самая логика стоит и за остальными статистическими тестами.</p>
 <p><strong>1. Формулирование нулевой и альтернативной гипотезы.</strong></p>
-<p>Сначала мы задаем две гипотезы о параметрах распределения. Одна из них называется нулевой: она обычно включает положение о том, что различий или связи нет или что это различие/связь равно определенному числу. Если мы хотим применить тестирование значимости к нашей “выборке”, то нулевую гипотезу можно будет сформулировать так: <span class="math display">\[H_0: \mu = 100\]</span>. Альтернативная или ненулевая гипотеза либо говорит о том, что среднее в генеральной совокупности на самом деле не равно какому-то конкретному числу (в нашем случае — 100) или что две выборки взяты из групп с различным средним и т.п.</p>
+<p>Сначала мы задаем две гипотезы о параметрах распределения. Одна из них называется нулевой: она обычно включает положение о том, что различий или связи нет или что это различие/связь равно определенному числу. Если мы хотим применить тестирование значимости к нашей “выборке”, то нулевую гипотезу можно будет сформулировать так: <span class="math display">\[H_0: \mu = 100\]</span></p>
+<p>Наша нулевая гипотеза заключается в том, что выборка была взята из распределения со средним 100.</p>
+<p>Альтернативная или ненулевая гипотеза либо говорит о том, что среднее в генеральной совокупности на самом деле не равно какому-то конкретному числу (в нашем случае — 100) или что две выборки взяты из групп с различным средним и т.п.</p>
 <p><span class="math display">\[H_1: \mu \ne 100\]</span></p>
 <p>Тестирование нулевой гипотезы предполагает подсчет какой-то статистики, а потом вычисление того, какова вероятность получить такой или более радикальный результат при условии, что верна нулевая гипотеза.</p>
 <p>Заметьте, мы формулируем гипотезу не про <em>статистики</em> в выборке, а про <em>параметры</em> в генеральной совокупности, поэтому пользуемся греческими (или большими латинскими) буквами.</p>
 <p>Вся дальнейшая логика расчетов будет строиться именно на нулевой гипотезе: мы будем пытаться понять, насколько реалистичны наши результаты при верности нулевой гипотезы, которую мы заранее обозначили. Это похоже на “доказательство от обратного” в геометрии: мы исходим из того, что эффекта не существует и пытаемся прийти к противоречию с данными, чтобы отбросить эту нулевую гипотезу и принять альтернативную гипотезу.</p>
 <p><strong>2. Подсчет тестовой статистики по выборке</strong></p>
-<p>Следующий этап тестирования значимости нулевой гипотезы — подсчет тестовой статистики. Тестовые статистики по своей сути не отличаются от описательных статистик, с которыми мы уже познакомились, но имеют другую функцию. Как и в случае описательных статистик, мы пытаемся выразить информацию о выборке в виде одного числа, но делаем это для того, чтобы сравнить это значение с другими <em>возможными</em> значениями, которые мы могли бы получить, если бы наша нулевая гипотеза была верна.</p>
+<p>Следующий этап <strong>тестирования значимости нулевой гипотезы</strong> — подсчет тестовой статистики. Тестовые статистики по своей сути не отличаются от описательных статистик, с которыми мы уже познакомились, но имеют другую функцию. Как и в случае описательных статистик, мы пытаемся выразить информацию о выборке в виде одного числа, но делаем это для того, чтобы сравнить это значение с другими <em>возможными</em> значениями, которые мы могли бы получить, если бы наша нулевая гипотеза была верна.</p>
 <p>Если мы знаем стандартное отклонение в генеральной совокупности, то можем посчитать <span class="math inline">\(z\)</span>-статистику по формуле:</p>
 <p><span class="math display">\[z = \frac{\overline{x} - \mu} {\sigma / \sqrt{N}} \]</span></p>
 <div class="cell">
@@ -787,21 +826,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.3251482</code></pre>
 </div>
 </div>
-<p><span class="math inline">\(z\)</span>-статистика — это выборочное среднее, из которого вычтено среднее в генеральной совокупносности согласно нашей гипотезе. Получившуюся разницу мы делим на стандартную ошибку.</p>
+<p><span class="math inline">\(z\)</span>-статистика — это выборочное среднее, из которого вычтено среднее в генеральной совокупности согласно нашей гипотезе. Получившуюся разницу мы делим на стандартную ошибку.</p>
 <p><strong>3. Расчет p-value</strong></p>
-<p>И вот мы подобрались к самому важному этапу – расчет <strong>p-value</strong>. p-value – это вероятность получить такую и более отклоняющуюся тестовую статистику при условии верности нулевой гипотезы. Очень важно понять, как именно оно расчитывается, потому что на этом основывается сама идея тестирования значимости нулевой гипотезы! Для этого нам нужно вернуться к идее выборочного распределения, только теперь уже не среднего, а <span class="math inline">\(z\)</span>-статистики. Впрочем, выглядеть оно будет абсолютно так же – нормально! Благодаря тому, что мы вычли среднее и поделили на стандартное отклонение, среднее этого нормального распределения будет равно 0, а стандартное отклонение – 1. То есть перед нами снова стандартное нормальное распределение.</p>
-<p>Благодаря ЦПТ, даже если распределение в генеральной совокупности несколько отличается от нормального, а выборка достаточно большая, то выборочное распределение z-статистик при верности нулевой гипотезы будет (примерно) нормальным.</p>
+<p>И вот мы подобрались к самому важному этапу – расчет <strong>p-value</strong>.</p>
+<blockquote class="blockquote">
+<p><strong>p-value</strong> – это вероятность получить такую и более отклоняющуюся тестовую статистику при условии верности нулевой гипотезы.</p>
+</blockquote>
+<p>Очень важно понять, как именно рассчитывается <em>p-value,</em> потому что на этом основывается сама идея тестирования значимости нулевой гипотезы! Для этого нам нужно вернуться к идее выборочного распределения, только теперь уже не среднего, а <span class="math inline">\(z\)</span>-статистики. Впрочем, выглядеть оно будет абсолютно так же – нормально! Благодаря тому, что мы вычли среднее и поделили на стандартное отклонение, среднее этого нормального распределения будет равно 0, а стандартное отклонение – 1. То есть перед нами снова <strong>стандартное нормальное распределение.</strong></p>
+<p>Благодаря ЦПТ, даже если распределение в генеральной совокупности несколько отличается от нормального, а выборка достаточно большая, то выборочное распределение <span class="math inline">\(z\)</span>-статистик при верности нулевой гипотезы будет (примерно) нормальным.</p>
 <p>Теперь нам нужно соотнести нашу <span class="math inline">\(z\)</span>-статистику с теоретическим выборочным распределением <span class="math inline">\(z\)</span>-статистик. Это позволит нам оценить вероятность получить такие и более отличающиеся результаты при допущении верности нулевой гипотезы, т.е. p-value.</p>
 <p>Какая вероятность получить <span class="math inline">\(z\)</span>-статистику 0.3251482, если на самом деле нулевая гипотеза верна? Это вопрос с подвохом: как мы выяснили ранее, для непрерывных распределений вероятность получить отдельное число равна 0. Но мы можем посчитать, какая вероятность получить такую же или большую <span class="math inline">\(z\)</span>-статистику!</p>
 <p>Графически эту вероятность можно представить как площадь под кривой функции плотности распределения от полученной <span class="math inline">\(z\)</span>-статистики до плюс бесконечности или от минус бесконечности до полученной <span class="math inline">\(z\)</span>-статистики, если <span class="math inline">\(z\)</span>-статистика отрицательная.</p>
-<p><img src="images/explanationsPValue.png" class="img-fluid" width="400"> Или же можем воспользоваться функцией накопленной плотности распределения. Для нормального распределения это можно сделать с помощью уже знакомой нам функции <code>pnorm()</code>:</p>
+<p><img src="images/explanationsPValue.png" class="img-fluid" width="400"></p>
+<p>Или же можем воспользоваться <strong>функцией накопленной плотности распределения.</strong> Для нормального распределения это можно сделать с помощью уже знакомой нам функции <code>pnorm()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(z)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6274655</code></pre>
 </div>
 </div>
-<p><code>pnorm()</code> считает от минус бесконечности до заданного числа, а нам нужно наоборот — от заданного числа до плюс бесконечности, потому что <span class="math inline">\(z\)</span> отличается от 0 в большую сторону. Этого можно добиться вычетанием из 1 <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>:</p>
+<p><code>pnorm()</code> считает от минус бесконечности до заданного числа, а нам нужно наоборот — от заданного числа до плюс бесконечности, потому что <span class="math inline">\(z\)</span> отличается от 0 в большую сторону. Этого можно добиться вычетанием из 1<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -818,11 +862,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.7450689</code></pre>
 </div>
 </div>
-<p>Вот эта число и есть <strong>p-value — вероятность получения такого же и более экстремального значения тестовой статистики при условии, что нулевая гипотеза верна.</strong></p>
+<p>Вот эта число и есть <em>p-value —</em> <em>вероятность получения такого же и более экстремального значения тестовой статистики при условии, что нулевая гипотеза верна.</em></p>
 <p><strong>4. Принятие решения о гипотезах</strong></p>
 <p>Отлично, мы посчитали <em>p-value</em>. В данном конкретном случае он оказался равен 0.7450689. Это много или мало? Фактически это означает, что если нулевая гипотеза верна, то в большинстве случаев мы будем получать z-статистики больше нашей. Короче говоря, это вполне реалистичный случай, если нулевая гипотеза верна.</p>
-<p>Значит ли это, что нулевая гипотеза верна? Нет, не значит. При тестировании значимости нулевой гипотезы мы в принципе ничего не можем сказать про верность альтернативной гипотезы. Например, возможно, настоящее среднее в генеральной совокупности, из которой мы взяли выборку, очень мало отличается от 100.</p>
-<p>Поэтому если <em>p-value</em> достаточно большой, мы не можем сделать выводов про верность нулевой и альтернативной гипотезы. Мы можем лишь сказать, что у нас нет оснований отклонить нулевую гипотезу.</p>
+<p>Значит ли это, что нулевая гипотеза верна? Нет, не значит. При тестировании уровня значимости нулевой гипотезы мы в принципе ничего не можем сказать про верность альтернативной гипотезы. Например, возможно, настоящее среднее в генеральной совокупности, из которой мы взяли выборку, очень мало отличается от 100.</p>
+<p>Поэтому если <em>p-value</em> большой, мы не можем сделать выводов про верность нулевой и альтернативной гипотезы. Мы можем лишь сказать, что у нас нет оснований отклонить нулевую гипотезу.</p>
 <p>Если же <em>p-value</em> очень маленький, то здесь у нас появляется больше однозначности. Например, если <em>p-value</em> равен .02, мы можем сказать, что ситуация малореалистичная: такие и более сильные отклонения от среднего мы можем получить только раз в 50 случаев, если <span class="math inline">\(H_0\)</span> верна. Поэтому мы отклоняем <span class="math inline">\(H_0\)</span> и принимаем <span class="math inline">\(H_1\)</span>.</p>
 <p>Насколько маленьким должен быть <em>p-value</em>, чтобы отклонить нулевую гипотезу? <strong>Критическое значение <em>p-value</em>, при котором отклоняют нулевую гипотезу, называется уровнем</strong> <span class="math inline">\(\alpha\)</span>. Это максимальный уровень ошибки, который мы допускаем в исследовании.</p>
 <p>Так получилось исторически, что стандартный уровень <span class="math inline">\(\alpha\)</span> равен .05. Нужно помнить, что .05 — это просто общепринятая условность, за этим числом не стоит никакого сакрального знания. Просто так получилось.</p>
@@ -864,7 +908,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li id="fn3"><p>Если мы возьмем достаточно большие значения, то этот трюк не сработает, что свзязано с тем, что числа дробные числа в компьютерах хранятся с ограниченной точностью.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>А почему именно 42? Ну, можно брать любое число, которое Вам нравится. А 42 - это <a href="https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%B2%D0%B5%D1%82_%D0%BD%D0%B0_%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B9_%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8,_%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D0%B8_%D0%B2%D1%81%D0%B5%D0%B3%D0%BE_%D1%82%D0%B0%D0%BA%D0%BE%D0%B3%D0%BE">ответ на главный вопрос жизни, вселенной и всего такого</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Конечно, на практике никто не будет собирать тысячу выборок. Но нам важно понимать, чтобы было, если бы мы повторяли один и тот же эксперимент в одинаковых условиях, даже если это и невозможно сделать. Это позволит нам понять, какие выводы мы можем сделать на основе тех данных, что мы имеем на самом деле.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>или же можно поставить параметру <code>lower.tail =</code> функции <code>pnorm()</code> значение <code>FALSE</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Для барплотов или точечных диаграмм. Для ящиков с усами используются другие правила, см. <a href="220-base_viz.html#sec-base_vis_boxplot"><span>Глава&nbsp;13.3</span></a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>или же можно поставить параметру <code>lower.tail =</code> функции <code>pnorm()</code> значение <code>FALSE</code>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1096,7 +1141,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./320-ttest.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
