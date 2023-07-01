@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Анализ данных и статистика в R - 18&nbsp; t-тест</title>
+<title>Анализ данных и статистика в R - 18&nbsp; \(t\)-тест</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./320-ttest.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./320-ttest.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">$t$-тест</span></a></li></ol></nav>
       <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -307,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -377,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-one_ttest" id="toc-sec-one_ttest" class="nav-link active" data-scroll-target="#sec-one_ttest"><span class="toc-section-number">18.1</span>  Одновыборочный t-тест</a></li>
+  <li><a href="#sec-one_ttest" id="toc-sec-one_ttest" class="nav-link active" data-scroll-target="#sec-one_ttest"><span class="toc-section-number">18.1</span>  Одновыборочный <span class="math inline">\(t\)</span>-тест</a></li>
   <li><a href="#sec-two_ttest" id="toc-sec-two_ttest" class="nav-link" data-scroll-target="#sec-two_ttest"><span class="toc-section-number">18.2</span>  Двухвыборочный t-тест</a>
   <ul class="collapse">
   <li><a href="#sec-dep_ttest" id="toc-sec-dep_ttest" class="nav-link" data-scroll-target="#sec-dep_ttest"><span class="toc-section-number">18.2.1</span>  Двухвыборочный зависимый t-тест</a></li>
@@ -397,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ttest" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span></h1>
+<h1 class="title"><span id="sec-ttest" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></h1>
 </div>
 
 
@@ -419,18 +419,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <section id="sec-one_ttest" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный t-тест</h2>
-<p>Мы научились делать z-тест. Однако на практике он не используется, потому что предполагает, что мы откуда-то знаем стандартное отклонение в генеральной совокупности. На практике это обычно не так, поэтому мы <em>оцениваем</em> стандартное отклонение в генеральной совокупности на основе стандартного отклонения по выборке. Это приводит к тому, что тестовая статистика уже не распределена нормально, а распределена согласно t-распределению. Ну и статистика уже называется t-статистикой.</p>
+<h2 data-number="18.1" class="anchored" data-anchor-id="sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный <span class="math inline">\(t\)</span>-тест</h2>
+<p>Мы научились делать <span class="math inline">\(z\)</span>-тест. Однако на практике он почти не используется, потому что предполагает, что мы откуда-то знаем стандартное отклонение в генеральной совокупности. Это обычно не так, поэтому мы <em>оцениваем</em> стандартное отклонение в генеральной совокупности на основе стандартного отклонения по выборке. Это приводит к тому, что тестовая статистика уже не распределена нормально, а распределена согласно <span class="math inline">\(t\)</span>-распределению. Ну и статистика уже называется <span class="math inline">\(t\)</span>-статистикой.</p>
 <p><span class="math display">\[t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} \]</span></p>
-<blockquote class="blockquote">
-<p>Иногда это t-распределение называют t-распределением Стьюдента, а соответствующий статистический тест - критерий Стьюдента. Дело в том, что его открыл сотрудник пивоварни Гиннесс Уильям Госсет. Сотрудникам Гиннесса было запрещено публиковать научные работы под своим именем, поэтому он написал свою знаменитую работу про t-распределение под псевдонимом “Ученик” (<em>Student</em>).</p>
-</blockquote>
-<p>Форма этого распределения очень похожа на форму нормального распределения, но имеет более тяжелые “хвосты” распределения. При этом эта форма зависит от размера выборки: чем больше выборка, тем ближе распределение к нормальному. Этот параметр распределения называется <strong>степенями свободы</strong> <em>(degrees of freedom)</em> и вычисляется как <span class="math inline">\(N - 1\)</span>, где <span class="math inline">\(N\)</span> - это размер выборки.</p>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> казалось бы, причем здесь пиво?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Иногда это <span class="math inline">\(t\)</span>-распределение называют <span class="math inline">\(t\)</span>-распределением Стьюдента, а соответствующий статистический тест - критерий Стьюдента. Дело в том, что его открыл сотрудник пивоварни Гиннесс Уильям Госсет. Сотрудникам Гиннесса было запрещено публиковать научные работы под своим именем, поэтому он написал свою знаменитую работу про <span class="math inline">\(t\)</span>-распределение под псевдонимом “Ученик” (<em>Student</em>).</p>
+</div>
+</div>
+<p>Форма этого распределения очень похожа на форму нормального распределения, но имеет более тяжелые “хвосты” распределения. При этом эта форма зависит от размера выборки: чем больше выборка, тем ближе распределение к нормальному. Этот параметр распределения называется <strong>степенями свободы</strong> <strong><em>(degrees of freedom)</em></strong> и вычисляется как <span class="math inline">\(N - 1\)</span>, где <span class="math inline">\(N\)</span> - это размер выборки.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.0     ✔ purrr   1.0.1
-✔ tibble  3.2.1     ✔ dplyr   1.1.0
+✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -441,8 +451,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="320-ttest_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Как видите, чем больше выборка (и количество степеней свободы соответственно), тем ближе t-распределение к стандартному нормальному распределению. При 100 степенях свободы они уже почти не различимы! Поэтому на больших выборках разница между t-тестом и z-тестом будет минимальна, тогда как на маленьких выборках разница может быть значительной.</p>
-<p>Давайте посчитаем t-статистику на тех же симулированных данных:</p>
+<p>Как видите, чем больше выборка (и количество степеней свободы соответственно), тем ближе <span class="math inline">\(t\)</span>-распределение к стандартному нормальному распределению. При 100 степенях свободы они уже почти не различимы! Поэтому на больших выборках разница между <span class="math inline">\(t\)</span>-тестом и <span class="math inline">\(z\)</span>-тестом будет минимальна, тогда как на маленьких выборках разница может быть значительной.</p>
+<p>Давайте посчитаем <span class="math inline">\(t\)</span>-статистику на тех же симулированных данных, что и раньше<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
@@ -454,36 +464,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.3122351</code></pre>
 </div>
 </div>
-<p>Давайте для сравнения еще раз посчитаем z-статистику:</p>
+<p>Давайте для сравнения еще раз посчитаем <span class="math inline">\(z\)</span>-статистику:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(m <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">/</span> (<span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3251482</code></pre>
 </div>
 </div>
-<p>Как видите, расчет довольно схожий, разница только в том, откуда мы берем стандартное отклонение. Для z-статистики у нас был заранее известный параметр генеральной совокупности (что обычно не так), для t-статистики мы оценивали стандартное отклонение по выборке.</p>
-<p>Давайте теперь посчитаем p-value. Мы будем пользоваться не функцией <code>pnorm()</code>, а функцией <code>pt()</code>, а в качестве параметра распределения указать количество степеней свобод в <code>df =</code></p>
+<p>Как видите, расчет довольно схожий, разница только в том, откуда мы берем стандартное отклонение. Для <span class="math inline">\(z\)</span>-статистики у нас был заранее известный параметр генеральной совокупности (что обычно не так), для <span class="math inline">\(t\)</span>-статистики мы оценивали стандартное отклонение по выборке.</p>
+<p>Давайте теперь посчитаем <em>p-value.</em> Мы будем пользоваться не функцией <code>pnorm()</code>, а функцией <code>pt()</code>, а в качестве параметра распределения нужно указать количество степеней свобод в <code>df =</code> (размер выборки минус 1).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6222407</code></pre>
 </div>
 </div>
-<p>Функция <code>pt()</code> считает от минус бесконечности до <span class="math inline">\(t\)</span>, а нам нужно от <span class="math inline">\(t\)</span> до плюс бесконечности, потому что <span class="math inline">\(t\)</span> больше 0:</p>
+<p>Функция <code>pt()</code> считает от минус бесконечности до <span class="math inline">\(t\)</span>, а нам нужно от <span class="math inline">\(t\)</span> до плюс бесконечности, потому что <span class="math inline">\(t\)</span> больше <span class="math inline">\(0\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3777593</code></pre>
 </div>
 </div>
-<p>И не забываем умножать на 2, если мы хотим сделать двусторонний тест.</p>
+<p>И не забываем умножать на <span class="math inline">\(2\)</span>, если мы хотим сделать двусторонний тест.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">*</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7555186</code></pre>
 </div>
 </div>
-<p>В отличие от z-теста, t-тест есть в базовом R.</p>
+<p>В отличие от <span class="math inline">\(z\)</span>-теста, t-тест есть в базовом R.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(samp, <span class="at">mu =</span> <span class="dv">100</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -500,19 +510,19 @@ mean of x
  100.4877 </code></pre>
 </div>
 </div>
-<p>Да, конечно, мы могли сразу запустить эту функцию и получить результаты. Обычно именно так вы и будете делать. Зато теперь вы знаете, что стоит за всеми числами в результате выполнения функции <code>t.test()</code>. Здесь можно увидеть выборочное среднее как оценку среднего в генеральной совокупности, 95% доверительный интервал для оценки среднего в генеральной совокупности, t-статистику, степени свобод и p-value.</p>
+<p>Да, конечно, мы могли сразу запустить эту функцию и получить результаты. Обычно именно так вы и будете делать. Зато теперь вы знаете, что стоит за всеми числами в результате выполнения функции <code>t.test()</code>! Здесь можно увидеть выборочное среднее как оценку среднего в генеральной совокупности, 95% доверительный интервал для оценки среднего в генеральной совокупности, <span class="math inline">\(t\)</span>-статистику, степени свобод и <em>p-value.</em></p>
 </section>
 <section id="sec-two_ttest" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="sec-two_ttest"><span class="header-section-number">18.2</span> Двухвыборочный t-тест</h2>
-<p>Одна из наиболее часто встречающихся задач при анализе данных - это сравнение средних двух выборок. Для этого нам тоже понадобится t-тест, но теперь <span class="math inline">\(H_0\)</span> нужно сформулировать по-другому: что две генеральные совокупности (из которых взяты соответствующие выборки) имеют одинаковое среднее. <span class="math display">\[H_0: \mu_1 = \mu_2\]</span></p>
+<p>Одна из наиболее часто встречающихся задач при анализе данных - это сравнение средних двух выборок. Для этого нам тоже понадобится <span class="math inline">\(t\)</span>-тест, но теперь <span class="math inline">\(H_0\)</span> нужно сформулировать по-другому: что две генеральные совокупности (из которых взяты соответствующие выборки) имеют одинаковое среднее. <span class="math display">\[H_0: \mu_1 = \mu_2\]</span></p>
 <p>Ну а альтернативная гипотеза, что эти две выборки взяты из распределений с разным средним в генеральной совокупности. <span class="math display">\[H_1: \mu_1 \ne \mu_2\]</span></p>
-<p>Есть две разновидности двухвыборочного t-теста: <strong>зависимый t-тест</strong> и <strong>независимый t-тест</strong>. Различие между зависимыми и независимыми тестами принципиальное, мы с ним еще будем сталкиваться.</p>
+<p>Есть две разновидности двухвыборочного <span class="math inline">\(t\)</span>-теста: <strong>зависимый</strong> <span class="math inline">\(t\)</span><strong>-тест <em>(paired</em></strong> <span class="math inline">\(t\)</span><strong><em>-test; dependent</em></strong> <span class="math inline">\(t\)</span><strong><em>-test)</em></strong> и <strong>независимый</strong> <span class="math inline">\(t\)</span><strong>-тест <em>(unpaired</em></strong> <span class="math inline">\(t\)</span><strong><em>-test; independent</em></strong> <span class="math inline">\(t\)</span><strong><em>-test).</em></strong> Различие между зависимыми и независимыми тестами принципиальное, мы с ним еще будем сталкиваться при обсуждении других методов, например, дисперсионного анализа (см. <a href="#sec-anova"><span class="quarto-unresolved-ref">sec-anova</span></a>).</p>
 <p>Зависимые тесты предполагают, что каждому значению в одной выборке мы можем поставить соответствующее значение из другой выборки. Обычно это повторные измерения какого-либо признака в разные моменты времени. В независимых тестах нет возможности сопоставить одно значение с другим. Мы уже не можем напрямую соотнести значения в двух выборках друг с другом, более того, размер двух выборок может быть разным!</p>
-<p>Использование зависимых и независимых тестов связано с использованием <strong>внутрииндивидуального</strong> и <strong>межиндивидуального</strong> экспериментальных дизайнов в планировании научных экспериментов. Даже если вы не планируете в дальнейшем заниматься проведением экспериментов, понимание различий между двумя видами дизайнов поможет вам понять разницу между зависимыми и независимыми тестами.</p>
-<p>Например, мы хотим исследовать влияние кофеина на скорость реакции. Можно поступить по-разному:</p>
+<p>Использование зависимых и независимых тестов связано с использованием <strong>внутрииндивидуального <em>(intra-subject design)</em></strong> и <strong>межиндивидуального</strong> <strong>экспериментальных планов <em>(inter-subject design)</em></strong> в планировании научных экспериментов. Даже если вы не планируете в дальнейшем заниматься проведением экспериментов, понимание различий между двумя видами планов поможет вам понять разницу между зависимыми и независимыми тестами.</p>
+<p>Допустим, мы хотим исследовать влияние кофеина на скорость реакции у человека. Мы собрали добровольцев на эксперимент, подготовили обычную воду и воду с кофеином, определили методику измерения времени реакции. Что делать дальше? У нас есть два варианта.</p>
 <ol type="1">
-<li><p>Набрать выборку, каждому испытуемому дать либо кофеин (например, в виде раствора небольшого количества кофеина в воде), либо обычную воду. Что именно получит испытуемый получит определяется случайным образом. Испытуемый не должен знать, что ему дают (слепое тестирование), а в идеале этого должен не знать даже экспериментатор, который дает напиток и измеряет показатели (двойное слепое тестирование). Посчитать скорость выполнения выбранной задачи, отправить домой. Это межинидивидуальный экспериментальный дизайн, для анализа результатов которого нам понадобится независимый t-тест.</p></li>
-<li><p>Набрать выборку, каждому испытуемому дать и обычную воду, и воду с кофеином, записывать скорость решения задач после употребления простой воды и после употребления воды с кофеином, соответственно. В данном случае будет случайным образом варьироваться порядок предъявления: одни испытуемые сначала получат обычную воду, а потом воду с кофеином, другие испытуемые — наоборот. Для такого эксперимента понадобится меньше участников, но оно будет дольше для каждого участника. Более того, в этом случае мы учтем межиндивидуальные различия участников: одни участники в среднем решают задачи быстрее других. Это внутриинидивидуальный экспериментальный дизайн, для анализа результатов которого нам понадобится зависимый t-тест.</p></li>
+<li><p><strong>Межиндивидуальный экспериментальный план.</strong> Каждому испытуемому мы даем либо воду с кофеином, либо обычную воду. Что именно получит испытуемый получит определяется случайным образом. Таким образом, для <strong>межиндивидуального экспериментального плана</strong> рандомизация <em>определяет испытуемого в одну из экспериментальных групп.</em> Для анализа результатов такого исследования нам понадобится <strong>независимый</strong> <span class="math inline">\(t\)</span><strong>-тест.</strong></p></li>
+<li><p><strong>Внутрииндивидуальный экспериментальный план.</strong> Набрать выборку, каждому испытуемому дать и обычную воду, и воду с кофеином, записывать скорость решения задач после употребления простой воды и после употребления воды с кофеином, соответственно. В данном случае будет случайным образом варьироваться порядок предъявления: одни испытуемые сначала получат обычную воду, а потом воду с кофеином, другие испытуемые — наоборот. Для такого эксперимента понадобится меньше участников, но оно будет дольше для каждого участника. Более того, в этом случае мы учтем межиндивидуальные различия участников: одни участники в среднем решают задачи быстрее других. Это внутриинидивидуальный экспериментальный дизайн, для анализа результатов которого нам понадобится зависимый t-тест.</p></li>
 </ol>
 <table class="table">
 <thead>
@@ -529,6 +539,19 @@ mean of x
 </tbody>
 </table>
 <p>Итак, с тем, когда использовать зависимый, а когда независимый t-тест, более-менее разобрались, давайте опробуем их!</p>
+<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> испытуемые должны быть слепыми котятками
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Как при <strong>внутрииндивидуальном плане,</strong> так и при <strong>межиндивидуальном плане</strong> испытуемый не должен знать какое из экспериментальных условий он получает <strong>(слепое тестирование; <em>blind study),</em></strong> а в идеале этого не должен знать даже сам экспериментатор, который дает напиток и измеряет показатели <strong>(двойное слепое тестирование; <em>double blind study).</em></strong> Поскольку в внутрииндивидуальном плане испытуемый получает несколько экспериментальных условий, у него есть возможность сравнить различные условия, поэтому организовать слепое тестирование сложнее. Сделать экспериментальные условия максимально похожими друг на друга для испытуемого – особое искусство исследователя-экспериментатора.</p>
+</div>
+</div>
 <section id="sec-dep_ttest" class="level3" data-number="18.2.1">
 <h3 data-number="18.2.1" class="anchored" data-anchor-id="sec-dep_ttest"><span class="header-section-number">18.2.1</span> Двухвыборочный зависимый t-тест</h3>
 <p>Двухвыборочный зависимый t-тест — это то же самое, что и одновыборочный t-тест, только для разницы между связанными значениями. Поскольку наша нулевая гипотеза звучит, что средние должны быть равны,</p>
@@ -552,7 +575,7 @@ dbl (7): Person, gender, Age, Height, pre.weight, Diet, weight6weeks
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Провести двухвыборочный t-тест можно в R двумя базовыми способами. Первый вариант - это дать два вектора значений. Это удобно в случае широкого формата данных.</p>
+<p>Провести двухвыборочный <span class="math inline">\(t\)</span>-тест в R можно двумя базовыми способами. Первый вариант - это дать два вектора значений. Это удобно в случае широкого формата данных.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -723,9 +746,19 @@ V = 299, p-value = 2.203e-05
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Не пугайтесь, когда видите сообщение <em>“Есть совпадающие значения: не могу высчитать точное p-значение”</em>. Это означает, что в ваших данных есть повторяющиеся значения, поэтому расчет p-value в данном случае — это некоторая апроксимация, но в большинстве случаев это не играет серьезной роли.</p>
-</blockquote>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> предупреждение о повторяющихся рангах
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Не пугайтесь, когда видите сообщение <em>“Есть совпадающие значения: не могу высчитать точное p-значение”</em>. Это означает, что в ваших данных есть повторяющиеся значения, поэтому расчет p-value в данном случае — это некоторая апроксимация, но в большинстве случаев это не играет серьезной роли, разве что у вас действительно очень много повторяющихся значений.</p>
+</div>
+</div>
 </section>
 <section id="sec-mann_test" class="level3" data-number="18.4.2">
 <h3 data-number="18.4.2" class="anchored" data-anchor-id="sec-mann_test"><span class="header-section-number">18.4.2</span> Тест Манна-Уитни</h3>
@@ -778,6 +811,12 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 
 
 </section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Благодаря <code>set.seed(42)</code> мы можем точно повторить сгенерированные значения.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

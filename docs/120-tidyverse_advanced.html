@@ -124,6 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -306,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -381,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-tidy_bind" id="toc-sec-tidy_bind" class="nav-link" data-scroll-target="#sec-tidy_bind"><span class="toc-section-number">11.1.1</span>  Соединение структурно схожих датафреймов: bind_rows(), bind_cols()</a></li>
   <li><a href="#sec-tidy_join" id="toc-sec-tidy_join" class="nav-link" data-scroll-target="#sec-tidy_join"><span class="toc-section-number">11.1.2</span>  Реляционные данные: <code>*_join()</code></a></li>
   </ul></li>
-  <li><a href="#sec-tidy_data" id="toc-sec-tidy_data" class="nav-link" data-scroll-target="#sec-tidy_data"><span class="toc-section-number">11.2</span>  Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></a></li>
+  <li><a href="#sec-tidy_data" id="toc-sec-tidy_data" class="nav-link" data-scroll-target="#sec-tidy_data"><span class="toc-section-number">11.2</span>  Tidy data: широкий и длинный форматы данных</a></li>
   <li><a href="#sec-tidy_across" id="toc-sec-tidy_across" class="nav-link" data-scroll-target="#sec-tidy_across"><span class="toc-section-number">11.3</span>  Трансформация нескольких колонок: <code>dplyr::across()</code></a></li>
   <li><a href="#sec-purrr" id="toc-sec-purrr" class="nav-link" data-scroll-target="#sec-purrr"><span class="toc-section-number">11.4</span>  Функциональное программирование: <code>purrr</code></a></li>
   <li><a href="#sec-list_colums_nest" id="toc-sec-list_colums_nest" class="nav-link" data-scroll-target="#sec-list_colums_nest"><span class="toc-section-number">11.5</span>  Колонки-списки и нестинг: <code>nest()</code></a></li>
@@ -423,8 +424,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.0     ✔ purrr   1.0.1
-✔ tibble  3.2.1     ✔ dplyr   1.1.0
+✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -593,7 +594,7 @@ dbl (3): ...1, Height, Weight
 <h3 data-number="11.1.2" class="anchored" data-anchor-id="sec-tidy_join"><span class="header-section-number">11.1.2</span> Реляционные данные: <code>*_join()</code></h3>
 <p>В реальности иногда возникает ситуация, когда нужно соединить две таблички, у которых есть общий столбец (или несколько столбцов), но все остальные столбцы различаются. Табличек может быть и больше, это может быть целая сеть таблиц, некоторые из которых содержат основные данные, а некоторые - дополнительные, которые необходимо на определенном этапе “включить” в анализ. Например, таблица с расшифровкой аббревиатур или сокращений вроде коротких названий стран или таблица телефонных кодов разных стран. Совокупность нескольких связанных друг с другом таблиц называют реляционными данными.</p>
 <p>В случае с реляционными данными простых <code>bind_rows()</code> и <code>bind_cols()</code> становится недостаточно.</p>
-<p>Эти две таблички нужно объединить (<em>join</em>). Эта задача обычно возникает не очень часто, обычно это происходит один-два раза в одном проекте, когда нужно дополнить имеющиеся данные дополнительной информацией извне или объединить два набора данных, обрабатывавшихся в разных программах. Всякий раз, когда такая задача возникает, это доставляет много боли. <code>dplyr</code> предлагает интуитивно понятный инструмент для объединения реляционных данных - семейство функций <code>*_join()</code>.</p>
+<p>Эти две таблички нужно объединить <strong>(<em>join</em>).</strong> Эта задача обычно возникает не очень часто, обычно это происходит один-два раза в одном проекте, когда нужно дополнить имеющиеся данные дополнительной информацией извне или объединить два набора данных, обрабатывавшихся в разных программах. Однако каждый раз, когда такая задача возникает, это доставляет много боли. <code>dplyr</code> предлагает интуитивно понятный инструмент для объединения реляционных данных - семейство функций <code>*_join()</code>.</p>
 <p>Возьмем для примера два тиббла <code>band_members</code> и <code>band_instruments</code>, встроенных в <code>dplyr</code> специально для демонстрации работы функций <code>*_join()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>band_members</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -757,9 +758,10 @@ dbl (3): ...1, Height, Weight
 </section>
 </section>
 <section id="sec-tidy_data" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="sec-tidy_data"><span class="header-section-number">11.2</span> Tidy data: <code>tidyr::pivot_longer()</code>, <code>tidyr::pivot_wider()</code></h2>
-<p>Принцип tidy data предполагает, что каждая строчка содержит в себе одно измерение, а каждая колонка - одну характеристику. Тем не менее, это не говорит однозначно о том, как именно хранить повторные измерения. Их можно хранить как одну колонку для каждого измерения (широкий формат) и как две колонки: одна колонка - для идентификатора измерения, другая колонка - для записи самого измерения.</p>
-<p>Это лучше понять на примере. Например, вес до и после прохождения курса. Как это лучше записать - как два числовых столбца (один испытуемый - одна строка) или же создать отдельную “группирующую” колонку, в которой будет написано время измерения, а в другой - измеренные значения (одно измерение - одна строка)?</p>
+<h2 data-number="11.2" class="anchored" data-anchor-id="sec-tidy_data"><span class="header-section-number">11.2</span> Tidy data: широкий и длинный форматы данных</h2>
+<p>Принцип <strong><em>tidy data</em></strong> предполагает, что каждая строка содержит в себе одно измерение, каждая колонка - одну характеристику, а в одной ячейке только одно значение. Тем не менее, это не говорит однозначно о том, как именно хранить повторные измерения. Их можно хранить в <strong>широком формате <em>(wide data)</em></strong> как одну колонку для каждого измерения. Одной строчке соответствует один объект измерения. Если измерений много, то такой датафрейм может получиться очень широким.</p>
+<p>Другой способ хранения данных в датафрейме – <strong>длинный формат <em>(long data).</em></strong> В этом случае создаются две колонки: одна колонка - для идентификатора измерения (например, время измерения), другая колонка - для записи самого измерения. Каждая строка соответствует одному измерению объекта, а объект измерения имеет несколько строк в датафрейме. Если измерений много, то датафрейм становится очень длинным.</p>
+<p>Это лучше пояснить на примере. Например, измерим массу студентов до и после прохождения курса по R. Как это лучше записать - <strong>в широком формате,</strong> как два числовых столбца (один – измерение до, второй – измерение после)? Или же <strong>в длинном формате:</strong> создать строковую колонку, в которой будет написано время измерения (“До курса по R”, “После курса по R”) и числовую колонку со значением массы?</p>
 <ul>
 <li><strong>Широкий формат:</strong></li>
 </ul>
@@ -790,7 +792,7 @@ dbl (3): ...1, Height, Weight
 </tbody>
 </table>
 <ul>
-<li><strong>Длинный” формат:</strong></li>
+<li><strong>Длинный формат:</strong></li>
 </ul>
 <table class="table">
 <thead>
@@ -833,11 +835,11 @@ dbl (3): ...1, Height, Weight
 </tr>
 </tbody>
 </table>
-<p>На самом деле, оба варианта приемлимы, оба варианта возможны в реальных данных, а разные функции и статистические пакеты могут требовать от вас как длинный, так и широкий форматы.</p>
-<p>Таким образом, нам нужно научиться переводить из широкого формата в длинный и наоборот.</p>
+<p>На самом деле, оба варианта приемлемы, оба варианта встречаются в реальных данных, а разные функции и статистические пакеты могут требовать от вас как <strong>длинный,</strong> так и <strong>широкий форматы.</strong></p>
+<p>Таким образом, нам нужно научиться переводить из широкого формата в длинный и наоборот. Для этого в tidyverse есть функции:</p>
 <ul>
-<li><p><code>tidyr::pivot_longer()</code>: из <em>широкого</em> в <em>длинный</em> формат</p></li>
-<li><p><code>tidyr::pivot_wider()</code>: из <em>длинного</em> в <em>широкий</em> формат</p></li>
+<li><p><code>tidyr::pivot_longer()</code>: переводит из <strong>широкого</strong> в <strong>длинный формат,</strong></p></li>
+<li><p><code>tidyr::pivot_wider()</code>: переводит из <strong>длинного</strong> в <strong>широкий формат.</strong></p></li>
 </ul>
 <div class="cell-output-display">
 <p><img src="images/tidyr-longer-wider.gif" class="img-fluid"></p>

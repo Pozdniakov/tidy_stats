@@ -124,6 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -306,7 +307,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -376,8 +377,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#анализ-главных-компонент" id="toc-анализ-главных-компонент" class="nav-link active" data-scroll-target="#анализ-главных-компонент"><span class="toc-section-number">23.1</span>  Анализ главных компонент</a></li>
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca"><span class="toc-section-number">23.2</span>  Анализ главных компонент (Principal component analysis)</a></li>
+  <li><a href="#sec-dim_red" id="toc-sec-dim_red" class="nav-link active" data-scroll-target="#sec-dim_red"><span class="toc-section-number">23.1</span>  Уменьшение размерности</a></li>
+  <li><a href="#sec-dim_red_pca" id="toc-sec-dim_red_pca" class="nav-link" data-scroll-target="#sec-dim_red_pca"><span class="toc-section-number">23.2</span>  Анализ главных компонент <em>(Principal component analysis)</em></a></li>
   <li><a href="#tsne" id="toc-tsne" class="nav-link" data-scroll-target="#tsne"><span class="toc-section-number">23.3</span>  tSNE</a></li>
   <li><a href="#эксплораторный-факторный-анализ" id="toc-эксплораторный-факторный-анализ" class="nav-link" data-scroll-target="#эксплораторный-факторный-анализ"><span class="toc-section-number">23.4</span>  Эксплораторный факторный анализ</a></li>
   <li><a href="#конфирматорный-факторный-анализ" id="toc-конфирматорный-факторный-анализ" class="nav-link" data-scroll-target="#конфирматорный-факторный-анализ"><span class="toc-section-number">23.5</span>  Конфирматорный факторный анализ</a></li>
@@ -414,116 +415,303 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Сегодняшнее занятие будет посвящено многомерным методам анализа данных - методам работы с данными, в которых много колонок. Мы уже сталкивались с некоторыми многомерными методами, такими как множественная линейная регрессия. Поэтому вы знаете, что многомерность создает новые проблемы. Например, при множественных корреляциях или попарных сравнениях возникает проблема множественных сравнений, а при использовании множественной регрессии лишние предикторы могут ловить только шум и приводить к переобучению (если говорить в терминах машинного обучения). Короче говоря, больше - не значит лучше. Нужно четко понимать, зачем мы используем данные и что пытаемся измерить.</p>
+<p><strong>Многомерные методы анализа данных</strong> – методы работы с данными, в которых много колонок. Мы уже сталкивались с некоторыми многомерными методами, например, с множественной линейной регрессией (<a href="#sec-lm_mult"><span class="quarto-unresolved-ref">sec-lm_mult</span></a>). Поэтому вы знаете, что многомерность создает новые проблемы. Например, при множественных корреляциях или попарных сравнениях возникает проблема множественных сравнений, а при использовании множественной регрессии лишние предикторы могут ловить только шум и приводить к переобучению (если говорить в терминах машинного обучения). Короче говоря, больше - не значит лучше. Нужно четко понимать, зачем мы используем данные и что пытаемся измерить.</p>
 <p>Однако в некоторых случаях мы в принципе не можем ничего интересного сделать с маленьким набором переменных. Много ли мы можем измерить личностным тестом с одним единственным вопросом? Можем ли мы точно оценить уровень интеллекта по успешности выполнения одного единственного задания? Очевидно, что нет. Более того, даже концепция интеллекта в современном его представлении появилась во многом благодаря разработке многомерных методов анализа! Ну или наоборот: исследования интеллекта подстегнули развитие многомерных методов.</p>
-<section id="анализ-главных-компонент" class="level2" data-number="23.1">
-<h2 data-number="23.1" class="anchored" data-anchor-id="анализ-главных-компонент"><span class="header-section-number">23.1</span> Анализ главных компонент</h2>
-</section>
-<section id="pca" class="level2" data-number="23.2">
-<h2 data-number="23.2" class="anchored" data-anchor-id="pca"><span class="header-section-number">23.2</span> Анализ главных компонент (Principal component analysis)</h2>
-<p>Анализ главных компонент (АГК) известен как метод “уменьшения размерности”. Представьте многомерное пространство, где каждая колонка — это отдельная ось, а каждая строка задает координаты одной точки в этом пространстве. Мы получим многомерную диаграмму рассеяния.</p>
-<p>Многомерную диаграмму рассеяния, к сожалению, нельзя нарисовать, поэтому нарисуем несколько двухмерных диаграмм рассеяния для отображения сочетания всех колонок набора данных <code>iris</code> со всеми.</p>
+<section id="sec-dim_red" class="level2" data-number="23.1">
+<h2 data-number="23.1" class="anchored" data-anchor-id="sec-dim_red"><span class="header-section-number">23.1</span> Уменьшение размерности</h2>
+<p>Представьте многомерное пространство, где каждая колонка — это отдельная ось, а каждая строка задает координаты одной точки в этом пространстве. Мы получим многомерную диаграмму рассеяния.</p>
+<p>Многомерную диаграмму рассеяния, к сожалению, нельзя нарисовать, поэтому нарисуем несколько двухмерных диаграмм рассеяния для отображения сочетания всех колонок со всеми набора данных <code>penguins</code>.</p>
+<!--# Написать про датасет пингвины -->
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.0     ✔ purrr   1.0.1
-✔ tibble  3.2.1     ✔ dplyr   1.1.0
+✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">col=</span>iris<span class="sc">$</span>Species)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(bill_length_mm<span class="sc">:</span>body_mass_g)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>body_mass_g) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> penguins<span class="sc">$</span>species)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="370-multivariate_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Суть АГК в том, чтобы повернуть оси этого пространства таким образом, чтобы первые оси объясняли как можно больший разброс данных, а последние - как можно меньший. Тогда мы могли бы отбросить последние оси и не очень-то многое потерять в данных.</p>
-<p>Для двух осей это выглядит вот так:</p>
+<p>Даже представить как устроены многомерные данные очень трудно, а ведь мы отобразили только четыре числовых колонки! Понять связи между отдельными переменными мы можем, если посмотрим на каждую диаграмму рассеяния по отдельности, но и то если их не слишком много. Но связи в многомерных данных могут быть гораздо более сложными и на простых диаграммах рассеяния их иногда нельзя заметить. Это как смотреть на тени, поворачивая какой-нибудь предмет различными сторонами.</p>
+<p>Уменьшение размерности позволяет вытащить из данных самую мякотку, уместив исходные данные в небольшое количество переменных. Остальное из данных удаляется.</p>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> уменьшение размерности приводит к потере данных
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Уменьшение размерности – не “бесплатная” операция. Уменьшение размерности всегда приводит к потере части данных и может значительно их изменить.</p>
+</div>
+</div>
+<p>Данные сниженной размерности гораздо проще визуализировать. Например, снизив размерность данных до двух шкал, можно просто нарисовать диаграмму рассеяния. Анализируя связь полученных шкал с изначальными шкалами и взаимное расположение точек в новых шкалах, можно многое понять об исследуемых данных.</p>
+<p>Однако снижение размерности используется не только для эксплораторного анализа, но и для снижения количества фичей в машинном обучения, для удаления шума из данных, для более экономного хранения данных и многих других задач.</p>
+</section>
+<section id="sec-dim_red_pca" class="level2" data-number="23.2">
+<h2 data-number="23.2" class="anchored" data-anchor-id="sec-dim_red_pca"><span class="header-section-number">23.2</span> Анализ главных компонент <em>(Principal component analysis)</em></h2>
+<p><strong>Анализ главных компонент</strong> <strong><em>(АГК; Principal component analysis)</em></strong> – это, пожалуй, самый известный метод <strong>уменьшения размерности<em>.</em></strong> АГК просто поворачивает систему координат многомерного пространства, которое задано имеющимися числовыми колонками. Координатная система поворачивается таким образом, чтобы первые оси объясняли как можно больший разброс данных, а последние - как можно меньший. Тогда мы могли бы отбросить последние оси и не очень-то многое потерять в данных. Для двух осей это выглядит вот так:</p>
 <div class="cell-output-display">
 <p><img src="images/q7hip.gif" class="img-fluid"></p>
 </div>
 <p>Первая ось должна минимизировать красные расстояния. Вторая ось будет просто перпендикулярна первой оси.</p>
-<blockquote class="blockquote">
-<p>Математически, АГК - это нахождение собственных векторов и собственных значений матрицы корреляций или ковариаций. Собственные вектора - это такие особенные вектора матрицы, умножив которые на данную матрицу, можно получить тот же самый вектор (т.е. того же направления), но другой длины. А вот коэффициент множителя длины нового вектора - это собственное значение. В контексте АГК, собственные вектора - это новые оси (т.е. те самые новые компоненты), а собственные значения - это размер объясняемой дисперсии с помощью новых осей. Собственные вектора, ранжированные по их собственным значениям от большего к меньшему, — это и есть главные компоненты в искомом порядке.</p>
-</blockquote>
-<p>Итак, для начала нам нужно центрировать и нормировать данные - вычесть среднее и поделить на стандартное отклонение, т.е. посчитать z-оценки (@ref(z_scores)). Это нужно для того, чтобы сделать все шкалы равноценными. Это особенно важно делать когда разные шкалы используют несопоставимые единицы измерения. Скажем, одна колонка - это масса человека в килограммах, а другая - рост в метрах. Если применять АГК на этих данных, то ничего хорошего не выйдет: вклад роста будет слишком маленьким. А вот если мы сделаем z-преобразование, то приведем и вес, и рост к “общему знаменателю”.</p>
-<p>В базовом R уже есть инструменты для АГК <code>princomp()</code> и <code>prcomp()</code>, считают они немного по-разному. Возьмем более рекомендуемый вариант, <code>prcomp()</code>. Эта функция умеет самостоятельно поводить z-преобразования, для чего нужно поставить <code>center = TRUE</code> и <code>scale. = TRUE</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>iris_pr <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>Species) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prcomp</span>(<span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<p>Уже много раз встречавшаяся нам функция <code>summary()</code>, примененная на результат проведения АГК, выдаст информацию о полученных компонентах. Наибольший интерес представляют строчки “Proportion of Variance” и “Cumulative Proportion”, которые показывают долю дисперсию, объясненную компонентной, и кумулятивную долю объясненной дисперсии.</p>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> какая математика стоит за АГК?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Для начала мы посчитаем корреляционную матрицу (как вариант – ковариационную матрицу, если мы не хотим делать z-преобразование переменных</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(iris_pr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins_cor <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>body_mass_g) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>penguins_cor</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+bill_length_mm         1.0000000    -0.2350529         0.6561813   0.5951098
+bill_depth_mm         -0.2350529     1.0000000        -0.5838512  -0.4719156
+flipper_length_mm      0.6561813    -0.5838512         1.0000000   0.8712018
+body_mass_g            0.5951098    -0.4719156         0.8712018   1.0000000</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li>Находим <strong>собственные векторы <em>(eigenvectors)</em></strong> и <strong>собственные значения <em>(eigenvalues)</em></strong> матрицы корреляций или ковариаций.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eigens <span class="ot">&lt;-</span> <span class="fu">eigen</span>(penguins_cor)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>eigens</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>eigen() decomposition
+$values
+[1] 2.7537551 0.7725168 0.3652359 0.1084922
+
+$vectors
+           [,1]         [,2]       [,3]       [,4]
+[1,]  0.4552503 -0.597031143  0.6443012  0.1455231
+[2,] -0.4003347 -0.797766572 -0.4184272 -0.1679860
+[3,]  0.5760133 -0.002282201 -0.2320840 -0.7837987
+[4,]  0.5483502 -0.084362920 -0.5966001  0.5798821</code></pre>
+</div>
+</div>
+<p><strong>Собственные вектора</strong> - это такие векторы матрицы, умножив которые на данную матрицу, можно получи вектор с тем же направлением, но другой длины.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>eigens<span class="sc">$</span>vectors</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]         [,2]       [,3]       [,4]
+[1,]  0.4552503 -0.597031143  0.6443012  0.1455231
+[2,] -0.4003347 -0.797766572 -0.4184272 -0.1679860
+[3,]  0.5760133 -0.002282201 -0.2320840 -0.7837987
+[4,]  0.5483502 -0.084362920 -0.5966001  0.5798821</code></pre>
+</div>
+</div>
+<p>А вот коэффициент множителя длины нового вектора - это <strong>собственное значение.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>eigens<span class="sc">$</span>values</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.7537551 0.7725168 0.3652359 0.1084922</code></pre>
+</div>
+</div>
+<p>В контексте АГК, <strong>собственные вектора</strong> - это новые оси (т.е. те самые новые компоненты), а <strong>собственные значения</strong> - это размер объясняемой дисперсии с помощью новых осей. Чтобы перейти от дисперсии к стандартному отклонению, нам нужно взять корень из <strong>собственных значений:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(eigens<span class="sc">$</span>values)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.6594442 0.8789293 0.6043475 0.3293816</code></pre>
+</div>
+</div>
+<p><strong>Собственные вектора,</strong> ранжированные по их собственным значениям от большего к меньшему, — это и есть главные компоненты в искомом порядке.</p>
+<p>Именно таким образом считается АГК в функции <code>princomp()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins_princomp <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>body_mass_g) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">princomp</span>(<span class="at">cor =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>penguins_princomp<span class="sc">$</span>loadings</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+                  Comp.1 Comp.2 Comp.3 Comp.4
+bill_length_mm     0.455  0.597  0.644  0.146
+bill_depth_mm     -0.400  0.798 -0.418 -0.168
+flipper_length_mm  0.576        -0.232 -0.784
+body_mass_g        0.548        -0.597  0.580
+
+               Comp.1 Comp.2 Comp.3 Comp.4
+SS loadings      1.00   1.00   1.00   1.00
+Proportion Var   0.25   0.25   0.25   0.25
+Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins_princomp<span class="sc">$</span>sdev</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Comp.1    Comp.2    Comp.3    Comp.4 
+1.6594442 0.8789293 0.6043475 0.3293816 </code></pre>
+</div>
+</div>
+<p>Функция <code>prcomp()</code> идет другим путем, используя <strong>сингулярное разложение матрицы <em>(singular value decomposition)</em></strong> исходных данных, это дает чуть более точные результаты.</p>
+<ol start="3" type="1">
+<li>Последний этап – поворот исходных данных в новом пространстве с помощью матричного перемножения изначальных данных (<span class="math inline">\(z\)</span>-трансформированных или нет).</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>penguins_original_scales <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>body_mass_g) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>()</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_original_scales <span class="sc">%*%</span> eigens<span class="sc">$</span>vectors)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]        [,2]       [,3]       [,4]
+[1,] -1.840748 -0.04763243 -0.2324536  0.5231365
+[2,] -1.304850  0.42772154 -0.0295191  0.4018377
+[3,] -1.367178  0.15425039  0.1983816 -0.5272343
+[4,] -1.876078  0.00204541 -0.6176912 -0.4776785
+[5,] -1.908951 -0.82799642 -0.6855795 -0.2071241
+[6,] -1.760446  0.35096537  0.0276311  0.5039784</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>penguins_prcomp <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>body_mass_g) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prcomp</span>(<span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins_prcomp<span class="sc">$</span>x)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           PC1         PC2        PC3        PC4
+[1,] -1.840748 -0.04763243  0.2324536  0.5231365
+[2,] -1.304850  0.42772154  0.0295191  0.4018377
+[3,] -1.367178  0.15425039 -0.1983816 -0.5272343
+[4,] -1.876078  0.00204541  0.6176912 -0.4776785
+[5,] -1.908951 -0.82799642  0.6855795 -0.2071241
+[6,] -1.760446  0.35096537 -0.0276311  0.5039784</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>Итак, для начала нам нужно центрировать и нормировать данные - вычесть среднее и поделить на стандартное отклонение, т.е. посчитать <span class="math inline">\(z\)</span>-оценки (см. <a href="#sec-z_scores"><span class="quarto-unresolved-ref">sec-z_scores</span></a>). Это нужно для того, чтобы сделать все шкалы равноценными. Это особенно важно делать когда разные шкалы используют несопоставимые единицы измерения. Скажем, одна колонка - это масса человека в килограммах, а другая - рост в метрах. Если применять АГК на этих данных, то ничего хорошего не выйдет: вклад роста будет слишком маленьким. А вот если мы сделаем <span class="math inline">\(z\)</span>-преобразование, то приведем и вес, и рост к “общему знаменателю”.</p>
+<p>В базовом R уже есть инструменты для АГК <code>princomp()</code> и <code>prcomp()</code>, считают они немного по-разному. Возьмем более рекомендуемый вариант, <code>prcomp()</code>. Эта функция умеет самостоятельно поводить <span class="math inline">\(z\)</span>-преобразования, для чего нужно поставить <code>center = TRUE</code> и <code>scale. = TRUE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>penguins_prcomp <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(bill_length_mm<span class="sc">:</span>body_mass_g) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prcomp</span>(<span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Уже много раз встречавшаяся нам функция <code>summary()</code>, примененная на результат проведения АГК, выдаст информацию о полученных компонентах. Наибольший интерес представляют строчки <em>“Proportion of Variance”</em> (доля дисперсии, объясненная компонентой) и <em>“Cumulative Proportion”</em> (накопленная доля дисперсии для компоненты данной и всех предыдущих компонент).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_prcomp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                           PC1    PC2     PC3     PC4
-Standard deviation     1.7084 0.9560 0.38309 0.14393
-Proportion of Variance 0.7296 0.2285 0.03669 0.00518
-Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
+Standard deviation     1.6594 0.8789 0.60435 0.32938
+Proportion of Variance 0.6884 0.1931 0.09131 0.02712
+Cumulative Proportion  0.6884 0.8816 0.97288 1.00000</code></pre>
 </div>
 </div>
 <p>Функция <code>plot()</code> повзоляет визуализировать соотношение разных компонент.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris_pr)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(penguins_prcomp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Как мы видим, первый компонент объясняет большую часть дисперсии, второй компонент заметно меньше, остальные два практически не имеют влияния, то есть, скорее всего, они репрезентируют некоторый шум в данных.</p>
+<p>Как мы видим, первый компонент объясняет большую часть дисперсии, второй и третий компоненты заметно меньше, последний – совсем немного, скорее всего, этот компонент репрезентирует некоторый шум в данных.</p>
 <p>Теперь мы можем визуализировать первые два компонента. Это можно сделать с помощью базовых инструментов R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris_pr<span class="sc">$</span>x[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col=</span>iris<span class="sc">$</span>Species)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(penguins_prcomp<span class="sc">$</span>x[,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">col=</span>penguins<span class="sc">$</span>species)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Однако пакет {factoextra} представляет гораздо более широкие возможности для визуализации.</p>
+<p>Однако пакет <code>{factoextra}</code> представляет гораздо более широкие возможности для визуализации.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"factoextra"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"factoextra"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Во-первых, как и с помощью базового <code>plot()</code>, можно нарисовать диаграмму рассеяния. Для этого воспользуемся функцией <code>fviz_pca_ind()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(iris_pr,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span>     <span class="co"># Avoid text overlapping</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(penguins_prcomp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Параметром <code>axes =</code> можно выбрать нужные компоненты для отображения.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(iris_pr,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.var =</span> <span class="st">"contrib"</span>, <span class="co"># Color by contributions to the PC</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">gradient.cols =</span> <span class="fu">c</span>(<span class="st">"#00AFBB"</span>, <span class="st">"#E7B800"</span>, <span class="st">"#FC4E07"</span>),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span>     <span class="co"># Avoid text overlapping</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(penguins_prcomp,</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Добавить расцветку можно с помощью параметра <code>habillage =</code>, в которой надо подставить нужный вектор из изначальных данных.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(iris_pr, <span class="at">repel =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.var =</span> <span class="st">"#2E9FDF"</span>, <span class="co"># Variables color</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">col.ind =</span> <span class="st">"#696969"</span>  <span class="co"># Individuals color</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(penguins_prcomp, </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> penguins<span class="sc">$</span>species)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Параметр <code>addEllipses = TRUE</code> позволяет обрисовать эллипсы вокруг точек, если те раскрашены по группам с помощью <code>habillage =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(iris_pr, <span class="at">data =</span> iris, <span class="at">colour =</span> <span class="st">"Species"</span>, <span class="at">loadings =</span> <span class="cn">TRUE</span>, <span class="at">loadings.label =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(penguins_prcomp, </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> penguins<span class="sc">$</span>species,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">addEllipses =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Чтобы рассмотреть отдельные точки, можно поставить <code>repel = TRUE</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_ind</span>(penguins_prcomp, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">habillage =</span> penguins<span class="sc">$</span>species,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>В дополнение к диаграмме рассеяния можно нарисовать график переменных функцией <code>fviz_pca_var()</code>. По осям <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> будут отображены первая и вторая компоненты соответственно. Как и для функции <code>fviz_pca_ind()</code>, можно выбрать и другие компоненты с помощью параметра <code>axes =</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(penguins_prcomp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Вместо отдельных точек мы видим здесь стрелочки, которые представляют собой изначальные шкалы. Чем ближе эти стрелочки к осям <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span>, тем больше коэффициент корреляции между исходной шкалой и выбранной компонентой.</p>
+<p>Если коэффициент корреляции отрицательный, то стрелочка исходной шкалы направлена в противоположную сторону от оси (влево или вниз).</p>
+<p>Наконец, есть так называемый <strong>биплот <em>(biplot),</em></strong> в котором объединены оба графика: и индивидуальные точки, и стрелочки с изначальными шкалами!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_biplot</span>(penguins_prcomp,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">addEllipses =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">habillage =</span> penguins<span class="sc">$</span>species)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Еще один способ нарисовать <strong>биплот</strong> – с помощью пакета <code>{ggfortify}</code>. В этом пакете есть функция <code>autoplot()</code>, которая автоматически рисует что-то в зависимости от класса объекта на входе. Если это объект класса <code>prcomp</code>, то мы получим тот самый <strong>биплот.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(penguins_prcomp, <span class="at">data =</span> penguins, <span class="at">colour =</span> <span class="st">"species"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -539,18 +727,18 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000</code></pre>
 <section id="кластерный-анализ" class="level2" data-number="23.6">
 <h2 data-number="23.6" class="anchored" data-anchor-id="кластерный-анализ"><span class="header-section-number">23.6</span> Кластерный анализ</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>iris_3means <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">centers =</span> <span class="dv">3</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris<span class="sc">$</span>Species, iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>iris_3means <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">centers =</span> <span class="dv">3</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris<span class="sc">$</span>Species, iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            
               1  2  3
-  setosa      0  0 50
-  versicolor 48  2  0
-  virginica  14 36  0</code></pre>
+  setosa      0 50  0
+  versicolor  2  0 48
+  virginica  36  0 14</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">col =</span> iris<span class="sc">$</span>Species, <span class="at">pch =</span> iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">col =</span> iris<span class="sc">$</span>Species, <span class="at">pch =</span> iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
