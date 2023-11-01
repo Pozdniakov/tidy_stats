@@ -467,7 +467,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ ggplot2 3.4.4     ✔ purrr   1.0.2
 ✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
@@ -679,8 +679,8 @@ dbl (3): ...1, Height, Weight
 <p><span class="math display">\[
 z_i = \frac{x_i - \overline{x}}{s}
 \]</span></p>
-<p>Проще говоря, <span class="math inline">\(z\)</span>-оценки – это центрированные вокруг нуля значения в единицах стандартного отклонения. Это может понадобится в случае необходимости свести разные шкалы как одной размерности (со средним равным нулю и стандартным отклонением равным одному). <span class="math inline">\(z\)</span>-преобразование является стандартной процедурой для многих методов, например, для анализа главных компонент (см. <a href="#sec-pca"><span class="quarto-unresolved-ref">sec-pca</span></a>).</p>
-<p>Для проведения <span class="math inline">\(z\)</span>-преобразования можно воспользоваться встроенной функцией <code>scale()</code>, однако она возвращает <span class="math inline">\(z\)</span>-оценки в довольно неочевидном формате: матрицу (см. <a href="#sec-matrix"><span class="quarto-unresolved-ref">sec-matrix</span></a>) с атрибутами (см. <a href="#sec-attr_class"><span class="quarto-unresolved-ref">sec-attr_class</span></a>) <code>"scaled:center"</code> (среднее изначальной шкалы) и <code>"scaled:scale"</code> (стандартное отклонение изначальной шкалы). Впрочем, функцию для <span class="math inline">\(z\)</span>-преобразования легко написать самостоятельно:</p>
+<p>Проще говоря, <span class="math inline">\(z\)</span>-оценки – это центрированные вокруг нуля значения в единицах стандартного отклонения. Это может понадобится в случае необходимости свести разные шкалы как одной размерности (со средним равным нулю и стандартным отклонением равным одному). <span class="math inline">\(z\)</span>-преобразование является стандартной процедурой для многих методов, например, для анализа главных компонент (см. <span class="quarto-unresolved-ref">?sec-pca</span>).</p>
+<p>Для проведения <span class="math inline">\(z\)</span>-преобразования можно воспользоваться встроенной функцией <code>scale()</code>, однако она возвращает <span class="math inline">\(z\)</span>-оценки в довольно неочевидном формате: матрицу (см. <a href="016-complex_structures.html#sec-matrix"><span>Глава&nbsp;4.1</span></a>) с атрибутами (см. <a href="016-complex_structures.html#sec-attr_class"><span>Глава&nbsp;4.5</span></a>) <code>"scaled:center"</code> (среднее изначальной шкалы) и <code>"scaled:scale"</code> (стандартное отклонение изначальной шкалы). Впрочем, функцию для <span class="math inline">\(z\)</span>-преобразования легко написать самостоятельно:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">scale</span>(weight))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -786,7 +786,7 @@ Attaching package: 'psych'</code></pre>
     2.0    61.0    81.0   112.3   108.0   900.0 </code></pre>
 </div>
 </div>
-<p>Функция <code>summary()</code> - это <strong>универсальная <em>(generic)</em></strong> функция (см. <a href="#sec-attr_class"><span class="quarto-unresolved-ref">sec-attr_class</span></a>). Это означает, что Вы можете ее применять для разных объектов и получать разные результаты. Попробуйте применить ее к векторам с разными типами данных и даже к датафреймам. Посмотрите, что получится.</p>
+<p>Функция <code>summary()</code> - это <strong>универсальная <em>(generic)</em></strong> функция (см. <a href="016-complex_structures.html#sec-attr_class"><span>Глава&nbsp;4.5</span></a>). Это означает, что Вы можете ее применять для разных объектов и получать разные результаты. Попробуйте применить ее к векторам с разными типами данных и даже к датафреймам. Посмотрите, что получится.</p>
 <p>В пакете <code>psych</code> есть еще и замечательная функция <code>describe()</code>, которая даст Вам еще больше статистик, включая ассиметрию и куртозис:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>psych<span class="sc">::</span><span class="fu">describe</span>(weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -795,7 +795,7 @@ Attaching package: 'psych'</code></pre>
 X1    1 495 112.25 104.15     81   89.56 32.62   2 900   898 3.87    19.46 4.68</code></pre>
 </div>
 </div>
-<p>Даже <strong>усеченное <em>(trimmed)</em> среднее</strong> есть (с <code>trim = 0.1</code>)! Все кроме <code>se</code> мы уже знаем. А про этот <code>se</code> узнаем немного позже (см. <a href="#sec-sample_dist"><span class="quarto-unresolved-ref">sec-sample_dist</span></a>).</p>
+<p>Даже <strong>усеченное <em>(trimmed)</em> среднее</strong> есть (с <code>trim = 0.1</code>)! Все кроме <code>se</code> мы уже знаем. А про этот <code>se</code> узнаем немного позже (см. <a href="310-infer_stats.html#sec-sample_dist"><span>Глава&nbsp;17.6</span></a>).</p>
 <p>Эта функция хорошо работает в сочетании с <code>group_by()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
@@ -1409,7 +1409,7 @@ X1    1 495 112.25 104.15     81   89.56 32.62   2 900   898 3.87    19.46 4.68<
 </div>
 </div>
 <p>Похоже, оба распределения немного право-ассиметричны и довольно “плоские”.</p>
-<p>Давайте еще посчитаем <strong>коэффициент корреляции <em>(correlation coefficient)</em></strong><em>.</em> Мы про него будем говорить позже гораздо подробнее (<a href="#sec-cor"><span class="quarto-unresolved-ref">sec-cor</span></a>). Пока что нам нужно знать, что <strong>коэффициент корреляции</strong> говорит о линейной связи двух переменных. Если коэффициент корреляции <em>положительный</em> (максимум равен <code>1</code>), то чем <em>больше</em> х, тем <em>больше</em> у. Если <em>отрицательный</em> (минимум равен <code>-1</code>), то чем <em>больше</em> х, тем <em>меньше</em> у. Если же коэффициент корреляции равен нулю, то такая линейная зависимость отсутствует.</p>
+<p>Давайте еще посчитаем <strong>коэффициент корреляции <em>(correlation coefficient)</em></strong><em>.</em> Мы про него будем говорить позже гораздо подробнее (<a href="330-cov_cor.html#sec-cor"><span>Глава&nbsp;19.2</span></a>). Пока что нам нужно знать, что <strong>коэффициент корреляции</strong> говорит о линейной связи двух переменных. Если коэффициент корреляции <em>положительный</em> (максимум равен <code>1</code>), то чем <em>больше</em> х, тем <em>больше</em> у. Если <em>отрицательный</em> (минимум равен <code>-1</code>), то чем <em>больше</em> х, тем <em>меньше</em> у. Если же коэффициент корреляции равен нулю, то такая линейная зависимость отсутствует.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(xxx<span class="sc">$</span>x, xxx<span class="sc">$</span>y)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ ggplot2 3.4.4     ✔ purrr   1.0.2
 ✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
@@ -918,7 +918,7 @@ dbl (3): ...1, Height, Weight
 <p>Поэтому в <code>dplyr</code> есть функция для операций над несколькими колонками сразу: <code>dplyr::across()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Эта функция работает похожим образом на функции семейства <code>apply()</code> и использует tidyselect для выбора колонок.</p>
 <p>Таким образом, конструкции с функцией <code>across()</code> можно разбить на три части:</p>
 <ol type="1">
-<li>Выбор колонок с помощью tidyselect. Здесь работают все те приемы, которые мы изучили при выборе колонок (<a href="#sec-tidyselect"><span class="quarto-unresolved-ref">sec-tidyselect</span></a>).</li>
+<li>Выбор колонок с помощью tidyselect. Здесь работают все те приемы, которые мы изучили при выборе колонок (<a href="110-tidyverse_basic.html#sec-tidyselect"><span>Глава&nbsp;10.6.2</span></a>).</li>
 <li>Собственно применение функции <code>across()</code>. Первый аргумент <code>.col</code> – колонки, выбранные на первом этапе с помощью tidyselect, по умолчанию это <code>everything()</code>, т.е. все колонки. Второй аргумент <code>.fns</code> – это функция или целый список из функций, которые будут применены к выбранным колонкам. Если функции требуют дополнительных аргументов, то они могут быть перечислены внутри <code>across()</code>.</li>
 <li>Использование <code>summarise()</code> или другой функции <code>dplyr</code>. В этом случае в качестве аргумента для функции используется результат работы функции <code>across()</code>.</li>
 </ol>
@@ -936,7 +936,7 @@ dbl (3): ...1, Height, Weight
 3 &lt;NA&gt;       NA     NA</code></pre>
 </div>
 </div>
-<p>Здесь мы столкнулись с уже известной нам проблемой: функция <code>mean()</code> при столкновении хотя бы с одним <code>NA</code> будет возвращать <code>NA</code>, если мы не изменим параметр <code>na.rm =</code>. Как и в случае с функциями семейства <code>apply()</code> (<a href="#sec-apply_f"><span class="quarto-unresolved-ref">sec-apply_f</span></a>), дополнительные параметры для функции можно перечислить через запятую после самой функции:</p>
+<p>Здесь мы столкнулись с уже известной нам проблемой: функция <code>mean()</code> при столкновении хотя бы с одним <code>NA</code> будет возвращать <code>NA</code>, если мы не изменим параметр <code>na.rm =</code>. Как и в случае с функциями семейства <code>apply()</code> (<a href="050-functional.html#sec-apply_f"><span>Глава&nbsp;8.5</span></a>), дополнительные параметры для функции можно перечислить через запятую после самой функции:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
@@ -1452,7 +1452,7 @@ $Weight
 <hr>
 <ol>
 <li id="fn1"><p>Если ключи будут неуникальными, то функции <code>*_join()</code> не будут выдавать ошибку. Вместо этого они добавят в итоговую таблицу все возможные пересечения повторяющихся ключей. С этим нужно быть очень осторожным, поэтому рекомендуется, во-первых, проверять уникальность ключей на входе и, во-вторых, проверять тиббл на выходе. Ну или использовать эту особенность работы функции <code>*_join()</code> себе во благо.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Функция <code>across()</code> появилась в пакете <code>dplyr</code> относительно недавно, до этого для работы с множественными колонками в tidyverse использовались многочисленные функции <code>*_at()</code>, <code>*_if()</code>, <code>*_all()</code>, например, <code>summarise_at()</code>, <code>summarise_if()</code>, <code>summarize_all()</code>. Эти функции до сих пор присутствуют в <code>dplyr</code>, но считаются устаревшими. Другая альтернатива - использование пакета <code>purrr</code> (<a href="#sec-purrr"><span class="quarto-unresolved-ref">sec-purrr</span></a>) или семейства функций <code>apply()</code> (<a href="#sec-apply_f"><span class="quarto-unresolved-ref">sec-apply_f</span></a>).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Функция <code>across()</code> появилась в пакете <code>dplyr</code> относительно недавно, до этого для работы с множественными колонками в tidyverse использовались многочисленные функции <code>*_at()</code>, <code>*_if()</code>, <code>*_all()</code>, например, <code>summarise_at()</code>, <code>summarise_if()</code>, <code>summarize_all()</code>. Эти функции до сих пор присутствуют в <code>dplyr</code>, но считаются устаревшими. Другая альтернатива - использование пакета <code>purrr</code> (<a href="#sec-purrr"><span>Глава&nbsp;11.4</span></a>) или семейства функций <code>apply()</code> (<a href="050-functional.html#sec-apply_f"><span>Глава&nbsp;8.5</span></a>).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

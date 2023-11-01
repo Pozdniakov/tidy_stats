@@ -564,7 +564,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x11bb16ae0&gt;
+&lt;bytecode: 0x11aceab50&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -574,7 +574,7 @@ function (..., na.rm = FALSE)  .Primitive("min")
 .Primitive("{")</code></pre>
 </div>
 </div>
-<p>Мы можем создать список из функций! Зачем — это другой вопрос, но ведь можем же! Например, создавать списки из функций может быть удобным для продвинутых операций в <code>across()</code> в пакете <code>{dplyr}</code> (см. <a href="#sec-tidy_across"><span class="quarto-unresolved-ref">sec-tidy_across</span></a>).</p>
+<p>Мы можем создать список из функций! Зачем — это другой вопрос, но ведь можем же! Например, создавать списки из функций может быть удобным для продвинутых операций в <code>across()</code> в пакете <code>{dplyr}</code> (см. <a href="120-tidyverse_advanced.html#sec-tidy_across"><span>Глава&nbsp;11.3</span></a>).</p>
 <p>Еще можно создавать функции внутри функций<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, использовать функции в качестве аргументов функций, сохранять функции как переменные. Пожалуй, самое важное из этого всего - это то, что функция может быть аргументом в функции. Не просто название функции как строковая переменная, не результат выполнения функции, а именно сама функция как объект! Это лежит в основе использования семейства функций <code>apply()</code>, о которых пойдет речь далее, и многих фишек <em>tidyverse.</em></p>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -775,7 +775,7 @@ $list
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Достаточно сложно предсказать, в каких именно случаях будет произведено упрощение, а в каких нет. Поэтому <code>sapply()</code> удобен в исследовании данных, но использовать эту функцию в скриптах не очень рекомендуется. Один из вариантов решения этой проблемы — это функция <code>vapply()</code>, которая позволяет управлять результатом <code>lapply()</code>, но гораздо более красиво эта проблема решена в пакете <code>{purrr}</code> (см. <a href="#sec-purrr"><span class="quarto-unresolved-ref">sec-purrr</span></a> ).</p>
+<p>Достаточно сложно предсказать, в каких именно случаях будет произведено упрощение, а в каких нет. Поэтому <code>sapply()</code> удобен в исследовании данных, но использовать эту функцию в скриптах не очень рекомендуется. Один из вариантов решения этой проблемы — это функция <code>vapply()</code>, которая позволяет управлять результатом <code>lapply()</code>, но гораздо более красиво эта проблема решена в пакете <code>{purrr}</code> (см. <a href="120-tidyverse_advanced.html#sec-purrr"><span>Глава&nbsp;11.4</span></a> ).</p>
 </div>
 </div>
 <p>Использование <code>sapply()</code> на векторе приводит к тем же результатам, что и просто применить векторизованную функцию обычным способом.</p>
@@ -805,7 +805,7 @@ $list
 <p>Еще одна альтернатива - это векторизация невекторизованной функции с помощью <code>Vectorize()</code>. Эта функция просто оборачивает функцию одним из вариантов <code>apply()</code>. Обратите внимание: функция <code>Vectorize()</code> в качестве аргумента принимает функцию и возвращает тоже функцию!</p>
 </div>
 </div>
-<p>Можно применять функции <code>lapply()</code> и <code>sapply()</code> на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. <a href="#sec-df"><span class="quarto-unresolved-ref">sec-df</span></a>), то итерироваться эти функции будут по колонкам:</p>
+<p>Можно применять функции <code>lapply()</code> и <code>sapply()</code> на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. <a href="016-complex_structures.html#sec-df"><span>Глава&nbsp;4.4</span></a>), то итерироваться эти функции будут по колонкам:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, </span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
@@ -817,7 +817,7 @@ $list
   "numeric" "character" "character" "character"   "integer" </code></pre>
 </div>
 </div>
-<p>Еще одна функция из семейства <code>apply()</code> - функция <code>replicate()</code> - самый простой способ повторить одну и ту же операцию много раз. Обычно эта функция используется при симуляции данных и моделировании. Например, давайте сделаем выборку из логнормального распределения (подробнее про распределения см. в <a href="#sec-distributions"><span class="quarto-unresolved-ref">sec-distributions</span></a>):</p>
+<p>Еще одна функция из семейства <code>apply()</code> - функция <code>replicate()</code> - самый простой способ повторить одну и ту же операцию много раз. Обычно эта функция используется при симуляции данных и моделировании. Например, давайте сделаем выборку из логнормального распределения (подробнее про распределения см. в <a href="310-infer_stats.html#sec-distributions"><span>Глава&nbsp;17.2</span></a>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rlnorm</span>(<span class="dv">30</span>)</span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -833,7 +833,7 @@ $list
 <p><img src="050-functional_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Про функции для генерации случайных чисел и про визуализацию будет в следующих главах: <a href="#sec-distributions"><span class="quarto-unresolved-ref">sec-distributions</span></a> и <a href="#sec-r_vis"><span class="quarto-unresolved-ref">sec-r_vis</span></a> соответственно.</p>
+<p>Про функции для генерации случайных чисел и про визуализацию будет в следующих главах: <a href="310-infer_stats.html#sec-distributions"><span>Глава&nbsp;17.2</span></a> и <a href="220-base_viz.html"><span>Глава&nbsp;13</span></a> соответственно.</p>
 <div class="callout callout-style-simple callout-warning no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -847,7 +847,7 @@ $list
 <p>Если хотите познакомиться с семейством <code>apply()</code> чуточку ближе, то рекомендую <a href="https://www.datacamp.com/community/tutorials/r-tutorial-apply-family">вот этот туториал</a>.</p>
 </div>
 </div>
-<p>В заключение стоит сказать, что семейство функций <code>apply()</code> — это очень сильное колдунство, но в <em>tidyverse</em> оно практически полностью перекрывается функциями из пакета <code>{purrr}</code>, за исключением самого <code>apply()</code> и некоторых других функций, которые работают с матрицами и массивами (<em>tidyverse</em> с ними принципиально не дружит). Впрочем, если вы поняли логику <code>apply()</code>, то при желании вы легко сможете переключиться на альтернативы из пакета <code>{purrr}</code> (см. <a href="#sec-purrr"><span class="quarto-unresolved-ref">sec-purrr</span></a>).</p>
+<p>В заключение стоит сказать, что семейство функций <code>apply()</code> — это очень сильное колдунство, но в <em>tidyverse</em> оно практически полностью перекрывается функциями из пакета <code>{purrr}</code>, за исключением самого <code>apply()</code> и некоторых других функций, которые работают с матрицами и массивами (<em>tidyverse</em> с ними принципиально не дружит). Впрочем, если вы поняли логику <code>apply()</code>, то при желании вы легко сможете переключиться на альтернативы из пакета <code>{purrr}</code> (см. <a href="120-tidyverse_advanced.html#sec-purrr"><span>Глава&nbsp;11.4</span></a>).</p>
 
 
 </section>

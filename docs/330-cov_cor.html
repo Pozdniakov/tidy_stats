@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ ggplot2 3.4.4     ✔ purrr   1.0.2
 ✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
@@ -650,7 +650,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>До этого мы говорили о <em>различиях</em> между выборками. Теперь мы будем говорить о <em>связи</em> между переменными.</p>
 <section id="sec-cov" class="level2" data-number="19.1">
 <h2 data-number="19.1" class="anchored" data-anchor-id="sec-cov"><span class="header-section-number">19.1</span> Ковариация</h2>
-<p>Самая простая мера связи между двумя переменными — это <strong>ковариация <em>(covariation).</em></strong> Если <strong>ковариация положительная</strong>, то чем <em>больше</em> одна переменная, тем <em>больше</em> другая переменная. При <strong>отрицательной ковариации</strong> все наоборот: чем <em>больше</em> одна переменная, тем <em>меньше</em> другая. <strong>Ковариация</strong> между переменными <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> часто обозначается буквой <span class="math inline">\(\sigma_{xy}\)</span>. Похоже на дисперсию и стандартное отклонение (см. <a href="#sec-var"><span class="quarto-unresolved-ref">sec-var</span></a>), не правда ли? И скоро мы убедимся, что это не случайно!</p>
+<p>Самая простая мера связи между двумя переменными — это <strong>ковариация <em>(covariation).</em></strong> Если <strong>ковариация положительная</strong>, то чем <em>больше</em> одна переменная, тем <em>больше</em> другая переменная. При <strong>отрицательной ковариации</strong> все наоборот: чем <em>больше</em> одна переменная, тем <em>меньше</em> другая. <strong>Ковариация</strong> между переменными <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> часто обозначается буквой <span class="math inline">\(\sigma_{xy}\)</span>. Похоже на дисперсию и стандартное отклонение (см. <a href="210-desc_stats.html#sec-var"><span>Глава&nbsp;12.5.2</span></a>), не правда ли? И скоро мы убедимся, что это не случайно!</p>
 <ul>
 <li>Формула ковариации:</li>
 </ul>
@@ -672,7 +672,7 @@ backpack_kg   6.601954    6.838333</code></pre>
 </div>
 <p>Полученная матрица симметрична: порядок двух переменных не имеет значения. Но что мы имеем по основной диагонали – это, получается, ковариация переменной с самой собой? Давайте подставим в формулу для ковариации <span class="math inline">\(x\)</span> вместо <span class="math inline">\(y\)</span>, чтобы узнать, что скрывается под ковариацией переменной с самой собой:</p>
 <p><span class="math display">\[\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(x_i - \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}{n}\]</span></p>
-<p>Знакомая формула? Это формула дисперсии (см. <a href="#sec-var"><span class="quarto-unresolved-ref">sec-var</span></a>)! Выходит, что <strong>ковариация переменной с самой собой – это дисперсия.</strong> Таким образом, <strong>в матрице ковариаций по основным диагоналям находятся дисперсии переменных.</strong></p>
+<p>Знакомая формула? Это формула дисперсии (см. <a href="210-desc_stats.html#sec-var"><span>Глава&nbsp;12.5.2</span></a>)! Выходит, что <strong>ковариация переменной с самой собой – это дисперсия.</strong> Таким образом, <strong>в матрице ковариаций по основным диагоналям находятся дисперсии переменных.</strong></p>
 <p><span class="math display">\[
 \begin{bmatrix}\sigma_x^2 &amp; \sigma_{xy}\\\sigma_{xy} &amp; \sigma_y^2\end{bmatrix}
 \]</span></p>
@@ -765,7 +765,7 @@ backpack_kg   6.601954    6.838333</code></pre>
 </div>
 </div>
 </div>
-<p>Ковариации имеют большое значение в статистике. Расчет ковариационной матрицы – это необходимый этап для многих многомерных методов, например, для анализа главных компонент (см. <a href="#sec-dim_red_pca"><span class="quarto-unresolved-ref">sec-dim_red_pca</span></a>). Однако у ковариации есть серьезное ограничение – ее размер привязан к исходной шкале, поэтому сложно оценить, насколько ковариация большая или маленькая. Поэтому на практике гораздо больше используются коэффициенты корреляции.</p>
+<p>Ковариации имеют большое значение в статистике. Расчет ковариационной матрицы – это необходимый этап для многих многомерных методов, например, для анализа главных компонент (см. <a href="370-multivariate.html#sec-dim_red_pca"><span>Глава&nbsp;23.2</span></a>). Однако у ковариации есть серьезное ограничение – ее размер привязан к исходной шкале, поэтому сложно оценить, насколько ковариация большая или маленькая. Поэтому на практике гораздо больше используются коэффициенты корреляции.</p>
 </section>
 <section id="sec-cor" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="sec-cor"><span class="header-section-number">19.2</span> Корреляция</h2>
@@ -780,7 +780,7 @@ backpack_kg   6.601954    6.838333</code></pre>
 <p>Самый известный коэффициент корреляции - коэффициент корреляции Пирсона:</p>
 <p><span class="math display">\[\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
 <p>Оценка коэффициента корреляции Пирсона по выборке: <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n - 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
-<p>Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение <span class="math inline">\(z\)</span>-оценок (<a href="#sec-z_scores"><span class="quarto-unresolved-ref">sec-z_scores</span></a>).</p>
+<p>Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение <span class="math inline">\(z\)</span>-оценок (<a href="210-desc_stats.html#sec-z_scores"><span>Глава&nbsp;12.5.3.1</span></a>).</p>
 <p>Корреляцию в R можно посчитать с помощью функции <code>cor()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
@@ -845,7 +845,7 @@ sample estimates:
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Заметьте, в данном случае два метода хотя и привели к схожим размерам корреляции, но в одном случае <em>p-value</em> оказался больше 0.05, а в другом случае - меньше 0.05. Выбирать тест <em>a posteriori</em> на основе того, какие результаты вам нравятся больше, — плохая практика (<a href="#sec-quest_practices"><span class="quarto-unresolved-ref">sec-quest_practices</span></a>). Не надо так делать.</p>
+<p>Заметьте, в данном случае два метода хотя и привели к схожим размерам корреляции, но в одном случае <em>p-value</em> оказался больше 0.05, а в другом случае - меньше 0.05. Выбирать тест <em>a posteriori</em> на основе того, какие результаты вам нравятся больше, — плохая практика (<a href="410-planning.html#sec-quest_practices"><span>Глава&nbsp;24.1</span></a>). Не надо так делать.</p>
 </blockquote>
 </section>
 </section>
@@ -879,7 +879,7 @@ Year        -0.09301727  0.05762194 -0.02946373  1.00000000</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Корреляционную матрицу можно построить разными способами, но самый простой – сделать <span class="math inline">\(z\)</span>-преобразование переменных (<a href="#sec-z_scores"><span class="quarto-unresolved-ref">sec-z_scores</span></a>), а для полученных z-оценок посчитать ковариационную матрицу.</p>
+<p>Корреляционную матрицу можно построить разными способами, но самый простой – сделать <span class="math inline">\(z\)</span>-преобразование переменных (<a href="210-desc_stats.html#sec-z_scores"><span>Глава&nbsp;12.5.3.1</span></a>), а для полученных z-оценок посчитать ковариационную матрицу.</p>
 <ol type="1">
 <li>Произведем <span class="math inline">\(z\)</span>-преобразования каждого столбца:</li>
 </ol>

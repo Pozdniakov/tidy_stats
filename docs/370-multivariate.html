@@ -415,7 +415,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p><strong>Многомерные методы анализа данных</strong> – методы работы с данными, в которых много колонок. Мы уже сталкивались с некоторыми многомерными методами, например, с множественной линейной регрессией (<a href="#sec-lm_mult"><span class="quarto-unresolved-ref">sec-lm_mult</span></a>). Поэтому вы знаете, что многомерность создает новые проблемы. Например, при множественных корреляциях или попарных сравнениях возникает проблема множественных сравнений, а при использовании множественной регрессии лишние предикторы могут ловить только шум и приводить к переобучению (если говорить в терминах машинного обучения). Короче говоря, больше - не значит лучше. Нужно четко понимать, зачем мы используем данные и что пытаемся измерить.</p>
+<p><strong>Многомерные методы анализа данных</strong> – методы работы с данными, в которых много колонок. Мы уже сталкивались с некоторыми многомерными методами, например, с множественной линейной регрессией (<a href="340-lm.html#sec-lm_mult"><span>Глава&nbsp;20.5</span></a>). Поэтому вы знаете, что многомерность создает новые проблемы. Например, при множественных корреляциях или попарных сравнениях возникает проблема множественных сравнений, а при использовании множественной регрессии лишние предикторы могут ловить только шум и приводить к переобучению (если говорить в терминах машинного обучения). Короче говоря, больше - не значит лучше. Нужно четко понимать, зачем мы используем данные и что пытаемся измерить.</p>
 <p>Однако в некоторых случаях мы в принципе не можем ничего интересного сделать с маленьким набором переменных. Много ли мы можем измерить личностным тестом с одним единственным вопросом? Можем ли мы точно оценить уровень интеллекта по успешности выполнения одного единственного задания? Очевидно, что нет. Более того, даже концепция интеллекта в современном его представлении появилась во многом благодаря разработке многомерных методов анализа! Ну или наоборот: исследования интеллекта подстегнули развитие многомерных методов.</p>
 <section id="sec-dim_red" class="level2" data-number="23.1">
 <h2 data-number="23.1" class="anchored" data-anchor-id="sec-dim_red"><span class="header-section-number">23.1</span> Уменьшение размерности</h2>
@@ -426,7 +426,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.2     ✔ purrr   1.0.1
+✔ ggplot2 3.4.4     ✔ purrr   1.0.2
 ✔ tibble  3.2.1     ✔ dplyr   1.1.2
 ✔ tidyr   1.3.0     ✔ stringr 1.5.0
 ✔ readr   2.1.3     ✔ forcats 1.0.0
@@ -605,7 +605,7 @@ Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
 </div>
 </div>
 </div>
-<p>Итак, для начала нам нужно центрировать и нормировать данные - вычесть среднее и поделить на стандартное отклонение, т.е. посчитать <span class="math inline">\(z\)</span>-оценки (см. <a href="#sec-z_scores"><span class="quarto-unresolved-ref">sec-z_scores</span></a>). Это нужно для того, чтобы сделать все шкалы равноценными. Это особенно важно делать когда разные шкалы используют несопоставимые единицы измерения. Скажем, одна колонка - это масса человека в килограммах, а другая - рост в метрах. Если применять АГК на этих данных, то ничего хорошего не выйдет: вклад роста будет слишком маленьким. А вот если мы сделаем <span class="math inline">\(z\)</span>-преобразование, то приведем и вес, и рост к “общему знаменателю”.</p>
+<p>Итак, для начала нам нужно центрировать и нормировать данные - вычесть среднее и поделить на стандартное отклонение, т.е. посчитать <span class="math inline">\(z\)</span>-оценки (см. <a href="210-desc_stats.html#sec-z_scores"><span>Глава&nbsp;12.5.3.1</span></a>). Это нужно для того, чтобы сделать все шкалы равноценными. Это особенно важно делать когда разные шкалы используют несопоставимые единицы измерения. Скажем, одна колонка - это масса человека в килограммах, а другая - рост в метрах. Если применять АГК на этих данных, то ничего хорошего не выйдет: вклад роста будет слишком маленьким. А вот если мы сделаем <span class="math inline">\(z\)</span>-преобразование, то приведем и вес, и рост к “общему знаменателю”.</p>
 <p>В базовом R уже есть инструменты для АГК <code>princomp()</code> и <code>prcomp()</code>, считают они немного по-разному. Возьмем более рекомендуемый вариант, <code>prcomp()</code>. Эта функция умеет самостоятельно поводить <span class="math inline">\(z\)</span>-преобразования, для чего нужно поставить <code>center = TRUE</code> и <code>scale. = TRUE</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>penguins_prcomp <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>
@@ -717,6 +717,111 @@ Cumulative Proportion  0.6884 0.8816 0.97288 1.00000</code></pre>
 </section>
 <section id="tsne" class="level2" data-number="23.3">
 <h2 data-number="23.3" class="anchored" data-anchor-id="tsne"><span class="header-section-number">23.3</span> tSNE</h2>
+<p><strong>t-Distributed Stochastic Neighbor Embedding <em>(t-SNE)</em></strong> - это еще один метод снижения размерности, который используется, в основном, для визуализации многомерных данных со сложными нелинейными связями между переменными в пространстве меньшей размерности (двумерном или трехмерном).</p>
+<p>Идея t-SNE состоит в том, чтобы расположить точки данных на такой картинке таким образом, чтобы близкие объекты оказались близко друг к другу, а далекие объекты - далеко друг от друга. Для этого используется математический подход, основанный на вероятностях и расстояниях между объектами.</p>
+<p>Для примера возьмем знаменитый набор данных MNIST (“Modified National Institute of Standards and Technology”). MNIST – это своего рода <em>iris</em> или <em>penguins</em> в мире глубокого обучения: самый базовый учебный набор данных, на котором учатся писать искусственные нейросети. Этот набор данных очень большой, поэтому мы будем работать с его уменьшенной версией:</p>
+<div class="cell" data-hash="370-multivariate_cache/html/unnamed-chunk-23_fe9d919ea8c654dcfb7a8c50d2274712">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>mnist_small <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/mnist_small.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 6000 Columns: 785
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+dbl (785): label, 1x1, 1x2, 1x3, 1x4, 1x5, 1x6, 1x7, 1x8, 1x9, 1x10, 1x11, 1...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mnist_small <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">400</span><span class="sc">:</span><span class="dv">410</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+  label `15x7` `15x8` `15x9` `15x10` `15x11` `15x12` `15x13` `15x14` `15x15`
+  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     2      0      0     22       0       0       0       0       0       0
+2     8      0      0      0       0     116     254      89      54     235
+3     6      0      0      0      56     252     252     252     252     252
+4     1      0      0      0       0       0       0      13     200     253
+5     5      0      0      0       0      32     191     233     187     145
+6     3      0     27     76      44     194     204     226     253     253
+# ℹ 2 more variables: `15x16` &lt;dbl&gt;, `15x17` &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>MNIST содержит большое количество написанных от руки цифр, каждый столбец – это яркость отдельного пикселя.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/370_multivariate_t-sne_MNIST-Dataset.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Пример рукописных цифр из набора данных MNIST</figcaption><p></p>
+</figure>
+</div>
+<p>Особенность этого набора данных в том, что стандартными линейными методами снижения размерности такими как АГК здесь не обойтись: нужно “поймать” сложные взаимоотношения между различными пикселями, которые создают различные палки, кружочки и закорючки.</p>
+<p>Давайте посмотрим, как справится в этой ситуации АГК:</p>
+<div class="cell" data-hash="370-multivariate_cache/html/unnamed-chunk-24_bb923381e2abe711a7425157bea7f511">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mnist_pca <span class="ot">&lt;-</span> mnist_small <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>label) <span class="sc">%&gt;%</span> <span class="co">#удалим колонку с цифрой</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">all</span>(x <span class="sc">==</span> <span class="dv">0</span>))) <span class="sc">%&gt;%</span> <span class="co">#и пустые колонки удалим</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">prcomp</span>(<span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>pca_df <span class="ot">&lt;-</span> mnist_pca<span class="sc">$</span>x[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(mnist_small<span class="sc">$</span>label) <span class="sc">%&gt;%</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...3`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pca_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"label"</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>pca_df <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, </span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> y, </span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> label, </span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> <span class="fu">as.factor</span>(label))) <span class="sc">+</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Какое-то разделение произошло, но большая часть цифр находится в общей куче.</p>
+<p>Теперь попробуем посмотреть, что сделает с теми же данными <strong>t-SNE.</strong> Для этого воспользуемся пакетом <code>{Rtsne}</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Rtsne"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>t-SNE</strong> работает итеративно, перемещая точки на картинке, чтобы улучшить соответствие между исходными данными и их представлением на картинке. <strong>t-SNE</strong> – довольно ресурсоемкий алгоритм (особенно по сравнению с АГК), поэтому в функции <code>Rtsne()</code> есть множество настроек для контроля скорости ее работы. Например, можно выбрать максимальное количество итераций с помощью параметра <code>max_iter =</code>. Но самый главный параметр – <code>dims =</code>, в котором нужно задать количество измерений, которое мы хотим получить. По умолчанию <code>dims = 2</code>, но можно поставить, например, <code>dims = 3</code>, чтобы получить точки в трехмерном пространстве.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rtsne)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>tsne <span class="ot">&lt;-</span> mnist_small <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>label) <span class="sc">%&gt;%</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Rtsne</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Теперь соединим результаты с исходными цифрами и визуализируем результаты:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>tsne_df <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(tsne<span class="sc">$</span>Y, mnist_small<span class="sc">$</span>label)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...1`
+• `` -&gt; `...2`
+• `` -&gt; `...3`</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tsne_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"label"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>tsne_df <span class="sc">%&gt;%</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> y, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> label, </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">colour =</span> <span class="fu">as.factor</span>(label))) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Как видите, <strong>t-SNE</strong> гораздо лучше справился с разделением цифр на группы: схожие цифры находятся рядом, непохожие – далеко. На получившемся графике заметно, что цифры 4 и 9 плохо разделись, но это довольно закономерно: эти цифры похожи по написанию.</p>
+<p>Важно отметить, что <strong>t-SNE</strong> не сохраняет все абсолютные расстояния между объектами, поэтому важно рассматривать результат в контексте относительных расстояний. Также стоит помнить, что <strong>t-SNE</strong> не является методом для точного измерения расстояний или сравнения объектов, а скорее для визуального представления структуры данных.</p>
 </section>
 <section id="эксплораторный-факторный-анализ" class="level2" data-number="23.4">
 <h2 data-number="23.4" class="anchored" data-anchor-id="эксплораторный-факторный-анализ"><span class="header-section-number">23.4</span> Эксплораторный факторный анализ</h2>
@@ -727,18 +832,18 @@ Cumulative Proportion  0.6884 0.8816 0.97288 1.00000</code></pre>
 <section id="кластерный-анализ" class="level2" data-number="23.6">
 <h2 data-number="23.6" class="anchored" data-anchor-id="кластерный-анализ"><span class="header-section-number">23.6</span> Кластерный анализ</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>iris_3means <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">centers =</span> <span class="dv">3</span>)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris<span class="sc">$</span>Species, iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>iris_3means <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">centers =</span> <span class="dv">3</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(iris<span class="sc">$</span>Species, iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            
               1  2  3
-  setosa      0 50  0
-  versicolor  2  0 48
-  virginica  36  0 14</code></pre>
+  setosa     50  0  0
+  versicolor  0  2 48
+  virginica   0 36 14</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">col =</span> iris<span class="sc">$</span>Species, <span class="at">pch =</span> iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!</span>Species), <span class="at">col =</span> iris<span class="sc">$</span>Species, <span class="at">pch =</span> iris_3means<span class="sc">$</span>cluster)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="370-multivariate_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="370-multivariate_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
