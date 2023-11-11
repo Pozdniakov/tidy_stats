@@ -277,7 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики <code>ggplot2</code></span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики <code>{ggplot2}</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -378,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#sec-tidy_verse" id="toc-sec-tidy_verse" class="nav-link active" data-scroll-target="#sec-tidy_verse"><span class="toc-section-number">10.1</span>  Вселенная tidyverse</a></li>
-  <li><a href="#загрузка-данных-с-помощью-readr" id="toc-загрузка-данных-с-помощью-readr" class="nav-link" data-scroll-target="#загрузка-данных-с-помощью-readr"><span class="toc-section-number">10.2</span>  Загрузка данных с помощью <code>readr</code></a></li>
+  <li><a href="#загрузка-данных-с-помощью-readr" id="toc-загрузка-данных-с-помощью-readr" class="nav-link" data-scroll-target="#загрузка-данных-с-помощью-readr"><span class="toc-section-number">10.2</span>  Загрузка данных с помощью <code>{readr}</code></a></li>
   <li><a href="#sec-tibble" id="toc-sec-tibble" class="nav-link" data-scroll-target="#sec-tibble"><span class="toc-section-number">10.3</span>  tibble</a></li>
   <li><a href="#sec-pipe" id="toc-sec-pipe" class="nav-link" data-scroll-target="#sec-pipe"><span class="toc-section-number">10.4</span>  magrittr::<code>%&gt;%</code></a></li>
   <li><a href="#главные-пакеты-tidyverse-dplyr-и-tidyr" id="toc-главные-пакеты-tidyverse-dplyr-и-tidyr" class="nav-link" data-scroll-target="#главные-пакеты-tidyverse-dplyr-и-tidyr"><span class="toc-section-number">10.5</span>  Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></a></li>
@@ -404,6 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-tidy_distinct" id="toc-sec-tidy_distinct" class="nav-link" data-scroll-target="#sec-tidy_distinct"><span class="toc-section-number">10.9.4</span>  Уникальные значения: <code>dplyr::distinct()</code></a></li>
   <li><a href="#sec-tidy_group_mutate" id="toc-sec-tidy_group_mutate" class="nav-link" data-scroll-target="#sec-tidy_group_mutate"><span class="toc-section-number">10.9.5</span>  Создание колонок с группировкой</a></li>
   </ul></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение"><span class="toc-section-number">10.10</span>  Заключение</a></li>
   </ul>
 </nav>
     </div>
@@ -435,57 +436,94 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="sec-tidy_verse" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="sec-tidy_verse"><span class="header-section-number">10.1</span> Вселенная tidyverse</h2>
-<p>tidyverse - это не один, а целое множество пакетов. Есть ключевые пакеты (ядро тайдиверса), а есть побочные - в основном для работы со специфическими видами данных.</p>
-<p><a href="https://www.tidyverse.org"><em>tidyverse</em></a> — это набор пакетов:</p>
-<ul>
-<li><em>ggplot2</em>, для визуализации</li>
-<li><em>tibble</em>, для работы с тибблами, продвинутый вариант датафрейма</li>
-<li><em>tidyr</em>, для формата tidy data</li>
-<li><em>readr</em>, для чтения файлов в R</li>
-<li><em>purrr</em>, для функционального программирования (замена семейства функций *apply())</li>
-<li><em>dplyr</em>, для преобразованиия данных</li>
-<li><em>stringr</em>, для работы со строковыми переменными</li>
-<li><em>forcats</em>, для работы с переменными-факторами</li>
-</ul>
-<p>Полезно также знать о следующих пакетах, не включенных в ядро, но также считающихся частью тайдиверса:</p>
-<ul>
-<li><em>vroom</em>, для быстрой загрузки табоичных данных</li>
-<li><em>readxl</em>, для чтения .xls и .xlsx</li>
-<li><em>jsonlite</em>, для работы с JSON</li>
-<li><em>xml</em>, для работы с XML</li>
-<li><em>DBI</em>, для работы с базами данных</li>
-<li><em>rvest</em>, для веб-скреппинга</li>
-<li><em>lubridate</em>, для работы с временем</li>
-<li><em>tidytext</em>, для работы с текстами и корпусами</li>
-<li><em>glue</em>, для продвинутого объединения строк</li>
-<li><em>magrtittr</em>, с несколькими вариантами pipe оператора</li>
-<li><em>tidymodels</em>, для моделирования и машинного обучения<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li><em>dtplyr</em>, для ускорения <code>dplyr</code> за счет перевод синтаксиса на <code>data.table</code></li>
-</ul>
-<p>И это еще не все пакеты tidyverse! Есть еще много других небольших пакетов, которые тоже считаются частью tidyverse. Кроме официальных пакетов tidyverse есть множество пакетов, которые пытаются соответствовать принципам tidyverse и дополняют его.</p>
-<p>Все пакеты tidyverse объединены tidy философией и взаимосовместимым синтаксисом. Это означает, что, во многих случаях даже не нужно думать о том, из какого именно пакета тайдиверса пришла функция. Можно просто установить и загрузить пакет <code>tidyverse</code>.</p>
+<p><strong>Тайдиверс <em>(tidyverse)</em></strong> - это не один, а целое <a href="https://www.tidyverse.org">множество пакетов</a>, объединенных общей философией, грамматикой и структурами данных. Пакеты <em>tidyverse</em> можно разделить на две группы:</p>
+<ol type="1">
+<li><strong>Основные пакеты,</strong> которые составляют ядро <em>tidyverse.</em> Сам по себе пакет <code>{tidyverse}</code> – это пакет для подключения и обновления основных пакетов tidyverse. Короче говоря, <code>{tidyverse}</code> – это такой <a href="images/110-tidyverse_basic_pack_with_packs.jpg">пакет с пакетами</a>.</li>
+</ol>
+<p>Давайте сначала установим пакет <code>{tidyverse}</code>, если он у вас еще не установлен.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Пакет <code>tidyverse</code> — это такой <a href="https://cs11.pikabu.ru/post_img/big/2019/03/12/11/1552415351186680692.jpg">пакет с пакетами</a>.</p>
+<p>Установка может занять довольно большое время: у вас установятся как основные пакеты <em>tidyverse,</em> так и огромное количество зависимостей – других пакетов, которые используются основными пакетами <em>tidyverse.</em> Зато при работе с новыми для себя пакетами вы приятно удивитесь тому, как много нужных вам пакетов уже установлено!</p>
+<p>Все пакеты <em>tidyverse,</em> включая, конечно, основные пакеты, объединены tidy философией и взаимосовместимым синтаксисом. Это означает, что, во многих случаях даже не нужно думать о том, из какого именно пакета <em>tidyverse</em> пришла функция. Можно просто подключить один пакет – пакет <code>{tidyverse}</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.4.4     ✔ purrr   1.0.2
-✔ tibble  3.2.1     ✔ dplyr   1.1.2
-✔ tidyr   1.3.0     ✔ stringr 1.5.0
-✔ readr   2.1.3     ✔ forcats 1.0.0
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.3     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<p>Подключение пакета <code>tidyverse</code> автоматически приводит к подключению ядра tidyverse, остальные же пакеты нужно подключать дополнительно при необходимости.</p>
+<p>Подключение пакета <code>{tidyverse}</code> автоматически приводит к подключению основных пакетов tidyverse, дополнительные пакеты нужно подключать дополнительно при необходимости.</p>
+<p>Вот эти пакеты:</p>
+<ul>
+<li><code>{dplyr}</code> – для преобразованиия данных, основной пакет всего тайдиверс<em>,</em></li>
+<li><code>{tidyr}</code> – для приведения данных к <strong>чистому виду <em>(tidy data),</em></strong></li>
+<li><code>{tibble}</code> – для работы с тибблами, продвинутый вариант датафрейма,</li>
+<li><code>{purrr}</code> – для функционального программирования (замена семейства функций <code>*apply()</code>; см. <a href="050-functional.html#sec-apply"><span>Глава&nbsp;8.5.1</span></a>),</li>
+<li><code>{readr}</code> – для чтения таблиц в текстовом виде, замена стандартным функциям семейства <code>read.table()</code>,</li>
+<li><code>{ggplot2}</code> – для визуализации данных с использованием Grammar of Graphics (<a href="230-ggplot2.html"><span>Глава&nbsp;14</span></a>),</li>
+<li><code>{stringr}</code> – для работы со строковыми переменными,</li>
+<li><code>{forcats}</code> – для работы с переменными-факторами.</li>
+</ul>
+<p>В 2023 году к ним добавился еще один пакет:</p>
+<ul>
+<li><p><code>{lubridate}</code> – для работы с датами и временем.</p>
+<ol start="2" type="1">
+<li><strong>Дополнительные пакеты</strong> <em>tidyverse:</em> они не подключаются при вызове <code>library(tidyverse)</code>, но они также разделяют подход <em>tidyverse</em>, дополняя и развивая его. Определить границы “расширенного” <em>tidyverse</em> очень сложно. Во-первых, есть еще много других небольших пакетов от команды <em>tidyverse,</em> которые тоже считаются частью <em>tidyverse.</em> Во-вторых, кроме официальных пакетов от команды <em>tidyverse</em> есть множество пакетов от других разработчиков, которые пытаются соответствовать принципам <em>tidyverse</em> и дополняют их.</li>
+</ol></li>
+</ul>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> Расширенная Вселенная tidyverse
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вселенная “расширенного” <em>tidyverse</em> необъятна. Перечислить все пакеты не представляется возможным, но можно выделить отдельные группы пакетов.</p>
+<ol type="1">
+<li>Пакеты для импорта и экспорта данных, работы с базами данных:</li>
+</ol>
+<ul>
+<li><code>{vroom}</code> – для быстрой загрузки таблиц в текстовом виде,</li>
+<li><code>{readxl}</code> – для чтения файлов <em>Microsoft Excel,</em></li>
+<li><code>{jsonlite}</code> – для работы с JSON,</li>
+<li><code>{xml2}</code> – для работы с XML,</li>
+<li><code>{DBI}</code> и <code>{dbplyr}</code> – для работы с базами данных,</li>
+<li><code>{rvest}</code> – для веб-скреппинга,</li>
+<li><code>{feather}</code> – для быстрого чтения и записи данных формата <em>feather,</em></li>
+<li><code>{googledrive}</code> – для взаимодействия с файлами на <em>Google-диске,</em></li>
+<li><code>{googlesheets4}</code> – для импорта и экспорта <em>Google-таблиц.</em></li>
+</ul>
+<ol start="2" type="1">
+<li><p>Пакеты для разработки пакетов: <code>{rlang}</code>, <code>{cli}</code>, <code>{crayon}</code>, <code>{rstudioapi}</code>, <code>{pillar}</code>.</p></li>
+<li><p><code>{tidymodels}</code> – еще один “пакет с пакетами”, который позволяет подключать другие пакеты для моделирования и машинного обучения. Включает себя пакеты <code>{rsample}</code>, <code>{parsnip}</code>, <code>{recipes}</code>, <code>{tune}</code>, <code>{yardstick}</code>.</p></li>
+</ol>
+<p>Еще несколько важных пакетов из расширенного <em>tidyverse:</em></p>
+<ul>
+<li><code>{blob}</code> – для работы с <strong>большими бинарными объектами <em>(binary large object; BLOB),</em></strong></li>
+<li><code>{reprex}</code> – для создания <strong>воспроизводимых примеров <em>(reproducible examples)</em></strong> – чтобы при написании вопросов в R чатах, <a href="https://stackoverflow.com">stackoverflow</a>, issues на гитхабе описывать проблему таким образом, чтобы отвечающие могли воспроизвести вашу проблему у себя.</li>
+<li><code>{glue}</code> – для продвинутого объединения строк,</li>
+<li><code>{tidytext}</code>– для работы с текстами и корпусами,</li>
+<li><code>{magrtittr}</code> – с несколькими вариантами (<code>%&gt;%</code>) пайп-оператора (<a href="#sec-tibble"><span>Глава&nbsp;10.3</span></a>),</li>
+<li><code>{dtplyr}</code> – для ускорения <code>{dplyr}</code> за счет перевод синтаксиса на более быстрый <code>{data.table}</code> (<a href="107-beyond_base_r.html#sec-dt_approach"><span>Глава&nbsp;9.1</span></a>).</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="загрузка-данных-с-помощью-readr" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="загрузка-данных-с-помощью-readr"><span class="header-section-number">10.2</span> Загрузка данных с помощью <code>readr</code></h2>
-<p>Стандартной функцией для чтения <code>.csv</code> файлов в R является функция <code>read.csv()</code>, но мы будем использовать функцию <code>read_csv()</code> из пакета <code>readr</code>. Синтаксис функции <code>read_csv()</code> очень похож на <code>read.csv()</code>: первым аргументом является путь к файлу (в том числе можно использовать URL), некоторые остальные параметры тоже совпадают.</p>
+<h2 data-number="10.2" class="anchored" data-anchor-id="загрузка-данных-с-помощью-readr"><span class="header-section-number">10.2</span> Загрузка данных с помощью <code>{readr}</code></h2>
+<p>Стандартной функцией для чтения <em>.csv</em> файлов в R является функция <code>read.csv()</code>, но мы будем использовать функцию <code>read_csv()</code> из пакета <code>readr</code>. Синтаксис функции <code>read_csv()</code> очень похож на <code>read.csv()</code>: первым аргументом является путь к файлу (в том числе можно использовать URL), некоторые остальные параметры тоже совпадают.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -510,11 +548,11 @@ dbl (3): ...1, Height, Weight
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Подробнее про импорт данных, в том числе в tidyverse, смотри в @ref(real_data).</p>
+<p>Подробнее про импорт данных, в том числе в <em>tidyverse,</em> смотри в <a href="030-import_data.html"><span>Глава&nbsp;6</span></a>.</p>
 </section>
 <section id="sec-tibble" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-tibble"><span class="header-section-number">10.3</span> tibble</h2>
-<p>Когда мы загрузили данные с помощью <code>read_csv()</code>, то мы получили <code>tibble</code>, а не <code>data.frame</code>:</p>
+<p>Когда мы загрузили данные с помощью <code>read_csv()</code>, то мы получили объект класса <code>tibble</code>, а не <code>data.frame</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heroes)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -590,8 +628,8 @@ dbl (3): ...1, Height, Weight
 </section>
 <section id="sec-pipe" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="sec-pipe"><span class="header-section-number">10.4</span> magrittr::<code>%&gt;%</code></h2>
-<p>Оператор <code>%&gt;%</code> называется “пайпом” (pipe), т.е. “трубой”. Он означает, что следующая функция (справа от пайпа) принимает на вход в качестве первого аргумента результат выполнения предыдущей функции (той, что слева). Фактически, это примерно то же самое, что и вставлять результат выполнения функции в качестве первого аргумента в другую функцию. Просто выглядит это красивее и читабельнее. Как будто данные пропускаются через трубы функций или конвеерную ленту на заводе, если хотите. А то, что первый параметр функции - это почти всегда данные, работает нам здесь на руку. Этот оператор взят из пакета <code>magrittr</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Возможно, даже если вы не захотите пользоваться tidyverse, использование пайпов Вам понравится.</p>
-<p>Важно понимать, что пайп не дает какой-то дополнительной функциональности или дополнительной скорости работы<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Он создан исключительно для читабельности и комфорта.</p>
+<p>Оператор <code>%&gt;%</code> называется “пайпом” (pipe), т.е. “трубой”. Он означает, что следующая функция (справа от пайпа) принимает на вход в качестве первого аргумента результат выполнения предыдущей функции (той, что слева). Фактически, это примерно то же самое, что и вставлять результат выполнения функции в качестве первого аргумента в другую функцию. Просто выглядит это красивее и читабельнее. Как будто данные пропускаются через трубы функций или конвеерную ленту на заводе, если хотите. А то, что первый параметр функции - это почти всегда данные, работает нам здесь на руку. Этот оператор взят из пакета <code>magrittr</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Возможно, даже если вы не захотите пользоваться tidyverse, использование пайпов Вам понравится.</p>
+<p>Важно понимать, что пайп не дает какой-то дополнительной функциональности или дополнительной скорости работы<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Он создан исключительно для читабельности и комфорта.</p>
 <p>С помощью пайпов вот эту команду…</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">sqrt</span>(<span class="fu">abs</span>(<span class="fu">sin</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>))))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -623,7 +661,7 @@ dbl (3): ...1, Height, Weight
 </section>
 <section id="главные-пакеты-tidyverse-dplyr-и-tidyr" class="level2" data-number="10.5">
 <h2 data-number="10.5" class="anchored" data-anchor-id="главные-пакеты-tidyverse-dplyr-и-tidyr"><span class="header-section-number">10.5</span> Главные пакеты tidyverse: <code>dplyr</code> и <code>tidyr</code></h2>
-<p><code>dplyr</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> — это самая основа всего <code>tidyverse</code>. Этот пакет предоставляет основные функции для манипуляции с тибблами. Пакет <code>dplyr</code> является наследником и более усовершенствованной версией <code>plyr</code>, так что если увидите использование пакета <code>plyr</code>, то, скорее всего, скрипт был написан очень давно.</p>
+<p><code>dplyr</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> — это самая основа всего <code>tidyverse</code>. Этот пакет предоставляет основные функции для манипуляции с тибблами. Пакет <code>dplyr</code> является наследником и более усовершенствованной версией <code>plyr</code>, так что если увидите использование пакета <code>plyr</code>, то, скорее всего, скрипт был написан очень давно.</p>
 <p>Пакет <code>tidyr</code> дополняет <code>dplyr</code>, предоставляя полезные функции для тайдификации тибблов. Тайдификация (“аккуратизация”) данных означает приведение табличных данных к такому формату, в котором:</p>
 <ul>
 <li>Каждая переменная имеет собственный столбец</li>
@@ -705,7 +743,7 @@ dbl (3): ...1, Height, Weight
 </section>
 <section id="sec-tidyselect" class="level3" data-number="10.6.2">
 <h3 data-number="10.6.2" class="anchored" data-anchor-id="sec-tidyselect"><span class="header-section-number">10.6.2</span> Мини-язык tidyselect для выбора колонок</h3>
-<p>Для выбора столбцов (не только в <code>select()</code>, но и для других функций tidyverse) используется специальный мини-язык tidyselect из одноименного пакета<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. tidyselect дает очень широкие возможности для выбора колонок.</p>
+<p>Для выбора столбцов (не только в <code>select()</code>, но и для других функций tidyverse) используется специальный мини-язык tidyselect из одноименного пакета<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. tidyselect дает очень широкие возможности для выбора колонок.</p>
 <p>Можно использовать оператор <code>:</code> для выбора нескольких соседних колонок (по аналогии с созданием числового вектора с шагом 1).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
@@ -876,7 +914,7 @@ dbl (3): ...1, Height, Weight
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Аналогично, с помощью функции <code>starts_with()</code> можно найти колонки с одинаковым префиксом, с помощью <code>contains()</code> — все колонки с выбранным паттерном в любой части названия колонки<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<p>Аналогично, с помощью функции <code>starts_with()</code> можно найти колонки с одинаковым префиксом, с помощью <code>contains()</code> — все колонки с выбранным паттерном в любой части названия колонки<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"Eye"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"color"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1024,7 +1062,7 @@ dbl (3): ...1, Height, Weight
 </div>
 </div>
 <p>###Перестановка колонок: <code>dplyr::relocate()</code> {#sec-tidy_relocate}</p>
-<p>Для изменения порядка колонок можно использовать функцию <code>relocate()</code>. Она тоже работает похожим образом на <code>select()</code> и <code>rename()</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Как и <code>rename()</code>, функция <code>relocate()</code> не выкидывает неиспользованные колонки:</p>
+<p>Для изменения порядка колонок можно использовать функцию <code>relocate()</code>. Она тоже работает похожим образом на <code>select()</code> и <code>rename()</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Как и <code>rename()</code>, функция <code>relocate()</code> не выкидывает неиспользованные колонки:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1198,11 +1236,11 @@ Absorbing Man
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name         Gender `Eye color` Race    `Hair color` Height Publisher   
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;       
-1   240 Emma Frost   Female blue        &lt;NA&gt;    Blond           178 Marvel Comi…
-2   679 Triton       Male   green       Inhuman No Hair         188 Marvel Comi…
-3   474 Moses Magnum Male   brown       &lt;NA&gt;    Black           175 Marvel Comi…
+   ...1 name          Gender `Eye color` Race  `Hair color` Height Publisher   
+  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;       
+1   449 Micah Sanders Male   brown       &lt;NA&gt;  Black            NA NBC - Heroes
+2   376 Jyn Erso      Female green       Human Brown            NA George Lucas
+3   605 Siren II      Female black       &lt;NA&gt;  &lt;NA&gt;             NA DC Comics   
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1212,15 +1250,15 @@ Absorbing Man
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 11
-   ...1 name         Gender `Eye color` Race       `Hair color` Height Publisher
-  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
-1    99 Black Flash  Male   &lt;NA&gt;        God / Ete… &lt;NA&gt;             NA DC Comics
-2    55 Aurora       Female blue        Mutant     Black           180 Marvel C…
-3   372 Judge Dredd  Male   &lt;NA&gt;        Human      &lt;NA&gt;            188 Rebellion
-4    35 Aquababy     Male   blue        &lt;NA&gt;       Blond            NA DC Comics
-5   288 Goku         Male   &lt;NA&gt;        Saiyan     &lt;NA&gt;            175 Shueisha 
-6   722 Wonder Woman Female blue        Amazon     Black           183 DC Comics
-7   475 Mr Immortal  Male   blue        Mutant     Blond           188 Marvel C…
+   ...1 name          Gender `Eye color`     Race  `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   666 Thunderstrike Male   blue            &lt;NA&gt;  Blond           198 Marvel C…
+2   333 Huntress      Female blue            &lt;NA&gt;  Black           180 DC Comics
+3   261 Fixer         &lt;NA&gt;   red             &lt;NA&gt;  No Hair          NA Marvel C…
+4   480 Mystique      Female yellow (withou… Muta… Red / Orange    178 Marvel C…
+5   314 Hawkgirl      Female green           &lt;NA&gt;  Red             175 DC Comics
+6   367 John Stewart  Male   green           Human Black           185 DC Comics
+7   394 Kraven II     Male   brown           Human Black           191 Marvel C…
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1233,15 +1271,15 @@ Absorbing Man
     ...1 name             Gender `Eye color` Race  `Hair color` Height Publisher
    &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
  1   584 Sebastian Shaw   Male   &lt;NA&gt;        Muta… &lt;NA&gt;             NA Marvel C…
- 2   672 Toad             Male   black       Muta… Brown           175 Marvel C…
- 3   488 Negasonic Teena… Female black       Muta… Black            NA Marvel C…
- 4   610 Sobek            Male   white       &lt;NA&gt;  No Hair          NA DC Comics
- 5   487 Nebula           Female blue        Luph… No Hair         185 Marvel C…
- 6   206 Darth Maul       Male   yellow / r… Dath… &lt;NA&gt;            170 George L…
- 7   486 Nathan Petrelli  Male   brown       &lt;NA&gt;  &lt;NA&gt;             NA NBC - He…
- 8    52 Atom II          Male   brown       Human Auburn          183 DC Comics
- 9     9 Agent Bob        Male   brown       Human Brown           178 Marvel C…
-10   685 Valerie Hart     Female hazel       &lt;NA&gt;  Black           175 Team Epi…
+ 2   629 Spock            Male   brown       Huma… Black           185 Star Trek
+ 3   707 Warlock          Male   red         &lt;NA&gt;  Blond           188 Marvel C…
+ 4   472 Morlun           Male   white / red &lt;NA&gt;  Black           188 Marvel C…
+ 5   503 One-Above-All    &lt;NA&gt;   &lt;NA&gt;        Cosm… &lt;NA&gt;             NA Marvel C…
+ 6   432 Martian Manhunt… Male   red         Mart… No Hair         201 DC Comics
+ 7   630 Spyke            Male   brown       Muta… Blond           183 Marvel C…
+ 8   470 Moon Knight      Male   brown       Human Brown           188 Marvel C…
+ 9   316 Hawkwoman        Female green       &lt;NA&gt;  Red             175 DC Comics
+10   107 Black Widow II   Female blue        &lt;NA&gt;  Blond           170 Marvel C…
 # ℹ 724 more rows
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
@@ -1472,7 +1510,7 @@ Caused by error:
 <section id="sec-summarise" class="level3" data-number="10.9.1">
 <h3 data-number="10.9.1" class="anchored" data-anchor-id="sec-summarise"><span class="header-section-number">10.9.1</span> Подытоживание: <code>summarise()</code></h3>
 <p>Аггрегация по группам - это очень часто возникающая задача, например, это может использоваться для усреднения данных по испытуемым или условиям. Сделать аггрегацию в датафрейме удобной Хэдли Уикхэм пытался еще в предшественнике <code>dplyr</code>, пакете <code>plyr</code>. <code>dplyr</code> позволяет делать аггрегацию очень симпатичным и понятным способым. Аггрегация в <code>dplyr</code> состоит из двух этапов: группировки (<code>group_by()</code>) и подытоживания (<code>summarise()</code>). Начнем с последнего.</p>
-<p>Функция <code>dplyr::summarise()</code><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> позволяет аггрегировать данные в тиббле. Работает она очень похоже на <code>mutate()</code>, но если внутри <code>mutate()</code> используются векторизованные функции, возвращающие вектор такой же длины, что и колонки, использовавшиеся для расчетов, то в <code>summarise()</code> используются функции, которые возвращают вектор длиной 1. Например, <code>min()</code>, <code>mean()</code>, <code>max()</code> и т.д. Можно создавать несколько колонок через запятую (это работает и для <code>mutate()</code>).</p>
+<p>Функция <code>dplyr::summarise()</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> позволяет аггрегировать данные в тиббле. Работает она очень похоже на <code>mutate()</code>, но если внутри <code>mutate()</code> используются векторизованные функции, возвращающие вектор такой же длины, что и колонки, использовавшиеся для расчетов, то в <code>summarise()</code> используются функции, которые возвращают вектор длиной 1. Например, <code>min()</code>, <code>mean()</code>, <code>max()</code> и т.д. Можно создавать несколько колонок через запятую (это работает и для <code>mutate()</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
@@ -1523,7 +1561,7 @@ dplyr 1.1.0.
 </section>
 <section id="sec-tidy_group" class="level3" data-number="10.9.2">
 <h3 data-number="10.9.2" class="anchored" data-anchor-id="sec-tidy_group"><span class="header-section-number">10.9.2</span> Группировка: <code>group_by()</code></h3>
-<p><code>dplyr::group_by()</code> - это функция для группировки данных в тиббле по дискретной переменной для дальнейшей аггрегации с помощью <code>summarise()</code>. После применения <code>group_by()</code> тиббл будет выглядеть так же, но у него появятся атрибут <code>groups</code><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>:</p>
+<p><code>dplyr::group_by()</code> - это функция для группировки данных в тиббле по дискретной переменной для дальнейшей аггрегации с помощью <code>summarise()</code>. После применения <code>group_by()</code> тиббл будет выглядеть так же, но у него появятся атрибут <code>groups</code><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1724,22 +1762,33 @@ dplyr 1.1.0.
 </div>
 <p>Результаты аггрегации были записаны в отдельную колонку, при этом значения этой колонки внутри одной группы повторяются:</p>
 <p><img src="images/group_by_m.png" class="img-fluid" width="400"></p>
-
-
 </section>
+</section>
+<section id="заключение" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="заключение"><span class="header-section-number">10.10</span> Заключение</h2>
+<p>Мы познакомились с основными принципами и функциями tidyverse. Этих функций, как можно заметить, очень, очень много, каждая из которых посвящена отдельному действию для работы с датафреймами. Чтобы не запутаться во всем многообразии, нужно запомнить самые основные из них:</p>
+<ul>
+<li><p>select() – для выбора строк,</p></li>
+<li><p>filter() – для выбора строк по условию,</p></li>
+<li><p>mutate() – для создания новых колонок,</p></li>
+<li><p>group_by() и summarise() для аггрегации данных.</p></li>
+</ul>
+<p>Эти функции достаточно гибкие, чтобы их хватало для большинства задач работы с данными. Однако важный принципп tidyverse – это максимальная эксплицитность: если вам нужно, скажем, поменять местами колонки, вы используете специальную функцию relocate(), которая предназначено специально для этой задачи.</p>
+<p>Такой код очень легко читается, да и тому кто использует tidyverse для написания кода позволяет мыслить более четко.</p>
+
+
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Как и пакет <code>tidyverse</code>, <code>tidymodels</code> — это пакет с несколькими пакетами.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Если быть точным, то оператор <code>%&gt;%</code> был импортирован во все основные пакеты tidyverse, а сам пакет <code>magrittr</code> не входит в базовый набор tidyverse. Тем не менее, в самом <code>magrittr</code> есть еще несколько интересных операторов.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Даже наоборот, использование пайпов незначительно снижает скорость выполнения команды.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p><a href="https://community.rstudio.com/t/pronunciations-of-common-r-terms/1810">Есть споры о том, как это правильно читать</a>. Используемые варианты: <em>диплаер</em>, <em>диплюр</em>, <em>диплир</em>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Как и в случае с <code>magrittr</code>, пакет <code>tidyselect</code> не содержатся в базовом tidyverse, но функции импортируются основыми пакетами tidyverse.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Выбранный паттерн будет найден посимвольно, если же вы хотите искать по регулярным выражениям, то вместо <code>contains()</code> нужно использовать <code>matches()</code>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p><code>relocate()</code> не позволяет переименовывать колонки в отличие от <code>select()</code> и <code>rename()</code><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8"><p>У функции <code>dplyr::summarise()</code> есть синоним <code>dplyr::summarize()</code>, которая делает абсолбтно то же самое. Просто потому что в американском английском и британском английском это слово пишется по-разному.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>Снять группировку можно с помощью функции <code>ungroup()</code>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Если быть точным, то оператор <code>%&gt;%</code> был импортирован во все основные пакеты tidyverse, а сам пакет <code>magrittr</code> не входит в набор базовых пакетов <em>tidyverse.</em> Тем не менее, в самом <code>magrittr</code> есть еще несколько интересных операторов.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Даже наоборот, использование пайпов незначительно снижает скорость выполнения команды.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://community.rstudio.com/t/pronunciations-of-common-r-terms/1810">Есть споры о том, как это правильно читать</a>. Используемые варианты: “<em>диплаер”</em>,”<em>диплюр”</em>, “<em>диплир”, ”диплёр”, ”дипилюр”</em>. Правильный вариант все-таки”диплаер”: пакет {dplyr} – это результат развития идей, заложенных в старом пакете Хэдли Уикхэма {plyr}, где ply означает apPLY. {plyr} был попыткой развить идею функций семейства <code>*apply()</code>. Хэдли Уикхэм<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Как и в случае с <code>magrittr</code>, пакет <code>tidyselect</code> не содержатся в базовом tidyverse, но функции импортируются основыми пакетами tidyverse.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Выбранный паттерн будет найден посимвольно, если же вы хотите искать по регулярным выражениям, то вместо <code>contains()</code> нужно использовать <code>matches()</code>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p><code>relocate()</code> не позволяет переименовывать колонки в отличие от <code>select()</code> и <code>rename()</code><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>У функции <code>dplyr::summarise()</code> есть синоним <code>dplyr::summarize()</code>, которая делает абсолбтно то же самое. Просто потому что в американском английском и британском английском это слово пишется по-разному.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>Снять группировку можно с помощью функции <code>ungroup()</code>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
