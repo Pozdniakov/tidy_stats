@@ -475,83 +475,77 @@ div.csl-indent {
 </div>
 <p>Если мы знаем сколько значений в матрице и сколько мы хотим строк, то количество столбцов указывать необязательно:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    1    6   11   16
-[2,]    2    7   12   17
-[3,]    3    8   13   18
-[4,]    4    9   14   19
-[5,]    5   10   15   20</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12</code></pre>
 </div>
 </div>
 <p>Все остальное так же как и с векторами: внутри находится данные только одного типа. Поскольку матрица – это уже двумерный массив, то у него имеется два индекса. Эти два индекса разделяются запятыми.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span>, <span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12</code></pre>
+<pre><code>[1] 10</code></pre>
 </div>
 </div>
 <p>Первый индекс – выбор строк, второй индекс – выбор колонок<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Результат – пересечение выбранных строк и столбцов.</p>
 <p>Так же как и с векторами, матрицы можно индексировать числовыми векторами:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3]
-[1,]    2    7   12
-[2,]    3    8   13
-[3,]    4    9   14</code></pre>
+<pre><code>     [,1] [,2]
+[1,]    5    9
+[2,]    6   10</code></pre>
 </div>
 </div>
-<!--# ###Drawing needed###  -->
+<p><img src="images/016-complex_structures_matrix.png" class="img-fluid"></p>
 <p>И даже логическими матрицами (матрицы имеют такие же типы, как и вектора):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>A[A <span class="sc">&gt;</span> <span class="dv">10</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre><code>[1] 11 12</code></pre>
 </div>
 </div>
 <p>В этом случае матрица упростится до вектора.</p>
 <p>Если же мы оставляем пустое поле вместо числа, то мы выбираем все строки/колонки в зависимости от того, оставили мы поле пустым до или после запятой:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>A[, <span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    5    9
+[2,]    6   10
+[3,]    7   11
+[4,]    8   12</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
-[1,]    1    6   11
-[2,]    2    7   12
-[3,]    3    8   13
-[4,]    4    9   14
-[5,]    5   10   15</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    2    7   12   17
-[2,]    3    8   13   18
-[3,]    4    9   14   19</code></pre>
+[1,]    1    5    9
+[2,]    2    6   10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>A[, ]</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    1    6   11   16
-[2,]    2    7   12   17
-[3,]    3    8   13   18
-[4,]    4    9   14   19
-[5,]    5   10   15   20</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12</code></pre>
 </div>
 </div>
 <p>Так же как и в случае с обычными векторами, часть матрицы можно переписать:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>A[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>A</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    1    6   11   16
-[2,]    2  100  100  100
-[3,]    3  100  100  100
-[4,]    4  100  100  100
-[5,]    5   10   15   20</code></pre>
+<pre><code>     [,1] [,2] [,3]
+[1,]  100  100    9
+[2,]  100  100   10
+[3,]    3    7   11
+[4,]    4    8   12</code></pre>
 </div>
 </div>
 <p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами (см. <a href="#sec-df"><span>Глава&nbsp;4.4</span></a>).</p>
@@ -632,12 +626,11 @@ div.csl-indent {
 
 
 [[4]]
-     [,1] [,2] [,3] [,4]
-[1,]    1    6   11   16
-[2,]    2  100  100  100
-[3,]    3  100  100  100
-[4,]    4  100  100  100
-[5,]    5   10   15   20</code></pre>
+     [,1] [,2] [,3]
+[1,]  100  100    9
+[2,]  100  100   10
+[3,]    3    7   11
+[4,]    4    8   12</code></pre>
 </div>
 </div>
 <p>Если у нас сложный список, то есть очень классная функция <code>str()</code>, чтобы посмотреть, как он устроен:</p>
@@ -651,7 +644,7 @@ div.csl-indent {
   ..$ : num 42
   ..$ : chr "Пам пам"
   ..$ : logi TRUE
- $ : num [1:5, 1:4] 1 2 3 4 5 6 100 100 100 10 ...</code></pre>
+ $ : num [1:4, 1:3] 100 100 3 4 100 100 7 8 9 10 ...</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -722,6 +715,7 @@ $student
 </div>
 </div>
 <p>Хотя последнее – практически то же самое, что и использование знака <code>$</code>.</p>
+<p><img src="images/016-complex_structures_list_subset.png" class="img-fluid"></p>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
