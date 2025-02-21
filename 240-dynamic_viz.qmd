@@ -7,7 +7,7 @@
 ```{r, include=FALSE}
 library("tidyverse")
 heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv",
-                   na = c("-", "-99"))
+                   na = c("-", "-99", "NA", " "))
 df <- read_tsv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/meta_dataset.txt")
 poli <- subset(df, subset=(Design=="Policy Change"))
 meta_2_gg <- ggplot(aes(x=Outcome_age, y=Effect_size, size=1/(SE^2), colour = Design, fill = Design), data=df %>% filter(Design != "School Age Cutoff")) +

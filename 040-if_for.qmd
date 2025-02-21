@@ -211,7 +211,7 @@ dplyr::case_when(
 Функция `case_when()` работает по той же логике, что и *if/else/else if* конструкция: сначала идет проверка на первое условие (как первое *if* в конструкции *if/else/else if* ). Если проверка проходит (то есть в условии получается `TRUE`), то соответствующее значение возвращается, а остальные условия не проверяются. Если же первое условие не выполняется, то идет проверка на следующее условие (аналог *else if*). Если же и оно не выполняется, то идет проверка на следующее (следующее *else if*), пока проверка не пройдет до последнего условия. Можно поставить значение по умолчанию с помощью параметра `.default =`, которое будет возвращаться, если все проверки выдали `FALSE`.
 
 ```{r}
-heroes <- read.csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv", na.strings = c("NA", "-", "-99"))
+heroes <- read.csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv", na.strings = c("NA", "-", "-99", " "))
 
 heroes$weight_group <- dplyr::case_when(
   heroes$Weight > 200 ~ "overweight", # "if"

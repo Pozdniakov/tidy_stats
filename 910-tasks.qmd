@@ -636,8 +636,7 @@ ifelse(vec5 > 10, "большое число", "маленькое число")
 
 ```{r, echo = TRUE}
 heroes <- read.csv("data/heroes_information.csv", 
-                   stringsAsFactors = FALSE,
-                   na.strings = c("-", "-99"))
+                   na.strings = c("-", "-99", "NA", " "))
 ```
 
 -   Создайте новою колонку `hair` в `heroes`, в которой будет значение `"Bold"` для тех супергероев, у которых в колонке `Hair.color` стоит `"No Hair"`, и значение `"Hairy"` во всех остальных случаях.
@@ -1030,7 +1029,7 @@ apply(B, 1, mean)
 ```{r, echo = TRUE}
 library(tidyverse)
 heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv",
-                   na = c("-", "-99"))
+                   na = c("-", "-99", "NA", " "))
 powers <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv")
 ```
 
