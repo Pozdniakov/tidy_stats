@@ -15,6 +15,7 @@ $$t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} $$
 Форма этого распределения очень похожа на форму нормального распределения, но имеет более тяжелые "хвосты" распределения. При этом эта форма зависит от размера выборки: чем больше выборка, тем ближе распределение к нормальному. Этот параметр распределения называется **степенями свободы** ***(degrees of freedom)*** и вычисляется как $N - 1$, где $N$ - это размер выборки.
 
 ```{r, echo=FALSE}
+#| message: false
 library(tidyverse)
 t_normal_pdf_gg <- tibble(x = seq(-3, 3, .01),
        `t(df=3)` = dt(x, df = 3),
@@ -124,6 +125,7 @@ $$t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} = \frac{\overline{d} - (\mu_1 -
 Мы будем использовать [данные с курса по статистике Университета Шеффилда про эффективность диет](https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv). Мы вытащим оттуда данные по диете номер 1 и посмотрим, действительно ли она помогает сбросить вес.
 
 ```{r}
+#| message: false
 library(tidyverse)
 diet <- readr::read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv")
 diet1 <- diet %>%
