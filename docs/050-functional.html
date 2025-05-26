@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="sec-create_fun" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="sec-create_fun"><span class="header-section-number">8.1</span> Создание функций</h2>
 <p>Поздравляю, сейчас мы выйдем на качественно новый уровень владения R. Вместо того, чтобы пользоваться теми функциями, которые уже написали за нас, мы можем сами создавать свои функции! В этом нет ничего сложного.</p>
-<p>Синтаксис создания функции внешне похож на создание циклов или условных конструкций. Мы пишем ключевое слово <code>function</code>, в круглых скобках обозначаем переменные, с которыми собираемся что-то делать. Внутри фигурных скобок пишем выражения, которые будут выполняться при запуске функции. У функции есть свое собственное <strong>окружение <em>(environment)</em></strong> — место, где хранятся переменные. Именно те объекты, которые мы передаем в скобочках, и будут в окружении, так же как и “обычные” переменные для нас в глобальном окружении. Это означает, что функция будет искать переменные в первую очередь среди объектов, которые переданы в круглых скобочках. С ними функция и будет работать. На выходе функция выдаст то, что вычисляется внутри функции <code>return()</code>. Если <code>return()</code> появляется в теле функции несколько раз, то до результат будет возвращаться из той функции <code>return()</code>, до которой выполнение дошло первым.</p>
+<p>Синтаксис создания функции внешне похож на создание циклов или условных конструкций. Мы пишем ключевое слово <code>function</code>, в круглых скобках обозначаем переменные, с которыми собираемся что-то делать. Внутри фигурных скобок пишем выражения, которые будут выполняться при запуске функции. У функции есть свое собственное <strong>окружение <em>(environment)</em></strong> — место, где хранятся переменные. Именно те объекты, которые мы передаем в скобочках, и будут в окружении, так же как и “обычные” переменные для нас в глобальном окружении. Это означает, что функция будет искать переменные в первую очередь среди объектов, которые переданы в круглых скобочках. С ними функция и будет работать. На выходе функция выдаст то, что вычисляется внутри функции <code>return()</code>. Если <code>return()</code> появляется в теле функции несколько раз, то результат будет возвращаться из той функции <code>return()</code>, до которой выполнение дошло первым.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  power <span class="ot">&lt;-</span> x <span class="sc">^</span> p</span>
@@ -495,7 +495,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>В R работают <strong>ленивые вычисления (lazy evaluations)</strong>. Это означает, что параметры функций будут только когда они понадобятся, а не заранее. R будет как самый ленивый прокрастинатор откладывать чтение данных, пока они не понадобятся в вычислениях. Это приводит к тому, что если параметр никак не задан, то обнаружится это только при его непосредственном использовании. Например, эта функция не будет выдавать ошибку, если мы не зададим параметр <code>we_will_not_use_this_parameter =</code>, потому что он нигде не используется в расчетах.</p>
+<p>В R работают <strong>ленивые вычисления (lazy evaluations)</strong>. Это означает, что параметры функций будут прочитаны только когда они понадобятся, а не заранее. R будет как самый ленивый прокрастинатор откладывать чтение данных, пока они не понадобятся в вычислениях. Это приводит к тому, что если параметр никак не задан, то обнаружится это только при его непосредственном использовании. Например, эта функция не будет выдавать ошибку, если мы не зададим параметр <code>we_will_not_use_this_parameter =</code>, потому что он нигде не используется в расчетах.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">p =</span> <span class="dv">2</span>, we_will_not_use_this_parameter) x <span class="sc">^</span> p</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pow</span>(<span class="at">x =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -508,7 +508,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="sec-sanity_check" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="sec-sanity_check"><span class="header-section-number">8.2</span> Проверка на адекватность</h2>
-<p>Лучший способ не бояться ошибок и предупреждений — научиться прописывать их самостоятельно в собственных функциях. Это позволит понять, что за текстом предупреждений и ошибок, которые у вас возникают, стоит забота разработчиков о пользователях, которые хотят максимально обезопасить нас от наших непродуманных действий.</p>
+<p>Лучший способ не бояться ошибок и предупреждений – научиться прописывать их самостоятельно в собственных функциях. Это позволит понять, что за текстом предупреждений и ошибок, которые у вас возникают, стоит забота разработчиков о пользователях, которые хотят максимально обезопасить нас от наших непродуманных действий.</p>
 <p>Хорошо написанные функции не только выдают правильный результат на все возможные адекватные данные на входе, но и не дают получить правдоподобные результаты при неадекватных входных данных. Как вы уже знаете, если на входе у вас имеются пропущенные значения, то многие функции будут в ответ тоже выдавать пропущенные значения. И это вполне осознанное решение, которое позволяет избегать ситуаций вроде той, когда <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7">около одной пятой научных статей по генетике содержало ошибки в приложенных данных</a> и замечать пропущенные значения на ранней стадии. Кроме того, можно проводить <strong>проверки на адекватность входящих данных <em>(sanity check).</em></strong></p>
 <p>Разберем <strong>проверку на адекватность входящих</strong> данных на примере самодельной функции <code>imt()</code>, которая выдает индекс массы тела, если на входе задать вес (аргумент <code>weight =</code>) в килограммах и рост (аргумент <code>height =</code>) в метрах.</p>
 <div class="cell">
@@ -569,7 +569,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x135762aa0&gt;
+&lt;bytecode: 0x15754fe60&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -813,7 +813,7 @@ $list
 <p>Можно применять функции <code>lapply()</code> и <code>sapply()</code> на датафреймах. Поскольку фактически датафрейм - это список из векторов одинаковой длины (см. <a href="016-complex_structures.html#sec-df"><span>Глава&nbsp;4.4</span></a>), то итерироваться эти функции будут по колонкам:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, </span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span>
 <span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(heroes, class)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          X        name      Gender   Eye.color        Race  Hair.color 

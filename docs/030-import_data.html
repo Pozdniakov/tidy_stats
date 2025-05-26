@@ -603,7 +603,7 @@ file or directory</code></pre>
 <li><p>Прочитаны ли пропущенные значения как <code>NA</code>. По умолчанию пропущенные значения обозначаются пропущенной строчкой или <code>"NA"</code>, но встречаются самые разнообразные варианты. Возможные варианты кодирования пропущенных значений можно задать в параметре <code>na.strings =</code> функции <code>read.table()</code> и ее вариантов. В нашем наборе данных как раз такая ситуация, где нужно самостоятельно задавать, какие значения будут прочитаны как <code>NA</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></li>
 <li><p>Прочитаны ли те столбики, которые должны быть числовыми, как <code>int</code> или <code>num</code>. Если в колонке содержатся числа, а написано <code>chr</code> (= <code>"character"</code>) или <code>Factor</code> (в случае если <code>stringsAsFactors = TRUE</code>), то, скорее всего, одна из строчек содержит в себе нечисловые знаки, которые не были прочитаны как <code>NA</code>.</p></li>
 <li><p>Странные названия колонок. Это может случиться по самым разным причинам, но в таких случаях стоит открывать файл в другой программе и смотреть первые строчки. Например, может оказаться, что первые несколько строчек — пустые или что первая строчка не содержит название столбцов (тогда для параметра <code>header =</code> нужно поставить <code>FALSE</code>)</p></li>
@@ -622,7 +622,7 @@ file or directory</code></pre>
 <p>Конкретно в нашем случае все прочиталось хорошо с помощью функции <code>read.csv()</code>, но в строковых переменных есть много прочерков, которые обозначают отсутствие информации по данному параметру супергероя, т.е. пропущенное значение. А вот с числовыми значениями все не так просто: для всех супергероев прописано какое-то число, но во многих случаях это <code>-99</code>. Очевидно, отрицательного роста и массы не бывает, это просто обозначение пропущенных значений (такое иногда используется). Таким образом, чтобы адекватно прочитать файл, нам нужно поменять параметр <code>na.strings =</code> функции <code>read.csv()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="sec-export_data" class="level2" data-number="6.4">
@@ -679,7 +679,7 @@ file or directory</code></pre>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"data/heroes_information.csv"</span>,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 • `` -&gt; `...1`</code></pre>
@@ -758,19 +758,21 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="st">"data/heroes_information.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      V1            name Gender Eye color              Race       Hair color
-  1:   0          A-Bomb   Male    yellow             Human          No Hair
-  2:   1      Abe Sapien   Male      blue     Icthyo Sapien          No Hair
-  3:   2        Abin Sur   Male      blue           Ungaran          No Hair
-  4:   3     Abomination   Male     green Human / Radiation          No Hair
-  5:   4         Abraxas   Male      blue     Cosmic Entity            Black
- ---                                                                        
-730: 729 Yellowjacket II Female      blue             Human Strawberry Blond
-731: 730            Ymir   Male     white       Frost Giant          No Hair
-732: 731            Yoda   Male     brown    Yoda's species            White
-733: 732         Zatanna Female      blue             Human            Black
-734: 733            Zoom   Male       red                 -            Brown
+<pre><code>        V1            name Gender Eye color              Race       Hair color
+     &lt;int&gt;          &lt;char&gt; &lt;char&gt;    &lt;char&gt;            &lt;char&gt;           &lt;char&gt;
+  1:     0          A-Bomb   Male    yellow             Human          No Hair
+  2:     1      Abe Sapien   Male      blue     Icthyo Sapien          No Hair
+  3:     2        Abin Sur   Male      blue           Ungaran          No Hair
+  4:     3     Abomination   Male     green Human / Radiation          No Hair
+  5:     4         Abraxas   Male      blue     Cosmic Entity            Black
+ ---                                                                          
+730:   729 Yellowjacket II Female      blue             Human Strawberry Blond
+731:   730            Ymir   Male     white       Frost Giant          No Hair
+732:   731            Yoda   Male     brown    Yoda's species            White
+733:   732         Zatanna Female      blue             Human            Black
+734:   733            Zoom   Male       red                 -            Brown
      Height         Publisher Skin color Alignment Weight
+      &lt;num&gt;            &lt;char&gt;     &lt;char&gt;    &lt;char&gt;  &lt;int&gt;
   1:  203.0     Marvel Comics          -      good    441
   2:  191.0 Dark Horse Comics       blue      good     65
   3:  185.0         DC Comics        red      good     90

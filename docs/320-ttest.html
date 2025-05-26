@@ -442,24 +442,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Форма этого распределения очень похожа на форму нормального распределения, но имеет более тяжелые “хвосты” распределения. При этом эта форма зависит от размера выборки: чем больше выборка, тем ближе распределение к нормальному. Этот параметр распределения называется <strong>степенями свободы</strong> <strong><em>(degrees of freedom)</em></strong> и вычисляется как <span class="math inline">\(N - 1\)</span>, где <span class="math inline">\(N\)</span> - это размер выборки.</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'stringr' was built under R version 4.2.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.4.4     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="320-ttest_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -467,19 +449,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Как видите, чем больше выборка (и количество степеней свободы соответственно), тем ближе <span class="math inline">\(t\)</span>-распределение к стандартному нормальному распределению. При 100 степенях свободы они уже почти не различимы! Поэтому на больших выборках разница между <span class="math inline">\(t\)</span>-тестом и <span class="math inline">\(z\)</span>-тестом будет минимальна, тогда как на маленьких выборках разница может быть значительной.</p>
 <p>Давайте посчитаем <span class="math inline">\(t\)</span>-статистику на тех же симулированных данных, что и раньше<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> (m <span class="sc">-</span> <span class="dv">100</span>)<span class="sc">/</span>sem</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> (m <span class="sc">-</span> <span class="dv">100</span>)<span class="sc">/</span>sem</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3122351</code></pre>
 </div>
 </div>
 <p>Давайте для сравнения еще раз посчитаем <span class="math inline">\(z\)</span>-статистику:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(m <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">/</span> (<span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(m <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">/</span> (<span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3251482</code></pre>
 </div>
@@ -487,28 +469,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Как видите, расчет довольно схожий, разница только в том, откуда мы берем стандартное отклонение. Для <span class="math inline">\(z\)</span>-статистики у нас был заранее известный параметр генеральной совокупности (что обычно не так), для <span class="math inline">\(t\)</span>-статистики мы оценивали стандартное отклонение по выборке.</p>
 <p>Давайте теперь посчитаем <em>p-value.</em> Мы будем пользоваться не функцией <code>pnorm()</code>, а функцией <code>pt()</code>, а в качестве параметра распределения нужно указать количество степеней свобод в <code>df =</code> (размер выборки минус 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6222407</code></pre>
 </div>
 </div>
 <p>Функция <code>pt()</code> считает от минус бесконечности до <span class="math inline">\(t\)</span>, а нам нужно от <span class="math inline">\(t\)</span> до плюс бесконечности, потому что <span class="math inline">\(t\)</span> больше <span class="math inline">\(0\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3777593</code></pre>
 </div>
 </div>
 <p>И не забываем умножать на <span class="math inline">\(2\)</span>, если мы хотим сделать двусторонний тест.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">*</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">*</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7555186</code></pre>
 </div>
 </div>
 <p>В отличие от <span class="math inline">\(z\)</span>-теста, t-тест есть в базовом R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(samp, <span class="at">mu =</span> <span class="dv">100</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(samp, <span class="at">mu =</span> <span class="dv">100</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -574,23 +556,14 @@ mean of x
 <p><span class="math display">\[t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} = \frac{\overline{d} - (\mu_1 - \mu_2)} {s_d / \sqrt{N}} = \frac{\overline{d} - 0} {s_d / \sqrt{N}}  = \frac{\overline{d}} {s_d / \sqrt{N}}\]</span></p>
 <p>Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>. Мы вытащим оттуда данные по диете номер 1 и посмотрим, действительно ли она помогает сбросить вес.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 78 Columns: 7
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (7): Person, gender, Age, Height, pre.weight, Diet, weight6weeks
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Провести двухвыборочный <span class="math inline">\(t\)</span>-тест в R можно двумя базовыми способами. Первый вариант - это дать два вектора значений. Это удобно в случае широкого формата данных.</p>
+<p>Чтобы провести двухвыборочный зависимый <span class="math inline">\(t\)</span>-тест нужно передать в функцию <code>t.test()</code> два вектора одинаковой длины<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Чтобы обозначить, что нам нужен именно зависимый <span class="math inline">\(t\)</span>-тест, нужно прописать значение <code>TRUE</code> для параметра <code>paired =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -605,46 +578,36 @@ mean difference
             3.3 </code></pre>
 </div>
 </div>
-<p>Второй вариант - используя формулы. Это удобно при длинном формате данных:</p>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Осторожно: не забывайте прописать paired = TRUE!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если вы не пропишите <code>paired = TRUE</code> или по ошибке пропишите <code>paired = FALSE</code>, когда правильно использовать зависимый <span class="math inline">\(t\)</span>-тест, то вы получите совершенно другие результаты:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>diet1_long <span class="ot">&lt;-</span> diet1 <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"when"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"weight"</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Paired t-test
+    Welch Two Sample t-test
 
-data:  weight by when
-t = 7.2168, df = 23, p-value = 2.397e-07
-alternative hypothesis: true mean difference is not equal to 0
+data:  diet1$pre.weight and diet1$weight6weeks
+t = 1.3623, df = 46, p-value = 0.1797
+alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- 2.354069 4.245931
+ -1.575829  8.175829
 sample estimates:
-mean difference 
-            3.3 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1_long<span class="sc">$</span>weight <span class="sc">~</span> diet1_long<span class="sc">$</span>when, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Paired t-test
-
-data:  diet1_long$weight by diet1_long$when
-t = 7.2168, df = 23, p-value = 2.397e-07
-alternative hypothesis: true mean difference is not equal to 0
-95 percent confidence interval:
- 2.354069 4.245931
-sample estimates:
-mean difference 
-            3.3 </code></pre>
+mean of x mean of y 
+   72.875    69.575 </code></pre>
 </div>
 </div>
-<p>В обоих вариантах мы использовали <code>paired = TRUE</code> , чтобы обозначить использование именно зависимого (т.е. парного) t-теста.</p>
+<p>Поскольку разница между зависимым и независимым <span class="math inline">\(t\)</span>-тестами очень значительная, внимательно проверяйте, правильное ли значение параметра <code>paired =</code> у вас стоит!</p>
+</div>
+</div>
 <table class="table">
 <thead>
 <tr class="header">
@@ -673,11 +636,11 @@ mean difference
 <p><span class="math display">\[se_{m_1 - m_2} = \sqrt {(s^2_{pool}) (\frac {1} {n_1} + \frac {1}{n_2} )}\]</span></p>
 <p>Выглядит сложно, но по своей сути это что-то вроде усредненного стандартного отклонения (с учетом размеров выборок). Ну а t-статистика затем считается просто:</p>
 <p><span class="math display">\[t = \frac {(m_1 - m_2) - (\mu_1 - \mu_2)} {se_{m_1 - m_2}} = \frac {(m_1 - m_2) - 0} {se_{m_1 - m_2}} = \frac {m_1 - m_2} {se_{m_1 - m_2}}\]</span></p>
-<p>Давайте теперь опробуем независимый t-тест для сравнения веса испытуемых двух групп после диеты. Мы снова воспользуемся функцией <code>t.test()</code>, но теперь уже поставим <code>paired = FALSE</code>:</p>
+<p>Давайте теперь опробуем независимый t-тест для сравнения веса испытуемых двух групп после диеты. Мы снова воспользуемся функцией <code>t.test()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -695,7 +658,7 @@ mean in group 1 mean in group 2
 <p>Если присмотритесь, то увидите, что со степенями свободы что-то странное. Они дробные! Дело в том, что мы провели не совсем “настоящий” t-тест, а его очень близкую альтернативу под названием <strong>тест Уэлча</strong> <em>(Welch test)</em>, который иногда называют <strong>поправкой Уэлча</strong> к t-тесту. Эта поправка позволяет тесту лучше справляться с выборками с разной дисперсией. Даже если у нас нет проблем с разной дисперсией, то от поправки Уэлча хуже не будет, поэтому это вариант по умолчанию в R.</p>
 <p>Но если его хочется отключить, то нужно поставить <code>var.equal = TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
@@ -721,7 +684,7 @@ mean in group 1 mean in group 2
 </ol>
 <p>Для проверки на нормальность существуют различные статистические тесты. Самый известный из них — тест Шапиро-Уилка. Его можно провести в R при помощи функции <code>shapiro.test()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(samp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(samp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -746,16 +709,16 @@ W = 0.98122, p-value = 0.1654</code></pre>
 <h3 data-number="18.4.1" class="anchored" data-anchor-id="sec-wilcox_test"><span class="header-section-number">18.4.1</span> Тест Уилкоксона</h3>
 <p>Непараметрический аналог двустороннего <em>зависимого</em> t-теста называется <strong>тестом Уилкоксона.</strong> Функция для него называется <code>wilcox.test()</code>, и она имеет такой же синтаксис, как и <code>t.test()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...): cannot
-compute exact p-value with ties</code></pre>
+<pre><code>Warning in wilcox.test.default(diet1$pre.weight, diet1$weight6weeks, paired =
+TRUE): cannot compute exact p-value with ties</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
 
-data:  weight by when
+data:  diet1$pre.weight and diet1$weight6weeks
 V = 299, p-value = 2.203e-05
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
@@ -776,9 +739,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </section>
 <section id="sec-mann_test" class="level3" data-number="18.4.2">
 <h3 data-number="18.4.2" class="anchored" data-anchor-id="sec-mann_test"><span class="header-section-number">18.4.2</span> Тест Манна-Уитни</h3>
-<p>Непараметрическим аналогом двустороннего <em>независимого</em> t-теста является <strong>тест Манна-Уитни.</strong> Для него тоже используется функция <code>wilcox.test()</code>, только в данном случае с параметром <code>paired = FALSE</code>.</p>
+<p>Непараметрическим аналогом двустороннего <em>независимого</em> t-теста является <strong>тест Манна-Уитни.</strong> Для него тоже используется функция <code>wilcox.test()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight <span class="sc">~</span> when, <span class="at">data =</span> diet1_long, <span class="at">paired =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...): cannot
 compute exact p-value with ties</code></pre>
@@ -787,8 +750,8 @@ compute exact p-value with ties</code></pre>
 <pre><code>
     Wilcoxon rank sum test with continuity correction
 
-data:  weight by when
-W = 357.5, p-value = 0.1546
+data:  weight6weeks by Diet
+W = 368, p-value = 0.4117
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
@@ -830,6 +793,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <hr>
 <ol>
 <li id="fn1"><p>Благодаря <code>set.seed(42)</code> мы можем точно повторить сгенерированные значения.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Раньше (до версии R 4.4.0) можно было провести <code>t.test()</code> имея данные в длинном формате, используя синтаксис формул. Однако тревожных разработчиков R (и не только их) сильно пугала мысль о том, что, используя синтаксис формул, можно легко допустить ошибку в расчетах, так как при этом нигде не задается экплицитно, какие именно значения спарены между собой. Поэтому теперь при попытке использовать формулы для двухвыборочного зависимого <span class="math inline">\(t\)</span>-теста вы получете ошибку со следующим текстом:</p>
+<p><code>Error in t.test.formula(..., paired = T) : cannot use 'paired' in formula method</code><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

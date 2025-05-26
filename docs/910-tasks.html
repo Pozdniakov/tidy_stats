@@ -912,11 +912,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <ul>
-<li>Создайте вектор 2, 4, 6, … , 18, 20 как минимум 2 новыми способами.</li>
+<li>Создайте вектор 2, 4, 6, … , 18, 20 как можно большим количеством способов. Постарайтесь найти хотя бы три разных способа.</li>
 </ul>
-<blockquote class="blockquote">
-<p>Знаю, это задание может показаться бессмысленным, но это очень базовая операция, с помощью которой можно, например, разделить данные на две части. Чем больше способов Вы знаете, тем лучше!</p>
-</blockquote>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
@@ -1138,7 +1135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="26.8" class="anchored" data-anchor-id="sec-task_list"><span class="header-section-number">26.8</span> Списки</h2>
 <p>Дан список <code>list1</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">=</span> <span class="fu">list</span>(<span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">letters =</span> letters, <span class="at">logic =</span> <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">letters =</span> letters, <span class="at">logic =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>list1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$numbers
@@ -1525,8 +1522,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Создайте новою колонку <code>hair</code> в <code>heroes</code>, в которой будет значение <code>"Bold"</code> для тех супергероев, у которых в колонке <code>Hair.color</code> стоит <code>"No Hair"</code>, и значение <code>"Hairy"</code> во всех остальных случаях.</li>
@@ -2014,7 +2010,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <div class="cell">
 <div class="sourceCode cell-code" id="cb188"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href="#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb188-2"><a href="#cb188-2" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
-<span id="cb188-3"><a href="#cb188-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
+<span id="cb188-3"><a href="#cb188-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span>
 <span id="cb188-4"><a href="#cb188-4" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -2271,7 +2267,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <ul>
-<li>Создайте новою колонку <code>hair</code> в heroes, в которой будет значение <code>"Bold"</code> для тех супергероев, у которых в колонке <code>Hair.color</code> стоит <code>"No Hair"</code>, и значение <code>"Hairy"</code> во всех остальных случаях. Затем выберите только колонки <code>name</code>, <code>Hair color</code>, <code>hair</code>.</li>
+<li>Создайте новою колонку <code>hair</code> в heroes, в которой будет значение <code>"Bold"</code> для тех супергероев, у которых в колонке <code>Hair color</code> стоит <code>"No Hair"</code>, и значение <code>"Hairy"</code> во всех остальных случаях. Затем выберите только колонки <code>name</code>, <code>Hair color</code>, <code>hair</code>.</li>
 </ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">

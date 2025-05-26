@@ -1578,7 +1578,7 @@ p-value больше .05, поэтому мы не можем отклонить
 ```{r}
 diet23 <- diet %>%
   filter(Diet %in% 2:3)
-t.test(weight6weeks ~ Diet, data = diet23, paired = FALSE)
+t.test(weight6weeks ~ Diet, data = diet23)
 ```
 
 p-value больше .05, поэтому мы не можем отклонить нулевую гипотезу о том, что масса до и после диеты одинаковая.
@@ -1588,7 +1588,7 @@ p-value больше .05, поэтому мы не можем отклонить
 ```{r}
 diet13 <- diet %>%
   filter(Diet %in% c(1,3))
-t.test(weight6weeks ~ Diet, data = diet13, paired = FALSE)
+t.test(weight6weeks ~ Diet, data = diet13)
 ```
 
 p-value больше .05, поэтому мы не можем отклонить нулевую гипотезу о том, что масса до и после диеты одинаковая.
@@ -1600,7 +1600,7 @@ p-value больше .05, поэтому мы не можем отклонить
 ```{r}
 diet12 <- diet %>%
   filter(Diet %in% c(1,2))
-wilcox.test(weight6weeks ~ Diet, data = diet12, paired = FALSE)
+wilcox.test(weight6weeks ~ Diet, data = diet12)
 ```
 
 В обоих случаях *p-value* больше 0.05, мы не можем отклонить нулевую гипотезу об отсутствии различий.
@@ -1608,8 +1608,8 @@ wilcox.test(weight6weeks ~ Diet, data = diet12, paired = FALSE)
 -   Повторите задание для второй и третьей группы, а так же для первой и третьей группы.
 
 ```{r}
-wilcox.test(weight6weeks ~ Diet, data = diet23, paired = FALSE)
-wilcox.test(weight6weeks ~ Diet, data = diet13, paired = FALSE)
+wilcox.test(weight6weeks ~ Diet, data = diet23)
+wilcox.test(weight6weeks ~ Diet, data = diet13)
 ```
 
 В обоих случаях *p-value* больше 0.05, как и для соответствующих t-тестов. Мы не можем отклонить нулевую гипотезу об отстутствии различий между второй и третьей диетой, между первой и третьей диетой.
