@@ -462,7 +462,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Так, давайте взглянем на то, что нам тут открылось:</p>
 <p><img src="images/010-intro_rstudio_tabs.png" class="img-fluid"></p>
 <p>В первую очередь нас интересуют два окна: <strong>1 - Code Editor</strong> (окно для написания скриптов)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> и <strong>2 - R Console</strong> (консоль). Здесь можно писать команды и запускать их. При этом работа в консоли и работа со скриптом немного различается.</p>
-<p>В <strong>2 - R Console</strong> вы пишите команду и запускаете ее нажиманием <code>Enter</code>. Иногда после запуска команды появляется какой-то результат. Если нажимать стрелку вверх на клавиатуре, то можно выводить в консоль предыдущие команды. Это очень удобно для запуска предыдущих команд с небольшими изменениями.</p>
+<p>В <strong>2 - R Console</strong> вы пишите команду и запускаете ее нажатием <code>Enter</code>. Иногда после запуска команды появляется какой-то результат. Если нажимать стрелку вверх на клавиатуре, то можно выводить в консоль предыдущие команды. Это очень удобно для запуска предыдущих команд с небольшими изменениями.</p>
 <p>В <strong>1 - Code Editor</strong> для запуска команды вы должны выделить ее и нажать <code>Ctrl</code> + <code>Enter</code> (<code>Cmd</code> + <code>Enter</code> на macOS). Если не нажать эту комбинацию клавиш, то команда не запустится. Можно выделить и запустить сразу несколько команд или даже все команды скрипта. Все команды скрипта можно выделить с помощью сочетания клавиш <code>Ctrl</code> + <code>A</code> на Windows и Linux, <code>Cmd</code> + <code>A</code> на macOS <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Как только вы запустите команду (или несколько команд), соответствующие строчки кода появятся в <strong>2 - R Console</strong>, как будто бы вы запускали их прямо там.</p>
 <p>Обычно в консоли удобно что-то писать, чтобы быстро что-то посчитать. Скрипты удобнее при работе с длинными командами и как способ сохранения написанного кода для дальнейшей работы. Для сохранения скрипта нажмите <code>File - Save As...</code>. R скрипты сохраняются с разрешением <em>.R</em>, но по своей сути это просто текстовые файлы, которые можно открыть и модифицировать в любом текстовом редакторе а-ля “Блокнот”.</p>
 <p><strong>3 - Workspace and History</strong> – здесь можно увидеть переменные. Это поле будет автоматически обновляться по мере того, как Вы будете запускать строчки кода и создавать новые переменные. Еще там есть вкладка с историей всех команд, которые были запущены.</p>
@@ -557,10 +557,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
+<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> детали синтаксиса
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Разделитель дробной части – точка, а не запятая. Если вы напишите то же самое с запятой, то получите ошибку:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">^</span> <span class="dv">0</span>,<span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in parse(text = input): &lt;text&gt;:1:7: unexpected ','
+1: 16 ^ 0,
+          ^</code></pre>
+</div>
+</div>
+<p>А вот пробелы между числами и оператором не важны: можете их ставить в любом количестве или вообще не ставить. Тут вам не Python, где неправильное количество отступов приводит к ошибке. В R пробелы не важны, но лучше их ставить, чтобы код был более читаемым. Этот и подобные вопросы касаются <strong>стиля</strong> написания кода. Какой-то один стиль в R не принят, но есть несколько общепринятых рекомендаций, которые мы будем использовать в этом учебнике. Самые известные стили – это <a href="https://style.tidyverse.org/">tidyverse style guide</a> и <a href="https://google.github.io/styleguide/Rguide.html">Google R Style Guide</a>, которые не особо сильно отличаются друг от друга.</p>
+</div>
+</div>
 <p>Ну а если нет, то можете воспользоваться специальной <strong>функцией</strong>: это обычно какие-то буквенные символы с круглыми скобками сразу после названия функции. Мы подаем на вход (внутрь скобочек) какие-то данные, внутри этих функций происходят какие-то вычисления, которые выдает в ответ какие-то другие данные (или же функция записывает файл, рисует график и т.д.).</p>
 <p>Вот, например, функция для корня:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
@@ -571,16 +593,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Осторожно!
+<em>Осторожно:</em> R – язык с чувствительностью к регистру
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>R – case-sensitive язык, т.е. регистр важен. SQRT(16) не будет работать.</p>
+<p>R – <strong>язык с чувствительностью к регистру</strong> <em>(case-sensitive language)</em>, т.е. регистр важен. <code>SQRT(16)</code> не будет работать:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SQRT</span>(<span class="dv">16</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>Error in SQRT(16): could not find function "SQRT"</code></pre>
+</div>
+</div>
 </div>
 </div>
 <p>А вот так выглядит функция логарифма:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.079442</code></pre>
 </div>
@@ -595,12 +623,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>То есть если возвести 2 в степень 3 у нас будет 8:</p>
 <p><span class="math inline">\(2^3 = 8\)</span></p>
 <p>Только наша функция считает все как-то не так.</p>
-<p>Чтобы понять, что происходит, нам нужно залезть в хэлп этой функции:</p>
+<p>Чтобы понять, что происходит, нам нужно залезть в документацию по этой функции:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>?log</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>?log</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Справа внизу в RStudio появится вот такое окно, в котором можно прочитать <strong>документацию <em>(documentation)</em></strong> по выбранной функции:</p>
 <p><img src="images/010-intro_screen_use_help.png" class="img-fluid" width="400"></p>
+<p>Другой способ вызвать документацию по функции – выделить название функции и нажать <code>F1</code>.</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -617,35 +646,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>В верхней части документации (<em>Usage</em>) функция прописана со всеми используемыми аргументами (arguments). Если через знак <code>=</code> для этих аргументов что-то прописано, то это означает, что эти параметры имеют значения по умолчанию.</p>
 <p>Действительно, у функции <code>log()</code> есть еще аргумент <code>base =</code>. По умолчанию он равен числу Эйлера (2.7182818…), т.е. функция считает натуральный логарифм. В большинстве функций R есть какой-то основной аргумент – данные в том или ином формате, а есть и дополнительные аргументы, которые можно прописывать вручную, если значения по умолчанию вас не устраивают. Обычно эти дополнительные аргументы – это параметры функции, которые задают то, как именно функция работает.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>…или просто (если вы уверены в порядке переменных):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Более того, вы можете использовать результат выполнения одних функций в качестве аргумента для других:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="fu">sqrt</span>(<span class="dv">4</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="fu">sqrt</span>(<span class="dv">4</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Если эксплицитно писать имена аргументов, то их порядок в функции не важен:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>А еще можно писать имена аргументов не полностью, если они не совпадают с другими:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">b =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">b =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -663,7 +692,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="callout-body-container callout-body">
 <p>Арифметические знаки, которые мы использовали: <code>+</code>,<code>-</code>,<code>/</code>,<code>^</code> и т.д. называются <strong>операторами</strong> и на самом деле тоже являются функциями:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
@@ -709,7 +738,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Главное, помните: загуглить работающий ответ всегда недостаточно. Надо понять, как и почему решение работает. Иначе что-то обязательно пойдет не так.</p>
-<p>Кроме того, правильно загуглить проблему – не так уж и просто. Это отдельное искусство, которое необходимо освоить любому, кто занимается программированием: у меня быстро находить ответ на вопрос в интернете. Это не шутка!</p>
+<p>Кроме того, правильно загуглить проблему – не так уж и просто. Это отдельное искусство, которое необходимо освоить любому, кто занимается программированием: умение быстро находить ответ на вопрос в интернете. Это не шутка!</p>
 <div class="callout callout-style-simple callout-caution no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -732,7 +761,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2.6" class="anchored" data-anchor-id="sec-variables"><span class="header-section-number">2.6</span> Переменные</h2>
 <p>Важная штука в программировании на практически любом языке – возможность сохранять значения в <strong>переменных <em>(variables)</em></strong>. В R это обычно делается с помощью вот этих символов: <code>&lt;-</code> (но можно использовать и обычное <code>=</code>, хотя это не очень принято). Для этого есть удобное сочетание клавиш: нажмите одновременно <code>Alt</code> + <code>-</code> (или <code>option</code> + <code>-</code> в macOS).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -747,7 +776,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Заметьте, при присвоении результат вычисления не выводится в консоль! Если опустить детали, то обычно результат выполнения команды либо выводится в консоль (и не сохраняется), либо записывается в переменную (но тогда не показывается в консоли).</p>
 <p>Чтобы вывести в консоль содержание существующей переменной, просто введите ее название:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -771,8 +800,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Можно: - <code>new_variable</code> - <code>.new.variable</code> - <code>var_2</code></p>
 <p>На самом деле, можно создавать переменные с невалидными именами. Такие названия нужно обрамлять бэктиками (`):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
@@ -797,25 +826,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/010-intro_env.png" class="img-fluid"></p>
 <p>Теперь использовать переменные в функциях и просто вычислениях:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">^</span> a <span class="sc">+</span> a <span class="sc">*</span> a</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">^</span> a <span class="sc">+</span> a <span class="sc">*</span> a</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(b, a)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(b, a)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Удалять переменные можно с помощью функции <code>rm()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> a <span class="sc">^</span> b</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>e</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> a <span class="sc">^</span> b</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>e</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 256</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(e)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>e <span class="co">#переменной больше нет, возвращает ошибку</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(e)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>e <span class="co">#переменной больше нет, возвращает ошибку</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'e' not found</code></pre>
 </div>
@@ -825,15 +854,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2.7" class="anchored" data-anchor-id="sec-logic"><span class="header-section-number">2.7</span> Логические операторы</h2>
 <p>Вы можете сравнивать разные переменные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Заметьте, что сравнивая две переменные мы используем два знака равно <code>==</code>, а не один <code>=</code>. Иначе это будет означать присвоение.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> b</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> b</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -855,34 +884,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Иногда нам нужно проверить на <strong><em>не</em></strong>равенство:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">!=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">!=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Восклицательный язык в программировании вообще и в R в частности стандартно означает отрицание.</p>
+<p>Восклицательный знак в программировании вообще и в R в частности стандартно означает отрицание.</p>
 <p>Еще мы можем сравнивать на больше/меньше:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -908,11 +937,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="callout-body-container callout-body">
 <p>Если число выглядит как целое, еще не факт, что это integer. Внутри оно может храниться как дробное, но, как я уже написал, это обычно не так важно. Но если очень нужно сделать именно integer, при создании числа можно поставить в конце <code>L</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(<span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(<span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(5L)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(5L)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -931,7 +960,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="callout-body-container callout-body">
 <p>Про <em>double</em> есть еще один маленький секрет. Дело в том, что дробные числа хранятся в R как <a href="https://ru.wikipedia.org/wiki/Число_двойной_точности">числа с плавающей запятой двойной точности</a> (отсюда и название – <strong><em>“double”</em>,</strong> т.е. <strong><em>“double precision”</em>).</strong> Да-да, компьютеры неточные! Дробные числа в компьютере могут быть записаны только с определенной степенью точности, поэтому иногда встречаются вот такие вот ситуации:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -941,14 +970,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Обычно это все работает хорошо, но некоторые операции “выпрыгивают” за рамки этой ошибки, отсюда и такое “странное” поведение, которое иногда может возникать при сравнении двух чисел. Если хотите углубиться в этот вопрос, то можете почитать <a href="https://stackoverflow.com/questions/9508518/why-are-these-numbers-not-equal?noredirect=1&amp;lq=1">здесь</a>.</p>
 <p>Это довольно стандартная ситуация, характерная не только для R. Чтобы ее избежать, можно воспользоваться функцией <code>all.equal()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Еще один пример необычного поведения дробных чисел, связанный с их “неточностью”, можно наблюдать в ситуациях, где вы ожидаете ноль, а получаете что-то такое:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.224647e-16</code></pre>
 </div>
@@ -958,7 +987,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Если перед нами очень маленькое число, то вместо того, чтобы писать многочисленные нули, можно записать его как <span class="math inline">\(m\times 10^{n}\)</span> , где <span class="math inline">\(m\)</span> – число от 1 до 10, а <span class="math inline">\(n\)</span> – это отрицательная степень десяти: <span class="math inline">\(10^{-1} = 0.1\)</span>, <span class="math inline">\(10^{-2} = 0.01\)</span>, <span class="math inline">\(10^{-3} = 0.001\)</span>, … , <span class="math inline">\(10^{-16} = 0.0000000000000001\)</span>.</p>
 <p><code>е-16</code> в конце числа – это и есть $10^{-16}$, а <code>1.224647</code> – это множитель <span class="math inline">\(m\)</span>, на который полученное число с очень большим количеством нулей умножается (точнее, только его первые несколько цифр). Получается, что этот множитель не сильно меняет погоды, поэтому когда видите число с <code>е-</code>, нужно смотреть в первую очередь именно на степень. Вот так это число выглядит в родной для нас десятичной записи:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fu">sin</span>(pi), <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fu">sin</span>(pi), <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "0.0000000000000001224647"</code></pre>
 </div>
@@ -966,14 +995,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Эта маленькая дробная часть возникла из-за этой “неточности” хранения дробных чисел и самого числа <span class="math inline">\(\pi\)</span> в компьютере, которую мы обсуждали выше.</p>
 <p>Аналогично маленьким числам, R использует экспоненциальную запись, когда нужно напечатать очень большое число:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.099512e+12</code></pre>
 </div>
 </div>
 <p>Обратите внимание, что здесь у нас <code>e+12</code>, а не <code>e-12</code>, что означает $10^{12}$, а не $10^{-12}$. То есть перед нами теперь <span class="math inline">\(1.099512\times 10^{12}\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "1099511627776"</code></pre>
 </div>
@@ -986,19 +1015,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="2.8.2" class="anchored" data-anchor-id="sec-type_character"><span class="header-section-number">2.8.2</span> Строковый тип</h3>
 <p><strong>Строковые <em>(character)</em></strong> данные – это набор букв, цифр и символов. Чтобы создать строковую переменную, нужные знаки обособляются кавычками.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="st">"Всем привет!"</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="st">"Всем привет!"</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Всем привет!"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <p>Как и в <em>Python</em>, можно использовать как <code>"</code>, так и <code>'</code> (что удобно, когда строчка внутри уже содержит какие-то кавычки).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"</code></pre>
 </div>
@@ -1006,25 +1035,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Главное, открывать и закрывать кавычки одинаковыми кавычками ( <code>"</code> или <code>'</code>)</p>
 <p>Чтобы соединить несколько строковых переменных вместе, можно воспользоваться функцией <code>paste()</code><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I love R"</code></pre>
 </div>
 </div>
 <p>По умолчанию функция <code>paste()</code> соединяет строки пробелами, но разделитель можно настроить параметром <code>sep =</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">"_&lt;3_"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">"_&lt;3_"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I_&lt;3_love_&lt;3_R"</code></pre>
 </div>
 </div>
 <p>Чтобы соединять строки, так сказать, “без ничего”, нужно поставить <code>sep = ""</code> или же воспользоваться функцией <code>paste0()</code> специально для этого конкретного случая:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "IloveR"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "IloveR"</code></pre>
 </div>
@@ -1034,14 +1063,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="2.8.3" class="anchored" data-anchor-id="sec-type_logical"><span class="header-section-number">2.8.3</span> Логический тип</h3>
 <p><strong>Логические <em>(logical)</em></strong> данные – это просто <code>TRUE</code> или <code>FALSE</code>. То же самое, что и <em>boolean</em> тип в других языках программирования</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1058,35 +1087,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="callout-body-container callout-body">
 <p>Вообще, можно еще писать <code>T</code> и <code>F</code> (но не <code>True</code> и <code>False</code>!)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> T</span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> F</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> T</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> F</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Это плохая практика: R защищает от перезаписи переменные <code>TRUE</code> и <code>FALSE</code>, но не защищает от этого <code>T</code> и <code>F</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in TRUE &lt;- FALSE: invalid (do_set) left-hand side to assignment</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a>T</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>T</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Теперь удалим эту переменную <code>T</code> от греха подальше иначе все перестанет работать при ее использовании:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <p>Мы уже встречались с логическими значениями при сравнении двух числовых переменных. Теперь вы можете догадаться, что результаты сравнения, например, числовых или строковых переменных, можно тоже сохранять в переменные!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> a <span class="sc">==</span> b</span>
-<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> a <span class="sc">==</span> b</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1094,53 +1123,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Это нам очень понадобится, когда мы будем работать с реальными данными: нам нужно будет постоянно вытаскивать какие-то данные из датасета, что как раз и построено на игре со сравнением переменных.</p>
 <p>Чтобы этим хорошо уметь пользоваться, нам нужно еще освоить как работать с логическими операторами. Про один мы немного уже говорили – это логическое НЕ (<code>!</code>). <code>!</code> превращает <code>TRUE</code> в <code>FALSE</code>, а <code>FALSE</code> в <code>TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!!</span>t1 <span class="co">#Двойное отрицание!</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!!</span>t1 <span class="co">#Двойное отрицание!</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Еще есть логическое И (выдаст <code>TRUE</code> только в том случае если обе переменные <code>TRUE</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>А еще логическое ИЛИ (выдаст <code>TRUE</code> в случае если хотя бы одна из переменных <code>TRUE</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1159,7 +1188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Если кому-то вдруг понадобится другое ИЛИ (строгое ЛИБО) – есть функция <code>xor()</code>, принимающая два аргумента и возвращая <code>TRUE</code> только в том случае, если ровно один из двух аргументов равен <code>TRUE</code>. Но на практике она нужна очень редко, тогда как логические И и ИЛИ нужны очень часто: например, вам нужно отобрать только респондентов от 18 до 25, для этого нужно сделать два сравнения: что возраст больше 18 и что возраст меньше 25, после чего соединить два сравнения логическим И.</p>
 </div>
 </div>
-<p>Итак, мы только что разобрались с самой занудной (хотя и важной) частью - с основными типа данных в R и как с ними работать<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Пора переходить к чему-то более интересному и специфическому для R. Вперед к ВЕКТОРАМ!</p>
+<p>Итак, мы только что разобрались с самой занудной (хотя и важной) частью - с основными типами данных в R и как с ними работать<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>. Пора переходить к чему-то более интересному и специфическому для R. Вперед к ВЕКТОРАМ!</p>
 
 
 </section>
