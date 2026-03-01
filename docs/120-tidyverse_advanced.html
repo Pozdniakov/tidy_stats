@@ -559,7 +559,7 @@ dbl (3): ...1, Height, Weight
 9 &lt;NA&gt;         NaN  </code></pre>
 </div>
 </div>
-<p>На входе в функции <code>bind_rows()</code> и <code>bind_cold()</code> можно подавать как сами датафреймы или тибблы через запятую, так и список из датафреймов/тибблов.</p>
+<p>На входе в функции <code>bind_rows()</code> и <code>bind_cols()</code> можно подавать как сами датафреймы или тибблы через запятую, так и список из датафреймов/тибблов.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>heroes_list_of_df <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">DC =</span> dc, </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">Marvel =</span> marvel, </span>
@@ -989,7 +989,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 3 &lt;NA&gt;    375.   182   129. </code></pre>
 </div>
 </div>
-<p>Или длину строк для строковых колонок. Для этого нам понадобится вспомнить, как создавать анонимные функции (@ref(anon_f)).</p>
+<p>Или длину строк для строковых колонок. Для этого нам понадобится вспомнить, как создавать анонимные функции (<a href="050-functional.html#sec-anon_f"><span>Глава&nbsp;8.5.2</span></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
@@ -1041,7 +1041,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Вот нам и понадобился список функций (@ref(functions_objects))!</p>
+<p>Вот нам и понадобился список функций (<a href="050-functional.html#sec-functions_objects"><span>Глава&nbsp;8.4</span></a>)!</p>
 </blockquote>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
@@ -1109,7 +1109,7 @@ Supply arguments directly to `.fns` through an anonymous function instead.
 </section>
 <section id="sec-purrr" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="sec-purrr"><span class="header-section-number">11.4</span> Функциональное программирование: <code>purrr</code></h2>
-<p><code>purrr</code> – это пакет для функционального программирования в tidyverse. Как и многие пакеты tidyverse, <code>purrr</code> пытается заменить собой базовый функционал R на более понятный и удобный. В данном случае, речь в первую очередь идет о функциях семейства <code>apply()</code>, с которыми мы работали ранее (@ref(apply_f)).</p>
+<p><code>purrr</code> – это пакет для функционального программирования в tidyverse. Как и многие пакеты tidyverse, <code>purrr</code> пытается заменить собой базовый функционал R на более понятный и удобный. В данном случае, речь в первую очередь идет о функциях семейства <code>apply()</code>, с которыми мы работали ранее (<a href="050-functional.html#sec-apply_f"><span>Глава&nbsp;8.5</span></a>).</p>
 <p>Давайте вспомним, как работает <code>lapply()</code>. В качестве первого аргумента функция <code>lapply()</code> принимает список (или то, что может быть в него превращено, например, датафрейм), в качестве второго - функцию, которая будет применена к каждому элементу списка. На выходе мы получим список такой же длины.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(heroes, class)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>

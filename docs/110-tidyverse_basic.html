@@ -391,6 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#выбор-колонок-dplyrselect" id="toc-выбор-колонок-dplyrselect" class="nav-link" data-scroll-target="#выбор-колонок-dplyrselect"><span class="toc-section-number">10.6.1</span>  Выбор колонок: <code>dplyr::select()</code></a></li>
   <li><a href="#sec-tidyselect" id="toc-sec-tidyselect" class="nav-link" data-scroll-target="#sec-tidyselect"><span class="toc-section-number">10.6.2</span>  Мини-язык tidyselect для выбора колонок</a></li>
+  <li><a href="#sec-tidy_relocate" id="toc-sec-tidy_relocate" class="nav-link" data-scroll-target="#sec-tidy_relocate"><span class="toc-section-number">10.6.3</span>  Перестановка колонок: <code>dplyr::relocate()</code></a></li>
   </ul></li>
   <li><a href="#sec-tidy_select_rows" id="toc-sec-tidy_select_rows" class="nav-link" data-scroll-target="#sec-tidy_select_rows"><span class="toc-section-number">10.7</span>  Работа со строками тиббла</a>
   <ul class="collapse">
@@ -738,7 +739,7 @@ dbl (3): ...1, Height, Weight
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Обратите внимание, если в названии колонки присутствует пробел или, например, колонка начинается с цифры или точки и цифры, то это синтаксически невалидное имя (@ref(variables)). Это не значит, что такие названия колонок недопустимы. Но такие названия колонок нужно обособлять ` грависом (правый штрих, на клавиатуре находится там же где и буква ё и ~).</p>
+<p>Обратите внимание, если в названии колонки присутствует пробел или, например, колонка начинается с цифры или точки и цифры, то это синтаксически невалидное имя (<a href="010-intro.html#sec-variables"><span>Глава&nbsp;2.6</span></a>). Это не значит, что такие названия колонок недопустимы. Но такие названия колонок нужно обособлять ` грависом (правый штрих, на клавиатуре находится там же где и буква ё и ~).</p>
 <p>Еще обратите внимание на то, что функции tidyverse не изменяют сами изначальные тибблы/датафреймы. Это означает, что если вы хотите полученный результат сохранить, то нужно добавить присвоение:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>heroes_some_cols <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
@@ -914,7 +915,7 @@ dbl (3): ...1, Height, Weight
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Впрочем, для перестановки колонок удобнее использовать специальную функцию <code>relocate()</code> (@ref(tidy_relocate)) Можно даже выбирать колонки по паттернам в названиях. Например, с помощью <code>ends_with()</code> можно выбрать все колонки, заканчивающиеся одинаковым суффиксом:</p>
+<p>Впрочем, для перестановки колонок удобнее использовать специальную функцию <code>relocate()</code> (<a href="#sec-tidy_relocate"><span>Глава&nbsp;10.6.3</span></a>). Можно даже выбирать колонки по паттернам в названиях. Например, с помощью <code>ends_with()</code> можно выбрать все колонки, заканчивающиеся одинаковым суффиксом:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"color"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -974,7 +975,7 @@ dbl (3): ...1, Height, Weight
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Ну и наконец, можно выбирать по содержимому колонок с помощью <code>where()</code>. Это напоминает применение <code>sapply()</code>(@ref(apply_other)) на датафрейме для индексирования колонок: в качестве аргумента для <code>where</code> принимается функция, которая применяется для каждой из колонок, после чего выбираются только те колонки, для которых было получено <code>TRUE</code>.</p>
+<p>Ну и наконец, можно выбирать по содержимому колонок с помощью <code>where()</code>. Это напоминает применение <code>sapply()</code>(<a href="050-functional.html#sec-apply_other"><span>Глава&nbsp;8.5.3</span></a>) на датафрейме для индексирования колонок: в качестве аргумента для <code>where</code> принимается функция, которая применяется для каждой из колонок, после чего выбираются только те колонки, для которых было получено <code>TRUE</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1082,7 +1083,9 @@ dbl (3): ...1, Height, Weight
 # ℹ 2 more variables: Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>###Перестановка колонок: <code>dplyr::relocate()</code> {#sec-tidy_relocate}</p>
+</section>
+<section id="sec-tidy_relocate" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="sec-tidy_relocate"><span class="header-section-number">10.6.3</span> Перестановка колонок: <code>dplyr::relocate()</code></h3>
 <p>Для изменения порядка колонок можно использовать функцию <code>relocate()</code>. Она тоже работает похожим образом на <code>select()</code> и <code>rename()</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Как и <code>rename()</code>, функция <code>relocate()</code> не выкидывает неиспользованные колонки:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
@@ -1257,11 +1260,11 @@ Absorbing Man
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name      Gender `Eye color` Race  `Hair color` Height Publisher      
-  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;          
-1   537 Question  Male   blue        Human Blond           188 "DC Comics"    
-2   286 Godzilla  &lt;NA&gt;   &lt;NA&gt;        Kaiju &lt;NA&gt;            108 ""             
-3     9 Agent Bob Male   brown       Human Brown           178 "Marvel Comics"
+   ...1 name          Gender `Eye color` Race      `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   251 Fallen One II Male   black       &lt;NA&gt;      Blue             NA Marvel C…
+2   232 Dr Manhattan  Male   white       Human / … No Hair          NA DC Comics
+3   312 Hawkeye       Male   blue        Human     Blond           191 Marvel C…
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1271,15 +1274,15 @@ Absorbing Man
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 11
-   ...1 name             Gender `Eye color` Race   `Hair color` Height Publisher
-  &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
-1     6 Adam Monroe      Male   blue        &lt;NA&gt;   Blond            NA NBC - He…
-2   515 Peter Petrelli   Male   &lt;NA&gt;        &lt;NA&gt;   &lt;NA&gt;             NA NBC - He…
-3   563 Robin            Male   blue        Human  Black           178 DC Comics
-4   622 Spider-Man       Male   hazel       Human  Brown           178 Marvel C…
-5   101 Black Knight III Male   brown       Human  Brown           183 Marvel C…
-6   526 Power Man        Male   &lt;NA&gt;        Mutant &lt;NA&gt;             NA Marvel C…
-7   652 T-800            Male   red         Cyborg &lt;NA&gt;             NA Dark Hor…
+   ...1 name              Gender `Eye color` Race  `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   246 Evil Deadpool     Male   white       Muta… Red             188 Marvel C…
+2   413 Lobo              Male   red         Czar… Black           229 DC Comics
+3   111 Blade             Male   brown       Vamp… Black           188 Marvel C…
+4   299 Green Goblin II   Male   blue        &lt;NA&gt;  Auburn          178 Marvel C…
+5   269 Franklin Storm    &lt;NA&gt;   blue        &lt;NA&gt;  Grey            188 Marvel C…
+6   233 Drax the Destroy… Male   red         Huma… No Hair         193 Marvel C…
+7   428 Man-Thing         Male   red         &lt;NA&gt;  No Hair         213 Marvel C…
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1289,18 +1292,18 @@ Absorbing Man
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name          Gender `Eye color`    Race  `Hair color` Height Publisher
-   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
- 1   135 Brainiac      Male   green          Andr… No Hair         198 DC Comics
- 2   661 Thor          Male   blue           Asga… Blond           198 Marvel C…
- 3    22 Angel         Male   blue           &lt;NA&gt;  Blond           183 Marvel C…
- 4   443 Mephisto      Male   white          &lt;NA&gt;  Black           198 Marvel C…
- 5   546 Razor-Fist II Male   blue           &lt;NA&gt;  No Hair         191 Marvel C…
- 6   231 Dormammu      Male   yellow         &lt;NA&gt;  No Hair         185 Marvel C…
- 7   458 Mister Knife  Male   blue           Spar… Brown            NA Marvel C…
- 8   480 Mystique      Female yellow (witho… Muta… Red / Orange    178 Marvel C…
- 9   326 Hit-Girl      Female &lt;NA&gt;           Human &lt;NA&gt;             NA Icon Com…
-10   171 Cheetah       Female green          Human Blond           163 DC Comics
+    ...1 name            Gender `Eye color` Race   `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   182 Colin Wagner    Male   grey        &lt;NA&gt;   Brown            NA HarperCo…
+ 2    44 Armor           Female black       &lt;NA&gt;   Black           163 Marvel C…
+ 3   338 Iceman          Male   brown       Mutant Brown           173 Marvel C…
+ 4   639 Steppenwolf     Male   red         New G… Black           183 DC Comics
+ 5   677 Trigon          Male   yellow      God /… Black            NA DC Comics
+ 6   607 Skaar           Male   green       &lt;NA&gt;   Black           198 Marvel C…
+ 7   609 Snowbird        Female white       &lt;NA&gt;   Blond           178 Marvel C…
+ 8   203 Darkseid        Male   red         New G… No Hair         267 DC Comics
+ 9   221 Doctor Doom     Male   brown       Human  Brown           201 Marvel C…
+10   301 Green Goblin IV Male   green       &lt;NA&gt;   Brown           178 Marvel C…
 # ℹ 724 more rows
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
@@ -1352,7 +1355,7 @@ Absorbing Man
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Для выбора колонок в <code>drop_na()</code> используется tidyselect, с которым мы недавно познакомились (@ref(tidyselect)).</p>
+<p>Для выбора колонок в <code>drop_na()</code> используется tidyselect, с которым мы недавно познакомились (<a href="#sec-tidyselect"><span>Глава&nbsp;10.6.2</span></a>).</p>
 </section>
 <section id="sec-tidy_arrange" class="level3" data-number="10.7.5">
 <h3 data-number="10.7.5" class="anchored" data-anchor-id="sec-tidy_arrange"><span class="header-section-number">10.7.5</span> Сортировка строк: <code>dplyr::arrange()</code></h3>
@@ -1470,7 +1473,7 @@ Absorbing Man
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Внутри <code>mutate()</code> и <code>transmute()</code> мы можем использовать либо векторизованные операции (длина новой колонки должна равняться длине датафрейма), либо операции, которые возвращают одно значение. В последнем случае значение будет одинаковым на всю колонку, т.е. будет работать правило ресайклинга (@ref(recycling)):</p>
+<p>Внутри <code>mutate()</code> и <code>transmute()</code> мы можем использовать либо векторизованные операции (длина новой колонки должна равняться длине датафрейма), либо операции, которые возвращают одно значение. В последнем случае значение будет одинаковым на всю колонку, т.е. будет работать правило ресайклинга (<a href="013-vector.html#sec-recycling"><span>Глава&nbsp;3.4</span></a>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(name, <span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1502,7 +1505,7 @@ Caused by error:
 ! `one_and_two` must be size 734 or 1, not 2.</code></pre>
 </div>
 </div>
-<p>Это не баг, а фича: авторы пакета <code>dplyr</code> считают, что ресайклинг кратных друг другу векторов — это слишком удобное место для выстрелов себе в ногу. Поэтому в таких случаях разработчики <code>dplyr</code> рекомендуют использовать функцию <code>rep()</code>, знакомую нам уже очень давно (@ref(atomic)).</p>
+<p>Это не баг, а фича: авторы пакета <code>dplyr</code> считают, что ресайклинг кратных друг другу векторов — это слишком удобное место для выстрелов себе в ногу. Поэтому в таких случаях разработчики <code>dplyr</code> рекомендуют использовать функцию <code>rep()</code>, знакомую нам уже очень давно (<a href="013-vector.html#sec-atomic"><span>Глава&nbsp;3.1</span></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">one_and_two =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(.)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1789,12 +1792,12 @@ dplyr 1.1.0.
 <h2 data-number="10.10" class="anchored" data-anchor-id="заключение"><span class="header-section-number">10.10</span> Заключение</h2>
 <p>Мы познакомились с основными принципами и функциями tidyverse. Этих функций, как можно заметить, очень, очень много, каждая из которых посвящена отдельному действию для работы с датафреймами. Чтобы не запутаться во всем многообразии, нужно запомнить самые основные из них:</p>
 <ul>
-<li><p><code>select</code>()` – для выбора строк,</p></li>
+<li><p><code>select()</code> – для выбора строк,</p></li>
 <li><p><code>filter()</code> – для выбора строк по условию,</p></li>
 <li><p><code>mutate()</code> – для создания новых колонок,</p></li>
 <li><p><code>group_by()</code> и <code>summarise()</code> для аггрегации данных.</p></li>
 </ul>
-<p>Эти функции достаточно гибкие, чтобы их хватало для большинства задач работы с данными. Однако важный принципп tidyverse – это максимальная эксплицитность: если вам нужно, скажем, поменять местами колонки, вы используете специальную функцию <code>relocate()</code>, которая предназначено специально для этой задачи.</p>
+<p>Эти функции достаточно гибкие, чтобы их хватало для большинства задач работы с данными. Однако важный принцип tidyverse – это максимальная эксплицитность: если вам нужно, скажем, поменять местами колонки, вы используете специальную функцию <code>relocate()</code>, которая предназначена специально для этой задачи.</p>
 <p>Такой код очень легко читается, да и тому кто использует tidyverse для написания кода позволяет мыслить более четко.</p>
 
 
