@@ -398,21 +398,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </h2>
 <p>Для примера возьмем датасет <code>heroes</code>, вытащим из него колонки <code>Height</code> и <code>Weight</code> как векторы и применим на них функцию <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: пакет 'ggplot2' был собран под R версии 4.4.3</code></pre>
-</div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span>
+<span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
 <span>                   na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
-e.g.:
-  dat &lt;- vroom(...)
-  problems(dat)</code></pre>
-</div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">heroes</span><span class="op">$</span><span class="va">Height</span>, <span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">heroes</span><span class="op">$</span><span class="va">Height</span>, <span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="220-base_viz_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -420,322 +411,34 @@ e.g.:
 <p>В этом случае будет нарисована <strong>диаграмма рассеяния (точечная диаграмма, <em>scatterplot),</em></strong> где каждая точка задается парой значений из этих векторов: значения из колонки <code>Height</code> используются как координаты по оси <em>x</em>, а соответствующие значения колонки <code>Weight</code> как координаты по оси <em>y</em>.</p>
 <p>Функция <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> - это тоже <strong>универсальная <em>(generic)</em></strong> функция, как и <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>(см. <a href="210-desc_stats.html#sec-summary"><span>Глава&nbsp;12.7</span></a>). В качестве аргумента можете ей скормить просто один вектор, матрицу, датафрейм. Давайте попробуем использовать функцию <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> на встроенном датафрейме <code>iris</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
-1            5.1         3.5          1.4         0.2     setosa
-2            4.9         3.0          1.4         0.2     setosa
-3            4.7         3.2          1.3         0.2     setosa
-4            4.6         3.1          1.5         0.2     setosa
-5            5.0         3.6          1.4         0.2     setosa
-6            5.4         3.9          1.7         0.4     setosa
-7            4.6         3.4          1.4         0.3     setosa
-8            5.0         3.4          1.5         0.2     setosa
-9            4.4         2.9          1.4         0.2     setosa
-10           4.9         3.1          1.5         0.1     setosa
-11           5.4         3.7          1.5         0.2     setosa
-12           4.8         3.4          1.6         0.2     setosa
-13           4.8         3.0          1.4         0.1     setosa
-14           4.3         3.0          1.1         0.1     setosa
-15           5.8         4.0          1.2         0.2     setosa
-16           5.7         4.4          1.5         0.4     setosa
-17           5.4         3.9          1.3         0.4     setosa
-18           5.1         3.5          1.4         0.3     setosa
-19           5.7         3.8          1.7         0.3     setosa
-20           5.1         3.8          1.5         0.3     setosa
-21           5.4         3.4          1.7         0.2     setosa
-22           5.1         3.7          1.5         0.4     setosa
-23           4.6         3.6          1.0         0.2     setosa
-24           5.1         3.3          1.7         0.5     setosa
-25           4.8         3.4          1.9         0.2     setosa
-26           5.0         3.0          1.6         0.2     setosa
-27           5.0         3.4          1.6         0.4     setosa
-28           5.2         3.5          1.5         0.2     setosa
-29           5.2         3.4          1.4         0.2     setosa
-30           4.7         3.2          1.6         0.2     setosa
-31           4.8         3.1          1.6         0.2     setosa
-32           5.4         3.4          1.5         0.4     setosa
-33           5.2         4.1          1.5         0.1     setosa
-34           5.5         4.2          1.4         0.2     setosa
-35           4.9         3.1          1.5         0.2     setosa
-36           5.0         3.2          1.2         0.2     setosa
-37           5.5         3.5          1.3         0.2     setosa
-38           4.9         3.6          1.4         0.1     setosa
-39           4.4         3.0          1.3         0.2     setosa
-40           5.1         3.4          1.5         0.2     setosa
-41           5.0         3.5          1.3         0.3     setosa
-42           4.5         2.3          1.3         0.3     setosa
-43           4.4         3.2          1.3         0.2     setosa
-44           5.0         3.5          1.6         0.6     setosa
-45           5.1         3.8          1.9         0.4     setosa
-46           4.8         3.0          1.4         0.3     setosa
-47           5.1         3.8          1.6         0.2     setosa
-48           4.6         3.2          1.4         0.2     setosa
-49           5.3         3.7          1.5         0.2     setosa
-50           5.0         3.3          1.4         0.2     setosa
-51           7.0         3.2          4.7         1.4 versicolor
-52           6.4         3.2          4.5         1.5 versicolor
-53           6.9         3.1          4.9         1.5 versicolor
-54           5.5         2.3          4.0         1.3 versicolor
-55           6.5         2.8          4.6         1.5 versicolor
-56           5.7         2.8          4.5         1.3 versicolor
-57           6.3         3.3          4.7         1.6 versicolor
-58           4.9         2.4          3.3         1.0 versicolor
-59           6.6         2.9          4.6         1.3 versicolor
-60           5.2         2.7          3.9         1.4 versicolor
-61           5.0         2.0          3.5         1.0 versicolor
-62           5.9         3.0          4.2         1.5 versicolor
-63           6.0         2.2          4.0         1.0 versicolor
-64           6.1         2.9          4.7         1.4 versicolor
-65           5.6         2.9          3.6         1.3 versicolor
-66           6.7         3.1          4.4         1.4 versicolor
-67           5.6         3.0          4.5         1.5 versicolor
-68           5.8         2.7          4.1         1.0 versicolor
-69           6.2         2.2          4.5         1.5 versicolor
-70           5.6         2.5          3.9         1.1 versicolor
-71           5.9         3.2          4.8         1.8 versicolor
-72           6.1         2.8          4.0         1.3 versicolor
-73           6.3         2.5          4.9         1.5 versicolor
-74           6.1         2.8          4.7         1.2 versicolor
-75           6.4         2.9          4.3         1.3 versicolor
-76           6.6         3.0          4.4         1.4 versicolor
-77           6.8         2.8          4.8         1.4 versicolor
-78           6.7         3.0          5.0         1.7 versicolor
-79           6.0         2.9          4.5         1.5 versicolor
-80           5.7         2.6          3.5         1.0 versicolor
-81           5.5         2.4          3.8         1.1 versicolor
-82           5.5         2.4          3.7         1.0 versicolor
-83           5.8         2.7          3.9         1.2 versicolor
-84           6.0         2.7          5.1         1.6 versicolor
-85           5.4         3.0          4.5         1.5 versicolor
-86           6.0         3.4          4.5         1.6 versicolor
-87           6.7         3.1          4.7         1.5 versicolor
-88           6.3         2.3          4.4         1.3 versicolor
-89           5.6         3.0          4.1         1.3 versicolor
-90           5.5         2.5          4.0         1.3 versicolor
-91           5.5         2.6          4.4         1.2 versicolor
-92           6.1         3.0          4.6         1.4 versicolor
-93           5.8         2.6          4.0         1.2 versicolor
-94           5.0         2.3          3.3         1.0 versicolor
-95           5.6         2.7          4.2         1.3 versicolor
-96           5.7         3.0          4.2         1.2 versicolor
-97           5.7         2.9          4.2         1.3 versicolor
-98           6.2         2.9          4.3         1.3 versicolor
-99           5.1         2.5          3.0         1.1 versicolor
-100          5.7         2.8          4.1         1.3 versicolor
-101          6.3         3.3          6.0         2.5  virginica
-102          5.8         2.7          5.1         1.9  virginica
-103          7.1         3.0          5.9         2.1  virginica
-104          6.3         2.9          5.6         1.8  virginica
-105          6.5         3.0          5.8         2.2  virginica
-106          7.6         3.0          6.6         2.1  virginica
-107          4.9         2.5          4.5         1.7  virginica
-108          7.3         2.9          6.3         1.8  virginica
-109          6.7         2.5          5.8         1.8  virginica
-110          7.2         3.6          6.1         2.5  virginica
-111          6.5         3.2          5.1         2.0  virginica
-112          6.4         2.7          5.3         1.9  virginica
-113          6.8         3.0          5.5         2.1  virginica
-114          5.7         2.5          5.0         2.0  virginica
-115          5.8         2.8          5.1         2.4  virginica
-116          6.4         3.2          5.3         2.3  virginica
-117          6.5         3.0          5.5         1.8  virginica
-118          7.7         3.8          6.7         2.2  virginica
-119          7.7         2.6          6.9         2.3  virginica
-120          6.0         2.2          5.0         1.5  virginica
-121          6.9         3.2          5.7         2.3  virginica
-122          5.6         2.8          4.9         2.0  virginica
-123          7.7         2.8          6.7         2.0  virginica
-124          6.3         2.7          4.9         1.8  virginica
-125          6.7         3.3          5.7         2.1  virginica
-126          7.2         3.2          6.0         1.8  virginica
-127          6.2         2.8          4.8         1.8  virginica
-128          6.1         3.0          4.9         1.8  virginica
-129          6.4         2.8          5.6         2.1  virginica
-130          7.2         3.0          5.8         1.6  virginica
-131          7.4         2.8          6.1         1.9  virginica
-132          7.9         3.8          6.4         2.0  virginica
-133          6.4         2.8          5.6         2.2  virginica
-134          6.3         2.8          5.1         1.5  virginica
-135          6.1         2.6          5.6         1.4  virginica
-136          7.7         3.0          6.1         2.3  virginica
-137          6.3         3.4          5.6         2.4  virginica
-138          6.4         3.1          5.5         1.8  virginica
-139          6.0         3.0          4.8         1.8  virginica
-140          6.9         3.1          5.4         2.1  virginica
-141          6.7         3.1          5.6         2.4  virginica
-142          6.9         3.1          5.1         2.3  virginica
-143          5.8         2.7          5.1         1.9  virginica
-144          6.8         3.2          5.9         2.3  virginica
-145          6.7         3.3          5.7         2.5  virginica
-146          6.7         3.0          5.2         2.3  virginica
-147          6.3         2.5          5.0         1.9  virginica
-148          6.5         3.0          5.2         2.0  virginica
-149          6.2         3.4          5.4         2.3  virginica
-150          5.9         3.0          5.1         1.8  virginica</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
 </div>
 </div>
 <p>Каждая строчка – один цветок ириса, числовые колонки содержат информацию о длине и ширине наружной <em>(sepal)</em> и внутренней <em>(petal)</em> долях околоцветника, в колонке <code>Species</code> содержится название сорта ирисов.</p>
 <!--# КАРТИНКА С ИРИСАМИ??? -->
 <p>Давайте уберем последнюю колонку, чтобы у нас остались только числовые колонки:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    Sepal.Length Sepal.Width Petal.Length Petal.Width
-1            5.1         3.5          1.4         0.2
-2            4.9         3.0          1.4         0.2
-3            4.7         3.2          1.3         0.2
-4            4.6         3.1          1.5         0.2
-5            5.0         3.6          1.4         0.2
-6            5.4         3.9          1.7         0.4
-7            4.6         3.4          1.4         0.3
-8            5.0         3.4          1.5         0.2
-9            4.4         2.9          1.4         0.2
-10           4.9         3.1          1.5         0.1
-11           5.4         3.7          1.5         0.2
-12           4.8         3.4          1.6         0.2
-13           4.8         3.0          1.4         0.1
-14           4.3         3.0          1.1         0.1
-15           5.8         4.0          1.2         0.2
-16           5.7         4.4          1.5         0.4
-17           5.4         3.9          1.3         0.4
-18           5.1         3.5          1.4         0.3
-19           5.7         3.8          1.7         0.3
-20           5.1         3.8          1.5         0.3
-21           5.4         3.4          1.7         0.2
-22           5.1         3.7          1.5         0.4
-23           4.6         3.6          1.0         0.2
-24           5.1         3.3          1.7         0.5
-25           4.8         3.4          1.9         0.2
-26           5.0         3.0          1.6         0.2
-27           5.0         3.4          1.6         0.4
-28           5.2         3.5          1.5         0.2
-29           5.2         3.4          1.4         0.2
-30           4.7         3.2          1.6         0.2
-31           4.8         3.1          1.6         0.2
-32           5.4         3.4          1.5         0.4
-33           5.2         4.1          1.5         0.1
-34           5.5         4.2          1.4         0.2
-35           4.9         3.1          1.5         0.2
-36           5.0         3.2          1.2         0.2
-37           5.5         3.5          1.3         0.2
-38           4.9         3.6          1.4         0.1
-39           4.4         3.0          1.3         0.2
-40           5.1         3.4          1.5         0.2
-41           5.0         3.5          1.3         0.3
-42           4.5         2.3          1.3         0.3
-43           4.4         3.2          1.3         0.2
-44           5.0         3.5          1.6         0.6
-45           5.1         3.8          1.9         0.4
-46           4.8         3.0          1.4         0.3
-47           5.1         3.8          1.6         0.2
-48           4.6         3.2          1.4         0.2
-49           5.3         3.7          1.5         0.2
-50           5.0         3.3          1.4         0.2
-51           7.0         3.2          4.7         1.4
-52           6.4         3.2          4.5         1.5
-53           6.9         3.1          4.9         1.5
-54           5.5         2.3          4.0         1.3
-55           6.5         2.8          4.6         1.5
-56           5.7         2.8          4.5         1.3
-57           6.3         3.3          4.7         1.6
-58           4.9         2.4          3.3         1.0
-59           6.6         2.9          4.6         1.3
-60           5.2         2.7          3.9         1.4
-61           5.0         2.0          3.5         1.0
-62           5.9         3.0          4.2         1.5
-63           6.0         2.2          4.0         1.0
-64           6.1         2.9          4.7         1.4
-65           5.6         2.9          3.6         1.3
-66           6.7         3.1          4.4         1.4
-67           5.6         3.0          4.5         1.5
-68           5.8         2.7          4.1         1.0
-69           6.2         2.2          4.5         1.5
-70           5.6         2.5          3.9         1.1
-71           5.9         3.2          4.8         1.8
-72           6.1         2.8          4.0         1.3
-73           6.3         2.5          4.9         1.5
-74           6.1         2.8          4.7         1.2
-75           6.4         2.9          4.3         1.3
-76           6.6         3.0          4.4         1.4
-77           6.8         2.8          4.8         1.4
-78           6.7         3.0          5.0         1.7
-79           6.0         2.9          4.5         1.5
-80           5.7         2.6          3.5         1.0
-81           5.5         2.4          3.8         1.1
-82           5.5         2.4          3.7         1.0
-83           5.8         2.7          3.9         1.2
-84           6.0         2.7          5.1         1.6
-85           5.4         3.0          4.5         1.5
-86           6.0         3.4          4.5         1.6
-87           6.7         3.1          4.7         1.5
-88           6.3         2.3          4.4         1.3
-89           5.6         3.0          4.1         1.3
-90           5.5         2.5          4.0         1.3
-91           5.5         2.6          4.4         1.2
-92           6.1         3.0          4.6         1.4
-93           5.8         2.6          4.0         1.2
-94           5.0         2.3          3.3         1.0
-95           5.6         2.7          4.2         1.3
-96           5.7         3.0          4.2         1.2
-97           5.7         2.9          4.2         1.3
-98           6.2         2.9          4.3         1.3
-99           5.1         2.5          3.0         1.1
-100          5.7         2.8          4.1         1.3
-101          6.3         3.3          6.0         2.5
-102          5.8         2.7          5.1         1.9
-103          7.1         3.0          5.9         2.1
-104          6.3         2.9          5.6         1.8
-105          6.5         3.0          5.8         2.2
-106          7.6         3.0          6.6         2.1
-107          4.9         2.5          4.5         1.7
-108          7.3         2.9          6.3         1.8
-109          6.7         2.5          5.8         1.8
-110          7.2         3.6          6.1         2.5
-111          6.5         3.2          5.1         2.0
-112          6.4         2.7          5.3         1.9
-113          6.8         3.0          5.5         2.1
-114          5.7         2.5          5.0         2.0
-115          5.8         2.8          5.1         2.4
-116          6.4         3.2          5.3         2.3
-117          6.5         3.0          5.5         1.8
-118          7.7         3.8          6.7         2.2
-119          7.7         2.6          6.9         2.3
-120          6.0         2.2          5.0         1.5
-121          6.9         3.2          5.7         2.3
-122          5.6         2.8          4.9         2.0
-123          7.7         2.8          6.7         2.0
-124          6.3         2.7          4.9         1.8
-125          6.7         3.3          5.7         2.1
-126          7.2         3.2          6.0         1.8
-127          6.2         2.8          4.8         1.8
-128          6.1         3.0          4.9         1.8
-129          6.4         2.8          5.6         2.1
-130          7.2         3.0          5.8         1.6
-131          7.4         2.8          6.1         1.9
-132          7.9         3.8          6.4         2.0
-133          6.4         2.8          5.6         2.2
-134          6.3         2.8          5.1         1.5
-135          6.1         2.6          5.6         1.4
-136          7.7         3.0          6.1         2.3
-137          6.3         3.4          5.6         2.4
-138          6.4         3.1          5.5         1.8
-139          6.0         3.0          4.8         1.8
-140          6.9         3.1          5.4         2.1
-141          6.7         3.1          5.6         2.4
-142          6.9         3.1          5.1         2.3
-143          5.8         2.7          5.1         1.9
-144          6.8         3.2          5.9         2.3
-145          6.7         3.3          5.7         2.5
-146          6.7         3.0          5.2         2.3
-147          6.3         2.5          5.0         1.9
-148          6.5         3.0          5.2         2.0
-149          6.2         3.4          5.4         2.3
-150          5.9         3.0          5.1         1.8</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width
+1          5.1         3.5          1.4         0.2
+2          4.9         3.0          1.4         0.2
+3          4.7         3.2          1.3         0.2
+4          4.6         3.1          1.5         0.2
+5          5.0         3.6          1.4         0.2
+6          5.4         3.9          1.7         0.4</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>, <span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="220-base_viz_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -746,7 +449,7 @@ e.g.:
 <span class="header-section-number">13.2</span> Великая гистограмма</h2>
 <p>Другая распространенная функция — <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code> — <strong>гистограмма (histogram)</strong>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">Weight</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">Weight</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -763,19 +466,19 @@ e.g.:
 <p>Главный вопрос здесь: на какие интервалы мы делим? В зависимости от этого гистограмма может выглядеть очень по-разному.</p>
 <p>Количество интервалов можно задать самостоятельно с помощью аргумента <code>breaks =</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span>, breaks <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span>, breaks <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="220-base_viz_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span>, breaks <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span>, breaks <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="220-base_viz_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span>, breaks <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">weight</span>, breaks <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="220-base_viz_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -793,7 +496,7 @@ e.g.:
 <div class="callout-body-container callout-body">
 <p>По умолчанию, функция <code><a href="https://rdrr.io/r/graphics/hist.html">hist()</a></code> использует <a href="https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%BE_%D0%A1%D1%82%D1%91%D1%80%D0%B4%D0%B6%D0%B5%D1%81%D0%B0"><strong>правило Стёрджеса</strong></a> <strong><em>(Sturges’ rule)</em></strong> для определения количества интервалов гистограммы: <span class="math display">\[\displaystyle n=1+\lfloor \log _{2}N\rfloor\]</span>Здесь <span class="math inline">\(N\)</span> – размер выборки, а <span class="math inline">\(\lfloor \rfloor\)</span> обозначают целую часть числа (т.е. округление вниз). Если мы возьмем вектор <code>weight</code>, длина которого 495, то получим 9 интервалов:</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>, base <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>, base <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9</code></pre>
 </div>
@@ -805,7 +508,7 @@ e.g.:
 <span class="header-section-number">13.3</span> Нестареющий боксплот</h2>
 <p>Ну и закончим на суперзвезде прошлого века под названием <strong>ящик с усами <em>(boxplot with whiskers):</em></strong></p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span>, <span class="va">heroes</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Weight</span> <span class="op">~</span> <span class="va">Gender</span>, <span class="va">heroes</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="220-base_viz_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>

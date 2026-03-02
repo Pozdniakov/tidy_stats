@@ -865,14 +865,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <ul>
-<li>Возведите в квадрат каждое значение вектора <code>vec3</code>.</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]   9  25   4   1  64  16  81 100   9 225   1 121</code></pre>
-</div>
-</div>
-<ul>
 <li>*Возведите в квадрат каждое значение вектора на нечетной позиции и извлеките корень из каждого значения на четной позиции вектора <code>vec3</code>.</li>
 </ul>
 <blockquote class="blockquote">
@@ -898,7 +890,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Создайте вектор <code>vec4</code> со значениями 300, 15, 8, 2, 0, 1, 110, скопировав следующий код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vec4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">15</span>, <span class="fl">8</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">110</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vec4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">300</span>, <span class="fl">15</span>, <span class="fl">8</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">110</span><span class="op">)</span></span>
 <span><span class="va">vec4</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 300  15   8  20   0   1 110</code></pre>
@@ -1109,7 +1101,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">26.8</span> Списки</h2>
 <p>Дан список <code>list1</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>numbers <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, letters <span class="op">=</span> <span class="va">letters</span>, logic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>numbers <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, letters <span class="op">=</span> <span class="va">letters</span>, logic <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">list1</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$numbers
@@ -1194,42 +1186,16 @@ $lupa$logic
 <li>Запустите команду <code>data(mtcars)</code> чтобы загрузить встроенный датафрейм с информацией про автомобили. Каждая строчка датафрейма - модель автомобиля, каждая колонка - отдельная характеристика. Подробнее см. <code><a href="https://rdrr.io/r/datasets/mtcars.html">?mtcars</a></code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
-<span><span class="va">mtcars</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
-Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
-Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
-Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
-Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
-Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
-Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
-Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
-Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 </div>
 <ul>
@@ -1437,39 +1403,13 @@ Volvo 142E     21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 </blockquote>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb wt_kg
-Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4  1188
-Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4  1304
-Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1  1052
-Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1  1458
-Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2  1560
-Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1  1569
-Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4  1619
-Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2  1447
-Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2  1429
-Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4  1560
-Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4  1560
-Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3  1846
-Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3  1692
-Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3  1715
-Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4  2381
-Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4  2460
-Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4  2424
-Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1   998
-Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2   733
-Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1   832
-Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1  1118
-Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2  1597
-AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2  1558
-Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4  1742
-Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2  1744
-Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1   878
-Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2   971
-Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2   686
-Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4  1438
-Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6  1256
-Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8  1619
-Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</code></pre>
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb wt_kg
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4  1188
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4  1304
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1  1052
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1  1458
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2  1560
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1  1569</code></pre>
 </div>
 </div>
 </section><section id="sec-task_if" class="level2" data-number="26.10"><h2 data-number="26.10" class="anchored" data-anchor-id="sec-task_if">
@@ -1478,7 +1418,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Создайте вектор <code>vec5</code>, скопировав следующий код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vec5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">9</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">vec5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">9</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Создайте новый строковый вектор, где на месте чисел больше 10 в <code>vec5</code> будет стоять “большое число”, а на месте остальных чисел – “маленькое число”.</li>
@@ -1493,7 +1433,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Загрузите файл heroes_information.csv в переменную <code>heroes</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/heroes_information.csv"</span>, </span>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/heroes_information.csv"</span>, </span>
 <span>                   na.strings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
@@ -1528,7 +1468,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>plus_one()</code> на числе 41.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plus_one</span><span class="op">(</span><span class="fl">41</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plus_one</span><span class="op">(</span><span class="fl">41</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 42</code></pre>
 </div>
@@ -1551,7 +1491,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте на значениях -100, -40 и 0, что функция <code>cels2fahr()</code> работает корректно.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">cels2fahr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="op">-</span><span class="fl">40</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">cels2fahr</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="op">-</span><span class="fl">40</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -148  -40   32</code></pre>
 </div>
@@ -1560,7 +1500,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Напишите функцию <code>highlight()</code>, которая принимает на входе строковый вектор, а возвращает тот же вектор, но дополненный значением <code>"***"</code> в начале и конце вектора. Лучше всего это рассмотреть на примере:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">highlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">highlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "***"     "Я"       "Бэтмен!" "***"    </code></pre>
 </div>
@@ -1572,11 +1512,11 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте написанную функцию на векторе <code>c("Я", "Бэтмен!")</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">highlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">highlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span><span class="op">)</span><span class="op">)</span> </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "***"     "Я"       "Бэтмен!" "***"    </code></pre>
 </div>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">highlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span><span class="op">)</span>, wrapper <span class="op">=</span> <span class="st">"__"</span><span class="op">)</span> </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">highlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span><span class="op">)</span>, wrapper <span class="op">=</span> <span class="st">"__"</span><span class="op">)</span> </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "__"      "Я"       "Бэтмен!" "__"     </code></pre>
 </div>
@@ -1588,7 +1528,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>na_n()</code> на векторе:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">na_n</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">na_n</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span>, <span class="cn">NA</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -1603,15 +1543,15 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>factors()</code> на простых и сложных числах:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">factors</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">factors</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 3</code></pre>
 </div>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">factors</span><span class="op">(</span><span class="fl">161</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">factors</span><span class="op">(</span><span class="fl">161</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   1   7  23 161</code></pre>
 </div>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">factors</span><span class="op">(</span><span class="fl">1984</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">factors</span><span class="op">(</span><span class="fl">1984</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]    1    2    4    8   16   31   32   62   64  124  248  496  992 1984</code></pre>
 </div>
@@ -1626,23 +1566,23 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте какие года были для нас простыми, а какие нет:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2017</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2017</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2019</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2019</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2019</span><span class="op">/</span><span class="fl">3</span> <span class="co">#2019 делится на 3 без остатка</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2019</span><span class="op">/</span><span class="fl">3</span> <span class="co">#2019 делится на 3 без остатка</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 673</code></pre>
 </div>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">is_prime</span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1654,26 +1594,26 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <p>Полезная функция для этого – <code><a href="https://rdrr.io/r/base/diff.html">diff()</a></code> – возвращает разницу соседних значений.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">monotonic</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Бинарные операторы типа <code>+</code> или <code>%in%</code> тоже представляют собой функции. Более того, мы можем создавать свои бинарные операторы! В этом нет особой сложности – нужно все так же создавать функцию (для двух переменных), главное окружать их <code>%</code> и название обрамлять обратными штрихами `. Например, можно сделать свой бинарный оператор <code>%notin%</code>, который будет выдавать <code>TRUE</code>, если значения слева <em>нет</em> в векторе справа:</p>
 <div class="cell">
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">`%notin%`</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">!</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">y</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">`%notin%`</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">!</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">y</span><span class="op">)</span></span>
 <span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">%notin%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
@@ -1683,7 +1623,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Создайте бинарный оператор <code>%without%</code>, который будет возвращать все значения вектора слева без значений вектора справа.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"а"</span>, <span class="st">"и"</span>, <span class="st">"б"</span>, <span class="st">"сидели"</span>, <span class="st">"на"</span>, <span class="st">"трубе"</span><span class="op">)</span> <span class="op">%without%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"а"</span>, <span class="st">"б"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"а"</span>, <span class="st">"и"</span>, <span class="st">"б"</span>, <span class="st">"сидели"</span>, <span class="st">"на"</span>, <span class="st">"трубе"</span><span class="op">)</span> <span class="op">%without%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"а"</span>, <span class="st">"б"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "и"      "сидели" "на"     "трубе" </code></pre>
 </div>
@@ -1692,7 +1632,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Создайте бинарный оператор <code>%between%</code>, который будет возвращать <code>TRUE</code>, если значение в векторе слева накходится в <em>диапазоне</em> значений вектора справа:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">%between%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">%between%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 </div>
@@ -1706,11 +1646,11 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте, что функция <code>trim()</code> работает корректно:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 3 4 5 6</code></pre>
 </div>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
 [20] "u" "v" "w" "x" "y"</code></pre>
@@ -1723,12 +1663,12 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте полученную функцию:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
 [20] "u" "v" "w" "x" "y"</code></pre>
 </div>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span>, n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u"
 [20] "v" "w" "x"</code></pre>
@@ -1738,7 +1678,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Сделайте так, чтобы функция <code>trim()</code> работала корректно с <code>n = 0</code>, т.е. функция возвращала бы исходный вектор без изменений.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span>, n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="va">letters</span>, n <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 [20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
@@ -1751,11 +1691,11 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Проверьте полученную функцию <code>trim()</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in trim(1:6, 3): n слишком большой!</code></pre>
 </div>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in trim(1:6, -1): n не может быть меньше нуля!</code></pre>
 </div>
@@ -1766,7 +1706,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Создайте матрицу <code>M2</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">M2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">11</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">M2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
@@ -1813,7 +1753,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Создайте список <code>list3</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,</span>
 <span>  b <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">20</span>,</span>
 <span>  c <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">24</span>,</span>
@@ -1858,7 +1798,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>max_item()</code> на списке <code>list3</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">max_item</span><span class="op">(</span><span class="va">list3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">max_item</span><span class="op">(</span><span class="va">list3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
@@ -1867,7 +1807,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Теперь мы сделаем сложный список <code>list4</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">40</span>, <span class="va">list3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">list4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">40</span>, <span class="va">list3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Посчитайте длину каждого вектора в списке, в т.ч. для списка внутри. Результат должен быть списком с такой же структорой, как и изначальный список <code>list4</code>.</li>
@@ -1918,7 +1858,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Используя ранее написанную функцию <code>is_prime()</code>, напишите функцию <code>prime_numbers()</code>, которая будет возвращать все простые числа до выбранного числа.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">prime_numbers</span><span class="op">(</span><span class="fl">200</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">prime_numbers</span><span class="op">(</span><span class="fl">200</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]   3   5   7  11  13  17  19  23  29  31  37  41  43  47  53  59  61  67  71
 [20]  73  79  83  89  97 101 103 107 109 113 127 131 137 139 149 151 157 163 167
@@ -1932,7 +1872,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Перепишите следующие выражения, используя <code>%&gt;%</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.416198</code></pre>
 </div>
@@ -1943,7 +1883,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
@@ -1954,7 +1894,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Корень из"</span>, <span class="fl">2</span>, <span class="st">"равен"</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Корень из"</span>, <span class="fl">2</span>, <span class="st">"равен"</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Корень из"       "2"               "равен"           "1.4142135623731"</code></pre>
 </div>
@@ -1965,7 +1905,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">39</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">39</span>, nrow <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">B</span>, <span class="fl">1</span>, <span class="va">mean</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22.5 23.5 24.5 25.5 26.5</code></pre>
@@ -1976,7 +1916,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </h2>
 <p>Для выполнения следующих заданий нам понадобятся датасеты <code>heroes</code> и <code>powers</code>, которые можно загрузить, используя следующие команды:</p>
 <div class="cell">
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
 <span>                   na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">powers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2369,7 +2309,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Для начала создайте тиббл <code>heroes_weight</code>, скопировав код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_weight</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_weight</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Publisher</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DC Comics"</span>, <span class="st">"Marvel Comics"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Gender</span>, <span class="va">Publisher</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>weight_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Weight</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -2711,15 +2651,15 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li>Нарисуйте столбиковую диаграмму (<code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>), которая будет отражать количество супергероев издателей <code>"Marvel Comics"</code>, <code>"DC Comics"</code> и всех остальных (отдельным столбиком) из датасета <code>heroes</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Publisher <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Publisher</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Marvel Comics"</span>, <span class="st">"DC Comics"</span><span class="op">)</span>, </span>
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Publisher <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">Publisher</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Marvel Comics"</span>, <span class="st">"DC Comics"</span><span class="op">)</span>,</span>
 <span>                            <span class="va">Publisher</span>,</span>
 <span>                            <span class="st">"Other publishers"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="co">#mutate(Publisher = fct_lump(Publisher, 2)) %&gt;% #Еще один способ сделать то же самое, но через forcats</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-193-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-192-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2727,7 +2667,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-194-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-193-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2735,7 +2675,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-195-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-194-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2743,13 +2683,13 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-196-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-195-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Создайте диаграмму рассеяния для датасета <code>heroes</code>, для которой координаты по оси <em>x</em> будут взяты из колонки <code>Height</code>, а координаты по оси <em>y</em> – из колонки <code>Weight</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-197-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-196-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2757,7 +2697,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-198-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-197-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2765,7 +2705,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-199-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-198-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2773,13 +2713,13 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-200-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-199-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Разделите график (<code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap()</a></code>) на три: для <code>"DC Comics"</code>,<code>"Marvel Comics"</code> и всех остальных.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-201-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-200-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2787,7 +2727,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-202-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-201-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2813,7 +2753,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-203-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-202-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2821,7 +2761,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-204-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-203-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2829,7 +2769,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-205-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-204-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2837,7 +2777,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-206-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-205-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="sec-one_ttest_tasks" class="level2" data-number="26.27"><h2 data-number="26.27" class="anchored" data-anchor-id="sec-one_ttest_tasks">
@@ -2849,7 +2789,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <span class="header-section-number">26.28</span> Двухвыборочный зависимый t-test</h2>
 <p>Для дальнейших заданий понадобится набор данных о результативности трех диет, который мы использовали во время занятия.</p>
 <div class="cell">
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Посчитайте двухвыборочный зависимый т-тест для остальных диет: для диеты 2 и диеты 3. Проинтерпретируйте полученные результаты.</li>
@@ -2861,7 +2801,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li><p>Проведите независимый t-тест для сравнения массы супергероев с черными и белыми глазами.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_white_black</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_white_black</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">`Eye color`</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"black"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="sec-nonparam_ttest_tasks" class="level2" data-number="26.30"><h2 data-number="26.30" class="anchored" data-anchor-id="sec-nonparam_ttest_tasks">
@@ -2877,7 +2817,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li>Связаны ли переменные Alignment и Gender? Используйте критерий хи-квадрат для проверки и проинтерпретируйте результаты</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pub_good</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pub_good</span> <span class="op">&lt;-</span> <span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Alignment</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"good"</span>, <span class="st">"bad"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Alignment</span>, <span class="va">Gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2901,14 +2841,14 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-211-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-210-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="sec-backpack_tasks" class="level2" data-number="26.32"><h2 data-number="26.32" class="anchored" data-anchor-id="sec-backpack_tasks">
 <span class="header-section-number">26.32</span> Исследование набора данных Backpack</h2>
 <p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("Stat2Data")</span></span>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#install.packages("Stat2Data")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/statmanrobin/Stat2Data">Stat2Data</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Backpack</span><span class="op">)</span></span>
 <span><span class="va">back</span> <span class="op">&lt;-</span> <span class="va">Backpack</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -2934,7 +2874,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-214-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-213-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -2942,7 +2882,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-215-1.png" class="img-fluid" width="672"></p>
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-214-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="sec-cov_tasks" class="level2" data-number="26.33"><h2 data-number="26.33" class="anchored" data-anchor-id="sec-cov_tasks">
@@ -2959,13 +2899,13 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <span class="header-section-number">26.35</span> ANOVA</h2>
 <p>Загрузите пингвиний датасет:</p>
 <div class="cell">
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">penguins</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co">#добавляем id</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Давайте посчитаем арифметические средние по группам для различных признаков:</p>
 <div class="cell">
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">penguins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"_mm"</span><span class="op">)</span> <span class="op">|</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"_g"</span><span class="op">)</span>,</span>
 <span>                   <span class="va">mean</span>,</span>

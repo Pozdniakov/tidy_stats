@@ -339,12 +339,6 @@ vec3[vec3 > 4 & vec3 < 10]
 vec3[vec3 < 4 | vec3 > 10]
 ```
 
--   Возведите в квадрат каждое значение вектора `vec3`.
-
-```{r}
-vec3 ^ 2
-```
-
 -   \*Возведите в квадрат каждое значение вектора на нечетной позиции и извлеките корень из каждого значения на четной позиции вектора `vec3`.
 
 > Извлечение корня - это то же самое, что и возведение в степень 0.5.
@@ -528,7 +522,7 @@ list2[[1]][[2]][3]
 
 ```{r, echo = TRUE}
 data(mtcars)
-mtcars
+head(mtcars)
 ```
 
 -   Изучите структуру датафрейма `mtcars` с помощью функции `str()`.
@@ -615,7 +609,7 @@ mtcars[mtcars$wt < mean(mtcars$wt), ]
 
 ```{r}
 mtcars$wt_kg <- round(mtcars$wt * 1000 * 0.45359237)
-mtcars
+head(mtcars)
 ```
 
 ## Условные конструкции {#sec-task_if}
@@ -984,6 +978,7 @@ prime_numbers(200)
 ## magrittr::`%>%` {#sec-task_pipe}
 
 ```{r}
+#| message: false
 library(tidyverse)
 ```
 
@@ -1026,7 +1021,7 @@ apply(B, 1, mean)
 
 Для выполнения следующих заданий нам понадобятся датасеты `heroes` и `powers`, которые можно загрузить, используя следующие команды:
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
 library(tidyverse)
 heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv",
                    na = c("-", "-99", "NA", " "))
@@ -1134,7 +1129,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(hair = ifelse(`Hair color` == "No Hair", "Bold", "Hairy")) %>%
+  mutate(hair = if_else(`Hair color` == "No Hair", "Bold", "Hairy")) %>%
   select(name, `Hair color`, hair)
 ```
 
@@ -1355,7 +1350,7 @@ skimr::skim(height)
 ```{r}
 #| echo: true
 heroes <- heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers"))
   #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
@@ -1363,7 +1358,7 @@ heroes <- heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers")) %>%
   #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
@@ -1375,7 +1370,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers")) %>%
   #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
@@ -1387,7 +1382,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers")) %>%
   #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
@@ -1399,7 +1394,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers")) %>%
   #mutate(Publisher = fct_lump(Publisher, 2)) %>% #Еще один способ сделать то же самое, но через forcats
@@ -1452,7 +1447,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers")) %>%
   filter(Weight < 700 & Height < 400) %>%
@@ -1466,7 +1461,7 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(Publisher = ifelse(Publisher %in% c("Marvel Comics", "DC Comics"), 
+  mutate(Publisher = if_else(Publisher %in% c("Marvel Comics", "DC Comics"),
                             Publisher,
                             "Other publishers")) %>%
   filter(Weight < 700 & Height < 400) %>%
@@ -1535,7 +1530,7 @@ hist(rf(100, df1 = 4, df2 = 10))
 
 Для дальнейших заданий понадобится набор данных о результативности трех диет, который мы использовали во время занятия.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, warning = FALSE}
 diet <- readr::read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv")
 ```
 
@@ -1606,7 +1601,7 @@ heroes %>%
 
 Для следующих тем нам понадобится набор данных `Backpack` из пакета `Stat2Data`.
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, message = FALSE}
 #install.packages("Stat2Data")
 library(Stat2Data)
 data(Backpack)
@@ -1661,6 +1656,7 @@ ggplot(back, aes(x = body_kg, y = backpack_kg))+
 ```{r}
 #| echo: true
 #| message: false
+#| warning: false
 library(tidyverse)
 penguins <- readr::read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv") %>%
   mutate(id = row_number()) #добавляем id

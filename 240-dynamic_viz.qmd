@@ -6,6 +6,7 @@
 
 ```{r, include=FALSE}
 #| message: false
+#| warning: false
 library("tidyverse")
 heroes <- read_csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv",
                    na = c("-", "-99", "NA", " "))
@@ -19,7 +20,7 @@ meta_2_gg <- ggplot(aes(x=Outcome_age, y=Effect_size, size=1/(SE^2), colour = De
 		xlab("Age at outcome test (years)") +
 		ylab("Gain for 1 year of education\n(IQ points)") +
 		guides(size=FALSE, colour = FALSE, fill = FALSE) +
-		geom_smooth(method="lm", size=.5, alpha=.25) + 
+		geom_smooth(method="lm", linewidth=.5, alpha=.25) + 
     ggtitle("Effect of education as a function of age at the outcome test")+ 
 		theme(plot.title = element_text(hjust=0.5)) +
     facet_grid(Design~.)+
