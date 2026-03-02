@@ -408,11 +408,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"heroes_information.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in file(file, "rt"): cannot open file 'heroes_information.csv': No such
-file or directory</code></pre>
+<pre><code>Warning in file(file, "rt"): не могу открыть файл 'heroes_information.csv': No
+such file or directory</code></pre>
 </div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
+<pre><code>Error in file(file, "rt"): не могу открыть соединение</code></pre>
 </div>
 </div>
 <p>Это означает, что R не может найти нужный файл. Вообще-то мы даже не сказали, где искать. Нам нужно как-то совместить место, где R ищет загружаемые файлы и сами файлы. Для этого есть несколько способов.</p>
@@ -424,7 +424,7 @@ file or directory</code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"heroes_information.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Кроме того, путь к рабочей папке можно увидеть в RStudio во вкладке с консолью, в самой верхней части (прямо под надписью “Console”):</p>
-<p><img src="images/Console_wd.png" class="img-fluid" width="400"></p>
+<p><img src="images/030-import_data_console_wd.png" class="img-fluid" width="400"></p>
 <ul>
 <li>Гора идет к Магомету: изменение рабочей папки.</li>
 </ul>
@@ -634,7 +634,7 @@ file or directory</code></pre>
 <p>Все чаще “кнопочная” работа с данными переезжает из Excel в облачный Google Sheets, который обладает схожим интерфейсом и функционалом, но позволяет удобно работать нескольким пользователям одновременно.</p>
 <p>Оттуда данные можно легко выгрузить в нужном формате. Конечно, и в .csv тоже. Но было бы удобно загружать данные из Google Sheets напрямую, по ссылке. И это вполне возможно и даже не очень трудно! Лучший пакет для этого – <code>googlesheets4</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"googlesheets"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"googlesheets4"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Основная функция – read_sheet(), в ней нужно прописать ссылку, которую можно получить в “Настройках доступа” (или которую вам уже прислали).</p>
 <div class="cell">

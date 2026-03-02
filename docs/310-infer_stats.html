@@ -421,11 +421,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Ну и функция <code>r*()</code> для создания случайных выборок из выбранного распределения.</p>
 <p>Во всех четырех случаях, вместо звездочки нужно поставить название соответствующего распределения в R. Таким образом, для каждого распределения в R есть четыре функции (с похожими названиями, различающимися первой буквой), и таких семейств функций в базовом R (точнее, во встроенном пакете <code>{stats}</code>) очень много (посмотреть можно с помощью <code><a href="https://rdrr.io/r/stats/Distributions.html">?Distributions</a></code>). Вот лишь некоторые из них:</p>
-<p><img src="images/rdists.PNG" class="img-fluid" width="400"></p>
+<p><img src="images/310-infer_stats_rdists.png" class="img-fluid" width="400"></p>
 <p>Возьмем, например, нормальное распределение, и разберем на его примере все эти функции: <code><a href="https://rdrr.io/r/stats/Normal.html">dnorm()</a></code>, <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code>, <code><a href="https://rdrr.io/r/stats/Normal.html">qnorm()</a></code> и <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>.</p>
 <p>Для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>. Если же <span class="math inline">\(\mu = 0\)</span>, а <span class="math inline">\(\sigma = 1\)</span>, то такое <strong>нормальное распределение</strong> называется <strong>стандартным <em>(standard normal distribution).</em></strong> Заметьте, здесь мы говорим о <em>параметрах</em> распределения в генеральной совокупности, а не о <em>статистиках</em> в конкретной выборке, хотя называются они одинаково.</p>
 <p>Я думаю, все видели, как выглядит нормальное распределение. Это та самая “колоколообразная кривая”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<p><img src="images/normalstandard.jpg" class="img-fluid" width="400"></p>
+<p><img src="images/310-infer_stats_normal_standard.jpg" class="img-fluid" width="400"></p>
 <p>То, что Вы видите на картинке - это так называемая <strong>функция плотности вероятности <em>(probability density function).</em></strong> Вот ее формула для <strong>нормального распределения <em>(normal distribution):</em></strong> <span class="math display">\[P(x) = \frac{e^{-(x - \mu)^{2}/(2\sigma^{2}) }} {\sigma\sqrt{2\pi}}\]</span></p>
 <p>Это аналог <strong><em>probability mass function</em></strong> для дискретных величин - распределение вероятности того, что случайная величина имеет данное значение. Довольно очевидно, да? Тогда почему аналогичная функция для непрерывных распределений называется по-другому?</p>
 <p>Дело в том, что вероятность получения конкретного значения для непрерывных величин равна нулю. Это немного необычный момент, но тем не менее: если распределение непрерывно, то получить точно 0,000000000000… с бесконечным количеством нулей после запятой невозможно, даже если среднее распределения равно нулю. Тем не менее, мы можем посчитать вероятность того, что случайное значение окажется в определенном промежутке. <strong>Функция плотности вероятности</strong> как раз и позволяет это сделать. Чтобы посчитать эту вероятность, надо посчитать площадь соответствующего участка под функцией. Соответственно, площадь под всей функцией плотности вероятности равна 1.</p>
@@ -538,8 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">17.3</span> Оценки</h2>
 <p>Самая основа статистики вывода - это <strong>оценки <em>(estimates)</em></strong><em>.</em> Как мы уже знаем, у распределений есть определенные параметры, которые описывают данное распределение.</p>
 <p>Например, для того, чтобы описать нормальное распределение нам нужно всего два параметра - его среднее <span class="math inline">\(\mu\)</span> и стандартное отклонение <span class="math inline">\(\sigma\)</span>.</p>
-<p>Наша цель - как-нибудь оценить эти параметры, потому что обычно мы их не знаем. Допустим, человеческий рост распределен нормально [^isnotnormal]. Какой средний рост в популяции? Какое у него стандартное отклонение? Для этого мы используем разного рода оценки: точечные и интервальные. В качестве оценок параметров часто используются статистики по выборке. Вот здесь легко запутаться, поэтому покажу картинку:<br>
-[^isnotnormal]: На самом деле, “чистое” нормальное распределение, так же как и любое другое “чистое” распределение, в природе встречается достаточно редко. Но довольно многие процессы могут апроксимироваться нормальным распределением благодаря центральной предельной теореме <a href="#sec-clt"><span>Глава&nbsp;17.8</span></a>.</p>
+<p>Наша цель - как-нибудь оценить эти параметры, потому что обычно мы их не знаем. Допустим, человеческий рост распределен нормально<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Какой средний рост в популяции? Какое у него стандартное отклонение? Для этого мы используем разного рода оценки: точечные и интервальные. В качестве оценок параметров часто используются статистики по выборке. Вот здесь легко запутаться, поэтому покажу картинку.</p>
 </section><section id="sec-sample_estimate" class="level2" data-number="17.4"><h2 data-number="17.4" class="anchored" data-anchor-id="sec-sample_estimate">
 <span class="header-section-number">17.4</span> Точечные оценки</h2>
 <p>Представим, что только что сгенерированные данные с помощью <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> - это и есть наша выборка. Перед нами стоит задача оценить IQ популяции по этой выборке. Попробуем <strong>оценить <em>(estimate)</em></strong> среднее в генеральной совокупности.</p>
@@ -599,7 +598,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><section id="sec-sample_dist" class="level2" data-number="17.6"><h2 data-number="17.6" class="anchored" data-anchor-id="sec-sample_dist">
 <span class="header-section-number">17.6</span> Выборочное распределение</h2>
 <p>Чтобы разобраться с тем, что стоит за <strong>доверительными интервалами</strong> и <strong>тестированием уровня значимости нулевой гипотезы</strong> (короче говоря, с основными инструментами статистики вывода), нам надо разобраться с очень абстрактной концепцией – выборочными распределениями.</p>
-<p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>:</p>
+<p>Представьте себе, что мы бы выбрали не одну, а сразу много выборок, а потом у каждой выборки посчитали бы среднее. Мы бы получили новый вектор данных - средние выборок из одного распределения. Давайте это сделаем<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">replicate</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">100</span>, sd <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -611,6 +610,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Вот это распределение и есть <strong>выборочное распределение средних <em>(sampling distribution of means).</em></strong> Точнее, было бы, если бы мы взяли не 1000 выборок, а бесконечное количество выборок. Так что у нас всего лишь аппроксимация выборочного распределения средних, к сожалению.</p>
+<p><img src="images/310-infer_stats_sampling_dist.png" class="img-fluid"></p>
 <p>Мы могли взять другие статистики, не средние выборок, а, например, медианы или стандартные отклонения выборок. Тогда это были бы выборочные распределения медиан и выборочные распределения стандартных отклонений соответственно. Но именно выборочное распределение средних обладает уникальными математическими свойствами, про которые мы скоро узнаем.</p>
 <p>Например, среднее выборочного распределения средних будет равно популяционному среднему:</p>
 <p><span class="math display">\[
@@ -641,7 +641,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 1.5</code></pre>
 </div>
 </div>
-<p><img src="images/310-infer_stats_sampling_dist.png" class="img-fluid"></p>
 <p>Из этой формулы следует, что стандартная ошибка тем меньше, чем больше выборка. И это довольно логично: чем больше у нас размер выборок, тем меньше будет разброс их средних. При этом уменьшение разброса не будет линейным: чтобы уменьшить его в 2 раза, нужно увеличить выборку в 4 раза, а чтобы уменьшить его в 10 раз, нужно увеличить выборку в 100 раз.</p>
 <p>Ну а если мы не знаем стандартного отклонения в генеральной совокупности (что обычно и бывает в жизни), то можем оценить стандартную ошибку среднего с помощью оценки стандартного отклонения, посчитанного на выборке:</p>
 <p><span class="math display">\[\hat{\sigma_{\overline{x}}}= \frac{\hat{\sigma}}{\sqrt{n}}\]</span></p>
@@ -651,7 +650,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 1.562035</code></pre>
 </div>
 </div>
-<p>Именно <strong>оценку</strong> <strong>стандартной ошибки среднего</strong> обычно используют на графиках в научных статьях в качестве <strong>усов</strong> <strong><em>(error bars)</em></strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a><strong><em>.</em></strong></p>
+<p>Именно <strong>оценку</strong> <strong>стандартной ошибки среднего</strong> обычно используют на графиках в научных статьях в качестве <strong>усов</strong> <strong><em>(error bars)</em></strong><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a><strong><em>.</em></strong></p>
 </section><section id="sec-nordm_dist_importance" class="level2" data-number="17.7"><h2 data-number="17.7" class="anchored" data-anchor-id="sec-nordm_dist_importance">
 <span class="header-section-number">17.7</span> Важность нормального распределения</h2>
 <p>В математике все числа равны, но некоторые все-таки заметно равнее других. Например, есть 0 и 1 - и очевидно, что это очень важные числа. Даже гугл выдает больше страниц по числам 0 и 1, чем по другим числам, например, 8 и 23218974. Не только целые числа могут быть важными. Вот, например, число пи и число Эйлера: они очень часто встречаются в самых разных, подчас неожиданных местах. Например, в тех же функциях распределений. На эти числа завязано очень интересные и важные свойства, поэтому такая зацикленность на них неудивительна. Например, число пи связывает радиус круг с длиной его окружности и площадью, поэтому когда перед нами что-то круглое, то и пи появится с большой вероятностью.</p>
@@ -677,7 +676,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Удивительно, но средние по выборкам из логнормального распределения будут выглядеть почти нормально! Более того, для других распределений это тоже будет верно: <strong>согласно центральной предельной теореме <em>(ЦПТ, central limit theorem)</em>, какой бы ни была форма распределения в генеральной совокупности, выборочное распределение средних будет стремиться к нормальному. При этом чем больше размер выборки, тем ближе выборочное распределение средних будет к нормальному.</strong> Это очень важная фишка, на которой основаны многие статистические тесты.</p>
-<p><img src="images/IllustrationCentralTheorem.png" class="img-fluid" width="400"></p>
+<p><img src="images/310-infer_stats_central_limit_theorem.png" class="img-fluid" width="400"></p>
 <p>Не верите? Попробуйте сами! Можете поиграться с разными распределениями с помощью кода (можете посмотреть другие распределения в хэлпе: <code><a href="https://rdrr.io/r/stats/Distributions.html">?Distributions</a></code> ). А еще можно потыкать интерактивную <a href="https://gallery.shinyapps.io/CLT_mean/">Shiny-демонстрацию магии ЦПТ</a>. Я очень рекомендую поиграться с ней. Попробуйте разные значения, посмотрите что будет.</p>
 <p>Как только наиграетесь, то сразу станет понятно, почему именно нормальное распределение занимает такое важное место в статистике.</p>
 <div class="callout callout-style-simple callout-note no-icon callout-captioned">
@@ -697,7 +696,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span class="header-section-number">17.9</span> Строим доверительный интервал</h2>
 <p>Теперь мы знаем достаточно, чтобы построить доверительный интервал своими руками на основе стандартной ошибки. Мы построим самый стандартный вариант - 95% доверительный интервал.</p>
 <p>Давайте еще раз посмотрим на нормальное распределение.</p>
-<p><img src="images/normalstandard.jpg" class="img-fluid" width="400"></p>
+<p><img src="images/310-infer_stats_normal_standard.jpg" class="img-fluid" width="400"></p>
 <p>Мы хотим поймать симметрично 95% от площади под кривой. Для этого нам нужно отбросить по 2.5% с обоих сторон. Эти 2.5% соответствуют примерно двум стандартным отклонениям от среднего. Если быть точнее, то 1.96. Если быть еще точнее:</p>
 <div class="cell">
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.975</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -735,7 +734,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
+<pre><code>Warning: пакет 'ggplot2' был собран под R версии 4.4.3</code></pre>
 </div>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_size</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
@@ -810,7 +809,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Теперь нам нужно соотнести нашу <span class="math inline">\(z\)</span>-статистику с теоретическим выборочным распределением <span class="math inline">\(z\)</span>-статистик. Это позволит нам оценить вероятность получить такие и более отличающиеся результаты при допущении верности нулевой гипотезы, т.е. p-value.</p>
 <p>Какая вероятность получить <span class="math inline">\(z\)</span>-статистику 0.3251482, если на самом деле нулевая гипотеза верна? Это вопрос с подвохом: как мы выяснили ранее, для непрерывных распределений вероятность получить отдельное число равна 0. Но мы можем посчитать, какая вероятность получить такую же или большую <span class="math inline">\(z\)</span>-статистику!</p>
 <p>Графически эту вероятность можно представить как площадь под кривой функции плотности распределения от полученной <span class="math inline">\(z\)</span>-статистики до плюс бесконечности или от минус бесконечности до полученной <span class="math inline">\(z\)</span>-статистики, если <span class="math inline">\(z\)</span>-статистика отрицательная.</p>
-<p><img src="images/explanationsPValue.png" class="img-fluid" width="400"></p>
+<p><img src="images/310-infer_stats_pvalue_explanation.png" class="img-fluid" width="400"></p>
 <p>Или же можем воспользоваться <strong>функцией накопленной плотности распределения.</strong> Для нормального распределения это можно сделать с помощью уже знакомой нам функции <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -818,7 +817,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 0.6274655</code></pre>
 </div>
 </div>
-<p><code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> считает от минус бесконечности до заданного числа, а нам нужно наоборот — от заданного числа до плюс бесконечности, потому что <span class="math inline">\(z\)</span> отличается от 0 в большую сторону. Этого можно добиться вычетанием из 1<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>:</p>
+<p><code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> считает от минус бесконечности до заданного числа, а нам нужно наоборот — от заданного числа до плюс бесконечности, потому что <span class="math inline">\(z\)</span> отличается от 0 в большую сторону. Этого можно добиться вычетанием из 1<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -875,9 +874,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li id="fn2"><p>Иногда эта функция называется <em>интегральной функцией вероятности</em>, а иногда просто <em>функцией вероятности.</em> Последний вариант может запутать, потому что часто под функцией вероятности подразумевают функцию плотности вероятности.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Если мы возьмем достаточно большие значения, то этот трюк не сработает, что свзязано с тем, что числа дробные числа в компьютерах хранятся с ограниченной точностью.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>А почему именно 42? Ну, можно брать любое число, которое Вам нравится. А 42 - это <a href="https://ru.wikipedia.org/wiki/%D0%9E%D1%82%D0%B2%D0%B5%D1%82_%D0%BD%D0%B0_%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D1%8B%D0%B9_%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8,_%D0%B2%D1%81%D0%B5%D0%BB%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9_%D0%B8_%D0%B2%D1%81%D0%B5%D0%B3%D0%BE_%D1%82%D0%B0%D0%BA%D0%BE%D0%B3%D0%BE">ответ на главный вопрос жизни, вселенной и всего такого</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Конечно, на практике никто не будет собирать тысячу выборок. Но нам важно понимать, чтобы было, если бы мы повторяли один и тот же эксперимент в одинаковых условиях, даже если это и невозможно сделать. Это позволит нам понять, какие выводы мы можем сделать на основе тех данных, что мы имеем на самом деле.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Для барплотов или точечных диаграмм. Для ящиков с усами используются другие правила, см. <a href="220-base_viz.html#sec-base_vis_boxplot"><span>Глава&nbsp;13.3</span></a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>или же можно поставить параметру <code>lower.tail =</code> функции <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> значение <code>FALSE</code>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>На самом деле, “чистое” нормальное распределение, так же как и любое другое “чистое” распределение, в природе встречается достаточно редко. Но довольно многие процессы могут аппроксимироваться нормальным распределением благодаря центральной предельной теореме <a href="#sec-clt"><span>Глава&nbsp;17.8</span></a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Конечно, на практике никто не будет собирать тысячу выборок. Но нам важно понимать, чтобы было, если бы мы повторяли один и тот же эксперимент в одинаковых условиях, даже если это и невозможно сделать. Это позволит нам понять, какие выводы мы можем сделать на основе тех данных, что мы имеем на самом деле.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>Для барплотов или точечных диаграмм. Для ящиков с усами используются другие правила, см. <a href="220-base_viz.html#sec-base_vis_boxplot"><span>Глава&nbsp;13.3</span></a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>или же можно поставить параметру <code>lower.tail =</code> функции <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> значение <code>FALSE</code>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -421,7 +421,7 @@ div.csl-indent {
 </section><section id="sec-gg_base" class="level2" data-number="14.2"><h2 data-number="14.2" class="anchored" data-anchor-id="sec-gg_base">
 <span class="header-section-number">14.2</span> Основы грамматики графики</h2>
 <p>Каждый график состоит из одного или нескольких <strong>слоев (layers)</strong>. Если слоев несколько, то они располагаются один над другим, при этом верхние слои “перекрывают” нижние, примерно как это происходит в программах вроде Adobe Photoshop. У каждого слоя есть три обязательных элемента: <strong>данные (data)</strong>, <strong>геом (geom)</strong>, <strong>эстетики (aestetics)</strong>; и два вспомогательных: <strong>статистические трансформации (stat).</strong> и <strong>регулировка положения (position adjustment).</strong></p>
-<p><img src="images/ggplot2_scheme.png" class="img-fluid"></p>
+<p><img src="images/230-ggplot2_scheme.png" class="img-fluid"></p>
 <ul>
 <li><p><strong>Данные (data).</strong> Собственно, сами данные в виде датафрейма, используемые в данном слое.</p></li>
 <li><p><strong>Геом (geom).</strong> Геом — это сокращение от “геометрический объект”. Собственно, в какой геометрический объект мы собираемся превращать данные. Например, в точки, прямоугольники или линии.</p></li>
@@ -446,12 +446,12 @@ div.csl-indent {
 <span class="header-section-number">14.3</span> Пример №0: пайчарт с распределение по полу</h2>
 <p>Сейчас мы попробуем сделать простой пример в <code>ggplot2</code>, похожий на пример, который использует в своей книге Леланд Уилкинсон, чтобы показать мощь грамматики графики <span class="citation" data-cites="gg">(<a href="950-references.html#ref-gg" role="doc-biblioref">Wilkinson 2005</a>)</span>. Приготовьтесь, этот пример перевернет ваши представления о графиках!</p>
 <p>Но сначала взглянем на структуру кода в <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>.</p>
-<p><img src="images/ggplot_code.png" class="img-fluid" width="400"></p>
+<p><img src="images/230-ggplot2_code.png" class="img-fluid" width="400"></p>
 <p>Как видно, код чем-то напоминает стандартный код tidyverse, но с <code>+</code> вместо пайпов. Когда был написан <code>ggplot2</code>, Хэдли Уикхэм еще не знал про <code>%&gt;%</code> из <a href="https://magrittr.tidyverse.org">magrittr</a>, хотя по смыслу <code>+</code> означает примерно то же самое.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
+<pre><code>Warning: пакет 'ggplot2' был собран под R версии 4.4.3</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
 <span>                   na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -535,7 +535,7 @@ e.g.:
 <p>Данные и скрипт для анализа данных в этой статье находятся в открытом доступе: https://osf.io/r8a24/</p>
 <p>Полный текст статьи доступен по <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6088505/">ссылке</a>.</p>
 <p>Существует положительная корреляция между количеством лет, который человек потратил на обучение, и интеллектом. Это может объясняться по-разному: как то, что обучение повышает интеллект, и как то, что люди с высоким интеллекте стремятся получать больше образования. Напрямую в эксперименте это проверить нельзя, поэтому есть несколько квази-экспериментальных планов, которые косвенно указывают на верность той или иной гипотезу. Например, если в стране изменилось количество лет обязательного школьного образования, то повлияло ли это на интеллект целого поколения? <del>Или все-таки дело в Моргенштерне</del></p>
-<p><img src="images/meta_2.png" class="img-fluid"></p>
+<p><img src="images/230-ggplot2_meta.png" class="img-fluid"></p>
 <p>Данная картинка показывает, насколько размер эффекта (выраженный в баллах IQ) зависит от того, какой средний возраст участвоваших в исследовании испытуемых.</p>
 <p>Каждая точка на этом графике — это отдельное исследование, положение по оси <em>x</em> — средний возраст респондентов, а положение по оси <em>y</em> - средний прирост интеллекта согласно исследованию. Размер точки отражает “точность” исследования (грубо говоря, чем больше выборка, тем больше точка). Два графика обозначают два квазиэкспериментальных плана.</p>
 <p>Мы сфокусируемся на нижней картинке с “Policy change” — это как раз исследования, в которых изучается изменения интеллекта в возрастных группах после изменения количества лет обучения в школе.</p>

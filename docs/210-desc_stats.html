@@ -431,7 +431,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Заметьте, у выборки (<strong>s</strong>ample) мы считаем статистики (<strong>s</strong>tatistics), а у генеральной совокупности (<strong>P</strong>opulation) есть параметры (<strong>P</strong>arameters). Вот такая вот мнемотехника.</p>
 </blockquote>
 <p>Статистики часто выступают в роли <em>точечной оценки</em> (point estimators) параметров, так что в этом легко запутаться. Например, среднее (в выборке) - это оценка среднего (в генеральной совокупности). Да, можно свихнуться. Мы это будем разбирать подробнее в следующие занятия (это действительно важно, поверьте), пока что остановимся только на описании выборки.</p>
-<p><img src="images/sample2.png" class="img-fluid" width="400"></p>
+<p><img src="images/210-desc_stats_sample.png" class="img-fluid" width="400"></p>
 </section><section id="типы-шкал" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="типы-шкал">
 <span class="header-section-number">12.2</span> Типы шкал</h2>
 <p>Перед тем, как начать речь об описательных статистиках, нужно разобраться с существующими типами шкал. Типы шкал классифицируются на основании типа измеряемых данных, которые задают допустимые для данной шкалы отношения.</p>
@@ -453,7 +453,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://tidyverse.tidyverse.org">"tidyverse"</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
+<pre><code>Warning: пакет 'ggplot2' был собран под R версии 4.4.3</code></pre>
 </div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
 <span>                   na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -684,7 +684,7 @@ z_i = \frac{x_i - \overline{x}}{s}
 <section id="sec-skew" class="level3" data-number="12.6.1"><h3 data-number="12.6.1" class="anchored" data-anchor-id="sec-skew">
 <span class="header-section-number">12.6.1</span> Асимметрия</h3>
 <p><strong>Асимметрия <em>(skewness)</em></strong> измеряет симметричность распределения. <strong>Положительный показатель асимметрии</strong> <strong><em>(“Right-skewed”</em></strong> или <strong><em>positive skewness)</em></strong> означает, что хвосты с правой части распределения длиннее. <strong>Негативный показатель асимметрии (<em>“Left-skewed”</em></strong> или <strong><em>negative skewness)</em></strong> означает, что левый хвост длиннее. Нулевой показатель асимметрии означает симметричное распределение.</p>
-<p><img src="images/7180OS_01_180.jpg" class="img-fluid" width="400"></p>
+<p><img src="images/210-desc_stats_skewness.jpg" class="img-fluid" width="400"></p>
 <p>В целом, распределения с положительным показателем асимметрии на практике встречаются чаще, чем с отрицательным: очень часто мы сталкиваемся со шкалами, которые ограничены снизу, но не ограничены сверху.</p>
 <ul>
 <li><p>В когнитивистике положительная асимметрия встречается очень часто. Например, время реакции: оно ограничено снизу 0 мс (а по факту не меньше 100 мс – быстрее сигнал не успеет по нервной системе пройти до пальцев), а вот с другой стороны оно никак не ограничено. Испытуемый может на полчаса перед монитором затупить, ага.</p></li>
@@ -692,7 +692,7 @@ z_i = \frac{x_i - \overline{x}}{s}
 </ul></section><section id="sec-kurtosis" class="level3" data-number="12.6.2"><h3 data-number="12.6.2" class="anchored" data-anchor-id="sec-kurtosis">
 <span class="header-section-number">12.6.2</span> Эксцесс</h3>
 <p><strong>Эксцесс <em>(kurtosis)</em></strong> - это мера “вытянутости” распределения:</p>
-<p><img src="images/page-64.png" class="img-fluid"></p>
+<p><img src="images/210-desc_stats_kurtosis.png" class="img-fluid"></p>
 <p>Положительные показатели эксцесса означают “вытянутое” распределение, а отрицательные - “плоское”.</p>
 </section><section id="sec-skewR" class="level3" data-number="12.6.3"><h3 data-number="12.6.3" class="anchored" data-anchor-id="sec-skewR">
 <span class="header-section-number">12.6.3</span> Ассиметрия и эксцесс в R</h3>
@@ -704,10 +704,10 @@ z_i = \frac{x_i - \overline{x}}{s}
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://personality-project.org/r/psych/">"psych"</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
-Attaching package: 'psych'</code></pre>
+Присоединяю пакет: 'psych'</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:ggplot2':
+<pre><code>Следующие объекты скрыты от 'package:ggplot2':
 
     %+%, alpha</code></pre>
 </div>
