@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.208">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Анализ данных и статистика в R - 22&nbsp; Дисперсионный анализ (ANOVA)</title>
 <style>
 code{white-space: pre-wrap;}
@@ -85,7 +82,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,19 +117,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Отменить",
     "search-submit-button-title": "Найти"
   }
-}</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -145,20 +134,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
               <i class="bi bi-bi-file-pdf pe-1"></i>
             Download PDF
@@ -171,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             </a>
           </li>
       </ul>
-    </div>
+</div>
 </div>
     </div>
       </div>
@@ -182,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
   </div>
@@ -194,8 +179,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
   </div>
@@ -231,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
@@ -239,8 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
   </div>
@@ -256,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
@@ -264,8 +249,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
   </div>
@@ -277,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики <code>{ggplot2}</code></span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики </span></a><a href="https://ggplot2.tidyverse.org">ggplot2</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -291,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
@@ -299,8 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
   </div>
@@ -341,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
@@ -354,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
   </div>
@@ -366,23 +351,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Содержание</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-aov" id="toc-sec-aov" class="nav-link active" data-scroll-target="#sec-aov"><span class="toc-section-number">22.0.1</span>  Функция aov()</a></li>
+<li><a href="#sec-aov" id="toc-sec-aov" class="nav-link active" data-scroll-target="#sec-aov"><span class="toc-section-number">22.0.1</span>  Функция aov()</a></li>
   <li><a href="#sec-anova_nhst" id="toc-sec-anova_nhst" class="nav-link" data-scroll-target="#sec-anova_nhst"><span class="toc-section-number">22.1</span>  Тестирование значимости нулевой гипотезы в ANOVA.</a></li>
   <li><a href="#sec-anova_posthoc" id="toc-sec-anova_posthoc" class="nav-link" data-scroll-target="#sec-anova_posthoc"><span class="toc-section-number">22.2</span>  Post-hoc тесты</a></li>
   <li><a href="#sec-aov_as_lm" id="toc-sec-aov_as_lm" class="nav-link" data-scroll-target="#sec-aov_as_lm"><span class="toc-section-number">22.3</span>  ANOVA и т-тест как частные случаи линейной регрессии</a></li>
@@ -391,20 +374,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-fact_aov" id="toc-sec-fact_aov" class="nav-link" data-scroll-target="#sec-fact_aov"><span class="toc-section-number">22.6</span>  Многофакторный дисперсионный анализ (Factorial ANOVA)</a></li>
   <li><a href="#sec-rm_aov" id="toc-sec-rm_aov" class="nav-link" data-scroll-target="#sec-rm_aov"><span class="toc-section-number">22.7</span>  Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</a></li>
   <li><a href="#sec-mixed_aov" id="toc-sec-mixed_aov" class="nav-link" data-scroll-target="#sec-mixed_aov"><span class="toc-section-number">22.8</span>  Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</a></li>
-  <li><a href="#sec-nonparam_aov" id="toc-sec-nonparam_aov" class="nav-link" data-scroll-target="#sec-nonparam_aov"><span class="toc-section-number">22.9</span>  Непараметрические аналоги ANOVA</a>
+  <li>
+<a href="#sec-nonparam_aov" id="toc-sec-nonparam_aov" class="nav-link" data-scroll-target="#sec-nonparam_aov"><span class="toc-section-number">22.9</span>  Непараметрические аналоги ANOVA</a>
   <ul class="collapse">
-  <li><a href="#sec-krask_aov" id="toc-sec-krask_aov" class="nav-link" data-scroll-target="#sec-krask_aov"><span class="toc-section-number">22.9.1</span>  Тест Краскела-Уоллеса</a></li>
+<li><a href="#sec-krask_aov" id="toc-sec-krask_aov" class="nav-link" data-scroll-target="#sec-krask_aov"><span class="toc-section-number">22.9.1</span>  Тест Краскела-Уоллеса</a></li>
   <li><a href="#sec-friedman_aov" id="toc-sec-friedman_aov" class="nav-link" data-scroll-target="#sec-friedman_aov"><span class="toc-section-number">22.9.2</span>  Тест Фридмана</a></li>
-  </ul></li>
-  <li><a href="#sec-aov_final" id="toc-sec-aov_final" class="nav-link" data-scroll-target="#sec-aov_final"><span class="toc-section-number">22.10</span>  Заключение</a></li>
   </ul>
-</nav>
+</li>
+  <li><a href="#sec-aov_final" id="toc-sec-aov_final" class="nav-link" data-scroll-target="#sec-aov_final"><span class="toc-section-number">22.10</span>  Заключение</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="sec-anova" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></h1>
 </div>
 
@@ -424,35 +405,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header>
-
-<p>Дисперсионный анализ или ANOVA<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - один из самых распространенных методов статистического анализа в психологии, биологии, медицине и многих других дисциплинах. Дисперсионный анализ очень хорошо подходит для анализа данных, полученных в эксперименте - методе организации исследования, при котором исследователь напрямую управляет уровнями независимой переменной. Терминологическая связь между дисперсионным анализом и планированием эксперимента настолько тесная, что многие термины пересекаются, поэтому нужно быть осторожными. Как и в случае с линейной регрессией, если мы что-то называем “независимой переменной” (или “фактором”), это не порождает никакой каузальной связи.</p>
+</header><p>Дисперсионный анализ или ANOVA<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - один из самых распространенных методов статистического анализа в психологии, биологии, медицине и многих других дисциплинах. Дисперсионный анализ очень хорошо подходит для анализа данных, полученных в эксперименте - методе организации исследования, при котором исследователь напрямую управляет уровнями независимой переменной. Терминологическая связь между дисперсионным анализом и планированием эксперимента настолько тесная, что многие термины пересекаются, поэтому нужно быть осторожными. Как и в случае с линейной регрессией, если мы что-то называем “независимой переменной” (или “фактором”), это не порождает никакой каузальной связи.</p>
 <blockquote class="blockquote">
 <p>Еще одна важная вещь, которую нужно понимать про дисперсионный анализ, это то, что у этого метода очень запутывающее название: из названия кажется, что этот статистический метод для сравнения дисперсий. Нет, это не так (хотя такие статистические тесты тоже есть, и они нам сегодня пригодятся - см. <a href="#sec-aova"><span>Глава&nbsp;22.5</span></a>). Нет, это просто сравнение средних в случае, если есть больше, чем 2 группы для сравнения.</p>
 </blockquote>
 <p>У дисперсионного анализа очень много разновидностей, для которых придумали множество названий. “Обычная” ANOVA называется One-Way ANOVA, она же межгрупповая ANOVA, это аналог независимого т-теста для нескольких групп.</p>
 <p>Давайте начнем сразу с проведения теста. Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>, на которых мы разбирались с t-тестом (<a href="320-ttest.html#sec-dep_ttest"><span>Глава&nbsp;18.2.1</span></a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/stcp-Rdataset-Diet.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Сделаем небольшой препроцессинг данных. Создадим дополнительные “факторные” переменные, создадим переменную, в которой будет разница массы “до” и “после”, удалим <code>NA</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight.loss =</span> weight6weeks <span class="sc">-</span> pre.weight,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Dietf =</span> <span class="fu">factor</span>(Diet, <span class="at">labels =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Person =</span> <span class="fu">factor</span>(Person)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>weight.loss <span class="op">=</span> <span class="va">weight6weeks</span> <span class="op">-</span> <span class="va">pre.weight</span>,</span>
+<span>         Dietf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Diet</span>, labels <span class="op">=</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>         Person <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">Person</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="sec-aov" class="level3" data-number="22.0.1">
-<h3 data-number="22.0.1" class="anchored" data-anchor-id="sec-aov"><span class="header-section-number">22.0.1</span> Функция aov()</h3>
-<p>Попробуем сразу провести дисперсионных анализ с помощью функции <code>aov()</code>:</p>
+<section id="sec-aov" class="level3" data-number="22.0.1"><h3 data-number="22.0.1" class="anchored" data-anchor-id="sec-aov">
+<span class="header-section-number">22.0.1</span> Функция aov()</h3>
+<p>Попробуем сразу провести дисперсионных анализ с помощью функции <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>aov_model</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">aov_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">Dietf</span>, <span class="va">diet</span><span class="op">)</span></span>
+<span><span class="va">aov_model</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
    aov(formula = weight.loss ~ Dietf, data = diet)
@@ -465,7 +444,7 @@ Deg. of Freedom        2        73
 Residual standard error: 2.371064
 Estimated effects may be unbalanced</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">aov_model</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)   
 Dietf        2   60.5  30.264   5.383 0.0066 **
@@ -474,9 +453,9 @@ Residuals   73  410.4   5.622
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Мы получили что-то похожее на результат применения функции <code>lm()</code>. Правда, лаконичнее, но с новыми столбцами <code>Sum Sq</code>, <code>Mean Sq</code> и новой статистикой <em>F</em> вместо <em>t</em>. Что будет, если с теми же данными с той же формулой запустить <code>lm()</code> вместо <code>aov()</code>?</p>
+<p>Мы получили что-то похожее на результат применения функции <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>. Правда, лаконичнее, но с новыми столбцами <code>Sum Sq</code>, <code>Mean Sq</code> и новой статистикой <em>F</em> вместо <em>t</em>. Что будет, если с теми же данными с той же формулой запустить <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> вместо <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">Dietf</span>, <span class="va">diet</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -499,21 +478,22 @@ Multiple R-squared:  0.1285,    Adjusted R-squared:  0.1047
 F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </div>
 </div>
-<p><code>lm()</code> превратил <code>Dietf</code> в две переменные, но <em>F</em> и p-value у двух моделей одинаковые! Кроме того, функция <code>aov()</code> является, по сути, просто “оберткой” над <code>lm()</code>:</p>
+<p><code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> превратил <code>Dietf</code> в две переменные, но <em>F</em> и p-value у двух моделей одинаковые! Кроме того, функция <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> является, по сути, просто “оберткой” над <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>:</p>
 <blockquote class="blockquote">
 <p>This provides a wrapper to lm for fitting linear models to balanced or unbalanced experimental designs.</p>
 </blockquote>
-</section>
-<section id="sec-anova_nhst" class="level2" data-number="22.1">
-<h2 data-number="22.1" class="anchored" data-anchor-id="sec-anova_nhst"><span class="header-section-number">22.1</span> Тестирование значимости нулевой гипотезы в ANOVA.</h2>
+</section><section id="sec-anova_nhst" class="level2" data-number="22.1"><h2 data-number="22.1" class="anchored" data-anchor-id="sec-anova_nhst">
+<span class="header-section-number">22.1</span> Тестирование значимости нулевой гипотезы в ANOVA.</h2>
 <p>Как и в случае с другими статистическими тестами, мы можем выделить 4 этапа в тестировании значимости нулевой гипотезы в ANOVA:</p>
 <ol type="1">
-<li><strong>Формулирование нулевой и альтернативной гипотезы.</strong> Нулевая гипотеза говорит, что между средними в генеральной совокупности нет различий:</li>
+<li>
+<strong>Формулирование нулевой и альтернативной гипотезы.</strong> Нулевая гипотеза говорит, что между средними в генеральной совокупности нет различий:</li>
 </ol>
 <p><span class="math display">\[H_0:\mu_1 = \mu_2 = ... = \mu_n\]</span> Можно было бы предположить, что ненулевая гипотеза звучит как “все средние не равны”, но вообще-то это не так. Альтернативная гипотеза в дисперсионном анализе звучит так:</p>
 <p><span class="math display">\[H_1: \text{Не все средние равны}\]</span></p>
 <ol start="2" type="1">
-<li><strong>Подсчет статистики.</strong> Как мы уже видели раньше, в дисперсионном анализе используется новая для нас статистика <em>F</em>. Впрочем, мы ее видели, когда смотрели на аутпут функции <code>lm()</code>, когда делали линейную регрессию. Чтобы считать <em>F</em> (если вдруг мы хотим сделать это вручную), нужно построить талбицу ANOVA (ANOVA table).</li>
+<li>
+<strong>Подсчет статистики.</strong> Как мы уже видели раньше, в дисперсионном анализе используется новая для нас статистика <em>F</em>. Впрочем, мы ее видели, когда смотрели на аутпут функции <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, когда делали линейную регрессию. Чтобы считать <em>F</em> (если вдруг мы хотим сделать это вручную), нужно построить талбицу ANOVA (ANOVA table).</li>
 </ol>
 <table class="table">
 <colgroup>
@@ -523,15 +503,13 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 <col style="width: 20%">
 <col style="width: 20%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Таблица ANOVA</th>
 <th style="text-align: center;">Степени свободы</th>
 <th style="text-align: center;">Суммы квадратов</th>
 <th style="text-align: center;">Средние квадраты</th>
 <th style="text-align: center;">F-статистика</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Межгрупповые</td>
@@ -556,9 +534,9 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Именно эту таблицу мы видели, когда использовали функцию <code>aov()</code>:</p>
+<p>Именно эту таблицу мы видели, когда использовали функцию <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">aov_model</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)   
 Dietf        2   60.5  30.264   5.383 0.0066 **
@@ -576,15 +554,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <col style="width: 20%">
 <col style="width: 20%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Таблица ANOVA</th>
 <th style="text-align: center;">Степени свободы</th>
 <th style="text-align: center;">Суммы квадратов</th>
 <th style="text-align: center;">Средние квадраты</th>
 <th style="text-align: center;">F-статистика</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Между</td>
@@ -613,34 +589,34 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Вариабельность обозначается <span class="math inline">\(SS\)</span> и означает “сумму квадратов” (sum of squares) - это то же, что и дисперсия, только мы не делим вме в конце на количество наблюдений (или количество наблюдений минус один): <span class="math display">\[SS = \sum\limits_{i=1}^{n_j} (x_{i}-\overline{x})^2\]</span></p>
 <p>Здесь много формул, но суть довольно простая: мы разделяем вариабельность зависимой переменной на внутригрупповую и межгрупповую, считаем их соотношение, которое и будет <em>F</em>. В среднем, <em>F</em> будет равен 1 при верности нулевой гипотезы. Это означает, что и межгрупповая вариабельность, и внутригрупповая вариабельность - это просто шум. Но если же межгрупповая вариабельность - это не просто шум, то это соотношение будет сильно больше единицы.</p>
 <ol start="3" type="1">
-<li><strong>Подсчет p-value.</strong> В t-тесте мы смотрели, как статистика распределена при условии верности нулевой гипотезы. То есть что будет, если нулевая гипотеза верна, мы будем повторять эксперимент с точно таким же дизайном (и размером выборок) бесконечное количество раз и считать <em>F</em>.</li>
+<li>
+<strong>Подсчет p-value.</strong> В t-тесте мы смотрели, как статистика распределена при условии верности нулевой гипотезы. То есть что будет, если нулевая гипотеза верна, мы будем повторять эксперимент с точно таким же дизайном (и размером выборок) бесконечное количество раз и считать <em>F</em>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>betweendf <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>withindf <span class="ot">&lt;-</span> <span class="dv">73</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">summary</span>(aov_model)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.1</span>,<span class="dv">10</span>, <span class="fl">0.01</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>fdist <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fvalues =</span> v, <span class="at">pdf =</span> <span class="fu">df</span>(v, betweendf, withindf))</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"F("</span>, betweendf, <span class="st">", "</span>, withindf, <span class="st">") = "</span>, <span class="fu">round</span>(f, <span class="dv">3</span>))</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fdist, <span class="fu">aes</span>(<span class="at">x =</span> fvalues, <span class="at">y =</span> pdf))<span class="sc">+</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> f)<span class="sc">+</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> f<span class="sc">+</span><span class="dv">1</span>, <span class="at">y =</span> <span class="fl">0.2</span>, <span class="at">label =</span> label)<span class="sc">+</span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())  </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">betweendf</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">withindf</span> <span class="op">&lt;-</span> <span class="fl">73</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">aov_model</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="cn">F</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">10</span>, <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">fdist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>fvalues <span class="op">=</span> <span class="va">v</span>, pdf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">df</a></span><span class="op">(</span><span class="va">v</span>, <span class="va">betweendf</span>, <span class="va">withindf</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"F("</span>, <span class="va">betweendf</span>, <span class="st">", "</span>, <span class="va">withindf</span>, <span class="st">") = "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">f</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">fdist</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">fvalues</span>, y <span class="op">=</span> <span class="va">pdf</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">f</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="va">f</span><span class="op">+</span><span class="fl">1</span>, y <span class="op">=</span> <span class="fl">0.2</span>, label <span class="op">=</span> <span class="va">label</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.line.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      axis.ticks.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      axis.text.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>  </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="350-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figure class="figure"><p><img src="350-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
 <p></p><figcaption class="figure-caption">F-распределение при верности нулевой гипотезы (см. детали в тексте)</figcaption><p></p>
 </figure>
 </div>
@@ -648,24 +624,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Заметьте, распределение <em>F</em> несимметричное<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Это значит, что мы всегда считаем считаем площадь от <em>F</em> до плюс бесконечности (без умножения на 2, как мы это делали в t-тесте):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(f, betweendf, withindf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span><span class="va">f</span>, <span class="va">betweendf</span>, <span class="va">withindf</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.006595853</code></pre>
 </div>
 </div>
 <p>Это и есть наш p-value!</p>
 <ol start="4" type="1">
-<li><strong>Сравнение p-value с уровнем</strong> <span class="math inline">\(\alpha\)</span>. Самый простой этап: если наш p-value меньше, чем <span class="math inline">\(\alpha\)</span> (который обычно равен 0.05), то мы отвергаем нулевую гипотезу. Если нет - не отвергаем.</li>
+<li>
+<strong>Сравнение p-value с уровнем</strong> <span class="math inline">\(\alpha\)</span>. Самый простой этап: если наш p-value меньше, чем <span class="math inline">\(\alpha\)</span> (который обычно равен 0.05), то мы отвергаем нулевую гипотезу. Если нет - не отвергаем.</li>
 </ol>
 <p>В нашем случае это 0.0065959, что, очевидно, меньше, чем 0.05. Отвергаем нулевую гипотезу (о том, что нет различий), принимаем ненулевую (о том, что различия есть). Все!</p>
-</section>
-<section id="sec-anova_posthoc" class="level2" data-number="22.2">
-<h2 data-number="22.2" class="anchored" data-anchor-id="sec-anova_posthoc"><span class="header-section-number">22.2</span> Post-hoc тесты</h2>
+</section><section id="sec-anova_posthoc" class="level2" data-number="22.2"><h2 data-number="22.2" class="anchored" data-anchor-id="sec-anova_posthoc">
+<span class="header-section-number">22.2</span> Post-hoc тесты</h2>
 <p>Тем не менее, дисперсионного анализа недостаточно, чтобы решить, какие именно группы между собой различаются. Для этого нужно проводить post-hoc тесты (апостериорные тесты).</p>
 <p>Post-hoc переводится с латыни как “после этого”. Post-hoc тесты или просто “пост-хоки” проводятся, если в результате ANOVA была отвергнута нулевая гипотеза. Собственно, пост-хоки никак не связаны с дисперсионным анализом на уровне расчетов - это абсолютно независимые тесты, но исторически так сложилось, что они известны именно как дополнительный этап ANOVA.</p>
 <p>Самый простой вариант пост-хок теста - это попарные т-тесты <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> с поправками на множественные сравнения:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(diet<span class="sc">$</span>weight.loss, diet<span class="sc">$</span>Dietf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test</a></span><span class="op">(</span><span class="va">diet</span><span class="op">$</span><span class="va">weight.loss</span>, <span class="va">diet</span><span class="op">$</span><span class="va">Dietf</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pairwise comparisons using t tests with pooled SD 
@@ -679,9 +655,9 @@ C 0.017 0.017
 P value adjustment method: holm </code></pre>
 </div>
 </div>
-<p>Второй подход связан с использованием специализированных тестов, таких как тест Тьюки (Tukey Honest Significant Differences = Tukey HSD). Для этого в R есть функция <code>TukeyHSD()</code>, которую нужно применять на объект <code>aov</code>:</p>
+<p>Второй подход связан с использованием специализированных тестов, таких как тест Тьюки (Tukey Honest Significant Differences = Tukey HSD). Для этого в R есть функция <code><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD()</a></code>, которую нужно применять на объект <code>aov</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">aov_model</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -695,12 +671,11 @@ C-A -1.848148 -3.439554 -0.2567422 0.0188047
 C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 </div>
 </div>
-</section>
-<section id="sec-aov_as_lm" class="level2" data-number="22.3">
-<h2 data-number="22.3" class="anchored" data-anchor-id="sec-aov_as_lm"><span class="header-section-number">22.3</span> ANOVA и т-тест как частные случаи линейной регрессии</h2>
-<p>Как мы уже видели, если применить <code>lm()</code> или <code>aov()</code> на одних и тех же данных с одной и той же формулой, то результат будет очень похожим. Но есть одно но: <code>lm()</code> создает из одного фактора две переменных-предиктора:</p>
+</section><section id="sec-aov_as_lm" class="level2" data-number="22.3"><h2 data-number="22.3" class="anchored" data-anchor-id="sec-aov_as_lm">
+<span class="header-section-number">22.3</span> ANOVA и т-тест как частные случаи линейной регрессии</h2>
+<p>Как мы уже видели, если применить <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> или <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> на одних и тех же данных с одной и той же формулой, то результат будет очень похожим. Но есть одно но: <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> создает из одного фактора две переменных-предиктора:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">Dietf</span>, <span class="va">diet</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -725,7 +700,7 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </div>
 <p>Дело в том, что мы не можем просто так загнать номинативную переменную в качестве предиктора в линейную регрессию. Мы можем это легко сделать, если у нас всего два уровня в номинативном предикторе. Тогда один из уровней можно обозначить за 0, другой - за 1. Такие переменные иногда называются “бинарными”. Тогда это легко использовать в линейной регрессии:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> gender, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">gender</span>, <span class="va">diet</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -749,7 +724,7 @@ F-statistic: 0.04379 on 1 and 74 DF,  p-value: 0.8348</code></pre>
 </div>
 <p>Можно ли так делать? Вполне! Допущения линейной регрессии касаются остатков, а не переменных самих по себе. Разве что это немного избыточно: линейная регрессия с бинарным предиктором - это фактически независимый t-тест:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">gender</span>, <span class="va">diet</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
@@ -766,7 +741,7 @@ mean in group 0 mean in group 1
 </div>
 <p>Как видите, p-value совпадают! А <em>t</em> статистика в квадрате - это <em>F</em> (при двух группах):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic<span class="sc">^</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">gender</span>, <span class="va">diet</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">statistic</span><span class="op">^</span><span class="fl">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         t 
 0.04378592 </code></pre>
@@ -774,7 +749,7 @@ mean in group 0 mean in group 1
 </div>
 <p>Более того, те же самые результаты можно получить и с помощью коэффициента корреляции Пирсона:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(diet<span class="sc">$</span>gender, diet<span class="sc">$</span>weight.loss)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">diet</span><span class="op">$</span><span class="va">gender</span>, <span class="va">diet</span><span class="op">$</span><span class="va">weight.loss</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -790,20 +765,19 @@ sample estimates:
 </div>
 </div>
 <p>Теперь должно быть понятно, почему все эти функции делают вроде бы разные статистические тесты, но выдают такой похожий результат - это фактически один и тот же метод! Все эти методы (и некоторые из тех, что будем рассматривать далее) можно рассматривать как разновидности множественной линейной регрессии. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
-</section>
-<section id="sec-dummy" class="level2" data-number="22.4">
-<h2 data-number="22.4" class="anchored" data-anchor-id="sec-dummy"><span class="header-section-number">22.4</span> Dummy coding</h2>
+</section><section id="sec-dummy" class="level2" data-number="22.4"><h2 data-number="22.4" class="anchored" data-anchor-id="sec-dummy">
+<span class="header-section-number">22.4</span> Dummy coding</h2>
 <p>Тем не менее, вопрос остается открытым: как превратить номинативную переменную в количественную и загнать ее в регрессию? Для этого можно использовать <strong>“фиктивное кодирование” (dummy coding):</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">isA =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">"A"</span>),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">isB =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">"B"</span>),</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">isC =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">"C"</span>))</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf) <span class="sc">%&gt;%</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Dietf, isA<span class="sc">:</span>isC)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>isA <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Dietf</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span>,</span>
+<span>         isB <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Dietf</span> <span class="op">==</span> <span class="st">"B"</span><span class="op">)</span>,</span>
+<span>         isC <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Dietf</span> <span class="op">==</span> <span class="st">"C"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Dietf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Dietf</span>, <span class="va">isA</span><span class="op">:</span><span class="va">isC</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
 # Groups:   Dietf [3]
@@ -819,11 +793,11 @@ sample estimates:
 </div>
 <p>Заметьте, что такое кодирование избыточно. Если мы знаем, что диет 3, а данная диета - это не диета В и не диета С, то это диета А. Значит, одна из созданных нами колонок - “лишняя”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>isA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span><span class="op">$</span><span class="va">isA</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Используем новую колонки для линейной регрессии и сравним результаты:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> isB <span class="sc">+</span> isC, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">isB</span> <span class="op">+</span> <span class="va">isC</span>, <span class="va">diet</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -845,7 +819,7 @@ Residual standard error: 2.371 on 73 degrees of freedom
 Multiple R-squared:  0.1285,    Adjusted R-squared:  0.1047 
 F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">Dietf</span>, <span class="va">diet</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -869,14 +843,13 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </div>
 </div>
 <p>То же самое!</p>
-</section>
-<section id="sec-aova" class="level2" data-number="22.5">
-<h2 data-number="22.5" class="anchored" data-anchor-id="sec-aova"><span class="header-section-number">22.5</span> Допущения ANOVA</h2>
+</section><section id="sec-aova" class="level2" data-number="22.5"><h2 data-number="22.5" class="anchored" data-anchor-id="sec-aova">
+<span class="header-section-number">22.5</span> Допущения ANOVA</h2>
 <ol type="1">
 <li><strong>Нормальность распределения ошибок:</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(aov_model))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">aov_model</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="350-anova_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -887,25 +860,25 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </ol>
 <p>То есть их равенство. Можно посмотреть на распределение остатков:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(aov_model)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diet, <span class="fu">aes</span>(<span class="at">x =</span> Dietf, <span class="at">y =</span> residuals))<span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span><span class="op">$</span><span class="va">residuals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">aov_model</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">diet</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Dietf</span>, y <span class="op">=</span> <span class="va">residuals</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="350-anova_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Все выглядит неплохо: нет какой-то одной группы, у которой разброс сильно больше или меньше. Есть и более формальные способы проверить равенство дисперсий. Например, с помощью теста Ливиня (Levene’s test). Для того, чтобы его провести, мы воспользуемся новым пакетом <code>ez</code> (читать как “easy”). Этот пакет сильно упрощает проведение дисперсионного анализа, особенно для более сложных дизайнов.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ez"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ez"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Синтаксис довольно простой: нужно указать, данные, зависимую переменную, переменную с ID, факторы. Необходимо прописать фактор в <code>between =</code> или <code>within =</code>. В данном случае - в <code>between =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>ez_model <span class="ot">&lt;-</span> <span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf,</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/mike-lawrence/ez">ez</a></span><span class="op">)</span></span>
+<span><span class="va">ez_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">diet</span>,</span>
+<span>        dv<span class="op">=</span> <span class="va">weight.loss</span>,</span>
+<span>        wid <span class="op">=</span> <span class="va">Person</span>, </span>
+<span>        between <span class="op">=</span> <span class="va">Dietf</span>,</span>
+<span>        detailed <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>        return_aov <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: You have removed one or more Ss from the analysis. Refactoring
 "Person" for ANOVA.</code></pre>
@@ -917,7 +890,7 @@ well-considered value for the type argument to ezANOVA().</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>Coefficient covariances computed by hccm()</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>ez_model</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ez_model</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$ANOVA
   Effect DFn DFd      SSn      SSd        F           p p&lt;.05       ges
@@ -941,9 +914,9 @@ Estimated effects may be unbalanced</code></pre>
 </div>
 </div>
 <p>Если при проведении теста Ливиня мы получаем <em>p &lt; .05</em>, то мы отбрасываем нулевую гипотезу о равенстве дисперсий. В данном случае мы не можем ее отбросить и поэтому принимаем <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-<p>Полученный объект (если поставить <code>return_aov = T</code>) содержит еще и объект <code>aov()</code> - на случай, если у Вас есть функции, которые работают с этим классом:</p>
+<p>Полученный объект (если поставить <code>return_aov = T</code>) содержит еще и объект <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> - на случай, если у Вас есть функции, которые работают с этим классом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ez_model<span class="sc">$</span>aov)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TukeyHSD.html">TukeyHSD</a></span><span class="op">(</span><span class="va">ez_model</span><span class="op">$</span><span class="va">aov</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -958,11 +931,12 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
-<li><strong>Примерно одинаковое количество испытуемых в разных группах.</strong> Здесь у нас все в порядке:</li>
+<li>
+<strong>Примерно одинаковое количество испытуемых в разных группах.</strong> Здесь у нас все в порядке:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Dietf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Dietf</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   Dietf     n
@@ -973,29 +947,28 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 </div>
 </div>
 <p>Небольшие различия в размерах групп - это ОК, тем более, что на практике такое очень часто случается: кого-то пришлось выкинуть из анализа, для какой-то строчки были потеряны данные и т.д. Однако больших различий в размерах групп стоит избегать. Самое плохое, когда группы различаются значительно по размеру (более чем в 2 раза) и вариабельность внутри групп отличается значительно (более чем в 2 раза).</p>
-</section>
-<section id="sec-fact_aov" class="level2" data-number="22.6">
-<h2 data-number="22.6" class="anchored" data-anchor-id="sec-fact_aov"><span class="header-section-number">22.6</span> Многофакторный дисперсионный анализ (Factorial ANOVA)</h2>
+</section><section id="sec-fact_aov" class="level2" data-number="22.6"><h2 data-number="22.6" class="anchored" data-anchor-id="sec-fact_aov">
+<span class="header-section-number">22.6</span> Многофакторный дисперсионный анализ (Factorial ANOVA)</h2>
 <p>На практике можно встретить One-Way ANOVA (однофакторную ANOVA) довольно редко. Обычно в исследованиях встречается многофакторный дисперсионный анализ, в котором проверяется влияние сразу нескольких факторов. В научных статьях это обозначается примерно так: “3х2 ANOVA”. Это означает, что был проведен двухфакторный дисперсионный анализ, причем в одном факторе было три уровня, во втором - два. В нашем случае это будут факторы “Диета” и “Пол”. Это означает, что у нас две гипотезы: о влиянии диеты на потерю веса и о влиянии пола на потерю веса. Кроме того, появляется гипотеза о взаимодействии факторов - то есть о том, что разные диеты по разному влияют на потерю веса для разных полов.</p>
 <p>Взаимодействие двух факторов хорошо видно на графике с линиями: если две линии параллельны, то взаимодействия нет. Если они не параллельны (пересекаются, сходятся, расходятся), то взаимодействие есть.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genderf =</span> <span class="fu">factor</span>(gender, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"ж"</span>, <span class="st">"м"</span>))) <span class="co">#превращаем в бинарную переменную в фактор</span></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x)) <span class="co">#пишем функцию для стандартной ошибки</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">=</span> <span class="fu">position_dodge</span>(<span class="fl">0.05</span>) <span class="co">#немного раздвигаем положение точек на будущем графике</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf, genderf) <span class="sc">%&gt;%</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">meanloss =</span> <span class="fu">mean</span>(weight.loss),</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">se =</span> <span class="fu">sem</span>(weight.loss)) <span class="sc">%&gt;%</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Dietf, </span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> meanloss, </span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> genderf)) <span class="sc">+</span></span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> genderf), <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> meanloss <span class="sc">-</span> se, </span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> meanloss <span class="sc">+</span> se), <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>genderf <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">gender</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ж"</span>, <span class="st">"м"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">#превращаем в бинарную переменную в фактор</span></span>
+<span></span>
+<span><span class="va">sem</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="co">#пишем функцию для стандартной ошибки</span></span>
+<span><span class="va">pd</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/position_dodge.html">position_dodge</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span> <span class="co">#немного раздвигаем положение точек на будущем графике</span></span>
+<span></span>
+<span><span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Dietf</span>, <span class="va">genderf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>meanloss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">weight.loss</span><span class="op">)</span>,</span>
+<span>            se <span class="op">=</span> <span class="fu">sem</span><span class="op">(</span><span class="va">weight.loss</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Dietf</span>, </span>
+<span>             y <span class="op">=</span> <span class="va">meanloss</span>, </span>
+<span>             colour <span class="op">=</span> <span class="va">genderf</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">genderf</span><span class="op">)</span>, position <span class="op">=</span> <span class="va">pd</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html">geom_pointrange</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>ymin <span class="op">=</span> <span class="va">meanloss</span> <span class="op">-</span> <span class="va">se</span>, </span>
+<span>                      ymax <span class="op">=</span> <span class="va">meanloss</span> <span class="op">+</span> <span class="va">se</span><span class="op">)</span>, position <span class="op">=</span> <span class="va">pd</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'Dietf'. You can override using the
 `.groups` argument.</code></pre>
@@ -1006,12 +979,12 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 </div>
 <p>Как видно по картинке, разница в эффективности диеты С по сравнению с другими видна только для женщин.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> .(Dietf, gender),</span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">diet</span>,</span>
+<span>        dv<span class="op">=</span> <span class="va">weight.loss</span>,</span>
+<span>        wid <span class="op">=</span> <span class="va">Person</span>, </span>
+<span>        between <span class="op">=</span> <span class="fu">.</span><span class="op">(</span><span class="va">Dietf</span>, <span class="va">gender</span><span class="op">)</span>,</span>
+<span>        detailed <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>        return_aov <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: You have removed one or more Ss from the analysis. Refactoring
 "Person" for ANOVA.</code></pre>
@@ -1055,24 +1028,23 @@ Estimated effects may be unbalanced</code></pre>
 </div>
 </div>
 <p>Итак, теперь мы проверяем три гипотезы вместо одной. Действительно, взаимодействие диеты и пола оказалось значимым, как и ожидалось.</p>
-</section>
-<section id="sec-rm_aov" class="level2" data-number="22.7">
-<h2 data-number="22.7" class="anchored" data-anchor-id="sec-rm_aov"><span class="header-section-number">22.7</span> Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</h2>
-<p>Если обычный дисперсионный анализ - это аналог независимого т-теста для нескольких групп, то дисперсионный анализ с повторными измерениями - это аналог зависимого т-теста. В функции <code>ezANOVA()</code> для проведения дисперсионного анализа с повторными измерениями нужно просто поставить нужным параметром внутригрупповую переменную. Это означает, что в данном случае мы должны иметь данные в длинном формате, для чего мы воспользуемся функцией <code>pivot_longer()</code>:</p>
+</section><section id="sec-rm_aov" class="level2" data-number="22.7"><h2 data-number="22.7" class="anchored" data-anchor-id="sec-rm_aov">
+<span class="header-section-number">22.7</span> Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</h2>
+<p>Если обычный дисперсионный анализ - это аналог независимого т-теста для нескольких групп, то дисперсионный анализ с повторными измерениями - это аналог зависимого т-теста. В функции <code><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA()</a></code> для проведения дисперсионного анализа с повторными измерениями нужно просто поставить нужным параметром внутригрупповую переменную. Это означает, что в данном случае мы должны иметь данные в длинном формате, для чего мы воспользуемся функцией <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>dietlong <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
-<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"weight"</span>)</span>
-<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>dietlongC <span class="ot">&lt;-</span> dietlong <span class="sc">%&gt;%</span></span>
-<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">filter</span>(Dietf <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">droplevels</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dietlong</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">pre.weight</span>, <span class="va">weight6weeks</span><span class="op">)</span>,</span>
+<span>               names_to <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>               values_to <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span>
+<span><span class="va">dietlongC</span> <span class="op">&lt;-</span> <span class="va">dietlong</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Dietf</span> <span class="op">==</span> <span class="st">"C"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/droplevels.html">droplevels</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlongC,</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA</a></span><span class="op">(</span><span class="va">dietlongC</span>,</span>
+<span>        dv <span class="op">=</span> <span class="va">weight</span>, </span>
+<span>        wid <span class="op">=</span> <span class="va">Person</span>,</span>
+<span>        within <span class="op">=</span> <span class="va">time</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Converting "time" to factor for ANOVA.</code></pre>
 </div>
@@ -1082,16 +1054,15 @@ Estimated effects may be unbalanced</code></pre>
 2   time   1  26 124.6949 2.030459e-11     * 0.0986036</code></pre>
 </div>
 </div>
-</section>
-<section id="sec-mixed_aov" class="level2" data-number="22.8">
-<h2 data-number="22.8" class="anchored" data-anchor-id="sec-mixed_aov"><span class="header-section-number">22.8</span> Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</h2>
-<p>Нам никто не мешает совмещать и внутригруппоdые, и межгрупповые факторы вместе. В <code>ezANOVA()</code> это делается просто с помощью прописывания разных факторов в нужных переменных: <code>between =</code> и <code>within =</code>.</p>
+</section><section id="sec-mixed_aov" class="level2" data-number="22.8"><h2 data-number="22.8" class="anchored" data-anchor-id="sec-mixed_aov">
+<span class="header-section-number">22.8</span> Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</h2>
+<p>Нам никто не мешает совмещать и внутригруппоdые, и межгрупповые факторы вместе. В <code><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA()</a></code> это делается просто с помощью прописывания разных факторов в нужных переменных: <code>between =</code> и <code>within =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlong,</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time,</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA</a></span><span class="op">(</span><span class="va">dietlong</span>,</span>
+<span>        dv <span class="op">=</span> <span class="va">weight</span>, </span>
+<span>        wid <span class="op">=</span> <span class="va">Person</span>,</span>
+<span>        within <span class="op">=</span> <span class="va">time</span>,</span>
+<span>        between <span class="op">=</span> <span class="va">Dietf</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: You have removed one or more Ss from the analysis. Refactoring
 "Person" for ANOVA.</code></pre>
@@ -1112,15 +1083,14 @@ well-considered value for the type argument to ezANOVA().</code></pre>
 </div>
 </div>
 <p>Здесь нас интересует взаимодействие между факторами. Результаты, полученные для этой гипотезы, идентичны результатам по обычному дисперсионному анализу на разницу до и после - по сути это одно и то же.</p>
-</section>
-<section id="sec-nonparam_aov" class="level2" data-number="22.9">
-<h2 data-number="22.9" class="anchored" data-anchor-id="sec-nonparam_aov"><span class="header-section-number">22.9</span> Непараметрические аналоги ANOVA</h2>
+</section><section id="sec-nonparam_aov" class="level2" data-number="22.9"><h2 data-number="22.9" class="anchored" data-anchor-id="sec-nonparam_aov">
+<span class="header-section-number">22.9</span> Непараметрические аналоги ANOVA</h2>
 <p>Как было описано выше, ANOVA довольно устойчив к разным отклонениям от нормальности и некоторой гетероскедастичности (разным дисперсиям в выборках). Но если уж у Вас данные ну совсем-совсем ненормальные, несимметричные, а от преобразований шкалы Вы по каким-то причинам отказались, то стоит упомянуть о непараметрических аналогах ANOVA.</p>
-<section id="sec-krask_aov" class="level3" data-number="22.9.1">
-<h3 data-number="22.9.1" class="anchored" data-anchor-id="sec-krask_aov"><span class="header-section-number">22.9.1</span> Тест Краскела-Уоллеса</h3>
+<section id="sec-krask_aov" class="level3" data-number="22.9.1"><h3 data-number="22.9.1" class="anchored" data-anchor-id="sec-krask_aov">
+<span class="header-section-number">22.9.1</span> Тест Краскела-Уоллеса</h3>
 <p>Это тест Краскела-Уоллеса - обобщение теста Манна-Уитни на несколько выборок (т.е. аналог межгруппового ANOVA):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">weight.loss</span> <span class="op">~</span> <span class="va">Dietf</span>, <span class="va">diet</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -1129,12 +1099,11 @@ data:  weight.loss by Dietf
 Kruskal-Wallis chi-squared = 9.4159, df = 2, p-value = 0.009023</code></pre>
 </div>
 </div>
-</section>
-<section id="sec-friedman_aov" class="level3" data-number="22.9.2">
-<h3 data-number="22.9.2" class="anchored" data-anchor-id="sec-friedman_aov"><span class="header-section-number">22.9.2</span> Тест Фридмана</h3>
+</section><section id="sec-friedman_aov" class="level3" data-number="22.9.2"><h3 data-number="22.9.2" class="anchored" data-anchor-id="sec-friedman_aov">
+<span class="header-section-number">22.9.2</span> Тест Фридмана</h3>
 <p>Для зависимых выборок есть тест Фридмана - непараметрический аналог дисперсионного анализа с повторными измерениями:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">friedman.test</span>(weight <span class="sc">~</span> time <span class="sc">|</span> Person, dietlongC)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/friedman.test.html">friedman.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">time</span> <span class="op">|</span> <span class="va">Person</span>, <span class="va">dietlongC</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Friedman rank sum test
@@ -1143,22 +1112,20 @@ data:  weight and time and Person
 Friedman chi-squared = 27, df = 1, p-value = 2.035e-07</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="sec-aov_final" class="level2" data-number="22.10">
-<h2 data-number="22.10" class="anchored" data-anchor-id="sec-aov_final"><span class="header-section-number">22.10</span> Заключение</h2>
+</section></section><section id="sec-aov_final" class="level2" data-number="22.10"><h2 data-number="22.10" class="anchored" data-anchor-id="sec-aov_final">
+<span class="header-section-number">22.10</span> Заключение</h2>
 <p>Мы разобрали много разных вариантов дисперсионного анализа. Зачем так много? ANOVA - один из самых распространенных методов как в психологии, так и во многих других областях. Естественно, это отнюдь не все методы, используемые в той же психологии. Более того, некоторые вопросы остались за бортом. Постараюсь коротко их перечислить:</p>
 <ul>
 <li><p>многомерный ANOVA (Multivariate ANalysis Of Variance; MANOVA) - расширение ANOVA для ситуации нескольких зависимых переменных. Это довольно редкая разновидность ANOVA, который берет во внимание ковариации между зависимыми переменными.</p></li>
-<li><p>тестирование сферичности для дисперсионного анализа с повторноми измерениями с помощью теста сферичности Моучли (Mauchly’s sphericity test). Этот тест проверяет использует матрицу ковариаций разниц каждого условия с каждым: дисперсии разниц между условиями должны быть примерно одинаковыми. Если нулевая гипотеза о сферичности может быть отброшена (p-value &lt; <span class="math inline">\(\alpha\)</span>), то нужно проводить специальные поправки, обычно это поправки Гринхауса-Гейсера (Greenhouse-Geisser corrections). Мы этого не делали, потому что в ситуации RM-ANOVA с всего двумя условиями эта сферичность никогда не нарушается: у нас всего одна дисперсия разниц между условиями, которую просто-напросто не с чем сравнивать. Тест сферичности Моучли вместе с поправками Гринхауса-Гейсера проводятся автоматически для RM-ANOVA с тремя или более группами при использовании функции <code>ezANOVA()</code>, так что особо париться над этим не стоит. Правда, нужно помнить, что как и все подобные статистические тесты допущений, они обладают проблемами, связанными с тем, что это статистические тесты: на маленьких выборках они не заметят даже серьезных отклонений от сферичности, на больших - даже маленькие отклонения, а <span class="math inline">\(p-value &lt; 0.05\)</span>, по сути, не может интерпретироваться как верность нулевой гипотезы. Тем не менее, это довольно стандартная процедура.</p></li>
+<li><p>тестирование сферичности для дисперсионного анализа с повторноми измерениями с помощью теста сферичности Моучли (Mauchly’s sphericity test). Этот тест проверяет использует матрицу ковариаций разниц каждого условия с каждым: дисперсии разниц между условиями должны быть примерно одинаковыми. Если нулевая гипотеза о сферичности может быть отброшена (p-value &lt; <span class="math inline">\(\alpha\)</span>), то нужно проводить специальные поправки, обычно это поправки Гринхауса-Гейсера (Greenhouse-Geisser corrections). Мы этого не делали, потому что в ситуации RM-ANOVA с всего двумя условиями эта сферичность никогда не нарушается: у нас всего одна дисперсия разниц между условиями, которую просто-напросто не с чем сравнивать. Тест сферичности Моучли вместе с поправками Гринхауса-Гейсера проводятся автоматически для RM-ANOVA с тремя или более группами при использовании функции <code><a href="https://rdrr.io/pkg/ez/man/ezANOVA.html">ezANOVA()</a></code>, так что особо париться над этим не стоит. Правда, нужно помнить, что как и все подобные статистические тесты допущений, они обладают проблемами, связанными с тем, что это статистические тесты: на маленьких выборках они не заметят даже серьезных отклонений от сферичности, на больших - даже маленькие отклонения, а <span class="math inline">\(p-value &lt; 0.05\)</span>, по сути, не может интерпретироваться как верность нулевой гипотезы. Тем не менее, это довольно стандартная процедура.</p></li>
 <li><p>Как правильно репортить результаты дисперсионного анализа. Здесь все, конечно, зависит от стиля, используемого конкретным журналом. В психологии и близких к ней дисциплинам фактическим lingua franca является стиль Американской Психологической Ассоциации (APA). И тут у меня есть для Вас хорошие новости: есть куча пакетов в R, которые позволяют репортить результаты статистических тестов в APA-стиле! Спасибо дотошным авторам руководства APA по офромлению статей, что этот стиль настолько точно прописывает, как нужно описывать результаты исследований, что это можно запрограммировать. Я лично пользуюсь пакетом <code>apa</code>, он весьма удобен:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"apa"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"apa"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apa)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_apa</span>(ez_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dgromer/apa">apa</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/apa/man/anova_apa.html">anova_apa</a></span><span class="op">(</span><span class="va">ez_model</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Effect                                            
 1  Dietf F(2, 73) = 5.38, p = .007, petasq = .13 ** </code></pre>
@@ -1172,20 +1139,14 @@ Friedman chi-squared = 27, df = 1, p-value = 2.035e-07</code></pre>
 </ul>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>ANOVA от ANalysis Of VAriance, по-русски часто читается как “АНОВА”.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Форма <em>F</em>-распределения будет сильно зависеть от числа степеней свободы. Но оно всегда определено от 0 до плюс бесконечности: в числителе и знаменателе всегда неотрицательные числа.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>По умолчанию функция <code>pairwise.t.test()</code> использует объединенное стандартное отклонение для всех условий при расчетах. Это дает немного другие результаты, чем просто попарные t-тесты, хотя разница обычно незначительная. Чтобы отключить такое поведение функции <code>pairwise.t.test()</code>, можно поставить <code>FALSE</code> для параметра <code>pool.sd()</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>По умолчанию функция <code><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test()</a></code> использует объединенное стандартное отклонение для всех условий при расчетах. Это дает немного другие результаты, чем просто попарные t-тесты, хотя разница обычно незначительная. Чтобы отключить такое поведение функции <code><a href="https://rdrr.io/r/stats/pairwise.t.test.html">pairwise.t.test()</a></code>, можно поставить <code>FALSE</code> для параметра <code>pool.sd()</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Обобщением множественной линейной регрессии (вернее, одним из) можно считать общую линейную модель (general linear model). Общая линейная модель может предсказывать не одну, а сразу несколько объясняемых переменных в отличие от множественной линейной регрессии. Следующим этапом обобщения служит обобщенная линейная модель (generalized linear model). Фишка последней в том, что можно использовать не только модели с нормально распределенными остатками, но и, например, логистическую и пуассоновскую регрессию.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Вообще-то эта логика не совсем корректна. Тест Ливиня - это такой же статистический тест, как и остальные. Поэтому считать, что допущения соблюдаются на основании того, что p-value больше допустимого уровня <span class="math inline">\(\alpha\)</span>, - это неправильно. Но для проверки допущений такая не очень корректная практика считается допустимой.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1403,9 +1364,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./340-lm.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span>
       </a>          

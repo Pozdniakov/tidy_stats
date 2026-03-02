@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.208">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Анализ данных и статистика в R - 18&nbsp; \(t\)-тест</title>
 <style>
 code{white-space: pre-wrap;}
@@ -85,7 +82,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -103,8 +99,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,19 +117,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Отменить",
     "search-submit-button-title": "Найти"
   }
-}</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
+}</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 </head>
-
 <body class="nav-sidebar floating">
 
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -145,20 +134,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
       <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-          <li>
+<li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
               <i class="bi bi-bi-file-pdf pe-1"></i>
             Download PDF
@@ -171,7 +156,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             </a>
           </li>
       </ul>
-    </div>
+</div>
 </div>
     </div>
       </div>
@@ -182,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
   </div>
@@ -194,8 +179,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
   </div>
@@ -231,7 +216,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
@@ -239,8 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
   </div>
@@ -256,7 +241,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
@@ -264,8 +249,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
   </div>
@@ -277,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики <code>{ggplot2}</code></span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики </span></a><a href="https://ggplot2.tidyverse.org">ggplot2</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -291,7 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
@@ -299,8 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
   </div>
@@ -341,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
@@ -354,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
   </div>
@@ -366,42 +351,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Содержание</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-one_ttest" id="toc-sec-one_ttest" class="nav-link active" data-scroll-target="#sec-one_ttest"><span class="toc-section-number">18.1</span>  Одновыборочный <span class="math inline">\(t\)</span>-тест</a></li>
-  <li><a href="#sec-two_ttest" id="toc-sec-two_ttest" class="nav-link" data-scroll-target="#sec-two_ttest"><span class="toc-section-number">18.2</span>  Двухвыборочный t-тест</a>
+<li><a href="#sec-one_ttest" id="toc-sec-one_ttest" class="nav-link active" data-scroll-target="#sec-one_ttest"><span class="toc-section-number">18.1</span>  Одновыборочный <span class="math inline">\(t\)</span>-тест</a></li>
+  <li>
+<a href="#sec-two_ttest" id="toc-sec-two_ttest" class="nav-link" data-scroll-target="#sec-two_ttest"><span class="toc-section-number">18.2</span>  Двухвыборочный t-тест</a>
   <ul class="collapse">
-  <li><a href="#sec-dep_ttest" id="toc-sec-dep_ttest" class="nav-link" data-scroll-target="#sec-dep_ttest"><span class="toc-section-number">18.2.1</span>  Двухвыборочный зависимый t-тест</a></li>
+<li><a href="#sec-dep_ttest" id="toc-sec-dep_ttest" class="nav-link" data-scroll-target="#sec-dep_ttest"><span class="toc-section-number">18.2.1</span>  Двухвыборочный зависимый t-тест</a></li>
   <li><a href="#sec-ind_ttest" id="toc-sec-ind_ttest" class="nav-link" data-scroll-target="#sec-ind_ttest"><span class="toc-section-number">18.2.2</span>  Двухвыборочный независимый t-тест</a></li>
-  </ul></li>
-  <li><a href="#sec-assumptions_ttest" id="toc-sec-assumptions_ttest" class="nav-link" data-scroll-target="#sec-assumptions_ttest"><span class="toc-section-number">18.3</span>  Допущения t-теста</a></li>
-  <li><a href="#sec-nonparam_ttest" id="toc-sec-nonparam_ttest" class="nav-link" data-scroll-target="#sec-nonparam_ttest"><span class="toc-section-number">18.4</span>  Непараметрические аналоги t-теста</a>
-  <ul class="collapse">
-  <li><a href="#sec-wilcox_test" id="toc-sec-wilcox_test" class="nav-link" data-scroll-target="#sec-wilcox_test"><span class="toc-section-number">18.4.1</span>  Тест Уилкоксона</a></li>
-  <li><a href="#sec-mann_test" id="toc-sec-mann_test" class="nav-link" data-scroll-target="#sec-mann_test"><span class="toc-section-number">18.4.2</span>  Тест Манна-Уитни</a></li>
-  </ul></li>
   </ul>
-</nav>
+</li>
+  <li><a href="#sec-assumptions_ttest" id="toc-sec-assumptions_ttest" class="nav-link" data-scroll-target="#sec-assumptions_ttest"><span class="toc-section-number">18.3</span>  Допущения t-теста</a></li>
+  <li>
+<a href="#sec-nonparam_ttest" id="toc-sec-nonparam_ttest" class="nav-link" data-scroll-target="#sec-nonparam_ttest"><span class="toc-section-number">18.4</span>  Непараметрические аналоги t-теста</a>
+  <ul class="collapse">
+<li><a href="#sec-wilcox_test" id="toc-sec-wilcox_test" class="nav-link" data-scroll-target="#sec-wilcox_test"><span class="toc-section-number">18.4.1</span>  Тест Уилкоксона</a></li>
+  <li><a href="#sec-mann_test" id="toc-sec-mann_test" class="nav-link" data-scroll-target="#sec-mann_test"><span class="toc-section-number">18.4.2</span>  Тест Манна-Уитни</a></li>
+  </ul>
+</li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="sec-ttest" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></h1>
 </div>
 
@@ -421,10 +404,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header>
-
-<section id="sec-one_ttest" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный <span class="math inline">\(t\)</span>-тест</h2>
+</header><section id="sec-one_ttest" class="level2" data-number="18.1"><h2 data-number="18.1" class="anchored" data-anchor-id="sec-one_ttest">
+<span class="header-section-number">18.1</span> Одновыборочный <span class="math inline">\(t\)</span>-тест</h2>
 <p>Мы научились делать <span class="math inline">\(z\)</span>-тест. Однако на практике он почти не используется, потому что предполагает, что мы откуда-то знаем стандартное отклонение в генеральной совокупности. Это обычно не так, поэтому мы <em>оцениваем</em> стандартное отклонение в генеральной совокупности на основе стандартного отклонения по выборке. Это приводит к тому, что тестовая статистика уже не распределена нормально, а распределена согласно <span class="math inline">\(t\)</span>-распределению. Ну и статистика уже называется <span class="math inline">\(t\)</span>-статистикой.</p>
 <p><span class="math display">\[t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} \]</span></p>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
@@ -452,48 +433,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Как видите, чем больше выборка (и количество степеней свободы соответственно), тем ближе <span class="math inline">\(t\)</span>-распределение к стандартному нормальному распределению. При 100 степенях свободы они уже почти не различимы! Поэтому на больших выборках разница между <span class="math inline">\(t\)</span>-тестом и <span class="math inline">\(z\)</span>-тестом будет минимальна, тогда как на маленьких выборках разница может быть значительной.</p>
 <p>Давайте посчитаем <span class="math inline">\(t\)</span>-статистику на тех же симулированных данных, что и раньше<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">15</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="fu">sd</span>(samp)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(samp))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> (m <span class="sc">-</span> <span class="dv">100</span>)<span class="sc">/</span>sem</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>t</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
+<span><span class="va">samp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">100</span>, <span class="fl">15</span><span class="op">)</span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span>
+<span><span class="va">sem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">m</span> <span class="op">-</span> <span class="fl">100</span><span class="op">)</span><span class="op">/</span><span class="va">sem</span></span>
+<span><span class="va">t</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3122351</code></pre>
 </div>
 </div>
 <p>Давайте для сравнения еще раз посчитаем <span class="math inline">\(z\)</span>-статистику:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(m <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">/</span> (<span class="dv">15</span><span class="sc">/</span><span class="fu">sqrt</span>(<span class="dv">100</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="va">m</span> <span class="op">-</span> <span class="fl">100</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">15</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3251482</code></pre>
 </div>
 </div>
 <p>Как видите, расчет довольно схожий, разница только в том, откуда мы берем стандартное отклонение. Для <span class="math inline">\(z\)</span>-статистики у нас был заранее известный параметр генеральной совокупности (что обычно не так), для <span class="math inline">\(t\)</span>-статистики мы оценивали стандартное отклонение по выборке.</p>
-<p>Давайте теперь посчитаем <em>p-value.</em> Мы будем пользоваться не функцией <code>pnorm()</code>, а функцией <code>pt()</code>, а в качестве параметра распределения нужно указать количество степеней свобод в <code>df =</code> (размер выборки минус 1).</p>
+<p>Давайте теперь посчитаем <em>p-value.</em> Мы будем пользоваться не функцией <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code>, а функцией <code><a href="https://rdrr.io/r/stats/TDist.html">pt()</a></code>, а в качестве параметра распределения нужно указать количество степеней свобод в <code>df =</code> (размер выборки минус 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">t</span>, df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6222407</code></pre>
 </div>
 </div>
-<p>Функция <code>pt()</code> считает от минус бесконечности до <span class="math inline">\(t\)</span>, а нам нужно от <span class="math inline">\(t\)</span> до плюс бесконечности, потому что <span class="math inline">\(t\)</span> больше <span class="math inline">\(0\)</span>:</p>
+<p>Функция <code><a href="https://rdrr.io/r/stats/TDist.html">pt()</a></code> считает от минус бесконечности до <span class="math inline">\(t\)</span>, а нам нужно от <span class="math inline">\(t\)</span> до плюс бесконечности, потому что <span class="math inline">\(t\)</span> больше <span class="math inline">\(0\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">t</span>, df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3777593</code></pre>
 </div>
 </div>
 <p>И не забываем умножать на <span class="math inline">\(2\)</span>, если мы хотим сделать двусторонний тест.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t, <span class="at">df =</span> <span class="fu">length</span>(samp) <span class="sc">-</span> <span class="dv">1</span>))<span class="sc">*</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">t</span>, df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fl">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7555186</code></pre>
 </div>
 </div>
 <p>В отличие от <span class="math inline">\(z\)</span>-теста, t-тест есть в базовом R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(samp, <span class="at">mu =</span> <span class="dv">100</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">samp</span>, mu <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -508,10 +489,9 @@ mean of x
  100.4877 </code></pre>
 </div>
 </div>
-<p>Да, конечно, мы могли сразу запустить эту функцию и получить результаты. Обычно именно так вы и будете делать. Зато теперь вы знаете, что стоит за всеми числами в результате выполнения функции <code>t.test()</code>! Здесь можно увидеть выборочное среднее как оценку среднего в генеральной совокупности, 95% доверительный интервал для оценки среднего в генеральной совокупности, <span class="math inline">\(t\)</span>-статистику, степени свобод и <em>p-value.</em></p>
-</section>
-<section id="sec-two_ttest" class="level2" data-number="18.2">
-<h2 data-number="18.2" class="anchored" data-anchor-id="sec-two_ttest"><span class="header-section-number">18.2</span> Двухвыборочный t-тест</h2>
+<p>Да, конечно, мы могли сразу запустить эту функцию и получить результаты. Обычно именно так вы и будете делать. Зато теперь вы знаете, что стоит за всеми числами в результате выполнения функции <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>! Здесь можно увидеть выборочное среднее как оценку среднего в генеральной совокупности, 95% доверительный интервал для оценки среднего в генеральной совокупности, <span class="math inline">\(t\)</span>-статистику, степени свобод и <em>p-value.</em></p>
+</section><section id="sec-two_ttest" class="level2" data-number="18.2"><h2 data-number="18.2" class="anchored" data-anchor-id="sec-two_ttest">
+<span class="header-section-number">18.2</span> Двухвыборочный t-тест</h2>
 <p>Одна из наиболее часто встречающихся задач при анализе данных - это сравнение средних двух выборок. Для этого нам тоже понадобится <span class="math inline">\(t\)</span>-тест, но теперь <span class="math inline">\(H_0\)</span> нужно сформулировать по-другому: что две генеральные совокупности (из которых взяты соответствующие выборки) имеют одинаковое среднее. <span class="math display">\[H_0: \mu_1 = \mu_2\]</span></p>
 <p>Ну а альтернативная гипотеза, что эти две выборки взяты из распределений с разным средним в генеральной совокупности. <span class="math display">\[H_1: \mu_1 \ne \mu_2\]</span></p>
 <p>Есть две разновидности двухвыборочного <span class="math inline">\(t\)</span>-теста: <strong>зависимый</strong> <span class="math inline">\(t\)</span><strong>-тест <em>(paired</em></strong> <span class="math inline">\(t\)</span><strong><em>-test; dependent</em></strong> <span class="math inline">\(t\)</span><strong><em>-test)</em></strong> и <strong>независимый</strong> <span class="math inline">\(t\)</span><strong>-тест <em>(unpaired</em></strong> <span class="math inline">\(t\)</span><strong><em>-test; independent</em></strong> <span class="math inline">\(t\)</span><strong><em>-test).</em></strong> Различие между зависимыми и независимыми тестами принципиальное, мы с ним еще будем сталкиваться при обсуждении других методов, например, дисперсионного анализа (см. <a href="350-anova.html"><span>Глава&nbsp;22</span></a>).</p>
@@ -523,18 +503,14 @@ mean of x
 <li><p><strong>Внутрииндивидуальный экспериментальный план.</strong> Набрать выборку, каждому испытуемому дать и обычную воду, и воду с кофеином, записывать скорость решения задач после употребления простой воды и после употребления воды с кофеином, соответственно. В данном случае будет случайным образом варьироваться порядок предъявления: одни испытуемые сначала получат обычную воду, а потом воду с кофеином, другие испытуемые — наоборот. Для такого эксперимента понадобится меньше участников, но оно будет дольше для каждого участника. Более того, в этом случае мы учтем межиндивидуальные различия участников: одни участники в среднем решают задачи быстрее других. Это внутриинидивидуальный экспериментальный дизайн, для анализа результатов которого нам понадобится зависимый t-тест.</p></li>
 </ol>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Внутрииндивидуальный план</th>
 <th>Межиндивидуальный план</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
+</tr></thead>
+<tbody><tr class="odd">
 <td>Зависимый t-тест</td>
 <td>Независимый t-тест</td>
-</tr>
-</tbody>
+</tr></tbody>
 </table>
 <p>Итак, с тем, когда использовать зависимый, а когда независимый t-тест, более-менее разобрались, давайте опробуем их!</p>
 <div class="callout callout-style-simple callout-note no-icon callout-captioned">
@@ -550,8 +526,8 @@ mean of x
 <p>Как при <strong>внутрииндивидуальном плане,</strong> так и при <strong>межиндивидуальном плане</strong> испытуемый не должен знать какое из экспериментальных условий он получает <strong>(слепое тестирование; <em>blind study),</em></strong> а в идеале этого не должен знать даже сам экспериментатор, который дает напиток и измеряет показатели <strong>(двойное слепое тестирование; <em>double blind study).</em></strong> Поскольку в внутрииндивидуальном плане испытуемый получает несколько экспериментальных условий, у него есть возможность сравнить различные условия, поэтому организовать слепое тестирование сложнее. Сделать экспериментальные условия максимально похожими друг на друга для испытуемого – особое искусство исследователя-экспериментатора.</p>
 </div>
 </div>
-<section id="sec-dep_ttest" class="level3" data-number="18.2.1">
-<h3 data-number="18.2.1" class="anchored" data-anchor-id="sec-dep_ttest"><span class="header-section-number">18.2.1</span> Двухвыборочный зависимый t-тест</h3>
+<section id="sec-dep_ttest" class="level3" data-number="18.2.1"><h3 data-number="18.2.1" class="anchored" data-anchor-id="sec-dep_ttest">
+<span class="header-section-number">18.2.1</span> Двухвыборочный зависимый t-тест</h3>
 <p>Двухвыборочный зависимый t-тест — это то же самое, что и одновыборочный t-тест, только для разницы между связанными значениями. Поскольку наша нулевая гипотеза звучит, что средние должны быть равны,</p>
 <p><span class="math display">\[H_0: \mu_1 = \mu_2\]</span></p>
 <p>то при верности нулевой гипотезы <span class="math display">\[\mu_1 - \mu_2 = 0\]</span>.</p>
@@ -559,14 +535,14 @@ mean of x
 <p><span class="math display">\[t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} = \frac{\overline{d} - (\mu_1 - \mu_2)} {s_d / \sqrt{N}} = \frac{\overline{d} - 0} {s_d / \sqrt{N}}  = \frac{\overline{d}} {s_d / \sqrt{N}}\]</span></p>
 <p>Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>. Мы вытащим оттуда данные по диете номер 1 и посмотрим, действительно ли она помогает сбросить вес.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>diet1 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">==</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">diet</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span><span class="op">)</span></span>
+<span><span class="va">diet1</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Diet</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Чтобы провести двухвыборочный зависимый <span class="math inline">\(t\)</span>-тест нужно передать в функцию <code>t.test()</code> два вектора одинаковой длины<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Чтобы обозначить, что нам нужен именно зависимый <span class="math inline">\(t\)</span>-тест, нужно прописать значение <code>TRUE</code> для параметра <code>paired =</code>.</p>
+<p>Чтобы провести двухвыборочный зависимый <span class="math inline">\(t\)</span>-тест нужно передать в функцию <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> два вектора одинаковой длины<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Чтобы обозначить, что нам нужен именно зависимый <span class="math inline">\(t\)</span>-тест, нужно прописать значение <code>TRUE</code> для параметра <code>paired =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">diet1</span><span class="op">$</span><span class="va">pre.weight</span>, <span class="va">diet1</span><span class="op">$</span><span class="va">weight6weeks</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -593,7 +569,7 @@ mean difference
 <div class="callout-body-container callout-body">
 <p>Если вы не пропишите <code>paired = TRUE</code> или по ошибке пропишите <code>paired = FALSE</code>, когда правильно использовать зависимый <span class="math inline">\(t\)</span>-тест, то вы получите совершенно другие результаты:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">diet1</span><span class="op">$</span><span class="va">pre.weight</span>, <span class="va">diet1</span><span class="op">$</span><span class="va">weight6weeks</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -612,12 +588,10 @@ mean of x mean of y
 </div>
 </div>
 <table class="table">
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Внутрииндивидуальный план</th>
 <th>Межиндивидуальный план</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>Зависимый t-тест</td>
@@ -628,10 +602,8 @@ mean of x mean of y
 <td><code>t.test(..., paired = FALSE)</code></td>
 </tr>
 </tbody>
-</table>
-</section>
-<section id="sec-ind_ttest" class="level3" data-number="18.2.2">
-<h3 data-number="18.2.2" class="anchored" data-anchor-id="sec-ind_ttest"><span class="header-section-number">18.2.2</span> Двухвыборочный независимый t-тест</h3>
+</table></section><section id="sec-ind_ttest" class="level3" data-number="18.2.2"><h3 data-number="18.2.2" class="anchored" data-anchor-id="sec-ind_ttest">
+<span class="header-section-number">18.2.2</span> Двухвыборочный независимый t-тест</h3>
 <p>В случае независимого t-теста формула отличается. Однако гипотеза остается такой же и логика примерна та же.</p>
 <p>У двух выборок могут различаться стандартные отклонения, поэтому для подсчет стандартной ошибки разницы средних для независимых выборок нужно сначала посчитать <strong>объединенное стандартное отклонение (pooled standard deviation)</strong>:</p>
 <p><span class="math display">\[s^2_{pool} = \frac {(n_1-1)s^2_1 + (n_2-1)s^2_2} {(n_1 - 1) + (n_2 -1)}\]</span></p>
@@ -639,11 +611,11 @@ mean of x mean of y
 <p><span class="math display">\[se_{m_1 - m_2} = \sqrt {(s^2_{pool}) (\frac {1} {n_1} + \frac {1}{n_2} )}\]</span></p>
 <p>Выглядит сложно, но по своей сути это что-то вроде усредненного стандартного отклонения (с учетом размеров выборок). Ну а t-статистика затем считается просто:</p>
 <p><span class="math display">\[t = \frac {(m_1 - m_2) - (\mu_1 - \mu_2)} {se_{m_1 - m_2}} = \frac {(m_1 - m_2) - 0} {se_{m_1 - m_2}} = \frac {m_1 - m_2} {se_{m_1 - m_2}}\]</span></p>
-<p>Давайте теперь опробуем независимый t-тест для сравнения веса испытуемых двух групп после диеты. Мы снова воспользуемся функцией <code>t.test()</code>:</p>
+<p>Давайте теперь опробуем независимый t-тест для сравнения веса испытуемых двух групп после диеты. Мы снова воспользуемся функцией <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>diet12 <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Diet <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet12</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Diet</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight6weeks</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">diet12</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Welch Two Sample t-test
@@ -661,7 +633,7 @@ mean in group 1 mean in group 2
 <p>Если присмотритесь, то увидите, что со степенями свободы что-то странное. Они дробные! Дело в том, что мы провели не совсем “настоящий” t-тест, а его очень близкую альтернативу под названием <strong>тест Уэлча</strong> <em>(Welch test)</em>, который иногда называют <strong>поправкой Уэлча</strong> к t-тесту. Эта поправка позволяет тесту лучше справляться с выборками с разной дисперсией. Даже если у нас нет проблем с разной дисперсией, то от поправки Уэлча хуже не будет, поэтому это вариант по умолчанию в R.</p>
 <p>Но если его хочется отключить, то нужно поставить <code>var.equal = TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">weight6weeks</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">diet12</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
@@ -676,18 +648,17 @@ mean in group 1 mean in group 2
        69.57500        68.08519 </code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="sec-assumptions_ttest" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="sec-assumptions_ttest"><span class="header-section-number">18.3</span> Допущения t-теста</h2>
+</section></section><section id="sec-assumptions_ttest" class="level2" data-number="18.3"><h2 data-number="18.3" class="anchored" data-anchor-id="sec-assumptions_ttest">
+<span class="header-section-number">18.3</span> Допущения t-теста</h2>
 <p>Чтобы подсчет <em>p-value</em> был корректным, некоторые допущения должны быть выполнены.</p>
 <ol type="1">
 <li>Шкала должна быть не ниже интервальной, т.е. <span class="math inline">\(t\)</span>-тест можно применять только в случа с <strong>интервальной шкалой</strong> или <strong>шкалой отношений.</strong> Иначе мы не можем говорить о различии средних – ведь только для этих шкал в принципе можно считать среднее.</li>
-<li><strong>Нормальное распределение.</strong> Это самое известное допущение, но чуть ли не наименее важное. Часто утверждается, что выборки должны быть взяты из нормального распределения. Это не совсем так: да, верно, это достаточное условие, но не необходимое. В первую очередь, важно именно выборочное распределение (средних разниц или разниц средних), которое достигается за счет центральной предельной теоремы (<a href="310-infer_stats.html#sec-clt"><span>Глава&nbsp;17.8</span></a>) особенно при большой выборке (<a href="310-infer_stats.html#sec-nordm_dist_importance"><span>Глава&nbsp;17.7</span></a>). Отсюда и все правила в духе “для t-теста распределение должно быть нормальным, но если n &gt; 30, то это необязательно”. Откуда именно 30? Да ниоткуда, просто. Как и со всеми точными числами в статистике.</li>
+<li>
+<strong>Нормальное распределение.</strong> Это самое известное допущение, но чуть ли не наименее важное. Часто утверждается, что выборки должны быть взяты из нормального распределения. Это не совсем так: да, верно, это достаточное условие, но не необходимое. В первую очередь, важно именно выборочное распределение (средних разниц или разниц средних), которое достигается за счет центральной предельной теоремы (<a href="310-infer_stats.html#sec-clt"><span>Глава&nbsp;17.8</span></a>) особенно при большой выборке (<a href="310-infer_stats.html#sec-nordm_dist_importance"><span>Глава&nbsp;17.7</span></a>). Отсюда и все правила в духе “для t-теста распределение должно быть нормальным, но если n &gt; 30, то это необязательно”. Откуда именно 30? Да ниоткуда, просто. Как и со всеми точными числами в статистике.</li>
 </ol>
-<p>Для проверки на нормальность существуют различные статистические тесты. Самый известный из них — тест Шапиро-Уилка. Его можно провести в R при помощи функции <code>shapiro.test()</code>.</p>
+<p>Для проверки на нормальность существуют различные статистические тесты. Самый известный из них — тест Шапиро-Уилка. Его можно провести в R при помощи функции <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(samp)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test</a></span><span class="op">(</span><span class="va">samp</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -702,17 +673,15 @@ W = 0.98122, p-value = 0.1654</code></pre>
 <ol start="2" type="1">
 <li><p>Для двувыборочного независимого t-теста выборки должны быть взяты из распределения <strong>с одинаковыми дисперсиями</strong>. Однако это не так критично с применением поправки Уэлча.</p></li>
 <li><p><strong>Независимость значений (или пар)</strong> в выборке. Типичным примером нарушения независимости является случай, когда t-тест применяется на неусредненных (например, по испытуемому) значениях. Еще один пример нарушения независимости — использование одного наблюдения несколько раз или использование одного и того же испытуемого несколько раз. Определить независимость можно следующим мысленным экспериментом: могу ли я хоть как-нибудь предсказать следующее значение в выборке? Например, в случае с несколькими значениями от одного испытуемого я могу ориентироваться на его предыдущие результаты и предсказать последующие результаты лучше, чем на основе простого среднего по всем остальным значениям. Это значит, что допущение о независимости нарушено.</p></li>
-</ol>
-</section>
-<section id="sec-nonparam_ttest" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="sec-nonparam_ttest"><span class="header-section-number">18.4</span> Непараметрические аналоги t-теста</h2>
+</ol></section><section id="sec-nonparam_ttest" class="level2" data-number="18.4"><h2 data-number="18.4" class="anchored" data-anchor-id="sec-nonparam_ttest">
+<span class="header-section-number">18.4</span> Непараметрические аналоги t-теста</h2>
 <p>Если выборка не очень большая и взята из сильно ассиметричного распределения или выборка представляет собой порядковые данные, то можно воспользоваться непараметрическими альтернативами для t-теста.</p>
 <p>Непараметрические тесты не имеют допущений о распределении, что делает их более универсальными. Большинство подобных тестов подразумевает превращение данных в ранги, т.е. внутри этих тестов происходит преобразование в ранговую шкалу. Такое преобразование может снизить статистическую мощность теста и привести к повышению вероятности ошибки второго рода.</p>
-<section id="sec-wilcox_test" class="level3" data-number="18.4.1">
-<h3 data-number="18.4.1" class="anchored" data-anchor-id="sec-wilcox_test"><span class="header-section-number">18.4.1</span> Тест Уилкоксона</h3>
-<p>Непараметрический аналог двустороннего <em>зависимого</em> t-теста называется <strong>тестом Уилкоксона.</strong> Функция для него называется <code>wilcox.test()</code>, и она имеет такой же синтаксис, как и <code>t.test()</code>.</p>
+<section id="sec-wilcox_test" class="level3" data-number="18.4.1"><h3 data-number="18.4.1" class="anchored" data-anchor-id="sec-wilcox_test">
+<span class="header-section-number">18.4.1</span> Тест Уилкоксона</h3>
+<p>Непараметрический аналог двустороннего <em>зависимого</em> t-теста называется <strong>тестом Уилкоксона.</strong> Функция для него называется <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code>, и она имеет такой же синтаксис, как и <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(diet1<span class="sc">$</span>pre.weight, diet1<span class="sc">$</span>weight6weeks, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">diet1</span><span class="op">$</span><span class="va">pre.weight</span>, <span class="va">diet1</span><span class="op">$</span><span class="va">weight6weeks</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in wilcox.test.default(diet1$pre.weight, diet1$weight6weeks, paired =
 TRUE): cannot compute exact p-value with ties</code></pre>
@@ -739,12 +708,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Не пугайтесь, когда видите сообщение <em>“Есть совпадающие значения: не могу высчитать точное p-значение”</em>. Это означает, что в ваших данных есть повторяющиеся значения, поэтому расчет p-value в данном случае — это некоторая апроксимация, но в большинстве случаев это не играет серьезной роли, разве что у вас действительно очень много повторяющихся значений.</p>
 </div>
 </div>
-</section>
-<section id="sec-mann_test" class="level3" data-number="18.4.2">
-<h3 data-number="18.4.2" class="anchored" data-anchor-id="sec-mann_test"><span class="header-section-number">18.4.2</span> Тест Манна-Уитни</h3>
-<p>Непараметрическим аналогом двустороннего <em>независимого</em> t-теста является <strong>тест Манна-Уитни.</strong> Для него тоже используется функция <code>wilcox.test()</code>:</p>
+</section><section id="sec-mann_test" class="level3" data-number="18.4.2"><h3 data-number="18.4.2" class="anchored" data-anchor-id="sec-mann_test">
+<span class="header-section-number">18.4.2</span> Тест Манна-Уитни</h3>
+<p>Непараметрическим аналогом двустороннего <em>независимого</em> t-теста является <strong>тест Манна-Уитни.</strong> Для него тоже используется функция <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(weight6weeks <span class="sc">~</span> Diet, <span class="at">data =</span> diet12)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">weight6weeks</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">diet12</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...): cannot
 compute exact p-value with ties</code></pre>
@@ -763,12 +731,10 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <col style="width: 49%">
 <col style="width: 50%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th>Внутрииндивидуальный план</th>
 <th>Межиндивидуальный план</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td>Зависимый t-тест:</td>
@@ -790,19 +756,14 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </table>
 
 
-</section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Благодаря <code>set.seed(42)</code> мы можем точно повторить сгенерированные значения.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Раньше (до версии R 4.4.0) можно было провести <code>t.test()</code> имея данные в длинном формате, используя синтаксис формул. Однако тревожных разработчиков R (и не только их) сильно пугала мысль о том, что, используя синтаксис формул, можно легко допустить ошибку в расчетах, так как при этом нигде не задается экплицитно, какие именно значения спарены между собой. Поэтому теперь при попытке использовать формулы для двухвыборочного зависимого <span class="math inline">\(t\)</span>-теста вы получете ошибку со следующим текстом:</p>
-<p><code>Error in t.test.formula(..., paired = T) : cannot use 'paired' in formula method</code><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<li id="fn2">
+<p>Раньше (до версии R 4.4.0) можно было провести <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> имея данные в длинном формате, используя синтаксис формул. Однако тревожных разработчиков R (и не только их) сильно пугала мысль о том, что, используя синтаксис формул, можно легко допустить ошибку в расчетах, так как при этом нигде не задается экплицитно, какие именно значения спарены между собой. Поэтому теперь при попытке использовать формулы для двухвыборочного зависимого <span class="math inline">\(t\)</span>-теста вы получете ошибку со следующим текстом:</p>
+<p><code>Error in t.test.formula(..., paired = T) : cannot use 'paired' in formula method</code><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p>
+</li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1020,9 +981,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./310-infer_stats.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span>
       </a>          
