@@ -366,17 +366,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
 <li><a href="#sec-wd" id="toc-sec-wd" class="nav-link active" data-scroll-target="#sec-wd"><span class="toc-section-number">6.1</span>  Рабочая папка и проекты RStudio</a></li>
-  <li>
-<a href="#sec-project_workflow" id="toc-sec-project_workflow" class="nav-link" data-scroll-target="#sec-project_workflow"><span class="toc-section-number">6.2</span>  Организация проектов</a>
-  <ul class="collapse">
-<li><a href="#sec-text_binary" id="toc-sec-text_binary" class="nav-link" data-scroll-target="#sec-text_binary"><span class="toc-section-number">6.2.1</span>  Табличные данные: текстовые и бинарные данные</a></li>
-  </ul>
-</li>
-  <li><a href="#sec-check_imported" id="toc-sec-check_imported" class="nav-link" data-scroll-target="#sec-check_imported"><span class="toc-section-number">6.3</span>  Проверка импортированных данных</a></li>
-  <li><a href="#sec-export_data" id="toc-sec-export_data" class="nav-link" data-scroll-target="#sec-export_data"><span class="toc-section-number">6.4</span>  Экспорт данных</a></li>
-  <li><a href="#sec-binary" id="toc-sec-binary" class="nav-link" data-scroll-target="#sec-binary"><span class="toc-section-number">6.5</span>  Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
-  <li><a href="#import_googlesheets" id="toc-import_googlesheets" class="nav-link" data-scroll-target="#import_googlesheets"><span class="toc-section-number">6.6</span>  Импорт данных из Google Sheets</a></li>
-  <li><a href="#sec-fastread" id="toc-sec-fastread" class="nav-link" data-scroll-target="#sec-fastread"><span class="toc-section-number">6.7</span>  Быстрый импорт данных</a></li>
+  <li><a href="#sec-project_workflow" id="toc-sec-project_workflow" class="nav-link" data-scroll-target="#sec-project_workflow"><span class="toc-section-number">6.2</span>  Организация проектов</a></li>
+  <li><a href="#sec-text_binary" id="toc-sec-text_binary" class="nav-link" data-scroll-target="#sec-text_binary"><span class="toc-section-number">6.3</span>  Табличные данные: текстовые и бинарные данные</a></li>
+  <li><a href="#sec-check_imported" id="toc-sec-check_imported" class="nav-link" data-scroll-target="#sec-check_imported"><span class="toc-section-number">6.4</span>  Проверка импортированных данных</a></li>
+  <li><a href="#sec-export_data" id="toc-sec-export_data" class="nav-link" data-scroll-target="#sec-export_data"><span class="toc-section-number">6.5</span>  Экспорт данных</a></li>
+  <li><a href="#sec-binary" id="toc-sec-binary" class="nav-link" data-scroll-target="#sec-binary"><span class="toc-section-number">6.6</span>  Импорт таблиц в бинарном формате: таблицы Excel, SPSS</a></li>
+  <li><a href="#import_googlesheets" id="toc-import_googlesheets" class="nav-link" data-scroll-target="#import_googlesheets"><span class="toc-section-number">6.7</span>  Импорт данных из Google Sheets</a></li>
+  <li><a href="#sec-fastread" id="toc-sec-fastread" class="nav-link" data-scroll-target="#sec-fastread"><span class="toc-section-number">6.8</span>  Быстрый импорт данных</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -408,11 +404,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"heroes_information.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in file(file, "rt"): не могу открыть файл 'heroes_information.csv': No
-such file or directory</code></pre>
+<pre><code>Warning in file(file, "rt"): cannot open file 'heroes_information.csv': No such
+file or directory</code></pre>
 </div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in file(file, "rt"): не могу открыть соединение</code></pre>
+<pre><code>Error in file(file, "rt"): cannot open the connection</code></pre>
 </div>
 </div>
 <p>Это означает, что R не может найти нужный файл. Вообще-то мы даже не сказали, где искать. Нам нужно как-то совместить место, где R ищет загружаемые файлы и сами файлы. Для этого есть несколько способов.</p>
@@ -457,7 +453,7 @@ such file or directory</code></pre>
 <ul>
 <li>Каждый Магомет получает по своей горе: использование проектов в RStudio.</li>
 </ul>
-<p>На первый взгляд это кажется чем-то очень сложным, но это не так. Это очень просто и ОЧЕНЬ удобно. При создании проекта создается отдельная папка, где у вас лежат данные, хранятся скрипты, вспомогательные файлы и отчеты. Кроме папки создается файл формата <em>.Rproj</em>, в котором хранятся настройки проекта. Если нужно вернуться к другому проекту — просто открываете другой проект, с другими файлами и скриптами. Можно даже иметь открытыми несколько окон <em>RStudio</em> таким образом. Это еще помогает не пересекаться переменным из разных проектов — а то, знаете, использование двух переменных <code>data</code> в разных скриптах чревато ошибками. Поэтому очень удобным решением будет выделение отдельного проекта под этот курс.</p>
+<p>На первый взгляд это кажется чем-то очень сложным, но это не так. Это очень просто и ОЧЕНЬ удобно. При создании проекта создается отдельная папка, где у вас лежат данные, хранятся скрипты, вспомогательные файлы и отчеты. Кроме папки создается файл формата <em>.Rproj</em>, в котором хранятся настройки проекта. Если нужно вернуться к другому проекту — просто открываете другой проект, с другими файлами и скриптами. Можно даже иметь открытыми несколько окон <em>RStudio</em> таким образом. Это еще помогает не пересекаться переменным из разных проектов — а то, знаете, использование двух переменных <code>data</code> в разных скриптах чревато ошибками. Поэтому очень удобным решением будет выделение отдельного проекта под этот курс и отдельного проекта — под практику работы с конкретным датасетом, на котором вы тренируетесь, применяя изученные инструменты.</p>
 <blockquote class="blockquote">
 <p>При закрытии проекта все переменные по умолчанию тоже будут сохраняться, а при открытии — восстанавливаться (а вот пакеты все равно придется подгружать заново). Это очень удобно, хотя некоторые <a href="https://r4ds.had.co.nz/workflow-projects.html">рекомендуют от этого отказаться</a>. Это можно сделать во вкладке <code>Tool - Global Options...</code></p>
 </blockquote>
@@ -481,8 +477,8 @@ such file or directory</code></pre>
 ├── 01_first_script_preposcessing.R
 ├── 02_second_script_statistics.R
 └── 03_third_script_figures.R </code></pre>
-<p>Данные стоит держать в отдельной папке, причем в некоторых ситуациях вы захотите создать отдельные подпапки, например, отдельные подпапки для данных на входе, временных файлов и данных на выходе. Результаты работы, например, отчеты, сгенерированные с помощью <em>R Markdown</em> или <em>Quarto</em> (см. <a href="250-rmarkdown.html"><span>Глава&nbsp;16</span></a>). Туда же можно поместить папку с графиками или же можно поместить эту папку в корневую директорию.</p>
-<p>Это лишь пример структуры организации проектов, детали могут различаться, но такая структура позволит не заблудиться в собственных файлах, если тех накопилось достаточно много. Кроме того, другому человеку в такой структуре проекта будет разобраться значительно проще</p>
+<p>Данные стоит держать в отдельной папке, причем в некоторых ситуациях вы захотите создать отдельные подпапки, например, отдельные подпапки для данных на входе, временных файлов и данных на выходе. Результаты работы, например, отчеты, сгенерированные с помощью <em>Quarto</em> (см. <a href="250-rmarkdown.html"><span>Глава&nbsp;16</span></a>). Туда же можно поместить папку с графиками или же можно поместить эту папку в корневую директорию.</p>
+<p>Это лишь пример структуры организации проектов, детали могут различаться, но такая структура позволит не заблудиться в собственных файлах, если тех накопилось достаточно много. Кроме того, другому человеку в такой структуре проекта будет разобраться значительно проще. Еще больше облегчит жизнь добавление файла README, в котором будет прописана вся важная информация о проекте: для чего какие файлы в проекте, что означают колонки в таблицах и т.д. Файл README можно создать в любом популярном текстовом формате — желательно в распространённых <em>.txt</em> или <em>Markdown</em> (см. <a href="250-rmarkdown.html"><span>Глава&nbsp;16</span></a>).</p>
 <p>При создании папок внутри основного проекта важно помнить о том, что теперь ваши файлы больше нельзя найти в вашей корневой директории: нужно искать их в соответствующих папках. Это значит, что путь до файла теперь будет не <code>"heroes_information.csv"</code>, а <code>"data/heroes_information.csv"</code> или даже <code>"data/raw/heroes_information.csv"</code>.</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -512,8 +508,8 @@ such file or directory</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Meaningful part of the script -------------------------------------------</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Разделенный на такие части скрипт (да еще и с подробными комментариями) гораздо удобнее читать!</p>
-<section id="sec-text_binary" class="level3" data-number="6.2.1"><h3 data-number="6.2.1" class="anchored" data-anchor-id="sec-text_binary">
-<span class="header-section-number">6.2.1</span> Табличные данные: текстовые и бинарные данные</h3>
+</section><section id="sec-text_binary" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="sec-text_binary">
+<span class="header-section-number">6.3</span> Табличные данные: текстовые и бинарные данные</h2>
 <p>Как вы уже поняли, импорт данных - одна из самых муторных и неприятных вещей в R. Если у вас получится с этим справится, то все остальное - ерунда. Мы уже разобрались с первой частью этого процесса - нахождением файла с данными, осталось научиться их читать.</p>
 <p>Здесь стоит сделать небольшую ремарку. Довольно часто данные представляют собой табличку. Или же их можно свести к табличке. Такая табличка, как мы уже выяснили, удобно репрезентируется в виде датафрейма. Но как эти данные хранятся на компьютере? Есть два варианта: в <em>бинарном</em> и в <em>текстовом</em> файле.</p>
 <p>Текстовый файл означает, что такой файл можно открыть в программе <em>Блокнот</em> или его аналоге (например, <em>TextEdit</em> на <em>macOS</em>) и увидеть напечатанный текст: скрипт, роман или упорядоченный набор цифр и букв. Нас сейчас интересует именно последний случай. Таблица может быть представлена как текст: отдельные строчки в файле будут разделять разные строчки таблицы, а какой-нибудь знак-разделитель отделять колонки друг от друга.</p>
@@ -540,8 +536,8 @@ such file or directory</code></pre>
 </div>
 </div>
 <p>Можете проверить с помощью <code>View(heroes)</code>: все работает! Если же вылезает какая-то странная ерунда или же просто ошибка - попробуйте другие функции (<code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim()</a></code>) и покопаться с параметрами. Для этого читайте <code>Help</code>.</p>
-</section></section><section id="sec-check_imported" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="sec-check_imported">
-<span class="header-section-number">6.3</span> Проверка импортированных данных</h2>
+</section><section id="sec-check_imported" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="sec-check_imported">
+<span class="header-section-number">6.4</span> Проверка импортированных данных</h2>
 <p>При импорте данных обратите внимания на предупреждения (если таковые появляются), в большинстве случаев они указывают на то, что данные импортированы некорректно.</p>
 <p>Проверим, что все прочиталось нормально с помощью уже известной нам функции <code><a href="https://rdrr.io/r/utils/str.html">str()</a></code>:</p>
 <div class="cell">
@@ -585,14 +581,14 @@ such file or directory</code></pre>
 </li>
 <li><p>Прочитаны ли те столбики, которые должны быть числовыми, как <code>int</code> или <code>num</code>. Если в колонке содержатся числа, а написано <code>chr</code> (= <code>"character"</code>) или <code>Factor</code> (в случае если <code>stringsAsFactors = TRUE</code>), то, скорее всего, одна из строчек содержит в себе нечисловые знаки, которые не были прочитаны как <code>NA</code>.</p></li>
 <li><p>Странные названия колонок. Это может случиться по самым разным причинам, но в таких случаях стоит открывать файл в другой программе и смотреть первые строчки. Например, может оказаться, что первые несколько строчек — пустые или что первая строчка не содержит название столбцов (тогда для параметра <code>header =</code> нужно поставить <code>FALSE</code>)</p></li>
-<li><p>Вместо строковых данных у вас кракозябры. Это означает проблемы с кодировкой. В первую очередь попробуйте выставить значение <code>"UTF-8"</code> для параметра <code>encoding =</code> в функции для чтения файла:</p></li>
-</ol>
+<li>
+<p>Вместо строковых данных у вас кракозябры. Это означает проблемы с кодировкой. В первую очередь попробуйте выставить значение <code>"UTF-8"</code> для параметра <code>encoding =</code> в функции для чтения файла:</p>
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/heroes_information.csv"</span>,</span>
 <span>                   encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>В случае если это не помогает, попробуйте <a href="https://www.artlebedev.ru/decoder/">разобрать</a>, что это за кодировка.</p>
-<ol start="5" type="1">
+</li>
 <li><p>Все прочиталось как одна колонка. В этом случае, скорее всего, неправильно подобран разделить колонок — параметр <code>sep =</code>. Откройте файл в текстовом редакторе, чтобы понять какой нужно использовать.</p></li>
 <li><p>В отдельных строчках все прочиталось как одна колонка, а в остальных нормально. Скорее всего, в файле есть значения типа <code>\</code> или <code>"</code>, которые в функциях <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv2()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim2()</a></code> читаются как символы для закавычивания значений. Это может понадобиться, если у вас в таблице есть строковые значения со знаками <code>,</code> или <code>;</code>, которые могут восприниматься как разделитель столбцов.</p></li>
 <li><p>Появились какие-то новые числовые колонки. Возможно неправильно поставлен разделитель дробной части. Обычно это либо <code>.</code> (<code><a href="https://rdrr.io/r/utils/read.table.html">read.table()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim()</a></code>), либо <code>,</code> (<code><a href="https://rdrr.io/r/utils/read.table.html">read.csv2()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.delim2()</a></code>).</p></li>
@@ -602,8 +598,8 @@ such file or directory</code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/heroes_information.csv"</span>, </span>
 <span>                   na.strings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="sec-export_data" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="sec-export_data">
-<span class="header-section-number">6.4</span> Экспорт данных</h2>
+</section><section id="sec-export_data" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="sec-export_data">
+<span class="header-section-number">6.5</span> Экспорт данных</h2>
 <p>Представим, что вы хотите сохранить табличку с данными про супергероев из вселенной DC в виде отдельного файла <em>.csv.</em></p>
 <div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dc</span> <span class="op">&lt;-</span> <span class="va">heroes</span><span class="op">[</span><span class="va">heroes</span><span class="op">$</span><span class="va">Publisher</span> <span class="op">==</span> <span class="st">"DC Comics"</span>,<span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -620,17 +616,15 @@ such file or directory</code></pre>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv2</a></span><span class="op">(</span><span class="va">dc</span>, <span class="st">"data/dc_heroes_information.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="sec-binary" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="sec-binary">
-<span class="header-section-number">6.5</span> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</h2>
+</section><section id="sec-binary" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="sec-binary">
+<span class="header-section-number">6.6</span> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</h2>
 <p>Тем не менее, далеко не всегда таблицы представлены в виде текстового файла. Самый распространенный пример таблицы в бинарном виде — родные форматы Microsoft Excel. Если Вы попробуете открыть .xlsx файл в Блокноте, то увидите кракозябры. Это делает работу с этим файлами гораздо менее удобной, поэтому стоит избегать экселевских форматов и стараться все сохранять в .csv.</p>
 <p>Такие файлы не получится прочитать при помощи базового инструментария R. Тем не менее, для чтения таких файлов есть много дополнительных пакетов:</p>
 <ul>
 <li><p>файлы Microsoft Excel: лучше всего справляется пакет <code>readxl</code> (является частью расширенного tidyverse), у него есть много альтернатив (<code>xlsx</code>, <code>openxlsx</code>).</p></li>
 <li><p>файлы SPSS, SAS, Stata: существуют два основных пакета — <code>haven</code> (часть расширенного tidyverse) и <code>foreign</code>.</p></li>
-</ul>
-<p>Что такое пакеты и как их устанавливать мы изучим очень скоро.</p>
-</section><section id="import_googlesheets" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="import_googlesheets">
-<span class="header-section-number">6.6</span> Импорт данных из Google Sheets</h2>
+</ul></section><section id="import_googlesheets" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="import_googlesheets">
+<span class="header-section-number">6.7</span> Импорт данных из Google Sheets</h2>
 <p>Все чаще “кнопочная” работа с данными переезжает из Excel в облачный Google Sheets, который обладает схожим интерфейсом и функционалом, но позволяет удобно работать нескольким пользователям одновременно.</p>
 <p>Оттуда данные можно легко выгрузить в нужном формате. Конечно, и в .csv тоже. Но было бы удобно загружать данные из Google Sheets напрямую, по ссылке. И это вполне возможно и даже не очень трудно! Лучший пакет для этого – <code>googlesheets4</code>.</p>
 <div class="cell">
@@ -645,8 +639,8 @@ such file or directory</code></pre>
 <p>Выбираете (в данном случае у меня только один аккаунт, поэтому пишу <em><code>1</code></em> и жму <em><code>Enter</code></em>).</p>
 <p>После этого откроется окно в веб-браузере, в котором Google будет спрашивать, доверяете ли вы R и готовы ли дать ему доступ к чтению таблицы (разумеется, отвечаем, что да). Это нужно будет сделать всего один раз, так что в дальнейшем нажимать в веб-браузере ничего будет не нужно.</p>
 <p>После этого таблица загрузится.</p>
-</section><section id="sec-fastread" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="sec-fastread">
-<span class="header-section-number">6.7</span> Быстрый импорт данных</h2>
+</section><section id="sec-fastread" class="level2" data-number="6.8"><h2 data-number="6.8" class="anchored" data-anchor-id="sec-fastread">
+<span class="header-section-number">6.8</span> Быстрый импорт данных</h2>
 <p>Чтение табличных данных обычно происходит очень быстро. По крайней мере, до тех пор пока ваши данные не содержат очень много значений. Если вы попробуете прочитать с помощью <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> таблицу с миллионами строчками, то заметите, что это происходит довольно медленно. Впрочем, эта проблема эффективно решается дополнительными пакетами.</p>
 <ul>
 <li>Пакет <code>readr</code> (часть базового tidyverse) предлагает функции, очень похожие на стандартные <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>, <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv2()</a></code> и тому подобные, только в названиях используется нижнее подчеркивание: <code>read_csv()</code> и <code>read_csv2()</code>. Они быстрее и немного удобнее, особенно если вы работаете в tidyverse.</li>
@@ -693,7 +687,7 @@ dbl (3): ...1, Height, Weight
 </div>
 </div>
 <ul>
-<li>Пакет <code>vroom</code> - это часть расширенного tidyverse. Это такая альтернатива <code>readr</code> из того же tidyverse, но еще быстрее (отсюда и название).</li>
+<li>Пакет <code>vroom</code> — это часть расширенного <em>tidyverse</em>. Начиная с версии 2.0, <code>readr</code> использует <code>vroom</code> в качестве бэкенда, поэтому по скорости они практически не отличаются. Тем не менее, <code>vroom</code> можно использовать и отдельно.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.tidyverse.org/reference/vroom.html">vroom</a></span><span class="op">(</span><span class="st">"data/heroes_information.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -760,7 +754,7 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 734:  185.0         DC Comics          -       bad     81</code></pre>
 </div>
 </div>
-<p>Чем же пользоваться среди всего этого многообразия? <a href="https://www.danielecook.com/speeding-up-reading-and-writing-in-r/">Бенчмарки</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> показывают, что быстрее всех <code>vroom</code> и <code>data.table</code>. Если же у вас нет задачи ускорить работу кода на несколько миллисекунд или прочитать датасет на много миллионов строк, то стандартного <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> (если вы работаете в базовом R) и <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> (если вы работаете в tidyverse) должно быть достаточно.</p>
+<p>Чем же пользоваться среди всего этого многообразия? Для большинства задач стандартного <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> (если вы работаете в базовом R) и <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> (если вы работаете в <em>tidyverse</em>) должно быть более чем достаточно. Если же у вас есть задача прочитать датасет на много миллионов строк, то стоит обратить внимание на <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">data.table::fread()</a></code>, который традиционно отличается высокой скоростью работы.</p>
 <p>Все перечисленные пакеты повзоляют не только быстро импортировать данные, но и быстро (и удобно!) экспортировать их:</p>
 <div class="cell">
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/write_delim.html">write_csv</a></span><span class="op">(</span><span class="va">dc</span>, <span class="st">"data/dc_heroes_information.csv"</span><span class="op">)</span></span>
@@ -768,14 +762,13 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <span><span class="fu">vroom</span><span class="fu">::</span><span class="fu"><a href="https://vroom.tidyverse.org/reference/vroom_write.html">vroom_write</a></span><span class="op">(</span><span class="va">dc</span>, <span class="st">"data/dc_heroes_information.csv"</span>, delim <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
 <span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fwrite.html">fwrite</a></span><span class="op">(</span><span class="va">dc</span>, <span class="st">"data/dc_heroes_information.csv"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>В плане скорости записи файлов соотношение сил примерно такое же, как и для чтения: <code>vroom</code> и <code>data.table</code> обгоняют всех, затем идет <code>readr</code>, и только после него - базовые функции R.</p>
+<p>В плане скорости записи файлов соотношение сил примерно такое же, как и для чтения: <code>readr</code>/<code>vroom</code> и <code>data.table</code> значительно быстрее базовых функций R.</p>
 
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>супергерои в комиксах, фильмах и телесериалах часто взаимодействуют друг с другом, однако обычно это взаимодействие происходит между супергероями одного издателя. Два крупнейших издателя комиксов — DC и Marvel, поэтому принято говорить о вселенной DC и Marvel.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>А еще <strong>f</strong>riendly: <code>fread()</code> обычно самостоятельно хорошо угадывает формат таблицы на входе. <code>vroom</code> тоже так умеет.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>бенчмаркинг — это тест производительности, в данном случае — сравнение скорости работы конкурирующих пакетов.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

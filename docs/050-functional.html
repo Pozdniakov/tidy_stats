@@ -402,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header><section id="sec-create_fun" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="sec-create_fun">
 <span class="header-section-number">8.1</span> Создание функций</h2>
-<p>Поздравляю, сейчас мы выйдем на качественно новый уровень владения R. Вместо того, чтобы пользоваться теми функциями, которые уже написали за нас, мы можем сами создавать свои функции! В этом нет ничего сложного.</p>
+<p>Поздравляю, сейчас мы выйдем на качественно новый уровень владения R. Вместо того, чтобы пользоваться теми функциями, которые уже написали за нас, мы можем сами создавать свои функции!</p>
 <p>Синтаксис создания функции внешне похож на создание циклов или условных конструкций. Мы пишем ключевое слово <code>function</code>, в круглых скобках обозначаем переменные, с которыми собираемся что-то делать. Внутри фигурных скобок пишем выражения, которые будут выполняться при запуске функции. У функции есть свое собственное <strong>окружение <em>(environment)</em></strong> — место, где хранятся переменные. Именно те объекты, которые мы передаем в скобочках, и будут в окружении, так же как и “обычные” переменные для нас в глобальном окружении. Это означает, что функция будет искать переменные в первую очередь среди объектов, которые переданы в круглых скобочках. С ними функция и будет работать. На выходе функция выдаст то, что вычисляется внутри функции <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>. Если <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> появляется в теле функции несколько раз, то результат будет возвращаться из той функции <code><a href="https://rdrr.io/r/base/function.html">return()</a></code>, до которой выполнение дошло первым.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pow</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">p</span><span class="op">)</span> <span class="op">{</span></span>
@@ -424,6 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] 9</code></pre>
 </div>
 </div>
+<p>Именно так и рекомендуется создавать функции, используя <code><a href="https://rdrr.io/r/base/function.html">return()</a></code> только в том случае, если нужно вернуть значение из функции досрочно, не дожидаясь завершения её выполнения.</p>
 <p>Если в последней строчке будет присвоение, то функция ничего не вернет обратно. Это очень распространенная ошибка: функция вроде бы работает правильно, но ничего не возвращает. Нужно писать так, как будто бы в последней строчке результат выполнения выводится в консоль.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pow</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">p</span><span class="op">)</span> <span class="op">{</span></span>
@@ -532,12 +533,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ну а в дальнейшем я советую ознакомиться со <a href="https://adv-r.hadley.nz/debugging.html">средствами отладки кода в R</a> для того, чтобы научиться справляться с ошибками в своем коде на более продвинутом уровне.</p>
 </section><section id="sec-why_functions" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="sec-why_functions">
 <span class="header-section-number">8.3</span> Когда и зачем создавать функции?</h2>
-<p>Когда стоит создавать функции? Существует <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">“правило трех”</a> — если у вас есть три куска очень похожего кода, то самое время превратить код в функцию. Это очень условное правило, но, действительно, стоит избегать копипастинга в коде. В этом случае очень легко ошибиться, а сам код становится нечитаемым.</p>
+<p>Когда стоит создавать функции? Существует <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">“правило трех”</a> — если у вас есть три куска очень похожего кода, то самое время превратить код в функцию. Это очень условное правило, но, действительно, стоит избегать «копипастинга» в коде. В этом случае очень легко ошибиться, а сам код становится нечитаемым.</p>
 <p>Есть и другой подход к созданию функций: их стоит создавать не столько для того, чтобы использовать тот же код снова, сколько для абстрагирования от того, что происходит в отдельных строчках кода. Если несколько строчек кода были написаны для того, чтобы решить одну задачу, которой можно дать понятное название (например, подсчет какой-то особенной метрики, для которой нет готовой функции в R), то этот код стоит обернуть в функцию. Если функция работает корректно, то теперь не нужно думать над тем, что происходит внутри нее. Вы ее можете мысленно представить как операцию, которая имеет определенный вход и выход — как и встроенные функции в R.</p>
-<p>Отсюда следует важный вывод, что хорошее название для функции — это очень важно. Очень, очень, очень важно.</p>
+<p>Отсюда следует важный вывод, что хорошее название для функции — это очень важно. Очень, очень, очень важно. Впрочем, это важно для любых переменных.</p>
 </section><section id="sec-functions_objects" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="sec-functions_objects">
 <span class="header-section-number">8.4</span> Функции как объекты первого порядка</h2>
-<p>Ранее мы убедились, что арифметические операторы — это тоже функции. На самом деле, практически все в R — это функции. Даже <code>function</code> — это функция <code>function()</code>. Даже скобочки <code>(</code>, <code>{</code> — это функции!</p>
+<p>Ранее мы убедились, что арифметические операторы — это функции. Да и не только арифметические операторы, но и все остальные типа <code>&gt;</code> или <code>%in%</code>. И даже, например, скобочки для индексирования <code>[</code> — это тоже функции. В принципе, всё, что <em>происходит</em> в R — это вызов функции.</p>
 <p>А сами функции — это объекты первого порядка в R. Это означает, что с функциями вы можете делать практически все то же самое, что и с другими объектами в R (векторами, датафреймами и т.д.). Небольшой пример, который может взорвать ваш мозг:</p>
 <div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">mean</span>, <span class="va">min</span>, <span class="va">`{`</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -545,7 +546,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x126aea0b0&gt;
+&lt;bytecode: 0x14a9fedf8&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -575,7 +576,7 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </h2>
 <section id="sec-apply" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="sec-apply">
 <span class="header-section-number">8.5.1</span> Применение <code>apply()</code> для матриц</h3>
-<p>Семейство? Да, их целое множество: <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code>, <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>,<code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>, <code><a href="https://rdrr.io/r/base/lapply.html">vapply()</a></code>,<code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code>,<code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code>, <code><a href="https://rdrr.io/r/base/rapply.html">rapply()</a></code>… Ладно, не пугайтесь, всех их знать не придется. Обычно достаточно первых двух-трех. Проще всего пояснить как они работают на простой матрице с числами:</p>
+<p>Семейство функций <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code>? Да, их целое множество: <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code>, <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>,<code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>, <code><a href="https://rdrr.io/r/base/lapply.html">vapply()</a></code>,<code><a href="https://rdrr.io/r/base/tapply.html">tapply()</a></code>,<code><a href="https://rdrr.io/r/base/mapply.html">mapply()</a></code>, <code><a href="https://rdrr.io/r/base/rapply.html">rapply()</a></code>… Ладно, не пугайтесь, всех их знать не придется. Обычно достаточно первых двух-трех. Проще всего пояснить как они работают на простой матрице с числами:</p>
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">A</span> </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,33 +587,23 @@ function (..., na.rm = FALSE)  .Primitive("min")
 [3,]    3    6    9   12</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> не работает с датафреймами
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Функция <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> предназначена для работы с матрицами (или многомерными массивами). Если вы скормите функции <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> датафрейм, то этот датафрейм будет сначала превращен в матрицу. Главное отличие матрицы от датафрейма в том, что в матрице все значения одного типа, поэтому будьте готовы, что сработает имплицитное приведение к общему типу данных. Например, если среди колонок датафрейма есть хотя бы одна строковая колонка, то все колонки станут строковыми.</p>
-</div>
-</div>
 <p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> вы можете в буквальном смысле “применить” функцию к матрице или датафрейму. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> — данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.е. для каждого элемента по отдельности), а <code>FUN</code> — это функция, которую вы хотите применить! <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/050-functional_apply_function.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Визуальное представление функции apply(): выбираем матрицу, задаем способ итерации (по строкам или столбцам, выбираем функцию, которая будет применяться на каждом элементе.</figcaption><p></p>
 </figure>
 </div>
-<div class="callout callout-style-simple callout-important no-icon">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>Заметьте, мы вставляем функцию без скобок и кавычек как аргумент в функцию. Это как раз тот случай, когда аргументом в функции выступает сама функция, а не ее название или результат ее выполнения.</p>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> передаём в <code>FUN =</code> функцию как объект
 </div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Заметьте, мы вставляем функцию без скобок и кавычек как аргумент в функцию. Это как раз тот случай, когда аргументом в функции выступает сама функция, а не её название или результат её выполнения.</p>
 </div>
 </div>
 <p>Давайте разберем на примере:</p>
@@ -663,6 +654,19 @@ function (..., na.rm = FALSE)  .Primitive("min")
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">A</span>, <span class="fl">1</span>, <span class="va">sum</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22 21 30</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> не работает с датафреймами
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Функция <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> предназначена для работы с матрицами (или многомерными массивами). Если вы скормите функции <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> датафрейм, то этот датафрейм будет сначала превращён в матрицу. Главное отличие матрицы от датафрейма в том, что в матрице все значения одного типа, поэтому будьте готовы, что сработает имплицитное приведение к общему типу данных. Например, если среди колонок датафрейма есть хотя бы одна строковая колонка, то все колонки станут строковыми.</p>
 </div>
 </div>
 </section><section id="sec-anon_f" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="sec-anon_f">
@@ -744,7 +748,7 @@ $list
   10   26 </code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -757,7 +761,7 @@ $list
 <p>Достаточно сложно предсказать, в каких именно случаях будет произведено упрощение, а в каких нет. Поэтому <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> удобен в исследовании данных, но использовать эту функцию в скриптах не очень рекомендуется. Один из вариантов решения этой проблемы — это функция <code><a href="https://rdrr.io/r/base/lapply.html">vapply()</a></code>, которая позволяет управлять результатом <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code>, но гораздо более красиво эта проблема решена в пакете <a href="https://purrr.tidyverse.org/">purrr</a> (см. <a href="120-tidyverse_advanced.html#sec-purrr"><span>Глава&nbsp;11.4</span></a> ).</p>
 </div>
 </div>
-<p>Использование <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> на векторе приводит к тем же результатам, что и просто применить векторизованную функцию обычным способом.</p>
+<p>Применение <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> к вектору приводит к тем же результатам, что и просто применить векторизованную функцию обычным способом.</p>
 <div class="cell">
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="va">sqrt</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -770,7 +774,7 @@ $list
  [9] 3.000000 3.162278</code></pre>
 </div>
 </div>
-<p>Зачем вообще тогда нужен <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>, если мы можем просто применить векторизованную функцию? Ключевое слово здесь <em>векторизованная</em> функция. Если функция не векторизована, то <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> становится удобным вариантом для того, чтобы избежать итерирования с помощью циклов <code>for</code>.</p>
+<p>Зачем вообще тогда нужен <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code>, если мы можем просто применить векторизованную функцию? Ключевое слово здесь <em>векторизованная</em> функция. Если функция не векторизована, то <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> становится удобным вариантом для того, чтобы избежать итерирования с помощью циклов <code>for</code>. Если же у вас уже есть векторизованная функция, то лучше применять напрямую именно её: такой код будет не только более читаемым, но и в большинстве случаев более быстрым.</p>
 <div class="callout callout-style-simple callout-warning no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
