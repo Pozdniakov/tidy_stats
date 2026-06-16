@@ -146,7 +146,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./107-beyond_base_r.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и `{data.table}`</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./107-beyond_base_r.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a></li></ol></nav>
       <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -246,7 +246,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и </span></a><a href="https://r-datatable.com">data.table</a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -281,7 +281,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики </span></a><a href="https://ggplot2.tidyverse.org">ggplot2</a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -384,14 +384,14 @@ div.csl-indent {
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
    
   <ul>
-<li><a href="#sec-dt_approach" id="toc-sec-dt_approach" class="nav-link active" data-scroll-target="#sec-dt_approach"><span class="toc-section-number">9.1</span>  Подход <code>{data.table}</code></a></li>
+<li><a href="#sec-dt_approach" id="toc-sec-dt_approach" class="nav-link active" data-scroll-target="#sec-dt_approach"><span class="toc-section-number">9.1</span>  Подход data.table</a></li>
   <li><a href="#sec-tidy_approach" id="toc-sec-tidy_approach" class="nav-link" data-scroll-target="#sec-tidy_approach"><span class="toc-section-number">9.2</span>  Подход tidyverse</a></li>
-  <li><a href="#sec-dt_vs_tidy" id="toc-sec-dt_vs_tidy" class="nav-link" data-scroll-target="#sec-dt_vs_tidy"><span class="toc-section-number">9.3</span>  <code>{data.table}</code> vs tidyverse</a></li>
+  <li><a href="#sec-dt_vs_tidy" id="toc-sec-dt_vs_tidy" class="nav-link" data-scroll-target="#sec-dt_vs_tidy"><span class="toc-section-number">9.3</span>  data.table vs tidyverse</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-beyond_base_r" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и <code>{data.table}</code></span></span></h1>
+<h1 class="title"><span id="sec-beyond_base_r" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></h1>
 </div>
 
 
@@ -414,8 +414,7 @@ div.csl-indent {
 <p>Возьмем, например, задачу <strong>агрегации</strong> <em>(aggregation)</em>: вам нужно посчитать средний рост супергероев отдельно для мужчин и для женщин (а еще и для <code>NA</code>, за компанию). Три группы еще ничего, а если бы их было 10, 50 или 200? В базовом R для этого есть специальная функция <code><a href="https://rdrr.io/r/stats/aggregate.html">aggregate()</a></code>, но она довольно неудобная.</p>
 <p>Поэтому стали появляться пакеты, которые пытаются сделать агрегацию и другие непростые операции максимально безболезненными. Основных таких пакетов два: <a href="https://r-datatable.com">data.table</a> и <a href="https://tidyverse.tidyverse.org">tidyverse</a>. Это огромные пакеты, которые значительно изменяют работу в R, в том числе в плане стиля и используемой парадигмы. Тем не менее, в основе своей лежит всё то, что мы прошли раньше.</p>
 <section id="sec-dt_approach" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-dt_approach">
-<span class="header-section-number">9.1</span> Подход <code>{data.table}</code>
-</h2>
+<span class="header-section-number">9.1</span> Подход data.table</h2>
 <p><a href="https://r-datatable.com">data.table</a> — это распространенный пакет, который позволяет анализировать датафреймы максимально быстро и с помощью очень лаконичного кода.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"data.table"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Давайте импортируем наш набор данных про супергероев. Для этого воспользуемся функцией <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> из пакета <a href="https://r-datatable.com">data.table</a>. Она нам уже знакома как функция для импорта больших наборов данных (см. <a href="030-import_data.html#sec-fastread"><span>Глава&nbsp;6.8</span></a>).</p>
@@ -607,7 +606,7 @@ dplyr::lag()         masks stats::lag()</code></pre>
 <p>Разработчики <em>tidyverse</em> в целом не гонятся за высокой скоростью выполнения кода. Часто можно заметить, что новые функции работают довольно медленно. Но если у вас строчек меньше миллиона, то разницу в скорости с <a href="https://r-datatable.com">data.table</a> вы едва ли заметите.</p>
 <p>Команда разработчиков <em>tidyverse</em> работает на компанию <em>Posit</em> (бывшая <em>RStudio</em>). Поэтому в <em>RStudio</em> вы найдете несколько «шпаргалок» для <em>tidyverse</em>, но не для <a href="https://r-datatable.com">data.table</a>. Они также активно работают над популяризацией <em>tidyverse</em>, стараясь сделать вход в него максимально комфортным, особенно для людей без опыта программирования.</p>
 </section><section id="sec-dt_vs_tidy" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-dt_vs_tidy">
-<span class="header-section-number">9.3</span> <code>{data.table}</code> vs tidyverse</h2>
+<span class="header-section-number">9.3</span> data.table vs tidyverse</h2>
 <p>Так что же лучше: <a href="https://r-datatable.com">data.table</a> или <em>tidyverse</em>? Это один из самых частых споров в R-комьюнити. У обоих подходов есть плюсы, которые можно обсуждать вечно. Сегодня <em>tidyverse</em> выигрывает в популярности, особенно за пределами русскоязычного пространства.</p>
 <p>В последнее время <a href="https://r-datatable.com">data.table</a> и <em>tidyverse</em> всё меньше противостоят друг другу и всё больше взаимодополняют. Например, некоторые используют в качестве основного инструмента <em>tidyverse</em>, но при работе с данными побольше переключаются на <a href="https://r-datatable.com">data.table</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Кроме того, сами разработчики <em>tidyverse</em> пытаются приладить суперскоростной <a href="https://r-datatable.com">data.table</a> к <em>tidyverse</em>: пакет <a href="https://dtplyr.tidyverse.org/"><code>{dtplyr}</code></a> позволяет «переводить» код, написанный в <em>tidyverse</em>, в код на <a href="https://r-datatable.com">data.table</a>.</p>
 <p>Таким образом, выбирая из <em>tidyverse</em> и <a href="https://r-datatable.com">data.table</a>, начинать лучше с более удобного и популярного <em>tidyverse</em>, чем и займемся далее.</p>
