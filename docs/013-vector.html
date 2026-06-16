@@ -227,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и </span></a><a href="https://r-datatable.com">data.table</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -371,16 +371,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#sec-recycling" id="toc-sec-recycling" class="nav-link" data-scroll-target="#sec-recycling"><span class="toc-section-number">3.4</span>  Ресайклинг</a></li>
   <li><a href="#sec-index_atomic" id="toc-sec-index_atomic" class="nav-link" data-scroll-target="#sec-index_atomic"><span class="toc-section-number">3.5</span>  Индексирование векторов</a></li>
   <li>
-<a href="#sec-logic_vectors" id="toc-sec-logic_vectors" class="nav-link" data-scroll-target="#sec-logic_vectors"><span class="toc-section-number">3.6</span>  Работа с логическими векторами</a>
+<a href="#sec-sorting" id="toc-sec-sorting" class="nav-link" data-scroll-target="#sec-sorting"><span class="toc-section-number">3.6</span>  Сортировка и ранжирование</a>
   <ul class="collapse">
-<li><a href="#sec-logic_mean_sum" id="toc-sec-logic_mean_sum" class="nav-link" data-scroll-target="#sec-logic_mean_sum"><span class="toc-section-number">3.6.1</span>  <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</a></li>
-  <li><a href="#sec-all_any" id="toc-sec-all_any" class="nav-link" data-scroll-target="#sec-all_any"><span class="toc-section-number">3.6.2</span>  <code>all()</code> и <code>any()</code></a></li>
-  <li><a href="#sec-which" id="toc-sec-which" class="nav-link" data-scroll-target="#sec-which"><span class="toc-section-number">3.6.3</span>  Превращение логических значений в индексы: <code>which()</code></a></li>
-  <li><a href="#sec-in" id="toc-sec-in" class="nav-link" data-scroll-target="#sec-in"><span class="toc-section-number">3.6.4</span>  оператор %in% и match()</a></li>
+<li><a href="#sec-sort" id="toc-sec-sort" class="nav-link" data-scroll-target="#sec-sort"><span class="toc-section-number">3.6.1</span>  <code>sort()</code>: сортируем значения</a></li>
+  <li><a href="#sec-order" id="toc-sec-order" class="nav-link" data-scroll-target="#sec-order"><span class="toc-section-number">3.6.2</span>  <code>order()</code>: получаем индексы для сортировки</a></li>
+  <li><a href="#sec-rank" id="toc-sec-rank" class="nav-link" data-scroll-target="#sec-rank"><span class="toc-section-number">3.6.3</span>  <code>rank()</code>: ранжируем значения</a></li>
   </ul>
 </li>
-  <li><a href="#sec-na" id="toc-sec-na" class="nav-link" data-scroll-target="#sec-na"><span class="toc-section-number">3.7</span>  NA - пропущенные значения</a></li>
-  <li><a href="#sec-vector_end" id="toc-sec-vector_end" class="nav-link" data-scroll-target="#sec-vector_end"><span class="toc-section-number">3.8</span>  Заключение</a></li>
+  <li>
+<a href="#sec-logic_vectors" id="toc-sec-logic_vectors" class="nav-link" data-scroll-target="#sec-logic_vectors"><span class="toc-section-number">3.7</span>  Работа с логическими векторами</a>
+  <ul class="collapse">
+<li><a href="#sec-logic_mean_sum" id="toc-sec-logic_mean_sum" class="nav-link" data-scroll-target="#sec-logic_mean_sum"><span class="toc-section-number">3.7.1</span>  <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</a></li>
+  <li><a href="#sec-all_any" id="toc-sec-all_any" class="nav-link" data-scroll-target="#sec-all_any"><span class="toc-section-number">3.7.2</span>  <code>all()</code> и <code>any()</code></a></li>
+  <li><a href="#sec-which" id="toc-sec-which" class="nav-link" data-scroll-target="#sec-which"><span class="toc-section-number">3.7.3</span>  Превращение логических значений в индексы: <code>which()</code></a></li>
+  <li><a href="#sec-in" id="toc-sec-in" class="nav-link" data-scroll-target="#sec-in"><span class="toc-section-number">3.7.4</span>  Оператор <code>%in%</code> и <code>match()</code></a></li>
+  </ul>
+</li>
+  <li><a href="#sec-na" id="toc-sec-na" class="nav-link" data-scroll-target="#sec-na"><span class="toc-section-number">3.8</span>  NA - пропущенные значения</a></li>
+  <li><a href="#sec-vector_end" id="toc-sec-vector_end" class="nav-link" data-scroll-target="#sec-vector_end"><span class="toc-section-number">3.9</span>  Заключение</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -406,11 +414,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header><section id="sec-atomic" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="sec-atomic">
 <span class="header-section-number">3.1</span> Понятие atomic вектора в R</h2>
-<p>Если у вас не было линейной алгебры (или у вас с ней было все плохо), то просто запомните, что <strong>вектор</strong> (<strong><em>atomic vector</em></strong> или просто <strong><em>atomic</em></strong>) – это набор (столбик) чисел в определенном порядке.</p>
+<p>Если у вас не было линейной алгебры (или у вас с ней было все плохо), то просто запомните, что <strong>вектор</strong> (<em>atomic vector</em> или просто <em>atomic</em>) — это набор (столбик) чисел в определенном порядке.</p>
 <p>Если вы привыкли из школьного курса физики считать вектора стрелочками, то не спешите возмущаться и паниковать. Представьте стрелочки как точки из нуля координат <span class="math inline">\((0, 0)\)</span> до какой-то точки на координатной плоскости, например, <span class="math inline">\((2, 3)\)</span>:</p>
-<p><img src="images/013-vector_coord_vector.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/013-vector_coord_vector.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Вектор {2, 3} на координатной плоскости: синяя стрелка из начала координат в точку (2, 3)</figcaption><p></p>
+</figure>
+</div>
 <p>Вот последние два числа и будем считать вектором. Попытайтесь теперь мысленно стереть координатную плоскость и выбросить стрелочки из головы, оставив только последовательность чисел {2,3}:</p>
-<p><img src="images/013-vector_coord_vector_blur.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/013-vector_coord_vector_blur.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Тот же вектор {2, 3}, но координатная плоскость и стрелка изображены блекло — остается только последовательность чисел {2, 3}</figcaption><p></p>
+</figure>
+</div>
 <p>На самом деле, мы уже работали с векторами в R, но, возможно, вы об этом даже не догадывались. Дело в том, что в R нет как таковых скалярных (т.е. одиночных) значений, <strong>есть вектора длиной 1</strong>. Такие дела!</p>
 <p>Чтобы создать вектор из нескольких значений, нужно воспользоваться функцией <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>:</p>
 <div class="cell">
@@ -437,54 +453,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Одна из самых мерзких и раздражающих причин ошибок в коде – это использование <code>с</code> из кириллицы вместо <code>c</code> из латиницы. Видите разницу? И я не вижу. А R видит. И об этом сообщает:</p>
+<p>Одна из самых мерзких и раздражающих причин ошибок в коде — это использование <code>с</code> из кириллицы вместо <code>c</code> из латиницы. Видите разницу? И я не вижу. А R видит. И об этом сообщает:</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">с</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in с(3, 4, 5): could not find function "с"</code></pre>
+<pre><code>Error in `с()`:
+! could not find function "с"</code></pre>
 </div>
 </div>
+</div>
+</div>
+<p>У любого вектора есть длина — количество элементов в нем. Ее возвращает функция <code><a href="https://rdrr.io/r/base/length.html">length()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">15</span>, <span class="fl">16</span>, <span class="fl">23</span>, <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
 </div>
 </div>
 <p>Для создания числовых векторов есть удобный оператор <code>:</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 </div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">5</span><span class="op">:</span><span class="op">-</span><span class="fl">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">5</span><span class="op">:</span><span class="op">-</span><span class="fl">3</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  5  4  3  2  1  0 -1 -2 -3</code></pre>
 </div>
 </div>
 <p>Этот оператор создает вектор от первого числа до второго с шагом 1. Вы не представляете, как часто эта штука нам пригодится… Если же нужно сделать вектор с другим шагом, то есть функция <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
 </div>
 </div>
 <p>Кроме того, можно задавать не шаг, а длину вектора. Тогда функция <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> сама посчитает шаг:</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">13</span>, length.out <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">13</span>, length.out <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  5  9 13</code></pre>
 </div>
 </div>
-<p>Другая функция – <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> – позволяет создавать вектора с повторяющимися значениями. Первый аргумент – значение, которое нужно повторять, а второй аргумент – сколько раз повторять.</p>
+<p>У функции <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> есть два полезных родственника — <code><a href="https://rdrr.io/r/base/seq.html">seq_len()</a></code> и <code><a href="https://rdrr.io/r/base/seq.html">seq_along()</a></code>. <code>seq_len(n)</code> создает последовательность натуральных чисел от 1 до <code>n</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+<p>А <code>seq_along(x)</code> создает последовательность натуральных чисел такой же длины, что и <code>x</code>, начиная с 1:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Раз"</span>, <span class="st">"два"</span>, <span class="st">"три"</span>, <span class="st">"четыре"</span>, <span class="st">"пять"</span>, <span class="st">"много"</span>, <span class="st">"функций"</span>, <span class="st">"будем"</span>, <span class="st">"знать!"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5 6 7 8 9</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> чем <code><a href="https://rdrr.io/r/base/seq.html">seq_len()</a></code> лучше <code>1:n</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Кажется, будто <code>seq_len(n)</code> — это просто другая запись для <code>1:n</code>, а <code>seq_along(x)</code> — для <code>1:length(x)</code>. Почти, но есть разница на краю. Вектор бывает и пустым — длины 0. И если <code>n</code> равно 0 (или <code>x</code> — вектор длины 0), то <code>1:n</code> даст не пустую последовательность, а <code>c(1, 0)</code>: оператор <code>:</code> начнет отсчитывать от 1 <em>в обратную сторону</em>, до 0. А <code>seq_len(0)</code> честно вернет пустую последовательность:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">:</span><span class="fl">0</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 0</code></pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+</div>
+<p>Особенно пригодятся <code><a href="https://rdrr.io/r/base/seq.html">seq_len()</a></code> и <code><a href="https://rdrr.io/r/base/seq.html">seq_along()</a></code> позже, когда мы будем перебирать элементы вектора по их номерам — индексам (см. <a href="040-if_for.html#sec-for"><span>Глава&nbsp;7.2</span></a>): на пустом векторе они уберегут от подобных ошибок.</p>
+</div>
+</div>
+<p>Другая функция — <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code> — позволяет создавать вектора с повторяющимися значениями. Первый аргумент — значение, которое нужно повторять, а второй аргумент — сколько раз повторять.</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 1 1 1 1</code></pre>
 </div>
 </div>
-<p>И первый, и второй аргумент могут быть векторами! Если второй агрумент – вектор такой же длины, то каждое значение первого вектора будет повторено соответствующее количество раз из второго вектора.</p>
+<p>И первый, и второй аргумент могут быть векторами! Если второй аргумент — вектор такой же длины, то каждое значение первого вектора будет повторено соответствующее количество раз из второго вектора.</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3 1 2 3 1 2 3</code></pre>
 </div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">2</span>, <span class="fl">30</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1 1 1 1 1 1 1 1 1 1 2 2 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
 [39] 3 3 3 3</code></pre>
@@ -492,14 +554,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Если нужно повторить каждое значение в векторе одно и то же количество раз, то можно воспользоваться дополнительным параметром <code>each =</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, each <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, each <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3</code></pre>
 </div>
 </div>
 <p>Еще можно объединять вектора (что мы, по сути, и делали, просто с векторами длиной 1):</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hey"</span>, <span class="st">"Ho"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Hey"</span>, <span class="st">"Ho"</span><span class="op">)</span></span>
 <span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Let's"</span>, <span class="st">"Go!"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">v2</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -508,11 +570,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Очень многие функции в R работают именно с векторами. Например, функции <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> (считает сумму значений вектора) и <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> (считает среднее арифметическое всех значений в векторе):</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 55</code></pre>
 </div>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.5</code></pre>
 </div>
@@ -520,17 +582,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><section id="sec-coercion" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="sec-coercion">
 <span class="header-section-number">3.2</span> Приведение типов</h2>
 <p>Что будет, если вы объедините два вектора с значениями разных типов? Ошибка?</p>
-<p>Мы уже обсуждали, что в обычных векторах (<em>atomic</em> векторах) может быть только один тип данных. В некоторых языках программирования при операции с данными разных типов мы бы получили ошибку. А вот в R при несовпадении типов произойдет попытка привести типы к “общему знаменателю”, то есть конвертировать данные в более “широкий” тип (а иногда – более “узкий” тип, если того требует функция).</p>
+<p>Мы уже обсуждали, что в обычных векторах (<em>atomic</em> векторах) может быть только один тип данных. В некоторых языках программирования при операции с данными разных типов мы бы получили ошибку. А вот в R при несовпадении типов произойдет попытка привести типы к “общему знаменателю”, то есть конвертировать данные в более “широкий” тип (а иногда — более “узкий” тип, если того требует функция).</p>
 <p>Например:</p>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">2</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fl">2</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0 2</code></pre>
 </div>
 </div>
 <p><code>FALSE</code> превратился в <code>0</code> (а <code>TRUE</code> превратился бы в <code>1</code>), чтобы оба значения можно было объединить в вектор. То же самое произошло бы в случае операций с векторами:</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span> <span class="op">+</span> <span class="cn">TRUE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">2</span> <span class="op">+</span> <span class="cn">TRUE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -538,7 +600,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Это называется <strong>неявным приведением типов (implicit coercion)</strong>.</p>
 <p>Вот более сложный пример:</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">3</span>, <span class="st">"hi"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">3</span>, <span class="st">"hi"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "TRUE" "3"    "hi"  </code></pre>
 </div>
@@ -556,27 +618,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="callout-body-container callout-body">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="images/013-vector_coercion.jpeg" class="img-fluid figure-img" style="width:56.0%"></p>
+<p></p><figcaption class="figure-caption">Мем: руки складываются в общий кулак (<code>c(1)</code>, <code>c(1,2)</code>, … <code>c(1,2,3,4,5,"6")</code>), но из-за одной строки <code>"6"</code> все элементы превращаются в строки <code>"1"</code>, <code>"2"</code>, …, <code>"6"</code> — иллюстрация приведения типов</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>У R есть иерархия приведения типов:</p>
 <p><code>NULL &lt; raw &lt; logical &lt; integer &lt; double &lt; complex &lt; character &lt; list &lt; expression</code>.</p>
-<p>Мы из этого списка еще многого не знаем, сейчас важно запомнить, что логические данные – <code>FALSE</code> и <code>TRUE</code> – превращаются в <code>0</code> и <code>1</code> соответственно, а <code>0</code> и <code>1</code> в строчки <code>"0"</code> и <code>"1"</code>.</p>
-<p>Если Вы боитесь полагаться на приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных()</code> для явного приведения типов (<strong>explicit coercion</strong>):</p>
+<p>Мы из этого списка еще многого не знаем, сейчас важно запомнить, что логические данные — <code>FALSE</code> и <code>TRUE</code> — превращаются в <code>0</code> и <code>1</code> соответственно, а <code>0</code> и <code>1</code> в строчки <code>"0"</code> и <code>"1"</code>.</p>
+<p>Если вы боитесь полагаться на приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных()</code> для явного приведения типов (<strong>explicit coercion</strong>):</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 0 0</code></pre>
 </div>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "1" "0" "0"</code></pre>
 </div>
 </div>
-<p>Можно превращать и обратно, например, строковые значения в числовые. Если среди числа встретится буква или другой неподходящий знак, то мы получим предупреждение <code>NA</code> – пропущенное значение (мы очень скоро научимся с ними работать, см. <a href="index.html"><span>Глава&nbsp;1</span></a>).</p>
+<p>Можно превращать и обратно, например, строковые значения в числовые. Если среди числа встретится буква или другой неподходящий знак, то мы получим предупреждение <code>NA</code> — пропущенное значение (мы очень скоро научимся с ними работать, см. <a href="index.html"><span>Глава&nbsp;1</span></a>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"три"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"три"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: NAs introduced by coercion</code></pre>
 </div>
@@ -594,63 +657,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Один из распространенных примеров использования неявного приведения типов – использования функций <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> и <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> для подсчета в логическом векторе количества и доли <code>TRUE</code> соответственно. Мы будем много раз пользоваться этим приемом в дальнейшем!</p>
+<p>Один из распространенных примеров использования неявного приведения типов — использования функций <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> и <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> для подсчета в логическом векторе количества и доли <code>TRUE</code> соответственно. Мы будем много раз пользоваться этим приемом в дальнейшем!</p>
 </div>
 </div>
 </section><section id="sec-vector_op" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="sec-vector_op">
 <span class="header-section-number">3.3</span> Векторизация</h2>
 <p>Все те арифметические операторы, что мы использовали ранее, можно использовать с векторами одинаковой длины:</p>
 <div class="cell">
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">100</span>, <span class="fl">1000</span>, <span class="fl">10000</span><span class="op">)</span></span>
 <span><span class="va">m</span> <span class="op">+</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]    11   102  1003 10004</code></pre>
 </div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">-</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">-</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]    9   98  997 9996</code></pre>
 </div>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">*</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">*</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]    10   200  3000 40000</code></pre>
 </div>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">/</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">/</span> <span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   10.0000   50.0000  333.3333 2500.0000</code></pre>
 </div>
 </div>
 <p>Если применить операторы на двух векторах одинаковой длины, то мы получим результат поэлементного применения оператора к двум векторам. Это называется <strong>векторизацией</strong> (<strong>vectorization</strong>).</p>
-<blockquote class="blockquote">
-<p>Если после какого-нибудь MATLAB Вы привыкли, что по умолчанию операторы работают по правилам линейной алгебры и <code>m * n</code> будет давать скалярное произведение (<em>dot product</em>), то снова нет. Для скалярного произведения нужно использовать операторы с <code>%</code> по краям:</p>
-</blockquote>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> скалярное произведение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если после какого-нибудь MATLAB вы привыкли, что по умолчанию операторы работают по правилам линейной алгебры и <code>m * n</code> будет давать скалярное произведение (<em>dot product</em>), то снова нет. Для скалярного произведения нужно использовать операторы с <code>%</code> по краям:</p>
 <div class="cell">
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">m</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">m</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      [,1]
 [1,] 43210</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
 <p>Абсолютно так же и с операциями с матрицами в R, хотя про матрицы будет немного позже.</p>
-</blockquote>
+</div>
+</div>
 <p>В принципе, большинство функций в R, которые работают с отдельными значениями, так же хорошо работают и с целыми векторами. Скажем, если вы хотите извлечь корень из нескольких чисел, то для этого не нужны никакие циклы (как это обычно делается во многих других языках программирования). Можно просто “скормить” вектор функции и получить результат применения функции к каждому элементу вектора:</p>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
  [9] 3.000000 3.162278</code></pre>
 </div>
 </div>
 <p>Таких векторизованных функций в R очень много. Многие из них написаны на более низкоуровневых языках программирования (C, C++, FORTRAN), за счет чего использование таких функций приводит не только к более элегантному, лаконичному, но и к более быстрому коду.</p>
-<blockquote class="blockquote">
-<p>Векторизация в R – это очень важная фишка, которая отличает этот язык программирования от многих других. Если вы уже имеете опыт программирования на другом языке, то вам во многих задачах захочется использовать циклы типа <code>for</code> и <code>while</code> <a href="040-if_for.html#sec-for"><span>Глава&nbsp;7.2</span></a>. Не спешите этого делать! В очень многих случаях циклы можно заменить векторизацией. Тем не менее, векторизация – это не единственный способ избавить от циклов типа <code>for</code> и <code>while</code> <a href="050-functional.html#sec-apply"><span>Глава&nbsp;8.5.1</span></a>.</p>
-</blockquote>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> векторизация вместо циклов
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если вы уже имеете опыт программирования на другом языке, то вам во многих задачах захочется использовать циклы типа <code>for</code> и <code>while</code> (см. <a href="040-if_for.html#sec-for"><span>Глава&nbsp;7.2</span></a>). Не спешите этого делать! В очень многих случаях циклы можно заменить векторизацией. Тем не менее, векторизация — это не единственный способ избавиться от циклов, есть еще функции семейства <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> (см. <a href="050-functional.html#sec-apply"><span>Глава&nbsp;8.6.1</span></a>).</p>
+</div>
+</div>
 </section><section id="sec-recycling" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="sec-recycling">
 <span class="header-section-number">3.4</span> Ресайклинг</h2>
-<p>Допустим мы хотим совершить какую-нибудь операцию с двумя векторами. Как мы убедились, с этим обычно нет никаких проблем, если они совпадают по длине. А что если вектора не совпадают по длине? Ничего страшного! Здесь будет работать правило <strong>ресайклинга</strong> (<em>правило переписывания, recycling rule</em>). Это означает, что если мы делаем операцию на двух векторах разной длины, то если короткий вектор кратен по длине длинному, короткий вектор будет повторяться необходимое количество раз:</p>
+<p>Допустим, мы хотим совершить какую-нибудь операцию с двумя векторами. Как мы убедились, с этим обычно нет никаких проблем, если они совпадают по длине. А что если вектора не совпадают по длине? Ничего страшного! Здесь будет работать правило <strong>ресайклинга</strong> <em>(recycling rule)</em>. Это означает, что если мы делаем операцию на двух векторах разной длины, то если короткий вектор кратен по длине длинному, короткий вектор будет повторяться необходимое количество раз:</p>
 <div class="cell">
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span></span>
 <span><span class="va">n</span> <span class="op">*</span> <span class="va">m</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -659,14 +740,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>А что будет, если совершать операции с вектором и отдельным значением? Можно считать это частным случаем ресайклинга: короткий вектор длиной 1 будет повторятся столько раз, сколько нужно, чтобы он совпадал по длине с длинным:</p>
 <div class="cell">
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">*</span> <span class="fl">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">*</span> <span class="fl">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 4 6 8</code></pre>
 </div>
 </div>
 <p>Если же меньший вектор не кратен большему (например, один из них длиной 3, а другой длиной 4), то R посчитает результат, но выдаст предупреждение.</p>
 <div class="cell">
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in n + c(3, 4, 5): longer object length is not a multiple of shorter
 object length</code></pre>
@@ -675,29 +756,39 @@ object length</code></pre>
 <pre><code>[1] 4 6 8 7</code></pre>
 </div>
 </div>
-<p>Проблема в том, что эти предупреждения могут в неожиданный момент стать причиной ошибок. Поэтому <a href="https://stackoverflow.com/questions/6555651/under-what-circumstances-does-r-recycle">не стоит полагаться</a> на ресайклинг некратных по длине векторов. А вот ресайклинг кратных по длине векторов – это очень удобная штука, которая используется очень часто.</p>
+<p>Проблема в том, что эти предупреждения могут в неожиданный момент стать причиной ошибок. Поэтому <a href="https://stackoverflow.com/questions/6555651/under-what-circumstances-does-r-recycle">не стоит полагаться</a> на ресайклинг некратных по длине векторов. А вот ресайклинг кратных по длине векторов — это очень удобная штука, которая используется очень часто.</p>
 </section><section id="sec-index_atomic" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="sec-index_atomic">
 <span class="header-section-number">3.5</span> Индексирование векторов</h2>
-<p>Итак, мы подошли к одному из самых сложных моментов. И одному из основных. От того, как хорошо вы научись с этим работать, зависит весь ваш дальнейший успех на R-поприще!</p>
-<p>Речь пойдет об <strong>индексировании</strong> векторов. Задача, которую Вам придется решать каждые пять минут работы в R – как выбрать из вектора (или же списка, матрицы и датафрейма) какую-то его часть. Для этого используются квадратные скобочки <code>[]</code> (не круглые – они для функций!).</p>
-<p>Самое простое – индексировать по номеру индекса, т.е. порядку значения в векторе.</p>
+<p>Итак, мы подошли к одному из самых сложных моментов. И одному из основных. От того, как хорошо вы научитесь с этим работать, зависит весь ваш дальнейший успех на R-поприще!</p>
+<p>Речь пойдет об <strong>индексировании</strong> векторов. Задача, которую вам придется решать каждые пять минут работы в R — как выбрать из вектора (или же списка, матрицы и датафрейма) какую-то его часть. Для этого используются квадратные скобочки <code>[]</code> (не круглые — они для функций!).</p>
+<p>Самое простое — индексировать по номеру индекса, т.е. порядку значения в векторе.</p>
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">13</span>, <span class="fl">21</span>, <span class="fl">34</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">8</span>, <span class="fl">13</span>, <span class="fl">21</span>, <span class="fl">34</span><span class="op">)</span></span>
 <span><span class="va">n</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 34</code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Если вы знакомы с другими языками программирования (не MATLAB, там все так же) и уже научились думать, что индексация с 0 – это очень удобно и очень правильно (ну или просто свыклись с этим), то в R вам придется переучиться обратно. Здесь первый индекс – это 1, а последний равен длине вектора – ее можно узнать с помощью функции <code><a href="https://rdrr.io/r/base/length.html">length()</a></code>. С обоих сторон индексы берутся включительно.</p>
-</blockquote>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> индексация с 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если вы знакомы с другими языками программирования (не MATLAB, там всё так же) и уже научились думать, что индексация с 0 — это очень удобно и очень правильно (ну или просто свыклись с этим), то в R вам придётся переучиться обратно. Здесь первый индекс — это 1, а последний равен длине вектора — ее, как мы помним, возвращает <code><a href="https://rdrr.io/r/base/length.html">length()</a></code>. С обеих сторон индексы берутся включительно.</p>
+</div>
+</div>
 <p>С помощью индексирования можно не только вытаскивать имеющиеся значения в векторе, но и присваивать им новые:</p>
 <div class="cell">
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
 <span><span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1 20  2  3  5  8 13 21 34</code></pre>
@@ -705,15 +796,15 @@ object length</code></pre>
 </div>
 <p>Конечно, можно использовать целые векторы для индексирования:</p>
 <div class="cell">
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 3 5 8</code></pre>
 </div>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 34 21 13  8  5  3  2 20  1  0</code></pre>
 </div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1 20  0  0  0  8 13 21 34</code></pre>
@@ -721,11 +812,11 @@ object length</code></pre>
 </div>
 <p>Индексирование с минусом выдаст вам все значения вектора кроме выбранных:</p>
 <div class="cell">
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1 20  0  0  0  8 13 21 34</code></pre>
 </div>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0  1 20  0  8 13 21 34</code></pre>
 </div>
@@ -733,26 +824,30 @@ object length</code></pre>
 <p>Минус здесь “выключает” выбранные значения из вектора, а не означает отсчет с конца как в Python.</p>
 <p>Более того, можно использовать логический вектор для индексирования. В этом случае нужен логический вектор такой же длины:</p>
 <div class="cell">
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0 20  0  8 21</code></pre>
 </div>
 </div>
 <p>Логический вектор работает здесь как фильтр: пропускает только те значения, где на соответствующей позиции в логическом векторе для индексирования содержится <code>TRUE</code>, и не пропускает те значения, где на соответствующей позиции в логическом векторе для индексирования содержится <code>FALSE</code>.</p>
-<p><img src="images/013-vector_index_gandolf.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/013-vector_index_gandolf.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Схема логического индексирования: вектор x = (5, −8, 2, −1), логический вектор y = (T, F, T, F); значения с <code>FALSE</code> «не проходят» (мем Гэндальфа «YOU SHALL NOT PASS»), поэтому x[y] = (5, 2)</figcaption><p></p>
+</figure>
+</div>
 <p>Ну а если эти два вектора (исходный вектор и логический вектор индексов) не равны по длине, то тут будет снова работать правило ресайклинга!</p>
 <div class="cell">
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span> <span class="co">#то же самое - recycling rule!</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span> <span class="co">#то же самое - recycling rule!</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0 20  0  8 21</code></pre>
 </div>
 </div>
-<p>Есть еще один способ индексирования векторов, но он несколько более редкий: индексирование по имени. Дело в том, что для значений векторов можно (но не обязательно) присваивать имена:</p>
+<p>Есть еще один способ индексирования векторов, но он несколько более редкий: индексирование по имени. Дело в том, что для значений векторов можно (но не обязательно) присваивать имена — такой вектор называют <strong>именованным</strong> <em>(named vector)</em>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_named_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>first <span class="op">=</span> <span class="fl">1</span>,</span>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_named_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>first <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                     second <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                     third <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span><span class="va">my_named_vector</span><span class="op">[</span><span class="st">'first'</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">my_named_vector</span><span class="op">[</span><span class="st">"first"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>first 
     1 </code></pre>
@@ -760,32 +855,42 @@ object length</code></pre>
 </div>
 <p>А еще можно “вытаскивать” имена из вектора с помощью функции <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> и присваивать таким образом новые имена.</p>
 <div class="cell">
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "a" "b" "c" "d"</code></pre>
 </div>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">d</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>a 
 1 </code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<p><code>letters</code> – это “зашитая” в R константа – вектор букв от a до z. Иногда это очень удобно! Кроме того, есть константа <code>LETTERS</code> – то же самое, но заглавными буквами. А еще в R есть названия месяцев на английском и числовая константа <code>pi</code>.</p>
-</blockquote>
+<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Полезное:</em> встроенные константы
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>letters</code> — это “зашитая” в R константа — вектор букв от a до z. Иногда это очень удобно! Кроме того, есть константа <code>LETTERS</code> — то же самое, но заглавными буквами. А еще в R есть <code>month.name</code> — полные названия месяцев на английском, <code>month.abb</code> — трёхбуквенные аббревиатуры месяцев и числовая константа <code>pi</code>.</p>
+</div>
+</div>
 <p>Вернемся к нашему вектору <code>n</code> и посчитаем его среднее с помощью функции <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.7</code></pre>
 </div>
 </div>
 <p>А как вытащить все значения, которые больше среднего?</p>
-<p>Сначала получим логический вектор – какие значения больше среднего:</p>
+<p>Сначала получим логический вектор — какие значения больше среднего:</p>
 <div class="cell">
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">larger</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">larger</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="va">larger</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE</code></pre>
@@ -793,127 +898,287 @@ object length</code></pre>
 </div>
 <p>А теперь используем его для индексирования вектора <code>n</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="va">larger</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="va">larger</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20 13 21 34</code></pre>
 </div>
 </div>
 <p>Можно все это сделать в одну строчку:</p>
 <div class="cell">
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="va">n</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="va">n</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20 13 21 34</code></pre>
 </div>
 </div>
 <p>Предыдущая строчка отражает то, что мы будем постоянно делать в R: вычленять (subset) из данных отдельные куски на основании разных условий.</p>
-</section><section id="sec-logic_vectors" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="sec-logic_vectors">
-<span class="header-section-number">3.6</span> Работа с логическими векторами</h2>
+</section><section id="sec-sorting" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="sec-sorting">
+<span class="header-section-number">3.6</span> Сортировка и ранжирование</h2>
+<p>Чтобы упорядочить значения в векторе, есть три родственные функции: <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code>, <code><a href="https://rdrr.io/r/base/order.html">order()</a></code> и <code><a href="https://rdrr.io/r/base/rank.html">rank()</a></code>. Они хоть и связаны, но возвращают разное.</p>
+<section id="sec-sort" class="level3" data-number="3.6.1"><h3 data-number="3.6.1" class="anchored" data-anchor-id="sec-sort">
+<span class="header-section-number">3.6.1</span> <code>sort()</code>: сортируем значения</h3>
+<p>Функция <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> возвращает вектор с теми же значениями, но в возрастающем порядке:</p>
+<div class="cell">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="va">nums</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 10 30</code></pre>
+</div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 30 40</code></pre>
+</div>
+</div>
+<p>Если параметру <code>decreasing =</code> передать значение <code>TRUE</code>, то порядок будет обратным:</p>
+<div class="cell">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">nums</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 30 10</code></pre>
+</div>
+</div>
+<p>Обратите внимание на поведение <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> со значениями <code>NA</code>: по умолчанию они удаляются, но параметром <code>na.last =</code> можно настроить, чтобы все <code>NA</code> оказались в конце (<code>TRUE</code>) или в начале (<code>FALSE</code>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums_na</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="cn">NA</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">nums_na</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 30 40</code></pre>
+</div>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">nums_na</span>, na.last <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 30 40 NA</code></pre>
+</div>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">nums_na</span>, na.last <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA 10 30 40</code></pre>
+</div>
+</div>
+<p>Сортировать можно не только числовые векторы: для логических векторов сначала будут идти все <code>FALSE</code>, потом все <code>TRUE</code>, а строковые сортируются в алфавитном порядке.</p>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> порядок сортировки строк зависит от локали
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>А как насчет того, что алфавитный порядок в разных языках разный? Документация R (<code><a href="https://rdrr.io/r/base/Comparison.html">?Comparison</a></code>) прямо предупреждает: не стоит делать никаких допущений о порядке сортировки строк. Например, в эстонском «z» идет между «s» и «t», а в датском «aa» считается отдельной буквой и идет после «z». Бывает и сложнее: в чешском «ch» — отдельная буква, которая идет после «h». По правилам какого языка пойдет сортировка, определяется <strong>локалью</strong> <em>(locale)</em> — набором региональных настроек, в которых работает программа: это язык, правила сравнения строк, формат дат и чисел. Существует и особая «нейтральная» локаль <code>C</code>: в ней строки сравниваются не по алфавиту какого-либо языка, а просто по числовым кодам символов. Такой порядок не самый естественный для человека (например, все заглавные буквы в нем идут раньше всех строчных), зато он одинаковый на любом компьютере. Отсортировать в этом порядке можно, не меняя никаких настроек: <code>sort(x, method = "radix")</code>.</p>
+</div>
+</div>
+</section><section id="sec-order" class="level3" data-number="3.6.2"><h3 data-number="3.6.2" class="anchored" data-anchor-id="sec-order">
+<span class="header-section-number">3.6.2</span> <code>order()</code>: получаем индексы для сортировки</h3>
+<p>Функция <code><a href="https://rdrr.io/r/base/order.html">order()</a></code> возвращает не сами значения, а их <strong>индексы</strong>: в каком порядке нужно брать элементы исходного вектора, чтобы получить отсортированный вектор. Рассмотрим на примере вектора <code>nums</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 40 10 30</code></pre>
+</div>
+</div>
+<p>Сначала нам надо взять второй элемент (<code>10</code>), потом третий (<code>30</code>), а в конце первый (<code>40</code>). Это и выдаст функция <code><a href="https://rdrr.io/r/base/order.html">order()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3 1</code></pre>
+</div>
+</div>
+<p>Если проиндексировать исходный вектор этими индексами, то получится то же, что выдает функция <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">nums</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">nums</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 30 40</code></pre>
+</div>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 30 40</code></pre>
+</div>
+</div>
+<p>Польза <code><a href="https://rdrr.io/r/base/order.html">order()</a></code> в том, что полученными индексами можно упорядочить и другой вектор тоже:</p>
+<div class="cell">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veronika"</span>, <span class="st">"Eugeny"</span>, <span class="st">"Lena"</span>, <span class="st">"Misha"</span>, <span class="st">"Sasha"</span><span class="op">)</span></span>
+<span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fl">34</span>, <span class="fl">23</span>, <span class="fl">27</span>, <span class="fl">26</span><span class="op">)</span></span>
+<span><span class="va">name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Lena"     "Veronika" "Sasha"    "Misha"    "Eugeny"  </code></pre>
+</div>
+</div>
+</section><section id="sec-rank" class="level3" data-number="3.6.3"><h3 data-number="3.6.3" class="anchored" data-anchor-id="sec-rank">
+<span class="header-section-number">3.6.3</span> <code>rank()</code>: ранжируем значения</h3>
+<p>Функция <code><a href="https://rdrr.io/r/base/rank.html">rank()</a></code> возвращает <strong>ранг</strong> каждого элемента, то есть его место по величине. Ранги стоят на тех же позициях, что и исходные значения: для вектора <code>nums</code> это <code>3 1 2</code> — у <code>40</code> ранг 3, у <code>10</code> — ранг 1, у <code>30</code> — ранг 2:</p>
+<div class="cell">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">nums</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3 1 2</code></pre>
+</div>
+</div>
+<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Осторожно:</em> ранг 1 получает наименьшее значение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Мы привыкли, что «первое место» достается тому, у кого наибольшее значение, — как в спорте. У <code><a href="https://rdrr.io/r/base/rank.html">rank()</a></code> наоборот: ранг 1 получает наименьшее значение, а ранги растут в том же направлении, что и сами значения. Поэтому взаимный порядок элементов сохраняется: <code><a href="https://rdrr.io/r/base/order.html">order()</a></code> от исходного вектора и от вектора рангов выдаст одно и то же. Если же нужны «спортивные» ранги — 1 у наибольшего, — можно ранжировать вектор с минусом: <code>rank(-nums)</code>.</p>
+</div>
+</div>
+<p>Если несколько значений в векторе совпадают, возникает <strong>ничья</strong> <em>(tie)</em>: на одни и те же ранги претендуют сразу несколько элементов. По умолчанию <code><a href="https://rdrr.io/r/base/rank.html">rank()</a></code> усредняет спорные ранги. Например, в векторе <code>c(40, 10, 30, 10)</code> две десятки претендуют на ранги 1 и 2 — и каждая получает <span class="math inline">\((1 + 2) / 2 = 1.5\)</span>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.0 1.5 3.0 1.5</code></pre>
+</div>
+</div>
+<p>Параметр <code>ties.method =</code> позволяет выбрать и другие способы. Например, <code>"min"</code> присваивает всем совпадающим значениям наименьший из спорных рангов, а <code>"first"</code> раздает спорные ранги по порядку появления в векторе:</p>
+<div class="cell">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">10</span><span class="op">)</span>, ties.method <span class="op">=</span> <span class="st">"min"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 1 3 1</code></pre>
+</div>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">10</span><span class="op">)</span>, ties.method <span class="op">=</span> <span class="st">"first"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 1 3 2</code></pre>
+</div>
+</div>
+<p>Сведем все три функции в таблицу:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Функция</th>
+<th>Что возвращает</th>
+<th>Для <code>c(40, 10, 30)</code>
+</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code></td>
+<td>значения по порядку</td>
+<td><code>10 30 40</code></td>
+</tr>
+<tr class="even">
+<td><code><a href="https://rdrr.io/r/base/order.html">order()</a></code></td>
+<td>индексы для сортировки</td>
+<td><code>2 3 1</code></td>
+</tr>
+<tr class="odd">
+<td><code><a href="https://rdrr.io/r/base/rank.html">rank()</a></code></td>
+<td>ранг каждого элемента</td>
+<td><code>3 1 2</code></td>
+</tr>
+</tbody>
+</table></section></section><section id="sec-logic_vectors" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="sec-logic_vectors">
+<span class="header-section-number">3.7</span> Работа с логическими векторами</h2>
 <p>На работе с логическими векторами построено очень много удобных фишек, связанных со сравнением условий.</p>
 <div class="cell">
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"blue"</span>, <span class="st">"brown"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"blue"</span>, <span class="st">"brown"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="sec-logic_mean_sum" class="level3" data-number="3.6.1"><h3 data-number="3.6.1" class="anchored" data-anchor-id="sec-logic_mean_sum">
-<span class="header-section-number">3.6.1</span> <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</h3>
+<section id="sec-logic_mean_sum" class="level3" data-number="3.7.1"><h3 data-number="3.7.1" class="anchored" data-anchor-id="sec-logic_mean_sum">
+<span class="header-section-number">3.7.1</span> <code>mean()</code> и <code>sum()</code> для подсчета пропорций и количества TRUE</h3>
 <p>Уже знакомая нам функция <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> позволяет посчитать количество <code>TRUE</code> в логическом векторе. Например, можно удобно посчитать сколько раз значение <code>"blue"</code> встречается в векторе <code>eyes</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Функцию <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> можно использовать для подсчета пропорций <code>TRUE</code> в логическом векторе.</p>
 <div class="cell">
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE FALSE FALSE  TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5</code></pre>
 </div>
 </div>
-<p>Умножив на 100, мы получим долю выраженную в процентах:</p>
+<p>Умножив на 100, мы получим долю, выраженную в процентах:</p>
 <div class="cell">
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50</code></pre>
 </div>
 </div>
-</section><section id="sec-all_any" class="level3" data-number="3.6.2"><h3 data-number="3.6.2" class="anchored" data-anchor-id="sec-all_any">
-<span class="header-section-number">3.6.2</span> <code>all()</code> и <code>any()</code>
+</section><section id="sec-all_any" class="level3" data-number="3.7.2"><h3 data-number="3.7.2" class="anchored" data-anchor-id="sec-all_any">
+<span class="header-section-number">3.7.2</span> <code>all()</code> и <code>any()</code>
 </h3>
 <p>Функция <code><a href="https://rdrr.io/r/base/all.html">all()</a></code> выдает <code>TRUE</code> только когда все значения логического вектора на входе равны <code>TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Функция <code><a href="https://rdrr.io/r/base/any.html">any()</a></code> выдает <code>TRUE</code> когда есть хотя бы одно значение <code>TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Вместе с оператором <code>!</code> можно получить много дополнительных вариантов. Например, есть ли хотя бы один <code>FALSE</code> в векторе?</p>
 <div class="cell">
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="op">!</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="op">!</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Все ли значения в векторе равны <code>FALSE</code>?</p>
 <div class="cell">
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="op">!</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="op">!</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-</section><section id="sec-which" class="level3" data-number="3.6.3"><h3 data-number="3.6.3" class="anchored" data-anchor-id="sec-which">
-<span class="header-section-number">3.6.3</span> Превращение логических значений в индексы: <code>which()</code>
+</section><section id="sec-which" class="level3" data-number="3.7.3"><h3 data-number="3.7.3" class="anchored" data-anchor-id="sec-which">
+<span class="header-section-number">3.7.3</span> Превращение логических значений в индексы: <code>which()</code>
 </h3>
 <p>Как вы уже знаете, и логические векторы, и числовые вектора с индексами могут использоваться для индексирования векторов. Иногда может понадобиться превратить логический вектор в вектор индексов. Для этого есть функция <code><a href="https://rdrr.io/r/base/which.html">which()</a></code></p>
 <div class="cell">
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 3 6</code></pre>
 </div>
 </div>
-</section><section id="sec-in" class="level3" data-number="3.6.4"><h3 data-number="3.6.4" class="anchored" data-anchor-id="sec-in">
-<span class="header-section-number">3.6.4</span> оператор %in% и match()</h3>
+</section><section id="sec-in" class="level3" data-number="3.7.4"><h3 data-number="3.7.4" class="anchored" data-anchor-id="sec-in">
+<span class="header-section-number">3.7.4</span> Оператор <code>%in%</code> и <code>match()</code>
+</h3>
 <p>Часто возникает такая задача: нужно проверить вектор на равенство с хотя бы одним значением из другого вектора. Например, мы хотим вычленить всех зеленоглазых и голубоглазых. Может возникнуть идея сделать так:</p>
 <div class="cell">
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span><span class="op">[</span><span class="va">eyes</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span><span class="op">[</span><span class="va">eyes</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "green" "blue" </code></pre>
 </div>
 </div>
 <p>Перед нами самый страшный случай: результат <em>похож</em> на правильный, но не правильный! Попытайтесь самостоятельно понять почему этот ответ неверный и что произошло на самом деле.</p>
 <p>А на самом деле мы просто сравнили два вектора, один из которых короче другого, следовательно, у нас сработало правило ресайклинга.</p>
-<p><img src="images/013-vector_logical_vectors_recycling.jpg" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/013-vector_logical_vectors_recycling.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Рукописная схема: сравнение eyes == c(“green”, “blue”) с ресайклингом короткого вектора по длинному из шести значений, результат — TRUE, TRUE, FALSE, FALSE, TRUE, TRUE</figcaption><p></p>
+</figure>
+</div>
 <p>Как мы видим, это совсем не то, что нам нужно! В данной ситуации нам подойдет сравнение с двумя значениями вместе с логическим ИЛИ.</p>
 <div class="cell">
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span><span class="op">[</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"green"</span> <span class="op">|</span> <span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span><span class="op">[</span><span class="va">eyes</span> <span class="op">==</span> <span class="st">"green"</span> <span class="op">|</span> <span class="va">eyes</span> <span class="op">==</span> <span class="st">"blue"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "blue"  "green" "blue" </code></pre>
 </div>
 </div>
 <p>Однако это не очень удобно, особенно если значений больше 2. Тогда на помощь приходит оператор <code>%in%</code>, который выполняет именно то, что нам изначально нужно: выдает для каждого значения в векторе слева, есть ли это значение среди значений вектора справа.</p>
 <div class="cell">
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span><span class="op">[</span><span class="va">eyes</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">eyes</span><span class="op">[</span><span class="va">eyes</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "blue"  "green" "blue" </code></pre>
 </div>
@@ -931,47 +1196,47 @@ object length</code></pre>
 <p>Основное преимущество оператора <code>%in%</code> в его простоте и понятности. У оператора <code>%in%</code> есть старший брат, более сложный и более мощный.</p>
 <p>Функция <code><a href="https://rdrr.io/r/base/match.html">match()</a></code> работает похожим образом на <code>%in%</code>, но при совпадении значения в левом векторе с одним из значений в правом выдает индекс соответствующего значения вместо <code>TRUE</code>. Если же совпадений нет, то вместо <code>FALSE</code> функция <code><a href="https://rdrr.io/r/base/match.html">match()</a></code> выдает <code>NA</code> (что можно поменять параметром <code>nomatch =</code>).</p>
 <div class="cell">
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">eyes</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">eyes</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  2  2 NA  1  2</code></pre>
 </div>
 </div>
-<p>Зачем это может понадобиться? Во-первых, это способ соединить два набора данных (хотя для этого есть и более подходящие инструменты), во-вторых, так можно заменить все значения кроме выбранных заменить на <code>NA</code> (для чего тоже есть альтернативы).</p>
+<p>Зачем это может понадобиться? Во-первых, это способ соединить два набора данных (хотя для этого есть и более подходящие инструменты), во-вторых, так можно все значения, кроме выбранных, заменить на <code>NA</code> (для чего тоже есть альтернативы).</p>
 <div class="cell">
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">eyes</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/match.html">match</a></span><span class="op">(</span><span class="va">eyes</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"green"</span>, <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "blue"  NA      "green" "blue" </code></pre>
 </div>
 </div>
 </div>
 </div>
-</section></section><section id="sec-na" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="sec-na">
-<span class="header-section-number">3.7</span> NA - пропущенные значения</h2>
-<p>В реальных данных у нас часто чего-то не хватает. Например, из-за технической ошибки или невнимательности не получилось записать какое-то измерение. Для обозначения пропущенных значений в R есть специальное значение <code>NA</code> (расшифровывается как <em>Not Available</em> - недоступное значение). <code>NA</code> – это не строка <code>"NA"</code>, не <code>0</code>, не пустая строка <code>""</code> и не <code>FALSE</code>. <code>NA</code> – это <code>NA</code>. Большинство операций с векторами, содержащими <code>NA</code> будут выдавать <code>NA</code>:</p>
+</section></section><section id="sec-na" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="sec-na">
+<span class="header-section-number">3.8</span> NA - пропущенные значения</h2>
+<p>В реальных данных у нас часто чего-то не хватает. Например, из-за технической ошибки или невнимательности не получилось записать какое-то измерение. Для обозначения пропущенных значений в R есть специальное значение <code>NA</code> (расшифровывается как <em>Not Available</em> - недоступное значение). <code>NA</code> — это не строка <code>"NA"</code>, не <code>0</code>, не пустая строка <code>""</code> и не <code>FALSE</code>. <code>NA</code> — это <code>NA</code>. Большинство операций с векторами, содержащими <code>NA</code> будут выдавать <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missed</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missed</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
 <span><span class="va">missed</span> <span class="op">==</span> <span class="st">"NA"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missed</span> <span class="op">==</span> <span class="st">""</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missed</span> <span class="op">==</span> <span class="st">""</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missed</span> <span class="op">==</span> <span class="cn">NA</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">missed</span> <span class="op">==</span> <span class="cn">NA</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
-<p>Заметьте, даже сравнение <code>NA</code> c <code>NA</code> выдает <code>NA</code>. Это может прозвучать абсурдно: ну как же так, и то <code>NA</code>, и другое <code>NA</code> – это же одно и то же, они должны быть равны! Не совсем: <code>NA</code> – это отсутствие информации об объекте, неопределенность, неизвестная нам величина. Если мы не знаем двух значений (т.е. имеем два <code>NA</code>), то это еще не значит, что они равны.</p>
+<p>Заметьте, даже сравнение <code>NA</code> c <code>NA</code> выдает <code>NA</code>. Это может прозвучать абсурдно: ну как же так, и то <code>NA</code>, и другое <code>NA</code> — это же одно и то же, они должны быть равны! Не совсем: <code>NA</code> — это отсутствие информации об объекте, неопределенность, неизвестная нам величина. Если мы не знаем двух значений (т.е. имеем два <code>NA</code>), то это еще не значит, что они равны.</p>
 <p>Иногда наличие <code>NA</code> в данных очень бесит:</p>
 <div class="cell">
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
 <span><span class="va">n</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1 20  0 NA  0  8 13 21 34</code></pre>
 </div>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -979,47 +1244,47 @@ object length</code></pre>
 <p>Получается, что наличие <code>NA</code> “заражает” неопределенностью все последующие действия. Что же делать?</p>
 <p>Наверное, надо сравнить вектор с <code>NA</code> и исключить этих пакостников. Давайте попробуем:</p>
 <div class="cell">
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">==</span> <span class="cn">NA</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">==</span> <span class="cn">NA</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] NA NA NA NA NA NA NA NA NA NA</code></pre>
 </div>
 </div>
-<p>Ах да, мы ведь только что узнали, что даже сравнение <code>NA</code> c <code>NA</code> приводит к <code>NA</code>! Сначала это может показаться нелогичным: ведь с обоих сторон <code>NA</code>, почему же тогда результат их сравнения – это тоже <code>NA</code>, а не <code>TRUE</code>?</p>
+<p>Ах да, мы ведь только что узнали, что даже сравнение <code>NA</code> c <code>NA</code> приводит к <code>NA</code>! Сначала это может показаться нелогичным: ведь с обоих сторон <code>NA</code>, почему же тогда результат их сравнения — это тоже <code>NA</code>, а не <code>TRUE</code>?</p>
 <p>Дело в том, что сравнивая две неопределенности, вы не можете установить между ними знак равенства. Представим себе двух супергероев: Бэтмена и Спайдермена. Допустим, мы не знаем их рост:</p>
 <div class="cell">
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Batman</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Batman</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
 <span><span class="va">Spiderman</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Одинаковый ли у них рост?</p>
 <div class="cell">
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Batman</span> <span class="op">==</span> <span class="va">Spiderman</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">Batman</span> <span class="op">==</span> <span class="va">Spiderman</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p>Мы не знаем! Возможно, да, возможно, и нет. Поэтому у нас здесь остается неопределенность.</p>
-<p>Так как же избавиться от <code>NA</code> в данных? Самый простой способ – это функция <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code>:</p>
+<p>Так как же избавиться от <code>NA</code> в данных? Самый простой способ — это функция <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 </div>
 </div>
-<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> на тех позициях, где у нас числа (или другие значения), и <code>TRUE</code> там, где у нас <code>NA</code>. Чтобы вычленить из вектора <code>n</code> все значения кроме <code>NA</code> нам нужно, чтобы было наоборот: <code>TRUE</code>, если это не <code>NA</code>, <code>FALSE</code>, если это <code>NA</code>. Здесь нам понадобится логический оператор НЕ <code>!</code> (мы его уже встречали – см. <a href="010-intro.html#sec-type_logical"><span>Глава&nbsp;2.8.3</span></a>), который инвертирует логические значения:</p>
+<p>Результат выполнения <code>is.na(n)</code> выдает <code>FALSE</code> на тех позициях, где у нас числа (или другие значения), и <code>TRUE</code> там, где у нас <code>NA</code>. Чтобы вычленить из вектора <code>n</code> все значения кроме <code>NA</code> нам нужно, чтобы было наоборот: <code>TRUE</code>, если это не <code>NA</code>, <code>FALSE</code>, если это <code>NA</code>. Здесь нам понадобится логический оператор НЕ <code>!</code> (мы его уже встречали — см. <a href="010-intro.html#sec-type_logical"><span>Глава&nbsp;2.8.3</span></a>), который инвертирует логические значения:</p>
 <div class="cell">
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  0  1 20  0  0  8 13 21 34</code></pre>
 </div>
 </div>
 <p>Ура, мы можем считать среднее без <code>NA</code>!</p>
 <div class="cell">
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.77778</code></pre>
 </div>
 </div>
-<p>Теперь Вы понимаете, зачем нужно отрицание (<code>!</code>)</p>
+<p>Теперь вы понимаете, зачем нужно отрицание (<code>!</code>)</p>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1030,20 +1295,20 @@ object length</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Вообще, есть еще один способ посчитать среднее, если есть NA. Для этого надо залезть в хэлп по функции <em>mean()</em>:</p>
+<p>Вообще, есть еще один способ посчитать среднее, если есть NA. Для этого надо залезть в хэлп по функции <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>В хэлпе мы найдем параметр <code>na.rm =</code>, который по умолчанию <code>FALSE</code>. Вы знаете, что нужно делать!</p>
 <div class="cell">
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10.77778</code></pre>
 </div>
 </div>
 </div>
 </div>
-<p><code>NA</code> может появляться в векторах разных типов. На самом деле, <code>NA</code> - это специальное значение в логических векторах, тогда как в векторах других типов <code>NA</code> появляется как <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> или <code>NA_character_</code>, но R обычно сам все переводит в нужный формат и показывает как просто <code>NA</code>. Таким образом, <code>NA</code> в векторах разных типов – это разные <code>NA</code>, хотя на практике эта деталь обычно несущественна.</p>
+<p><code>NA</code> может появляться в векторах разных типов. На самом деле, <code>NA</code> - это специальное значение в логических векторах, тогда как в векторах других типов <code>NA</code> появляется как <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> или <code>NA_character_</code>, но R обычно сам все переводит в нужный формат и показывает как просто <code>NA</code>. Таким образом, <code>NA</code> в векторах разных типов — это разные <code>NA</code>, хотя на практике эта деталь обычно несущественна.</p>
 <div class="callout callout-style-simple callout-warning no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1054,21 +1319,21 @@ object length</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Кроме <code>NA</code> есть еще <code>NaN</code> – это разные вещи. <code>NaN</code> расшифровывается как <em>Not a Number</em> и получается в результате таких операций как <code>0 / 0</code>. Тем не менее, функция <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> выдает <code>TRUE</code> на <code>NaN</code>, а вот функция <code><a href="https://rdrr.io/r/base/is.finite.html">is.nan()</a></code> выдает <code>TRUE</code> на <code>NaN</code> и <code>FALSE</code> на <code>NA</code>:</p>
+<p>Кроме <code>NA</code> есть еще <code>NaN</code> — это разные вещи. <code>NaN</code> расшифровывается как <em>Not a Number</em> и получается в результате таких операций как <code>0 / 0</code>. Тем не менее, функция <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> выдает <code>TRUE</code> на <code>NaN</code>, а вот функция <code><a href="https://rdrr.io/r/base/is.finite.html">is.nan()</a></code> выдает <code>TRUE</code> на <code>NaN</code> и <code>FALSE</code> на <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="cn">NaN</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="cn">NaN</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span><span class="op">(</span><span class="cn">NaN</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span><span class="op">(</span><span class="cn">NaN</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -1077,20 +1342,24 @@ object length</code></pre>
 </div>
 <p>Еще один объект, похожий на <code>NA</code> и <code>NaN</code>, — это <code>NULL</code>. Его можно воспринимать как объект нулевой длины без типа:</p>
 <div class="cell">
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p><code>NULL</code> часто используется как значение по умолчанию в аргументах функций (что-то вроде “ничего не задано”), а также для удаления элементов из списков. В отличие от <code>NA</code>, <code>NULL</code> не является “пропущенным значением” — это скорее “ничто” или “пустой объект”.</p>
-</section><section id="sec-vector_end" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="sec-vector_end">
-<span class="header-section-number">3.8</span> Заключение</h2>
-<p>Итак, с векторами мы более-менее разобрались. Помните, что вектора – это один из краеугольных камней вашей работы в R. Если вы хорошо с ними разобрались, то дальше все будет довольно несложно. Тем не менее, вектора – это не все. Есть еще два важных типа данных: <strong>списки</strong> <strong><em>(list)</em></strong> и <strong>матрицы</strong> <strong><em>(matrix)</em></strong>. Их можно рассматривать как своеобразное “расширение” векторов, каждый в свою сторону. Ну а списки и матрицы нужны чтобы понять основной тип данных в R – <strong>датафрейм <em>(dataframe)</em></strong>.</p>
-<p><img src="images/013-vector_matrix_list_df.jpg" class="img-fluid" width="400"></p>
+</section><section id="sec-vector_end" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="sec-vector_end">
+<span class="header-section-number">3.9</span> Заключение</h2>
+<p>Итак, с векторами мы более-менее разобрались. Помните, что вектора — это один из краеугольных камней вашей работы в R. Если вы хорошо с ними разобрались, то дальше все будет довольно несложно. Тем не менее, вектора — это не все. Есть еще два важных типа данных: <strong>списки</strong> <em>(list)</em> и <strong>матрицы</strong> <em>(matrix)</em>. Их можно рассматривать как своеобразное “расширение” векторов, каждый в свою сторону. Ну а списки и матрицы нужны чтобы понять основной тип данных в R — <strong>датафрейм</strong> <em>(dataframe)</em>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/013-vector_matrix_list_df.jpg" class="img-fluid figure-img" width="400"></p>
+<p></p><figcaption class="figure-caption">Схема связей структур данных: от atomic vector стрелки ведут к matrix и list, а от них обоих — к data.frame</figcaption><p></p>
+</figure>
+</div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

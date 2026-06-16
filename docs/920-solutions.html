@@ -227,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и </span></a><a href="https://r-datatable.com">data.table</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -678,7 +678,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Поделите каждый элемент вектора <code>p</code> на соответствующий ему элемент вектора <code>q</code>:</li>
 </ul>
 <blockquote class="blockquote">
-<p>О, да, Вам нужно делить на 0!</p>
+<p>О, да, вам нужно делить на 0!</p>
 </blockquote>
 <div class="cell">
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">/</span> <span class="va">q</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1121,7 +1121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>*Создайте таблицу умножения (9х9) в виде матрицы. Сохраните ее в переменную <code>mult_tab</code>.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Вам может понадобиться функция <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code>.</p>
+<p>вам может понадобиться функция <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code>.</p>
 </blockquote>
 <div class="cell">
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mult_tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">9</span>,<span class="fl">9</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span>
@@ -1779,7 +1779,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1  1569</code
 <p>Бинарные операторы типа <code>+</code> или <code>%in%</code> тоже представляют собой функции. Более того, мы можем создавать свои бинарные операторы! В этом нет особой сложности — нужно все так же создавать функцию (для двух переменных), главное окружать их <code>%</code> и название обрамлять обратными штрихами `. Например, можно сделать свой бинарный оператор <code>%notin%</code>, который будет выдавать <code>TRUE</code>, если значения слева <em>нет</em> в векторе справа:</p>
 <div class="cell">
 <div class="sourceCode" id="cb250"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">`%notin%`</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">!</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">y</span><span class="op">)</span></span>
-<span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">%notin%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%notin%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
 </div>
@@ -1885,11 +1885,13 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1  1569</code
 <div class="cell">
 <div class="sourceCode" id="cb272"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in trim(1:6, 3): n слишком большой!</code></pre>
+<pre><code>Error in `trim()`:
+! n слишком большой!</code></pre>
 </div>
 <div class="sourceCode" id="cb274"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">trim</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in trim(1:6, -1): n не может быть меньше нуля!</code></pre>
+<pre><code>Error in `trim()`:
+! n не может быть меньше нуля!</code></pre>
 </div>
 </div>
 </section><section id="sec-solution_apply" class="level2" data-number="27.13"><h2 data-number="27.13" class="anchored" data-anchor-id="sec-solution_apply">
@@ -2721,7 +2723,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1  1569</code
 </div>
 </div>
 <ul>
-<li>Создайте из тиббла <code>heroes</code> новый тиббл, в котором числовые значения <code>Height</code> и <code>Weight</code> заменены на следующие строковые значения: если у супергероя рост или вес выше среднего по колонке, то <code>"выше среднего"</code>, если его/ее рост или вес ниже или равен среднему, то <code>"ниже среднего"</code>.</li>
+<li>Создайте из тиббла <code>heroes</code> новый тиббл, в котором числовые значения <code>Height</code> и <code>Weight</code> заменены на следующие строковые значения: если у супергероя рост или масса выше среднего по колонке, то <code>"выше среднего"</code>, если его/ее рост или масса ниже или равна среднему, то <code>"ниже среднего"</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb364"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">higher_than_average</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -2749,7 +2751,7 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1  1569</code
 </div>
 </div>
 <ul>
-<li>Создайте из тиббла <code>heroes</code> новый тиббл, в котором числовые значения <code>Height</code> и <code>Weight</code> заменены на следующие строковые значения: если у супергероя <em>внутри соответствующей группы по полу</em> рост или вес выше среднего по колонке, то <code>"выше среднего по X"</code>, если его/ее рост или вес ниже или равен среднему <em>внутри соответствующей группы по полу</em>, то <code>"ниже среднего по X"</code> , где <em>X</em> — соответствующий пол (<code>Gender</code>).</li>
+<li>Создайте из тиббла <code>heroes</code> новый тиббл, в котором числовые значения <code>Height</code> и <code>Weight</code> заменены на следующие строковые значения: если у супергероя <em>внутри соответствующей группы по полу</em> рост или масса выше среднего по колонке, то <code>"выше среднего по X"</code>, если его/ее рост или масса ниже или равна среднему <em>внутри соответствующей группы по полу</em>, то <code>"ниже среднего по X"</code> , где <em>X</em> — соответствующий пол (<code>Gender</code>).</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb366"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3149,7 +3151,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </section><section id="sec-one_ttest_solutions" class="level2" data-number="27.27"><h2 data-number="27.27" class="anchored" data-anchor-id="sec-one_ttest_solutions">
 <span class="header-section-number">27.27</span> Одновыборочный t-test</h2>
 <ul>
-<li>Представьте, что наши супергерои из набора данных <code>heroes</code> — это выборка из генеральной совокупности всех написанных и ненаписанных супергероев. Проведите одновыборочный t-тест для веса супергероев и числа 100 — предположительного среднего веса в генеральной совокупности всех супергероев. Проинтерпретируйте результат.</li>
+<li>Представьте, что наши супергерои из набора данных <code>heroes</code> — это выборка из генеральной совокупности всех написанных и ненаписанных супергероев. Проведите одновыборочный t-тест для массы супергероев и числа 100 — предположительной средней массы в генеральной совокупности всех супергероев. Проинтерпретируйте результат.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb403"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span>, mu <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3167,7 +3169,7 @@ mean of x
  112.2525 </code></pre>
 </div>
 </div>
-<p>p-value меньше .05, поэтому мы можем отклонить нулевую гипотезу о том, что среднее для веса в генеральной совкупности, из которой вы взяли выборку супергероев, равно 100. Мы принимаем ненулевую гипотезу о том, что в генеральной совокупности средний вес <em>не равен</em> 100.</p>
+<p>p-value меньше .05, поэтому мы можем отклонить нулевую гипотезу о том, что среднее для массы в генеральной совокупности, из которой вы взяли выборку супергероев, равно 100. Мы принимаем ненулевую гипотезу о том, что в генеральной совокупности средняя масса <em>не равна</em> 100.</p>
 <ul>
 <li>Проведите одновыборочный t-тест для роста супергероев и числа 185 — предположительного среднего роста в генеральной совокупности всех супергероев. Проинтерпретируйте результат.</li>
 </ul>
@@ -3264,7 +3266,7 @@ mean in group black mean in group white
 </section><section id="sec-ind_ttest_solutions" class="level2" data-number="27.29"><h2 data-number="27.29" class="anchored" data-anchor-id="sec-ind_ttest_solutions">
 <span class="header-section-number">27.29</span> Двухвыборочный независимый t-test</h2>
 <ul>
-<li>Сделайте независимый t-тест для сравнения веса испытуемых двух групп после диеты, сравнив вторую и третью группу. Проинтерпретируйте результаты.</li>
+<li>Сделайте независимый t-тест для сравнения массы испытуемых двух групп после диеты, сравнив вторую и третью группу. Проинтерпретируйте результаты.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb415"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet23</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3286,7 +3288,7 @@ mean in group 2 mean in group 3
 </div>
 <p>p-value больше .05, поэтому мы не можем отклонить нулевую гипотезу о том, что масса до и после диеты одинаковая.</p>
 <ul>
-<li>Сделайте независимый t-тест для сравнения веса испытуемых двух групп после диеты, сравнив первую и третью группу. Проинтерпретируйте результаты.</li>
+<li>Сделайте независимый t-тест для сравнения массы испытуемых двух групп после диеты, сравнив первую и третью группу. Проинтерпретируйте результаты.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb417"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet13</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3310,7 +3312,7 @@ mean in group 1 mean in group 3
 </section><section id="sec-nonparam_ttest_solutions" class="level2" data-number="27.30"><h2 data-number="27.30" class="anchored" data-anchor-id="sec-nonparam_ttest_solutions">
 <span class="header-section-number">27.30</span> Непараметрические аналоги t-теста</h2>
 <ul>
-<li>Сравните вес первой и второй группы после диеты, используя тест Манна-Уитни. Сравните результаты теста Манна-Уитни с результатами t-теста? Проинтерпретируйте полученные результаты.</li>
+<li>Сравните массу первой и второй группы после диеты, используя тест Манна-Уитни. Сравните результаты теста Манна-Уитни с результатами t-теста? Проинтерпретируйте полученные результаты.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb419"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet12</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3318,10 +3320,10 @@ mean in group 1 mean in group 3
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">weight6weeks</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">diet12</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon rank sum test with continuity correction
+    Wilcoxon rank sum exact test
 
 data:  weight6weeks by Diet
-W = 368, p-value = 0.4117
+W = 368, p-value = 0.4123
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
@@ -3333,25 +3335,25 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="sourceCode" id="cb421"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">weight6weeks</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">diet23</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon rank sum test with continuity correction
+    Wilcoxon rank sum exact test
 
 data:  weight6weeks by Diet
-W = 340.5, p-value = 0.6843
+W = 340.5, p-value = 0.6835
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 <div class="sourceCode" id="cb423"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">weight6weeks</span> <span class="op">~</span> <span class="va">Diet</span>, data <span class="op">=</span> <span class="va">diet13</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon rank sum test with continuity correction
+    Wilcoxon rank sum exact test
 
 data:  weight6weeks by Diet
-W = 346, p-value = 0.6849
+W = 346, p-value = 0.684
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p>В обоих случаях <em>p-value</em> больше 0.05, как и для соответствующих t-тестов. Мы не можем отклонить нулевую гипотезу об отстутствии различий между второй и третьей диетой, между первой и третьей диетой.</p>
 <ul>
-<li>Сравните вес до и после для диеты 1, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</li>
+<li>Сравните массу до и после для диеты 1, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb425"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">diet1</span> <span class="op">&lt;-</span> <span class="va">diet</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3359,34 +3361,34 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">diet1</span><span class="op">$</span><span class="va">pre.weight</span>, <span class="va">diet1</span><span class="op">$</span><span class="va">weight6weeks</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon signed rank test with continuity correction
+    Wilcoxon signed rank exact test
 
 data:  diet1$pre.weight and diet1$weight6weeks
-V = 299, p-value = 2.203e-05
+V = 299, p-value = 2.384e-07
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p>И t-тест, и тест Уилкоксона дают <em>p-value</em> ниже 0.05. Мы можем отклонить нулевую гипотезу об отсутствии различий.</p>
 <ul>
-<li>Сравните вес до и после для диеты 2 и диеты 3, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</li>
+<li>Сравните массу до и после для диеты 2 и диеты 3, используя тест Уилкоксона. Сравните с результатами применения t-теста. Проинтерпретируйте полученные результаты.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">diet2</span><span class="op">$</span><span class="va">pre.weight</span>, <span class="va">diet2</span><span class="op">$</span><span class="va">weight6weeks</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon signed rank test with continuity correction
+    Wilcoxon signed rank exact test
 
 data:  diet2$pre.weight and diet2$weight6weeks
-V = 313, p-value = 5.419e-05
+V = 357, p-value = 4.768e-06
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 <div class="sourceCode" id="cb429"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">diet3</span><span class="op">$</span><span class="va">pre.weight</span>, <span class="va">diet3</span><span class="op">$</span><span class="va">weight6weeks</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Wilcoxon signed rank test with continuity correction
+    Wilcoxon signed rank exact test
 
 data:  diet3$pre.weight and diet3$weight6weeks
-V = 378, p-value = 5.912e-06
+V = 378, p-value = 1.49e-08
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
@@ -3499,7 +3501,7 @@ X-squared = 0.00037447, df = 1, p-value = 0.9846</code></pre>
 <span>         body_kg <span class="op">=</span> <span class="fl">0.45359237</span> <span class="op">*</span> <span class="va">BodyWeight</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>Как различается вес рюкзака в зависимости от пола? Кто весит больше?</li>
+<li>Как различается масса рюкзака в зависимости от пола? У кого рюкзаки тяжелее?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb442"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">back</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3514,7 +3516,7 @@ X-squared = 0.00037447, df = 1, p-value = 0.9846</code></pre>
 </div>
 </div>
 <ul>
-<li>Если допустить, что выборка репрезентативна, то можно ли сделать вывод о различии по среднему весу рюкзаков в генеральной совокупности?</li>
+<li>Если допустить, что выборка репрезентативна, то можно ли сделать вывод о различии по средней массе рюкзаков в генеральной совокупности?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb444"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">backpack_kg</span> <span class="op">~</span> <span class="va">Sex</span>, data <span class="op">=</span> <span class="va">back</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3534,7 +3536,7 @@ mean in group Female   mean in group Male
 </div>
 <p>p-value больше .05, поэтому мы не можем отклонить нулевую гипотезу о том, что масса до и после диеты одинаковая.</p>
 <ul>
-<li>Повторите пунктs 2 и 3 для веса самих студентов.</li>
+<li>Повторите пункты 2 и 3 для массы самих студентов.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb446"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">back</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3587,7 +3589,7 @@ mean in group Female   mean in group Male
 </section><section id="sec-cov_solutions" class="level2" data-number="27.33"><h2 data-number="27.33" class="anchored" data-anchor-id="sec-cov_solutions">
 <span class="header-section-number">27.33</span> Ковариация</h2>
 <ul>
-<li>Посчитайте матрицу ковариаций для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета ковариации этих двух переменных от результатов подсчета ковариаций веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
+<li>Посчитайте матрицу ковариаций для массы студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета ковариации этих двух переменных от результатов подсчета ковариаций массы студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb452"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">back</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -3603,7 +3605,7 @@ BackpackWeight   32.08788       33.23677</code></pre>
 </section><section id="sec-cor_solutions" class="level2" data-number="27.34"><h2 data-number="27.34" class="anchored" data-anchor-id="sec-cor_solutions">
 <span class="header-section-number">27.34</span> Коэффициент корреляции</h2>
 <ul>
-<li>Посчитайте коэффициент корреляции Пирсона для веса студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета коэффициента корреляции Пирсона (сам коэффициент, p-value) этих двух переменных от результатов подсчета корреляции Пирсона веса студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
+<li>Посчитайте коэффициент корреляции Пирсона для массы студентов и их рюкзаков в <em>фунтах.</em> Различаются ли результаты подсчета коэффициента корреляции Пирсона (сам коэффициент, p-value) этих двух переменных от результатов подсчета корреляции Пирсона массы студентов и их рюкзаков в <em>килограммах</em>? Почему?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb454"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">back</span><span class="op">$</span><span class="va">BackpackWeight</span>, <span class="va">back</span><span class="op">$</span><span class="va">BodyWeight</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3623,7 +3625,7 @@ sample estimates:
 </div>
 <p>Результаты не различаются, потому что значение ковариации не зависит от размерности исходных шкал.</p>
 <ul>
-<li>Посчитайте коэффициент корреляции Пирсона для веса и роста супергероев из датасета <code>heroes</code>. Проинтерпретируйте результат.</li>
+<li>Посчитайте коэффициент корреляции Пирсона для массы и роста супергероев из датасета <code>heroes</code>. Проинтерпретируйте результат.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb456"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span>, <span class="va">heroes</span><span class="op">$</span><span class="va">Height</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3641,9 +3643,9 @@ sample estimates:
 0.1934412 </code></pre>
 </div>
 </div>
-<p>p-value меньше 0.05, поэтому мы можем отклонить нулевую гипотезу об отсутствии линейной связи между ростом и весом и принять альтернативную гипотезу о том, что такая связь есть. Судя по знаку и размеру корреляции, чем выше рост, тем выше вес супергероя, но эта связь достаточно слабая.</p>
+<p>p-value меньше 0.05, поэтому мы можем отклонить нулевую гипотезу об отсутствии линейной связи между ростом и массой и принять альтернативную гипотезу о том, что такая связь есть. Судя по знаку и размеру корреляции, чем выше рост, тем больше масса супергероя, но эта связь достаточно слабая.</p>
 <ul>
-<li>Теперь посчитайте коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла для веса и роста супергероев из датасета <code>heroes</code>. Различаются ли результаты по сравнению с коэффициентом корреляции Пирсона? Почему?</li>
+<li>Теперь посчитайте коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла для массы и роста супергероев из датасета <code>heroes</code>. Различаются ли результаты по сравнению с коэффициентом корреляции Пирсона? Почему?</li>
 </ul>
 <div class="cell">
 <div class="sourceCode" id="cb458"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span>, <span class="va">heroes</span><span class="op">$</span><span class="va">Height</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3673,7 +3675,7 @@ sample estimates:
 0.6751664 </code></pre>
 </div>
 </div>
-<p>В обоих случаях p-value меньше 0.05, поэтому мы можем отклонить нулевую гипотезу об отсутствии связи между ростом и весом и принять альтернативную гипотезу о том, что такая связь есть. Сильное различие между коэффициентами корреляции указывает на нелинейность этой связи, либо же на наличие значительных выбросов в данных.</p>
+<p>В обоих случаях p-value меньше 0.05, поэтому мы можем отклонить нулевую гипотезу об отсутствии связи между ростом и массой и принять альтернативную гипотезу о том, что такая связь есть. Сильное различие между коэффициентами корреляции указывает на нелинейность этой связи, либо же на наличие значительных выбросов в данных.</p>
 </section><section id="sec-anova_solutions" class="level2" data-number="27.35"><h2 data-number="27.35" class="anchored" data-anchor-id="sec-anova_solutions">
 <span class="header-section-number">27.35</span> ANOVA</h2>
 <p>Загрузите пингвиний датасет:</p>

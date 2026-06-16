@@ -80,6 +80,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -127,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./107-beyond_base_r.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./107-beyond_base_r.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и `{data.table}`</span></a></li></ol></nav>
       <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -227,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и </span></a><a href="https://r-datatable.com">data.table</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -367,12 +386,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
 <li><a href="#sec-dt_approach" id="toc-sec-dt_approach" class="nav-link active" data-scroll-target="#sec-dt_approach"><span class="toc-section-number">9.1</span>  Подход <code>{data.table}</code></a></li>
   <li><a href="#sec-tidy_approach" id="toc-sec-tidy_approach" class="nav-link" data-scroll-target="#sec-tidy_approach"><span class="toc-section-number">9.2</span>  Подход tidyverse</a></li>
-  <li><a href="#sec-dt_vs_tidy" id="toc-sec-dt_vs_tidy" class="nav-link" data-scroll-target="#sec-dt_vs_tidy"><span class="toc-section-number">9.3</span>  {data.table} vs tidyverse</a></li>
+  <li><a href="#sec-dt_vs_tidy" id="toc-sec-dt_vs_tidy" class="nav-link" data-scroll-target="#sec-dt_vs_tidy"><span class="toc-section-number">9.3</span>  <code>{data.table}</code> vs tidyverse</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-beyond_base_r" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></h1>
+<h1 class="title"><span id="sec-beyond_base_r" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и <code>{data.table}</code></span></span></h1>
 </div>
 
 
@@ -391,34 +410,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>Как вы уже, наверное, убедились, базовый R умеет очень много, в том числе и для работы с данными. Однако какие-то операции все равно выполнить довольно непросто.</p>
-<p>Возьмем, например, задачу агрегации: вам нужно посчитать средний рост супергероев отдельно для мужчин и для женщин (а еще и для <code>NA</code>, за компанию). Три группы еще ничего, а если бы их было 10, 50 или 200? В базовом R для этого есть специальная функция <code><a href="https://rdrr.io/r/stats/aggregate.html">aggregate()</a></code>, но она довольно неудобная.</p>
-<p>Поэтому стали появляться пакеты, которые пытаются сделать агрегацию и другие непростые операции максимально безболезненными способами. Основных таких пакетов два: <a href="https://r-datatable.com">data.table</a> и <a href="https://tidyverse.tidyverse.org">tidyverse</a>. Это огромные пакеты, которые очень сильно изменяют работу в R, в том числе в плане стиля и используемой парадигмы. Тем не менее, в основе своей стоит все то, что мы прошли раньше.</p>
+</header><p>Как вы уже, наверное, убедились, базовый R умеет очень много, в том числе и для работы с данными. Однако какие-то операции всё равно выполнить довольно непросто.</p>
+<p>Возьмем, например, задачу <strong>агрегации</strong> <em>(aggregation)</em>: вам нужно посчитать средний рост супергероев отдельно для мужчин и для женщин (а еще и для <code>NA</code>, за компанию). Три группы еще ничего, а если бы их было 10, 50 или 200? В базовом R для этого есть специальная функция <code><a href="https://rdrr.io/r/stats/aggregate.html">aggregate()</a></code>, но она довольно неудобная.</p>
+<p>Поэтому стали появляться пакеты, которые пытаются сделать агрегацию и другие непростые операции максимально безболезненными. Основных таких пакетов два: <a href="https://r-datatable.com">data.table</a> и <a href="https://tidyverse.tidyverse.org">tidyverse</a>. Это огромные пакеты, которые значительно изменяют работу в R, в том числе в плане стиля и используемой парадигмы. Тем не менее, в основе своей лежит всё то, что мы прошли раньше.</p>
 <section id="sec-dt_approach" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="sec-dt_approach">
 <span class="header-section-number">9.1</span> Подход <code>{data.table}</code>
 </h2>
-<p><a href="https://r-datatable.com">data.table</a> – это распространенный пакет, который позволяет анализировать датафреймы максимально быстро и с помощью очень лаконичного кода.</p>
+<p><a href="https://r-datatable.com">data.table</a> — это распространенный пакет, который позволяет анализировать датафреймы максимально быстро и с помощью очень лаконичного кода.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"data.table"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Давайте импортируем наш набор данных про супергероев. Для этого воспользуемся функцией <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> из пакета <a href="https://r-datatable.com">data.table</a>. Эта функция нам уже знакома как функция для импорта больших наборов данных <a href="030-import_data.html#sec-fastread"><span>Глава&nbsp;6.8</span></a>.</p>
-<p><em>“f”</em> в <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> означает <em>“<strong>f</strong>ast and <strong>f</strong>riendly”</em>: эта функция очень быстрая и довольно хорошо угадывает формат текстовой таблицы.</p>
+<p>Давайте импортируем наш набор данных про супергероев. Для этого воспользуемся функцией <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> из пакета <a href="https://r-datatable.com">data.table</a>. Она нам уже знакома как функция для импорта больших наборов данных (см. <a href="030-import_data.html#sec-fastread"><span>Глава&nbsp;6.8</span></a>).</p>
+<p><em>«f»</em> в <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> означает <em>«<strong>f</strong>ast and <strong>f</strong>riendly»</em>: эта функция очень быстрая и довольно хорошо угадывает формат текстовой таблицы.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
-<span><span class="va">heroes_dt</span> <span class="op">&lt;-</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'data.table'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:base':
+
+    %notin%</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread</a></span><span class="op">(</span></span>
 <span>    <span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
-<span>    na.strings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span><span class="op">)</span></span>
+<span>    na.strings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in
-fread("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv",
-: na.strings[4]==" " consists only of whitespace, ignoring. Since
-strip.white=TRUE (default), use na.strings="" to specify that any number of
-spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 </div>
-</div>
-<p>Функция <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> создает не просто датафрейм, а <strong>дататейбл <em>(datatable):</em></strong></p>
+<p>Функция <code><a href="https://rdrr.io/pkg/data.table/man/fread.html">fread()</a></code> создает не просто датафрейм, а <strong>дататейбл</strong> <em>(data.table)</em>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        V1            name Gender Eye color              Race       Hair color
      &lt;int&gt;          &lt;char&gt; &lt;char&gt;    &lt;char&gt;            &lt;char&gt;           &lt;char&gt;
@@ -447,15 +468,15 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 733:  170.0         DC Comics       &lt;NA&gt;      good     57
 734:  185.0         DC Comics       &lt;NA&gt;       bad     81</code></pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">heroes_dt</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">heroes_dt</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.table" "data.frame"</code></pre>
 </div>
 </div>
-<p><strong>Дататейбл</strong> – это “улучшенный” датафрейм: с ним работают все те функции, которые мы применяли для датафрейма, специальные функции для дататейбла, а что-то работает немного по-другому по сравнению с датафреймом. Например, оператор <code>[</code>, т.е. квадратные скобки.</p>
-<p>Давайте посмотрим по-внимательнее как это происходит на примере расчета среднего роста супергероев, группируя по полу:</p>
+<p>Дататейбл — это «улучшенный» датафрейм: с ним работают и все те функции, которые мы применяли для датафрейма, и специальные функции для дататейбла, а кое-что устроено немного по-другому. Например, оператор <code>[</code>, т.е. квадратные скобки.</p>
+<p>Давайте посмотрим повнимательнее, как это происходит на примере расчета среднего роста супергероев с группировкой по полу:</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Height</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">Gender</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Height</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, by <span class="op">=</span> <span class="va">Gender</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Gender       V1
    &lt;char&gt;    &lt;num&gt;
@@ -464,9 +485,9 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 3:   &lt;NA&gt; 177.0667</code></pre>
 </div>
 </div>
-<p>Сразу уже усложним задачу: возьмем только хороших (у кого в колонке <code>Alignment</code> стоит <code>"good"</code>), а потом еще отсортируем по среднему росту.</p>
+<p>Сразу же усложним задачу: возьмем только хороших (у кого в колонке <code>Alignment</code> стоит <code>"good"</code>), а потом еще отсортируем по среднему росту.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span><span class="op">[</span><span class="va">Alignment</span> <span class="op">==</span> <span class="st">"good"</span>, </span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_dt</span><span class="op">[</span><span class="va">Alignment</span> <span class="op">==</span> <span class="st">"good"</span>, </span>
 <span>          <span class="fu">.</span><span class="op">(</span>mean_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Height</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>          by <span class="op">=</span> <span class="va">Gender</span><span class="op">]</span><span class="op">[</span></span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">mean_height</span><span class="op">)</span></span>
@@ -479,7 +500,7 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 3: Female    174.7607</code></pre>
 </div>
 </div>
-<p>Уух! Выглядит монструозно, да? Зато как мы ловко все сделали, используя минимальное количество знаков! Заметьте, что здесь необычного для нас:</p>
+<p>Уух! Выглядит монструозно, да? Зато как мы ловко всё сделали, используя минимальное количество знаков! Вот что здесь необычного для нас:</p>
 <ul>
 <li><p>Не нужно прописывать <code>heroes_dt$Alignment</code>, поиск переменной будет начинаться с колонок дататейбла.</p></li>
 <li><p>Там, где мы раньше выбирали колонки, мы можем сразу вести расчёты.</p></li>
@@ -487,49 +508,29 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 <li><p>Несколько операций прописываются путем соединения квадратных скобочек, код превращается в эдакий паровозик<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p></li>
 </ul>
 <p>И это не все отличия!</p>
-<p>На <a href="https://rdatatable.gitlab.io/data.table/">сайте пакета <code>{data.table}</code></a> особенно уделяется вниманию скорости <a href="https://r-datatable.com">data.table</a>, приводя в качестве доказательства <a href="https://h2oai.github.io/db-benchmark/">бэнчмарк</a>, где сравниваются по скорости различные инструменты для работы с данными. <a href="https://r-datatable.com">data.table</a> почти на порядок обгоняет как <a href="https://dplyr.tidyverse.org">dplyr</a>, так и питоновский <em>pandas</em> – самый используемый пакет для анализа данных в <em>Python</em>.</p>
-<p>Разработчики <a href="https://r-datatable.com">data.table</a> делают особый акцент на “консервативности” пакета: у него нет никаких зависимостей (в этом плане пакет <a href="https://r-datatable.com">data.table</a> обгоняет большинство российских экспатов в Тбилиси), ему достаточно очень старой версии R, функционирование пакета не будет ломаться из-за выкинутых устаревших функций. В общем, <a href="https://r-datatable.com">data.table</a> очень суров и уважаем программистами. Он и не особо пытается понравиться рядовым пользователям. Зато, освоив его, вы сможете творить магию: то, что с помощью базового R, <em>tidyverse</em> или Python будет выполняться очень долго (если выполнится вообще), <a href="https://r-datatable.com">data.table</a> сможет сделать гораздо быстрее, иногда в десятки и сотни раз!</p>
-<p>Очень сильно, не правда ли? Чем же может ответить <em>tidyverse</em>?</p>
+<p>На <a href="https://rdatatable.gitlab.io/data.table/">сайте пакета <code>{data.table}</code></a> особое внимание уделяется скорости <a href="https://r-datatable.com">data.table</a>, а в качестве доказательства приводится <a href="https://duckdblabs.github.io/db-benchmark/">бенчмарк db-benchmark</a>, где сравниваются по скорости различные инструменты для работы с данными. <a href="https://r-datatable.com">data.table</a> почти на порядок обгоняет как <a href="https://dplyr.tidyverse.org">dplyr</a>, так и питоновский <code>pandas</code> — самый используемый пакет для анализа данных в Python.</p>
+<p>Разработчики <a href="https://r-datatable.com">data.table</a> делают особый акцент на «консервативности» пакета: у него нет никаких зависимостей (в этом плане пакет <a href="https://r-datatable.com">data.table</a> обгоняет большинство российских экспатов в Тбилиси). Ему достаточно очень старой версии R, и функционирование пакета не будет ломаться из-за выкинутых устаревших функций. В общем, <a href="https://r-datatable.com">data.table</a> очень суров и уважаем программистами. Он и не особо пытается понравиться рядовым пользователям. Зато, освоив его, вы сможете творить магию: то, что с помощью базового R, <em>tidyverse</em> или Python будет выполняться очень долго (если выполнится вообще), <a href="https://r-datatable.com">data.table</a> сможет сделать гораздо быстрее, иногда в десятки и сотни раз!</p>
+<p>Мощно, не правда ли? Чем же может ответить <em>tidyverse</em>?</p>
 </section><section id="sec-tidy_approach" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="sec-tidy_approach">
 <span class="header-section-number">9.2</span> Подход tidyverse</h2>
 <p>Давайте посмотрим, как будет выглядеть решение тех же задач (отбор строк по условию, агрегация и сортировка) в <em>tidyverse</em>.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tibble' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'tidyr' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'readr' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'purrr' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'dplyr' was built under R version 4.4.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'lubridate' was built under R version 4.4.3</code></pre>
-</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.2.0     ✔ readr     2.2.0
+✔ dplyr     1.2.1     ✔ readr     2.2.0
 ✔ forcats   1.0.1     ✔ stringr   1.6.0
-✔ ggplot2   4.0.2     ✔ tibble    3.3.1
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
 ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-✔ purrr     1.2.1     
+✔ purrr     1.2.2     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::between()     masks data.table::between()
 ✖ dplyr::filter()      masks stats::filter()
 ✖ dplyr::first()       masks data.table::first()
 ✖ lubridate::hour()    masks data.table::hour()
 ✖ lubridate::isoweek() masks data.table::isoweek()
+✖ lubridate::isoyear() masks data.table::isoyear()
 ✖ dplyr::lag()         masks stats::lag()
 ✖ dplyr::last()        masks data.table::last()
 ✖ lubridate::mday()    masks data.table::mday()
@@ -545,14 +546,23 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
-<p>Не пугайтесь сообщений, все в порядке. Во-первых, пакет <a href="https://tidyverse.tidyverse.org">tidyverse</a> – это не просто пакет, а “пакет с пакетами” (да-да, как у вас дома), который подключает сразу несколько других пакетов, которые составляют <em>ядро tidyverse</em>. Список и версии этих пакетов <a href="https://tidyverse.tidyverse.org">tidyverse</a> выводит при подключении. Разные пакеты <em>tidyverse</em> мы очень детально разберем позже (<a href="110-tidyverse_basic.html"><span>Глава&nbsp;10</span></a> ), а сейчас просто посмотрите, как это все выглядит.</p>
+<p>Не пугайтесь сообщений, всё в порядке. Дело в том, что пакет <a href="https://tidyverse.tidyverse.org">tidyverse</a> — это не просто пакет, а «пакет с пакетами» (да-да, как у вас дома), который подключает сразу несколько других пакетов, которые составляют ядро <em>tidyverse</em>. Список и версии этих пакетов <a href="https://tidyverse.tidyverse.org">tidyverse</a> выводит при подключении. Разные пакеты <em>tidyverse</em> мы очень детально разберем позже (см. <a href="110-tidyverse_basic.html"><span>Глава&nbsp;10</span></a>), а сейчас просто посмотрите, как это всё выглядит.</p>
+<p>Кроме того, <a href="https://tidyverse.tidyverse.org">tidyverse</a> показывает конфликты функций. Помните, мы обсуждали неприятную ситуацию, которая возникает, если в двух подключенных пакетах совпадают названия функций (<a href="020-install.html#sec-from_package"><span>Глава&nbsp;5.5</span></a>)? <a href="https://tidyverse.tidyverse.org">tidyverse</a> любезно нас предупреждает о подобных конфликтах, а еще и дает подсказку, как использовать функцию из того пакета, что нужен именно нам. Например, вот эта строка означает, что есть функция <code><a href="https://dplyr.tidyverse.org/reference/between.html">between()</a></code> и в пакете <a href="https://dplyr.tidyverse.org">dplyr</a> (из <em>tidyverse</em>), и в <a href="https://r-datatable.com">data.table</a>:</p>
+<pre><code>dplyr::between()     masks data.table::between()</code></pre>
+<p>После подключения <em>tidyverse</em> функция <code><a href="https://dplyr.tidyverse.org/reference/between.html">between()</a></code> из <a href="https://dplyr.tidyverse.org">dplyr</a> будет маскировать одноименную функцию из <a href="https://r-datatable.com">data.table</a>. Если же вам нужна именно функция <code><a href="https://dplyr.tidyverse.org/reference/between.html">between()</a></code> из <a href="https://r-datatable.com">data.table</a>, то вызвать вы ее можете с помощью оператора <code>::</code>:</p>
+<pre><code><a href="https://rdrr.io/pkg/data.table/man/between.html">data.table::between()</a></code></pre>
+<p>Как мы обсуждали в <a href="020-install.html#sec-from_package"><span>Глава&nbsp;5.5</span></a>, чтобы код не зависел от порядка подключения пакетов, к таким функциям лучше всегда обращаться явно через <code>::</code>.</p>
+<p>К счастью, обычно замаскированных функций немного: хотя у <em>tidyverse</em> и <a href="https://r-datatable.com">data.table</a> много функций с одинаковыми названиями, на практике их подключают вместе нечасто. Тем не менее, есть две функции, которые всегда будут выдавать конфликты:</p>
+<pre><code>dplyr::filter()      masks stats::filter()
+dplyr::lag()         masks stats::lag()</code></pre>
+<p>Это связано с тем, что в <em>tidyverse</em> есть две функции, которые совпадают названиями со встроенными функциями в R<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
-<span>    na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
+<span>    na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Функция <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> (не путать с функцией из базового R – <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>!) возвращает <strong>тиббл</strong> – “улучшенный” датафрейм, примерно как это было с дататейблом.</p>
+<p>Функция <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> (не путать с функцией из базового R — <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>!) возвращает <strong>тиббл</strong> <em>(tibble)</em> — «улучшенный» датафрейм, примерно как это было с дататейблом.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_tbl</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_tbl</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -570,14 +580,14 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 # ℹ 724 more rows
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">heroes_tbl</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">heroes_tbl</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
 </div>
 </div>
 <p>Теперь же сделаем то же самое с нашими данными, что мы делали с помощью <a href="https://r-datatable.com">data.table</a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes_tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Alignment</span> <span class="op">==</span> <span class="st">"good"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Height</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -591,22 +601,28 @@ spaces in a string column should be read as &lt;NA&gt;.</code></pre>
 3 Female        175.</code></pre>
 </div>
 </div>
-<p>Очень сильно отличается от того, как мы работали раньше! Хотя в основе лежит все тот же R. Код, написанный в <em>tidyverse</em>, нарочито многословен (особенно по сравнению с <a href="https://r-datatable.com">data.table</a>), каждая отдельная операция имеет свою функцию. Писать нужно больше, зато это гораздо легче: меньше нужно думать, какими хитрыми трюками сделать преобразование данных. Нужно просто разделить весь процесс преобразования данных на отдельные операции и последовательно прописать их. Код получается аккуратный и очень читаемый, даже для человека, который не знает <em>tidyverse</em> или даже R в целом. Даже этот новый оператор <code>%&gt;%</code> выглядит довольно понятно: его можно прочитать как “затем”.</p>
+<p>Это очень сильно отличается от того, как мы работали раньше! Хотя в основе лежит всё тот же R. Код, написанный в <em>tidyverse</em>, нарочито многословен (особенно по сравнению с <a href="https://r-datatable.com">data.table</a>): каждая отдельная операция имеет свою функцию. Писать нужно больше, зато это гораздо легче: меньше нужно думать, какими хитрыми трюками сделать преобразование данных. Нужно просто разделить весь процесс на отдельные операции и последовательно прописать их. Код получается аккуратный и очень читаемый, даже для человека, который не знает <em>tidyverse</em> или даже R в целом. И этот новый оператор <code>%&gt;%</code> выглядит довольно понятно: его можно прочитать как «затем».</p>
 <p>Заметьте, что <em>tidyverse</em> выводит очень подробные сообщения, которые даже выглядят очень красиво: со всякими иконками, красивым форматированием. Разработчики <em>tidyverse</em> работают над тем, чтобы делать свой интерфейс максимально понятным для пользователя: говорящие сами за себя названия функций, куча удобных фишек на все случаи жизни.</p>
-<p><em>tidyverse</em> постоянно обновляется, регулярно появляются новые функции, а старые функции заменяются на более удобные новые. И это не всегда плюс: обновив пакеты, установленные год назад, вы можете обнаружить, что старый код перестал работать! Мол, мы тут придумали, как сделать лучше, переписывайте код заново (или используйте старые версии пакетов).</p>
-<p>Разработчики <em>tidyverse</em>, в целом, не гонятся за высокой скоростью выполнения кода. Часто можно заметить, что новые функции работают довольно медленно. Но если у вас строчек меньше миллиона, то разницу в скорости с <a href="https://r-datatable.com">data.table</a> вы едва ли заметите.</p>
-<p>Команда разработчиков <em>tidyverse</em> работает на компанию <em>Posit</em> (бывшая <em>RStudio</em>). Поэтому в <em>RStudio</em> вы найдете несколько “шпаргалок” для <em>tidyverse</em>, но не для <a href="https://r-datatable.com">data.table</a>. Они также активно работают над популяризацией <em>tidyverse</em>, стараясь сделать вход в него максимально комфортным, особенно для людей без опыта программирования.</p>
+<p><em>tidyverse</em> постоянно обновляется, регулярно появляются новые функции, а старые заменяются более удобными. И это не всегда плюс: обновив пакеты, установленные год назад, вы можете обнаружить, что старый код перестал работать! Мол, мы тут придумали, как сделать лучше, переписывайте код заново (или используйте старые версии пакетов).</p>
+<p>Разработчики <em>tidyverse</em> в целом не гонятся за высокой скоростью выполнения кода. Часто можно заметить, что новые функции работают довольно медленно. Но если у вас строчек меньше миллиона, то разницу в скорости с <a href="https://r-datatable.com">data.table</a> вы едва ли заметите.</p>
+<p>Команда разработчиков <em>tidyverse</em> работает на компанию <em>Posit</em> (бывшая <em>RStudio</em>). Поэтому в <em>RStudio</em> вы найдете несколько «шпаргалок» для <em>tidyverse</em>, но не для <a href="https://r-datatable.com">data.table</a>. Они также активно работают над популяризацией <em>tidyverse</em>, стараясь сделать вход в него максимально комфортным, особенно для людей без опыта программирования.</p>
 </section><section id="sec-dt_vs_tidy" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="sec-dt_vs_tidy">
-<span class="header-section-number">9.3</span> {data.table} vs tidyverse</h2>
+<span class="header-section-number">9.3</span> <code>{data.table}</code> vs tidyverse</h2>
 <p>Так что же лучше: <a href="https://r-datatable.com">data.table</a> или <em>tidyverse</em>? Это один из самых частых споров в R-комьюнити. У обоих подходов есть плюсы, которые можно обсуждать вечно. Сегодня <em>tidyverse</em> выигрывает в популярности, особенно за пределами русскоязычного пространства.</p>
-<p>В последнее время <a href="https://r-datatable.com">data.table</a> и <em>tidyverse</em> все меньше противостоят друг другу и все больше взаимодополняют. Например, некоторые используют в качестве основного инструмента tidyverse, но при работе с данными побольше переключаются на <a href="https://r-datatable.com">data.table</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Кроме того, сами разработчики tidyverse пытаются приладить суперскоростной <a href="https://r-datatable.com">data.table</a> в <em>tidyverse</em>: пакет <a href="https://dtplyr.tidyverse.org">dtplyr</a> позволяет “переводить” код, написанный в <em>tidyverse</em> в код на <a href="https://r-datatable.com">data.table</a>.</p>
+<p>В последнее время <a href="https://r-datatable.com">data.table</a> и <em>tidyverse</em> всё меньше противостоят друг другу и всё больше взаимодополняют. Например, некоторые используют в качестве основного инструмента <em>tidyverse</em>, но при работе с данными побольше переключаются на <a href="https://r-datatable.com">data.table</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Кроме того, сами разработчики <em>tidyverse</em> пытаются приладить суперскоростной <a href="https://r-datatable.com">data.table</a> к <em>tidyverse</em>: пакет <a href="https://dtplyr.tidyverse.org/"><code>{dtplyr}</code></a> позволяет «переводить» код, написанный в <em>tidyverse</em>, в код на <a href="https://r-datatable.com">data.table</a>.</p>
 <p>Таким образом, выбирая из <em>tidyverse</em> и <a href="https://r-datatable.com">data.table</a>, начинать лучше с более удобного и популярного <em>tidyverse</em>, чем и займемся далее.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
+<div id="ref-chan2019greatest" class="csl-entry" role="doc-biblioentry">
+Chan, M. (2019). <em><span>LondonR</span>: <span>Hadley Wickham</span> &amp; tidyverse’s greatest hits</em>. <a href="https://martinctc.github.io/blog/londonr-hadley-wickham-and-tidyverse-greatest-hits/">https://martinctc.github.io/blog/londonr-hadley-wickham-and-tidyverse-greatest-hits/</a>
+</div>
+</div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Это работает и в базовом R, но именно в <a href="https://r-datatable.com">data.table</a> это очень частая конструкция.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Автор книги поступает именно так =)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Эти функции используются относительно редко, и Хэдли Уикхэм (создатель <a href="https://dplyr.tidyverse.org">dplyr</a>) в докладе «Tidyverse: the greatest hits» (LondonR, 2019) отнёс перекрытие <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> и <code><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag()</a></code> к «неисправимым ошибкам» <em>tidyverse</em> <span class="citation" data-cites="chan2019greatest">(<a href="950-references.html#ref-chan2019greatest" role="doc-biblioref">Chan, 2019</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Автор книги поступает именно так =)<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -246,7 +246,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и </span></a><a href="https://r-datatable.com">data.table</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -415,15 +415,15 @@ div.csl-indent {
 
 </header><p>Давайте повторим то, что мы знаем про вектор в R:</p>
 <ul>
-<li><p>Вектор – это последовательность из значений.</p></li>
+<li><p>Вектор — это последовательность из значений.</p></li>
 <li><p>Порядок значений имеет значение, но этот порядок одномерный.</p></li>
-<li><p>Внутри вектора могут быть данные только одного типа</p></li>
+<li><p>Внутри вектора могут быть данные только одного типа.</p></li>
 </ul>
-<p>Как вы уже поняли, вектор – это одно из важнейших понятий в R, и он нам будет встречаться дальше постоянно. Обычно работа с данными – это именно работа с векторами, различные операции на векторах.</p>
-<p>Однако иногда в понятии вектора нам уже становится несколько тесно. Поэтому нам нужно выйти за рамки его ограничений. Во-первых, нужна структура с двумя и более измерениями — для двух измерений есть <strong>матрица (matrix)</strong>, а для трёх и более — <strong>массив (array)</strong>. Во-вторых, нам нужна структура, которая могла бы содержать данные разных типов — это <strong>список (list).</strong></p>
+<p>Как вы уже поняли, вектор — это одно из важнейших понятий в R, и он нам будет встречаться дальше постоянно. Обычно работа с данными — это именно работа с векторами, различные операции на векторах.</p>
+<p>Однако иногда в понятии вектора нам уже становится несколько тесно. Поэтому нам нужно выйти за рамки его ограничений. Во-первых, нужна структура с двумя и более измерениями — для двух измерений есть <strong>матрица</strong> <em>(matrix)</em>, а для трёх и более — <strong>массив</strong> <em>(array)</em>. Во-вторых, нам нужна структура, которая могла бы содержать данные разных типов — это <strong>список</strong> <em>(list)</em>.</p>
 <section id="sec-matrix" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="sec-matrix">
 <span class="header-section-number">4.1</span> Матрица</h2>
-<p>Если вдруг вас пугает это слово, то совершенно зря. <strong>Матрица (matrix)</strong> – это всего лишь “двумерный” вектор: вектор, у которого есть не только длина, но и ширина. Создать матрицу можно с помощью функции <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code> из вектора, указав при этом количество строк и столбцов.</p>
+<p>Если вдруг вас пугает это слово, то совершенно зря. Матрица — это всего лишь “двумерный” вектор: вектор, у которого есть не только длина, но и ширина. Создать матрицу можно с помощью функции <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code> из вектора, указав при этом количество строк и столбцов.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, nrow <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">A</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -449,14 +449,14 @@ div.csl-indent {
 <!--# ###Drawing needed###  -->
 </div>
 </div>
-<p>Все остальное так же как и с векторами: внутри находится данные только одного типа. Поскольку матрица – это уже двумерный массив, то у него имеется два индекса. Эти два индекса разделяются запятыми.</p>
+<p>Все остальное так же как и с векторами: внутри находится данные только одного типа. Поскольку матрица — это уже двумерный массив, то у него имеется два индекса. Эти два индекса разделяются запятыми.</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10</code></pre>
 </div>
 </div>
-<p>Первый индекс – выбор строк, второй индекс – выбор колонок<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Результат – пересечение выбранных строк и столбцов.</p>
+<p>Первый индекс — выбор строк, второй индекс — выбор колонок<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Результат — пересечение выбранных строк и столбцов.</p>
 <p>Так же как и с векторами, матрицы можно индексировать числовыми векторами:</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -466,7 +466,11 @@ div.csl-indent {
 [2,]    6   10</code></pre>
 </div>
 </div>
-<p><img src="images/016-complex_structures_matrix.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/016-complex_structures_matrix.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Схема индексирования матрицы: матрица 4×3 со значениями 1–12; при выборе <code>A[1:2, 2:3]</code> подсвечиваются первые две строки и второй–третий столбцы, результат — матрица 2×2 (5, 9 / 6, 10)</figcaption><p></p>
+</figure>
+</div>
 <p>И даже логическими матрицами (матрицы имеют такие же типы, как и вектора):</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">A</span><span class="op">[</span><span class="va">A</span> <span class="op">&gt;</span> <span class="fl">10</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -513,7 +517,7 @@ div.csl-indent {
 </div>
 </div>
 <p>В принципе, это все, что нам нужно знать о матрицах. Матрицы используются в R довольно редко, особенно по сравнению, например, с MATLAB. Но вот индексировать матрицы хорошо бы уметь: это понадобится в работе с датафреймами (см. <a href="#sec-df"><span>Глава&nbsp;4.4</span></a>).</p>
-<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -523,12 +527,12 @@ div.csl-indent {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>То, что матрица – это просто двумерный вектор, не является метафорой: в R матрица – это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты – это свойства объектов, своего рода “метаданные”. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">здесь</a> или на стр. 99-101 книги “R in a Nutshell” <span class="citation" data-cites="adler2010r">(<a href="950-references.html#ref-adler2010r" role="doc-biblioref">Adler 2010</a>)</span>.</p>
+<p>То, что матрица — это просто двумерный вектор, не является метафорой: в R матрица — это по сути своей вектор с дополнительными <em>атрибутами</em> <code>dim</code> и (опционально) <code>dimnames</code>. Атрибуты — это свойства объектов, своего рода “метаданные”. Для всех объектов есть обязательные атрибуты типа и длины и могут быть любые необязательные атрибуты. Можно задавать свои атрибуты или удалять уже присвоенные: удаление атрибута <code>dim</code> у матрицы превратит ее в обычный вектор. Про атрибуты подробнее можно почитать <a href="https://perso.esiee.fr/~courivad/R/06-objects.html">в этом материале про объекты в R</a> или на стр. 99–101 книги “R in a Nutshell” <span class="citation" data-cites="adler2010r">(<a href="950-references.html#ref-adler2010r" role="doc-biblioref">Adler, 2010</a>)</span>.</p>
 </div>
 </div>
 </section><section id="sec-arrays" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="sec-arrays">
 <span class="header-section-number">4.2</span> Массив</h2>
-<p>Два измерения – это не предел! Структура с одним типом данных внутри, но с тремя измерениями или больше, называется <strong>массивом (array)</strong>. Создание массива очень похоже на создание матрицы: задаем вектор, из которого будет собран массив, и размерность массива.</p>
+<p>Два измерения — это не предел! Структура с одним типом данных внутри, но с тремя измерениями или больше, называется массивом. Создание массива очень похоже на создание матрицы: задаем вектор, из которого будет собран массив, и размерность массива.</p>
 <div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">array_3d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">array_3d</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -550,7 +554,7 @@ div.csl-indent {
 </div>
 </section><section id="sec-list" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="sec-list">
 <span class="header-section-number">4.3</span> Список</h2>
-<p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим <strong>список (list)</strong>!</p>
+<p>Теперь представим себе вектор без ограничения на одинаковые данные внутри. И получим список!</p>
 <div class="cell">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">simple_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">42</span>, <span class="st">"Пам пам"</span>, <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">simple_list</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -610,7 +614,7 @@ div.csl-indent {
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Представьте, что список - это такое дерево с ветвистой структурой. А на конце этих ветвей - листья-векторы.</p>
+<p>Представьте, что список — это такое дерево с ветвистой структурой. А на конце этих ветвей — листья-векторы.</p>
 </blockquote>
 <p>Как и в случае с векторами мы можем давать имена элементам списка:</p>
 <div class="cell">
@@ -642,7 +646,7 @@ $student
 [1] "Veronika"</code></pre>
 </div>
 </div>
-<p>Мы, по сути, получили элемент списка – просто как часть списка, т.е. как список длиной один:</p>
+<p>Мы, по сути, получили элемент списка — просто как часть списка, т.е. как список длиной один:</p>
 <div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">named_list</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -676,8 +680,12 @@ $student
 <pre><code>[1] 26</code></pre>
 </div>
 </div>
-<p>Хотя последнее – практически то же самое, что и использование знака <code>$</code>.</p>
-<p><img src="images/016-complex_structures_list_subset.png" class="img-fluid"></p>
+<p>Хотя последнее — практически то же самое, что и использование знака <code>$</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/016-complex_structures_list_subset.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Схема обращения к элементам списка: одинарные скобки <code>LIST[1]</code> и <code>LIST["AGE"]</code> возвращают подсписок, а двойные скобки <code>LIST[[1]]</code>, <code>LIST[["AGE"]]</code> и <code>LIST$AGE</code> — сам вектор значений</figcaption><p></p>
+</figure>
+</div>
 <div class="callout callout-style-simple callout-tip no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -688,12 +696,12 @@ $student
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Списки довольно часто используются в R, но реже, чем в <em>Python.</em> Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками – к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры – хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
+<p>Списки довольно часто используются в R, но реже, чем в <em>Python</em>. Со многими объектами в R, такими как результаты статистических тестов, удобно работать именно как со списками — к ним все вышеописанное применимо. Кроме того, некоторые данные мы изначально получаем в виде древообразной структуры — хочешь не хочешь, а придется работать с этим как со списком. Но обычно после этого стоит как можно скорее превратить список в датафрейм.</p>
 </div>
 </div>
 </section><section id="sec-df" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="sec-df">
 <span class="header-section-number">4.4</span> Датафрейм</h2>
-<p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы (dataframes)</strong>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
+<p>Итак, мы перешли к самому главному. Самому-самому. <strong>Датафреймы</strong> <em>(dataframes)</em>. Более того, сейчас станет понятно, зачем нам нужно было разбираться со всеми предыдущими темами.</p>
 <p>Без векторов мы не смогли бы разобраться с матрицами и списками. А без последних мы не сможем понять, что такое датафрейм.</p>
 <p>Представьте себе, что мы хотим записать различную информацию о нескольких респондентах. Мы могли бы записать это в список из векторов.</p>
 <div class="cell">
@@ -733,16 +741,16 @@ $student
 5    Sasha  26    TRUE</code></pre>
 </div>
 </div>
-<p>Так и есть, датафрейм – это что-то вроде проименованного списка, каждый элемент которого является вектором фиксированной длины. Скорее всего, вы представляли список “горизонтально”. Если это так, то теперь “переверните” список у себя в голове на 90 градусов. Так, чтобы названия векторов оказались сверху, а элементы списка стали столбцами.</p>
+<p>Так и есть, датафрейм — это что-то вроде именованного списка, каждый элемент которого является вектором фиксированной длины. Скорее всего, вы представляли список “горизонтально”. Если это так, то теперь “переверните” список у себя в голове на 90 градусов. Так, чтобы названия векторов оказались сверху, а элементы списка стали столбцами.</p>
 <!--# ###Drawing needed###  -->
-<p>Поскольку длина всех этих векторов одинаковая (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут иметь разные типы данных. В нашем случае первая колонка – <code>character</code>, вторая колонка – <code>numeric</code>, третья колонка – <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с проименованным списком, и как с матрицей:</p>
+<p>Поскольку длина всех этих векторов одинаковая (обязательное условие!), то данные представляют собой табличку, похожую на матрицу. Но в отличие от матрицы, разные столбцы могут иметь разные типы данных. В нашем случае первая колонка — <code>character</code>, вторая колонка — <code>numeric</code>, третья колонка — <code>logical</code>. Тем не менее, обращаться с датафреймом можно и как с именованным списком, и как с матрицей:</p>
 <div class="cell">
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">age</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26 34 23 27 26</code></pre>
 </div>
 </div>
-<p>Здесь мы сначала извлекли колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор. Колонки датафрейма – это и есть векторы!</p>
+<p>Здесь мы сначала извлекли колонку <code>age</code> с помощью оператора <code>$</code>. Результатом этой операции является числовой вектор. Колонки датафрейма — это и есть векторы!</p>
 <div class="cell">
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -773,7 +781,7 @@ $student
 5  26    TRUE</code></pre>
 </div>
 </div>
-<p>Как и с матрицами, первый индекс означает строчки, а второй – столбцы.</p>
+<p>Как и с матрицами, первый индекс означает строчки, а второй — столбцы.</p>
 <p>А еще можно использовать названия колонок внутри квадратных скобок:</p>
 <div class="cell">
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"age"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -808,7 +816,7 @@ $student
 <pre><code>[1]  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
 </div>
 </div>
-<p>Мы получили логический вектор, длина которого совпадает с длиной датафрейма. При этом <code>TRUE</code> стоит на тех позициях, где в соответствующей строчке в датафрейме возраст респондента больше среднего, а <code>FALSE</code> – в остальных случаях. Теперь этот логический вектор мы используем для выбора строк в исходном датафрейме:</p>
+<p>Мы получили логический вектор, длина которого совпадает с длиной датафрейма. При этом <code>TRUE</code> стоит на тех позициях, где в соответствующей строчке в датафрейме возраст респондента меньше среднего, а <code>FALSE</code> — в остальных случаях. Теперь этот логический вектор мы используем для выбора строк в исходном датафрейме:</p>
 <div class="cell">
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>, <span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -832,22 +840,38 @@ $student
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 </div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>, <span class="st">'lovesR'</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>, <span class="st">"lovesR"</span><span class="op">]</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE TRUE TRUE TRUE</code></pre>
 </div>
 </div>
-<p>В большинстве случаев подходят сразу несколько способов – тем не менее, стоит овладеть ими всеми. Чем богаче ваш арсенал инструментов работы в R, тем легче вам обрабатывать свои данные: возможность сделать одно и то же действие добавляет вам гибкости, потому что разные способы будут более или менее подходящими в разных ситуациях.</p>
-<p>Датафреймы удобно просматривать в RStudio. Для это нужно написать команду <code>View(df)</code> или же просто нажать на названии нужной переменной из списка вверху справа (там где Environment). Тогда увидите табличку, очень похожую на Excel и тому подобные программы для работы с таблицами. Там же есть и всякие возможности для фильтрации, сортировки и поиска <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p><img src="images/016-complex_structures_df_view.png" class="img-fluid"></p>
+<p>В большинстве случаев подходят сразу несколько способов — тем не менее, стоит овладеть ими всеми. Чем богаче ваш арсенал инструментов работы в R, тем легче вам обрабатывать свои данные: возможность сделать одно и то же действие добавляет вам гибкости, потому что разные способы будут более или менее подходящими в разных ситуациях.</p>
+<p>Датафреймы удобно просматривать в RStudio. Для этого нужно написать команду <code>View(df)</code> или же просто нажать на название нужной переменной из списка вверху справа (там, где <code>Environment</code>). Тогда увидите табличку, очень похожую на Excel и тому подобные программы для работы с таблицами. Там же есть и всякие возможности для фильтрации, сортировки и поиска <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/016-complex_structures_df_view.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Окно <code>View(df)</code> в RStudio: таблица с колонками name, age, student, lovesR и панелью Filter для фильтрации и сортировки</figcaption><p></p>
+</figure>
+</div>
 <p>Но, конечно, интереснее все эти вещи делать руками, т.е. с помощью написания кода.</p>
-<p>Датафреймы – это структура, которая будет встречаться вам чаще всего при работе с данными в R. С одной стороны, кажется, что она все равно довольно ограниченная: в каждой колонке должно быть одинаковое количество значений, внутри колонки только один тип данных. Но именно так обычно и представлены наши данные. Например, если вы загрузите результаты опроса Google Forms в виде таблицы, то каждая строчка будет респондентом, а каждая колонка – ответом на какой-то вопрос. Поэтому количество значений в каждой колонке будет одинаковым (хотя значения могут быть пропущенными), а каждая колонка – имеет свой тип. Например, год рождения – и это должна быть числовая колонка, с которой вы сможете делать все, что вы умеете делать с числовыми колонками. Например, посчитать возраст. Если в колонке с годом рождения оказалось что-то кроме чисел, то это повод для исследования данных.</p>
+<p>Датафреймы — это структура, которая будет встречаться вам чаще всего при работе с данными в R. С одной стороны, кажется, что она все равно довольно ограниченная: в каждой колонке должно быть одинаковое количество значений, внутри колонки только один тип данных. Но именно так обычно и представлены наши данные. Например, если вы загрузите результаты опроса Google Forms в виде таблицы, то каждая строчка будет респондентом, а каждая колонка — ответом на какой-то вопрос. Поэтому количество значений в каждой колонке будет одинаковым (хотя значения могут быть пропущенными), а каждая колонка — имеет свой тип. Например, год рождения — и это должна быть числовая колонка, с которой вы сможете делать все, что вы умеете делать с числовыми колонками. Например, посчитать возраст. Если в колонке с годом рождения оказалось что-то кроме чисел, то это повод для исследования данных.</p>
 </section><section id="sec-attr_class" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="sec-attr_class">
 <span class="header-section-number">4.5</span> Атрибуты и классы</h2>
-<p>…</p>
+<div class="callout callout-style-simple callout-note no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+В разработке
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Этот раздел находится в разработке и будет добавлен в следующих версиях учебника.</p>
+</div>
+</div>
 </section><section id="sec-formula" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="sec-formula">
 <span class="header-section-number">4.6</span> Формулы</h2>
-<p>Формулы – это специальный класс в R, который используется в первую очередь для статистических моделей.</p>
+<p>Формулы — это специальный класс в R, который используется в первую очередь для статистических моделей.</p>
 <p>Выглядит формула следующим образом:</p>
 <div class="cell">
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -859,7 +883,7 @@ $student
 <pre><code>[1] "formula"</code></pre>
 </div>
 </div>
-<p>Как видите, здесь нет никаких кавычек, т.е. это не строковое значение, а отдельный класс. В каждой формуле должна быть тильда (<code>~</code>), которая имеет смысл знака равно (=) в уравнениях (например, для уравнений линейной регрессии). Слева от <code>~</code> обычно находится зависимая переменная, а справа – независимые (предикторы).</p>
+<p>Как видите, здесь нет никаких кавычек, т.е. это не строковое значение, а отдельный класс. В каждой формуле должна быть тильда (<code>~</code>), которая имеет смысл знака равно (=) в уравнениях (например, для уравнений линейной регрессии). Слева от <code>~</code> обычно находится зависимая переменная, а справа — независимые (предикторы).</p>
 <p>Кроме статистических моделей, формулы используются много где как служебная конструкция, чтобы задать соответствующие пары значений. Вот несколько примеров:</p>
 <ul>
 <li>
@@ -870,14 +894,14 @@ $student
 </ul>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
 <div id="ref-adler2010r" class="csl-entry" role="doc-biblioentry">
-Adler, Joseph. 2010. <em>R in a nutshell: A desktop quick reference</em>. " O’Reilly Media, Inc.".
+Adler, J. (2010). <em>R in a Nutshell: A Desktop Quick Reference</em>. O’Reilly Media.
 </div>
 </div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>Это универсальный порядок: что в других языках программирования, что в линейной алгебре первый индекс – выбор строчек, второй индекс – выбор столбцов.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Это универсальный порядок: что в других языках программирования, что в линейной алгебре первый индекс — выбор строчек, второй индекс — выбор столбцов.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Все, что вы нажмете в этом окошке, никак не повлияет на исходную переменную. Так что можете смело использовать эти функции для исследования содержимого датафрейма.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

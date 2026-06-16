@@ -80,6 +80,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -227,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и </span></a><a href="https://r-datatable.com">data.table</a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -365,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Содержание</h2>
    
   <ul>
-<li><a href="#sec-sec-if" id="toc-sec-sec-if" class="nav-link active" data-scroll-target="#sec-sec-if"><span class="toc-section-number">7.1</span>  Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+<li><a href="#sec-if" id="toc-sec-if" class="nav-link active" data-scroll-target="#sec-if"><span class="toc-section-number">7.1</span>  Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
   <li><a href="#sec-for" id="toc-sec-for" class="nav-link" data-scroll-target="#sec-for"><span class="toc-section-number">7.2</span>  Циклы <code>for</code></a></li>
   <li><a href="#sec-ifelse" id="toc-sec-ifelse" class="nav-link" data-scroll-target="#sec-ifelse"><span class="toc-section-number">7.3</span>  Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
   </ul></nav>
@@ -391,7 +410,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="sec-sec-if" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sec-sec-if">
+</header><section id="sec-if" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="sec-if">
 <span class="header-section-number">7.1</span> Выражения <code>if</code>, <code>else</code>, <code>else if</code>
 </h2>
 <p>Условные конструкции — стандартная часть почти любого языка программирования. R, конечно, — не исключение. Однако и здесь у R есть свои особенности, которые вытекают из ориентированности R на работу с векторами. В самом простом виде условная конструкция в R выглядит так:</p>
@@ -404,7 +423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "Положительное число"</code></pre>
 </div>
 </div>
-<p>Если выражение (expression) содержит больше одной строчки, то они объединяются фигурными скобками. Впрочем, использовать их можно, даже если строчка всего в выражении всего одна.</p>
+<p>Если <strong>выражение</strong> <em>(expression)</em> содержит больше одной строчки, то они объединяются фигурными скобками. Впрочем, использовать их можно, даже если в выражении всего одна строчка.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">number</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">number</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -415,7 +434,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>В рассмотренной нами конструкции происходит проверка на условие. Если условие верно<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, то происходит то, что записано в последующем выражении. Если же условие неверно<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, то ничего не происходит.</p>
-<p>Оператор <code>else</code> позволяет задавать действие на все остальные случаи:</p>
+<p>Ключевое слово <code>else</code> позволяет задавать действие на все остальные случаи:</p>
 <pre><code>if (условие) выражение else выражение</code></pre>
 <p>Работает это так:</p>
 <div class="cell">
@@ -429,7 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "Отрицательное число или ноль"</code></pre>
 </div>
 </div>
-<p>Иногда нам нужна последовательная проверка на несколько условий. Для этого есть оператор <code>else if</code>. Вот как выглядит ее применение:</p>
+<p>Иногда нам нужна последовательная проверка на несколько условий. Для этого есть конструкция <code>else if</code>. Вот как выглядит ее применение:</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">number</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">number</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -454,7 +473,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="st">"Ноль"</span></span>
 <span><span class="op">}</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>Error in if (numbers &gt; 0) {: the condition has length &gt; 1</code></pre>
+<pre><code>Error in `if (numbers &gt; 0) ...`:
+! the condition has length &gt; 1</code></pre>
 </div>
 </div>
 <p>Ошибка! Однако если у вас более старая версия R (до 4.2.0, апрель 2022), то вместо ошибки будет учитываться только первое значение вектора условий: остальные будут игнорироваться, при этом будет выводиться предупреждение. Как же посчитать для всего вектора сразу?</p>
@@ -474,11 +494,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><section id="sec-for" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="sec-for">
 <span class="header-section-number">7.2</span> Циклы <code>for</code>
 </h2>
-<p>Во-первых, можно использовать <code>for</code>. Синтаксис у <code>for</code> похож на синтаксис условных конструкций.</p>
+<p>Самый привычный по другим языкам программирования способ пройтись по всем элементам какого-то объекта — перебрать значения с помощью цикла <code>for</code>. В R, конечно, цикл <code>for</code> тоже есть, синтаксис у него похож на синтаксис условных конструкций:</p>
 <pre><code>for (переменная in последовательность) выражение</code></pre>
-<p>Теперь мы можем объединить условные конструкции и <code>for</code>. Немножко монструозно, но это работает:</p>
+<p>Например, переберем наш вектор <code>numbers</code> (тот самый, <code>-2:2</code>) и напечатаем каждое значение:</p>
 <div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">numbers</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2
+[1] -1
+[1] 0
+[1] 1
+[1] 2</code></pre>
+</div>
+</div>
+<p>Обратите внимание: если мы хотим вывести в консоль результат операций внутри цикла, нужно эксплицитно использовать функцию <code><a href="https://rdrr.io/r/base/print.html">print()</a></code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>Теперь вернемся к нашей задаче — применить условную конструкцию к каждому значению вектора <code>numbers</code>, объединив конструкции <code>if</code>/<code>else if</code>/<code>else</code> и цикл <code>for</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">numbers</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Положительное число"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -495,45 +529,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [1] "Положительное число"</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Чтобы выводить в консоль результат вычислений внутри <code>for</code>, нужно использовать <code><a href="https://rdrr.io/r/base/print.html">print()</a></code>.</p>
-</div>
-</div>
-<p>Здесь стоит отметить, что <code>for</code> используется в R относительно редко. В подавляющем числе ситуаций использование <code>for</code> можно избежать. Обычно мы работаем в R с векторами или датафреймами, которые представляют собой множество относительно независимых наблюдений. Если мы хотим провести какие-нибудь операции с этими наблюдениями, то они обычно могут быть выполнены параллельно. Скажем, вы хотите для каждого испытуемого пересчитать его массу из фунтов в килограммы. Этот пересчет осуществляется по одинаковой формуле для каждого испытуемого. Эта формула не изменится из-за того, что какой-то испытуемый слишком большой или слишком маленький - для следующего испытуемого формула будет прежняя. Если Вы встречаете подобную задачу (где функцию можно применить независимо для всех значений), то без цикла <code>for</code> вполне можно обойтись.</p>
-<p>Даже во многих случаях, где расчеты для одной строчки зависят от расчетов предыдущих строчек, можно обойтись без <code>for</code> векторизованными функциями, например, <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code> для подсчета кумулятивной суммы.</p>
+<p>Выглядит несколько монструозно, но это работает. Однако монструозность этой конструкции — не единственная проблема. Есть еще вопрос скорости: о циклах <code>for</code> в R часто говорят, что они медленные. На самом деле это верно лишь отчасти — чаще всего низкая скорость связана с тем, <em>как именно</em> написан цикл.</p>
+<p>Типичная ошибка — наращивать объект на каждой итерации. Для компьютера это «дорогая» операция: когда объект увеличивается, R обычно не может просто дописать значение в конец — он выделяет под увеличенный объект новый участок памяти и копирует туда все старые значения, а на следующей итерации повторяет всё заново<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Лучше заранее создать объект нужного размера и затем заполнять его, переписывая значения в уже выделенных ячейках.</p>
+<p>Здесь есть еще одна тонкость. До сих пор мы перебирали сами элементы вектора (<code>for (i in numbers)</code>). Но чтобы записывать результат в нужную позицию, нам нужны не значения, а их номера — индексы. Получить их помогает уже знакомая нам функция <code><a href="https://rdrr.io/r/base/seq.html">seq_along()</a></code> (<a href="013-vector.html#sec-atomic"><span>Глава&nbsp;3.1</span></a>): она возвращает номера элементов вектора — для нашего <code>numbers</code> это числа от 1 до 5.</p>
+<p>Вот так делать <strong>не надо</strong> — объект наращивается на каждой итерации:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numbers_descriptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span> <span class="co"># начинаем с пустого вектора</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">numbers</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">numbers</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">numbers_descriptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">numbers_descriptions</span>, <span class="st">"Положительное число"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">numbers</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">numbers_descriptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">numbers_descriptions</span>, <span class="st">"Отрицательное число"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">numbers_descriptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">numbers_descriptions</span>, <span class="st">"Ноль"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">numbers_descriptions</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  1  3  6 10 15 21 28 36 45 55</code></pre>
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
+[4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
-<p>Если же нет подходящей векторизованной функции, то можно воспользоваться семейством функций <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> (см. <a href="050-functional.html#sec-apply_f"><span>Глава&nbsp;8.5</span></a>).</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> зачем циклы? прост
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>После этих объяснений кому-то может показаться странным, что я вообще упоминаю про эти циклы. Но для кого-то циклы <code>for</code> настолько привычны, что их полное отсутствие в курсе может показаться еще более странным. Поэтому лучше от меня, чем на улице.</p>
-</div>
-</div>
-<p>Зачем вообще избегать конструкций <code>for</code>? Некоторые говорят, что они слишком медленные, и частично это верно, если мы сравниваем с векторизованными функциями, которые написаны на более низкоуровневых языках. Но в большинстве случаев низкая скорость <code>for</code> связана с неправильным использованием этой конструкции. Например, стоит избегать ситуации, когда на каждой итерации <code>for</code> какой-то объект (вектор, список, что угодно) изменяется в размере. Лучше будет создать заранее объект нужного размера, который затем будет наполняться значениями:</p>
+<p>А вот так писать циклы правильно — объект сразу создается нужного размера:</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numbers_descriptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">numbers</span><span class="op">)</span><span class="op">)</span> <span class="co">#создаем строковый вектор с такой же длиной, как и исходный вектор</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">numbers</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">numbers_descriptions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">numbers</span><span class="op">)</span><span class="op">)</span> <span class="co"># создаем строковый вектор такой же длины, как исходный</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">numbers</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="va">numbers</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">numbers_descriptions</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"Положительное число"</span></span>
 <span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">numbers</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -548,20 +568,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
-<p>В общем, при правильном обращении с <code>for</code> особых проблем со скоростью не будет, хотя векторизованные функции и будут быстрее. Но все равно это будет громоздкая конструкция, в которой легко ошибиться, и которую, скорее всего, можно заменить одной короткой строчкой. Кроме того, без конструкции <code>for</code> код обычно легко превратить в набор функций, последовательно применяющихся к данным, что мы будем по максимуму использовать, работая в <em>tidyverse</em> и применяя пайпы (см. <a href="110-tidyverse_basic.html#sec-pipe"><span>Глава&nbsp;10.4</span></a>).</p>
+<p>На таких маленьких векторах разницы в скорости вы не заметите, но на объектах большего размера она будет ощутимой. При аккуратном обращении с циклами особых проблем со скоростью не будет — хотя векторизованные функции всё равно будут быстрее.</p>
+<p>И это приводит нас к главному: в R цикл <code>for</code> обычно вообще не нужен<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>! Чаще всего мы работаем с векторами и датафреймами — наборами относительно независимых наблюдений, и операции над ними могут выполняться независимо друг от друга. Скажем, чтобы перевести массу каждого испытуемого из фунтов в килограммы, цикл не нужен: формула для всех одна и та же, и достаточно применить ее ко всему вектору сразу (это и есть векторизация, см. <a href="013-vector.html#sec-vector_op"><span>Глава&nbsp;3.3</span></a>). Конечно, внутри это всё равно будет работать через циклы — но для многих базовых функций, написанных на более низкоуровневых языках вроде C и C++, эти циклы выполняются гораздо быстрее, чем циклы, написанные на R.</p>
+<blockquote class="blockquote">
+<p>Конечно, кто-то должен писать циклы <code>for</code>. Но это не обязательно должны быть вы.</p>
+<p>— <a href="https://jennybc.github.io/purrr-tutorial/">Дженни Брайан</a></p>
+</blockquote>
+<p>Даже когда расчет для одной строчки зависит от предыдущих, часто есть готовая векторизованная функция и на этот случай — например, <code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code> для накопительной суммы:</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  3  6 10 15 21 28 36 45 55</code></pre>
+</div>
+</div>
+<p>Если же подходящей векторизованной функции нет, на помощь приходит семейство функций <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> (см. <a href="050-functional.html#sec-apply_f"><span>Глава&nbsp;8.6</span></a>).</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+<em>Для продвинутых:</em> дело не только в скорости
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Циклов в R избегают в первую очередь ради ясности. R — функциональный язык<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>: код принято писать как последовательность функций, применяемых к данным, и тогда на виду главное — <em>что именно</em> вы делаете с данными, а не техническая возня с индексами и перебором <span class="citation" data-cites="wickham16">(<a href="950-references.html#ref-wickham16" role="doc-biblioref">Wickham и др., 2023</a>)</span>. Поэтому возьмите за правило: возникла мысль написать цикл — остановитесь и подумайте, нельзя ли обойтись без него. Вы удивитесь, как часто это получается. Почему так — хорошо разобрано в заметке <a href="https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/">«Vectorization in R: Why?»</a>.</p>
+</div>
+</div>
 </section><section id="sec-ifelse" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="sec-ifelse">
 <span class="header-section-number">7.3</span> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code>
 </h2>
 <p>Из-за того, что конструкция <em>if/else/else if</em> не векторизованная, она редко используется непосредственно в операциях с данными, обычно она используется при написании функций (<a href="050-functional.html#sec-create_fun"><span>Глава&nbsp;8.1</span></a>) и разработке пакетов.</p>
 <p>Альтернативой сочетанию условных конструкций и циклов <code>for</code> является использование встроенной функции <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>. Функция <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> принимает три аргумента:</p>
 <ol type="1">
-<li><p><code>test =</code> – условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>),</p></li>
-<li><p><code>yes =</code> – что выдавать в случае <code>TRUE</code>,</p></li>
-<li><p><code>no =</code> – что выдавать в случае <code>FALSE</code>.</p></li>
+<li><p><code>test =</code> — условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>),</p></li>
+<li><p><code>yes =</code> — что выдавать в случае <code>TRUE</code>,</p></li>
+<li><p><code>no =</code> — что выдавать в случае <code>FALSE</code>.</p></li>
 </ol>
 <p>На выходе получается вектор такой же длины, как и изначальный логический вектор (условие). Это очень похоже на <code>ЕСЛИ()</code> в <em>Microsoft Excel.</em></p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
@@ -596,20 +642,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Пакеты <a href="https://dplyr.tidyverse.org">dplyr</a> и <a href="https://r-datatable.com">data.table</a> предоставляют более быстрые и более строгие альтернативы для базовой функции <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> с аналогичным синтаксисом:</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/if_else.html">if_else</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fifelse.html">fifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fifelse.html">fifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
 </div>
-<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. <a href="107-beyond_base_r.html"><span>Глава&nbsp;9</span></a>, то я советую пользоваться соответствующей функцией вместо базового <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>.</p>
+<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. <a href="107-beyond_base_r.html"><span>Глава&nbsp;9</span></a>), то я советую пользоваться соответствующей функцией вместо базовой функции <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>.</p>
 <div class="callout callout-style-simple callout-important no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -620,12 +666,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Обе функции будут избегать скрытого приведения типов (см. <a href="013-vector.html#sec-coercion"><span>Глава&nbsp;3.2</span></a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="013-vector.html#sec-na"><span>Глава&nbsp;3.7</span></a>).</p>
+<p>Обе функции будут избегать скрытого приведения типов (см. <a href="013-vector.html#sec-coercion"><span>Глава&nbsp;3.2</span></a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="013-vector.html#sec-na"><span>Глава&nbsp;3.8</span></a>).</p>
 </div>
 </div>
 <p>У <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> тоже есть недостаток: он не может включать в себя дополнительных условий по типу <code>else if</code>. В простых ситуациях можно вставлять <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> внутри <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>,</span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>,</span>
 <span>       <span class="st">"Положительное число"</span>,</span>
 <span>       <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">numbers</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -633,9 +679,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
-<p>Но что если условий много? Бесконечные <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> внутри <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> — это громоздко и нечитаемо. Достаточно симпатичное решение есть в пакете <code>dplyr</code> — функция <code>case_when()</code>, которая работает с использованием формулы:</p>
+<p>Но что если условий много? Бесконечные <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> внутри <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> — это громоздко и нечитаемо. Достаточно симпатичное решение есть в пакете <a href="https://dplyr.tidyverse.org">dplyr</a> — функция <code>case_when()</code>. В качестве аргументов она принимает <strong>формулы</strong> — специальный класс объектов R (см. <a href="016-complex_structures.html#sec-formula"><span>Глава&nbsp;4.6</span></a>), которые легко узнать по знаку тильды <code>~</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
 <span>  <span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"Положительное число"</span>,</span>
 <span>  <span class="va">numbers</span> <span class="op">&lt;</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"Отрицательное число"</span>,</span>
 <span>  <span class="va">numbers</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">~</span> <span class="st">"Ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -646,7 +692,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Функция <code>case_when()</code> работает по той же логике, что и <em>if/else/else if</em> конструкция: сначала идет проверка на первое условие (как первое <em>if</em> в конструкции <em>if/else/else if</em> ). Если проверка проходит (то есть в условии получается <code>TRUE</code>), то соответствующее значение возвращается, а остальные условия не проверяются. Если же первое условие не выполняется, то идет проверка на следующее условие (аналог <em>else if</em>). Если же и оно не выполняется, то идет проверка на следующее (следующее <em>else if</em>), пока проверка не пройдет до последнего условия. Можно поставить значение по умолчанию с помощью параметра <code>.default =</code>, которое будет возвращаться, если все проверки выдали <code>FALSE</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, na.strings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, na.strings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">heroes</span><span class="op">$</span><span class="va">weight_group</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
 <span>  <span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span> <span class="op">&gt;</span> <span class="fl">200</span> <span class="op">~</span> <span class="st">"overweight"</span>, <span class="co"># "if"</span></span>
@@ -661,16 +707,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Осторожно: не забывайте про запятые
+<em>Осторожно:</em> не забывайте про запятые
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Будьте внимательны с запятыми! Несмотря на довольно экстравагантный синтаксис, <code>case_when()</code> – это по-прежнему функция, а различные условия, которые вы прописываете внутри этой функции – это аргументы этой функции.</p>
+<p>Будьте внимательны с запятыми! Несмотря на довольно экстравагантный синтаксис, <code>case_when()</code> — это по-прежнему функция, а различные условия, которые вы прописываете внутри этой функции — это аргументы этой функции.</p>
 </div>
 </div>
-<p>Важный момент: если <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> возвращает <code>NA</code> на <code>NA</code> в условии, что обычно нас устраивает (у нас нет данных, что у нас на входе, следовательно, не знаем, что на выходе), то <code>case_when()</code> такого не делает. <code>NA</code> в условии считается как <code>FALSE</code>, поэтому нужно дополнительно обрабатывать условие для него. Чтобы на место <code>NA</code> поставить NA, нужно записать вот так:</p>
+<p>Важный момент: если <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> возвращает <code>NA</code> на <code>NA</code> в условии, что обычно нас устраивает (у нас нет данных, что у нас на входе, следовательно, не знаем, что на выходе), то <code>case_when()</code> такого не делает. <code>NA</code> в условии считается как <code>FALSE</code>, поэтому нужно дополнительно обрабатывать условие для него. Чтобы на место <code>NA</code> поставить <code>NA</code>, нужно записать вот так:</p>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span><span class="op">$</span><span class="va">weight_group</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">heroes</span><span class="op">$</span><span class="va">weight_group</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
 <span>  <span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span> <span class="op">&gt;</span> <span class="fl">200</span> <span class="op">~</span> <span class="st">"overweight"</span>, <span class="co"># "if"</span></span>
 <span>  <span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span> <span class="op">&gt;</span> <span class="fl">120</span> <span class="op">~</span> <span class="st">"somewhat overweight"</span>, <span class="co"># "else if"</span></span>
 <span>  <span class="va">heroes</span><span class="op">$</span><span class="va">Weight</span> <span class="op">&lt;</span> <span class="fl">50</span> <span class="op">~</span> <span class="st">"underweight"</span>, <span class="co"># next "else if"</span></span>
@@ -678,9 +724,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  .default <span class="op">=</span> <span class="st">"typical weight"</span> <span class="co"># final "else" </span></span>
 <span>  <span class="op">)</span> <span class="co"># final "else" </span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>В <a href="https://r-datatable.com">data.table</a> тоже есть свой (<a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">более быстрый</a>) аналог <code>case_when()</code> — функция <code>fcase()</code>. Синтаксис отличается только тем, что вместо формул используются простые запятые. То есть первый аргумент – условие, второй – значение, которое возвращается при верности первого аргумента, третий аргумент – условие, четвертый – возвращаемое значение при верности третьего аргумента и т.д.</p>
+<p>В <a href="https://r-datatable.com">data.table</a> тоже есть свой (<a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">более быстрый</a>) аналог <code>case_when()</code> — функция <code>fcase()</code>. Синтаксис отличается только тем, что вместо формул используются простые запятые. То есть первый аргумент — условие, второй — значение, которое возвращается при верности первого аргумента, третий аргумент — условие, четвертый — возвращаемое значение при верности третьего аргумента и т.д.</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fcase.html">fcase</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/data.table/man/fcase.html">fcase</a></span><span class="op">(</span></span>
 <span>  <span class="va">numbers</span> <span class="op">&gt;</span> <span class="fl">0</span>, <span class="st">"Положительное число"</span>,</span>
 <span>  <span class="va">numbers</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="st">"Отрицательное число"</span>,</span>
 <span>  <span class="va">numbers</span> <span class="op">==</span> <span class="fl">0</span>, <span class="st">"Ноль"</span><span class="op">)</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -692,11 +738,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Задача создания вектора или колонки по множественным условиям из другой колонки плавно перетекает в задачу объединения двух датафреймов по единому ключу, и такое решение может оказаться <a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">наиболее быстрым</a> (см. <a href="120-tidyverse_advanced.html#sec-tidy_join"><span>Глава&nbsp;11.1.2</span></a>).</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
+<div id="ref-wickham16" class="csl-entry" role="doc-biblioentry">
+Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em> (2-я изд.). O’Reilly Media. <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>
+</div>
+</div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>В принципе, необязательно внутри должна быть проверка условий, достаточно просто значения <code>TRUE</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Аналогично, достаточно просто значения <code>FALSE</code>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>В более свежих версиях пакета <a href="https://dplyr.tidyverse.org">dplyr</a> разработчики отказались от этой “строгости”, поэтому <code>NA</code> все-таки будут приводиться к нужному типу. Однако <code><a href="https://rdrr.io/pkg/data.table/man/fifelse.html">data.table::fifelse()</a></code> остался строгим.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Когда вы просто вводите команду в консоли, R неявно вызывает для результата функцию <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> — поэтому значение и появляется на экране. Внутри циклов и функций такого автоматического вызова нет, так что <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> приходится писать явно.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Эта классическая ошибка вынесена во «второй круг ада» в эссе Патрика Бёрнса <a href="https://www.burns-stat.com/pages/Tutor/R_inferno.pdf">«The R Inferno»</a> (Circle 2, «Growing Objects»).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Циклы <code>while</code> и <code>repeat</code>, оставшиеся за пределами этой главы, в анализе данных встречаются еще реже, и всё сказанное относится к ним в той же мере.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Эта идея раскроется полнее, когда мы дойдем до <em>tidyverse</em> и пайпов (<a href="110-tidyverse_basic.html"><span>Глава&nbsp;10</span></a>, <a href="110-tidyverse_basic.html#sec-pipe"><span>Глава&nbsp;10.4</span></a>).<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>В более свежих версиях пакета <a href="https://dplyr.tidyverse.org">dplyr</a> разработчики отказались от этой “строгости”, поэтому <code>NA</code> все-таки будут приводиться к нужному типу. Однако <code><a href="https://rdrr.io/pkg/data.table/man/fifelse.html">data.table::fifelse()</a></code> остался строгим.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
