@@ -182,7 +182,7 @@ str(heroes)
 
     ```{r}
     heroes <- read.csv("https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv", 
-                       na.strings = c("NA", "-", "-99", " "))
+                       na.strings = c("NA", "-", "-99"))
     ```
 
 2.  Прочитаны ли те столбики, которые должны быть числовыми, как `int` или `num`. Если в колонке содержатся числа, а написано `chr` (= `"character"`) или `Factor` (в случае если `stringsAsFactors = TRUE`), то, скорее всего, одна из строчек содержит в себе нечисловые знаки, которые не были прочитаны как `NA`.
@@ -208,7 +208,7 @@ str(heroes)
 
 ```{r}
 heroes <- read.csv("data/heroes_information.csv", 
-                   na.strings = c("NA", "-", "-99", " "))
+                   na.strings = c("NA", "-", "-99"))
 ```
 
 ## Экспорт данных {#sec-export_data}
@@ -284,7 +284,7 @@ heroes_form_gsh <- googlesheets4::read_sheet("https://docs.google.com/spreadshee
 ```{r}
 #| warning: false
 readr::read_csv("data/heroes_information.csv",
-         na = c("-", "-99", "NA", " "))
+         na = c("-", "-99", "NA"))
 ```
 
 -   Пакет [`{vroom}`](https://vroom.r-lib.org/) --- это часть расширенного *tidyverse*. Начиная с версии 2.0, `{readr}` использует `{vroom}` в качестве бэкенда, поэтому по скорости они практически не отличаются. Тем не менее, `{vroom}` можно использовать и отдельно.
