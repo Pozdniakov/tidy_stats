@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.208">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="И.С. Поздняков">
 
-<title>Анализ данных и статистика в R - 26&nbsp; Задания</title>
+<title>26&nbsp; Задания – Анализ данных и статистика в R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -17,9 +21,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +52,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -95,22 +71,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./920-solutions.html" rel="next">
 <link href="./905-tasks_solutions.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -119,29 +101,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "дополнительный результат в этом документе",
     "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
     "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти"
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./905-tasks_solutions.html">Задачник</a></li><li class="breadcrumb-item"><a href="./910-tasks.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a></li></ol></nav>
-      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./905-tasks_solutions.html">Задачник</a></li><li class="breadcrumb-item"><a href="./910-tasks.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -150,23 +161,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -177,253 +188,286 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Поиск"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Основы R и Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidyverse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Разведочный анализ и создание отчетов</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></a>
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Тестирование статистических гипотез</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></a>
+  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Задачник</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-task_begin" id="toc-sec-task_begin" class="nav-link active" data-scroll-target="#sec-task_begin"><span class="toc-section-number">26.1</span>  Начало работы в R</a></li>
-  <li><a href="#sec-task_new_vecs" id="toc-sec-task_new_vecs" class="nav-link" data-scroll-target="#sec-task_new_vecs"><span class="toc-section-number">26.2</span>  Создание векторов</a></li>
-  <li><a href="#sec-task_coer" id="toc-sec-task_coer" class="nav-link" data-scroll-target="#sec-task_coer"><span class="toc-section-number">26.3</span>  Приведение типов</a></li>
-  <li><a href="#sec-task_vec_ion" id="toc-sec-task_vec_ion" class="nav-link" data-scroll-target="#sec-task_vec_ion"><span class="toc-section-number">26.4</span>  Векторизация</a></li>
-  <li><a href="#sec-task_vec_ind" id="toc-sec-task_vec_ind" class="nav-link" data-scroll-target="#sec-task_vec_ind"><span class="toc-section-number">26.5</span>  Индексирование векторов</a></li>
-  <li><a href="#sec-task_na" id="toc-sec-task_na" class="nav-link" data-scroll-target="#sec-task_na"><span class="toc-section-number">26.6</span>  Работа с пропущенными значениями</a></li>
-  <li><a href="#sec-task_matrix" id="toc-sec-task_matrix" class="nav-link" data-scroll-target="#sec-task_matrix"><span class="toc-section-number">26.7</span>  Матрицы</a></li>
-  <li><a href="#sec-task_list" id="toc-sec-task_list" class="nav-link" data-scroll-target="#sec-task_list"><span class="toc-section-number">26.8</span>  Списки</a></li>
-  <li><a href="#sec-task_df" id="toc-sec-task_df" class="nav-link" data-scroll-target="#sec-task_df"><span class="toc-section-number">26.9</span>  Датафрейм</a></li>
-  <li><a href="#sec-task_if" id="toc-sec-task_if" class="nav-link" data-scroll-target="#sec-task_if"><span class="toc-section-number">26.10</span>  Условные конструкции</a></li>
-  <li><a href="#sec-task_function" id="toc-sec-task_function" class="nav-link" data-scroll-target="#sec-task_function"><span class="toc-section-number">26.11</span>  Создание функций</a></li>
-  <li><a href="#sec-task_sanity" id="toc-sec-task_sanity" class="nav-link" data-scroll-target="#sec-task_sanity"><span class="toc-section-number">26.12</span>  Проверка на адекватность</a></li>
-  <li><a href="#sec-task_apply" id="toc-sec-task_apply" class="nav-link" data-scroll-target="#sec-task_apply"><span class="toc-section-number">26.13</span>  Семейство функций apply()</a></li>
-  <li><a href="#sec-task_pipe" id="toc-sec-task_pipe" class="nav-link" data-scroll-target="#sec-task_pipe"><span class="toc-section-number">26.14</span>  magrittr::<code>%&gt;%</code></a></li>
-  <li><a href="#sec-task_select" id="toc-sec-task_select" class="nav-link" data-scroll-target="#sec-task_select"><span class="toc-section-number">26.15</span>  Выбор столбцов: <code>dplyr::select()</code></a></li>
-  <li><a href="#sec-task_filt" id="toc-sec-task_filt" class="nav-link" data-scroll-target="#sec-task_filt"><span class="toc-section-number">26.16</span>  Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
-  <li><a href="#sec-task_arr" id="toc-sec-task_arr" class="nav-link" data-scroll-target="#sec-task_arr"><span class="toc-section-number">26.17</span>  Сортировка строк: <code>dplyr::arrange()</code></a></li>
-  <li><a href="#sec-task_dist" id="toc-sec-task_dist" class="nav-link" data-scroll-target="#sec-task_dist"><span class="toc-section-number">26.18</span>  Уникальные значения: <code>dplyr::distinct()</code></a></li>
-  <li><a href="#sec-task_mutate" id="toc-sec-task_mutate" class="nav-link" data-scroll-target="#sec-task_mutate"><span class="toc-section-number">26.19</span>  Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
-  <li><a href="#sec-task_group_by" id="toc-sec-task_group_by" class="nav-link" data-scroll-target="#sec-task_group_by"><span class="toc-section-number">26.20</span>  Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
-  <li><a href="#sec-task_join" id="toc-sec-task_join" class="nav-link" data-scroll-target="#sec-task_join"><span class="toc-section-number">26.21</span>  Соединение датафреймов: *_join</a></li>
-  <li><a href="#sec-task_pivot" id="toc-sec-task_pivot" class="nav-link" data-scroll-target="#sec-task_pivot"><span class="toc-section-number">26.22</span>  Tidy data</a></li>
-  <li><a href="#sec-task_across" id="toc-sec-task_across" class="nav-link" data-scroll-target="#sec-task_across"><span class="toc-section-number">26.23</span>  Операции с несколькими колонками: <code>across()</code></a></li>
-  <li><a href="#sec-desc_tasks" id="toc-sec-desc_tasks" class="nav-link" data-scroll-target="#sec-desc_tasks"><span class="toc-section-number">26.24</span>  Описательная статистика</a></li>
-  <li><a href="#sec-ggplot2_tasks" id="toc-sec-ggplot2_tasks" class="nav-link" data-scroll-target="#sec-ggplot2_tasks"><span class="toc-section-number">26.25</span>  Построение графиков в ggplot2</a></li>
-  <li><a href="#sec-dist_tasks" id="toc-sec-dist_tasks" class="nav-link" data-scroll-target="#sec-dist_tasks"><span class="toc-section-number">26.26</span>  Распределения</a></li>
-  <li><a href="#sec-one_ttest_tasks" id="toc-sec-one_ttest_tasks" class="nav-link" data-scroll-target="#sec-one_ttest_tasks"><span class="toc-section-number">26.27</span>  Одновыборочный t-test</a></li>
-  <li><a href="#sec-dep_ttest_tasks" id="toc-sec-dep_ttest_tasks" class="nav-link" data-scroll-target="#sec-dep_ttest_tasks"><span class="toc-section-number">26.28</span>  Двухвыборочный зависимый t-test</a></li>
-  <li><a href="#sec-ind_ttest_tasks" id="toc-sec-ind_ttest_tasks" class="nav-link" data-scroll-target="#sec-ind_ttest_tasks"><span class="toc-section-number">26.29</span>  Двухвыборочный независимый t-test</a></li>
-  <li><a href="#sec-nonparam_ttest_tasks" id="toc-sec-nonparam_ttest_tasks" class="nav-link" data-scroll-target="#sec-nonparam_ttest_tasks"><span class="toc-section-number">26.30</span>  Непараметрические аналоги t-теста</a></li>
-  <li><a href="#sec-chi_sq_tasks" id="toc-sec-chi_sq_tasks" class="nav-link" data-scroll-target="#sec-chi_sq_tasks"><span class="toc-section-number">26.31</span>  Критерий хи-квадрат Пирсона</a></li>
-  <li><a href="#sec-backpack_tasks" id="toc-sec-backpack_tasks" class="nav-link" data-scroll-target="#sec-backpack_tasks"><span class="toc-section-number">26.32</span>  Исследование набора данных Backpack</a></li>
-  <li><a href="#sec-cov_tasks" id="toc-sec-cov_tasks" class="nav-link" data-scroll-target="#sec-cov_tasks"><span class="toc-section-number">26.33</span>  Ковариация</a></li>
-  <li><a href="#sec-cor_tasks" id="toc-sec-cor_tasks" class="nav-link" data-scroll-target="#sec-cor_tasks"><span class="toc-section-number">26.34</span>  Коэффициент корреляции</a></li>
-  <li><a href="#sec-anova_tasks" id="toc-sec-anova_tasks" class="nav-link" data-scroll-target="#sec-anova_tasks"><span class="toc-section-number">26.35</span>  ANOVA</a></li>
+  <li><a href="#sec-task_begin" id="toc-sec-task_begin" class="nav-link active" data-scroll-target="#sec-task_begin"><span class="header-section-number">26.1</span> Начало работы в R</a></li>
+  <li><a href="#sec-task_new_vecs" id="toc-sec-task_new_vecs" class="nav-link" data-scroll-target="#sec-task_new_vecs"><span class="header-section-number">26.2</span> Создание векторов</a></li>
+  <li><a href="#sec-task_coer" id="toc-sec-task_coer" class="nav-link" data-scroll-target="#sec-task_coer"><span class="header-section-number">26.3</span> Приведение типов</a></li>
+  <li><a href="#sec-task_vec_ion" id="toc-sec-task_vec_ion" class="nav-link" data-scroll-target="#sec-task_vec_ion"><span class="header-section-number">26.4</span> Векторизация</a></li>
+  <li><a href="#sec-task_vec_ind" id="toc-sec-task_vec_ind" class="nav-link" data-scroll-target="#sec-task_vec_ind"><span class="header-section-number">26.5</span> Индексирование векторов</a></li>
+  <li><a href="#sec-task_na" id="toc-sec-task_na" class="nav-link" data-scroll-target="#sec-task_na"><span class="header-section-number">26.6</span> Работа с пропущенными значениями</a></li>
+  <li><a href="#sec-task_matrix" id="toc-sec-task_matrix" class="nav-link" data-scroll-target="#sec-task_matrix"><span class="header-section-number">26.7</span> Матрицы</a></li>
+  <li><a href="#sec-task_list" id="toc-sec-task_list" class="nav-link" data-scroll-target="#sec-task_list"><span class="header-section-number">26.8</span> Списки</a></li>
+  <li><a href="#sec-task_df" id="toc-sec-task_df" class="nav-link" data-scroll-target="#sec-task_df"><span class="header-section-number">26.9</span> Датафрейм</a></li>
+  <li><a href="#sec-task_if" id="toc-sec-task_if" class="nav-link" data-scroll-target="#sec-task_if"><span class="header-section-number">26.10</span> Условные конструкции</a></li>
+  <li><a href="#sec-task_function" id="toc-sec-task_function" class="nav-link" data-scroll-target="#sec-task_function"><span class="header-section-number">26.11</span> Создание функций</a></li>
+  <li><a href="#sec-task_sanity" id="toc-sec-task_sanity" class="nav-link" data-scroll-target="#sec-task_sanity"><span class="header-section-number">26.12</span> Проверка на адекватность</a></li>
+  <li><a href="#sec-task_apply" id="toc-sec-task_apply" class="nav-link" data-scroll-target="#sec-task_apply"><span class="header-section-number">26.13</span> Семейство функций apply()</a></li>
+  <li><a href="#sec-task_pipe" id="toc-sec-task_pipe" class="nav-link" data-scroll-target="#sec-task_pipe"><span class="header-section-number">26.14</span> magrittr::<code>%&gt;%</code></a></li>
+  <li><a href="#sec-task_select" id="toc-sec-task_select" class="nav-link" data-scroll-target="#sec-task_select"><span class="header-section-number">26.15</span> Выбор столбцов: <code>dplyr::select()</code></a></li>
+  <li><a href="#sec-task_filt" id="toc-sec-task_filt" class="nav-link" data-scroll-target="#sec-task_filt"><span class="header-section-number">26.16</span> Выбор строк: <code>dplyr::slice()</code> и <code>dplyr::filter()</code></a></li>
+  <li><a href="#sec-task_arr" id="toc-sec-task_arr" class="nav-link" data-scroll-target="#sec-task_arr"><span class="header-section-number">26.17</span> Сортировка строк: <code>dplyr::arrange()</code></a></li>
+  <li><a href="#sec-task_dist" id="toc-sec-task_dist" class="nav-link" data-scroll-target="#sec-task_dist"><span class="header-section-number">26.18</span> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+  <li><a href="#sec-task_mutate" id="toc-sec-task_mutate" class="nav-link" data-scroll-target="#sec-task_mutate"><span class="header-section-number">26.19</span> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+  <li><a href="#sec-task_group_by" id="toc-sec-task_group_by" class="nav-link" data-scroll-target="#sec-task_group_by"><span class="header-section-number">26.20</span> Агрегация: <code>dplyr::group_by() %&gt;% summarise()</code></a></li>
+  <li><a href="#sec-task_join" id="toc-sec-task_join" class="nav-link" data-scroll-target="#sec-task_join"><span class="header-section-number">26.21</span> Соединение датафреймов: *_join</a></li>
+  <li><a href="#sec-task_pivot" id="toc-sec-task_pivot" class="nav-link" data-scroll-target="#sec-task_pivot"><span class="header-section-number">26.22</span> Tidy data</a></li>
+  <li><a href="#sec-task_across" id="toc-sec-task_across" class="nav-link" data-scroll-target="#sec-task_across"><span class="header-section-number">26.23</span> Операции с несколькими колонками: <code>across()</code></a></li>
+  <li><a href="#sec-desc_tasks" id="toc-sec-desc_tasks" class="nav-link" data-scroll-target="#sec-desc_tasks"><span class="header-section-number">26.24</span> Описательная статистика</a></li>
+  <li><a href="#sec-ggplot2_tasks" id="toc-sec-ggplot2_tasks" class="nav-link" data-scroll-target="#sec-ggplot2_tasks"><span class="header-section-number">26.25</span> Построение графиков в ggplot2</a></li>
+  <li><a href="#sec-dist_tasks" id="toc-sec-dist_tasks" class="nav-link" data-scroll-target="#sec-dist_tasks"><span class="header-section-number">26.26</span> Распределения</a></li>
+  <li><a href="#sec-one_ttest_tasks" id="toc-sec-one_ttest_tasks" class="nav-link" data-scroll-target="#sec-one_ttest_tasks"><span class="header-section-number">26.27</span> Одновыборочный t-test</a></li>
+  <li><a href="#sec-dep_ttest_tasks" id="toc-sec-dep_ttest_tasks" class="nav-link" data-scroll-target="#sec-dep_ttest_tasks"><span class="header-section-number">26.28</span> Двухвыборочный зависимый t-test</a></li>
+  <li><a href="#sec-ind_ttest_tasks" id="toc-sec-ind_ttest_tasks" class="nav-link" data-scroll-target="#sec-ind_ttest_tasks"><span class="header-section-number">26.29</span> Двухвыборочный независимый t-test</a></li>
+  <li><a href="#sec-nonparam_ttest_tasks" id="toc-sec-nonparam_ttest_tasks" class="nav-link" data-scroll-target="#sec-nonparam_ttest_tasks"><span class="header-section-number">26.30</span> Непараметрические аналоги t-теста</a></li>
+  <li><a href="#sec-chi_sq_tasks" id="toc-sec-chi_sq_tasks" class="nav-link" data-scroll-target="#sec-chi_sq_tasks"><span class="header-section-number">26.31</span> Критерий хи-квадрат Пирсона</a></li>
+  <li><a href="#sec-backpack_tasks" id="toc-sec-backpack_tasks" class="nav-link" data-scroll-target="#sec-backpack_tasks"><span class="header-section-number">26.32</span> Исследование набора данных Backpack</a></li>
+  <li><a href="#sec-cov_tasks" id="toc-sec-cov_tasks" class="nav-link" data-scroll-target="#sec-cov_tasks"><span class="header-section-number">26.33</span> Ковариация</a></li>
+  <li><a href="#sec-cor_tasks" id="toc-sec-cor_tasks" class="nav-link" data-scroll-target="#sec-cor_tasks"><span class="header-section-number">26.34</span> Коэффициент корреляции</a></li>
+  <li><a href="#sec-anova_tasks" id="toc-sec-anova_tasks" class="nav-link" data-scroll-target="#sec-anova_tasks"><span class="header-section-number">26.35</span> ANOVA</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./905-tasks_solutions.html">Задачник</a></li><li class="breadcrumb-item"><a href="./910-tasks.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-tasks" class="quarto-section-identifier"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></span></h1>
 </div>
@@ -435,7 +479,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Автор</div>
     <div class="quarto-title-meta-contents">
-             <p>И.С. Поздняков <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>И.С. Поздняков <a href="mailto:bucherr@yandex.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -444,7 +488,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
+
 </header>
+
 
 <p>Задания, которые помечены звездочкой (*) можно пропускать: это задания повышенной сложности, в них требуется подумать над решением, а не просто применить выученные инструменты.</p>
 <section id="sec-task_begin" class="level2" data-number="26.1">
@@ -806,7 +852,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Создайте вектор <code>numbers</code>, скопировав следующий код:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">11</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">1</span>, <span class="dv">11</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Найдите второй элемент вектора <code>numbers</code>.</li>
@@ -926,8 +972,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Создайте вектор <code>vec4</code> со значениями 300, 15, 8, 2, 0, 1, 110, скопировав следующий код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">110</span>)</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>vec4</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>vec4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">300</span>, <span class="dv">15</span>, <span class="dv">8</span>, <span class="dv">20</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">110</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>vec4</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 300  15   8  20   0   1 110</code></pre>
 </div>
@@ -1135,8 +1181,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="26.8" class="anchored" data-anchor-id="sec-task_list"><span class="header-section-number">26.8</span> Списки</h2>
 <p>Дан список <code>list1</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">letters =</span> letters, <span class="at">logic =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>list1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">numbers =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">letters =</span> letters, <span class="at">logic =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>list1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$numbers
 [1] 1 2 3 4 5
@@ -1221,8 +1267,8 @@ $lupa$logic
 <li>Запустите команду <code>data(mtcars)</code> чтобы загрузить встроенный датафрейм с информацией про автомобили. Каждая строчка датафрейма - модель автомобиля, каждая колонка - отдельная характеристика. Подробнее см. <code>?mtcars</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>mtcars</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
@@ -1506,7 +1552,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Создайте вектор <code>vec5</code>, скопировав следующий код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>vec5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Создайте новый строковый вектор, где на месте чисел больше 10 в <code>vec5</code> будет стоять “большое число”, а на месте остальных чисел – “маленькое число”.</li>
@@ -1521,8 +1567,8 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Загрузите файл heroes_information.csv в переменную <code>heroes</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
-<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Создайте новою колонку <code>hair</code> в <code>heroes</code>, в которой будет значение <code>"Bold"</code> для тех супергероев, у которых в колонке <code>Hair.color</code> стоит <code>"No Hair"</code>, и значение <code>"Hairy"</code> во всех остальных случаях.</li>
@@ -1558,7 +1604,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>plus_one()</code> на числе 41.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plus_one</span>(<span class="dv">41</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plus_one</span>(<span class="dv">41</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 42</code></pre>
 </div>
@@ -1581,7 +1627,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте на значениях -100, -40 и 0, что функция <code>cels2fahr()</code> работает корректно.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cels2fahr</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cels2fahr</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">100</span>, <span class="sc">-</span><span class="dv">40</span>, <span class="dv">0</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -148  -40   32</code></pre>
 </div>
@@ -1590,7 +1636,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Напишите функцию <code>highlight()</code>, которая принимает на входе строковый вектор, а возвращает тот же вектор, но дополненный значением <code>"***"</code> в начале и конце вектора. Лучше всего это рассмотреть на примере:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "***"     "Я"       "Бэтмен!" "***"    </code></pre>
 </div>
@@ -1602,11 +1648,11 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте написанную функцию на векторе <code>c("Я", "Бэтмен!")</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>)) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>)) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "***"     "Я"       "Бэтмен!" "***"    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>), <span class="at">wrapper =</span> <span class="st">"__"</span>) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight</span>(<span class="fu">c</span>(<span class="st">"Я"</span>, <span class="st">"Бэтмен!"</span>), <span class="at">wrapper =</span> <span class="st">"__"</span>) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "__"      "Я"       "Бэтмен!" "__"     </code></pre>
 </div>
@@ -1618,7 +1664,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>na_n()</code> на векторе:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">na_n</span>(<span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="cn">NA</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">na_n</span>(<span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>, <span class="cn">NA</span>, <span class="dv">2</span>, <span class="cn">NA</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -1633,15 +1679,15 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>factors()</code> на простых и сложных числах:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">161</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">161</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]   1   7  23 161</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">1984</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factors</span>(<span class="dv">1984</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]    1    2    4    8   16   31   32   62   64  124  248  496  992 1984</code></pre>
 </div>
@@ -1656,23 +1702,23 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте какие года были для нас простыми, а какие нет:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2017</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2017</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2019</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2019</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2019</span><span class="sc">/</span><span class="dv">3</span> <span class="co">#2019 делится на 3 без остатка</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2019</span><span class="sc">/</span><span class="dv">3</span> <span class="co">#2019 делится на 3 без остатка</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 673</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2020</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2020</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2021</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is_prime</span>(<span class="dv">2021</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1684,27 +1730,27 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <p>Полезная функция для этого – <code>diff()</code> – возвращает разницу соседних значений.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,<span class="dv">5</span><span class="sc">:</span><span class="dv">1</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="dv">6</span><span class="sc">:-</span><span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="dv">6</span><span class="sc">:-</span><span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">rep</span>(<span class="dv">5</span>, <span class="dv">10</span>), <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">monotonic</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="fu">rep</span>(<span class="dv">5</span>, <span class="dv">10</span>), <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Бинарные операторы типа <code>+</code> или <code>%in%</code> тоже представляют собой функции. Более того, мы можем создавать свои бинарные операторы! В этом нет особой сложности – нужно все так же создавать функцию (для двух переменных), главное окружать их <code>%</code> и название обрамлять обратными штрихами `. Например, можно сделать свой бинарный оператор <code>%notin%</code>, который будет выдавать <code>TRUE</code>, если значения слева <em>нет</em> в векторе справа:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">%notin%</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="sc">!</span> (x <span class="sc">%in%</span> y)</span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">%notin%</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="sc">!</span> (x <span class="sc">%in%</span> y)</span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%notin%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
 </div>
@@ -1713,7 +1759,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Создайте бинарный оператор <code>%without%</code>, который будет возвращать все значения вектора слева без значений вектора справа.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"а"</span>, <span class="st">"и"</span>, <span class="st">"б"</span>, <span class="st">"сидели"</span>, <span class="st">"на"</span>, <span class="st">"трубе"</span>) <span class="sc">%without%</span> <span class="fu">c</span>(<span class="st">"а"</span>, <span class="st">"б"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"а"</span>, <span class="st">"и"</span>, <span class="st">"б"</span>, <span class="st">"сидели"</span>, <span class="st">"на"</span>, <span class="st">"трубе"</span>) <span class="sc">%without%</span> <span class="fu">c</span>(<span class="st">"а"</span>, <span class="st">"б"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "и"      "сидели" "на"     "трубе" </code></pre>
 </div>
@@ -1722,7 +1768,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Создайте бинарный оператор <code>%between%</code>, который будет возвращать <code>TRUE</code>, если значение в векторе слева накходится в <em>диапазоне</em> значений вектора справа:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%between%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 </div>
@@ -1737,11 +1783,11 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте, что функция <code>trim()</code> работает корректно:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2 3 4 5 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb148"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
 [20] "u" "v" "w" "x" "y"</code></pre>
@@ -1754,12 +1800,12 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте полученную функцию:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb150"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t"
 [20] "u" "v" "w" "x" "y"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters, <span class="at">n =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters, <span class="at">n =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u"
 [20] "v" "w" "x"</code></pre>
@@ -1769,7 +1815,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Сделайте так, чтобы функция <code>trim()</code> работала корректно с <code>n = 0</code>, т.е. функция возвращала бы исходный вектор без изменений.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters, <span class="at">n =</span> <span class="dv">0</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(letters, <span class="at">n =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s"
 [20] "t" "u" "v" "w" "x" "y" "z"</code></pre>
@@ -1782,12 +1828,12 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Проверьте полученную функцию <code>trim()</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `trim()`:
 ! n слишком большой!</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">trim</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `trim()`:
 ! n не может быть меньше нуля!</code></pre>
@@ -1800,8 +1846,8 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Создайте матрицу <code>M2</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">11</span>, <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">5</span>)</span>
-<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a>M2</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">11</span>, <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>), <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a>M2</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4]
 [1,]   20   15   11   16
@@ -1847,13 +1893,13 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Создайте список <code>list3</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>list3 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>list3 <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
 <span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
 <span id="cb166-3"><a href="#cb166-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>,</span>
 <span id="cb166-4"><a href="#cb166-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">24</span>,</span>
 <span id="cb166-5"><a href="#cb166-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb166-6"><a href="#cb166-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">e =</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">25</span></span>
-<span id="cb166-7"><a href="#cb166-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb166-7"><a href="#cb166-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Найдите максимальное значение каждого вектора списка <code>list3</code>.</li>
@@ -1892,7 +1938,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Проверьте функцию <code>max_item()</code> на списке <code>list3</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max_item</span>(list3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max_item</span>(list3)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
 </div>
@@ -1901,7 +1947,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Теперь мы сделаем сложный список <code>list4</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>list4 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">40</span>, list3)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>list4 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">3</span><span class="sc">:</span><span class="dv">40</span>, list3)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Посчитайте длину каждого вектора в списке, в т.ч. для списка внутри. Результат должен быть списком с такой же структорой, как и изначальный список <code>list4</code>.</li>
@@ -1952,7 +1998,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>*Используя ранее написанную функцию <code>is_prime()</code>, напишите функцию <code>prime_numbers()</code>, которая будет возвращать все простые числа до выбранного числа.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prime_numbers</span>(<span class="dv">200</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prime_numbers</span>(<span class="dv">200</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]   3   5   7  11  13  17  19  23  29  31  37  41  43  47  53  59  61  67  71
 [20]  73  79  83  89  97 101 103 107 109 113 127 131 137 139 149 151 157 163 167
@@ -1966,7 +2012,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Перепишите следующие выражения, используя <code>%&gt;%</code>:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.416198</code></pre>
 </div>
@@ -1977,7 +2023,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="fu">min</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="fu">min</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5</code></pre>
 </div>
@@ -1988,8 +2034,8 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">39</span>, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
-<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(B, <span class="dv">1</span>, mean)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb183"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb183-1"><a href="#cb183-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">39</span>, <span class="at">nrow =</span> <span class="dv">5</span>)</span>
+<span id="cb183-2"><a href="#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(B, <span class="dv">1</span>, mean)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 22.5 23.5 24.5 25.5 26.5</code></pre>
 </div>
@@ -1999,10 +2045,10 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <h2 data-number="26.15" class="anchored" data-anchor-id="sec-task_select"><span class="header-section-number">26.15</span> Выбор столбцов: <code>dplyr::select()</code></h2>
 <p>Для выполнения следующих заданий нам понадобятся датасеты <code>heroes</code> и <code>powers</code>, которые можно загрузить, используя следующие команды:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb185"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb185"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb185-1"><a href="#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb185-2"><a href="#cb185-2" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
-<span id="cb185-3"><a href="#cb185-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span>
-<span id="cb185-4"><a href="#cb185-4" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb185-3"><a href="#cb185-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>))</span>
+<span id="cb185-4"><a href="#cb185-4" aria-hidden="true" tabindex="-1"></a>powers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/super_hero_powers.csv"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Выберете первые 4 столбца в <code>powers</code>.</li>
@@ -2394,12 +2440,12 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 <li>Для начала создайте тиббл <code>heroes_weight</code>, скопировав код:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb204"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1" aria-hidden="true" tabindex="-1"></a>heroes_weight <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb204"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb204-1"><a href="#cb204-1" aria-hidden="true" tabindex="-1"></a>heroes_weight <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
 <span id="cb204-2"><a href="#cb204-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"DC Comics"</span>, <span class="st">"Marvel Comics"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb204-3"><a href="#cb204-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender, Publisher) <span class="sc">%&gt;%</span></span>
 <span id="cb204-4"><a href="#cb204-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb204-5"><a href="#cb204-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span>
-<span id="cb204-6"><a href="#cb204-6" aria-hidden="true" tabindex="-1"></a>heroes_weight </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb204-6"><a href="#cb204-6" aria-hidden="true" tabindex="-1"></a>heroes_weight </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
 # Groups:   Gender [2]
@@ -2649,7 +2695,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2  1261</c
 X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61</code></pre>
 </div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <caption>Data summary</caption>
 <tbody>
 <tr class="odd">
@@ -2687,7 +2733,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
-<table class="table table-sm table-striped">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 17%">
 <col style="width: 12%">
@@ -2741,15 +2787,19 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li>Нарисуйте столбиковую диаграмму (<code>geom_bar()</code>), которая будет отражать количество супергероев издателей <code>"Marvel Comics"</code>, <code>"DC Comics"</code> и всех остальных (отдельным столбиком) из датасета <code>heroes</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb224"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href="#cb224-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
 <span id="cb224-2"><a href="#cb224-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Publisher =</span> <span class="fu">ifelse</span>(Publisher <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Marvel Comics"</span>, <span class="st">"DC Comics"</span>), </span>
 <span id="cb224-3"><a href="#cb224-3" aria-hidden="true" tabindex="-1"></a>                            Publisher,</span>
 <span id="cb224-4"><a href="#cb224-4" aria-hidden="true" tabindex="-1"></a>                            <span class="st">"Other publishers"</span>))</span>
-<span id="cb224-5"><a href="#cb224-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#mutate(Publisher = fct_lump(Publisher, 2)) %&gt;% #Еще один способ сделать то же самое, но через forcats</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb224-5"><a href="#cb224-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#mutate(Publisher = fct_lump(Publisher, 2)) %&gt;% #Еще один способ сделать то же самое, но через forcats</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-191-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-191-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2757,7 +2807,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-192-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-192-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2765,7 +2819,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-193-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-193-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2773,13 +2831,21 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-194-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-194-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Создайте диаграмму рассеяния для датасета <code>heroes</code>, для которой координаты по оси <em>x</em> будут взяты из колонки <code>Height</code>, а координаты по оси <em>y</em> – из колонки <code>Weight</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-195-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-195-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2787,7 +2853,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-196-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-196-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2795,7 +2865,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-197-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-197-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2803,13 +2877,21 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-198-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-198-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Разделите график (<code>facet_wrap()</code>) на три: для <code>"DC Comics"</code>,<code>"Marvel Comics"</code> и всех остальных.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-199-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-199-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2817,7 +2899,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-200-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-200-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2845,7 +2931,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-201-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-201-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2853,7 +2943,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-202-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-202-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2861,7 +2955,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-203-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-203-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2869,7 +2967,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-204-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-204-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2884,7 +2986,7 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="26.28" class="anchored" data-anchor-id="sec-dep_ttest_tasks"><span class="header-section-number">26.28</span> Двухвыборочный зависимый t-test</h2>
 <p>Для дальнейших заданий понадобится набор данных о результативности трех диет, который мы использовали во время занятия.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb225"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb225"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/stcp-Rdataset-Diet.csv"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Посчитайте двухвыборочный зависимый т-тест для остальных диет: для диеты 2 и диеты 3. Проинтерпретируйте полученные результаты.</li>
@@ -2898,8 +3000,8 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li><p>Проведите независимый t-тест для сравнения массы супергероев с черными и белыми глазами.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href="#cb226-1" aria-hidden="true" tabindex="-1"></a>heroes_white_black <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
-<span id="cb226-2"><a href="#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Eye color</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb226"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href="#cb226-1" aria-hidden="true" tabindex="-1"></a>heroes_white_black <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb226-2"><a href="#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Eye color</span><span class="st">`</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="st">"black"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="sec-nonparam_ttest_tasks" class="level2" data-number="26.30">
@@ -2917,10 +3019,10 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <li>Связаны ли переменные Alignment и Gender? Используйте критерий хи-квадрат для проверки и проинтерпретируйте результаты</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb227"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a>pub_good <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb227"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a>pub_good <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
 <span id="cb227-2"><a href="#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Alignment <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"good"</span>, <span class="st">"bad"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb227-3"><a href="#cb227-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Alignment, Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb227-4"><a href="#cb227-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb227-4"><a href="#cb227-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><p>Создайте в <code>heroes</code> новую колонку <code>is_human</code> логического типа, в которой будет <code>TRUE</code>, если супергерой принадлежит расе (<code>Race</code>) <code>"Human"</code>, и <code>FALSE</code> в случае если супергерой принадлежит другой расе.</p></li>
@@ -2941,7 +3043,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-209-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-209-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2949,12 +3055,12 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="26.32" class="anchored" data-anchor-id="sec-backpack_tasks"><span class="header-section-number">26.32</span> Исследование набора данных Backpack</h2>
 <p>Для следующих тем нам понадобится набор данных <code>Backpack</code> из пакета <code>Stat2Data</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb229"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb229"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Stat2Data")</span></span>
 <span id="cb229-2"><a href="#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Stat2Data)</span>
 <span id="cb229-3"><a href="#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(Backpack)</span>
 <span id="cb229-4"><a href="#cb229-4" aria-hidden="true" tabindex="-1"></a>back <span class="ot">&lt;-</span> Backpack <span class="sc">%&gt;%</span></span>
 <span id="cb229-5"><a href="#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">backpack_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BackpackWeight,</span>
-<span id="cb229-6"><a href="#cb229-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb229-6"><a href="#cb229-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_kg =</span> <span class="fl">0.45359237</span> <span class="sc">*</span> BodyWeight)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li>Как различается масса рюкзака в зависимости от пола? У кого рюкзаки тяжелее?</li>
@@ -2975,7 +3081,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-212-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-212-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -2983,7 +3093,11 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="910-tasks_files/figure-html/unnamed-chunk-213-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="910-tasks_files/figure-html/unnamed-chunk-213-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3005,17 +3119,17 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 <h2 data-number="26.35" class="anchored" data-anchor-id="sec-anova_tasks"><span class="header-section-number">26.35</span> ANOVA</h2>
 <p>Загрузите пингвиний датасет:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb231"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb231"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb231-2"><a href="#cb231-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/penguins.csv"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb231-3"><a href="#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="co">#добавляем id</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb231-3"><a href="#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">row_number</span>()) <span class="co">#добавляем id</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Давайте посчитаем арифметические средние по группам для различных признаков:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb232"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href="#cb232-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb232-2"><a href="#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">%&gt;%</span></span>
 <span id="cb232-3"><a href="#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">"_mm"</span>) <span class="sc">|</span> <span class="fu">ends_with</span>(<span class="st">"_g"</span>),</span>
 <span id="cb232-4"><a href="#cb232-4" aria-hidden="true" tabindex="-1"></a>                   mean,</span>
-<span id="cb232-5"><a href="#cb232-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb232-5"><a href="#cb232-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   species   bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -3036,237 +3150,419 @@ X1    1 517 186.73 59.25    183  182.02 11.86 15.2 975 959.8 8.84   105.03 2.61<
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script>
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./905-tasks_solutions.html" class="pagination-link">
+      <a href="./905-tasks_solutions.html" class="pagination-link" aria-label="Задачник">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Задачник</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./920-solutions.html" class="pagination-link">
+      <a href="./920-solutions.html" class="pagination-link" aria-label="Решения заданий">
         <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

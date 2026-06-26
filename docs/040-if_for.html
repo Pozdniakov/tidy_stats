@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.208">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="И.С. Поздняков">
 
-<title>Анализ данных и статистика в R - 7&nbsp; Условные конструкции и циклы</title>
+<title>7&nbsp; Условные конструкции и циклы – Анализ данных и статистика в R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -17,9 +21,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +52,20 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +79,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -114,22 +91,28 @@ div.csl-indent {
 <meta name="quarto:offset" content="./">
 <link href="./050-functional.html" rel="next">
 <link href="./030-import_data.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -138,29 +121,58 @@ div.csl-indent {
     "search-more-match-text": "дополнительный результат в этом документе",
     "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
     "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти"
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-whole_r_intro.html">Основы R и Rstudio</a></li><li class="breadcrumb-item"><a href="./040-if_for.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a></li></ol></nav>
-      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-whole_r_intro.html">Основы R и Rstudio</a></li><li class="breadcrumb-item"><a href="./040-if_for.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -169,23 +181,23 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -196,221 +208,254 @@ div.csl-indent {
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Поиск"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Основы R и Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidyverse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Разведочный анализ и создание отчетов</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></a>
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Тестирование статистических гипотез</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></a>
+  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Задачник</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-if" id="toc-sec-if" class="nav-link active" data-scroll-target="#sec-if"><span class="toc-section-number">7.1</span>  Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
-  <li><a href="#sec-for" id="toc-sec-for" class="nav-link" data-scroll-target="#sec-for"><span class="toc-section-number">7.2</span>  Циклы <code>for</code></a></li>
-  <li><a href="#sec-ifelse" id="toc-sec-ifelse" class="nav-link" data-scroll-target="#sec-ifelse"><span class="toc-section-number">7.3</span>  Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
+  <li><a href="#sec-if" id="toc-sec-if" class="nav-link active" data-scroll-target="#sec-if"><span class="header-section-number">7.1</span> Выражения <code>if</code>, <code>else</code>, <code>else if</code></a></li>
+  <li><a href="#sec-for" id="toc-sec-for" class="nav-link" data-scroll-target="#sec-for"><span class="header-section-number">7.2</span> Циклы <code>for</code></a></li>
+  <li><a href="#sec-ifelse" id="toc-sec-ifelse" class="nav-link" data-scroll-target="#sec-ifelse"><span class="header-section-number">7.3</span> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-whole_r_intro.html">Основы R и Rstudio</a></li><li class="breadcrumb-item"><a href="./040-if_for.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-loops_conditions" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></h1>
 </div>
@@ -422,7 +467,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Автор</div>
     <div class="quarto-title-meta-contents">
-             <p>И.С. Поздняков <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>И.С. Поздняков <a href="mailto:bucherr@yandex.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -431,7 +476,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <section id="sec-if" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="sec-if"><span class="header-section-number">7.1</span> Выражения <code>if</code>, <code>else</code>, <code>else if</code></h2>
@@ -439,18 +486,18 @@ div.csl-indent {
 <pre><code>if (условие) выражение</code></pre>
 <p>Вот так это будет работать на практике:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="st">"Положительное число"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="st">"Положительное число"</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Положительное число"</code></pre>
 </div>
 </div>
 <p>Если <strong>выражение</strong> <em>(expression)</em> содержит больше одной строчки, то они объединяются фигурными скобками. Впрочем, использовать их можно, даже если в выражении всего одна строчка.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Положительное число"</code></pre>
 </div>
@@ -460,57 +507,57 @@ div.csl-indent {
 <pre><code>if (условие) выражение else выражение</code></pre>
 <p>Работает это так:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число или ноль"</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль"</code></pre>
 </div>
 </div>
 <p>Иногда нам нужна последовательная проверка на несколько условий. Для этого есть конструкция <code>else if</code>. Вот как выглядит ее применение:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (number <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число"</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ноль"</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Ноль"</code></pre>
 </div>
 </div>
 <p>Как мы помним, R — язык, в котором векторизация играет большое значение. Но вот незадача — условные конструкции не векторизованы в R! Давайте попробуем применить эти конструкции для вектора значений и посмотрим, что получится.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span><span class="sc">:</span><span class="dv">2</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (numbers <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Положительное число"</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (numbers <span class="sc">&lt;</span> <span class="dv">0</span>){</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Отрицательное число"</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ноль"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `if (numbers &gt; 0) ...`:
 ! the condition has length &gt; 1</code></pre>
 </div>
 </div>
 <p>Ошибка! Однако если у вас более старая версия R (до 4.2.0, апрель 2022), то вместо ошибки будет учитываться только первое значение вектора условий: остальные будут игнорироваться, при этом будет выводиться предупреждение. Как же посчитать для всего вектора сразу?</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> применение условных конструкций
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span><em>Полезное:</em> применение условных конструкций
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Невекторизованная конструкция <em>if/else/else if</em> неудобна при работе с данными, ее практически не используют для обработки данных. В основном она применяется при написании функций, чтобы проверить конкретное значение параметра или адекватность данных на входе (см. <a href="050-functional.html"><span>Глава&nbsp;8</span></a>).</p>
+<p>Невекторизованная конструкция <em>if/else/else if</em> неудобна при работе с данными, ее практически не используют для обработки данных. В основном она применяется при написании функций, чтобы проверить конкретное значение параметра или адекватность данных на входе (см. <a href="050-functional.html" class="quarto-xref"><span>Глава 8</span></a>).</p>
 </div>
 </div>
 </section>
@@ -520,9 +567,9 @@ div.csl-indent {
 <pre><code>for (переменная in последовательность) выражение</code></pre>
 <p>Например, переберем наш вектор <code>numbers</code> (тот самый, <code>-2:2</code>) и напечатаем каждое значение:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> numbers) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> numbers) {</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2
 [1] -1
@@ -534,7 +581,7 @@ div.csl-indent {
 <p>Обратите внимание: если мы хотим вывести в консоль результат операций внутри цикла, нужно эксплицитно использовать функцию <code>print()</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p>Теперь вернемся к нашей задаче — применить условную конструкцию к каждому значению вектора <code>numbers</code>, объединив конструкции <code>if</code>/<code>else if</code>/<code>else</code> и цикл <code>for</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> numbers) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> numbers) {</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (i <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Положительное число"</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (i <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
@@ -542,7 +589,7 @@ div.csl-indent {
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Ноль"</span>)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число"
 [1] "Отрицательное число"
@@ -553,10 +600,10 @@ div.csl-indent {
 </div>
 <p>Выглядит несколько монструозно, но это работает. Однако монструозность этой конструкции — не единственная проблема. Есть еще вопрос скорости: о циклах <code>for</code> в R часто говорят, что они медленные. На самом деле это верно лишь отчасти — чаще всего низкая скорость связана с тем, <em>как именно</em> написан цикл.</p>
 <p>Типичная ошибка — наращивать объект на каждой итерации. Для компьютера это «дорогая» операция: когда объект увеличивается, R обычно не может просто дописать значение в конец — он выделяет под увеличенный объект новый участок памяти и копирует туда все старые значения, а на следующей итерации повторяет всё заново<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Лучше заранее создать объект нужного размера и затем заполнять его, переписывая значения в уже выделенных ячейках.</p>
-<p>Здесь есть еще одна тонкость. До сих пор мы перебирали сами элементы вектора (<code>for (i in numbers)</code>). Но чтобы записывать результат в нужную позицию, нам нужны не значения, а их номера — индексы. Получить их помогает уже знакомая нам функция <code>seq_along()</code> (<a href="013-vector.html#sec-atomic"><span>Глава&nbsp;3.1</span></a>): она возвращает номера элементов вектора — для нашего <code>numbers</code> это числа от 1 до 5.</p>
+<p>Здесь есть еще одна тонкость. До сих пор мы перебирали сами элементы вектора (<code>for (i in numbers)</code>). Но чтобы записывать результат в нужную позицию, нам нужны не значения, а их номера — индексы. Получить их помогает уже знакомая нам функция <code>seq_along()</code> (<a href="013-vector.html#sec-atomic" class="quarto-xref"><span>Глава 3.1</span></a>): она возвращает номера элементов вектора — для нашего <code>numbers</code> это числа от 1 до 5.</p>
 <p>Вот так делать <strong>не надо</strong> — объект наращивается на каждой итерации:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>) <span class="co"># начинаем с пустого вектора</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">0</span>) <span class="co"># начинаем с пустого вектора</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(numbers)) {</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (numbers[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers_descriptions, <span class="st">"Положительное число"</span>)</span>
@@ -566,7 +613,7 @@ div.csl-indent {
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">c</span>(numbers_descriptions, <span class="st">"Ноль"</span>)</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>numbers_descriptions</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>numbers_descriptions</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
@@ -574,7 +621,7 @@ div.csl-indent {
 </div>
 <p>А вот так писать циклы правильно — объект сразу создается нужного размера:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(numbers)) <span class="co"># создаем строковый вектор такой же длины, как исходный</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>numbers_descriptions <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="fu">length</span>(numbers)) <span class="co"># создаем строковый вектор такой же длины, как исходный</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(numbers)) {</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (numbers[i] <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Положительное число"</span></span>
@@ -584,33 +631,33 @@ div.csl-indent {
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    numbers_descriptions[i] <span class="ot">&lt;-</span> <span class="st">"Ноль"</span></span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>numbers_descriptions</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>numbers_descriptions</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
 <p>На таких маленьких векторах разницы в скорости вы не заметите, но на объектах большего размера она будет ощутимой. При аккуратном обращении с циклами особых проблем со скоростью не будет — хотя векторизованные функции всё равно будут быстрее.</p>
-<p>И это приводит нас к главному: в R цикл <code>for</code> обычно вообще не нужен<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>! Чаще всего мы работаем с векторами и датафреймами — наборами относительно независимых наблюдений, и операции над ними могут выполняться независимо друг от друга. Скажем, чтобы перевести массу каждого испытуемого из фунтов в килограммы, цикл не нужен: формула для всех одна и та же, и достаточно применить ее ко всему вектору сразу (это и есть векторизация, см. <a href="013-vector.html#sec-vector_op"><span>Глава&nbsp;3.3</span></a>). Конечно, внутри это всё равно будет работать через циклы — но для многих базовых функций, написанных на более низкоуровневых языках вроде C и C++, эти циклы выполняются гораздо быстрее, чем циклы, написанные на R.</p>
+<p>И это приводит нас к главному: в R цикл <code>for</code> обычно вообще не нужен<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>! Чаще всего мы работаем с векторами и датафреймами — наборами относительно независимых наблюдений, и операции над ними могут выполняться независимо друг от друга. Скажем, чтобы перевести массу каждого испытуемого из фунтов в килограммы, цикл не нужен: формула для всех одна и та же, и достаточно применить ее ко всему вектору сразу (это и есть векторизация, см. <a href="013-vector.html#sec-vector_op" class="quarto-xref"><span>Глава 3.3</span></a>). Конечно, внутри это всё равно будет работать через циклы — но для многих базовых функций, написанных на более низкоуровневых языках вроде C и C++, эти циклы выполняются гораздо быстрее, чем циклы, написанные на R.</p>
 <blockquote class="blockquote">
 <p>Конечно, кто-то должен писать циклы <code>for</code>. Но это не обязательно должны быть вы.</p>
 <p>— <a href="https://jennybc.github.io/purrr-tutorial/">Дженни Брайан</a></p>
 </blockquote>
 <p>Даже когда расчет для одной строчки зависит от предыдущих, часто есть готовая векторизованная функция и на этот случай — например, <code>cumsum()</code> для накопительной суммы:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  1  3  6 10 15 21 28 36 45 55</code></pre>
 </div>
 </div>
-<p>Если же подходящей векторизованной функции нет, на помощь приходит семейство функций <code>apply()</code> (см. <a href="050-functional.html#sec-apply_f"><span>Глава&nbsp;8.6</span></a>).</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<p>Если же подходящей векторизованной функции нет, на помощь приходит семейство функций <code>apply()</code> (см. <a href="050-functional.html#sec-apply_f" class="quarto-xref"><span>Глава 8.6</span></a>).</p>
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> дело не только в скорости
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> дело не только в скорости
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -620,7 +667,7 @@ div.csl-indent {
 </section>
 <section id="sec-ifelse" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="sec-ifelse"><span class="header-section-number">7.3</span> Векторизованные условные конструкции: функции <code>ifelse()</code> и <code>dplyr::case_when()</code></h2>
-<p>Из-за того, что конструкция <em>if/else/else if</em> не векторизованная, она редко используется непосредственно в операциях с данными, обычно она используется при написании функций (<a href="050-functional.html#sec-create_fun"><span>Глава&nbsp;8.1</span></a>) и разработке пакетов.</p>
+<p>Из-за того, что конструкция <em>if/else/else if</em> не векторизованная, она редко используется непосредственно в операциях с данными, обычно она используется при написании функций (<a href="050-functional.html#sec-create_fun" class="quarto-xref"><span>Глава 8.1</span></a>) и разработке пакетов.</p>
 <p>Альтернативой сочетанию условных конструкций и циклов <code>for</code> является использование встроенной функции <code>ifelse()</code>. Функция <code>ifelse()</code> принимает три аргумента:</p>
 <ol type="1">
 <li><p><code>test =</code> — условие (т.е. просто логический вектор, состоящий из <code>TRUE</code> и <code>FALSE</code>),</p></li>
@@ -629,33 +676,33 @@ div.csl-indent {
 </ol>
 <p>На выходе получается вектор такой же длины, как и изначальный логический вектор (условие). Это очень похоже на <code>ЕСЛИ()</code> в <em>Microsoft Excel.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> иногда <code>ifelse()</code> излишен
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span><em>Полезное:</em> иногда <code>ifelse()</code> излишен
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Периодически я встречаю у студентов строчку вроде такой: <code>ifelse(условие, TRUE, FALSE)</code>. Эта конструкция избыточна, т.к. получается, что логический вектор из <code>TRUE</code> и <code>FALSE</code> превращается в абсолютно такой же вектор из <code>TRUE</code> и <code>FALSE</code> на тех же самых местах. Выходит, что ничего не меняется!</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> <code>NA</code> в <code>ifelse()</code> превращается в <code>NA</code>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> <code>NA</code> в <code>ifelse()</code> превращается в <code>NA</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -664,49 +711,49 @@ div.csl-indent {
 </div>
 <p>Пакеты <code>{dplyr}</code> и <code>{data.table}</code> предоставляют более быстрые и более строгие альтернативы для базовой функции <code>ifelse()</code> с аналогичным синтаксисом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">if_else</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">if_else</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>, <span class="st">"Отрицательное число или ноль"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число или ноль" "Отрицательное число или ноль"
 [3] "Отрицательное число или ноль" "Положительное число"         
 [5] "Положительное число"         </code></pre>
 </div>
 </div>
-<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. <a href="107-beyond_base_r.html"><span>Глава&nbsp;9</span></a>), то я советую пользоваться соответствующей функцией вместо базовой функции <code>ifelse()</code>.</p>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. <a href="107-beyond_base_r.html" class="quarto-xref"><span>Глава 9</span></a>), то я советую пользоваться соответствующей функцией вместо базовой функции <code>ifelse()</code>.</p>
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> возвращение <code>NA</code> может привести к ошибкам
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> возвращение <code>NA</code> может привести к ошибкам
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Обе функции будут избегать скрытого приведения типов (см. <a href="013-vector.html#sec-coercion"><span>Глава&nbsp;3.2</span></a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="013-vector.html#sec-na"><span>Глава&nbsp;3.8</span></a>).</p>
+<p>Обе функции будут избегать скрытого приведения типов (см. <a href="013-vector.html#sec-coercion" class="quarto-xref"><span>Глава 3.2</span></a>) и намеренно выдавать ошибку при использовании разных типов данных в параметрах <code>yes =</code> и <code>no =</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>. Помните, что <code>NA</code> по умолчанию — это логический тип данных, поэтому в этих функциях нужно использовать <code>NA</code> соответствующего типа <code>NA_character_</code>, <code>NA_integer_</code>, <code>NA_real_</code>, <code>NA_complex_</code> (см. <a href="013-vector.html#sec-na" class="quarto-xref"><span>Глава 3.8</span></a>).</p>
 </div>
 </div>
 <p>У <code>ifelse()</code> тоже есть недостаток: он не может включать в себя дополнительных условий по типу <code>else if</code>. В простых ситуациях можно вставлять <code>ifelse()</code> внутри <code>ifelse()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(numbers <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Положительное число"</span>,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(numbers <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ifelse</span>(numbers <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>, <span class="st">"Ноль"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
-<p>Но что если условий много? Бесконечные <code>ifelse()</code> внутри <code>ifelse()</code> — это громоздко и нечитаемо. Достаточно симпатичное решение есть в пакете <code>{dplyr}</code> — функция <code>case_when()</code>. В качестве аргументов она принимает <strong>формулы</strong> — специальный класс объектов R (см. <a href="016-complex_structures.html#sec-formula"><span>Глава&nbsp;4.6</span></a>), которые легко узнать по знаку тильды <code>~</code>:</p>
+<p>Но что если условий много? Бесконечные <code>ifelse()</code> внутри <code>ifelse()</code> — это громоздко и нечитаемо. Достаточно симпатичное решение есть в пакете <code>{dplyr}</code> — функция <code>case_when()</code>. В качестве аргументов она принимает <strong>формулы</strong> — специальный класс объектов R (см. <a href="016-complex_structures.html#sec-formula" class="quarto-xref"><span>Глава 4.6</span></a>), которые легко узнать по знаку тильды <code>~</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Положительное число"</span>,</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Отрицательное число"</span>,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Ноль"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
@@ -714,22 +761,22 @@ div.csl-indent {
 </div>
 <p>Функция <code>case_when()</code> работает по той же логике, что и <em>if/else/else if</em> конструкция: сначала идет проверка на первое условие (как первое <em>if</em> в конструкции <em>if/else/else if</em> ). Если проверка проходит (то есть в условии получается <code>TRUE</code>), то соответствующее значение возвращается, а остальные условия не проверяются. Если же первое условие не выполняется, то идет проверка на следующее условие (аналог <em>else if</em>). Если же и оно не выполняется, то идет проверка на следующее (следующее <em>else if</em>), пока проверка не пройдет до последнего условия. Можно поставить значение по умолчанию с помощью параметра <code>.default =</code>, которое будет возвращаться, если все проверки выдали <code>FALSE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">" "</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>, <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>weight_group <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
 <span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">~</span> <span class="st">"overweight"</span>, <span class="co"># "if"</span></span>
 <span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">~</span> <span class="st">"somewhat overweight"</span>, <span class="co"># "else if"</span></span>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"underweight"</span>, <span class="co"># next "else if"</span></span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"typical weight"</span> <span class="co"># final "else" </span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> не забывайте про запятые
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> не забывайте про запятые
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -738,30 +785,30 @@ div.csl-indent {
 </div>
 <p>Важный момент: если <code>ifelse()</code> возвращает <code>NA</code> на <code>NA</code> в условии, что обычно нас устраивает (у нас нет данных, что у нас на входе, следовательно, не знаем, что на выходе), то <code>case_when()</code> такого не делает. <code>NA</code> в условии считается как <code>FALSE</code>, поэтому нужно дополнительно обрабатывать условие для него. Чтобы на место <code>NA</code> поставить <code>NA</code>, нужно записать вот так:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>weight_group <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>weight_group <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">200</span> <span class="sc">~</span> <span class="st">"overweight"</span>, <span class="co"># "if"</span></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">~</span> <span class="st">"somewhat overweight"</span>, <span class="co"># "else if"</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  heroes<span class="sc">$</span>Weight <span class="sc">&lt;</span> <span class="dv">50</span> <span class="sc">~</span> <span class="st">"underweight"</span>, <span class="co"># next "else if"</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(heroes<span class="sc">$</span>Weight) <span class="sc">~</span> <span class="cn">NA</span>, <span class="co"># one more "else if", maps NA to NA</span></span>
 <span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"typical weight"</span> <span class="co"># final "else" </span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># final "else" </span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="co"># final "else" </span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>В <code>{data.table}</code> тоже есть свой (<a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">более быстрый</a>) аналог <code>case_when()</code> — функция <code>fcase()</code>. Синтаксис отличается только тем, что вместо формул используются простые запятые. То есть первый аргумент — условие, второй — значение, которое возвращается при верности первого аргумента, третий аргумент — условие, четвертый — возвращаемое значение при верности третьего аргумента и т.д.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fcase</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fcase</span>(</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">"Положительное число"</span>,</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="st">"Отрицательное число"</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Ноль"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  numbers <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Ноль"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Отрицательное число" "Отрицательное число" "Ноль"               
 [4] "Положительное число" "Положительное число"</code></pre>
 </div>
 </div>
-<p>Задача создания вектора или колонки по множественным условиям из другой колонки плавно перетекает в задачу объединения двух датафреймов по единому ключу, и такое решение может оказаться <a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">наиболее быстрым</a> (см. <a href="120-tidyverse_advanced.html#sec-tidy_join"><span>Глава&nbsp;11.1.2</span></a>).</p>
+<p>Задача создания вектора или колонки по множественным условиям из другой колонки плавно перетекает в задачу объединения двух датафреймов по единому ключу, и такое решение может оказаться <a href="https://themockup.blog/posts/2021-02-13-joins-vs-casewhen-speed-and-memory-tradeoffs/">наиболее быстрым</a> (см. <a href="120-tidyverse_advanced.html#sec-tidy_join" class="quarto-xref"><span>Глава 11.1.2</span></a>).</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-wickham16" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham16" class="csl-entry" role="listitem">
 Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em> (2-я изд.). O’Reilly Media. <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>
 </div>
 </div>
@@ -774,244 +821,426 @@ Wickham, H., Çetinkaya-Rundel, M., &amp; Grolemund, G. (2023). <em>R for Data S
 <li id="fn3"><p>Когда вы просто вводите команду в консоли, R неявно вызывает для результата функцию <code>print()</code> — поэтому значение и появляется на экране. Внутри циклов и функций такого автоматического вызова нет, так что <code>print()</code> приходится писать явно.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Эта классическая ошибка вынесена во «второй круг ада» в эссе Патрика Бёрнса <a href="https://www.burns-stat.com/pages/Tutor/R_inferno.pdf">«The R Inferno»</a> (Circle 2, «Growing Objects»).<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Циклы <code>while</code> и <code>repeat</code>, оставшиеся за пределами этой главы, в анализе данных встречаются еще реже, и всё сказанное относится к ним в той же мере.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>Эта идея раскроется полнее, когда мы дойдем до <em>tidyverse</em> и пайпов (<a href="110-tidyverse_basic.html"><span>Глава&nbsp;10</span></a>, <a href="110-tidyverse_basic.html#sec-pipe"><span>Глава&nbsp;10.4</span></a>).<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Эта идея раскроется полнее, когда мы дойдем до <em>tidyverse</em> и пайпов (<a href="110-tidyverse_basic.html" class="quarto-xref"><span>Глава 10</span></a>, <a href="110-tidyverse_basic.html#sec-pipe" class="quarto-xref"><span>Глава 10.4</span></a>).<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>В более свежих версиях пакета <code>{dplyr}</code> разработчики отказались от этой “строгости”, поэтому <code>NA</code> все-таки будут приводиться к нужному типу. Однако <code>data.table::fifelse()</code> остался строгим.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script>
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./030-import_data.html" class="pagination-link">
+      <a href="./030-import_data.html" class="pagination-link" aria-label="Импорт и экспорт данных">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./050-functional.html" class="pagination-link">
+      <a href="./050-functional.html" class="pagination-link" aria-label="Функциональное программирование в R">
         <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.208">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="И.С. Поздняков">
 
-<title>Анализ данных и статистика в R - 2&nbsp; Введение в R</title>
+<title>2&nbsp; Введение в R – Анализ данных и статистика в R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -17,9 +21,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +52,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -95,22 +71,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./013-vector.html" rel="next">
 <link href="./005-whole_r_intro.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -119,29 +101,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "дополнительный результат в этом документе",
     "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
     "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти"
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-whole_r_intro.html">Основы R и Rstudio</a></li><li class="breadcrumb-item"><a href="./010-intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a></li></ol></nav>
-      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-whole_r_intro.html">Основы R и Rstudio</a></li><li class="breadcrumb-item"><a href="./010-intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -150,23 +161,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -177,223 +188,256 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Поиск"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Основы R и Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./010-intro.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidyverse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Разведочный анализ и создание отчетов</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></a>
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Тестирование статистических гипотез</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></a>
+  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Задачник</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-install" id="toc-sec-install" class="nav-link active" data-scroll-target="#sec-install"><span class="toc-section-number">2.1</span>  Установка R и RStudio</a></li>
-  <li><a href="#sec-rstudio" id="toc-sec-rstudio" class="nav-link" data-scroll-target="#sec-rstudio"><span class="toc-section-number">2.2</span>  Знакомство с RStudio</a></li>
-  <li><a href="#sec-calc" id="toc-sec-calc" class="nav-link" data-scroll-target="#sec-calc"><span class="toc-section-number">2.3</span>  R как калькулятор</a></li>
-  <li><a href="#sec-func" id="toc-sec-func" class="nav-link" data-scroll-target="#sec-func"><span class="toc-section-number">2.4</span>  Функции</a></li>
-  <li><a href="#sec-google" id="toc-sec-google" class="nav-link" data-scroll-target="#sec-google"><span class="toc-section-number">2.5</span>  В любой непонятной ситуации — гуглите</a></li>
-  <li><a href="#sec-variables" id="toc-sec-variables" class="nav-link" data-scroll-target="#sec-variables"><span class="toc-section-number">2.6</span>  Переменные</a></li>
-  <li><a href="#sec-logic" id="toc-sec-logic" class="nav-link" data-scroll-target="#sec-logic"><span class="toc-section-number">2.7</span>  Логические операторы</a></li>
-  <li><a href="#sec-data_types" id="toc-sec-data_types" class="nav-link" data-scroll-target="#sec-data_types"><span class="toc-section-number">2.8</span>  Типы данных</a>
+  <li><a href="#sec-install" id="toc-sec-install" class="nav-link active" data-scroll-target="#sec-install"><span class="header-section-number">2.1</span> Установка R и RStudio</a></li>
+  <li><a href="#sec-rstudio" id="toc-sec-rstudio" class="nav-link" data-scroll-target="#sec-rstudio"><span class="header-section-number">2.2</span> Знакомство с RStudio</a></li>
+  <li><a href="#sec-calc" id="toc-sec-calc" class="nav-link" data-scroll-target="#sec-calc"><span class="header-section-number">2.3</span> R как калькулятор</a></li>
+  <li><a href="#sec-func" id="toc-sec-func" class="nav-link" data-scroll-target="#sec-func"><span class="header-section-number">2.4</span> Функции</a></li>
+  <li><a href="#sec-google" id="toc-sec-google" class="nav-link" data-scroll-target="#sec-google"><span class="header-section-number">2.5</span> В любой непонятной ситуации — гуглите</a></li>
+  <li><a href="#sec-variables" id="toc-sec-variables" class="nav-link" data-scroll-target="#sec-variables"><span class="header-section-number">2.6</span> Переменные</a></li>
+  <li><a href="#sec-logic" id="toc-sec-logic" class="nav-link" data-scroll-target="#sec-logic"><span class="header-section-number">2.7</span> Логические операторы</a></li>
+  <li><a href="#sec-data_types" id="toc-sec-data_types" class="nav-link" data-scroll-target="#sec-data_types"><span class="header-section-number">2.8</span> Типы данных</a>
   <ul class="collapse">
-  <li><a href="#sec-type_numeric" id="toc-sec-type_numeric" class="nav-link" data-scroll-target="#sec-type_numeric"><span class="toc-section-number">2.8.1</span>  Числовые типы</a></li>
-  <li><a href="#sec-type_character" id="toc-sec-type_character" class="nav-link" data-scroll-target="#sec-type_character"><span class="toc-section-number">2.8.2</span>  Строковый тип</a></li>
-  <li><a href="#sec-type_logical" id="toc-sec-type_logical" class="nav-link" data-scroll-target="#sec-type_logical"><span class="toc-section-number">2.8.3</span>  Логический тип</a></li>
+  <li><a href="#sec-type_numeric" id="toc-sec-type_numeric" class="nav-link" data-scroll-target="#sec-type_numeric"><span class="header-section-number">2.8.1</span> Числовые типы</a></li>
+  <li><a href="#sec-type_character" id="toc-sec-type_character" class="nav-link" data-scroll-target="#sec-type_character"><span class="header-section-number">2.8.2</span> Строковый тип</a></li>
+  <li><a href="#sec-type_logical" id="toc-sec-type_logical" class="nav-link" data-scroll-target="#sec-type_logical"><span class="header-section-number">2.8.3</span> Логический тип</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -401,7 +445,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./005-whole_r_intro.html">Основы R и Rstudio</a></li><li class="breadcrumb-item"><a href="./010-intro.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-intro" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></span></h1>
 </div>
@@ -413,7 +457,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Автор</div>
     <div class="quarto-title-meta-contents">
-             <p>И.С. Поздняков <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>И.С. Поздняков <a href="mailto:bucherr@yandex.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -422,7 +466,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
+
 </header>
+
 
 <section id="sec-install" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-install"><span class="header-section-number">2.1</span> Установка R и RStudio</h2>
@@ -439,7 +485,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>sudo apt-get install r-cran-base</code></pre>
 <p>В этой книге используется следующая версия R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()<span class="sc">$</span>R.version<span class="sc">$</span>version.string</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()<span class="sc">$</span>R.version<span class="sc">$</span>version.string</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "R version 4.6.0 (2026-04-24)"</code></pre>
 </div>
@@ -454,7 +500,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Первый и вполне закономерный вопрос: зачем мы ставили R и отдельно еще какой-то <em>RStudio</em>? Если опустить незначительные детали, то R — это сам язык программирования, а <em>RStudio</em> — это <strong>интегрированная среда разработки</strong> <em>(integrated development environment, IDE)</em>, которая позволяет очень удобно в этом языке работать.</p>
 <blockquote class="blockquote">
-<p><em>RStudio</em> — это не единственная среда для R, но, определенно, самая удобная на сегодняшний день. Почти все пользуются именно ей и не стоит тратить время на поиск чего-то более удобного и лучшего. Если же вы привыкли работать с <em>Jupyter Notebook</em>, то в R обычно вместо него используются великолепный <em>R Markdown</em> или еще более великолепный <em>Quarto</em> — с помощью последнего и написан этот онлайн-учебник, кстати говоря. И с <em>R Markdown</em> и <em>Quarto</em> мы тоже будем разбираться (см. <a href="250-rmarkdown.html"><span>Глава&nbsp;16</span></a>)!</p>
+<p><em>RStudio</em> — это не единственная среда для R, но, определенно, самая удобная на сегодняшний день. Почти все пользуются именно ей и не стоит тратить время на поиск чего-то более удобного и лучшего. Если же вы привыкли работать с <em>Jupyter Notebook</em>, то в R обычно вместо него используются великолепный <em>R Markdown</em> или еще более великолепный <em>Quarto</em> — с помощью последнего и написан этот онлайн-учебник, кстати говоря. И с <em>R Markdown</em> и <em>Quarto</em> мы тоже будем разбираться (см. <a href="250-rmarkdown.html" class="quarto-xref"><span>Глава 16</span></a>)!</p>
 </blockquote>
 </section>
 <section id="sec-rstudio" class="level2" data-number="2.2">
@@ -464,7 +510,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>В первую очередь нас интересуют два окна: <strong>1 - Code Editor</strong> (окно для написания скриптов)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> и <strong>2 - R Console</strong> (консоль). Здесь можно писать команды и запускать их. При этом работа в консоли и работа со скриптом немного различается.</p>
 <p>В <strong>2 - R Console</strong> вы пишете команду и запускаете ее нажатием <code>Enter</code>. Иногда после запуска команды появляется какой-то результат. Если нажимать стрелку вверх на клавиатуре, то можно выводить в консоль предыдущие команды. Это очень удобно для запуска предыдущих команд с небольшими изменениями.</p>
 <p>В <strong>1 - Code Editor</strong> для запуска команды вы должны выделить ее и нажать <code>Ctrl</code> + <code>Enter</code> (<code>Cmd</code> + <code>Enter</code> на macOS). Если не нажать эту комбинацию клавиш, то команда не запустится. Можно выделить и запустить сразу несколько команд или даже все команды скрипта. Все команды скрипта можно выделить с помощью сочетания клавиш <code>Ctrl</code> + <code>A</code> на Windows и Linux, <code>Cmd</code> + <code>A</code> на macOS <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Как только вы запустите команду (или несколько команд), соответствующие строчки кода появятся в <strong>2 - R Console</strong>, как будто бы вы запускали их прямо там.</p>
-<p>Обычно в консоли удобно что-то писать, чтобы быстро что-то посчитать. Скрипты удобнее при работе с длинными командами и как способ сохранения написанного кода для дальнейшей работы. Для сохранения скрипта нажмите <code>File - Save As...</code>. R-скрипты сохраняются с расширением <strong><em>.R</em></strong>, но по своей сути это просто текстовые файлы, которые можно открыть и модифицировать в любом текстовом редакторе а-ля “Блокнот”.</p>
+<p>Обычно в консоли удобно что-то писать, чтобы быстро что-то посчитать. Скрипты удобнее при работе с длинными командами и как способ сохранения написанного кода для дальнейшей работы. Для сохранения скрипта нажмите <code>File - Save As...</code>. R-скрипты сохраняются с расширением <strong><em>.R</em></strong>, но по своей сути это просто текстовые файлы, которые можно открыть и модифицировать в любом текстовом редакторе а-ля <em>Блокнот</em>.</p>
 <p><strong>3 - Workspace and History</strong> — здесь можно увидеть переменные. Это поле будет автоматически обновляться по мере того, как вы будете запускать строчки кода и создавать новые переменные. Еще там есть вкладка с историей всех команд, которые были запущены.</p>
 <p><strong>4 - Plots and files</strong>. Здесь есть очень много всего. Во-первых, небольшой файловый менеджер, во-вторых, там будут появляться графики, когда вы будете их рисовать. Там же есть вкладка с вашими пакетами (<code>Packages</code>) и <code>Help</code> по функциям. Но об этом потом.</p>
 </section>
@@ -474,42 +520,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Давайте начнем с самого простого и попробуем использовать R как калькулятор с помощью арифметических операторов <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code> (степень), <code>()</code> и т.д.</p>
 <p>Просто запускайте в консоли пока не надоест:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">40</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">40</span> <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 42</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">-</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">-</span> <span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">6</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">*</span> <span class="dv">6</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">99</span> <span class="sc">/</span> <span class="dv">9</span> <span class="co"># деление</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">99</span> <span class="sc">/</span> <span class="dv">9</span> <span class="co"># деление</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 11</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">3</span> <span class="co"># степень, 2 ** 3 тоже работает</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">3</span> <span class="co"># степень, 2 ** 3 тоже работает</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">%/%</span> <span class="dv">3</span> <span class="co"># целочисленное деление</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">%/%</span> <span class="dv">3</span> <span class="co"># целочисленное деление</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">%%</span> <span class="dv">3</span> <span class="co"># остаток от деления</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> <span class="sc">%%</span> <span class="dv">3</span> <span class="co"># остаток от деления</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Время мемов
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Осторожность</span>Время мемов
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -518,13 +564,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Ничего сложного, верно? Вводим выражение и получаем результат.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div id="co-comment" class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> комментарии
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span><em>Полезное:</em> комментарии
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -536,7 +582,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Согласно данным навязчивых рекламных баннеров в интернете, только 14% россиян могут справиться с этим примером:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6</code></pre>
 </div>
@@ -544,7 +590,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>На самом деле, разные языки программирования ведут себя <a href="https://www.quora.com/Do-all-computer-languages-with-operator-precedence-use-the-same-operator-precedence">по-разному</a> в таких ситуациях, поэтому ответ 6 (сначала умножаем, потом складываем) не так очевиден.</p>
 <p>Порядок выполнения арифметических операций (т.е. <strong>приоритет операторов</strong>; <em>operator precedence</em>) в R как в математике, так что не забывайте про скобочки.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(<span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
@@ -555,24 +601,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2.4" class="anchored" data-anchor-id="sec-func"><span class="header-section-number">2.4</span> Функции</h2>
 <p>Давайте теперь извлечем корень из какого-нибудь числа. В принципе, тем, кто помнит школьный курс математики, возведения в степень вполне достаточно:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">^</span> <span class="fl">0.5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">^</span> <span class="fl">0.5</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> детали синтаксиса
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> детали синтаксиса
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Разделитель дробной части — точка, а не запятая. Если вы напишете то же самое с запятой, то получите ошибку:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">^</span> <span class="dv">0</span>,<span class="dv">5</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span> <span class="sc">^</span> <span class="dv">0</span>,<span class="dv">5</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in parse(text = input): &lt;text&gt;:1:7: unexpected ','
 1: 16 ^ 0,
@@ -585,24 +631,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Ну а если нет, то можете воспользоваться специальной <strong>функцией</strong>: это обычно какие-то буквенные символы с круглыми скобками сразу после названия функции. Мы подаем на вход (внутрь скобочек) какие-то данные, внутри этих функций происходят какие-то вычисления, которые выдает в ответ какие-то другие данные (или же функция записывает файл, рисует график и т.д.).</p>
 <p>Вот, например, функция для корня:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">16</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-captioned">
+<div class="callout callout-style-simple callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Осторожно:</em> R — язык с чувствительностью к регистру
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> R — язык с чувствительностью к регистру
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>R — <strong>язык с чувствительностью к регистру</strong> <em>(case-sensitive language)</em>, т.е. регистр важен. <code>SQRT(16)</code> не будет работать:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SQRT</span>(<span class="dv">16</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SQRT</span>(<span class="dv">16</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `SQRT()`:
 ! could not find function "SQRT"</code></pre>
@@ -612,7 +658,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>А вот так выглядит функция логарифма:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.079442</code></pre>
 </div>
@@ -629,18 +675,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Только наша функция считает все как-то не так.</p>
 <p>Чтобы понять, что происходит, нам нужно залезть в документацию по этой функции:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>?log</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>?log</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Справа внизу в RStudio появится вот такое окно, в котором можно прочитать <strong>документацию</strong> <em>(documentation)</em> по выбранной функции:</p>
 <p><img src="images/010-intro_screen_use_help.png" class="img-fluid" alt="Панель Help в RStudio с документацией функции log: раздел «Logarithms and Exponentials»" width="400"></p>
 <p>Другой способ вызвать документацию по функции — выделить название функции и нажать <code>F1</code>.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> Документация в R
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span><em>Полезное:</em> Документация в R
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -648,13 +694,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>В верхней части документации (<em>Usage</em>) функция прописана со всеми используемыми аргументами (arguments). Если через знак <code>=</code> для этих аргументов что-то прописано, то это означает, что эти аргументы имеют значения по умолчанию.</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> параметр, аргумент, формальный и фактический аргумент
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> параметр, аргумент, формальный и фактический аргумент
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -665,71 +711,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Действительно, у функции <code>log()</code> есть еще параметр <code>base =</code>. По умолчанию он равен числу Эйлера (2.7182818…), т.е. функция считает натуральный логарифм. В большинстве функций R есть какой-то основной параметр — данные в том или ином формате, а есть и дополнительные параметры, которые можно прописывать вручную, если значения по умолчанию вас не устраивают. Обычно эти дополнительные параметры задают то, как именно функция работает.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">x =</span> <span class="dv">8</span>, <span class="at">base =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>…или просто (если вы уверены в порядке переменных):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="dv">2</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Более того, вы можете использовать результат выполнения одних функций в качестве аргумента для других:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="fu">sqrt</span>(<span class="dv">4</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">8</span>, <span class="fu">sqrt</span>(<span class="dv">4</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Если эксплицитно писать имена аргументов, то их порядок в функции не важен:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">base =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>А еще можно писать имена аргументов не полностью, если они не совпадают с другими:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">b =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="at">b =</span> <span class="dv">2</span>, <span class="at">x =</span> <span class="dv">8</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p>Мы еще много раз будем возвращаться к функциям. Вообще, функции — это одна из важнейших штук в R (примерно так же как и в <em>Python</em>). Мы будем создавать свои функции, использовать функции как аргументы для функций и многое-многое другое. В R очень крутые возможности работы с функциями. Поэтому подружитесь с функциями, они клевые.</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<p>Мы еще много раз будем возвращаться к функциям. Вообще, функции — это одна из важнейших штук в R (примерно так же как и в Python). Мы будем создавать свои функции, использовать функции как аргументы для функций и многое-многое другое. В R очень крутые возможности работы с функциями. Поэтому подружитесь с функциями, они клевые.</p>
+<div id="co_adv_f_as_op" class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> операторы — это тоже функции
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> операторы — это тоже функции
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Арифметические знаки, которые мы использовали: <code>+</code>,<code>-</code>,<code>/</code>,<code>^</code> и т.д. называются <strong>операторами</strong> и на самом деле тоже функции:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">+</span><span class="st">`</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7</code></pre>
 </div>
 </div>
-<p>Это не очень читаемая запись, конечно, поэтому использовать так обычно не рекомендуется: мы хотим, чтобы код был максимально понятным. Но ведь любопытно, правда? Более того, в R почти всё, что происходит, — это вызов функции (подробнее — <a href="050-functional.html#sec-functions_objects"><span>Глава&nbsp;8.4</span></a>).</p>
+<p>Это не очень читаемая запись, конечно, поэтому использовать так обычно не рекомендуется: мы хотим, чтобы код был максимально понятным. Но ведь любопытно, правда? Более того, в R почти всё, что происходит, — это вызов функции (подробнее — <a href="050-functional.html#sec-functions_objects" class="quarto-xref"><span>Глава 8.4</span></a>).</p>
 </div>
 </div>
 </section>
 <section id="sec-google" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="sec-google"><span class="header-section-number">2.5</span> В любой непонятной ситуации — гуглите</h2>
 <p>Если вдруг вы не знаете, что искать в хэлпе, или хэлпа попросту недостаточно, то… гуглите!</p>
-<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Время мемов
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Осторожность</span>Время мемов
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -737,13 +783,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Нет ничего постыдного в том, чтобы гуглить решения проблем. Это абсолютно нормально. Используйте силу интернета во благо и да помогут вам <a href="https://stackoverflow.com"><em>Stackoverflow</em></a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> и бесчисленные R-туториалы!</p>
-<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Время мемов
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Осторожность</span>Время мемов
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -758,13 +804,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Главное, помните: загуглить работающий ответ всегда недостаточно. Надо понять, как и почему решение работает. Иначе что-то обязательно пойдет не так.</p>
 <p>Кроме того, правильно загуглить проблему — не так уж и просто. Это отдельное искусство, которое необходимо освоить любому, кто занимается программированием: умение быстро находить ответ на вопрос в интернете. Это не шутка!</p>
-<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Время мемов
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Осторожность</span>Время мемов
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -780,22 +826,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2.6" class="anchored" data-anchor-id="sec-variables"><span class="header-section-number">2.6</span> Переменные</h2>
 <p>Важная штука в программировании на практически любом языке — возможность сохранять значения в <strong>переменных</strong> <em>(variables)</em>. В R это обычно делается с помощью вот этих символов: <code>&lt;-</code> (но можно использовать и обычное <code>=</code>, хотя это не очень принято). Для этого есть удобное сочетание клавиш: нажмите одновременно <code>Alt</code> + <code>-</code> (или <code>option</code> + <code>-</code> в macOS).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> присвоение и вывод в консоль
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span><em>Полезное:</em> присвоение и вывод в консоль
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Заметьте, при присвоении результат вычисления не выводится в консоль! Если опустить детали, то обычно результат выполнения команды либо выводится в консоль (и не сохраняется), либо записывается в переменную (но тогда не показывается в консоли).</p>
 <p>Чтобы вывести в консоль содержание существующей переменной, просто введите ее название:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -804,13 +850,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Справа от <code>&lt;-</code> находится значение, которое вы хотите сохранить, или же какое-то выражение, результат которого вы хотите сохранить в эту переменную<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>:</p>
 <p>Слева от <code>&lt;-</code> находится название будущей переменной. Имена переменных могут быть самыми разными.</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> синтаксически валидные имена для переменных
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> синтаксически валидные имена для переменных
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -819,22 +865,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Можно: - <code>new_variable</code> - <code>.new.variable</code> - <code>var_2</code></p>
 <p>На самом деле, можно создавать переменные с невалидными именами. Такие названия нужно обрамлять бэктиками (`):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">1 СЛОВНО ...</span><span class="st">`</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
 </div>
-<p>Это же относится и к другим именам в R, например, к названиям колонок датафрейма (см. <a href="016-complex_structures.html#sec-df"><span>Глава&nbsp;4.4</span></a>), но таких имен лучше, конечно, избегать.</p>
+<p>Это же относится и к другим именам в R, например, к названиям колонок датафрейма (см. <a href="016-complex_structures.html#sec-df" class="quarto-xref"><span>Глава 4.4</span></a>), но таких имен лучше, конечно, избегать.</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-captioned">
+<div class="callout callout-style-simple callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Полезное:</em> понятные имена переменных
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span><em>Полезное:</em> понятные имена переменных
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -845,25 +891,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="images/010-intro_env.png" class="img-fluid" alt="Вкладка Environment в RStudio с переменной a, равной 2"></p>
 <p>Теперь можно использовать переменные в функциях и просто вычислениях:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">^</span> a <span class="sc">+</span> a <span class="sc">*</span> a</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">^</span> a <span class="sc">+</span> a <span class="sc">*</span> a</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(b, a)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(b, a)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <p>Удалять переменные можно с помощью функции <code>rm()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> a <span class="sc">^</span> b</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>e</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> a <span class="sc">^</span> b</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>e</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 256</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(e)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>e <span class="co"># переменной больше нет, возвращает ошибку</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(e)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>e <span class="co"># переменной больше нет, возвращает ошибку</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error:
 ! object 'e' not found</code></pre>
@@ -874,26 +920,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2.7" class="anchored" data-anchor-id="sec-logic"><span class="header-section-number">2.7</span> Логические операторы</h2>
 <p>Вы можете сравнивать разные переменные:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Заметьте, что сравнивая две переменные мы используем два знака равно <code>==</code>, а не один <code>=</code>. Иначе это будет означать присвоение.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> b</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> b</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Время мемов
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Осторожность</span>Время мемов
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -904,14 +950,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Иногда нам нужно проверить на <strong>не</strong>равенство:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">==</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">!=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">!=</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -919,19 +965,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Восклицательный знак в программировании вообще и в R в частности стандартно означает отрицание.</p>
 <p>Еще мы можем сравнивать на больше/меньше:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;=</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;=</span> b</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&lt;=</span> b</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -946,59 +992,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>До этого момента мы работали только с <strong>числами</strong> <em>(numeric)</em>. На самом деле, в R три типа <em>numeric</em>: <strong>integer</strong> (целые), <strong>double</strong> (дробные), <strong>complex</strong> (комплексные числа)<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. R сам будет конвертировать числа в нужный числовой тип при необходимости, поэтому этим можно не заморачиваться за исключением редких случаев.</p>
 <p>Название <em>numeric</em> немного запутанное: оно обозначает как числовые типы в целом, так и тип <em>double</em> в частности — функция <code>is.numeric()</code> возвращает <code>TRUE</code> для значений типа и <code>double</code>, и <code>integer</code>. Подробнее о числовых типах можно прочитать в книге <a href="https://adv-r.hadley.nz/vectors-chap.html#numeric">Advanced R</a>.</p>
 <p>Если же все-таки нужно задать конкретный тип числа эксплицитно, то можно воспользоваться функциями <code>as.integer()</code>, <code>as.double()</code> и <code>as.complex()</code>.</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> числа не то, чем кажутся
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> числа не то, чем кажутся
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Если число выглядит как целое, еще не факт, что это integer. Внутри оно может храниться как дробное, но, как я уже написал, это обычно не так важно. Но если очень нужно сделать именно integer, при создании числа можно поставить в конце <code>L</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(<span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(<span class="dv">5</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(5L)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.integer</span>(<span class="dv">5</span>L)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> ограничения дробных чисел
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> ограничения дробных чисел
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Про <em>double</em> есть еще один маленький секрет. Дело в том, что дробные числа хранятся в R как <a href="https://ru.wikipedia.org/wiki/Число_двойной_точности">числа с плавающей запятой двойной точности</a> (отсюда и название — <em>“double”</em>, т.е. <em>“double precision”</em>). Да-да, компьютеры неточные! Дробные числа в компьютере могут быть записаны только с определенной степенью точности, поэтому иногда встречаются вот такие вот ситуации:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Казалось бы, с обеих сторон — 2, почему же тогда <code>FALSE</code>? Дело в том, что в обоих случаях это дробное число, которое не может равняться ровно двум. Внутри это не два, а что-то вроде 2.0000….001 или 1.9999…999, число записано как степени двойки и отображено в десятичной системе. R не показывает все доступные цифры дробной части ради удобства, поэтому показывает округление, и мы видим просто число 2.</p>
 <p>Поэтому при сравнении двух чисел происходит не сравнение их разницы с чистым круглым нулем, а сопоставление с очень маленьким числом — <strong>машинной ошибкой</strong> или <strong>машинным эпсилоном</strong> <em>(machine epsilon)</em>. Если разница между двумя дробными числами меньше этого эпсилона, то числа считаются равными. Если выходят за пределы этой ошибки, то нет. Размер машинного эпсилона можно посмотреть с помощью <code>.Machine$double.eps</code>.</p>
-<p>Обычно это все работает хорошо, но некоторые операции “выпрыгивают” за рамки этой ошибки, отсюда и такое “странное” поведение, которое иногда может возникать при сравнении двух чисел. Если хотите углубиться в этот вопрос, то можете почитать <a href="https://stackoverflow.com/questions/9508518/why-are-these-numbers-not-equal?noredirect=1&amp;lq=1">в этом обсуждении на StackOverflow</a>.</p>
+<p>Обычно это все работает хорошо, но некоторые операции «выпрыгивают» за рамки этой ошибки, отсюда и такое «странное» поведение, которое иногда может возникать при сравнении двух чисел. Если хотите углубиться в этот вопрос, то можете почитать <a href="https://stackoverflow.com/questions/9508518/why-are-these-numbers-not-equal?noredirect=1&amp;lq=1">в этом обсуждении на StackOverflow</a>.</p>
 <p>Это довольно стандартная ситуация, характерная не только для R. Чтобы ее избежать, можно воспользоваться функцией <code>all.equal()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>, <span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>) <span class="sc">^</span> <span class="dv">2</span>, <span class="dv">2</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Еще один пример необычного поведения дробных чисел, связанный с их “неточностью”, можно наблюдать в ситуациях, где вы ожидаете ноль, а получаете что-то такое:</p>
+<p>Еще один пример необычного поведения дробных чисел, связанный с их «неточностью», можно наблюдать в ситуациях, где вы ожидаете ноль, а получаете что-то такое:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.224647e-16</code></pre>
 </div>
@@ -1008,22 +1054,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Если перед нами очень маленькое число, то вместо того, чтобы писать многочисленные нули, можно записать его как <span class="math inline">\(m\times 10^{n}\)</span> , где <span class="math inline">\(m\)</span> — число от 1 до 10, а <span class="math inline">\(n\)</span> — это отрицательная степень десяти: <span class="math inline">\(10^{-1} = 0.1\)</span>, <span class="math inline">\(10^{-2} = 0.01\)</span>, <span class="math inline">\(10^{-3} = 0.001\)</span>, … , <span class="math inline">\(10^{-16} = 0.0000000000000001\)</span>.</p>
 <p><code>e-16</code> в конце числа — это и есть $10^{-16}$, а <code>1.224647</code> — это множитель <span class="math inline">\(m\)</span>, на который полученное число с очень большим количеством нулей умножается (точнее, только его первые несколько цифр). Получается, что этот множитель не сильно меняет погоды, поэтому когда видите число с <code>e-</code>, нужно смотреть в первую очередь именно на степень. Вот так это число выглядит в родной для нас десятичной записи:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fu">sin</span>(pi), <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="fu">sin</span>(pi), <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "0.0000000000000001224647"</code></pre>
 </div>
 </div>
-<p>Эта маленькая дробная часть возникла из-за этой “неточности” хранения дробных чисел и самого числа <span class="math inline">\(\pi\)</span> в компьютере, которую мы обсуждали выше.</p>
+<p>Эта маленькая дробная часть возникла из-за этой «неточности» хранения дробных чисел и самого числа <span class="math inline">\(\pi\)</span> в компьютере, которую мы обсуждали выше.</p>
 <p>Аналогично маленьким числам, R использует экспоненциальную запись, когда нужно напечатать очень большое число:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.099512e+12</code></pre>
 </div>
 </div>
 <p>Обратите внимание, что здесь у нас <code>e+12</code>, а не <code>e-12</code>, что означает $10^{12}$, а не $10^{-12}$. То есть перед нами теперь <span class="math inline">\(1.099512\times 10^{12}\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(<span class="dv">2</span> <span class="sc">^</span> <span class="dv">40</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "1099511627776"</code></pre>
 </div>
@@ -1036,19 +1082,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="2.8.2" class="anchored" data-anchor-id="sec-type_character"><span class="header-section-number">2.8.2</span> Строковый тип</h3>
 <p><strong>Строковые</strong> <em>(character)</em> данные — это набор букв, цифр и символов. Чтобы создать строковую переменную, нужные знаки обособляются кавычками.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="st">"Всем привет!"</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="st">"Всем привет!"</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>s</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Всем привет!"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(s)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
-<p>Как и в <em>Python</em>, можно использовать как <code>"</code>, так и <code>'</code> (что удобно, когда строчка внутри уже содержит какие-то кавычки).</p>
+<p>Как и в Python, можно использовать как <code>"</code>, так и <code>'</code> (что удобно, когда строчка внутри уже содержит какие-то кавычки).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="st">"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn"</code></pre>
 </div>
@@ -1056,25 +1102,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Главное — открывать и закрывать кавычки одинаковыми кавычками (<code>"</code> или <code>'</code>).</p>
 <p>Чтобы соединить несколько строковых переменных вместе, можно воспользоваться функцией <code>paste()</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I love R"</code></pre>
 </div>
 </div>
 <p>По умолчанию функция <code>paste()</code> соединяет строки пробелами, но разделитель можно настроить параметром <code>sep =</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">"_&lt;3_"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">"_&lt;3_"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "I_&lt;3_love_&lt;3_R"</code></pre>
 </div>
 </div>
-<p>Чтобы соединять строки, так сказать, “без ничего”, нужно поставить <code>sep = ""</code> или же воспользоваться функцией <code>paste0()</code> специально для этого конкретного случая:</p>
+<p>Чтобы соединять строки, так сказать, «без ничего», нужно поставить <code>sep = ""</code> или же воспользоваться функцией <code>paste0()</code> специально для этого конкретного случая:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "IloveR"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="st">"I"</span>, <span class="st">"love"</span>, <span class="st">"R"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "IloveR"</code></pre>
 </div>
@@ -1084,60 +1130,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 data-number="2.8.3" class="anchored" data-anchor-id="sec-type_logical"><span class="header-section-number">2.8.3</span> Логический тип</h3>
 <p><strong>Логические</strong> <em>(logical)</em> данные — это просто <code>TRUE</code> или <code>FALSE</code>. То же самое, что и <em>boolean</em> тип в других языках программирования</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> <span class="cn">TRUE</span></span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
 <span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>f1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> <code>T</code> и <code>F</code>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> <code>T</code> и <code>F</code>
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Вообще, можно еще писать <code>T</code> и <code>F</code> (но не <code>True</code> и <code>False</code>!)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> T</span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> F</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">&lt;-</span> T</span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> F</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Это плохая практика: R защищает от перезаписи переменные <code>TRUE</code> и <code>FALSE</code>, но не защищает от этого <code>T</code> и <code>F</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span> <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `TRUE &lt;- FALSE`:
 ! invalid (do_set) left-hand side to assignment</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="cn">TRUE</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
-<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>T</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="cn">FALSE</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>T</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Теперь удалим эту переменную <code>T</code> от греха подальше иначе все перестанет работать при ее использовании:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(T)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>Мы уже встречались с логическими значениями при сравнении двух числовых переменных. Теперь вы можете догадаться, что результаты сравнения, например, числовых или строковых переменных, можно тоже сохранять в переменные!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> a <span class="sc">==</span> b</span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>comparison</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> a <span class="sc">==</span> b</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -1145,65 +1191,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Это нам очень понадобится, когда мы будем работать с реальными данными: нам нужно будет постоянно вытаскивать какие-то данные из датасета, что как раз и построено на игре со сравнением переменных.</p>
 <p>Чтобы этим хорошо уметь пользоваться, нам нужно еще освоить как работать с логическими операторами. Про один мы немного уже говорили — это логическое НЕ (<code>!</code>). <code>!</code> превращает <code>TRUE</code> в <code>FALSE</code>, а <code>FALSE</code> в <code>TRUE</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!!</span>t1 <span class="co"># Двойное отрицание!</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="sc">!!</span>t1 <span class="co"># Двойное отрицание!</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <p>Еще есть логическое И (выдаст <code>TRUE</code> только в том случае если обе переменные <code>TRUE</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">&amp;</span> f1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">&amp;</span> f1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>А еще логическое ИЛИ (выдаст <code>TRUE</code> в случае если хотя бы одна из переменных <code>TRUE</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="sc">|</span> f1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> t1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> t1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> f1</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="sc">|</span> f1</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>Обратите внимание: <code>t1 | t1</code>, то есть когда с обеих сторон <code>TRUE</code>, тоже возвращает <code>TRUE</code>!</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> строгое ЛИБО
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> строгое ЛИБО
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1231,237 +1277,419 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script>
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./005-whole_r_intro.html" class="pagination-link">
+      <a href="./005-whole_r_intro.html" class="pagination-link" aria-label="Основы R и Rstudio">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Основы R и Rstudio</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./013-vector.html" class="pagination-link">
+      <a href="./013-vector.html" class="pagination-link" aria-label="Вектор">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

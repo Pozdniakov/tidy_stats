@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.208">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="И.С. Поздняков">
 
-<title>Анализ данных и статистика в R - 22&nbsp; Дисперсионный анализ (ANOVA)</title>
+<title>22&nbsp; Дисперсионный анализ (ANOVA) – Анализ данных и статистика в R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -17,9 +21,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +52,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -95,22 +71,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <meta name="quarto:offset" content="./">
 <link href="./360-glm.html" rel="next">
 <link href="./340-lm.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -119,29 +101,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "дополнительный результат в этом документе",
     "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
     "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти"
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./350-anova.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a></li></ol></nav>
-      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./350-anova.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -150,23 +161,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -177,233 +188,266 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Поиск"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Основы R и Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidyverse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Разведочный анализ и создание отчетов</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></a>
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Тестирование статистических гипотез</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></a>
+  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./350-anova.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Задачник</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-aov" id="toc-sec-aov" class="nav-link active" data-scroll-target="#sec-aov"><span class="toc-section-number">22.0.1</span>  Функция aov()</a></li>
-  <li><a href="#sec-anova_nhst" id="toc-sec-anova_nhst" class="nav-link" data-scroll-target="#sec-anova_nhst"><span class="toc-section-number">22.1</span>  Тестирование значимости нулевой гипотезы в ANOVA.</a></li>
-  <li><a href="#sec-anova_posthoc" id="toc-sec-anova_posthoc" class="nav-link" data-scroll-target="#sec-anova_posthoc"><span class="toc-section-number">22.2</span>  Post-hoc тесты</a></li>
-  <li><a href="#sec-aov_as_lm" id="toc-sec-aov_as_lm" class="nav-link" data-scroll-target="#sec-aov_as_lm"><span class="toc-section-number">22.3</span>  ANOVA и т-тест как частные случаи линейной регрессии</a></li>
-  <li><a href="#sec-dummy" id="toc-sec-dummy" class="nav-link" data-scroll-target="#sec-dummy"><span class="toc-section-number">22.4</span>  Dummy coding</a></li>
-  <li><a href="#sec-aova" id="toc-sec-aova" class="nav-link" data-scroll-target="#sec-aova"><span class="toc-section-number">22.5</span>  Допущения ANOVA</a></li>
-  <li><a href="#sec-fact_aov" id="toc-sec-fact_aov" class="nav-link" data-scroll-target="#sec-fact_aov"><span class="toc-section-number">22.6</span>  Многофакторный дисперсионный анализ (Factorial ANOVA)</a></li>
-  <li><a href="#sec-rm_aov" id="toc-sec-rm_aov" class="nav-link" data-scroll-target="#sec-rm_aov"><span class="toc-section-number">22.7</span>  Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</a></li>
-  <li><a href="#sec-mixed_aov" id="toc-sec-mixed_aov" class="nav-link" data-scroll-target="#sec-mixed_aov"><span class="toc-section-number">22.8</span>  Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</a></li>
-  <li><a href="#sec-nonparam_aov" id="toc-sec-nonparam_aov" class="nav-link" data-scroll-target="#sec-nonparam_aov"><span class="toc-section-number">22.9</span>  Непараметрические аналоги ANOVA</a>
+  <li><a href="#sec-aov" id="toc-sec-aov" class="nav-link active" data-scroll-target="#sec-aov"><span class="header-section-number">22.0.1</span> Функция aov()</a></li>
+  <li><a href="#sec-anova_nhst" id="toc-sec-anova_nhst" class="nav-link" data-scroll-target="#sec-anova_nhst"><span class="header-section-number">22.1</span> Тестирование значимости нулевой гипотезы в ANOVA.</a></li>
+  <li><a href="#sec-anova_posthoc" id="toc-sec-anova_posthoc" class="nav-link" data-scroll-target="#sec-anova_posthoc"><span class="header-section-number">22.2</span> Post-hoc тесты</a></li>
+  <li><a href="#sec-aov_as_lm" id="toc-sec-aov_as_lm" class="nav-link" data-scroll-target="#sec-aov_as_lm"><span class="header-section-number">22.3</span> ANOVA и т-тест как частные случаи линейной регрессии</a></li>
+  <li><a href="#sec-dummy" id="toc-sec-dummy" class="nav-link" data-scroll-target="#sec-dummy"><span class="header-section-number">22.4</span> Dummy coding</a></li>
+  <li><a href="#sec-aova" id="toc-sec-aova" class="nav-link" data-scroll-target="#sec-aova"><span class="header-section-number">22.5</span> Допущения ANOVA</a></li>
+  <li><a href="#sec-fact_aov" id="toc-sec-fact_aov" class="nav-link" data-scroll-target="#sec-fact_aov"><span class="header-section-number">22.6</span> Многофакторный дисперсионный анализ (Factorial ANOVA)</a></li>
+  <li><a href="#sec-rm_aov" id="toc-sec-rm_aov" class="nav-link" data-scroll-target="#sec-rm_aov"><span class="header-section-number">22.7</span> Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</a></li>
+  <li><a href="#sec-mixed_aov" id="toc-sec-mixed_aov" class="nav-link" data-scroll-target="#sec-mixed_aov"><span class="header-section-number">22.8</span> Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</a></li>
+  <li><a href="#sec-nonparam_aov" id="toc-sec-nonparam_aov" class="nav-link" data-scroll-target="#sec-nonparam_aov"><span class="header-section-number">22.9</span> Непараметрические аналоги ANOVA</a>
   <ul class="collapse">
-  <li><a href="#sec-krask_aov" id="toc-sec-krask_aov" class="nav-link" data-scroll-target="#sec-krask_aov"><span class="toc-section-number">22.9.1</span>  Тест Краскела-Уоллеса</a></li>
-  <li><a href="#sec-friedman_aov" id="toc-sec-friedman_aov" class="nav-link" data-scroll-target="#sec-friedman_aov"><span class="toc-section-number">22.9.2</span>  Тест Фридмана</a></li>
+  <li><a href="#sec-krask_aov" id="toc-sec-krask_aov" class="nav-link" data-scroll-target="#sec-krask_aov"><span class="header-section-number">22.9.1</span> Тест Краскела-Уоллеса</a></li>
+  <li><a href="#sec-friedman_aov" id="toc-sec-friedman_aov" class="nav-link" data-scroll-target="#sec-friedman_aov"><span class="header-section-number">22.9.2</span> Тест Фридмана</a></li>
   </ul></li>
-  <li><a href="#sec-aov_final" id="toc-sec-aov_final" class="nav-link" data-scroll-target="#sec-aov_final"><span class="toc-section-number">22.10</span>  Заключение</a></li>
+  <li><a href="#sec-aov_final" id="toc-sec-aov_final" class="nav-link" data-scroll-target="#sec-aov_final"><span class="header-section-number">22.10</span> Заключение</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./350-anova.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-anova" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></h1>
 </div>
@@ -415,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Автор</div>
     <div class="quarto-title-meta-contents">
-             <p>И.С. Поздняков <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>И.С. Поздняков <a href="mailto:bucherr@yandex.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -424,32 +468,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
+
 </header>
+
 
 <p>Дисперсионный анализ или ANOVA<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> - один из самых распространенных методов статистического анализа в психологии, биологии, медицине и многих других дисциплинах. Дисперсионный анализ очень хорошо подходит для анализа данных, полученных в эксперименте - методе организации исследования, при котором исследователь напрямую управляет уровнями независимой переменной. Терминологическая связь между дисперсионным анализом и планированием эксперимента настолько тесная, что многие термины пересекаются, поэтому нужно быть осторожными. Как и в случае с линейной регрессией, если мы что-то называем “независимой переменной” (или “фактором”), это не порождает никакой каузальной связи.</p>
 <blockquote class="blockquote">
-<p>Еще одна важная вещь, которую нужно понимать про дисперсионный анализ, это то, что у этого метода очень запутывающее название: из названия кажется, что этот статистический метод для сравнения дисперсий. Нет, это не так (хотя такие статистические тесты тоже есть, и они нам сегодня пригодятся - см. <a href="#sec-aova"><span>Глава&nbsp;22.5</span></a>). Нет, это просто сравнение средних в случае, если есть больше, чем 2 группы для сравнения.</p>
+<p>Еще одна важная вещь, которую нужно понимать про дисперсионный анализ, это то, что у этого метода очень запутывающее название: из названия кажется, что этот статистический метод для сравнения дисперсий. Нет, это не так (хотя такие статистические тесты тоже есть, и они нам сегодня пригодятся - см. <a href="#sec-aova" class="quarto-xref"><span>Глава 22.5</span></a>). Нет, это просто сравнение средних в случае, если есть больше, чем 2 группы для сравнения.</p>
 </blockquote>
 <p>У дисперсионного анализа очень много разновидностей, для которых придумали множество названий. “Обычная” ANOVA называется One-Way ANOVA, она же межгрупповая ANOVA, это аналог независимого т-теста для нескольких групп.</p>
-<p>Давайте начнем сразу с проведения теста. Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>, на которых мы разбирались с t-тестом (<a href="320-ttest.html#sec-dep_ttest"><span>Глава&nbsp;18.2.1</span></a>).</p>
+<p>Давайте начнем сразу с проведения теста. Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>, на которых мы разбирались с t-тестом (<a href="320-ttest.html#sec-dep_ttest" class="quarto-xref"><span>Глава 18.2.1</span></a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/stcp-Rdataset-Diet.csv"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/stcp-Rdataset-Diet.csv"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Сделаем небольшой препроцессинг данных. Создадим дополнительные “факторные” переменные, создадим переменную, в которой будет разница массы “до” и “после”, удалим <code>NA</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight.loss =</span> weight6weeks <span class="sc">-</span> pre.weight,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Dietf =</span> <span class="fu">factor</span>(Diet, <span class="at">labels =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]),</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">Person =</span> <span class="fu">factor</span>(Person)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="sec-aov" class="level3" data-number="22.0.1">
 <h3 data-number="22.0.1" class="anchored" data-anchor-id="sec-aov"><span class="header-section-number">22.0.1</span> Функция aov()</h3>
 <p>Попробуем сразу провести дисперсионный анализ с помощью функции <code>aov()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>aov_model</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aov_model <span class="ot">&lt;-</span> <span class="fu">aov</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>aov_model</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
    aov(formula = weight.loss ~ Dietf, data = diet)
@@ -462,7 +508,7 @@ Deg. of Freedom        2        73
 Residual standard error: 2.371064
 Estimated effects may be unbalanced</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)   
 Dietf        2   60.5  30.264   5.383 0.0066 **
@@ -473,7 +519,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Мы получили что-то похожее на результат применения функции <code>lm()</code>. Правда, лаконичнее, но с новыми столбцами <code>Sum Sq</code>, <code>Mean Sq</code> и новой статистикой <em>F</em> вместо <em>t</em>. Что будет, если с теми же данными с той же формулой запустить <code>lm()</code> вместо <code>aov()</code>?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -512,7 +558,7 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 <ol start="2" type="1">
 <li><strong>Подсчет статистики.</strong> Как мы уже видели раньше, в дисперсионном анализе используется новая для нас статистика <em>F</em>. Впрочем, мы ее видели, когда смотрели на аутпут функции <code>lm()</code>, когда делали линейную регрессию. Чтобы считать <em>F</em> (если вдруг мы хотим сделать это вручную), нужно построить талбицу ANOVA (ANOVA table).</li>
 </ol>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 20%">
@@ -555,7 +601,7 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </table>
 <p>Именно эту таблицу мы видели, когда использовали функцию <code>aov()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov_model)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)   
 Dietf        2   60.5  30.264   5.383 0.0066 **
@@ -565,7 +611,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <p>Вот как это все считается:</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 20%">
@@ -613,7 +659,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><strong>Подсчет p-value.</strong> В t-тесте мы смотрели, как статистика распределена при условии верности нулевой гипотезы. То есть что будет, если нулевая гипотеза верна, мы будем повторять эксперимент с точно таким же дизайном (и размером выборок) бесконечное количество раз и считать <em>F</em>.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>betweendf <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>betweendf <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>withindf <span class="ot">&lt;-</span> <span class="dv">73</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">summary</span>(aov_model)[[<span class="dv">1</span>]]<span class="sc">$</span>F[<span class="dv">1</span>]</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -633,19 +679,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())  </span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>())  </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="350-anova_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<p></p><figcaption class="figure-caption">F-распределение при верности нулевой гипотезы (см. детали в тексте)</figcaption><p></p>
+<figcaption>F-распределение при верности нулевой гипотезы (см. детали в тексте)</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Заметьте, распределение <em>F</em> несимметричное<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Это значит, что мы всегда считаем считаем площадь от <em>F</em> до плюс бесконечности (без умножения на 2, как мы это делали в t-тесте):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(f, betweendf, withindf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(f, betweendf, withindf)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.006595853</code></pre>
 </div>
@@ -662,7 +708,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Post-hoc переводится с латыни как “после этого”. Post-hoc тесты или просто “пост-хоки” проводятся, если в результате ANOVA была отвергнута нулевая гипотеза. Собственно, пост-хоки никак не связаны с дисперсионным анализом на уровне расчетов - это абсолютно независимые тесты, но исторически так сложилось, что они известны именно как дополнительный этап ANOVA.</p>
 <p>Самый простой вариант пост-хок теста - это попарные т-тесты <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> с поправками на множественные сравнения:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(diet<span class="sc">$</span>weight.loss, diet<span class="sc">$</span>Dietf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(diet<span class="sc">$</span>weight.loss, diet<span class="sc">$</span>Dietf)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pairwise comparisons using t tests with pooled SD 
@@ -678,7 +724,7 @@ P value adjustment method: holm </code></pre>
 </div>
 <p>Второй подход связан с использованием специализированных тестов, таких как тест Тьюки (Tukey Honest Significant Differences = Tukey HSD). Для этого в R есть функция <code>TukeyHSD()</code>, которую нужно применять на объект <code>aov</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(aov_model)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -697,7 +743,7 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 <h2 data-number="22.3" class="anchored" data-anchor-id="sec-aov_as_lm"><span class="header-section-number">22.3</span> ANOVA и т-тест как частные случаи линейной регрессии</h2>
 <p>Как мы уже видели, если применить <code>lm()</code> или <code>aov()</code> на одних и тех же данных с одной и той же формулой, то результат будет очень похожим. Но есть одно но: <code>lm()</code> создает из одного фактора две переменных-предиктора:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -722,7 +768,7 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </div>
 <p>Дело в том, что мы не можем просто так загнать номинативную переменную в качестве предиктора в линейную регрессию. Мы можем это легко сделать, если у нас всего два уровня в номинативном предикторе. Тогда один из уровней можно обозначить за 0, другой - за 1. Такие переменные иногда называются “бинарными”. Тогда это легко использовать в линейной регрессии:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> gender, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> gender, diet))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -746,7 +792,7 @@ F-statistic: 0.04379 on 1 and 74 DF,  p-value: 0.8348</code></pre>
 </div>
 <p>Можно ли так делать? Вполне! Допущения линейной регрессии касаются остатков, а не переменных самих по себе. Разве что это немного избыточно: линейная регрессия с бинарным предиктором - это фактически независимый t-тест:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Two Sample t-test
@@ -763,7 +809,7 @@ mean in group 0 mean in group 1
 </div>
 <p>Как видите, p-value совпадают! А <em>t</em> статистика в квадрате - это <em>F</em> (при двух группах):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic<span class="sc">^</span><span class="dv">2</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(weight.loss <span class="sc">~</span> gender, diet, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>statistic<span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         t 
 0.04378592 </code></pre>
@@ -771,7 +817,7 @@ mean in group 0 mean in group 1
 </div>
 <p>Более того, те же самые результаты можно получить и с помощью коэффициента корреляции Пирсона:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(diet<span class="sc">$</span>gender, diet<span class="sc">$</span>weight.loss)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(diet<span class="sc">$</span>gender, diet<span class="sc">$</span>weight.loss)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -792,7 +838,7 @@ sample estimates:
 <h2 data-number="22.4" class="anchored" data-anchor-id="sec-dummy"><span class="header-section-number">22.4</span> Dummy coding</h2>
 <p>Тем не менее, вопрос остается открытым: как превратить номинативную переменную в количественную и загнать ее в регрессию? Для этого можно использовать <strong>“фиктивное кодирование” (dummy coding):</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">isA =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">"A"</span>),</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">isB =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">"B"</span>),</span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">isC =</span> <span class="fu">as.numeric</span>(Dietf <span class="sc">==</span> <span class="st">"C"</span>))</span>
@@ -800,7 +846,7 @@ sample estimates:
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Dietf) <span class="sc">%&gt;%</span></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Dietf, isA<span class="sc">:</span>isC)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Dietf, isA<span class="sc">:</span>isC)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
 # Groups:   Dietf [3]
@@ -816,11 +862,11 @@ sample estimates:
 </div>
 <p>Заметьте, что такое кодирование избыточно. Если мы знаем, что диет 3, а данная диета - это не диета В и не диета С, то это диета А. Значит, одна из созданных нами колонок - “лишняя”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>isA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>isA <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Используем новую колонки для линейной регрессии и сравним результаты:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> isB <span class="sc">+</span> isC, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> isB <span class="sc">+</span> isC, diet))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -842,7 +888,7 @@ Residual standard error: 2.371 on 73 degrees of freedom
 Multiple R-squared:  0.1285,    Adjusted R-squared:  0.1047 
 F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(weight.loss <span class="sc">~</span> Dietf, diet))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -873,9 +919,13 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 <li><strong>Нормальность распределения ошибок:</strong></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(aov_model))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(aov_model))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="350-anova_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="350-anova_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Как мы видим, распределение не сильно далеко от нормального - этого вполне достаточно. ANOVA - это метод достаточно устойчивый к отклонениям от нормальности.</p>
@@ -884,30 +934,34 @@ F-statistic: 5.383 on 2 and 73 DF,  p-value: 0.006596</code></pre>
 </ol>
 <p>То есть их равенство. Можно посмотреть на распределение остатков:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(aov_model)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diet, <span class="fu">aes</span>(<span class="at">x =</span> Dietf, <span class="at">y =</span> residuals))<span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>diet<span class="sc">$</span>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(aov_model)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diet, <span class="fu">aes</span>(<span class="at">x =</span> Dietf, <span class="at">y =</span> residuals))<span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="350-anova_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="350-anova_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Все выглядит неплохо: нет какой-то одной группы, у которой разброс сильно больше или меньше. Есть и более формальные способы проверить равенство дисперсий. Например, с помощью теста Ливиня (Levene’s test). Для того, чтобы его провести, мы воспользуемся новым пакетом <code>ez</code> (читать как “easy”). Этот пакет сильно упрощает проведение дисперсионного анализа, особенно для более сложных дизайнов.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ez"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ez"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Синтаксис довольно простой: нужно указать, данные, зависимую переменную, переменную с ID, факторы. Необходимо прописать фактор в <code>between =</code> или <code>within =</code>. В данном случае - в <code>between =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ez)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Registered S3 method overwritten by 'lme4':
   method           from
   na.action.merMod car </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ez_model <span class="ot">&lt;-</span> <span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ez_model <span class="ot">&lt;-</span> <span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf,</span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: You have removed one or more Ss from the analysis. Refactoring
 "Person" for ANOVA.</code></pre>
@@ -919,7 +973,7 @@ well-considered value for the type argument to ezANOVA().</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>Coefficient covariances computed by hccm()</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>ez_model</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>ez_model</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$ANOVA
   Effect DFn DFd      SSn      SSd        F           p p&lt;.05       ges
@@ -945,7 +999,7 @@ Estimated effects may be unbalanced</code></pre>
 <p>Если при проведении теста Ливиня мы получаем <em>p &lt; .05</em>, то мы отбрасываем нулевую гипотезу о равенстве дисперсий. В данном случае мы не можем ее отбросить и поэтому принимаем <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
 <p>Полученный объект (если поставить <code>return_aov = T</code>) содержит еще и объект <code>aov()</code> - на случай, если у вас есть функции, которые работают с этим классом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ez_model<span class="sc">$</span>aov)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ez_model<span class="sc">$</span>aov)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Tukey multiple comparisons of means
     95% family-wise confidence level
@@ -963,8 +1017,8 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 <li><strong>Примерно одинаковое количество испытуемых в разных группах.</strong> Здесь у нас все в порядке:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Dietf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>diet <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Dietf)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   Dietf     n
@@ -981,7 +1035,7 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 <p>На практике можно встретить One-Way ANOVA (однофакторную ANOVA) довольно редко. Обычно в исследованиях встречается многофакторный дисперсионный анализ, в котором проверяется влияние сразу нескольких факторов. В научных статьях это обозначается примерно так: “3х2 ANOVA”. Это означает, что был проведен двухфакторный дисперсионный анализ, причем в одном факторе было три уровня, во втором - два. В нашем случае это будут факторы “Диета” и “Пол”. Это означает, что у нас две гипотезы: о влиянии диеты на снижение массы и о влиянии пола на снижение массы. Кроме того, появляется гипотеза о взаимодействии факторов - то есть о том, что разные диеты по-разному влияют на снижение массы для разных полов.</p>
 <p>Взаимодействие двух факторов хорошо видно на графике с линиями: если две линии параллельны, то взаимодействия нет. Если они не параллельны (пересекаются, сходятся, расходятся), то взаимодействие есть.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">genderf =</span> <span class="fu">factor</span>(gender, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"ж"</span>, <span class="st">"м"</span>))) <span class="co">#превращаем в бинарную переменную в фактор</span></span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>sem <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x)) <span class="co">#пишем функцию для стандартной ошибки</span></span>
@@ -997,7 +1051,7 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 <span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> genderf), <span class="at">position =</span> pd) <span class="sc">+</span></span>
 <span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> meanloss <span class="sc">-</span> se, </span>
 <span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">ymax =</span> meanloss <span class="sc">+</span> se), <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has regrouped the output.
 ℹ Summaries were computed grouped by Dietf and genderf.
@@ -1007,17 +1061,21 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
   (`?dplyr::dplyr_by`) instead.</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="350-anova_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="350-anova_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Как видно по картинке, разница в эффективности диеты С по сравнению с другими видна только для женщин.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(<span class="at">data =</span> diet,</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv=</span> weight.loss,</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person, </span>
 <span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> .(Dietf, gender),</span>
 <span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">detailed =</span> T, </span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">return_aov =</span> T)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: You have removed one or more Ss from the analysis. Refactoring
 "Person" for ANOVA.</code></pre>
@@ -1066,19 +1124,19 @@ Estimated effects may be unbalanced</code></pre>
 <h2 data-number="22.7" class="anchored" data-anchor-id="sec-rm_aov"><span class="header-section-number">22.7</span> Дисперсионный анализ с повторными измерениями (Repeated-measures ANOVA)</h2>
 <p>Если обычный дисперсионный анализ - это аналог независимого т-теста для нескольких групп, то дисперсионный анализ с повторными измерениями - это аналог зависимого т-теста. В функции <code>ezANOVA()</code> для проведения дисперсионного анализа с повторными измерениями нужно просто поставить нужным параметром внутригрупповую переменную. Это означает, что в данном случае мы должны иметь данные в длинном формате, для чего мы воспользуемся функцией <code>pivot_longer()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>dietlong <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>dietlong <span class="ot">&lt;-</span> diet <span class="sc">%&gt;%</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(pre.weight, weight6weeks),</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
 <span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"weight"</span>)</span>
 <span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>dietlongC <span class="ot">&lt;-</span> dietlong <span class="sc">%&gt;%</span></span>
 <span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">filter</span>(Dietf <span class="sc">==</span> <span class="st">"C"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">droplevels</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">droplevels</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlongC,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlongC,</span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
 <span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Converting "time" to factor for ANOVA.</code></pre>
 </div>
@@ -1093,11 +1151,11 @@ Estimated effects may be unbalanced</code></pre>
 <h2 data-number="22.8" class="anchored" data-anchor-id="sec-mixed_aov"><span class="header-section-number">22.8</span> Смешанный дисперсионный анализ (Mixed between-within subjects ANOVA)</h2>
 <p>Нам никто не мешает совмещать и внутригруппоdые, и межгрупповые факторы вместе. В <code>ezANOVA()</code> это делается просто с помощью прописывания разных факторов в нужных переменных: <code>between =</code> и <code>within =</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlong,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ezANOVA</span>(dietlong,</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">dv =</span> weight, </span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">wid =</span> Person,</span>
 <span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">within =</span> time,</span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">between =</span> Dietf)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: You have removed one or more Ss from the analysis. Refactoring
 "Person" for ANOVA.</code></pre>
@@ -1126,7 +1184,7 @@ well-considered value for the type argument to ezANOVA().</code></pre>
 <h3 data-number="22.9.1" class="anchored" data-anchor-id="sec-krask_aov"><span class="header-section-number">22.9.1</span> Тест Краскела-Уоллеса</h3>
 <p>Это тест Краскела-Уоллеса - обобщение теста Манна-Уитни на несколько выборок (т.е. аналог межгруппового ANOVA):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -1140,7 +1198,7 @@ Kruskal-Wallis chi-squared = 9.4159, df = 2, p-value = 0.009023</code></pre>
 <h3 data-number="22.9.2" class="anchored" data-anchor-id="sec-friedman_aov"><span class="header-section-number">22.9.2</span> Тест Фридмана</h3>
 <p>Для зависимых выборок есть тест Фридмана - непараметрический аналог дисперсионного анализа с повторными измерениями:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">friedman.test</span>(weight <span class="sc">~</span> time <span class="sc">|</span> Person, dietlongC)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">friedman.test</span>(weight <span class="sc">~</span> time <span class="sc">|</span> Person, dietlongC)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Friedman rank sum test
@@ -1160,11 +1218,11 @@ Friedman chi-squared = 27, df = 1, p-value = 2.035e-07</code></pre>
 <li><p>Как правильно репортить результаты дисперсионного анализа. Здесь все, конечно, зависит от стиля, используемого конкретным журналом. В психологии и близких к ней дисциплинам фактическим lingua franca является стиль Американской Психологической Ассоциации (APA). И тут у меня есть для вас хорошие новости: есть куча пакетов в R, которые позволяют репортить результаты статистических тестов в APA-стиле! Спасибо дотошным авторам руководства APA по офромлению статей, что этот стиль настолько точно прописывает, как нужно описывать результаты исследований, что это можно запрограммировать. Я лично пользуюсь пакетом <code>apa</code>, он весьма удобен:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"apa"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"apa"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apa)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_apa</span>(ez_model)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apa)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova_apa</span>(ez_model)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Effect                                            
 1  Dietf F(2, 73) = 5.38, p = .007, petasq = .13 ** </code></pre>
@@ -1192,237 +1250,419 @@ Friedman chi-squared = 27, df = 1, p-value = 2.035e-07</code></pre>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script>
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./340-lm.html" class="pagination-link">
+      <a href="./340-lm.html" class="pagination-link" aria-label="Линейная регрессия">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./360-glm.html" class="pagination-link">
+      <a href="./360-glm.html" class="pagination-link" aria-label="Общая линейная модель и ее расширения">
         <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

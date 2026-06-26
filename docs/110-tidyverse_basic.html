@@ -2,13 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.208">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="И.С. Поздняков">
 
-<title>Анализ данных и статистика в R - 10&nbsp; Введение в tidyverse</title>
+<title>10&nbsp; Введение в tidyverse – Анализ данных и статистика в R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -17,9 +21,11 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +52,20 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +79,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -114,22 +91,28 @@ div.csl-indent {
 <meta name="quarto:offset" content="./">
 <link href="./120-tidyverse_advanced.html" rel="next">
 <link href="./107-beyond_base_r.html" rel="prev">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Поиск не дал результатов",
     "search-matching-documents-text": "Результаты поиска",
@@ -138,29 +121,58 @@ div.csl-indent {
     "search-more-match-text": "дополнительный результат в этом документе",
     "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
     "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Отменить",
-    "search-submit-button-title": "Найти"
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
-
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./110-tidyverse_basic.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a></li></ol></nav>
-      <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./110-tidyverse_basic.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -169,23 +181,23 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Анализ данных и статистика в R</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Download"><i class="bi bi-download"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.pdf">
-              <i class="bi bi-bi-file-pdf pe-1"></i>
+              <i class="bi bi-file-pdf pe-1"></i>
             Download PDF
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="./Анализ-данных-и-статистика-в-R.epub">
-              <i class="bi bi-bi-journal pe-1"></i>
+              <i class="bi bi-journal pe-1"></i>
             Download ePub
             </a>
           </li>
@@ -196,253 +208,286 @@ div.csl-indent {
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
+        <div id="quarto-search" class="" title="Поиск"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">О курсе</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">Основы R и Rstudio</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Основы R и Rstudio</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./010-intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></a>
+  <a href="./010-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Введение в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./013-vector.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></a>
+  <a href="./013-vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Вектор</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></a>
+  <a href="./016-complex_structures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Сложные структуры данных в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./020-install.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></a>
+  <a href="./020-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пакеты в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></a>
+  <a href="./030-import_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Импорт и экспорт данных</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></a>
+  <a href="./040-if_for.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Условные конструкции и циклы</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./050-functional.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></a>
+  <a href="./050-functional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Функциональное программирование в R</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">Tidyverse</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./105-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tidyverse</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></a>
+  <a href="./107-beyond_base_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a>
+  <a href="./110-tidyverse_basic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></a>
+  <a href="./120-tidyverse_advanced.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">Разведочный анализ и создание отчетов</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./205-eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Разведочный анализ и создание отчетов</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></a>
+  <a href="./210-desc_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Описательная статистика</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></a>
+  <a href="./220-base_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Встроенные функции для графиков</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></a>
+  <a href="./230-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Грамматика графики ggplot2</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></a>
+  <a href="./240-dynamic_viz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Динамические визуализации в R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></a>
+  <a href="./250-rmarkdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">R Markdown и Quarto</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">Тестирование статистических гипотез</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./305-hyp_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Тестирование статистических гипотез</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></a>
+  <a href="./310-infer_stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Статистика вывода</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a>
+  <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></a>
+  <a href="./325-chisq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></a>
+  <a href="./330-cov_cor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Ковариация и корреляция</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./340-lm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></a>
+  <a href="./340-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Линейная регрессия</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./350-anova.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></a>
+  <a href="./350-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Дисперсионный анализ (ANOVA)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./360-glm.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></a>
+  <a href="./360-glm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Общая линейная модель и ее расширения</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></a>
+  <a href="./370-multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Многомерные методы анализа данных</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./410-planning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></a>
+  <a href="./410-planning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Планирования научного исследования</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">Задачник</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./905-tasks_solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Задачник</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></a>
+  <a href="./910-tasks.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Задания</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></a>
+  <a href="./920-solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Решения заданий</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./950-references.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></a>
+  <a href="./950-references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Библиография</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-tidy_verse" id="toc-sec-tidy_verse" class="nav-link active" data-scroll-target="#sec-tidy_verse"><span class="toc-section-number">10.1</span>  Вселенная tidyverse</a></li>
-  <li><a href="#загрузка-данных-с-помощью-readr" id="toc-загрузка-данных-с-помощью-readr" class="nav-link" data-scroll-target="#загрузка-данных-с-помощью-readr"><span class="toc-section-number">10.2</span>  Загрузка данных с помощью readr</a></li>
-  <li><a href="#sec-tibble" id="toc-sec-tibble" class="nav-link" data-scroll-target="#sec-tibble"><span class="toc-section-number">10.3</span>  tibble</a></li>
-  <li><a href="#sec-pipe" id="toc-sec-pipe" class="nav-link" data-scroll-target="#sec-pipe"><span class="toc-section-number">10.4</span>  Пайпы: <code>magrittr::%&gt;%</code> и встроенный <code>|&gt;</code></a>
+  <li><a href="#sec-tidy_verse" id="toc-sec-tidy_verse" class="nav-link active" data-scroll-target="#sec-tidy_verse"><span class="header-section-number">10.1</span> Вселенная tidyverse</a></li>
+  <li><a href="#загрузка-данных-с-помощью-readr" id="toc-загрузка-данных-с-помощью-readr" class="nav-link" data-scroll-target="#загрузка-данных-с-помощью-readr"><span class="header-section-number">10.2</span> Загрузка данных с помощью readr</a></li>
+  <li><a href="#sec-tibble" id="toc-sec-tibble" class="nav-link" data-scroll-target="#sec-tibble"><span class="header-section-number">10.3</span> tibble</a></li>
+  <li><a href="#sec-pipe" id="toc-sec-pipe" class="nav-link" data-scroll-target="#sec-pipe"><span class="header-section-number">10.4</span> Пайпы: <code>magrittr::%&gt;%</code> и встроенный <code>|&gt;</code></a>
   <ul class="collapse">
-  <li><a href="#пайпы-и-tidyverse" id="toc-пайпы-и-tidyverse" class="nav-link" data-scroll-target="#пайпы-и-tidyverse"><span class="toc-section-number">10.4.1</span>  Пайпы и tidyverse</a></li>
-  <li><a href="#нативный-пайп" id="toc-нативный-пайп" class="nav-link" data-scroll-target="#нативный-пайп"><span class="toc-section-number">10.4.2</span>  Нативный пайп <code>|&gt;</code></a></li>
+  <li><a href="#пайпы-и-tidyverse" id="toc-пайпы-и-tidyverse" class="nav-link" data-scroll-target="#пайпы-и-tidyverse"><span class="header-section-number">10.4.1</span> Пайпы и tidyverse</a></li>
+  <li><a href="#нативный-пайп" id="toc-нативный-пайп" class="nav-link" data-scroll-target="#нативный-пайп"><span class="header-section-number">10.4.2</span> Нативный пайп <code>|&gt;</code></a></li>
   </ul></li>
-  <li><a href="#главные-пакеты-tidyverse-dplyr-и-tidyr" id="toc-главные-пакеты-tidyverse-dplyr-и-tidyr" class="nav-link" data-scroll-target="#главные-пакеты-tidyverse-dplyr-и-tidyr"><span class="toc-section-number">10.5</span>  Главные пакеты tidyverse: dplyr и tidyr</a></li>
-  <li><a href="#sec-tidy_select_cols" id="toc-sec-tidy_select_cols" class="nav-link" data-scroll-target="#sec-tidy_select_cols"><span class="toc-section-number">10.6</span>  Работа с колонками тиббла</a>
+  <li><a href="#главные-пакеты-tidyverse-dplyr-и-tidyr" id="toc-главные-пакеты-tidyverse-dplyr-и-tidyr" class="nav-link" data-scroll-target="#главные-пакеты-tidyverse-dplyr-и-tidyr"><span class="header-section-number">10.5</span> Главные пакеты tidyverse: dplyr и tidyr</a></li>
+  <li><a href="#sec-tidy_select_cols" id="toc-sec-tidy_select_cols" class="nav-link" data-scroll-target="#sec-tidy_select_cols"><span class="header-section-number">10.6</span> Работа с колонками тиббла</a>
   <ul class="collapse">
-  <li><a href="#выбор-колонок-dplyrselect" id="toc-выбор-колонок-dplyrselect" class="nav-link" data-scroll-target="#выбор-колонок-dplyrselect"><span class="toc-section-number">10.6.1</span>  Выбор колонок: <code>dplyr::select()</code></a></li>
-  <li><a href="#sec-tidyselect" id="toc-sec-tidyselect" class="nav-link" data-scroll-target="#sec-tidyselect"><span class="toc-section-number">10.6.2</span>  Мини-язык tidy selection для выбора колонок</a></li>
-  <li><a href="#переименование-колонок-dplyrrename" id="toc-переименование-колонок-dplyrrename" class="nav-link" data-scroll-target="#переименование-колонок-dplyrrename"><span class="toc-section-number">10.6.3</span>  Переименование колонок: <code>dplyr::rename()</code></a></li>
-  <li><a href="#sec-tidy_relocate" id="toc-sec-tidy_relocate" class="nav-link" data-scroll-target="#sec-tidy_relocate"><span class="toc-section-number">10.6.4</span>  Перестановка колонок: <code>dplyr::relocate()</code></a></li>
-  <li><a href="#извлечение-колонки-как-вектора-dplyrpull" id="toc-извлечение-колонки-как-вектора-dplyrpull" class="nav-link" data-scroll-target="#извлечение-колонки-как-вектора-dplyrpull"><span class="toc-section-number">10.6.5</span>  Извлечение колонки как вектора: <code>dplyr::pull()</code></a></li>
+  <li><a href="#выбор-колонок-dplyrselect" id="toc-выбор-колонок-dplyrselect" class="nav-link" data-scroll-target="#выбор-колонок-dplyrselect"><span class="header-section-number">10.6.1</span> Выбор колонок: <code>dplyr::select()</code></a></li>
+  <li><a href="#sec-tidyselect" id="toc-sec-tidyselect" class="nav-link" data-scroll-target="#sec-tidyselect"><span class="header-section-number">10.6.2</span> Мини-язык tidy selection для выбора колонок</a></li>
+  <li><a href="#переименование-колонок-dplyrrename" id="toc-переименование-колонок-dplyrrename" class="nav-link" data-scroll-target="#переименование-колонок-dplyrrename"><span class="header-section-number">10.6.3</span> Переименование колонок: <code>dplyr::rename()</code></a></li>
+  <li><a href="#sec-tidy_relocate" id="toc-sec-tidy_relocate" class="nav-link" data-scroll-target="#sec-tidy_relocate"><span class="header-section-number">10.6.4</span> Перестановка колонок: <code>dplyr::relocate()</code></a></li>
+  <li><a href="#извлечение-колонки-как-вектора-dplyrpull" id="toc-извлечение-колонки-как-вектора-dplyrpull" class="nav-link" data-scroll-target="#извлечение-колонки-как-вектора-dplyrpull"><span class="header-section-number">10.6.5</span> Извлечение колонки как вектора: <code>dplyr::pull()</code></a></li>
   </ul></li>
-  <li><a href="#sec-tidy_select_rows" id="toc-sec-tidy_select_rows" class="nav-link" data-scroll-target="#sec-tidy_select_rows"><span class="toc-section-number">10.7</span>  Работа со строками тиббла</a>
+  <li><a href="#sec-tidy_select_rows" id="toc-sec-tidy_select_rows" class="nav-link" data-scroll-target="#sec-tidy_select_rows"><span class="header-section-number">10.7</span> Работа со строками тиббла</a>
   <ul class="collapse">
-  <li><a href="#sec-tidy_slice" id="toc-sec-tidy_slice" class="nav-link" data-scroll-target="#sec-tidy_slice"><span class="toc-section-number">10.7.1</span>  Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
-  <li><a href="#sec-tidy_filter" id="toc-sec-tidy_filter" class="nav-link" data-scroll-target="#sec-tidy_filter"><span class="toc-section-number">10.7.2</span>  Выбор строк по условию: <code>dplyr::filter()</code></a></li>
-  <li><a href="#sec-slice_family" id="toc-sec-slice_family" class="nav-link" data-scroll-target="#sec-slice_family"><span class="toc-section-number">10.7.3</span>  Семейство функций <code>slice()</code></a></li>
-  <li><a href="#sec-tidy_drop_na" id="toc-sec-tidy_drop_na" class="nav-link" data-scroll-target="#sec-tidy_drop_na"><span class="toc-section-number">10.7.4</span>  Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
-  <li><a href="#sec-tidy_arrange" id="toc-sec-tidy_arrange" class="nav-link" data-scroll-target="#sec-tidy_arrange"><span class="toc-section-number">10.7.5</span>  Сортировка строк: <code>dplyr::arrange()</code></a></li>
+  <li><a href="#sec-tidy_slice" id="toc-sec-tidy_slice" class="nav-link" data-scroll-target="#sec-tidy_slice"><span class="header-section-number">10.7.1</span> Выбор строк по номеру: <code>dplyr::slice()</code></a></li>
+  <li><a href="#sec-tidy_filter" id="toc-sec-tidy_filter" class="nav-link" data-scroll-target="#sec-tidy_filter"><span class="header-section-number">10.7.2</span> Выбор строк по условию: <code>dplyr::filter()</code></a></li>
+  <li><a href="#sec-slice_family" id="toc-sec-slice_family" class="nav-link" data-scroll-target="#sec-slice_family"><span class="header-section-number">10.7.3</span> Семейство функций <code>slice()</code></a></li>
+  <li><a href="#sec-tidy_drop_na" id="toc-sec-tidy_drop_na" class="nav-link" data-scroll-target="#sec-tidy_drop_na"><span class="header-section-number">10.7.4</span> Удаление строчек с NA: <code>tidyr::drop_na()</code></a></li>
+  <li><a href="#sec-tidy_arrange" id="toc-sec-tidy_arrange" class="nav-link" data-scroll-target="#sec-tidy_arrange"><span class="header-section-number">10.7.5</span> Сортировка строк: <code>dplyr::arrange()</code></a></li>
   </ul></li>
-  <li><a href="#sec-tidy_mutate" id="toc-sec-tidy_mutate" class="nav-link" data-scroll-target="#sec-tidy_mutate"><span class="toc-section-number">10.8</span>  Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
-  <li><a href="#sec-tidy_aggregate" id="toc-sec-tidy_aggregate" class="nav-link" data-scroll-target="#sec-tidy_aggregate"><span class="toc-section-number">10.9</span>  Агрегация данных в тиббле</a>
+  <li><a href="#sec-tidy_mutate" id="toc-sec-tidy_mutate" class="nav-link" data-scroll-target="#sec-tidy_mutate"><span class="header-section-number">10.8</span> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></a></li>
+  <li><a href="#sec-tidy_aggregate" id="toc-sec-tidy_aggregate" class="nav-link" data-scroll-target="#sec-tidy_aggregate"><span class="header-section-number">10.9</span> Агрегация данных в тиббле</a>
   <ul class="collapse">
-  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="toc-section-number">10.9.1</span>  Подытоживание: <code>summarise()</code></a></li>
-  <li><a href="#sec-tidy_group" id="toc-sec-tidy_group" class="nav-link" data-scroll-target="#sec-tidy_group"><span class="toc-section-number">10.9.2</span>  Группировка: <code>group_by()</code></a></li>
-  <li><a href="#sec-tidy_count" id="toc-sec-tidy_count" class="nav-link" data-scroll-target="#sec-tidy_count"><span class="toc-section-number">10.9.3</span>  Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
-  <li><a href="#sec-tidy_distinct" id="toc-sec-tidy_distinct" class="nav-link" data-scroll-target="#sec-tidy_distinct"><span class="toc-section-number">10.9.4</span>  Уникальные значения: <code>dplyr::distinct()</code></a></li>
-  <li><a href="#sec-tidy_group_mutate" id="toc-sec-tidy_group_mutate" class="nav-link" data-scroll-target="#sec-tidy_group_mutate"><span class="toc-section-number">10.9.5</span>  Создание колонок с группировкой</a></li>
+  <li><a href="#sec-summarise" id="toc-sec-summarise" class="nav-link" data-scroll-target="#sec-summarise"><span class="header-section-number">10.9.1</span> Подытоживание: <code>summarise()</code></a></li>
+  <li><a href="#sec-tidy_group" id="toc-sec-tidy_group" class="nav-link" data-scroll-target="#sec-tidy_group"><span class="header-section-number">10.9.2</span> Группировка: <code>group_by()</code></a></li>
+  <li><a href="#sec-tidy_count" id="toc-sec-tidy_count" class="nav-link" data-scroll-target="#sec-tidy_count"><span class="header-section-number">10.9.3</span> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></a></li>
+  <li><a href="#sec-tidy_distinct" id="toc-sec-tidy_distinct" class="nav-link" data-scroll-target="#sec-tidy_distinct"><span class="header-section-number">10.9.4</span> Уникальные значения: <code>dplyr::distinct()</code></a></li>
+  <li><a href="#sec-tidy_group_mutate" id="toc-sec-tidy_group_mutate" class="nav-link" data-scroll-target="#sec-tidy_group_mutate"><span class="header-section-number">10.9.5</span> Создание колонок с группировкой</a></li>
   </ul></li>
-  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение"><span class="toc-section-number">10.10</span>  Заключение</a></li>
+  <li><a href="#заключение" id="toc-заключение" class="nav-link" data-scroll-target="#заключение"><span class="header-section-number">10.10</span> Заключение</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./105-tidyverse.html">Tidyverse</a></li><li class="breadcrumb-item"><a href="./110-tidyverse_basic.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-tidy_intro" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Введение в tidyverse</span></span></h1>
 </div>
@@ -454,7 +499,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Автор</div>
     <div class="quarto-title-meta-contents">
-             <p>И.С. Поздняков <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+             <p>И.С. Поздняков <a href="mailto:bucherr@yandex.ru" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-2450-7004" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
           </div>
   </div>
     
@@ -463,7 +508,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <section id="sec-tidy_verse" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="sec-tidy_verse"><span class="header-section-number">10.1</span> Вселенная tidyverse</h2>
@@ -473,12 +520,12 @@ div.csl-indent {
 </ol>
 <p>Давайте сначала установим пакет <code>{tidyverse}</code>, если он у вас еще не установлен.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Установка может занять довольно большое время: у вас установятся как основные пакеты <em>tidyverse,</em> так и огромное количество зависимостей – других пакетов, которые используются основными пакетами <em>tidyverse.</em> Зато при работе с новыми для себя пакетами вы приятно удивитесь тому, как много нужных вам пакетов уже установлено!</p>
 <p>Все пакеты <em>tidyverse,</em> включая, конечно, основные пакеты, объединены tidy философией и взаимосовместимым синтаксисом. Это означает, что во многих случаях даже не нужно думать о том, из какого именно пакета <em>tidyverse</em> пришла функция. Можно просто подключить один пакет – пакет <code>{tidyverse}</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.2.1     ✔ readr     2.2.0
@@ -498,9 +545,9 @@ div.csl-indent {
 <li><code>{dplyr}</code> – для преобразования данных, основной пакет всего <em>тайдиверс</em>,</li>
 <li><code>{tidyr}</code> – для приведения данных к <strong>чистому виду <em>(tidy data),</em></strong></li>
 <li><code>{tibble}</code> – для работы с тибблами, продвинутый вариант датафрейма,</li>
-<li><code>{purrr}</code> – для функционального программирования (замена семейства функций <code>apply()</code>; см. <a href="050-functional.html#sec-apply"><span>Глава&nbsp;8.6.1</span></a>),</li>
+<li><code>{purrr}</code> – для функционального программирования (замена семейства функций <code>apply()</code>; см. <a href="050-functional.html#sec-apply" class="quarto-xref"><span>Глава 8.6.1</span></a>),</li>
 <li><code>{readr}</code> – для чтения таблиц в текстовом виде, замена стандартным функциям семейства <code>read.table()</code>,</li>
-<li><code>{ggplot2}</code> – для визуализации данных с использованием Grammar of Graphics (<a href="230-ggplot2.html"><span>Глава&nbsp;14</span></a>),</li>
+<li><code>{ggplot2}</code> – для визуализации данных с использованием Grammar of Graphics (<a href="230-ggplot2.html" class="quarto-xref"><span>Глава 14</span></a>),</li>
 <li><code>{stringr}</code> – для работы со строковыми переменными,</li>
 <li><code>{forcats}</code> – для работы с переменными-факторами.</li>
 </ul>
@@ -512,13 +559,13 @@ div.csl-indent {
 <li><strong>Дополнительные пакеты</strong> <em>tidyverse:</em> они не подключаются при вызове <code>library(tidyverse)</code>, но они также разделяют подход <em>tidyverse</em>, дополняя и развивая его. Определить границы “расширенного” <em>tidyverse</em> очень сложно. Во-первых, есть еще много других небольших пакетов от команды <em>tidyverse,</em> которые тоже считаются частью <em>tidyverse.</em> Во-вторых, кроме официальных пакетов от команды <em>tidyverse</em> есть множество пакетов от других разработчиков, которые пытаются соответствовать принципам <em>tidyverse</em> и дополняют их.</li>
 </ol></li>
 </ul>
-<div class="callout callout-style-simple callout-warning no-icon callout-captioned">
+<div class="callout callout-style-simple callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-<em>Для продвинутых:</em> Расширенная Вселенная tidyverse
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> Расширенная Вселенная tidyverse
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -545,10 +592,10 @@ div.csl-indent {
 <ul>
 <li><code>{blob}</code> – для работы с <strong>большими бинарными объектами <em>(binary large object; BLOB),</em></strong></li>
 <li><code>{reprex}</code> – для создания <strong>воспроизводимых примеров <em>(reproducible examples)</em></strong> – чтобы при написании вопросов в R чатах, <a href="https://stackoverflow.com">stackoverflow</a>, issues на гитхабе описывать проблему таким образом, чтобы отвечающие могли воспроизвести вашу проблему у себя.</li>
-<li><code>{glue}</code> – для продвинутого объединения строк (аналог F-строк в <em>Python</em>),</li>
+<li><code>{glue}</code> – для продвинутого объединения строк (аналог F-строк в Python),</li>
 <li><code>{tidytext}</code>– для работы с текстами и корпусами,</li>
-<li><code>{magrittr}</code> – с несколькими вариантами (<code>%&gt;%</code>) пайп-оператора (<a href="#sec-pipe"><span>Глава&nbsp;10.4</span></a>),</li>
-<li><code>{dtplyr}</code> – для ускорения <code>{dplyr}</code> за счёт перевода синтаксиса на более быстрый <code>{data.table}</code> (<a href="107-beyond_base_r.html#sec-dt_approach"><span>Глава&nbsp;9.1</span></a>).</li>
+<li><code>{magrittr}</code> – с несколькими вариантами (<code>%&gt;%</code>) пайп-оператора (<a href="#sec-pipe" class="quarto-xref"><span>Глава 10.4</span></a>),</li>
+<li><code>{dtplyr}</code> – для ускорения <code>{dplyr}</code> за счёт перевода синтаксиса на более быстрый <code>{data.table}</code> (<a href="107-beyond_base_r.html#sec-dt_approach" class="quarto-xref"><span>Глава 9.1</span></a>).</li>
 </ul>
 </div>
 </div>
@@ -557,8 +604,8 @@ div.csl-indent {
 <h2 data-number="10.2" class="anchored" data-anchor-id="загрузка-данных-с-помощью-readr"><span class="header-section-number">10.2</span> Загрузка данных с помощью readr</h2>
 <p>Стандартной функцией для чтения <em>.csv</em> файлов в R является функция <code>read.csv()</code>, но мы будем использовать функцию <code>read_csv()</code> из пакета <code>{readr}</code>. Синтаксис функции <code>read_csv()</code> очень похож на <code>read.csv()</code>: первым аргументом является путь к файлу (в том числе можно использовать URL), некоторые остальные параметры тоже совпадают.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>, <span class="st">" "</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
 • `` -&gt; `...1`</code></pre>
@@ -580,20 +627,20 @@ dbl (3): ...1, Height, Weight
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Подробнее про импорт данных, в том числе в <em>tidyverse,</em> смотри в <a href="030-import_data.html"><span>Глава&nbsp;6</span></a>.</p>
+<p>Подробнее про импорт данных, в том числе в <em>tidyverse,</em> смотри в <a href="030-import_data.html" class="quarto-xref"><span>Глава 6</span></a>.</p>
 </section>
 <section id="sec-tibble" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-tibble"><span class="header-section-number">10.3</span> tibble</h2>
 <p>Когда мы загрузили данные с помощью <code>read_csv()</code>, то мы получили объект класса <code>{tibble}</code>, а не <code>data.frame</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heroes)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heroes)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
 </div>
 </div>
 <p>Тиббл (<code>{tibble}</code>) - это такой “усовершенствованный” <code>data.frame</code>. <a href="https://www.jumpingrivers.com/blog/the-trouble-with-tibbles/">Почти</a> всё, что работает с <code>data.frame</code>, работает и с тибблами. Однако у тибблов есть свои дополнительные фишки. Самая очевидная из них - более аккуратный вывод в консоль:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>heroes</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>heroes</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -615,12 +662,12 @@ dbl (3): ...1, Height, Weight
 <p>Выводятся только первые 10 строк, если какие-то колонки не влезают на экран, то они просто перечислены внизу. Ну а тип данных написан прямо под названием колонки.</p>
 <p>Функции различных пакетов <em>tidyverse</em> сами конвертируют в тиббл при необходимости. Если же нужно это сделать самостоятельно, то можно это сделать так:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>heroes_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(heroes) <span class="co">#создаем простой датафрейм</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heroes_df)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>heroes_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(heroes) <span class="co">#создаем простой датафрейм</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heroes_df)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(heroes_df) <span class="co">#превращаем обратно в тиббл</span></span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(heroes_df) <span class="co">#превращаем обратно в тиббл</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -644,10 +691,10 @@ dbl (3): ...1, Height, Weight
 </blockquote>
 <p>Можно создавать тибблы вручную с помощью функции <code>tibble()</code>, которая работает аналогично функции <code>data.frame()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
       a b    
@@ -662,7 +709,7 @@ dbl (3): ...1, Height, Weight
 <h2 data-number="10.4" class="anchored" data-anchor-id="sec-pipe"><span class="header-section-number">10.4</span> Пайпы: <code>magrittr::%&gt;%</code> и встроенный <code>|&gt;</code></h2>
 <p>Мы уже привыкли к использованию векторизованных функций, работая в базовом R. Они позволяют нам делать сложные операции с целыми векторами без каких-либо циклов, просто передавая результат выполнения функций в качестве аргумента для других функций:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">abs</span>(<span class="fu">sin</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)))))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">log</span>(<span class="fu">abs</span>(<span class="fu">sin</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)))))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -14.08595</code></pre>
 </div>
@@ -670,30 +717,30 @@ dbl (3): ...1, Height, Weight
 <p>С одной стороны, это довольно лаконично и элегантно, с другой стороны, читается такой код с некоторым трудом: нам нужно найти где-то внутри начало операции (создание числового вектора <code>1:20</code>), а затем читать изнутри наружу, чтобы понять порядок действий.</p>
 <p>Оператор <code>%&gt;%</code> из пакета <code>{magrittr}</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> позволяет переписать этот же код в более естественном для чтения порядке:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> <span class="fu">sin</span>() <span class="sc">%&gt;%</span> <span class="fu">abs</span>() <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">%&gt;%</span> <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> <span class="fu">sin</span>() <span class="sc">%&gt;%</span> <span class="fu">abs</span>() <span class="sc">%&gt;%</span> <span class="fu">log</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -14.08595</code></pre>
 </div>
 </div>
 <p>Здесь код читается последовательно слева направо. Или же даже можно сделать порядок “сверху вниз”:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">%&gt;%</span> </span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -14.08595</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-caution no-icon callout-captioned">
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Время мемов
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Осторожность</span>Время мемов
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -703,12 +750,12 @@ dbl (3): ...1, Height, Weight
 <p>Оператор <code>%&gt;%</code> называется <strong>“пайпом” <em>(pipe)</em></strong>, т.е. “трубой”. Он означает, что следующая функция (справа от пайпа) принимает на вход в качестве первого аргумента результат выполнения предыдущей функции (той, что слева). Фактически, это примерно то же самое, что и вставлять результат выполнения функции в качестве первого аргумента в другую функцию. Просто выглядит это красивее и читабельнее. Как будто данные пропускаются через трубы функций или конвейерную ленту на заводе, если хотите. А то, что первый параметр функции — это почти всегда данные, работает нам здесь на руку.</p>
 <p>В редких случаях нам нужно передать результат выполнения команды слева от пайпа не на первую позицию внутри функции. В этих случаях используется <strong>“плейсхолдер” <em>(placeholder)</em></strong>, который выглядит как простая точка: <code>.</code>, которую вы ставите туда, куда хотите передать результат выполнения команды слева от пайпа:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">%&gt;%</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">%&gt;%</span> </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(<span class="dv">2</span>, <span class="at">base =</span> .) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -178.9075</code></pre>
 </div>
@@ -723,12 +770,12 @@ dbl (3): ...1, Height, Weight
 <h3 data-number="10.4.2" class="anchored" data-anchor-id="нативный-пайп"><span class="header-section-number">10.4.2</span> Нативный пайп <code>|&gt;</code></h3>
 <p>В R 4.1.0 (май 2021) появились встроенные пайпы, которые уже не требуют подключения никаких дополнительных пакетов. Смысл этих пайпов тот же самый, но выглядят они немного по-другому: сам нативный пайп пишется <code>|&gt;</code> (вместо <code>%&gt;%</code> из <code>{magrittr}</code>), а плейсхолдер — <code>_</code> (вместо <code>.</code> в <code>{magrittr}</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span> <span class="sc">|&gt;</span> </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sin</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>() <span class="sc">|&gt;</span> </span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(<span class="dv">2</span>, <span class="at">base =</span> _) <span class="sc">|&gt;</span> </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -178.9075</code></pre>
 </div>
@@ -756,8 +803,8 @@ dbl (3): ...1, Height, Weight
 <h3 data-number="10.6.1" class="anchored" data-anchor-id="выбор-колонок-dplyrselect"><span class="header-section-number">10.6.1</span> Выбор колонок: <code>dplyr::select()</code></h3>
 <p>Функция <code>dplyr::select()</code> позволяет выбирать колонки по номеру или имени (кавычки не нужны).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span>,<span class="dv">5</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 2
     ...1 Race             
@@ -776,8 +823,8 @@ dbl (3): ...1, Height, Weight
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race, Publisher, <span class="st">`</span><span class="at">Hair color</span><span class="st">`</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race, Publisher, <span class="st">`</span><span class="at">Hair color</span><span class="st">`</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 4
    name          Race              Publisher         `Hair color`
@@ -795,12 +842,12 @@ dbl (3): ...1, Height, Weight
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Обратите внимание, если в названии колонки присутствует пробел или, например, колонка начинается с цифры или точки и цифры, то это синтаксически невалидное имя (<a href="010-intro.html#sec-variables"><span>Глава&nbsp;2.6</span></a>). Это не значит, что такие названия колонок недопустимы. Но такие названия колонок нужно обособлять ` грависом (правый штрих, на клавиатуре находится там же где и буква ё и ~).</p>
+<p>Обратите внимание, если в названии колонки присутствует пробел или, например, колонка начинается с цифры или точки и цифры, то это синтаксически невалидное имя (<a href="010-intro.html#sec-variables" class="quarto-xref"><span>Глава 2.6</span></a>). Это не значит, что такие названия колонок недопустимы. Но такие названия колонок нужно обособлять ` грависом (правый штрих, на клавиатуре находится там же где и буква ё и ~).</p>
 <p>Еще обратите внимание на то, что функции tidyverse не изменяют сами изначальные тибблы/датафреймы. Это означает, что если вы хотите полученный результат сохранить, то нужно добавить присвоение:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>heroes_some_cols <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>heroes_some_cols <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race, Publisher, <span class="st">`</span><span class="at">Hair color</span><span class="st">`</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>heroes_some_cols</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>heroes_some_cols</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 4
    name          Race              Publisher         `Hair color`
@@ -824,8 +871,8 @@ dbl (3): ...1, Height, Weight
 <p>Для выбора столбцов (не только в <code>select()</code>, но и для других функций <em>tidyverse</em>) используется специальный мини-язык tidy selection из пакета <code>{tidyselect}</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Tidy selection даёт очень широкие возможности для выбора колонок.</p>
 <p>Можно использовать оператор <code>:</code> для выбора нескольких соседних колонок (по аналогии с созданием числового вектора с шагом 1).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span>Publisher)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span>Publisher)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 7
    name          Gender `Eye color` Race           `Hair color` Height Publisher
@@ -844,8 +891,8 @@ dbl (3): ...1, Height, Weight
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span><span class="st">`</span><span class="at">Eye color</span><span class="st">`</span>, Publisher<span class="sc">:</span>Weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span><span class="st">`</span><span class="at">Eye color</span><span class="st">`</span>, Publisher<span class="sc">:</span>Weight)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 7
    name          Gender `Eye color` Publisher      `Skin color` Alignment Weight
@@ -865,8 +912,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>Используя <code>!</code> можно вырезать ненужные колонки.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>...<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>...<span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 10
    name      Gender `Eye color` Race  `Hair color` Height Publisher `Skin color`
@@ -884,8 +931,8 @@ dbl (3): ...1, Height, Weight
 # ℹ 724 more rows
 # ℹ 2 more variables: Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>Gender<span class="sc">:</span>Height)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>Gender<span class="sc">:</span>Height)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 6
     ...1 name          Publisher         `Skin color` Alignment Weight
@@ -907,8 +954,8 @@ dbl (3): ...1, Height, Weight
 <p>В дополнение к логическим операторам и <code>:</code>, в tidy selection есть набор вспомогательных функций, работающих исключительно в контексте выбора колонок.</p>
 <p>Вспомогательная функция <code>last_col()</code> позволит обратиться к последней колонке тиббла:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span><span class="fu">last_col</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name<span class="sc">:</span><span class="fu">last_col</span>())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 10
    name      Gender `Eye color` Race  `Hair color` Height Publisher `Skin color`
@@ -929,8 +976,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>А функция <code>everything()</code> позволяет выбрать все колонки.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">everything</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">everything</span>())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -951,8 +998,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>При этом <code>everything()</code> не будет дублировать выбранные колонки, поэтому можно использовать <code>everything()</code> для перестановки колонок в тиббле:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Publisher, <span class="fu">everything</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Publisher, <span class="fu">everything</span>())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
    name          Publisher     ...1 Gender `Eye color` Race  `Hair color` Height
@@ -971,10 +1018,10 @@ dbl (3): ...1, Height, Weight
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Впрочем, для перестановки колонок удобнее использовать специальную функцию <code>relocate()</code> (<a href="#sec-tidy_relocate"><span>Глава&nbsp;10.6.4</span></a>). Можно даже выбирать колонки по паттернам в названиях. Например, с помощью <code>ends_with()</code> можно выбрать все колонки, заканчивающиеся одинаковым суффиксом:</p>
+<p>Впрочем, для перестановки колонок удобнее использовать специальную функцию <code>relocate()</code> (<a href="#sec-tidy_relocate" class="quarto-xref"><span>Глава 10.6.4</span></a>). Можно даже выбирать колонки по паттернам в названиях. Например, с помощью <code>ends_with()</code> можно выбрать все колонки, заканчивающиеся одинаковым суффиксом:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"color"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"color"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 3
    `Eye color` `Hair color` `Skin color`
@@ -994,8 +1041,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>Аналогично, с помощью функции <code>starts_with()</code> можно найти колонки с одинаковым префиксом, с помощью <code>contains()</code> — все колонки с выбранным паттерном в любой части названия колонки<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"Eye"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"color"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"Eye"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"color"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 1
    `Eye color`
@@ -1012,8 +1059,8 @@ dbl (3): ...1, Height, Weight
 10 brown      
 # ℹ 724 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"eight"</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"eight"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 2
    Height Weight
@@ -1031,10 +1078,10 @@ dbl (3): ...1, Height, Weight
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Ну и наконец, можно выбирать по содержимому колонок с помощью <code>where()</code>. Это напоминает применение <code>sapply()</code>(<a href="050-functional.html#sec-apply_other"><span>Глава&nbsp;8.6.3</span></a>) на датафрейме для индексирования колонок: в качестве аргумента для <code>where</code> принимается функция, которая применяется для каждой из колонок, после чего выбираются только те колонки, для которых было получено <code>TRUE</code>.</p>
+<p>Ну и наконец, можно выбирать по содержимому колонок с помощью <code>where()</code>. Это напоминает применение <code>sapply()</code>(<a href="050-functional.html#sec-apply_other" class="quarto-xref"><span>Глава 8.6.3</span></a>) на датафрейме для индексирования колонок: в качестве аргумента для <code>where</code> принимается функция, которая применяется для каждой из колонок, после чего выбираются только те колонки, для которых было получено <code>TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 3
     ...1 Height Weight
@@ -1054,8 +1101,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>Функция <code>where()</code> даёт невиданную мощь: можно использовать как встроенные или созданные функции, так и анонимные функции. Например, можно выбрать все колонки без <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">any</span>(<span class="fu">is.na</span>(x))))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(<span class="cf">function</span>(x) <span class="sc">!</span><span class="fu">any</span>(<span class="fu">is.na</span>(x))))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 3
     ...1 name          Publisher        
@@ -1078,8 +1125,8 @@ dbl (3): ...1, Height, Weight
 <h3 data-number="10.6.3" class="anchored" data-anchor-id="переименование-колонок-dplyrrename"><span class="header-section-number">10.6.3</span> Переименование колонок: <code>dplyr::rename()</code></h3>
 <p>Внутри <code>select()</code> можно не только выбирать колонки, но и переименовывать их:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">id =</span> ...<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">id =</span> ...<span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 1
       id
@@ -1099,8 +1146,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>Однако удобнее для этого использовать специальную функцию <code>dplyr::rename()</code>. Синтаксис у нее такой же, как и у <code>select()</code>, но <code>rename()</code> не выбрасывает колонки, которые не были упомянуты.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> ...<span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">id =</span> ...<span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
       id name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -1121,8 +1168,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>Для массового переименования колонок можно использовать функцию <code>rename_with()</code>. Эта функция также использует синтаксис tidy selection для выбора колонок (по умолчанию выбираются все колонки) и применяет функцию-аргумент к названиям выбранных колонок:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(make.names)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(make.names)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name      Gender Eye.color Race  Hair.color Height Publisher Skin.color
@@ -1146,8 +1193,8 @@ dbl (3): ...1, Height, Weight
 <h3 data-number="10.6.4" class="anchored" data-anchor-id="sec-tidy_relocate"><span class="header-section-number">10.6.4</span> Перестановка колонок: <code>dplyr::relocate()</code></h3>
 <p>Для изменения порядка колонок можно использовать функцию <code>relocate()</code>. Она тоже работает похожим образом на <code>select()</code> и <code>rename()</code><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. Как и <code>rename()</code>, функция <code>relocate()</code> не выкидывает неиспользованные колонки:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
    Publisher          ...1 name     Gender `Eye color` Race  `Hair color` Height
@@ -1168,8 +1215,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p>При этом <code>relocate()</code> имеет дополнительные параметры <code>.after =</code> и <code>.before =</code>, которые позволяют выбирать, куда поместить выбранные колонки.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher, <span class="at">.after =</span> name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher, <span class="at">.after =</span> name)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name          Publisher    Gender `Eye color` Race  `Hair color` Height
@@ -1190,8 +1237,8 @@ dbl (3): ...1, Height, Weight
 </div>
 <p><code>relocate()</code> очень хорошо работает в сочетании с выбором колонок с помощью tidy selection. Например, можно передвинуть в одно место все колонки с одним типом данных:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher, <span class="fu">where</span>(is.numeric), <span class="at">.after =</span> name)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(Publisher, <span class="fu">where</span>(is.numeric), <span class="at">.after =</span> name)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
    name      Publisher  ...1 Height Weight Gender `Eye color` Race  `Hair color`
@@ -1215,25 +1262,25 @@ dbl (3): ...1, Height, Weight
 <h3 data-number="10.6.5" class="anchored" data-anchor-id="извлечение-колонки-как-вектора-dplyrpull"><span class="header-section-number">10.6.5</span> Извлечение колонки как вектора: <code>dplyr::pull()</code></h3>
 <p>Последняя важная функция для выбора колонок — <code>pull()</code>. Эта функция делает то же самое, что и индексирование с помощью <code>$</code>, т.е. вытаскивает из тиббла вектор с выбранным названием. Это лучше вписывается в логику tidyverse, поскольку позволяет извлечь колонку из тиббла с использованием пайпа:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Height) <span class="sc">%&gt;%</span></span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 203 191 185 203  NA 193</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height) <span class="sc">%&gt;%</span></span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 203 191 185 203  NA 193</code></pre>
 </div>
 </div>
 <p>У функции <code>pull()</code> есть параметр <code>name =</code>, который позволяет создать именованный вектор:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(Height, name) <span class="sc">%&gt;%</span></span>
-<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       A-Bomb    Abe Sapien      Abin Sur   Abomination       Abraxas 
           203           191           185           203            NA 
@@ -1250,8 +1297,8 @@ Absorbing Man
 <h3 data-number="10.7.1" class="anchored" data-anchor-id="sec-tidy_slice"><span class="header-section-number">10.7.1</span> Выбор строк по номеру: <code>dplyr::slice()</code></h3>
 <p>Начнем с выбора строк. Функция <code>dplyr::slice()</code> выбирает строчки по их числовому индексу.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
    ...1 name       Gender `Eye color` Race         `Hair color` Height Publisher
@@ -1267,8 +1314,8 @@ Absorbing Man
 <h3 data-number="10.7.2" class="anchored" data-anchor-id="sec-tidy_filter"><span class="header-section-number">10.7.2</span> Выбор строк по условию: <code>dplyr::filter()</code></h3>
 <p>Функция <code>dplyr::filter()</code> делает то же самое, что и <code>slice()</code>, но уже по условию. Причем для условий нужно использовать не векторы из тиббла, а название колонок (без кавычек) как будто бы они были переменными в окружении.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span> </span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">==</span> <span class="st">"DC Comics"</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Publisher <span class="sc">==</span> <span class="st">"DC Comics"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 215 × 11
     ...1 name             Gender `Eye color` Race  `Hair color` Height Publisher
@@ -1292,8 +1339,8 @@ Absorbing Man
 <h3 data-number="10.7.3" class="anchored" data-anchor-id="sec-slice_family"><span class="header-section-number">10.7.3</span> Семейство функций <code>slice()</code></h3>
 <p>У функции <code>slice()</code> есть множество родственников, которые объединяют функционал обычного <code>slice()</code> и <code>filter()</code>. Например, с помощью функций <code>dplyr::slice_max()</code> и <code>dplyr::slice_min()</code> можно выбрать заданное количество строк, содержащих наибольшие или наименьшие значения по колонке соответственно:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(Weight, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(Weight, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
    ...1 name       Gender `Eye color` Race    `Hair color` Height Publisher    
@@ -1303,8 +1350,8 @@ Absorbing Man
 3   203 Darkseid   Male   red         New God No Hair         267 DC Comics    
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(Weight, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(Weight, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
    ...1 name        Gender `Eye color` Race        `Hair color` Height Publisher
@@ -1317,54 +1364,54 @@ Absorbing Man
 </div>
 <p>Функция <code>slice_sample()</code> позволяет выбирать заданное количество случайных строчек:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name            Gender `Eye color` Race    `Hair color` Height Publisher
-  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
-1    11 Air-Walker      Male   blue        &lt;NA&gt;    White           188 Marvel C…
-2   150 Captain Britain Male   blue        Human   Blond           198 Marvel C…
-3   644 Superboy-Prime  Male   blue        Krypto… Black / Blue    180 DC Comics
+   ...1 name           Gender `Eye color` Race   `Hair color` Height Publisher  
+  &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;      
+1   583 Scorpion       Male   brown       Human  Brown           211 Marvel Com…
+2   716 Winter Soldier Male   brown       Human  Brown           175 Marvel Com…
+3   374 Junkpile       Male   &lt;NA&gt;        Mutant &lt;NA&gt;             NA Marvel Com…
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Или же долю строчек:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 11
-   ...1 name              Gender `Eye color` Race  `Hair color` Height Publisher
-  &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
-1   432 Martian Manhunter Male   red         Mart… No Hair         201 DC Comics
-2   557 Rey               Female hazel       Human Brown           297 George L…
-3   145 Callisto          Female blue        &lt;NA&gt;  Black           175 Marvel C…
-4   274 Gamora            Female yellow      Zen-… Black           183 Marvel C…
-5   675 Tracy Strauss     Female &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA NBC - He…
-6   392 Klaw              Male   red         Human No Hair         188 Marvel C…
-7   382 Kevin 11          Male   &lt;NA&gt;        Human Black            NA DC Comics
+   ...1 name            Gender `Eye color` Race    `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   383 Kick-Ass        Male   blue        Human   Blond            NA Icon Com…
+2    34 Apocalypse      Male   red         Mutant  Black           213 Marvel C…
+3   486 Nathan Petrelli Male   brown       &lt;NA&gt;    &lt;NA&gt;             NA NBC - He…
+4   347 Isis            Female &lt;NA&gt;        &lt;NA&gt;    &lt;NA&gt;             NA DC Comics
+5   123 Blue Beetle     Male   &lt;NA&gt;        &lt;NA&gt;    &lt;NA&gt;             NA DC Comics
+6   292 Goliath IV      Male   brown       &lt;NA&gt;    Black           183 Marvel C…
+7   377 K-2SO           Male   white       Android No Hair         213 George L…
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p>Если поставить значение параметра <code>prop =</code> равным <code>1</code>, то таким образом можно перемешать порядок строчек в тиббле:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name             Gender `Eye color` Race  `Hair color` Height Publisher
-   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
- 1   430 Mandarin         Male   blue        Human White           188 Marvel C…
- 2   219 DL Hawkins       Male   &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA NBC - He…
- 3    15 Alex Woolsly     Male   &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA NBC - He…
- 4    96 Black Canary     Female blue        Human Blond           165 DC Comics
- 5   109 Blackwing        Male   blue        &lt;NA&gt;  Black           185 Marvel C…
- 6   341 Indigo           Female &lt;NA&gt;        Alien Purple           NA DC Comics
- 7   406 Light Lass       Female blue        &lt;NA&gt;  Red             165 DC Comics
- 8   468 Monarch          Male   blue        &lt;NA&gt;  White           193 DC Comics
- 9   320 Hela             Female green       Asga… Black           213 Marvel C…
-10   366 John Constantine Male   blue        Human Blond           183 DC Comics
+    ...1 name            Gender `Eye color` Race   `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   380 Kathryn Janeway Female &lt;NA&gt;        Human  &lt;NA&gt;            NA  "Star Tr…
+ 2    41 Ardina          Female white       Alien  Orange         193  "Marvel …
+ 3   730 Ymir            Male   white       Frost… No Hair        305. "Marvel …
+ 4   541 Rachel Pirzad   Female &lt;NA&gt;        Alpha  &lt;NA&gt;            NA  "SyFy"   
+ 5   435 Master Chief    Male   brown       Human… Brown          213  "Microso…
+ 6   650 Synch           Male   brown       &lt;NA&gt;   Black          180  "Marvel …
+ 7   311 Hawk            Male   red         &lt;NA&gt;   Brown          185  "DC Comi…
+ 8   509 Parademon       &lt;NA&gt;   &lt;NA&gt;        Parad… &lt;NA&gt;            NA  "DC Comi…
+ 9   185 Copycat         Female red         Mutant White          183  "Marvel …
+10    86 Bionic Woman    Female blue        Cyborg Black           NA  ""       
 # ℹ 724 more rows
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
@@ -1374,8 +1421,8 @@ Absorbing Man
 <h3 data-number="10.7.4" class="anchored" data-anchor-id="sec-tidy_drop_na"><span class="header-section-number">10.7.4</span> Удаление строчек с NA: <code>tidyr::drop_na()</code></h3>
 <p>Если нужно выбрать только строчки без пропущенных значений, то можно воспользоваться удобной функцией <code>tidyr::drop_na()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 50 × 11
     ...1 name       Gender `Eye color` Race        `Hair color` Height Publisher
@@ -1396,8 +1443,8 @@ Absorbing Man
 </div>
 <p>Можно выбрать колонки, наличие <code>NA</code> в которых будет приводить к удалению соответствующих строчек (не затрагивая другие строчки, в которых есть <code>NA</code> в остальных столбцах).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Weight)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 495 × 11
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -1416,14 +1463,14 @@ Absorbing Man
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Для выбора колонок в <code>drop_na()</code> используется tidy selection, с которым мы недавно познакомились (<a href="#sec-tidyselect"><span>Глава&nbsp;10.6.2</span></a>).</p>
+<p>Для выбора колонок в <code>drop_na()</code> используется tidy selection, с которым мы недавно познакомились (<a href="#sec-tidyselect" class="quarto-xref"><span>Глава 10.6.2</span></a>).</p>
 </section>
 <section id="sec-tidy_arrange" class="level3" data-number="10.7.5">
 <h3 data-number="10.7.5" class="anchored" data-anchor-id="sec-tidy_arrange"><span class="header-section-number">10.7.5</span> Сортировка строк: <code>dplyr::arrange()</code></h3>
 <p>Функция <code>dplyr::arrange()</code> сортирует строчки от меньшего к большему (или по алфавиту - для текстовых значений) по выбранной колонке.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Weight)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Weight)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name            Gender `Eye color` Race   `Hair color` Height Publisher
@@ -1444,8 +1491,8 @@ Absorbing Man
 </div>
 <p>Чтобы отсортировать в обратном порядке, воспользуйтесь функцией <code>desc()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Weight))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Weight))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name       Gender `Eye color` Race        `Hair color` Height Publisher
@@ -1466,8 +1513,8 @@ Absorbing Man
 </div>
 <p>Можно сортировать по нескольким колонкам сразу. В таких случаях удобно в качестве первой переменной выбирать переменную, обозначающую принадлежность к группе, а в качестве второй — континуальную числовую переменную:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Gender, <span class="fu">desc</span>(Weight))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Gender, <span class="fu">desc</span>(Weight))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
     ...1 name      Gender `Eye color` Race         `Hair color` Height Publisher
@@ -1492,10 +1539,10 @@ Absorbing Man
 <h2 data-number="10.8" class="anchored" data-anchor-id="sec-tidy_mutate"><span class="header-section-number">10.8</span> Создание колонок: <code>dplyr::mutate()</code> и <code>dplyr::transmute()</code></h2>
 <p>Функция <code>dplyr::mutate()</code> позволяет создавать новые колонки в тиббле.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, imt) <span class="sc">%&gt;%</span></span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(imt))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(imt))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 2
    name          imt
@@ -1515,8 +1562,8 @@ Absorbing Man
 </div>
 <p><code>dplyr::transmute()</code> - это аналог <code>mutate()</code>, который не только создает новые колонки, но и сразу же выкидывает все старые:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 1
      imt
@@ -1534,10 +1581,10 @@ Absorbing Man
 # ℹ 724 more rows</code></pre>
 </div>
 </div>
-<p>Внутри <code>mutate()</code> и <code>transmute()</code> мы можем использовать либо векторизованные операции (длина новой колонки должна равняться длине датафрейма), либо операции, которые возвращают одно значение. В последнем случае значение будет одинаковым на всю колонку, т.е. будет работать правило ресайклинга (<a href="013-vector.html#sec-recycling"><span>Глава&nbsp;3.4</span></a>):</p>
+<p>Внутри <code>mutate()</code> и <code>transmute()</code> мы можем использовать либо векторизованные операции (длина новой колонки должна равняться длине датафрейма), либо операции, которые возвращают одно значение. В последнем случае значение будет одинаковым на всю колонку, т.е. будет работать правило ресайклинга (<a href="013-vector.html#sec-recycling" class="quarto-xref"><span>Глава 3.4</span></a>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(name, <span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transmute</span>(name, <span class="at">weight_mean =</span> <span class="fu">mean</span>(Weight, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 2
    name          weight_mean
@@ -1557,8 +1604,8 @@ Absorbing Man
 </div>
 <p>Однако в функциях <code>mutate()</code> и <code>transmute()</code> правило ресайклинга не будет работать в остальных случаях: если полученный вектор будет не равен 1 или длине датафрейма, то мы получим ошибку.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">one_and_two =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">one_and_two =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `mutate()`:
 ℹ In argument: `one_and_two = 1:2`.
@@ -1566,10 +1613,10 @@ Caused by error:
 ! `one_and_two` must be size 734 or 1, not 2.</code></pre>
 </div>
 </div>
-<p>Это не баг, а фича: авторы пакета <code>{dplyr}</code> считают, что ресайклинг кратных друг другу векторов — это слишком удобное место для выстрелов себе в ногу. Поэтому в таких случаях разработчики <code>{dplyr}</code> рекомендуют использовать функцию <code>rep()</code>, знакомую нам уже очень давно (<a href="013-vector.html#sec-atomic"><span>Глава&nbsp;3.1</span></a>).</p>
+<p>Это не баг, а фича: авторы пакета <code>{dplyr}</code> считают, что ресайклинг кратных друг другу векторов — это слишком удобное место для выстрелов себе в ногу. Поэтому в таких случаях разработчики <code>{dplyr}</code> рекомендуют использовать функцию <code>rep()</code>, знакомую нам уже очень давно (<a href="013-vector.html#sec-atomic" class="quarto-xref"><span>Глава 3.1</span></a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">one_and_two =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(.)))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">one_and_two =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(.)))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 12
     ...1 name          Gender `Eye color` Race     `Hair color` Height Publisher
@@ -1597,10 +1644,10 @@ Caused by error:
 <p>Агрегация по группам - это очень часто возникающая задача, например, это может использоваться для усреднения данных по испытуемым или условиям. Сделать агрегацию в датафрейме удобной Хэдли Уикхэм пытался еще в предшественнике <code>{dplyr}</code>, пакете <code>{plyr}</code>. <code>{dplyr}</code> позволяет делать агрегацию очень симпатичным и понятным способом. Агрегация в <code>{dplyr}</code> состоит из двух этапов: группировки (<code>group_by()</code>) и подытоживания (<code>summarise()</code>). Начнем с последнего.</p>
 <p>Функция <code>dplyr::summarise()</code><a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> позволяет агрегировать данные в тиббле. Работает она очень похоже на <code>mutate()</code>, но если внутри <code>mutate()</code> используются векторизованные функции, возвращающие вектор такой же длины, что и колонки, использовавшиеся для расчетов, то в <code>summarise()</code> используются функции, которые возвращают вектор длиной 1. Например, <code>min()</code>, <code>mean()</code>, <code>max()</code> и т.д. Можно создавать несколько колонок через запятую (это работает и для <code>mutate()</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">min</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">max</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb110-4"><a href="#cb110-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">max</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   `min(imt, na.rm = TRUE)` `max(imt, na.rm = TRUE)`
@@ -1610,12 +1657,12 @@ Caused by error:
 </div>
 <p>В <code>{dplyr}</code> есть дополнительные суммирующие функции для более удобного индексирования в стиле tidyverse. Например, функции <code>dplyr::nth()</code>, <code>dplyr::first()</code> и <code>dplyr::last()</code>, которые позволяют вытаскивать значения из вектора по индексу (что-то вроде <code>slice()</code>, но для векторов)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(imt) <span class="sc">%&gt;%</span></span>
 <span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">first =</span> <span class="fu">first</span>(imt),</span>
 <span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">tenth =</span> <span class="fu">nth</span>(imt, <span class="dv">10</span>),</span>
-<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">last =</span> <span class="fu">last</span>(imt))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">last =</span> <span class="fu">last</span>(imt))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
    first tenth  last
@@ -1625,9 +1672,9 @@ Caused by error:
 </div>
 <p>В отличие от <code>mutate()</code>, иногда мы хотим, чтобы функция внутри агрегации возвращала вектор из нескольких значений. Для этого вместо <code>summarise()</code> можно использовать <code>reframe()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">imt_range =</span> <span class="fu">range</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">reframe</span>(<span class="at">imt_range =</span> <span class="fu">range</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   imt_range
@@ -1641,8 +1688,8 @@ Caused by error:
 <h3 data-number="10.9.2" class="anchored" data-anchor-id="sec-tidy_group"><span class="header-section-number">10.9.2</span> Группировка: <code>group_by()</code></h3>
 <p><code>dplyr::group_by()</code> - это функция для группировки данных в тиббле по дискретной переменной для дальнейшей агрегации с помощью <code>summarise()</code>. После применения <code>group_by()</code> тиббл будет выглядеть так же, но у него появятся атрибут <code>groups</code><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
 # Groups:   Gender [3]
@@ -1664,11 +1711,11 @@ Caused by error:
 </div>
 <p>Если после этого применить на тиббле функцию <code>summarise()</code>, то мы получим не тиббл длиной один, а тиббл со значением для каждой из групп.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imt =</span> Weight<span class="sc">/</span>(Height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
 <span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">min</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">max</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">max</span>(imt, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   Gender `min(imt, na.rm = TRUE)` `max(imt, na.rm = TRUE)`
@@ -1685,9 +1732,9 @@ Caused by error:
 <h3 data-number="10.9.3" class="anchored" data-anchor-id="sec-tidy_count"><span class="header-section-number">10.9.3</span> Подсчет строк: <code>dplyr::n()</code>, <code>dplyr::count()</code></h3>
 <p>Для подсчёта количества значений можно воспользоваться функцией <code>n()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span></span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   Gender     n
@@ -1699,10 +1746,10 @@ Caused by error:
 </div>
 <p>Функция <code>n()</code> вместе с <code>group_by()</code> внутри <code>filter()</code> позволяет удобным образом “отрезать” от тиббла редкие группы…</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Race) <span class="sc">%&gt;%</span></span>
 <span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 611 × 2
 # Groups:   Race [6]
@@ -1723,10 +1770,10 @@ Caused by error:
 </div>
 <p>или же наоборот, выделить только маленькие группы:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Race) <span class="sc">%&gt;%</span></span>
 <span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(name, Race)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34 × 2
 # Groups:   Race [34]
@@ -1747,8 +1794,8 @@ Caused by error:
 </div>
 <p>Таблицу частот можно создать без <code>group_by()</code> и <code>summarise(n = n())</code>. Функция <code>count()</code> заменяет эту конструкцию:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   Gender     n
@@ -1760,8 +1807,8 @@ Caused by error:
 </div>
 <p>Эту таблицу частот удобно сразу проранжировать, указав в параметре <code>sort =</code> значение <code>TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Gender, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   Gender     n
@@ -1779,8 +1826,8 @@ Caused by error:
 <h3 data-number="10.9.4" class="anchored" data-anchor-id="sec-tidy_distinct"><span class="header-section-number">10.9.4</span> Уникальные значения: <code>dplyr::distinct()</code></h3>
 <p><code>dplyr::distinct()</code> - это более быстрый аналог <code>unique()</code>, позволяет извлекать уникальные значения для одной или нескольких колонок.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Gender)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Gender)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   Gender
@@ -1791,8 +1838,8 @@ Caused by error:
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Gender, Race)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Gender, Race)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 81 × 2
    Gender Race             
@@ -1816,10 +1863,10 @@ Caused by error:
 <h3 data-number="10.9.5" class="anchored" data-anchor-id="sec-tidy_group_mutate"><span class="header-section-number">10.9.5</span> Создание колонок с группировкой</h3>
 <p>В tidyverse это можно сделать с помощью сочетания <code>group_by()</code> и <code>mutate()</code> (вместо <code>summarise()</code>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="sc">%&gt;%</span></span>
 <span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Race) <span class="sc">%&gt;%</span></span>
 <span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Race_n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Race, name, Gender, Race_n)</span></code><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Race, name, Gender, Race_n)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 4
 # Groups:   Race [62]
@@ -1855,8 +1902,8 @@ Caused by error:
 <p>Такой код очень легко читается, да и тому, кто использует <em>tidyverse</em> для написания кода, позволяет мыслить более четко.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="doc-bibliography" style="display: none">
-<div id="ref-wickham25history" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-wickham25history" class="csl-entry" role="listitem">
 Wickham, H. (2025). <em>A Personal History of the Tidyverse</em>. <a href="https://hadley.github.io/25-tidyverse-history/">https://hadley.github.io/25-tidyverse-history/</a>
 </div>
 </div>
@@ -1877,238 +1924,419 @@ Wickham, H. (2025). <em>A Personal History of the Tidyverse</em>. <a href="https
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
     };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
       }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+      return false;
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-});
-</script>
-
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./107-beyond_base_r.html" class="pagination-link">
+      <a href="./107-beyond_base_r.html" class="pagination-link" aria-label="За пределами base R: tidyverse и data.table">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">За пределами base R: tidyverse и data.table</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./120-tidyverse_advanced.html" class="pagination-link">
+      <a href="./120-tidyverse_advanced.html" class="pagination-link" aria-label="Продвинутый tidyverse">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Продвинутый tidyverse</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
