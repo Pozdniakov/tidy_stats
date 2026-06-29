@@ -128,35 +128,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -360,7 +331,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -537,10 +508,10 @@ window.Quarto = {
 <pre><code>[1] 9</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> <code>{}</code> — блок инструкций
@@ -562,10 +533,10 @@ window.Quarto = {
 <pre><code>[1] 27</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> ленивые вычисления
@@ -692,7 +663,7 @@ window.Quarto = {
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0xa90573460&gt;
+&lt;bytecode: 0x8503d3460&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -704,10 +675,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </div>
 <p>Мы можем создать список из функций! Зачем — это другой вопрос, но ведь можем же! Например, создавать списки из функций может быть удобным для продвинутых операций в <code>across()</code> в пакете <code>{dplyr}</code> (см. <a href="120-tidyverse_advanced.html#sec-tidy_across" class="quarto-xref"><span>Глава 11.3</span></a>).</p>
 <p>Еще можно создавать функции внутри функций<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, использовать функции в качестве аргументов функций, сохранять функции как переменные. Пожалуй, самое важное из этого всего — это то, что функция может быть аргументом в функции. Не просто название функции как строковая переменная, не результат выполнения функции, а именно сама функция как объект! Это лежит в основе использования семейства функций <code>apply()</code>, о которых пойдет речь далее, и многих фишек <em>tidyverse.</em></p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> а как в Python?
@@ -717,10 +688,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 <p>В Python дело обстоит похожим образом: функции там тоже являются объектами первого порядка, поэтому все эти фишки функционального программирования (с поправкой на синтаксис, конечно) будут работать и там.</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> окружения и поиск переменных
@@ -776,10 +747,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </div>
 <p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code>apply()</code> вы можете в буквальном смысле “применить” функцию к матрице или датафрейму. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> — данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.е. для каждого элемента по отдельности), а <code>FUN</code> — это функция, которую вы хотите применить! <code>apply()</code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
 <p><img src="images/050-functional_apply_function.png" class="img-fluid" alt="Схема работы `apply()`: выбираем матрицу, задаем направление обхода (по строкам или по столбцам) и функцию, которая применяется к каждой строке или столбцу"></p>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> передаём в <code>FUN =</code> функцию как объект
@@ -807,10 +778,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 [3,]    3    6    9   12</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> специальные функции для операций над всеми строками/столбцами
@@ -869,10 +840,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </div>
 </div>
 <p>Причем работать это будет не только с <code>na.rm =</code>, но и с любым другим дополнительным аргументом!</p>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> <code>apply()</code> не работает с датафреймами
@@ -887,10 +858,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 <h3 data-number="8.6.2" class="anchored" data-anchor-id="sec-anon_f"><span class="header-section-number">8.6.2</span> Анонимные функции</h3>
 <p>Что делать, если мы хотим сделать что-то более сложное, чем просто применить одну функцию? А если функция принимает не первым, а вторым аргументом данные из матрицы? В этом случае нам помогут <strong>анонимные функции</strong> <em>(anonymous function)</em>.</p>
 <p>Анонимные функции — это функции, которые будут использоваться один раз и без названия.</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> а как в Python?
@@ -923,10 +894,10 @@ function (..., na.rm = FALSE)  .Primitive("min")
 <pre><code>[1] 11 17 15</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> параметр анонимной функции
@@ -962,10 +933,10 @@ $list
   10   26 </code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> такой непредсказуемый <code>sapply()</code>
@@ -989,10 +960,10 @@ $list
 </div>
 </div>
 <p>Зачем вообще тогда нужен <code>sapply()</code>, если мы можем просто применить векторизованную функцию? Ключевое слово здесь <em>векторизованная</em> функция. Если функция не векторизована, то <code>sapply()</code> становится удобным вариантом для того, чтобы избежать итерирования с помощью циклов <code>for</code>. Если же у вас уже есть векторизованная функция, то лучше применять напрямую именно её: такой код будет не только более читаемым, но и в большинстве случаев более быстрым.</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> <code>Vectorize()</code>

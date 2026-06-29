@@ -128,35 +128,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -360,7 +331,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -547,10 +518,10 @@ window.Quarto = {
 </div>
 </div>
 <p>Ошибка! Однако если у вас более старая версия R (до 4.2.0, апрель 2022), то вместо ошибки будет учитываться только первое значение вектора условий: остальные будут игнорироваться, при этом будет выводиться предупреждение. Как же посчитать для всего вектора сразу?</p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> применение условных конструкций
@@ -651,10 +622,10 @@ window.Quarto = {
 </div>
 </div>
 <p>Если же подходящей векторизованной функции нет, на помощь приходит семейство функций <code>apply()</code> (см. <a href="050-functional.html#sec-apply_f" class="quarto-xref"><span>Глава 8.6</span></a>).</p>
-<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> дело не только в скорости
@@ -683,10 +654,10 @@ window.Quarto = {
 [5] "Положительное число"         </code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> иногда <code>ifelse()</code> излишен
@@ -696,10 +667,10 @@ window.Quarto = {
 <p>Периодически я встречаю у студентов строчку вроде такой: <code>ifelse(условие, TRUE, FALSE)</code>. Эта конструкция избыточна, т.к. получается, что логический вектор из <code>TRUE</code> и <code>FALSE</code> превращается в абсолютно такой же вектор из <code>TRUE</code> и <code>FALSE</code> на тех же самых местах. Выходит, что ничего не меняется!</p>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> <code>NA</code> в <code>ifelse()</code> превращается в <code>NA</code>
@@ -725,10 +696,10 @@ window.Quarto = {
 </div>
 </div>
 <p>Если вы пользуетесь одним из этих пакетов (о них пойдет речь далее — см. <a href="107-beyond_base_r.html" class="quarto-xref"><span>Глава 9</span></a>), то я советую пользоваться соответствующей функцией вместо базовой функции <code>ifelse()</code>.</p>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> возвращение <code>NA</code> может привести к ошибкам
@@ -770,10 +741,10 @@ window.Quarto = {
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="st">"typical weight"</span> <span class="co"># final "else" </span></span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> не забывайте про запятые

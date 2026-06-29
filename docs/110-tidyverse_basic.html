@@ -128,35 +128,6 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -360,7 +331,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./320-ttest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -559,10 +530,10 @@ window.Quarto = {
 <li><strong>Дополнительные пакеты</strong> <em>tidyverse:</em> они не подключаются при вызове <code>library(tidyverse)</code>, но они также разделяют подход <em>tidyverse</em>, дополняя и развивая его. Определить границы “расширенного” <em>tidyverse</em> очень сложно. Во-первых, есть еще много других небольших пакетов от команды <em>tidyverse,</em> которые тоже считаются частью <em>tidyverse.</em> Во-вторых, кроме официальных пакетов от команды <em>tidyverse</em> есть множество пакетов от других разработчиков, которые пытаются соответствовать принципам <em>tidyverse</em> и дополняют их.</li>
 </ol></li>
 </ul>
-<div class="callout callout-style-simple callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Предупреждение</span><em>Для продвинутых:</em> Расширенная Вселенная tidyverse
@@ -734,10 +705,10 @@ dbl (3): ...1, Height, Weight
 <pre><code>[1] -14.08595</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Осторожность</span>Время мемов
@@ -1368,11 +1339,11 @@ Absorbing Man
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name       Gender `Eye color` Race     `Hair color` Height Publisher    
-  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
-1   315 Hawkman    Male   blue        &lt;NA&gt;     Brown           185 DC Comics    
-2    33 Anti-Venom Male   blue        Symbiote Blond           229 Marvel Comics
-3    50 Atom       Male   &lt;NA&gt;        &lt;NA&gt;     &lt;NA&gt;             NA DC Comics    
+   ...1 name        Gender `Eye color` Race        `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   394 Kraven II   Male   brown       Human       Black           191 Marvel C…
+2   331 Hulk        Male   green       Human / Ra… Green           244 Marvel C…
+3   520 Plastic Lad Male   &lt;NA&gt;        &lt;NA&gt;        &lt;NA&gt;             NA DC Comics
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1382,15 +1353,15 @@ Absorbing Man
 <span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 11
-   ...1 name             Gender `Eye color` Race   `Hair color` Height Publisher
-  &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
-1   160 Captain Universe &lt;NA&gt;   &lt;NA&gt;        God /… &lt;NA&gt;             NA Marvel C…
-2   701 Vixen            Female amber       Human  Black           175 DC Comics
-3   350 Jack-Jack        Male   blue        Human  Brown            71 Dark Hor…
-4   433 Marvel Girl      Female green       &lt;NA&gt;   Red             170 Marvel C…
-5   466 Moloch           Male   &lt;NA&gt;        &lt;NA&gt;   &lt;NA&gt;             NA DC Comics
-6    62 Batgirl          Female &lt;NA&gt;        &lt;NA&gt;   &lt;NA&gt;             NA DC Comics
-7   266 Flash IV         Male   yellow      Human  Auburn          157 DC Comics
+   ...1 name          Gender `Eye color` Race  `Hair color` Height Publisher    
+  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
+1   118 Blob          Male   brown       &lt;NA&gt;  Brown           178 Marvel Comics
+2   516 Phantom       Male   &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA DC Comics    
+3   508 Ozymandias    Male   blue        Human Blond            NA DC Comics    
+4   113 Bling!        Female &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;            168 Marvel Comics
+5   635 Stargirl      Female blue        Human Blond           165 DC Comics    
+6   502 One Punch Man Male   &lt;NA&gt;        Human No Hair         175 Shueisha     
+7   655 Taskmaster    Male   brown       Human Brown           188 Marvel Comics
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1400,18 +1371,18 @@ Absorbing Man
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name          Gender `Eye color` Race   `Hair color`  Height Publisher 
-   &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;     
- 1   455 Miss Martian  Female red         &lt;NA&gt;   Red              178 DC Comics 
- 2   630 Spyke         Male   brown       Mutant Blond            183 Marvel Co…
- 3   614 Spawn         Male   brown       Demon  Black            211 Image Com…
- 4   399 Lady Bullseye Female &lt;NA&gt;        &lt;NA&gt;   Black             NA Marvel Co…
- 5   321 Hellboy       Male   gold        Demon  Black            259 Dark Hors…
- 6   245 Etrigan       Male   red         Demon  No Hair          193 DC Comics 
- 7    91 Bishop        Male   brown       Mutant No Hair          198 Marvel Co…
- 8   295 Gravity       Male   blue        Human  Brown            178 Marvel Co…
- 9   227 Donatello     Male   green       Mutant No Hair           NA IDW Publi…
-10   262 Flash         Male   blue        Human  Brown / White    180 DC Comics 
+    ...1 name            Gender `Eye color` Race   `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   132 Box             Male   &lt;NA&gt;        &lt;NA&gt;   &lt;NA&gt;             NA Marvel C…
+ 2   568 Rocket Raccoon  Male   brown       Animal Brown           122 Marvel C…
+ 3   525 Power Girl      Female blue        Krypt… blond           180 DC Comics
+ 4   589 Shang-Chi       Male   brown       Human  Black           178 Marvel C…
+ 5   255 Fin Fang Foom   Male   red         Kakar… No Hair         975 Marvel C…
+ 6    62 Batgirl         Female &lt;NA&gt;        &lt;NA&gt;   &lt;NA&gt;             NA DC Comics
+ 7   343 Invisible Woman Female blue        Human… Blond           168 Marvel C…
+ 8   437 Matt Parkman    Male   &lt;NA&gt;        &lt;NA&gt;   &lt;NA&gt;             NA NBC - He…
+ 9   647 Swamp Thing     Male   red         God /… No Hair          NA DC Comics
+10    73 Beak            Male   black       &lt;NA&gt;   White           175 Marvel C…
 # ℹ 724 more rows
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>

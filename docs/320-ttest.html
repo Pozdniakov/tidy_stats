@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./320-ttest.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./320-ttest.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -340,7 +340,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./320-ttest.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -426,7 +426,7 @@ window.Quarto = {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-one_ttest" id="toc-sec-one_ttest" class="nav-link active" data-scroll-target="#sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный <span class="math inline">\(t\)</span>-тест</a></li>
+  <li><a href="#sec-one_ttest" id="toc-sec-one_ttest" class="nav-link active" data-scroll-target="#sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный t-тест</a></li>
   <li><a href="#sec-two_ttest" id="toc-sec-two_ttest" class="nav-link" data-scroll-target="#sec-two_ttest"><span class="header-section-number">18.2</span> Двухвыборочный t-тест</a>
   <ul class="collapse">
   <li><a href="#sec-dep_ttest" id="toc-sec-dep_ttest" class="nav-link" data-scroll-target="#sec-dep_ttest"><span class="header-section-number">18.2.1</span> Двухвыборочный зависимый t-тест</a></li>
@@ -444,9 +444,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./320-ttest.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./320-ttest.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-ttest" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><span class="math inline">\(t\)</span>-тест</span></span></h1>
+<h1 class="title"><span id="sec-ttest" class="quarto-section-identifier"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">t-тест</span></span></h1>
 </div>
 
 
@@ -470,13 +470,13 @@ window.Quarto = {
 
 
 <section id="sec-one_ttest" class="level2" data-number="18.1">
-<h2 data-number="18.1" class="anchored" data-anchor-id="sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный <span class="math inline">\(t\)</span>-тест</h2>
+<h2 data-number="18.1" class="anchored" data-anchor-id="sec-one_ttest"><span class="header-section-number">18.1</span> Одновыборочный t-тест</h2>
 <p>Мы научились делать <span class="math inline">\(z\)</span>-тест. Однако на практике он почти не используется, потому что предполагает, что мы откуда-то знаем стандартное отклонение в генеральной совокупности. Это обычно не так, поэтому мы <em>оцениваем</em> стандартное отклонение в генеральной совокупности на основе стандартного отклонения по выборке. Это приводит к тому, что тестовая статистика уже не распределена нормально, а распределена согласно <span class="math inline">\(t\)</span>-распределению. Ну и статистика уже называется <span class="math inline">\(t\)</span>-статистикой.</p>
 <p><span class="math display">\[t = \frac{\overline{x} - \mu} {s_x / \sqrt{N}} \]</span></p>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Совет</span><em>Полезное:</em> казалось бы, причем здесь пиво?
@@ -584,10 +584,10 @@ mean of x
 </tbody>
 </table>
 <p>Итак, с тем, когда использовать зависимый, а когда независимый t-тест, более-менее разобрались, давайте опробуем их!</p>
-<div class="callout callout-style-simple callout-note no-icon callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Уведомление</span><em>Полезное:</em> испытуемые должны быть слепыми котятками
@@ -628,10 +628,10 @@ mean difference
             3.3 </code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span>Осторожно: не забывайте прописать paired = TRUE!
@@ -769,10 +769,10 @@ V = 299, p-value = 2.384e-07
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important no-icon callout-titled">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> предупреждение о повторяющихся рангах
