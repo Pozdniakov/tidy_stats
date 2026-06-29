@@ -109,6 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="callout-custom.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -499,10 +500,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pkg_deps</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>ℹ Loading metadata database</code></pre>
+<pre><code></code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>✔ Loading metadata database ... done</code></pre>
+<pre><code>✔ Updated metadata database: 6.67 MB in 6 files.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>ℹ Updating metadata database</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>✔ Updating metadata database ... done</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code></code></pre>
@@ -533,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>В дальнейшем оператор <code>::</code> будет иногда использоваться, чтобы указать, из какого пакета взята функция.</p>
 <p>Оператор <code>::</code> полезен еще и в тех случаях, когда в разных пакетах присутствуют функции с одинаковым названием. Например, у основного пакета <em>tidyverse</em>, <a href="https://dplyr.tidyverse.org/"><code>{dplyr}</code></a>, есть функция <code>filter()</code>. Функция с точно таким же названием есть в базовом R в пакете <code>{stats}</code>, в котором та выполняет совершенно другую задачу. Если у вас уже загружен <code>{dplyr}</code>, то использование <code>::</code> укажет на то, что вы хотите воспользоваться именно функцией <code>filter()</code> из пакета <code>{stats}</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">filter</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">filter</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">3</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Time Series:
 Start = 1 
@@ -558,7 +568,7 @@ Frequency = 1
 </div>
 <p>Выгрузить ненужный пакет можно с помощью функции <code>detach()</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>pak)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>pak)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="sec-install_github" class="level2" data-number="5.6">
@@ -566,14 +576,14 @@ Frequency = 1
 <p>Некоторых пакетов нет ни на <em>CRAN</em>, ни на <em>Bioconductor</em>. Обычно это касается пакетов, разработчики которых по каким-либо причинам решили не проходить проверки или не прошли проверки на строгие требования <em>CRAN</em>. Иногда бывает, что пакет был удален с <em>CRAN</em> (например, автор давно не занимается им) или же версия пакета на <em>CRAN</em> отстает от последней, а именно в ней реализованы так нужные вам функции. В некоторых случаях пакета может не быть на <em>CRAN</em>, потому что его разработчики активно занимаются его развитием и постоянно переделывают уже имеющийся функционал, добавляя новые возможности и удаляя старые. Это нужно делать с осторожностью, когда пакет уже выложен на <em>CRAN</em>, потому что если функции новой версии пакета будут работать по-другому, то это может вызвать массу проблем.</p>
 <p>Во всех этих случаях пакет обычно можно скачать с репозитория <em>GitHub</em>. Для этого нам понадобится уже установленный пакет <code>{pak}</code>. Достаточно передать в <code>pak::pak()</code> адрес репозитория в формате <code>"пользователь/репозиторий"</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"dracor-org/rdracor"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"dracor-org/rdracor"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Теперь установленный пакет осталось загрузить, после чего им можно пользоваться.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdracor)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>godunov <span class="ot">&lt;-</span> <span class="fu">get_net_cooccur_igraph</span>(<span class="at">corpus =</span> <span class="st">"rus"</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">play =</span> <span class="st">"pushkin-boris-godunov"</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(godunov)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rdracor)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>godunov <span class="ot">&lt;-</span> <span class="fu">get_net_cooccur_igraph</span>(<span class="at">corpus =</span> <span class="st">"rus"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">play =</span> <span class="st">"pushkin-boris-godunov"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(godunov)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -588,7 +598,7 @@ Frequency = 1
 <p>У биологов есть свой большой репозиторий, который является альтернативой <em>CRAN</em>, — <em>Bioconductor</em>. С него можно скачать множество специализированных пакетов для работы с биологическими данными.</p>
 <p>Пакет <code>{pak}</code> умеет устанавливать пакеты и с <em>Bioconductor</em> — достаточно добавить префикс <code>bioc::</code> перед названием пакета. Например, для установки пакета <a href="https://bioconductor.org/packages/flowCore"><code>{flowCore}</code></a> — пакета для анализа данных проточной цитометрии:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"bioc::flowCore"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"bioc::flowCore"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="sec-where_packages" class="level2" data-number="5.8">
