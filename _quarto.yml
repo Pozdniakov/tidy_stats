@@ -68,11 +68,31 @@ format:
     code-link: false
   pdf:
     documentclass: book
+    classoption: [openany]
     mainfont: "Mont"
     monofont: "Menlo"
     colorlinks: true
+    code-overflow: wrap
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \fvset{breaklines=true, breakanywhere=true, fontsize=\small}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere,fontsize=\small}
+        \raggedbottom
+        \renewcommand{\labelitemi}{{\large\textbullet}}
+        \renewcommand{\labelitemii}{{\large\textendash}}
+        \AtBeginDocument{\tcbset{fonttitle=\bfseries, opacitybacktitle=1}}
+        \AtBeginDocument{%
+          \let\qExclTriangle\faExclamationTriangle%
+          \renewcommand{\faExclamation}{\qExclTriangle}%
+          \renewcommand{\faLightbulb}{\faGem}%
+          \renewcommand{\faExclamationTriangle}{\faRocket}%
+          \renewcommand{\faInfo}{\faDumbbell}%
+          \renewcommand{\faFire}{\faGrinTongue}%
+        }
   epub:
     cover-image: images/R_stats_pozdniakov_cover.png
+    css: epub-styles.css
 
 pdf-engine: xelatex
 
@@ -80,8 +100,8 @@ prefer-html: false
 
 editor: visual
 
-callout-appearance: simple
-callout-icon: false
+callout-appearance: default
+callout-icon: true
 
 # execute:
 #   execute_notebooks: force
