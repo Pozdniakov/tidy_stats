@@ -420,8 +420,8 @@ div.csl-indent {
   <ul>
   <li><a href="#sec-grammar_of_graphics" id="toc-sec-grammar_of_graphics" class="nav-link active" data-scroll-target="#sec-grammar_of_graphics"><span class="header-section-number">14.1</span> История грамматики графики</a></li>
   <li><a href="#sec-gg_base" id="toc-sec-gg_base" class="nav-link" data-scroll-target="#sec-gg_base"><span class="header-section-number">14.2</span> Основы грамматики графики</a></li>
-  <li><a href="#sec-gg_0" id="toc-sec-gg_0" class="nav-link" data-scroll-target="#sec-gg_0"><span class="header-section-number">14.3</span> Пример №0: пайчарт с распределение по полу</a></li>
-  <li><a href="#sec-gg_1" id="toc-sec-gg_1" class="nav-link" data-scroll-target="#sec-gg_1"><span class="header-section-number">14.4</span> Пример №1: Education and IQ meta-analysis</a></li>
+  <li><a href="#sec-gg_0" id="toc-sec-gg_0" class="nav-link" data-scroll-target="#sec-gg_0"><span class="header-section-number">14.3</span> Пример №0: пайчарт с распределением по полу</a></li>
+  <li><a href="#sec-gg_1" id="toc-sec-gg_1" class="nav-link" data-scroll-target="#sec-gg_1"><span class="header-section-number">14.4</span> Пример №1: мета-анализ образования и интеллекта</a></li>
   <li><a href="#sec-gg_ext" id="toc-sec-gg_ext" class="nav-link" data-scroll-target="#sec-gg_ext"><span class="header-section-number">14.5</span> Расширения ggplot2</a></li>
   </ul>
 </nav>
@@ -456,24 +456,29 @@ div.csl-indent {
 
 <section id="sec-grammar_of_graphics" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="sec-grammar_of_graphics"><span class="header-section-number">14.1</span> История грамматики графики</h2>
-<p>Встроенные возможности для визуализации в R довольно обширны, но дополнительные пакеты значительно ее расширяют. Среди этих пакетов, есть один, который занимает совершенно особенное место – <code>{ggplot2}</code>.</p>
+<p>Встроенные возможности для визуализации в R довольно обширны, но дополнительные пакеты значительно ее расширяют. Среди этих пакетов есть один, который занимает совершенно особенное место — <code>{ggplot2}</code>.</p>
 <p><code>{ggplot2}</code> — это не просто пакет, который рисует красивые графики. Красивые графики можно рисовать и в базовом R. Чтобы понять, почему пакет <code>{ggplot2}</code> занимает особенное место среди пакетов для визуализации (и не только среди пакетов для R, а вообще!), нужно расшифровать <code>gg</code> в его названии. <code>gg</code> означает грамматику графики (Grammar of Graphics), язык для описания графиков, изложенный в одноименной книге Леланда Уилкинсона <span class="citation" data-cites="gg">(<a href="950-references.html#ref-gg" role="doc-biblioref">Wilkinson, 2005</a>)</span>.</p>
 <p>Грамматика графики позволяет описывать графики не в терминах типологии (вот есть пайчарт, есть барплот, есть гистограмма, а есть ящик с усами), а с помощью специального разработанного языка. Этот язык позволяет с помощью грамматики и небольшого количества “слов” языка описывать и создавать практически любые графики и даже придумывать новые! Это дает огромную свободу в создании именно той визуализации, что необходима для текущей задачи.</p>
-<p>Хэдли Уикхэм (да, снова он) немного дополнил идею грамматики графики в статье “A Layered grammar of graphics” <span class="citation" data-cites="layered-grammar">(<a href="950-references.html#ref-layered-grammar" role="doc-biblioref">Wickham, 2010</a>)</span>, которую сопроводил пакетом <code>{ggplot2}</code> с реализацией идей Уилкинсона и своих.</p>
+<p>Хэдли Уикхэм (да, снова он) немного дополнил идею грамматики графики в статье “A Layered Grammar of Graphics” <span class="citation" data-cites="layered-grammar">(<a href="950-references.html#ref-layered-grammar" role="doc-biblioref">Wickham, 2010</a>)</span>, которую сопроводил пакетом <code>{ggplot2}</code> с реализацией идей Уилкинсона и своих.</p>
 </section>
 <section id="sec-gg_base" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="sec-gg_base"><span class="header-section-number">14.2</span> Основы грамматики графики</h2>
-<p>Каждый график состоит из одного или нескольких <strong>слоев (layers)</strong>. Если слоев несколько, то они располагаются один над другим, при этом верхние слои “перекрывают” нижние, примерно как это происходит в программах вроде Adobe Photoshop. У каждого слоя есть три обязательных элемента: <strong>данные (data)</strong>, <strong>геом (geom)</strong>, <strong>эстетики (aestetics)</strong>; и два вспомогательных: <strong>статистические трансформации (stat).</strong> и <strong>регулировка положения (position adjustment).</strong></p>
-<p><img src="images/230-ggplot2_scheme.png" class="img-fluid"></p>
+<p>Каждый график состоит из одного или нескольких <strong>слоев (layers)</strong>. Если слоев несколько, то они располагаются один над другим, при этом верхние слои “перекрывают” нижние, примерно как это происходит в программах вроде Adobe Photoshop. У каждого слоя есть три обязательных элемента: <strong>данные (data)</strong>, <strong>геом (geom)</strong>, <strong>эстетики (aesthetics)</strong>; и два вспомогательных: <strong>статистические трансформации (stat).</strong> и <strong>регулировка положения (position adjustment).</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/230-ggplot2_scheme.png" class="img-fluid figure-img"></p>
+<figcaption>Схема слоёв грамматики графики: данные, геом, эстетики, статистика, регулировка положения</figcaption>
+</figure>
+</div>
 <ul>
 <li><p><strong>Данные (data).</strong> Собственно, сами данные в виде датафрейма, используемые в данном слое.</p></li>
 <li><p><strong>Геом (geom).</strong> Геом — это сокращение от “геометрический объект”. Собственно, в какой геометрический объект мы собираемся превращать данные. Например, в точки, прямоугольники или линии.</p></li>
-<li><p><strong>Отображение (mapping).</strong> Эстетические отображения или просто <strong>эстетики (aestetics)</strong> — это набор правил, как различные переменные превращаются в визуальные особенности геометрии. Без эстетик остается непонятно, какие именно колонки в используемом датафрейме превращаются в различные особенности геомов: позицию, размер, цвет и т.д. У каждой геометрии свой набор эстетик, но многие из них совпадают у разных геомов, например, <em>x</em>, <em>y</em>, <em>colour</em>, <em>fill</em>, <em>size</em>. Без некоторых эстетик геом не будет работать. Например, геометрия в виде точек не будет работать без двух координат этих точек (<em>x</em> и <em>y</em>). Другие эстетики необязательны и имеют значения по умолчанию. Например, по умолчанию точки будут черными, но можно сделать их цвет зависимым от выбранной колонки в датафрейме с помощью эстетики <em>colour</em>.</p></li>
-<li><p><strong>Статистические трансформации (stat).</strong> Название используемой статистической трансформации (или просто — статистики). Да, статистические трансформации можно делать прямо внутри <code>{ggplot2}</code>! Это дает дополнительную свободу в выборе инструментов, потому что обычно те же статистические трансформации можно сделать вне <code>{ggplot2}</code> в процессе препроцессинга. Формально, статистические трансформации — это обязательный элемент геома, но если вы не хотите преобразовывать данные, то можете выбрать “identity” преобразование, которое оставляет все как есть. В <code>{ggplot2}</code> у каждого геома есть статистика по умолчанию, а у каждой статистики - свой геом по умолчанию. И не всегда статистика по умолчанию — это “identity” статистика. Например, для барплота (<code>geom_barplot()</code>) используется статистика “count” <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, которая считает частоты, ведь именно частоты затем трансформируются в высоту барплотов.</p></li>
+<li><p><strong>Отображение (mapping).</strong> Эстетические отображения или просто <strong>эстетики (aesthetics)</strong> — это набор правил, как различные переменные превращаются в визуальные особенности геометрии. Без эстетик остается непонятно, какие именно колонки в используемом датафрейме превращаются в различные особенности геомов: позицию, размер, цвет и т.д. У каждой геометрии свой набор эстетик, но многие из них совпадают у разных геомов, например, <em>x</em>, <em>y</em>, <em>colour</em>, <em>fill</em>, <em>size</em>. Без некоторых эстетик геом не будет работать. Например, геометрия в виде точек не будет работать без двух координат этих точек (<em>x</em> и <em>y</em>). Другие эстетики необязательны и имеют значения по умолчанию. Например, по умолчанию точки будут черными, но можно сделать их цвет зависимым от выбранной колонки в датафрейме с помощью эстетики <em>colour</em>.</p></li>
+<li><p><strong>Статистические трансформации (stat).</strong> Название используемой статистической трансформации (или просто — статистики). Да, статистические трансформации можно делать прямо внутри <code>{ggplot2}</code>! Это дает дополнительную свободу в выборе инструментов, потому что обычно те же статистические трансформации можно сделать вне <code>{ggplot2}</code> в процессе препроцессинга. Формально, статистические трансформации — это обязательный элемент геома, но если вы не хотите преобразовывать данные, то можете выбрать “identity” преобразование, которое оставляет все как есть. В <code>{ggplot2}</code> у каждого геома есть статистика по умолчанию, а у каждой статистики — свой геом по умолчанию. И не всегда статистика по умолчанию — это “identity” статистика. Например, для барплота (<code>geom_bar()</code>) используется статистика “count” <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, которая считает частоты, ведь именно частоты затем трансформируются в высоту барплотов.</p></li>
 </ul>
 <!-- -->
 <ul>
-<li><strong>Регулировка положения (position adjustment).</strong> Регуляровка положения — это небольшое улучшение позиции геометрий для части элементов. Например, можно добавить немного случайного шума (“jitter”) в позицию точек, чтобы они не перекрывали друг друга. Или “раздвинуть” (“dodge”) два барплота, чтобы один не загораживал другой. Как и в случае со статистическими трансформациями, в большинстве случаев значение по умолчанию — “identity”.</li>
+<li><strong>Регулировка положения (position adjustment).</strong> Регулировка положения — это небольшое улучшение позиции геометрий для части элементов. Например, можно добавить немного случайного шума (“jitter”) в позицию точек, чтобы они не перекрывали друг друга. Или “раздвинуть” (“dodge”) два барплота, чтобы один не загораживал другой. Как и в случае со статистическими трансформациями, в большинстве случаев значение по умолчанию — “identity”.</li>
 </ul>
 <p>Кроме слоев, у графика есть:</p>
 <ul>
@@ -481,17 +486,22 @@ div.csl-indent {
 </ul>
 <!-- -->
 <ul>
-<li><p><strong>Шкалы (scales).</strong> Шкалы задают то, <em>как именно</em> значения превращаются в эстетики. Например, если мы задали, что разные значения в колонке будут влиять на цвет точки, то какая именно палитра будет использоваться? В какие конкретно цвета будут превращаться числовые, логические или строковые значения в колонке? В <code>{ggplot2}</code> есть правила по умолчанию для всех эстестик, и они отличные, но самостоятельная настройка шкал может значительно улучшить график.</p></li>
-<li><p><strong>Фасетки (facets).</strong> Фасетки — это одно из нововведений Уикхэма в грамматику графики. Фасетки повзоляют разбить график на множество похожих, задав переменную, по которой график будет разделен. Это очень напоминает использование группировки с помощью <code>group_by()</code>.</p></li>
+<li><p><strong>Шкалы (scales).</strong> Шкалы задают то, <em>как именно</em> значения превращаются в эстетики. Например, если мы задали, что разные значения в колонке будут влиять на цвет точки, то какая именно палитра будет использоваться? В какие конкретно цвета будут превращаться числовые, логические или строковые значения в колонке? В <code>{ggplot2}</code> есть правила по умолчанию для всех эстетик, и они отличные, но самостоятельная настройка шкал может значительно улучшить график.</p></li>
+<li><p><strong>Фасетки (facets).</strong> Фасетки — это одно из нововведений Уикхэма в грамматику графики. Фасетки позволяют разбить график на множество похожих, задав переменную, по которой график будет разделен. Это очень напоминает использование группировки с помощью <code>group_by()</code>.</p></li>
 <li><p><strong>Тема (theme).</strong> Тема — это зрительное оформление “подложки” графика, не относящийся к содержанию графика: размер шрифта, цвет фона, размер и цвет линий на фоне и т.д. и т.п. В <code>{ggplot2}</code> есть несколько встроенных тем, а также есть множество пакетов, которые добавляют дополнительные темы. Кроме того, их можно настраивать самостоятельно!</p></li>
 <li><p><strong>Значения по умолчанию (defaults).</strong> Если в графике используется несколько слоев, то часто все они используют одни и те же данные и эстетики. Можно задать данные и эстетики по умолчанию для всего графика, чтобы не повторять код.</p></li>
 </ul>
 </section>
 <section id="sec-gg_0" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="sec-gg_0"><span class="header-section-number">14.3</span> Пример №0: пайчарт с распределение по полу</h2>
+<h2 data-number="14.3" class="anchored" data-anchor-id="sec-gg_0"><span class="header-section-number">14.3</span> Пример №0: пайчарт с распределением по полу</h2>
 <p>Сейчас мы попробуем сделать простой пример в <code>{ggplot2}</code>, похожий на пример, который использует в своей книге Леланд Уилкинсон, чтобы показать мощь грамматики графики <span class="citation" data-cites="gg">(<a href="950-references.html#ref-gg" role="doc-biblioref">Wilkinson, 2005</a>)</span>. Приготовьтесь, этот пример перевернет ваши представления о графиках!</p>
 <p>Но сначала взглянем на структуру кода в <code>ggplot()</code>.</p>
-<p><img src="images/230-ggplot2_code.png" class="img-fluid" width="400"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/230-ggplot2_code.png" class="img-fluid figure-img" width="400"></p>
+<figcaption>Структура кода ggplot(): данные, эстетики и геомы, соединённые через +</figcaption>
+</figure>
+</div>
 <p>Как видно, код чем-то напоминает стандартный код tidyverse, но с <code>+</code> вместо пайпов. Когда был написан <code>{ggplot2}</code>, Хэдли Уикхэм еще не знал про <code>%&gt;%</code> из <code>{magrittr}</code>, хотя по смыслу <code>+</code> означает примерно то же самое.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -528,7 +538,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Возьмем <code>geom_bar()</code> для отрисовки барплота. В качестве эстетик поставим <code>x = Gender</code> и <code>fill = Gender</code>. Поскольку это эстетики, они обозначаются внутри функции параметра <code>mapping = aes()</code> или просто внутри функции <code>aes()</code>. По умолчанию, <code>geom_bar()</code> имеет статистику “count”, что нас полностью устраивает: <code>geom_bar()</code> сам посчитает табличу частот и использует значения <code>Gender</code> для обозначения позиций и заливки, а посчитанные частоты будет использовать для задания высоты столбцов.</p>
+<p>Возьмем <code>geom_bar()</code> для отрисовки барплота. В качестве эстетик поставим <code>x = Gender</code> и <code>fill = Gender</code>. Поскольку это эстетики, они обозначаются внутри аргумента <code>mapping = aes()</code> или просто внутри функции <code>aes()</code>. По умолчанию, <code>geom_bar()</code> имеет статистику “count”, что нас полностью устраивает: <code>geom_bar()</code> сам посчитает таблицу частот и использует значения <code>Gender</code> для обозначения позиций и заливки, а посчитанные частоты будет использовать для задания высоты столбцов.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heroes) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">fill =</span> Gender))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -581,8 +591,8 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Нам нужно было всего-лишь поменять систему координат с декартовой на полярную (круговую)! Иначе говоря, пайчарт - это барплот в полярной системе координат.</p>
-<p>Именно в этом основная сила грамматики графики и ее реализации в <code>{ggplot2}</code> — вместо того, чтобы описывать и рисовать огромное количество типов графиков, можно описать практически любой график через небольшой количество элементарных элементов и правила их соединения.</p>
+<p>Нам нужно было всего лишь поменять систему координат с декартовой на полярную (круговую)! Иначе говоря, пайчарт — это барплот в полярной системе координат.</p>
+<p>Именно в этом основная сила грамматики графики и ее реализации в <code>{ggplot2}</code> — вместо того, чтобы описывать и рисовать огромное количество типов графиков, можно описать практически любой график через небольшое количество элементарных элементов и правила их соединения.</p>
 <p>Получившийся пайчарт осталось подретушировать, убрав все лишние элементы подложки с помощью самой минималистичной темы <code>theme_void()</code> и добавив название графика:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heroes) <span class="sc">+</span></span>
@@ -601,16 +611,21 @@ e.g.:
 <p>Это был интересный, но немного шуточный пример. Все-таки пайчарт — это довольно спорный способ визуализировать данные, вызывающий много вполне справедливой критики. Поэтому сейчас мы перейдем к гораздо более реалистичному примеру.</p>
 </section>
 <section id="sec-gg_1" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="sec-gg_1"><span class="header-section-number">14.4</span> Пример №1: Education and IQ meta-analysis</h2>
+<h2 data-number="14.4" class="anchored" data-anchor-id="sec-gg_1"><span class="header-section-number">14.4</span> Пример №1: мета-анализ образования и интеллекта</h2>
 <p>Для этого примера мы возьмем мета-анализ связи количества лет обучения и интеллекта: <em>“How Much Does Education Improve Intelligence? A Meta-Analysis”</em> <span class="citation" data-cites="eduiq">(<a href="950-references.html#ref-eduiq" role="doc-biblioref">Ritchie &amp; Tucker-Drob, 2018</a>)</span>. Мета-анализ — это группа статистических методов, которые позволяют объединить результаты нескольких исследований с похожим планом исследованием и тематикой, чтобы посчитать средний эффект между несколькими статьями сразу.</p>
-<p>Данные и скрипт для анализа данных в этой статье находятся в открытом доступе: https://osf.io/r8a24/</p>
-<p>Существует положительная корреляция между количеством лет, который человек потратил на обучение, и интеллектом. Это может объясняться по-разному: как то, что обучение повышает интеллект, и как то, что люди с высоким интеллекте стремятся получать больше образования. Напрямую в эксперименте это проверить нельзя, поэтому есть несколько квази-экспериментальных планов, которые косвенно указывают на верность той или иной гипотезу. Например, если в стране изменилось количество лет обязательного школьного образования, то повлияло ли это на интеллект целого поколения? <del>Или всё-таки дело в Моргенштерне</del></p>
-<p><img src="images/230-ggplot2_meta.png" class="img-fluid"></p>
-<p>Данная картинка показывает, насколько размер эффекта (выраженный в баллах IQ) зависит от того, какой средний возраст участвоваших в исследовании испытуемых.</p>
-<p>Каждая точка на этом графике — это отдельное исследование, положение по оси <em>x</em> — средний возраст респондентов, а положение по оси <em>y</em> - средний прирост интеллекта согласно исследованию. Размер точки отражает “точность” исследования (грубо говоря, чем больше выборка, тем больше точка). Два графика обозначают два квазиэкспериментальных плана.</p>
+<p>Данные и скрипт для анализа данных в этой статье находятся в открытом доступе <a href="https://osf.io/r8a24/">на OSF</a>.</p>
+<p>Существует положительная корреляция между количеством лет, который человек потратил на обучение, и интеллектом. Это может объясняться по-разному: как то, что обучение повышает интеллект, и как то, что люди с высоким интеллекте стремятся получать больше образования. Напрямую в эксперименте это проверить нельзя, поэтому есть несколько квази-экспериментальных планов, которые косвенно указывают на верность той или иной гипотезы. Например, если в стране изменилось количество лет обязательного школьного образования, то повлияло ли это на интеллект целого поколения? <del>Или всё-таки дело в Моргенштерне</del></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/230-ggplot2_meta.png" class="img-fluid figure-img"></p>
+<figcaption>График мета-анализа: зависимость размера эффекта образования на IQ от среднего возраста участников</figcaption>
+</figure>
+</div>
+<p>Эта картинка показывает, насколько размер эффекта (выраженный в баллах IQ) зависит от того, какой средний возраст участвовавших в исследовании испытуемых.</p>
+<p>Каждая точка на этом графике — это отдельное исследование, положение по оси <em>x</em> — средний возраст респондентов, а положение по оси <em>y</em> — средний прирост интеллекта согласно исследованию. Размер точки отражает “точность” исследования (грубо говоря, чем больше выборка, тем больше точка). Два графика обозначают два квазиэкспериментальных плана.</p>
 <p>Мы сфокусируемся на нижней картинке с “Policy change” — это как раз исследования, в которых изучается изменения интеллекта в возрастных группах после изменения количества лет обучения в школе.</p>
 <p>Мы полностью воспроизведем код построчно, посмотрим, как эта картинка создавалась шаг за шагом.</p>
-<p>Заметьте, данный датасет использует немного непривычный для нас формат хранения данных. Попытайтесь самостоятельно прочитать его.</p>
+<p>Заметьте, этот набор данных использует немного непривычный для нас формат хранения данных. Попытайтесь самостоятельно прочитать его.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/meta_dataset.txt"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -638,7 +653,7 @@ e.g.:
 #   published &lt;dbl&gt;, Male_only &lt;dbl&gt;, Achievement &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<p>Каждая строчка — это результат отдельного исследования, при этом одна статья может включать несколько исследований,</p>
+<p>Каждая строчка — это результат отдельного исследования, при этом одна статья может включать несколько исследований, поэтому исследований в датасете больше, чем статей.</p>
 <p>В дальнейшем мы будем использовать код авторов статьи и смотреть, строчка за строчкой, как он будет работать.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cpiq <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, <span class="at">subset=</span>(Design<span class="sc">==</span><span class="st">"Control Prior IQ"</span>))</span>
@@ -667,7 +682,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Что изменилось? Появилась координатная ось и шкалы. Заметьте, масштаб неслучаен: он строится на основе разброса значений в выбранных колонках. Однако этого недостаточно для отрисовки графика, нехватает геометрии: нужно задать, в какую географическую сущность отобразятся данные.</p>
+<p>Что изменилось? Появилась координатная ось и шкалы. Заметьте, масштаб неслучаен: он строится на основе разброса значений в выбранных колонках. Однако этого недостаточно для отрисовки графика, не хватает геометрии: нужно задать, в какую геометрическую сущность отобразятся данные.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>() </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -691,7 +706,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Перед нами возникла проблема оверплоттинга: некоторые точки перекрывают друг друга, поскольку имеют очень близкие координат. Авторы графика решают эту проблему очевидным способом: добавляют прозрачности точкам. Заметьте, прозрачность задается для всех точек одним значением, поэтому параметр <code>alpha</code> задается вне функции <code>aes()</code>.</p>
+<p>Перед нами возникла проблема оверплоттинга: некоторые точки перекрывают друг друга, поскольку имеют очень близкие координаты. Авторы графика решают эту проблему очевидным способом: добавляют прозрачности точкам. Заметьте, прозрачность задается для всех точек одним значением, поэтому аргумент <code>alpha</code> задается вне функции <code>aes()</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -788,7 +803,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Авторы графика перекрашивают серую полупрозначную область тоже. В этом случае используется параметр <code>fill =</code>, а не <code>colour =</code>, но цвет используется тот же.</p>
+<p>Авторы графика перекрашивают серую полупрозрачную область тоже. В этом случае используется аргумент <code>fill =</code>, а не <code>colour =</code>, но цвет используется тот же.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -811,7 +826,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Регрессионную линию авторы немного утоньшают с помощью параметра <code>size =</code>.</p>
+<p>Регрессионную линию авторы немного утоньшают с помощью аргумента <code>size =</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -1012,7 +1027,7 @@ of ggplot2 3.3.4.</code></pre>
 </div>
 </div>
 </div>
-<p>Теперь поставим два графика друг над другом, поместив <code>Design</code> слева от <code>~</code> внутри <code>facet_wrap()</code>. Справа нужно добавить точку.</p>
+<p>Теперь поставим два графика друг над другом, поместив <code>Design</code> слева от <code>~</code> внутри <code>facet_grid()</code>. Справа нужно добавить точку.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Design <span class="sc">!=</span> <span class="st">"School Age Cutoff"</span>)) <span class="sc">+</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -1061,8 +1076,8 @@ of ggplot2 3.3.4.</code></pre>
 </div>
 </div>
 </div>
-<p>Чтобы акцентировать графики, можно раскрасить их в разные цвета в дополнение к фасеткам. Для этого мы переносим <code>colour =</code> и <code>fill =</code> из параметров соответствующих геомов внутрь эстетик и делаем зависимыми от <code>Design</code>. Поскольку эти эстетики (точнее, <code>colour =</code>) одинаковы заданы для двух геомов (<code>geom_point()</code> и <code>geom_smooth()</code>), то мы спокойно можем вынести их в эстетики по умолчанию — в параметры <code>aes()</code> внутри <code>ggplot()</code>.</p>
-<p>При этом сразу выключим легенды для новых эстетик, потому они избыточны.</p>
+<p>Чтобы акцентировать графики, можно раскрасить их в разные цвета в дополнение к фасеткам. Для этого мы переносим <code>colour =</code> и <code>fill =</code> из параметров соответствующих геомов внутрь эстетик и делаем зависимыми от <code>Design</code>. Поскольку эти эстетики (точнее, <code>colour =</code>) одинаковы заданы для двух геомов (<code>geom_point()</code> и <code>geom_smooth()</code>), то мы спокойно можем вынести их в эстетики по умолчанию — в аргументы <code>aes()</code> внутри <code>ggplot()</code>.</p>
+<p>При этом сразу выключим легенды для новых эстетик, потому что они избыточны.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>), <span class="at">colour =</span> Design, <span class="at">fill =</span> Design), <span class="at">data=</span>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Design <span class="sc">!=</span> <span class="st">"School Age Cutoff"</span>)) <span class="sc">+</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>) <span class="sc">+</span></span>
@@ -1119,9 +1134,9 @@ of ggplot2 3.3.4.</code></pre>
 </section>
 <section id="sec-gg_ext" class="level2" data-number="14.5">
 <h2 data-number="14.5" class="anchored" data-anchor-id="sec-gg_ext"><span class="header-section-number">14.5</span> Расширения ggplot2</h2>
-<p><code>{ggplot2}</code> стал очень популярным пакетом и быстро обзавелся расширениями - пакетами R, которые являются надстройками над <code>{ggplot2}</code>. Эти расширения бывают самого разного рода, например, добавляющие дополнительные геомы или просто реализующие отдельные типы графиков на языке <code>{ggplot2}</code>.</p>
-<p>Я рекомендую посмотреть самостоятельно галерею расширений <code>{ggplot2}</code>: https://exts.ggplot2.tidyverse.org/gallery/</p>
-<p>Больше сотни пакетов! Это самые разные пак</p>
+<p><code>{ggplot2}</code> стал очень популярным пакетом и быстро обзавелся расширениями — пакетами R, надстройками над <code>{ggplot2}</code>. Эти расширения бывают самого разного рода, например, добавляющие дополнительные геомы или просто реализующие отдельные типы графиков на языке <code>{ggplot2}</code>.</p>
+<p>Я рекомендую посмотреть самостоятельно <a href="https://exts.ggplot2.tidyverse.org/gallery/">галерею расширений <code>{ggplot2}</code></a>.</p>
+<p>Больше сотни пакетов! Это самые различные пакеты, включая как очень специфические, посвященные отдельным научным областям или решающие отдельную задачу при визуализации, так и большие пакеты, которые пытаются расширять саму грамматику графики.</p>
 <p>Для примера мы возьмем пакет <code>{hrbrthemes}</code>, который предоставляет дополнительные темы для <code>{ggplot2}</code>, компоненты тем и шкалы.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"hrbrthemes"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1148,7 +1163,7 @@ Wilkinson, L. (2005). <em>The Grammar of Graphics</em> (2-я изд.). Springer.
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>идентична по своему смыслу функции <code>dplyr::count</code>, которая считает частоты по выбранной колонке тиббла <a href="110-tidyverse_basic.html#sec-tidy_count" class="quarto-xref"><span>Глава 10.9.3</span></a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Идентична по своему смыслу функции <code>dplyr::count</code>, которая считает частоты по выбранной колонке тиббла (см. <a href="110-tidyverse_basic.html#sec-tidy_count" class="quarto-xref"><span>Глава 10.9.3</span></a>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Декартова система координат названа в честь великого математика и философа Рене Декарта, на латинском — <em>Renatus Cartesius</em>, отсюда и название <em>cartesian coordinate system</em>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Кстати, именно функция <code>subset()</code> вдохновила Уикхема на создание <code>filter()</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
