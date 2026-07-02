@@ -427,7 +427,7 @@ window.Quarto = {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#тест-хи-квадрат-пирсона-на-независимость" id="toc-тест-хи-квадрат-пирсона-на-независимость" class="nav-link active" data-scroll-target="#тест-хи-квадрат-пирсона-на-независимость"><span class="header-section-number">19.0.1</span> Тест хи-квадрат Пирсона на независимость</a></li>
+  <li><a href="#тест-хи-квадрат-пирсона-на-независимость" id="toc-тест-хи-квадрат-пирсона-на-независимость" class="nav-link active" data-scroll-target="#тест-хи-квадрат-пирсона-на-независимость"><span class="header-section-number">19.1</span> Тест хи-квадрат Пирсона на независимость</a></li>
   </ul>
 </nav>
     </div>
@@ -436,7 +436,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./305-hyp_test.html">Тестирование статистических гипотез</a></li><li class="breadcrumb-item"><a href="./325-chisq.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></h1>
+<h1 class="title"><span id="sec-chisq" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Тесты хи-квадрат</span></span></h1>
 </div>
 
 
@@ -459,20 +459,20 @@ window.Quarto = {
 </header>
 
 
-<p>Тесты хи-квадрат – это целый набор статистических методов для исследования связи между переменными. Значения делятся по группам</p>
-<p><span class="math display">\[\chi^2 = \sum^n_{i = 1} \frac{{(O_i - E_i)^2}}{{E_i}}\]</span> <span class="math inline">\(E_i\)</span> – ожидаемая частота, <span class="math inline">\(O_i\)</span> – наблюдаемая частота.</p>
-<p>Соответственно, чем <em>больше</em> расхождения между ожидаемым распределением по группам и реальным, тем <em>больше</em> статистика <span class="math inline">\(\chi^2\)</span> и тем меньше <em>p-value.</em></p>
-<section id="тест-хи-квадрат-пирсона-на-независимость" class="level3" data-number="19.0.1">
-<h3 data-number="19.0.1" class="anchored" data-anchor-id="тест-хи-квадрат-пирсона-на-независимость"><span class="header-section-number">19.0.1</span> Тест хи-квадрат Пирсона на независимость</h3>
-<p>Тест хи-квадрат Пирсона на независимость – это статистический метод, используемый для определения того, есть ли статистическая связь между категориальными переменными.</p>
-<p>Например, с помощью этого теста мы можем посмотреть, различается ли распределение по полу супергероев у двух основных издателей супергероики – Marvel Comics и DC Comics.</p>
+<p>Тесты хи-квадрат — это целый набор статистических методов для исследования связи между переменными. Значения делятся по группам (категориям), после чего наблюдаемые частоты в группах сравниваются с ожидаемыми:</p>
+<p><span class="math display">\[\chi^2 = \sum^n_{i = 1} \frac{{(O_i - E_i)^2}}{{E_i}}\]</span> <span class="math inline">\(E_i\)</span> — ожидаемая частота, <span class="math inline">\(O_i\)</span> — наблюдаемая частота.</p>
+<p>Соответственно, чем <em>больше</em> расхождения между ожидаемым распределением по группам и реальным, тем <em>больше</em> статистика <span class="math inline">\(\chi^2\)</span> и тем меньше p-value.</p>
+<section id="тест-хи-квадрат-пирсона-на-независимость" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="тест-хи-квадрат-пирсона-на-независимость"><span class="header-section-number">19.1</span> Тест хи-квадрат Пирсона на независимость</h2>
+<p><strong>Тест хи-квадрат Пирсона на независимость</strong> <em>(Pearson’s chi-squared test of independence)</em> позволяет определить, есть ли связь между категориальными переменными.</p>
+<p>Например, с помощью этого теста мы можем посмотреть, различается ли распределение по полу супергероев у двух основных издателей супергероики — Marvel Comics и DC Comics.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Для начала нам нужно создать таблицу сопряженности (contingency table) для двух переменных с помощью встроенной функции <code>table()</code>. Эта функция похожа на <code>count()</code> из пакета <code>{dplyr}</code>.</p>
+<p>Для начала нам нужно создать <strong>таблицу сопряженности</strong> <em>(contingency table)</em> для двух переменных с помощью встроенной функции <code>table()</code>. Эта функция похожа на <code>count()</code> из пакета <code>{dplyr}</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gender_publisher <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Gender) <span class="sc">%&gt;%</span></span>
@@ -506,7 +506,7 @@ Gender   DC Comics Marvel Comics
   Male         153           252</code></pre>
 </div>
 </div>
-<p>С помощью дженерик-функции <code>summary()</code> примененной на построенной таблице сопряженности можно посчитать тест на независимость хи-квадрат.</p>
+<p>С помощью универсальной <em>(generic)</em> функции <code>summary()</code> (см. <a href="210-desc_stats.html#sec-summary" class="quarto-xref"><span>Глава 12.7</span></a>), примененной к таблице сопряженности, можно провести тест хи-квадрат на независимость.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">table</span>(gender_publisher))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -527,7 +527,7 @@ data:  table(gender_publisher)
 X-squared = 0.18649, df = 1, p-value = 0.6659</code></pre>
 </div>
 </div>
-<p>Как можно заметить, в этом случае p-value несколько отличается. Дело в том, что <em>p-value</em> для хи-квадрат рассчитывается по непрерывному хи-квадрат распределению, тогда как хи-квадрат статистики распределены таким образом только в случае достаточно большой выборке. Чтобы скорретировать на малый размер групп используется поправка на непрерывность Йейтса.</p>
+<p>В этом случае p-value несколько отличается. Дело в том, что для таблиц 2×2 <code>chisq.test()</code> по умолчанию применяет <strong>поправку на непрерывность Йейтса</strong> <em>(Yates’ continuity correction)</em>, а <code>summary()</code> считает тест Пирсона без нее. Статистика хи-квадрат считается по дискретным частотам, а p-value рассчитывается по непрерывному <span class="math inline">\(\chi^2\)</span>-распределению — поправка Йейтса пытается учесть это расхождение, заметное на малых выборках. Если отключить поправку (<code>correct = FALSE</code>), результат совпадет с выводом <code>summary()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(<span class="fu">table</span>(gender_publisher), <span class="at">correct =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -538,7 +538,7 @@ data:  table(gender_publisher)
 X-squared = 0.27673, df = 1, p-value = 0.5988</code></pre>
 </div>
 </div>
-<p>Другой подход для более точного подсчета p-value – это использование точного теста Фишера:</p>
+<p>Другой подход для более точного подсчета p-value — это использование <strong>точного теста Фишера</strong> <em>(Fisher’s exact test)</em>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(<span class="fu">table</span>(gender_publisher))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
