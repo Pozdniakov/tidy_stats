@@ -538,7 +538,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Возьмем <code>geom_bar()</code> для отрисовки барплота. В качестве эстетик поставим <code>x = Gender</code> и <code>fill = Gender</code>. Поскольку это эстетики, они обозначаются внутри аргумента <code>mapping = aes()</code> или просто внутри функции <code>aes()</code>. По умолчанию, <code>geom_bar()</code> имеет статистику “count”, что нас полностью устраивает: <code>geom_bar()</code> сам посчитает таблицу частот и использует значения <code>Gender</code> для обозначения позиций и заливки, а посчитанные частоты будет использовать для задания высоты столбцов.</p>
+<p>Возьмем <code>geom_bar()</code> для отрисовки барплота. В качестве эстетик поставим <code>x = Gender</code> и <code>fill = Gender</code>. Поскольку это эстетики, они обозначаются внутри параметра <code>mapping = aes()</code> или просто внутри функции <code>aes()</code>. По умолчанию, <code>geom_bar()</code> имеет статистику “count”, что нас полностью устраивает: <code>geom_bar()</code> сам посчитает таблицу частот и использует значения <code>Gender</code> для обозначения позиций и заливки, а посчитанные частоты будет использовать для задания высоты столбцов.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> heroes) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">fill =</span> Gender))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -706,7 +706,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Перед нами возникла проблема оверплоттинга: некоторые точки перекрывают друг друга, поскольку имеют очень близкие координаты. Авторы графика решают эту проблему очевидным способом: добавляют прозрачности точкам. Заметьте, прозрачность задается для всех точек одним значением, поэтому аргумент <code>alpha</code> задается вне функции <code>aes()</code>.</p>
+<p>Перед нами возникла проблема оверплоттинга: некоторые точки перекрывают друг друга, поскольку имеют очень близкие координаты. Авторы графика решают эту проблему очевидным способом: добавляют прозрачности точкам. Заметьте, прозрачность задается для всех точек одним значением, поэтому параметр <code>alpha</code> задается вне функции <code>aes()</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -803,7 +803,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Авторы графика перекрашивают серую полупрозрачную область тоже. В этом случае используется аргумент <code>fill =</code>, а не <code>colour =</code>, но цвет используется тот же.</p>
+<p>Авторы графика перекрашивают серую полупрозрачную область тоже. В этом случае используется параметр <code>fill =</code>, а не <code>colour =</code>, но цвет используется тот же.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -826,7 +826,7 @@ e.g.:
 </div>
 </div>
 </div>
-<p>Регрессионную линию авторы немного утоньшают с помощью аргумента <code>size =</code>.</p>
+<p>Регрессионную линию авторы немного утоньшают с помощью параметра <code>size =</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -1076,7 +1076,7 @@ of ggplot2 3.3.4.</code></pre>
 </div>
 </div>
 </div>
-<p>Чтобы акцентировать графики, можно раскрасить их в разные цвета в дополнение к фасеткам. Для этого мы переносим <code>colour =</code> и <code>fill =</code> из параметров соответствующих геомов внутрь эстетик и делаем зависимыми от <code>Design</code>. Поскольку эти эстетики (точнее, <code>colour =</code>) одинаковы заданы для двух геомов (<code>geom_point()</code> и <code>geom_smooth()</code>), то мы спокойно можем вынести их в эстетики по умолчанию — в аргументы <code>aes()</code> внутри <code>ggplot()</code>.</p>
+<p>Чтобы акцентировать графики, можно раскрасить их в разные цвета в дополнение к фасеткам. Для этого мы переносим <code>colour =</code> и <code>fill =</code> из параметров соответствующих геомов внутрь эстетик и делаем зависимыми от <code>Design</code>. Поскольку эти эстетики (точнее, <code>colour =</code>) одинаковы заданы для двух геомов (<code>geom_point()</code> и <code>geom_smooth()</code>), то мы спокойно можем вынести их в эстетики по умолчанию — в параметры <code>aes()</code> внутри <code>ggplot()</code>.</p>
 <p>При этом сразу выключим легенды для новых эстетик, потому что они избыточны.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>), <span class="at">colour =</span> Design, <span class="at">fill =</span> Design), <span class="at">data=</span>df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Design <span class="sc">!=</span> <span class="st">"School Age Cutoff"</span>)) <span class="sc">+</span></span>
