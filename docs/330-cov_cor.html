@@ -435,7 +435,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#sec-cor_mat" id="toc-sec-cor_mat" class="nav-link" data-scroll-target="#sec-cor_mat"><span class="header-section-number">20.3</span> Корреляционная матрица</a></li>
   <li><a href="#sec-hitmap_cor" id="toc-sec-hitmap_cor" class="nav-link" data-scroll-target="#sec-hitmap_cor"><span class="header-section-number">20.4</span> Хитмэп корреляций</a></li>
-  <li><a href="#матрица-корреляций-в-виде-графа" id="toc-матрица-корреляций-в-виде-графа" class="nav-link" data-scroll-target="#матрица-корреляций-в-виде-графа"><span class="header-section-number">20.5</span> Матрица корреляций в виде графа</a></li>
+  <li><a href="#sec-cor_graph" id="toc-sec-cor_graph" class="nav-link" data-scroll-target="#sec-cor_graph"><span class="header-section-number">20.5</span> Матрица корреляций в виде графа</a></li>
   </ul>
 </nav>
     </div>
@@ -467,7 +467,7 @@ window.Quarto = {
 </header>
 
 
-<p>Возьмем новый набор данных, на этот раз про американских студентов, массу их рюкзаков и проблемы со спиной. Этот набор данных хранится в пакете <code>Stat2Data</code> — пакет с большим количеством разнообразных данных.</p>
+<p>Возьмем новый набор данных, на этот раз про американских студентов, массу их рюкзаков и проблемы со спиной. Этот набор данных хранится в пакете <code>{Stat2Data}</code> — пакет с большим количеством разнообразных данных.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"Stat2Data"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -692,16 +692,16 @@ window.Quarto = {
 <p>До этого мы говорили о <em>различиях</em> между выборками. Теперь мы будем говорить о <em>связи</em> между переменными.</p>
 <section id="sec-cov" class="level2" data-number="20.1">
 <h2 data-number="20.1" class="anchored" data-anchor-id="sec-cov"><span class="header-section-number">20.1</span> Ковариация</h2>
-<p>Самая простая мера связи между двумя переменными — это <strong>ковариация <em>(covariation).</em></strong> Если <strong>ковариация положительная</strong>, то чем <em>больше</em> одна переменная, тем <em>больше</em> другая переменная. При <strong>отрицательной ковариации</strong> все наоборот: чем <em>больше</em> одна переменная, тем <em>меньше</em> другая. <strong>Ковариация</strong> между переменными <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> часто обозначается буквой <span class="math inline">\(\sigma_{xy}\)</span>. Похоже на дисперсию и стандартное отклонение (см. <a href="210-desc_stats.html#sec-var" class="quarto-xref"><span>Глава 12.5.2</span></a>), не правда ли? И скоро мы убедимся, что это не случайно!</p>
+<p>Самая простая мера связи между двумя переменными — это <strong>ковариация</strong> <em>(covariance)</em>. Если <strong>ковариация положительная</strong>, то чем <em>больше</em> одна переменная, тем <em>больше</em> другая переменная. При <strong>отрицательной ковариации</strong> все наоборот: чем <em>больше</em> одна переменная, тем <em>меньше</em> другая. <strong>Ковариация</strong> между переменными <span class="math inline">\(x\)</span> и <span class="math inline">\(y\)</span> часто обозначается буквой <span class="math inline">\(\sigma_{xy}\)</span>. Похоже на дисперсию и стандартное отклонение (см. <a href="210-desc_stats.html#sec-var" class="quarto-xref"><span>Глава 12.5.2</span></a>), не правда ли? И скоро мы убедимся, что это не случайно!</p>
 <ul>
 <li>Формула ковариации:</li>
 </ul>
-<p><span class="math display">\[\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n}\]</span></p>
+<p><span class="math display">\[\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{n}\]</span></p>
 <ul>
 <li>Оценка ковариации по выборке:</li>
 </ul>
-<p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n-1}\]</span></p>
-<p>В R есть функция <code>cov()</code> для подсчета ковариации. Эта функция считает сразу <strong>матрицу ковариаций <em>(covariation matrix)</em></strong> для всех сочетаний колонок на входе:</p>
+<p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{n-1}\]</span></p>
+<p>В R есть функция <code>cov()</code> для подсчета ковариации. Эта функция считает сразу <strong>матрицу ковариаций</strong> <em>(covariance matrix)</em> для всех сочетаний колонок на входе:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
@@ -712,9 +712,9 @@ body_kg     177.807700    6.601954
 backpack_kg   6.601954    6.838333</code></pre>
 </div>
 </div>
-<p>Полученная матрица симметрична: порядок двух переменных не имеет значения. Но что мы имеем по основной диагонали – это, получается, ковариация переменной с самой собой? Давайте подставим в формулу для ковариации <span class="math inline">\(x\)</span> вместо <span class="math inline">\(y\)</span>, чтобы узнать, что скрывается под ковариацией переменной с самой собой:</p>
-<p><span class="math display">\[\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(x_i - \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}{n}\]</span></p>
-<p>Знакомая формула? Это формула дисперсии (см. <a href="210-desc_stats.html#sec-var" class="quarto-xref"><span>Глава 12.5.2</span></a>)! Выходит, что <strong>ковариация переменной с самой собой – это дисперсия.</strong> Таким образом, <strong>в матрице ковариаций по основным диагоналям находятся дисперсии переменных.</strong></p>
+<p>Полученная матрица симметрична: порядок двух переменных не имеет значения. Но что мы имеем по основной диагонали — это, получается, ковариация переменной с самой собой? Давайте подставим в формулу для ковариации <span class="math inline">\(x\)</span> вместо <span class="math inline">\(y\)</span>, чтобы узнать, что скрывается под ковариацией переменной с самой собой:</p>
+<p><span class="math display">\[\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(x_i --- \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})^2}{n}\]</span></p>
+<p>Знакомая формула? Это формула дисперсии (см. <a href="210-desc_stats.html#sec-var" class="quarto-xref"><span>Глава 12.5.2</span></a>)! Выходит, что <strong>ковариация переменной с самой собой — это дисперсия.</strong> Таким образом, <strong>в матрице ковариаций по основной диагонали находятся дисперсии переменных.</strong></p>
 <p><span class="math display">\[\begin{bmatrix}\sigma_x^2 &amp; \sigma_{xy}\\\sigma_{xy} &amp; \sigma_y^2\end{bmatrix}\]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -726,7 +726,7 @@ backpack_kg   6.601954    6.838333</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>В английском языке <strong>дисперсия –</strong> <strong><em>variance</em></strong>, а <strong>ковариация –</strong> <strong><em>covariance</em></strong>, что значительно упрощает запоминание связи этих двух понятий.</p>
+<p>В английском языке <strong>дисперсия</strong> — <em>variance</em>, а <strong>ковариация</strong> — <em>covariance</em>, что значительно упрощает запоминание связи этих двух понятий.</p>
 </div>
 </div>
 <p>Что интересно, в R это тоже отображено: посчитать матрицу ковариаций можно как с помощью функции <code>cov()</code>, так и уже знакомой нам функции <code>var()</code> для расчета дисперсии. Различаются эти функции только дополнительными параметрами.</p>
@@ -780,7 +780,7 @@ backpack_kg   653.5934    676.9950</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
-<li>Поделим матрицу на <span class="math inline">\(n\)</span> или <span class="math inline">\(n - 1\)</span> (если мы хотим оценить матрицу ковариаций в генеральной совокупности по выборке), где <span class="math inline">\(n\)</span> – количество наблюдений. Это и будет ковариационной матрицей!</li>
+<li>Поделим матрицу на <span class="math inline">\(n\)</span> или <span class="math inline">\(n - 1\)</span> (если мы хотим оценить матрицу ковариаций в генеральной совокупности по выборке), где <span class="math inline">\(n\)</span> — количество наблюдений. Это и будет ковариационной матрицей!</li>
 </ol>
 <p><span class="math display">\[C_X = \frac{X^TX}{n-1}\]</span></p>
 <div class="cell">
@@ -801,21 +801,21 @@ backpack_kg   6.601954    6.838333</code></pre>
 </div>
 </div>
 </div>
-<p>Ковариации имеют большое значение в статистике. Расчет ковариационной матрицы – это необходимый этап для многих многомерных методов, например, для анализа главных компонент (см. <a href="370-multivariate.html#sec-dim_red_pca" class="quarto-xref"><span>Глава 24.2</span></a>). Однако у ковариации есть серьезное ограничение – ее размер привязан к исходной шкале, поэтому сложно оценить, насколько ковариация большая или маленькая. Поэтому на практике гораздо больше используются коэффициенты корреляции.</p>
+<p>Ковариации имеют большое значение в статистике. Расчет ковариационной матрицы — это необходимый этап для многих многомерных методов, например, для анализа главных компонент (см. <a href="370-multivariate.html#sec-dim_red_pca" class="quarto-xref"><span>Глава 24.2</span></a>). Однако у ковариации есть серьезное ограничение — ее размер привязан к исходной шкале, поэтому сложно оценить, насколько ковариация большая или маленькая. Поэтому на практике гораздо больше используются коэффициенты корреляции.</p>
 </section>
 <section id="sec-cor" class="level2" data-number="20.2">
 <h2 data-number="20.2" class="anchored" data-anchor-id="sec-cor"><span class="header-section-number">20.2</span> Корреляция</h2>
-<p><strong>Корреляцией</strong> обычно называют любую связь между двумя переменными, это просто синоним слова “ассоциация”. Если вдруг слово “корреляция” вам еще непривычно, то попробуйте мысленно заменять “корреляцию” на “ассоциацию”, а “коррелирует” на “связано”. <strong>Коэффициент корреляции</strong> — это уже конкретная математическая формула, которая позволяет посчитать эту связь и принимает значения от <span class="math inline">\(-1\)</span> до <span class="math inline">\(1\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><strong>Корреляцией</strong> <em>(correlation)</em> обычно называют любую связь между двумя переменными, это просто синоним слова «ассоциация». Если вдруг слово «корреляция» вам еще непривычно, то попробуйте мысленно заменять «корреляцию» на «ассоциацию», а «коррелирует» на «связано». <strong>Коэффициент корреляции</strong> <em>(correlation coefficient)</em> — это уже конкретная математическая формула, которая позволяет посчитать эту связь и принимает значения от <span class="math inline">\(-1\)</span> до <span class="math inline">\(1\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <ul>
 <li><p>Если коэффициент корреляции <strong>положительный</strong>, то чем <strong>больше</strong> значения в одной переменной, тем <strong>больше</strong> значения в другой переменной.</p></li>
 <li><p>Если коэффициент корреляции <strong>отрицательный</strong>, то чем <strong>больше</strong> значения в одной переменной, тем <strong>меньше</strong> значения в другой переменной.</p></li>
-<li><p>Если коэффициент корреляции равен 0, то изменения одной переменной не связано с изменениями в другой переменной.</p></li>
+<li><p>Если коэффициент корреляции равен 0, то изменения одной переменной не связаны с изменениями в другой переменной.</p></li>
 </ul>
 <section id="sec-pearson_cor" class="level3" data-number="20.2.1">
 <h3 data-number="20.2.1" class="anchored" data-anchor-id="sec-pearson_cor"><span class="header-section-number">20.2.1</span> Коэффициент корреляции Пирсона</h3>
-<p>Самый известный коэффициент корреляции - коэффициент корреляции Пирсона:</p>
-<p><span class="math display">\[\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
-<p>Оценка коэффициента корреляции Пирсона по выборке: <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n - 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
+<p>Самый известный коэффициент корреляции — <strong>коэффициент корреляции Пирсона</strong> <em>(Pearson correlation coefficient)</em>:</p>
+<p><span class="math display">\[\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i --- \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i --- \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
+<p>Оценка коэффициента корреляции Пирсона по выборке: <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i --- \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i --- \overline{y})^2}} = \frac{1}{n --- 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
 <p>Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение <span class="math inline">\(z\)</span>-оценок (<a href="210-desc_stats.html#sec-z_scores" class="quarto-xref"><span>Глава 12.5.3.1</span></a>).</p>
 <p>Корреляцию в R можно посчитать с помощью функции <code>cor()</code>:</p>
 <div class="cell">
@@ -845,11 +845,11 @@ sample estimates:
 0.1893312 </code></pre>
 </div>
 </div>
-<p>Результат выполнения этой функции очень похож на то, что мы получали при проведении t-теста.</p>
+<p>Результат выполнения этой функции очень похож на то, что мы получали при проведении <span class="math inline">\(t\)</span>-теста.</p>
 </section>
 <section id="sec-nonparam_cor" class="level3" data-number="20.2.2">
 <h3 data-number="20.2.2" class="anchored" data-anchor-id="sec-nonparam_cor"><span class="header-section-number">20.2.2</span> Непараметрические коэффициенты корреляции</h3>
-<p>У коэффициента корреляции Пирсона, как и у <span class="math inline">\(t\)</span>-теста, есть свои непараметрические братья: коэффициент корреляции Спирмена и коэффициент корреляции Кэнделла. Из них чаще используется коэффициент корреляции Спирмена. Посчитать его можно с помощью той же функции <code>cor.test()</code>, задав соответствующее значение параметра <code>method =</code>:</p>
+<p>У коэффициента корреляции Пирсона, как и у <span class="math inline">\(t\)</span>-теста, есть свои непараметрические братья: <strong>коэффициент корреляции Спирмена</strong> <em>(Spearman correlation coefficient)</em> и <strong>коэффициент корреляции Кендалла</strong> <em>(Kendall correlation coefficient)</em>. Из них чаще используется коэффициент корреляции Спирмена. Посчитать его можно с помощью той же функции <code>cor.test()</code>, задав соответствующее значение параметра <code>method =</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg, <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -880,9 +880,19 @@ sample estimates:
 0.1478736 </code></pre>
 </div>
 </div>
-<blockquote class="blockquote">
-<p>Заметьте, в данном случае два метода хотя и привели к схожим размерам корреляции, но в одном случае <em>p-value</em> оказался больше 0.05, а в другом случае - меньше 0.05. Выбирать тест <em>a posteriori</em> на основе того, какие результаты вам нравятся больше, — плохая практика (<a href="410-planning.html#sec-quest_practices" class="quarto-xref"><span>Глава 25.1</span></a>). Не надо так делать.</p>
-</blockquote>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важное уведомление</span><em>Осторожно:</em> не выбирайте тест по результатам
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Заметьте, в нашем случае два метода хотя и привели к схожим размерам корреляции, но в одном случае p-value оказался больше 0.05, а в другом случае — меньше 0.05. Выбирать тест <em>a posteriori</em> на основе того, какие результаты вам нравятся больше, — плохая практика (<a href="410-planning.html#sec-quest_practices" class="quarto-xref"><span>Глава 25.1</span></a>). Не надо так делать.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="sec-cor_mat" class="level2" data-number="20.3">
@@ -913,7 +923,7 @@ Year        -0.09301727  0.05762194 -0.02946373  1.00000000</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Корреляционную матрицу можно построить разными способами, но самый простой – сделать <span class="math inline">\(z\)</span>-преобразование переменных (<a href="210-desc_stats.html#sec-z_scores" class="quarto-xref"><span>Глава 12.5.3.1</span></a>), а для полученных z-оценок посчитать ковариационную матрицу.</p>
+<p>Корреляционную матрицу можно построить разными способами, но самый простой — сделать <span class="math inline">\(z\)</span>-преобразование переменных (<a href="210-desc_stats.html#sec-z_scores" class="quarto-xref"><span>Глава 12.5.3.1</span></a>), а для полученных z-оценок посчитать ковариационную матрицу.</p>
 <ol type="1">
 <li>Произведем <span class="math inline">\(z\)</span>-преобразования каждого столбца:</li>
 </ol>
@@ -935,7 +945,7 @@ backpack_kg 18.74378    99.00000</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
-<li>Осталось поделить результаты матрицу на <span class="math inline">\(n - 1\)</span>, где <span class="math inline">\(n\)</span> – количество наблюдений. Это и будет ковариационной матрицей!</li>
+<li>Осталось поделить матрицу на <span class="math inline">\(n - 1\)</span>, где <span class="math inline">\(n\)</span> — количество наблюдений. Это и будет корреляционной матрицей!</li>
 </ol>
 <p><span class="math display">\[COR_X = \frac{X^TX}{n-1}\]</span></p>
 <div class="cell">
@@ -947,17 +957,17 @@ backpack_kg 0.1893312   1.0000000</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>               body_kg backpack_kg
-body_kg     177.807700    6.601954
-backpack_kg   6.601954    6.838333</code></pre>
+<pre><code>              body_kg backpack_kg
+body_kg     1.0000000   0.1893312
+backpack_kg 0.1893312   1.0000000</code></pre>
 </div>
 </div>
 </div>
 </div>
-<p>Но функция <code>cor()</code>не позволяет посчитать <em>p-value</em> для этих корреляций! Функция <code>cor.test()</code> позволяет получить <em>p-value</em>, но только для одной пары переменных.</p>
-<p>На помощь приходит пакет <code>psych</code> с функцией <code>corr.test()</code>:</p>
+<p>Но функция <code>cor()</code> не позволяет посчитать p-value для этих корреляций! Функция <code>cor.test()</code> позволяет получить p-value, но только для одной пары переменных.</p>
+<p>На помощь приходит пакет <code>{psych}</code> с функцией <code>corr.test()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
@@ -983,9 +993,9 @@ Year           0.36        0.57  0.77    0
 </div>
 </div>
 <p>Тем не менее, если у вас много гипотез для тестирования, то у вас появляется проблема: вероятность выпадения статистически значимых результатов сильно повышается. Даже если эти переменные никак не связаны друг с другом.</p>
-<p>Эта проблема называется <strong>проблемой множественных сравнений (multiple comparisons problem)</strong> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода (Family-wise error rate)</strong> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
-<p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.е. в среднем 2-3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
-<p>Поэтому если вы проверяете сразу много гипотез, то необходимо применять <strong>поправки на множественные сравнения (multiple testing correction)</strong>. Эти поправки позволяют контролировать групповую вероятность ошибки первого рода на желаемом уровне. Самая простая и популярная поправка на множественные сравнения — <strong>поправка Бонферрони (Bonferroni correction)</strong>. Она считается очень просто: мы просто умножаем p-value на количество проверяемых гипотез!</p>
+<p>Эта проблема называется <strong>проблемой множественных сравнений</strong> <em>(multiple comparisons problem)</em> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода</strong> <em>(family-wise error rate)</em> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
+<p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.е. в среднем 2–3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
+<p>Поэтому если вы проверяете сразу много гипотез, то необходимо применять <strong>поправки на множественные сравнения</strong> <em>(multiple testing correction)</em>. Эти поправки позволяют контролировать групповую вероятность ошибки первого рода на желаемом уровне. Самая простая и популярная поправка на множественные сравнения — <strong>поправка Бонферрони</strong> <em>(Bonferroni correction)</em>. Она считается очень просто: мы просто умножаем p-value на количество проверяемых гипотез!</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
@@ -1010,9 +1020,9 @@ Year           0.36        0.57  0.77    0
  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 </div>
 </div>
-<p>Это очень “дубовая” и излишне консервативная поправка. Да, она гарантирует контроль групповую вероятности ошибки первого рода, но при этом сильно повышает вероятность ошибки второго рода — вероятность пропустить эффект, если он на самом деле существует. Поэтому по умолчанию в R используется более либеральная поправка на множественные сравнения под названием <strong>поправка Холма</strong> или <strong>поправка Холма-Бонферрони (Holm-Bonferroni correction)</strong>, которая, тем не менее, тоже гарантирует контроль групповой вероятности ошибки первого рода.</p>
-<p>Альтернативный подход к решению проблемы множественных сравнений — это контроль <strong>средней доли ложных отклонений (False Discovery Rate; FDR)</strong> на на уровне не выше уровня <span class="math inline">\(\alpha\)</span>. Это более либеральный подход: в данном случае мы контролируем, что ложно-положительных результатов у нас не больше, например, 5%. Такой подход применяется в областях, где происходит масштабное множественное тестирование. Попытка контролировать <em>групповую вероятность ошибки первого уровня</em> не выше уровня <span class="math inline">\(\alpha\)</span> привела бы к чрезвычайно низкой вероятности обнаружить хоть какие-нибудь эффекты (т.е. к низкой статистической мощности).</p>
-<p>Самая известная поправка для контроля <em>средней доли ложных отклонений</em> — это <strong>поправка Бенджамини — Хохберга (Benjamini-Hochberg correction).</strong></p>
+<p>Это очень «дубовая» и излишне консервативная поправка. Да, она гарантирует контроль групповой вероятности ошибки первого рода, но при этом сильно повышает вероятность ошибки второго рода — вероятность пропустить эффект, если он на самом деле существует. Поэтому по умолчанию в R используется более либеральная поправка на множественные сравнения под названием <strong>поправка Холма</strong> или <strong>поправка Холма-Бонферрони</strong> <em>(Holm-Bonferroni correction)</em>, которая, тем не менее, тоже гарантирует контроль групповой вероятности ошибки первого рода.</p>
+<p>Альтернативный подход к решению проблемы множественных сравнений — это контроль <strong>средней доли ложных отклонений</strong> <em>(false discovery rate, FDR)</em> на уровне не выше уровня <span class="math inline">\(\alpha\)</span>. Это более либеральный подход: в этом случае мы контролируем, что ложно-положительных результатов у нас не больше, например, 5%. Такой подход применяется в областях, где происходит масштабное множественное тестирование. Попытка контролировать <em>групповую вероятность ошибки первого рода</em> не выше уровня <span class="math inline">\(\alpha\)</span> привела бы к чрезвычайно низкой вероятности обнаружить хоть какие-нибудь эффекты (т.е. к низкой статистической мощности).</p>
+<p>Самая известная поправка для контроля <em>средней доли ложных отклонений</em> — это <strong>поправка Бенджамини-Хохберга</strong> <em>(Benjamini-Hochberg correction)</em>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_kg, backpack_kg, Units, Year) <span class="sc">%&gt;%</span></span>
@@ -1037,7 +1047,7 @@ Year           0.36        0.57  0.77 0.00
  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 </div>
 </div>
-<p>Все перечсиленные поправки (и еще несколько других) доступны не только в функции <code>corr.test()</code>, но и в базовом R с помощью функции <code>p.adjust()</code>. Эта функция принимает вектор из <em>p-value</em> и возвращает результат применения поправок.</p>
+<p>Все перечисленные поправки (и еще несколько других) доступны не только в функции <code>corr.test()</code>, но и в базовом R с помощью функции <code>p.adjust()</code>. Эта функция принимает вектор из p-value и возвращает результат применения поправок.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>p_vec <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.0001</span>, <span class="fl">0.06</span>, <span class="at">length.out =</span> <span class="dv">10</span>)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>p_vec</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1045,7 +1055,7 @@ Year           0.36        0.57  0.77 0.00
 <pre><code> [1] 0.000100000 0.006755556 0.013411111 0.020066667 0.026722222 0.033377778
  [7] 0.040033333 0.046688889 0.053344444 0.060000000</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec) <span class="co">#по умолчанию используется поправка Холма-Бонферрони</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p.adjust</span>(p_vec) <span class="co"># по умолчанию используется поправка Холма-Бонферрони</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 0.0010000 0.0608000 0.1072889 0.1404667 0.1603333 0.1668889 0.1668889
  [8] 0.1668889 0.1668889 0.1668889</code></pre>
@@ -1064,7 +1074,7 @@ Year           0.36        0.57  0.77 0.00
 </section>
 <section id="sec-hitmap_cor" class="level2" data-number="20.4">
 <h2 data-number="20.4" class="anchored" data-anchor-id="sec-hitmap_cor"><span class="header-section-number">20.4</span> Хитмэп корреляций</h2>
-<p>Как видите, почти все коррелирует друг с другом, даже с учетом поправок. Такие множественные корреляции лучше всего смотреть с помощью хитмап-визуализации.</p>
+<p>Как видите, почти всё коррелирует друг с другом, даже с учетом поправок. Такие множественные корреляции лучше всего смотреть с помощью хитмэп-визуализации.</p>
 <p>В качестве примера возьмем встроенный датасет <code>mtcars</code>, в котором есть множество количественных переменных.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1108,13 +1118,10 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrplot"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Для начала нам нужно построить матрицу корреляций. Уже знакомая нам функция <code>cor()</code> для это вполне подойдет:</p>
+<p>Для начала нам нужно построить матрицу корреляций. Уже знакомая нам функция <code>cor()</code> для этого вполне подойдет:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>corrplot 0.95 loaded</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(mtcars)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(mtcars)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            mpg        cyl       disp         hp        drat         wt
 mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.68117191 -0.8676594
@@ -1142,9 +1149,9 @@ gear -0.21268223  0.2060233  0.79405876  1.0000000  0.27407284
 carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
 </div>
 </div>
-<p>Основная функция пакета <code>{corrplot}</code> – функция <code>corrplot()</code>. Давайте теперь попробуем ее применить на нашей матрице корреляций.</p>
+<p>Основная функция пакета <code>{corrplot}</code> — функция <code>corrplot()</code>. Давайте теперь попробуем ее применить на нашей матрице корреляций.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1155,7 +1162,7 @@ carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
 </div>
 <p>По умолчанию значение корреляций кодируется цветом и размером круга. У функции <code>corrplot()</code> есть множество параметров, позволяющих довольно тонко настраивать хитмэп корреляций. Например, можно кодировать только цветом, а переменные сгруппировать на основе кластеризации.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars), <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(mtcars), <span class="at">method =</span> <span class="st">"color"</span>, <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1164,10 +1171,10 @@ carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
 </div>
 </div>
 </div>
-<p>Можно сделать еще интереснее: добавить крестики, которые будут означать наличие или отсутствие статистической значимости. В этом случае нам понадобится не только матрица корреляций, но соответствующая матрица с <em>p-value</em>. Для этого нам нужно обратиться к уже знакомой нам функции <code>corr.test()</code> из пакета <code>{psych}</code>.</p>
+<p>Можно сделать еще интереснее: добавить крестики, которые будут означать наличие или отсутствие статистической значимости. В этом случае нам понадобится не только матрица корреляций, но и соответствующая матрица с p-value. Для этого нам нужно обратиться к уже знакомой нам функции <code>corr.test()</code> из пакета <code>{psych}</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mtcars_cor_p <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">corr.test</span>(mtcars)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>mtcars_cor_p</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>mtcars_cor_p <span class="ot">&lt;-</span> psych<span class="sc">::</span><span class="fu">corr.test</span>(mtcars)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>mtcars_cor_p</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:psych::corr.test(x = mtcars)
 Correlation matrix 
@@ -1202,9 +1209,9 @@ carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
 </div>
 </div>
-<p>Нам нужно разворошить полученную переменную mtcars_cor_p</p>
+<p>Нам нужно разворошить полученную переменную <code>mtcars_cor_p</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_cor_p)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_cor_p)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 14
  $ r     : num [1:11, 1:11] 1 -0.852 -0.848 -0.776 0.681 ...
@@ -1251,10 +1258,10 @@ carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="at">corr =</span> mtcars_cor_p<span class="sc">$</span>r,</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.mat =</span> mtcars_cor_p<span class="sc">$</span>p,</span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"color"</span>,</span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="at">corr =</span> mtcars_cor_p<span class="sc">$</span>r,</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">p.mat =</span> mtcars_cor_p<span class="sc">$</span>p,</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"color"</span>,</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">order =</span> <span class="st">"hclust"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1263,19 +1270,19 @@ carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
 </div>
 </div>
 </div>
-<p>Крестиками отмечены статистические незначимые (с <em>p.value &lt; .05),</em> а без крестиков – статистически значимые коэффициенты корреляции. Обратите внимание, матрица несимметричная: <code>psych::corr.test()</code> возвращает скорректированные <em>p-value</em> в верхнем правом треугольнике в матрице корреляций.</p>
+<p>Крестиками отмечены статистически незначимые (с p-value &gt; 0.05), а без крестиков — статистически значимые коэффициенты корреляции. Обратите внимание, матрица несимметричная: <code>psych::corr.test()</code> возвращает скорректированные p-value в верхнем правом треугольнике в матрице корреляций.</p>
 </section>
-<section id="матрица-корреляций-в-виде-графа" class="level2" data-number="20.5">
-<h2 data-number="20.5" class="anchored" data-anchor-id="матрица-корреляций-в-виде-графа"><span class="header-section-number">20.5</span> Матрица корреляций в виде графа</h2>
+<section id="sec-cor_graph" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="sec-cor_graph"><span class="header-section-number">20.5</span> Матрица корреляций в виде графа</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrr"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"corrr"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrr)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Функционал пакета {corrr} позволяет работать с корреляционными матрицами в духе tidyverse, возвращая тиббл вместо матрицы.</p>
+<p>Функционал пакета <code>{corrr}</code> позволяет работать с корреляционными матрицами в духе tidyverse, возвращая тиббл вместо матрицы.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Correlation computed with
 • Method: 'pearson'
@@ -1302,8 +1309,8 @@ carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
 <p>Нас же интересует в первую очередь представление матрицы корреляций в виде графа.</p>
 <p>Делается это следующим образом: мы устанавливаем минимальное значение для корреляций с помощью параметра <code>min_cor =</code>, которые будут отображены в качестве связи между переменными. Если мы этого не сделаем, то мы просто получим полностью связанный граф, потому что все переменные хотя бы немного коррелируют со всеми. По умолчанию этот параметр равен 0.3, но мы можем изменить это значение на собственное усмотрение. В данном случае установим <code>min_cor = 0.7</code>, потому что в нашей матрице очень много сильных корреляций.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars) <span class="sc">%&gt;%</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  corrr<span class="sc">::</span><span class="fu">network_plot</span>(<span class="at">min_cor =</span> <span class="fl">0.7</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">correlate</span>(mtcars) <span class="sc">%&gt;%</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  corrr<span class="sc">::</span><span class="fu">network_plot</span>(<span class="at">min_cor =</span> <span class="fl">0.7</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Correlation computed with
 • Method: 'pearson'
@@ -1329,8 +1336,8 @@ carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Впрочем, это не так уж и важно: на практике часто опускают слово “коэффициент” и называют корреляцией как и просто связь, так и ее способ измерения.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>“Проблема множественных сравнений” - это устоявшийся термин, который используется и в случае множественных корреляций, и в случае множественных сравнений средних и в любых других случаях с тестированием нескольких гипотез одновременно.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Впрочем, это не так уж и важно: на практике часто опускают слово «коэффициент» и называют корреляцией как и просто связь, так и ее способ измерения.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>«Проблема множественных сравнений» — это устоявшийся термин, который используется и в случае множественных корреляций, и в случае множественных сравнений средних и в любых других случаях с тестированием нескольких гипотез одновременно.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
