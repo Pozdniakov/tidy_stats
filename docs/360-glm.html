@@ -463,16 +463,21 @@ window.Quarto = {
 
 <section id="sec-general_linear_model" class="level2" data-number="23.1">
 <h2 data-number="23.1" class="anchored" data-anchor-id="sec-general_linear_model"><span class="header-section-number">23.1</span> Общая линейная модель</h2>
-<p>Обобщением множественной линейной регрессии можно считать <strong>общую линейную модель (general linear model)</strong>. Общая линейная модель может предсказывать не одну, а сразу несколько объясняемых переменных в отличие от множественной линейной регрессии.</p>
-<p><span class="math display">\[Y = XB\]</span> где <span class="math inline">\(Y\)</span> — матрица объясняемых переменных, <span class="math inline">\(X\)</span> — матрица предикторов, <span class="math inline">\(B\)</span> — матрица параметров.</p>
+<p>Обобщением множественной линейной регрессии можно считать <strong>общую линейную модель</strong> <em>(general linear model)</em>. Она может предсказывать не одну, а сразу несколько объясняемых переменных в отличие от множественной линейной регрессии.</p>
+<p><span class="math display">\[Y = XB + E,\]</span> где <span class="math inline">\(Y\)</span> — матрица объясняемых переменных, <span class="math inline">\(X\)</span> — матрица предикторов, <span class="math inline">\(B\)</span> — матрица параметров, <span class="math inline">\(E\)</span> — матрица ошибок.</p>
 <p>Почти все пройденные нами методы можно рассматривать как частный случай общей линейной модели: t-тесты, коэффициент корреляции Пирсона, линейная регрессия, ANOVA.</p>
-<p><img src="https://lindeloev.github.io/tests-as-linear/linear_tests_cheat_sheet.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/360-glm_tests_as_linear.png" class="img-fluid figure-img"></p>
+<figcaption>Шпаргалка «Обычные статистические тесты — это линейные модели»: t-тесты, корреляция, ANOVA и другие тесты как частные случаи линейной модели с соответствующими R-формулами. Автор — Йонас Кристоффер Линделёв (Jonas Kristoffer Lindeløv), <a href="https://lindeloev.github.io/tests-as-linear/">lindeloev.net</a>, CC BY</figcaption>
+</figure>
+</div>
 </section>
 <section id="sec-glm_model" class="level2" data-number="23.2">
 <h2 data-number="23.2" class="anchored" data-anchor-id="sec-glm_model"><span class="header-section-number">23.2</span> Обобщенная линейная модель</h2>
-<p><strong>Обобщенная линейная модель (generalized linear model)</strong> была придумана как обобщение линейной регрессии и ее сородичей: логистической регрессии и пуассоновской регрессии.</p>
-<p>Общая линейная модель задается формулой <span class="math display">\[Y = XB\]</span></p>
-<p>Обобщенная оборачивает предиктор <span class="math inline">\(XB\)</span> <strong>связывающей функцией (link function),</strong> которая различается для разных типов регрессионных моделей.</p>
+<p><strong>Обобщенная линейная модель</strong> <em>(generalized linear model)</em> была придумана как обобщение линейной регрессии и ее сородичей: логистической регрессии и пуассоновской регрессии.</p>
+<p>Общая линейная модель задается формулой <span class="math display">\[Y = XB + E\]</span></p>
+<p>Обобщенная оборачивает предиктор <span class="math inline">\(XB\)</span> <strong>связывающей функцией</strong> <em>(link function)</em>, которая различается для разных типов регрессионных моделей.</p>
 <p>Давайте попробуем построить модель, в которой объясняемой переменной будет то, является ли супергерой хорошим или плохим.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -480,15 +485,20 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"-"</span>, <span class="st">"-99"</span>, <span class="st">"NA"</span>))</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>heroes<span class="sc">$</span>good <span class="ot">&lt;-</span> heroes<span class="sc">$</span>Alignment <span class="sc">==</span> <span class="st">"good"</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Обычная линейная модель нам не подходит, если распределение наших ошибок далеко от нормального. А это значит, что мы не можем использовать общую линейную модель с бинарной объясняемой переменной. Эту проблему решает логистическая регрессия, которая является частным случаем обобщенной линейной модели.</p>
-<p>Для этого нам понадобится функция <code>glm()</code>, а не <code>lm()</code> как раньше. Ее синтаксис очень похож, но нам теперь нужно задать еще один важный параметр <code>family =</code> для выбора связывающей функции (в данном случае это логит-функция, которая является связующей функцией по умолчанию для биномиального семейства функций в <code>glm()</code>).</p>
+<p>Обычная линейная модель в случае с бинарной объясняемой переменной работает плохо: ее предсказания не ограничены диапазоном от 0 до 1 (а именно так — как вероятность — хочется трактовать предсказание для бинарного исхода), да и ошибки такой модели заведомо далеки от нормальных. Эту проблему решает логистическая регрессия, которая является частным случаем обобщенной линейной модели.</p>
+<p>Но прежде уберем строки с пропусками в интересующих нас переменных: скоро мы будем сравнивать несколько моделей, а сравнивать их можно, только если они построены на одних и тех же данных.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Weight <span class="sc">+</span> Gender, heroes, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>heroes_good <span class="ot">&lt;-</span> heroes <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(good, Weight, Gender)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Для этого нам понадобится функция <code>glm()</code>, а не <code>lm()</code> как раньше. Ее синтаксис очень похож, но нам теперь нужно задать еще один важный параметр <code>family =</code> для выбора связывающей функции (в данном случае это логит-функция, которая является связывающей функцией по умолчанию для биномиального семейства функций в <code>glm()</code>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Weight <span class="sc">+</span> Gender, heroes_good, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-glm(formula = good ~ Weight + Gender, family = binomial(), data = heroes)
+glm(formula = good ~ Weight + Gender, family = binomial(), data = heroes_good)
 
 Coefficients:
              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -502,35 +512,33 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
     Null deviance: 605.22  on 477  degrees of freedom
 Residual deviance: 570.88  on 475  degrees of freedom
-  (256 observations deleted due to missingness)
 AIC: 576.88
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 </div>
-<p>Результат очень похож по своей структуре на <code>glm()</code>, однако вместо <span class="math inline">\(R^2\)</span> перед нами AIC. AIC расшифровывается как информационный критерий Акаике (Akaike information criterion) — это критерий использующийся для выбора из нескольких моделей. Чем он меньше, тем лучше модель. Как и Adjusted R<sup>2</sup>, AIC “наказывает” за большое количество параметров в модели.</p>
-<p>Поскольку AIC — это относительный показатель качества модели, нам нужно сравнить его с AIC другой, более общей модели. Можно сравнить с моделью без массы супергероев.</p>
+<p>Результат очень похож по структуре на вывод <code>lm()</code>, однако вместо <span class="math inline">\(R^2\)</span> перед нами AIC. AIC расшифровывается как <strong>информационный критерий Акаике</strong> <em>(Akaike information criterion)</em> — это критерий, использующийся для выбора из нескольких моделей. Чем он меньше, тем лучше модель. Как и adjusted <span class="math inline">\(R^2\)</span>, AIC «наказывает» за большое количество параметров в модели.</p>
+<p>Поскольку AIC — это относительный показатель качества модели, нам нужно сравнить его с AIC другой модели, построенной на тех же данных, — например, более простой, без массы супергероев.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm_noweight <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Gender, heroes, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm_noweight)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>heroes_good_glm_noweight <span class="ot">&lt;-</span> <span class="fu">glm</span>(good <span class="sc">~</span> Gender, heroes_good, <span class="at">family =</span> <span class="fu">binomial</span>()) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(heroes_good_glm_noweight)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-glm(formula = good ~ Gender, family = binomial(), data = heroes)
+glm(formula = good ~ Gender, family = binomial(), data = heroes_good)
 
 Coefficients:
             Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   1.4178     0.1785   7.944 1.95e-15 ***
-GenderMale   -0.8716     0.2012  -4.332 1.48e-05 ***
+(Intercept)   1.4040     0.2109   6.657 2.80e-11 ***
+GenderMale   -0.9311     0.2389  -3.898 9.72e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 873.81  on 698  degrees of freedom
-Residual deviance: 853.24  on 697  degrees of freedom
-  (35 observations deleted due to missingness)
-AIC: 857.24
+    Null deviance: 605.22  on 477  degrees of freedom
+Residual deviance: 588.52  on 476  degrees of freedom
+AIC: 592.52
 
 Number of Fisher Scoring iterations: 4</code></pre>
 </div>
@@ -539,84 +547,70 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </section>
 <section id="sec-lme_model" class="level2" data-number="23.3">
 <h2 data-number="23.3" class="anchored" data-anchor-id="sec-lme_model"><span class="header-section-number">23.3</span> Модель со смешанными эффектами</h2>
-<p>Модели со смешанными эффектами (mixed-effects models) — это то же самое, что и иерархическая регрессия (hierarchical regression) или многоуровневое моделирование (multilevel modelling). Этому методу повезло иметь много названий - в зависимости от области, в которой он используется. Модели со смешанными эффектами позволяет включать в линейную регрессию не только фиксированные эффекты (fixed effects), но и случайные эффекты (random effects).</p>
+<p><strong>Модели со смешанными эффектами</strong> <em>(mixed-effects models)</em> — это то же самое, что и <strong>иерархическая регрессия</strong> <em>(hierarchical regression)</em> или <strong>многоуровневое моделирование</strong> <em>(multilevel modelling)</em>. Этому методу повезло иметь много названий — в зависимости от области, в которой он используется. Модели со смешанными эффектами позволяют включать в линейную регрессию не только <strong>фиксированные эффекты</strong> <em>(fixed effects)</em>, но и <strong>случайные эффекты</strong> <em>(random effects)</em>.</p>
 <p>Для экспериментальных дисциплин это интересно тем, что в таких моделях можно не усреднять показатели по испытуемым или образцам, а учитывать влияние соответствующей группирующей переменной как случайный эффект. В отличие от обычного фактора как в линейной регрессии или дисперсионном анализе (здесь он называется фиксированным), случайный эффект не интересует нас сам по себе, а его значения считаются случайной переменной.</p>
 <p>Смешанные модели используются в самых разных областях. Они позволяют решить проблему зависимости наблюдений без усреднения значений по испытуемым или группам, что повышает статистическую мощность.</p>
-<p>Для работы со смешанными моделями в R есть два известных пакета: <code>nlme</code> и более современный <code>lme4</code>.</p>
+<p>Для работы со смешанными моделями в R есть два известных пакета: <code>{nlme}</code> и более современный <code>{lme4}</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lme4"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"lme4"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'Matrix'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:tidyr':
-
-    expand, pack, unpack</code></pre>
-</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Для примера возьмем данные исследования влияния депривации сна на время реакции.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sleepstudy"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sleepstudy"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Данные представлены в длинном формате: каждая строчка — это усредненное время реакции для одного испытуемого в соответствующий день эксперимента.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="360-glm_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="360-glm_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Можно заметить, что, в среднем, время реакции у испытуемых повышается от первого к последнему дню. С помощью смешанных моделей мы можем проверить, различается ли скорость возрастания времени реакции от дня к дню у разных испытуемых.</p>
-<p>Для этого мы сравниваем две модели, одна из которых является “вложенной” в другую, то есть усложненной версией более общей модели. В данном случае, более общая модель предполагает, что время реакции увеличивается у всех испытуемых одинаково, а испытуемые различаются только средним временем реакции.</p>
+<p>Для этого мы сравниваем две вложенные модели: более простая получается из более сложной, если убрать часть параметров. Более простая модель предполагает, что время реакции увеличивается у всех испытуемых одинаково, а испытуемые различаются только средним временем реакции. Более сложная модель дополнительно разрешает, чтобы скорость увеличения (наклон по дням) различалась между испытуемыми.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), sleepstudy)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), sleepstudy)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Subject), sleepstudy)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject), sleepstudy)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Визуализируем предсказания двух моделей:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme0)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme1)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme0 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme0)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sleepstudy<span class="sc">$</span>predicted_by_sleep_lme1 <span class="ot">&lt;-</span> <span class="fu">predict</span>(sleep_lme1)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">observed_reaction_time =</span> Reaction) <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(observed_reaction_time, predicted_by_sleep_lme0, predicted_by_sleep_lme1), <span class="at">names_to =</span> <span class="st">"model"</span>, <span class="at">values_to =</span> <span class="st">"Reaction"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> model)) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(aes(y = predicted_by_M1), colour = "orange") + </span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_line(aes(y = predicted_by_M2), colour = "purple") +   </span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sleepstudy, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sleepstudy <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">observed_reaction_time =</span> Reaction) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(observed_reaction_time, predicted_by_sleep_lme0, predicted_by_sleep_lme1), <span class="at">names_to =</span> <span class="st">"model"</span>, <span class="at">values_to =</span> <span class="st">"Reaction"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Days, <span class="at">y =</span> Reaction)) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> model)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sleepstudy, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="360-glm_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="360-glm_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Зеленая линия (нулевая модель) имеет везде один и тот же наклон, а синяя (альтернативная модель) имеет разный наклон у всех испытуемых.</p>
+<p>Линия более простой модели (<code>sleep_lme0</code>) имеет везде один и тот же наклон, а линия более сложной (<code>sleep_lme1</code>) — разный наклон у каждого испытуемого.</p>
 <p>Есть несколько способов сравнивать модели, например, уже знакомый нам AIC. Кроме того, можно сравнить две модели с помощью теста хи-квадрат, воспользовавшись функцией <code>anova()</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(sleep_lme0, sleep_lme1)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(sleep_lme0, sleep_lme1)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>refitting model(s) with ML (instead of REML)</code></pre>
 </div>
@@ -632,9 +626,15 @@ sleep_lme1    6 1763.9 1783.1 -875.97    1751.9 42.139  2  7.072e-10 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Модель со случайным наклоном прямой оказалась лучше, о чем нам говорят как более низкие AIC и BIC, так и тестирование с помощью хи-квадрат.</p>
+<p>Модель со случайным наклоном прямой оказалась лучше, о чем нам говорят как более низкие AIC и BIC<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, так и тестирование с помощью хи-квадрат.</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>BIC — это <strong>байесовский информационный критерий</strong> <em>(Bayesian information criterion)</em>, родственник AIC, но с немного отличающейся формулой.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
