@@ -203,7 +203,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Основы R и Rstudio</span></a>
+ <span class="menu-text">Основы R и RStudio</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -715,7 +715,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2 data-number="22.2" class="anchored" data-anchor-id="sec-anova_posthoc"><span class="header-section-number">22.2</span> Post-hoc тесты</h2>
 <p>Тем не менее, дисперсионного анализа недостаточно, чтобы решить, какие именно группы между собой различаются. Для этого нужно проводить <strong>post-hoc тесты</strong> (апостериорные тесты).</p>
 <p>Post-hoc переводится с латыни как «после этого». Post-hoc тесты или просто «пост-хоки» проводятся, если в результате ANOVA была отвергнута нулевая гипотеза. Собственно, пост-хоки никак не связаны с дисперсионным анализом на уровне расчетов — это абсолютно независимые тесты, но исторически так сложилось, что они известны именно как дополнительный этап ANOVA.</p>
-<p>Самый простой вариант пост-хок теста — это попарные <span class="math inline">\(t\)</span>-тесты <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> с поправками на множественные сравнения:</p>
+<p>Самый простой вариант пост-хок теста — это попарные <span class="math inline">\(t\)</span>-тесты<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> с поправками на множественные сравнения:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(diet<span class="sc">$</span>weight.loss, diet<span class="sc">$</span>Dietf)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -841,7 +841,7 @@ sample estimates:
 -0.02431772 </code></pre>
 </div>
 </div>
-<p>Теперь должно быть понятно, почему все эти функции делают вроде бы разные статистические тесты, но выдают такой похожий результат — это фактически один и тот же метод! Все эти методы (и некоторые из тех, что будем рассматривать далее) можно рассматривать как разновидности множественной линейной регрессии. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<p>Теперь должно быть понятно, почему все эти функции делают вроде бы разные статистические тесты, но выдают такой похожий результат — это фактически один и тот же метод! Все эти методы (и некоторые из тех, что будем рассматривать далее) можно рассматривать как разновидности множественной линейной регрессии.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 </section>
 <section id="sec-dummy" class="level2" data-number="22.4">
 <h2 data-number="22.4" class="anchored" data-anchor-id="sec-dummy"><span class="header-section-number">22.4</span> Dummy coding</h2>
@@ -1243,7 +1243,7 @@ Friedman chi-squared = 27, df = 1, p-value = 2.035e-07</code></pre>
 <ol>
 <li id="fn1"><p>ANOVA от ANalysis Of VAriance, по-русски часто читается как «АНОВА».<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Форма <span class="math inline">\(F\)</span>-распределения будет сильно зависеть от числа степеней свободы. Но оно всегда определено от 0 до плюс бесконечности: в числителе и знаменателе всегда неотрицательные числа.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>По умолчанию функция <code>pairwise.t.test()</code> использует объединенное стандартное отклонение для всех условий при расчетах. Это дает немного другие результаты, чем просто попарные t-тесты, хотя разница обычно незначительная. Чтобы отключить такое поведение функции <code>pairwise.t.test()</code>, можно поставить <code>pool.sd = FALSE</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>По умолчанию функция <code>pairwise.t.test()</code> использует объединенное стандартное отклонение для всех условий при расчетах. Это дает немного другие результаты, чем просто попарные <span class="math inline">\(t\)</span>-тесты, хотя разница обычно незначительная. Чтобы отключить такое поведение функции <code>pairwise.t.test()</code>, можно поставить <code>pool.sd = FALSE</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Обобщением множественной линейной регрессии (вернее, одним из) можно считать общую линейную модель (см. <a href="360-glm.html#sec-general_linear_model" class="quarto-xref"><span>Глава 23.1</span></a>). Общая линейная модель может предсказывать не одну, а сразу несколько объясняемых переменных в отличие от множественной линейной регрессии. Следующим этапом обобщения служит обобщенная линейная модель (см. <a href="360-glm.html#sec-glm_model" class="quarto-xref"><span>Глава 23.2</span></a>). Фишка последней в том, что можно использовать не только модели с нормально распределенными остатками, но и, например, логистическую и пуассоновскую регрессию.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Вообще-то эта логика не совсем корректна. Тест Ливиня — это такой же статистический тест, как и остальные. Поэтому считать, что допущения соблюдаются на основании того, что p-value больше допустимого уровня <span class="math inline">\(\alpha\)</span>, — это неправильно. Но для проверки допущений такая не очень корректная практика считается допустимой.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>

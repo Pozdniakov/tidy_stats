@@ -108,6 +108,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="callout-custom.css">
 </head>
@@ -174,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./005-whole_r_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Основы R и Rstudio</span></a>
+ <span class="menu-text">Основы R и RStudio</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -442,10 +471,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><em>Обсуждение неожиданных результатов как ожидаемых.</em> Возможно, вам это покажется смешным, но очень часто результаты оказываются статистически значимыми, но направлены в другую сторону, чем предполагалось в гипотезе. И в таких случаях исследователи часто пишут, как будто бы такие результаты и ожидались изначально! Приходится, правда, немного подкрутить теоретические построения.</p></li>
 <li><p><em>Остановка набора испытуемых при достижении уровня значимости (Optional stopping).</em> Представьте себе, что вы не обнаружили значимых результатов, но p-value болтается около 0.05. Тогда вам захочется добрать парочку испытуемых. А потом еще. И еще немного. Проблема с таким подходом в том, что рано или поздно вы получите статистически значимые результаты. В любом случае, даже если эффекта нет. На самом деле, эта проблема не так сильно влияет на результаты как может показаться, но это всё-таки достаточно плохая практика, а ее применение увеличивает количество опубликованных ложно-положительных результатов.</p></li>
 <li><p><em>Неправильное округление до .05.</em> Всякий раз, когда видите <em>p = .05</em> будьте внимательны: вообще-то он не может быть равен именно <em>.05</em>. Либо автор не очень этого понимает, либо просто <em>p</em> больше, а не меньше <em>.05</em>. Например, <em>.054</em>, что потом округляется до <em>.05</em> и преподносится как статистически значимые результаты.</p></li>
-<li><p><em>Использование односторонних тестов для сравнения средних.</em> Эта практика похожа на предыдущую: исследователь получил <em>p &gt; .05</em>, но меньше, чем <em>.1</em>. Недобросовестный исследователь, который хочет опубликоваться проводит односторонний т-тест вместо двустороннего, т.е. фактически просто делит р на 2. Совсем недобросовестные даже не пишут, что они использовали односторонний т-тест, хотя по умолчанию все используют двусторонний.</p></li>
+<li><p><em>Использование односторонних тестов для сравнения средних.</em> Эта практика похожа на предыдущую: исследователь получил <em>p &gt; .05</em>, но меньше, чем <em>.1</em>. Недобросовестный исследователь, который хочет опубликоваться проводит односторонний <span class="math inline">\(t\)</span>-тест вместо двустороннего, т.е. фактически просто делит р на 2. Совсем недобросовестные даже не пишут, что они использовали односторонний <span class="math inline">\(t\)</span>-тест, хотя по умолчанию все используют двусторонний.</p></li>
 </ul>
 <p>Данный список не претендует на полноту. Этих практик стоит избегать и других от этого отучать. Ну а если вы думаете, что никто не заметит, если вы так сделаете, то это не так.</p>
-<p>Например, последние две практики можно легко обнаружить с помощью сайта http://statcheck.io. Этот сайт делает магию: нужно кинуть ему статью, он распознает в ней статистические тесты и пересчитывает их. На самом деле, ничего сложного, а это сайт сделан с помощью R и уже знакомых нам инструментов: с помощью специальных пакетов из файлов вытаскивается текст, в тексте с помощью регулярных выражений находятся паттерны вроде “<em>t</em>(18) = -1.91, <em>p</em> = .036” - в большинстве журналов используется очень похожее форматирование статистических результатов. Зная степени свободы и т-статистику, можно пересчитать p-value. В данном случае это можно посчитать вот так:</p>
+<p>Например, последние две практики можно легко обнаружить с помощью сайта http://statcheck.io. Этот сайт делает магию: нужно кинуть ему статью, он распознает в ней статистические тесты и пересчитывает их. На самом деле, ничего сложного, а это сайт сделан с помощью R и уже знакомых нам инструментов: с помощью специальных пакетов из файлов вытаскивается текст, в тексте с помощью регулярных выражений находятся паттерны вроде “<em>t</em>(18) = -1.91, <em>p</em> = .036” - в большинстве журналов используется очень похожее форматирование статистических результатов. Зная степени свободы и <span class="math inline">\(t\)</span>-статистику, можно пересчитать p-value. В данном случае это можно посчитать вот так:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.91</span>, <span class="at">df =</span> <span class="dv">18</span>)<span class="sc">*</span><span class="dv">2</span> <span class="co">#умножаем на 2, потому что двусторонний тест</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -468,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Этот пакет предоставляет семейство функций для расчета мощности, размера эффекта, уровня значимости или нужного размера выборки для разных статистических тестов.</p>
 <p>Статистическая мощность - вероятность обнаружить статистически значимый эффект, если он действительно есть. Размер эффекта - собственно, размер эффекта в исследовании, обычно в универсальных единицах. Например, размер различия средних обычно измеряется в стандартных отклонениях. Это позволяет сравнивать эффекты в разных исследованиях и даже эффекты в разных областях науки.</p>
 <p>Если задать 3 из 4 чисел (статистическая мощность - стандартно это .8, уровень значимости - стандартно .05, размер эффекта, размер выборки), то функция выдаст недостающее число.</p>
-<p>Я очень советую поиграться с этим самостоятельно. Например, если размер эффекта в единицах стандартных отклонений Cohen’s d = 2, то сколько нужно испытуемых, чтобы обнаружить эффект для двухвыборочного т-теста с вероятностью .8?</p>
+<p>Я очень советую поиграться с этим самостоятельно. Например, если размер эффекта в единицах стандартных отклонений Cohen’s d = 2, то сколько нужно испытуемых, чтобы обнаружить эффект для двухвыборочного <span class="math inline">\(t\)</span>-теста с вероятностью .8?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pwr)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">"two.sample"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -501,7 +530,7 @@ NOTE: n is number in *each* group</code></pre>
 NOTE: n is number of *pairs*</code></pre>
 </div>
 </div>
-<p>Еще меньше, если использовать within-subject дизайн исследования и зависимый т-тест.</p>
+<p>Еще меньше, если использовать within-subject дизайн исследования и зависимый <span class="math inline">\(t\)</span>-тест.</p>
 <p>А если эффект маленький - всего d = .2?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> .<span class="dv">2</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">"two.sample"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
