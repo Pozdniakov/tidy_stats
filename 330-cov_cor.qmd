@@ -40,11 +40,11 @@ back <- Backpack %>%
 
 - Формула ковариации:
 
-$$\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{n}$$
+$$\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n}$$
 
 - Оценка ковариации по выборке:
 
-$$\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{n-1}$$
+$$\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n-1}$$
 
 В R есть функция `cov()` для подсчета ковариации. Эта функция считает сразу **матрицу ковариаций** *(covariance matrix)* для всех сочетаний колонок на входе:
 
@@ -56,7 +56,7 @@ back %>%
 
 Полученная матрица симметрична: порядок двух переменных не имеет значения. Но что мы имеем по основной диагонали --- это, получается, ковариация переменной с самой собой? Давайте подставим в формулу для ковариации $x$ вместо $y$, чтобы узнать, что скрывается под ковариацией переменной с самой собой:
 
-$$\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(x_i --- \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})^2}{n}$$
+$$\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(x_i - \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}{n}$$
 
 Знакомая формула? Это формула дисперсии (см. @sec-var)! Выходит, что **ковариация переменной с самой собой --- это дисперсия.** Таким образом, **в матрице ковариаций по основной диагонали находятся дисперсии переменных.**
 
@@ -130,9 +130,9 @@ back %>%
 
 Самый известный коэффициент корреляции --- **коэффициент корреляции Пирсона** *(Pearson correlation coefficient)*:
 
-$$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i --- \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i --- \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}$$
+$$\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}$$
 
-Оценка коэффициента корреляции Пирсона по выборке: $$r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i --- \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i --- \overline{y})^2}} = \frac{1}{n --- 1}\sum_{i = 1}^n z_{x,i} z_{y, i}$$
+Оценка коэффициента корреляции Пирсона по выборке: $$r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n - 1}\sum_{i = 1}^n z_{x,i} z_{y, i}$$
 
 Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение $z$-оценок (@sec-z_scores).
 
