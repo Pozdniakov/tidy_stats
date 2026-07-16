@@ -270,7 +270,8 @@ p.adjust(p_vec, method = "BH")
 В качестве примера возьмем встроенный датасет `mtcars`, в котором есть множество количественных переменных.
 
 ```{r}
-mtcars
+mtcars %>%
+  slice_head(n = 6)
 ```
 
 Для визуализации возьмем пакет `{corrplot}`.
@@ -310,7 +311,7 @@ mtcars_cor_p
 Нам нужно разворошить полученную переменную `mtcars_cor_p`.
 
 ```{r}
-str(mtcars_cor_p)
+str(mtcars_cor_p, max.level = 1)
 ```
 
 ```{r}

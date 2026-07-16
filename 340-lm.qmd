@@ -82,7 +82,8 @@ back$residuals <- residuals(model)
 back$fitted <- fitted(model)
 
 back %>%
-  transmute(backpack_kg - (fitted + residuals))
+  transmute(backpack_kg - (fitted + residuals)) %>%
+  slice_head(n = 6)
 ```
 
 Соответственно, вся изменчивость зависимой переменной разделяется на объясненную и необъясненную части. **Полная сумма квадратов** *(total sum of squares, TSS)* --- это сумма квадратов отклонений зависимой переменной от ее среднего. Необъясненная часть --- это **остаточная сумма квадратов** *(residual sum of squares, RSS)*: сумма квадратов ошибок.
