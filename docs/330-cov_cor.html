@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./340-lm.html" rel="next">
 <link href="./325-chisq.html" rel="prev">
+<link href="./images/favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -696,11 +697,11 @@ window.Quarto = {
 <ul>
 <li>Формула ковариации:</li>
 </ul>
-<p><span class="math display">\[\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{n}\]</span></p>
+<p><span class="math display">\[\sigma_{xy} = cov(x, y) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n}\]</span></p>
 <ul>
 <li>Оценка ковариации по выборке:</li>
 </ul>
-<p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{n-1}\]</span></p>
+<p><span class="math display">\[\hat{\sigma}_{xy} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{n-1}\]</span></p>
 <p>В R есть функция <code>cov()</code> для подсчета ковариации. Эта функция считает сразу <strong>матрицу ковариаций</strong> <em>(covariance matrix)</em> для всех сочетаний колонок на входе:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
@@ -713,7 +714,7 @@ backpack_kg   6.601954    6.838333</code></pre>
 </div>
 </div>
 <p>Полученная матрица симметрична: порядок двух переменных не имеет значения. Но что мы имеем по основной диагонали — это, получается, ковариация переменной с самой собой? Давайте подставим в формулу для ковариации <span class="math inline">\(x\)</span> вместо <span class="math inline">\(y\)</span>, чтобы узнать, что скрывается под ковариацией переменной с самой собой:</p>
-<p><span class="math display">\[\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(x_i --- \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})^2}{n}\]</span></p>
+<p><span class="math display">\[\sigma_{xx} = cov(x, x) = \frac{\sum_{i = 1}^n(x_i - \overline{x})(x_i - \overline{x})}{n} = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}{n}\]</span></p>
 <p>Знакомая формула? Это формула дисперсии (см. <a href="210-desc_stats.html#sec-var" class="quarto-xref"><span>Глава 12.5.2</span></a>)! Выходит, что <strong>ковариация переменной с самой собой — это дисперсия.</strong> Таким образом, <strong>в матрице ковариаций по основной диагонали находятся дисперсии переменных.</strong></p>
 <p><span class="math display">\[\begin{bmatrix}\sigma_x^2 &amp; \sigma_{xy}\\\sigma_{xy} &amp; \sigma_y^2\end{bmatrix}\]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -814,8 +815,8 @@ backpack_kg   6.601954    6.838333</code></pre>
 <section id="sec-pearson_cor" class="level3" data-number="20.2.1">
 <h3 data-number="20.2.1" class="anchored" data-anchor-id="sec-pearson_cor"><span class="header-section-number">20.2.1</span> Коэффициент корреляции Пирсона</h3>
 <p>Самый известный коэффициент корреляции — <strong>коэффициент корреляции Пирсона</strong> <em>(Pearson correlation coefficient)</em>:</p>
-<p><span class="math display">\[\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i --- \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i --- \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
-<p>Оценка коэффициента корреляции Пирсона по выборке: <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i --- \overline{x})(y_i --- \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i --- \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i --- \overline{y})^2}} = \frac{1}{n --- 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
+<p><span class="math display">\[\rho_{xy} = \frac{\sigma_{xy}}{\sigma_x \sigma_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
+<p>Оценка коэффициента корреляции Пирсона по выборке: <span class="math display">\[r_{xy} = \frac{\hat{\sigma}_{xy}}{\hat{\sigma}_x \hat{\sigma}_y} = \frac{\sum_{i = 1}^n(x_i - \overline{x})(y_i - \overline{y})}{\sqrt{\sum_{i = 1}^n(x_i - \overline{x})^2}\sqrt{\sum_{i = 1}^n(y_i - \overline{y})^2}} = \frac{1}{n - 1}\sum_{i = 1}^n z_{x,i} z_{y, i}\]</span></p>
 <p>Коэффициент корреляции Пирсона можно понимать по-разному. С одной стороны, это просто ковариация, нормированная на стандартное отклонение обоих переменных. С другой стороны, можно понимать это как среднее произведение <span class="math inline">\(z\)</span>-оценок (<a href="210-desc_stats.html#sec-z_scores" class="quarto-xref"><span>Глава 12.5.3.1</span></a>).</p>
 <p>Корреляцию в R можно посчитать с помощью функции <code>cor()</code>:</p>
 <div class="cell">
@@ -1077,41 +1078,16 @@ Year           0.36        0.57  0.77 0.00
 <p>Как видите, почти всё коррелирует друг с другом, даже с учетом поправок. Такие множественные корреляции лучше всего смотреть с помощью хитмэп-визуализации.</p>
 <p>В качестве примера возьмем встроенный датасет <code>mtcars</code>, в котором есть множество количественных переменных.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">6</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
-Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
-Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
-Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
-Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
-Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
-Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
-Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
-Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
-Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
-Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
-Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
-Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
-Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
-Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
-Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
-Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
-AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
-Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
-Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
-Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
-Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
-Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
-Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
-Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
-Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
-Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 </div>
 <p>Для визуализации возьмем пакет <code>{corrplot}</code>.</p>
@@ -1211,48 +1187,27 @@ carb 0.00   0 0.03 0.00 0.62 0.01 0.00 0.00 0.75 0.13 0.00
 </div>
 <p>Нам нужно разворошить полученную переменную <code>mtcars_cor_p</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_cor_p)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(mtcars_cor_p, <span class="at">max.level =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 14
  $ r     : num [1:11, 1:11] 1 -0.852 -0.848 -0.776 0.681 ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
  $ n     : num 32
  $ t     : num [1:11, 1:11] Inf -8.92 -8.75 -6.74 5.1 ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
  $ p     : num [1:11, 1:11] 0.00 6.11e-10 9.38e-10 1.79e-07 1.78e-05 ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
  $ p.adj : num [1:55] 3.18e-08 4.78e-08 9.92e-11 8.05e-06 1.74e-07 ...
  $ se    : num [1:11, 1:11] 0 0.0955 0.0969 0.1151 0.1337 ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
  $ sef   : num 0.186
  $ adjust: chr "holm"
  $ sym   : logi TRUE
  $ ci    :'data.frame': 55 obs. of  4 variables:
-  ..$ lower: num [1:55] -0.926 -0.923 -0.885 0.436 -0.934 ...
-  ..$ r    : num [1:55] -0.852 -0.848 -0.776 0.681 -0.868 ...
-  ..$ upper: num [1:55] -0.716 -0.708 -0.586 0.832 -0.744 ...
-  ..$ p    : num [1:55] 6.11e-10 9.38e-10 1.79e-07 1.78e-05 1.29e-10 ...
  $ ci2   :'data.frame': 55 obs. of  5 variables:
-  ..$ lower: num [1:55] -0.926 -0.923 -0.885 0.436 -0.934 ...
-  ..$ r    : num [1:55] -0.852 -0.848 -0.776 0.681 -0.868 ...
-  ..$ upper: num [1:55] -0.716 -0.708 -0.586 0.832 -0.744 ...
-  ..$ p    : num [1:55] 6.11e-10 9.38e-10 1.79e-07 1.78e-05 1.29e-10 ...
-  ..$ p.adj: num [1:55] 3.18e-08 4.78e-08 8.05e-06 5.86e-04 6.86e-09 ...
  $ ci.adj:'data.frame': 55 obs. of  2 variables:
-  ..$ lower.adj: num [1:55] -0.954 -0.953 -0.928 0.238 -0.959 ...
-  ..$ upper.adj: num [1:55] -0.572 -0.562 -0.405 0.89 -0.61 ...
  $ stars : chr [1:11, 1:11] "1***" "-0.85***" "-0.85***" "-0.78***" ...
   ..- attr(*, "dimnames")=List of 2
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
-  .. ..$ : chr [1:11] "mpg" "cyl" "disp" "hp" ...
  $ Call  : language psych::corr.test(x = mtcars)
  - attr(*, "class")= chr [1:2] "psych" "corr.test"</code></pre>
 </div>
