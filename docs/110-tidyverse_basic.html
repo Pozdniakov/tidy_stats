@@ -553,7 +553,7 @@ div.csl-indent {
 <li><code>{xml2}</code> — для работы с XML,</li>
 <li><code>{DBI}</code> и <code>{dbplyr}</code> — для работы с базами данных,</li>
 <li><code>{rvest}</code> — для веб-скреппинга,</li>
-<li><code>{feather}</code> — для быстрого чтения и записи данных формата <em>feather,</em></li>
+<li><code>{arrow}</code> — для быстрого чтения и записи данных в форматах <em>Parquet</em> и <em>Feather,</em></li>
 <li><code>{googledrive}</code> — для взаимодействия с файлами на <em>Google-диске,</em></li>
 <li><code>{googlesheets4}</code> — для импорта и экспорта <em>Google-таблиц.</em></li>
 </ul>
@@ -600,11 +600,11 @@ dbl (3): ...1, Height, Weight
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-<p>Подробнее про импорт данных, в том числе в <em>tidyverse,</em> смотри в <a href="030-import_data.html" class="quarto-xref"><span>Глава 6</span></a>.</p>
+<p>Подробнее про импорт данных, в том числе в <em>tidyverse,</em> см. <a href="030-import_data.html" class="quarto-xref"><span>Глава 6</span></a>.</p>
 </section>
 <section id="sec-tibble" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-tibble"><span class="header-section-number">10.3</span> tibble</h2>
-<p>Когда мы загрузили данные с помощью <code>read_csv()</code>, то мы получили объект класса <code>{tibble}</code>, а не <code>data.frame</code>:</p>
+<p>Когда мы загрузили данные с помощью <code>read_csv()</code>, то мы получили объект класса <code>tbl_df</code> (<strong>тиббл</strong>), а не <code>data.frame</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(heroes)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -680,7 +680,7 @@ dbl (3): ...1, Height, Weight
 </section>
 <section id="sec-pipe" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="sec-pipe"><span class="header-section-number">10.4</span> Пайпы: <code>magrittr::%&gt;%</code> и встроенный <code>|&gt;</code></h2>
-<p>Мы уже привыкли к использованию векторизованных функций, работая в базовом R. Они позволяют нам делать сложные операции с целыми векторами без каких-либо циклов, просто передавая результат выполнения функций в качестве аргумента для других функций. Для примера посчитаем геометрическое среднее для вектора времени реакций:</p>
+<p>Мы уже привыкли к использованию векторизованных функций, работая в базовом R. Они позволяют нам делать сложные операции с целыми векторами без каких-либо циклов, просто передавая результат выполнения функций в качестве аргумента для других функций. Для примера посчитаем геометрическое среднее для вектора времен реакции:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">320</span>, <span class="dv">350</span>, <span class="dv">480</span>, <span class="dv">2100</span>, <span class="dv">410</span>, <span class="dv">390</span>) <span class="co"># времена реакции в миллисекундах</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">exp</span>(<span class="fu">mean</span>(<span class="fu">log</span>(rt))))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1358,11 +1358,11 @@ Absorbing Man
 <span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 11
-   ...1 name          Gender `Eye color` Race  `Hair color` Height Publisher    
-  &lt;dbl&gt; &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
-1   411 Liz Sherman   Female &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA Dark Horse C…
-2   340 Indiana Jones Male   &lt;NA&gt;        Human &lt;NA&gt;            183 George Lucas 
-3   706 Warbird       Female blue        &lt;NA&gt;  Blond           180 Marvel Comics
+   ...1 name        Gender `Eye color` Race  `Hair color` Height Publisher    
+  &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        
+1   714 White Queen Female blue        &lt;NA&gt;  Blond           178 Marvel Comics
+2   136 Brainiac 5  Male   green       &lt;NA&gt;  Blond           170 DC Comics    
+3   514 Penguin     Male   blue        Human Black           157 DC Comics    
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1372,15 +1372,15 @@ Absorbing Man
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> .<span class="dv">01</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 11
-   ...1 name    Gender `Eye color` Race         `Hair color` Height Publisher   
-  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;       
-1   505 Oracle  Female blue        Human        Red             178 DC Comics   
-2   161 Carnage Male   green       Symbiote     Red             185 Marvel Comi…
-3    69 Batman  Male   blue        Human        Black           178 DC Comics   
-4   132 Box     Male   &lt;NA&gt;        &lt;NA&gt;         &lt;NA&gt;             NA Marvel Comi…
-5   370 Jolt    Female blue        &lt;NA&gt;         Black           165 Marvel Comi…
-6   482 Namor   Male   grey        Atlantean    Black           188 Marvel Comi…
-7   629 Spock   Male   brown       Human-Vulcan Black           185 Star Trek   
+   ...1 name         Gender `Eye color` Race       `Hair color` Height Publisher
+  &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+1   525 Power Girl   Female blue        Kryptonian blond         180   DC Comics
+2   283 Giganta      Female green       &lt;NA&gt;       Red            62.5 DC Comics
+3   106 Black Widow  Female green       Human      Auburn        170   Marvel C…
+4   149 Captain Atom Male   blue        Human / R… Silver        193   DC Comics
+5   152 Captain Epic Male   blue        &lt;NA&gt;       Brown         188   Team Epi…
+6   470 Moon Knight  Male   brown       Human      Brown         188   Marvel C…
+7   453 Minna Murray Female &lt;NA&gt;        &lt;NA&gt;       &lt;NA&gt;           NA   Wildstorm
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1390,18 +1390,18 @@ Absorbing Man
 <span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">prop =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 734 × 11
-    ...1 name       Gender `Eye color`  Race       `Hair color` Height Publisher
-   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
- 1   693 Vertigo II Female blue         &lt;NA&gt;       Silver          168 Marvel C…
- 2   370 Jolt       Female blue         &lt;NA&gt;       Black           165 Marvel C…
- 3   487 Nebula     Female blue         Luphomoid  No Hair         185 Marvel C…
- 4    94 Black Adam Male   brown        &lt;NA&gt;       Black           191 DC Comics
- 5   234 Ego        &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;       &lt;NA&gt;             NA Marvel C…
- 6   206 Darth Maul Male   yellow / red Dathomiri… &lt;NA&gt;            170 George L…
- 7   212 Deadpool   Male   brown        Mutant     No Hair         188 Marvel C…
- 8   403 Legion     Male   green / blue Mutant     Black           175 Marvel C…
- 9   379 Karate Kid Male   brown        Human      Brown           173 DC Comics
-10   320 Hela       Female green        Asgardian  Black           213 Marvel C…
+    ...1 name             Gender `Eye color` Race  `Hair color` Height Publisher
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;    
+ 1   608 Snake-Eyes       Male   &lt;NA&gt;        Anim… &lt;NA&gt;             NA Marvel C…
+ 2   188 Crimson Crusader Male   blue        &lt;NA&gt;  Strawberry …     NA Marvel C…
+ 3   228 Donna Troy       Female blue        Amaz… Black           175 DC Comics
+ 4   715 Wildfire         Male   &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA DC Comics
+ 5   556 Renata Soliz     Female &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA HarperCo…
+ 6   380 Kathryn Janeway  Female &lt;NA&gt;        Human &lt;NA&gt;             NA Star Trek
+ 7   185 Copycat          Female red         Muta… White           183 Marvel C…
+ 8   365 Johann Krauss    Male   &lt;NA&gt;        &lt;NA&gt;  &lt;NA&gt;             NA Dark Hor…
+ 9    67 Batgirl VI       Female blue        &lt;NA&gt;  Blond           168 DC Comics
+10   708 Warp             Male   brown       &lt;NA&gt;  Black           173 DC Comics
 # ℹ 724 more rows
 # ℹ 3 more variables: `Skin color` &lt;chr&gt;, Alignment &lt;chr&gt;, Weight &lt;dbl&gt;</code></pre>
 </div>
