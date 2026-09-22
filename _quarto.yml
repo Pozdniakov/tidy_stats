@@ -81,6 +81,9 @@ format:
         \fvset{breaklines=true, breakanywhere=true, fontsize=\small}
         \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere,fontsize=\small}
         \raggedbottom
+        % soul (pandoc: \ul, \st) под XeLaTeX теряет кириллицу — заменяем на ulem
+        \usepackage[normalem]{ulem}
+        \AtBeginDocument{\renewcommand{\ul}[1]{\uline{#1}}\renewcommand{\st}[1]{\sout{#1}}}
         \renewcommand{\labelitemi}{{\large\textbullet}}
         \renewcommand{\labelitemii}{{\large\textendash}}
         \AtBeginDocument{\tcbset{fonttitle=\bfseries, opacitybacktitle=1}}
