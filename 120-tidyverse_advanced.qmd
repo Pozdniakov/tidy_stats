@@ -478,7 +478,7 @@ films %>%
 ```{r}
 films %>%
   mutate(genres = strsplit(genres, ", ")) %>%
-  unnest()
+  unnest(genres)
 ```
 
 Теперь у нас данные в длинном виде! Результат можно расширить с помощью уже знакомого `pivot_wider()` и дополнительной колонки со значениями `TRUE`. Если соответствующей пары нет в тиббле, то в итоговой широкой таблице будет `NA`, мы можем поменять их на `FALSE` с помощью параметра `values_fill =`.
@@ -486,7 +486,7 @@ films %>%
 ```{r}
 films %>%
   mutate(genres = strsplit(genres, ", ")) %>%
-  unnest() %>%
+  unnest(genres) %>%
   mutate(value = TRUE) %>%
   pivot_wider(names_from = "genres",
               values_from = "value", values_fill = FALSE)
