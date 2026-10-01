@@ -1,6 +1,8 @@
 project:
   type: book
   output-dir: docs
+  resources:
+    - "assets/fonts/**/*.woff2"
 
 lang: ru
 
@@ -67,12 +69,31 @@ format:
     theme: cosmo
     cover-image: images/R_stats_pozdniakov_cover.png
     code-link: false
-    css: callout-custom.css
+    css:
+      - callout-custom.css
+      - fonts.css
+    mainfont: "Source Sans 3"
+    monofont: "Source Code Pro"
   pdf:
     documentclass: book
     classoption: [openany]
-    mainfont: "Mont"
-    monofont: "Menlo"
+    mainfont: "SourceSans3"
+    mainfontoptions:
+      - Path=assets/fonts/source-sans-3/
+      - Extension=.otf
+      - UprightFont=*-Regular
+      - BoldFont=*-Bold
+      - ItalicFont=*-It
+      - BoldItalicFont=*-BoldIt
+    monofont: "SourceCodePro"
+    monofontoptions:
+      - Path=assets/fonts/source-code-pro/
+      - Extension=.otf
+      - UprightFont=*-Regular
+      - BoldFont=*-Bold
+      - ItalicFont=*-It
+      - BoldItalicFont=*-BoldIt
+      - Scale=MatchLowercase
     colorlinks: true
     code-overflow: wrap
     include-in-header:
@@ -83,6 +104,17 @@ format:
         \raggedbottom
         % меньше строк, вылезающих за правое поле
         \emergencystretch=3em
+        % заголовки всех уровней — Montserrat Bold
+        \usepackage{sectsty}
+        \newfontfamily\headingfont{Montserrat-Bold}[Path=assets/fonts/montserrat/, Extension=.ttf, BoldFont=Montserrat-Bold]
+        \allsectionsfont{\headingfont\raggedright}
+        % оглавление: шире поля под номера, чтобы «17.10» не слипалось с названием
+        \usepackage[titles]{tocloft}
+        \setlength{\cftchapnumwidth}{2.2em}
+        \setlength{\cftsecindent}{2.2em}
+        \setlength{\cftsecnumwidth}{3.2em}
+        \setlength{\cftsubsecindent}{5.4em}
+        \setlength{\cftsubsecnumwidth}{3.8em}
         % soul (pandoc: \ul, \st) под XeLaTeX теряет кириллицу — заменяем на ulem
         \usepackage[normalem]{ulem}
         \AtBeginDocument{\renewcommand{\ul}[1]{\uline{#1}}\renewcommand{\st}[1]{\sout{#1}}}
