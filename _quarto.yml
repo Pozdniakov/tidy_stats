@@ -72,6 +72,7 @@ format:
     css:
       - callout-custom.css
       - fonts.css
+      - md-result.css
     mainfont: "Source Sans 3"
     monofont: "Source Code Pro"
   pdf:
@@ -115,6 +116,16 @@ format:
         \setlength{\cftsecnumwidth}{3.2em}
         \setlength{\cftsubsecindent}{5.4em}
         \setlength{\cftsubsecnumwidth}{3.8em}
+        % рамка «Получаем» для Markdown-примеров в 250 (фильтр md-result.lua)
+        % (tcolorbox загружаем здесь раньше Quarto, поэтому библиотеки skins и breakable — за нас: Quarto их не догрузит)
+        \usepackage{tcolorbox}
+        \tcbuselibrary{skins,breakable}
+        \makeatletter
+        \newtcolorbox{mdresult}{breakable, parbox=false, before upper={\def\@mpfn{footnote}\def\thempfn{\thefootnote}}, colback=black!2, colframe=black!40, boxrule=0.4pt, arc=1.5pt, left=6pt, right=6pt, top=6pt, bottom=4pt, title={Получаем}, fonttitle=\small, coltitle=black!70, colbacktitle=black!8, toptitle=1pt, bottomtitle=1pt}
+        \makeatother
+        % сноски из рамки — вниз страницы с обычным номером, а не вниз рамки с буквой
+        \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+        \makesavenoteenv{mdresult}
         % soul (pandoc: \ul, \st) под XeLaTeX теряет кириллицу — заменяем на ulem
         \usepackage[normalem]{ulem}
         \AtBeginDocument{\renewcommand{\ul}[1]{\uline{#1}}\renewcommand{\st}[1]{\sout{#1}}}
@@ -140,6 +151,7 @@ format:
     css:
       - epub-styles.css
       - callout-custom.css
+      - md-result.css
 
 pdf-engine: xelatex
 
@@ -157,6 +169,9 @@ callout-icon: true
   
 # Результаты выполнения глав хранятся в _freeze/ и пересчитываются только при изменении главы;
 # полный пересчет — удалить _freeze/ и отрендерить заново
+filters:
+  - md-result.lua
+
 execute:
   freeze: auto
 
