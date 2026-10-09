@@ -111,6 +111,14 @@ format:
         \usepackage{sectsty}
         \newfontfamily\headingfont{Montserrat-Bold}[Path=assets/fonts/montserrat/, Extension=.ttf, BoldFont=Montserrat-Bold]
         \allsectionsfont{\headingfont\raggedright}
+        % sectsty переопределяет \paragraph/\subparagraph и отменяет pandoc'овский вариант «отдельной строкой»:
+        % заголовок 5–6 уровня становится «в строку» и внутри рамки md-result пропадает — возвращаем вариант pandoc
+        \makeatletter
+        \let\oldparagraph\paragraph
+        \renewcommand{\paragraph}{\@ifstar\xxxParagraphStar\xxxParagraphNoStar}
+        \let\oldsubparagraph\subparagraph
+        \renewcommand{\subparagraph}{\@ifstar\xxxSubParagraphStar\xxxSubParagraphNoStar}
+        \makeatother
         % оглавление: шире поля под номера, чтобы «17.10» не слипалось с названием
         \usepackage[titles]{tocloft}
         \setlength{\cftchapnumwidth}{2.2em}
