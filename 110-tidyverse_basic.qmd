@@ -363,6 +363,29 @@ heroes %>%
   rename_with(make.names)
 ```
 
+<!-- Заготовка (вводные строки --- переписать): примеры str_to_*() для rename_with() по просьбе Ивана 20.10. Семейство в {stringr}: str_to_lower(), str_to_upper(), str_to_title() (заглавная у каждого слова), str_to_sentence() (заглавная только у первого слова). Все четыре принимают вектор строк и возвращают вектор той же длины --- поэтому подходят rename_with(). -->
+
+Чаще всего в `rename_with()` используют функции семейства `str_to_*()` из пакета `{stringr}`: `str_to_lower()`, `str_to_upper()`, `str_to_title()` и `str_to_sentence()`. Например, привести все названия колонок к нижнему регистру:
+
+```{r}
+heroes %>%
+  rename_with(str_to_lower)
+```
+
+Параметр `.cols` ограничивает набор колонок --- синтаксис тот же tidy selection:
+
+```{r}
+heroes %>%
+  rename_with(str_to_upper, .cols = c(Height, Weight))
+```
+
+А `str_to_title()` делает заглавной первую букву каждого слова:
+
+```{r}
+heroes %>%
+  rename_with(str_to_title)
+```
+
 ### Перестановка колонок: `dplyr::relocate()` {#sec-tidy_relocate}
 
 Для изменения порядка колонок можно использовать функцию `relocate()`. Она тоже работает похожим образом на `select()` и `rename()`[^110-tidyverse_basic-7]. Как и `rename()`, функция `relocate()` не выкидывает неиспользованные колонки:
