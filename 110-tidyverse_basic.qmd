@@ -363,23 +363,17 @@ heroes %>%
   rename_with(make.names)
 ```
 
-<!-- Заготовка (вводные строки --- переписать): примеры str_to_*() для rename_with() по просьбе Ивана 20.10. Семейство в {stringr}: str_to_lower(), str_to_upper(), str_to_title() (заглавная у каждого слова), str_to_sentence() (заглавная только у первого слова). Все четыре принимают вектор строк и возвращают вектор той же длины --- поэтому подходят rename_with(). -->
-
-Чаще всего в `rename_with()` используют функции семейства `str_to_*()` из пакета `{stringr}`: `str_to_lower()`, `str_to_upper()`, `str_to_title()` и `str_to_sentence()`. Например, привести все названия колонок к нижнему регистру:
+<!-- Примеры str_to_*() для rename_with() (просьба Ивана 20.10); текст --- Иван. Факты: семейство в {stringr} (подключается с tidyverse): str_to_lower(), str_to_upper(), str_to_title() (заглавная у каждого слова), str_to_sentence() (заглавная только у первого слова; на колонках heroes меняет лишь name → Name, поэтому чанка нет). Все принимают вектор строк и возвращают вектор той же длины --- поэтому годятся для rename_with(). Второй чанк заодно показывает параметр .cols (tidy selection). -->
 
 ```{r}
 heroes %>%
   rename_with(str_to_lower)
 ```
 
-Параметр `.cols` ограничивает набор колонок --- синтаксис тот же tidy selection:
-
 ```{r}
 heroes %>%
   rename_with(str_to_upper, .cols = c(Height, Weight))
 ```
-
-А `str_to_title()` делает заглавной первую букву каждого слова:
 
 ```{r}
 heroes %>%
@@ -538,6 +532,23 @@ heroes %>%
   mutate(imt = Weight/(Height/100)^2) %>%
   select(name, imt) %>%
   arrange(desc(imt))
+```
+
+<!-- Параметры положения и состава колонок в mutate() (просьба Ивана 20.10); текст --- Иван. Факты (dplyr 1.2.1, проверено на heroes): новая колонка по умолчанию встаёт последней; `.after = Weight` / `.before = name` ставят её после/перед указанной колонкой (принимают tidy selection, например `.after = last_col()`); `.keep` управляет составом: "all" (по умолчанию), "used" --- остаются только колонки, участвовавшие в вычислении (Height, Weight, imt), "unused" --- наоборот, "none" --- только новые колонки (это и есть замена transmute(): transmute() со dplyr 1.1.0 superseded, NEWS #6414; при .keep = "none" упомянутые в mutate() старые колонки сохраняются: mutate(name, imt = ..., .keep = "none")). -->
+
+```{r}
+heroes %>%
+  mutate(imt = Weight/(Height/100)^2, .after = Weight)
+```
+
+```{r}
+heroes %>%
+  mutate(imt = Weight/(Height/100)^2, .before = name)
+```
+
+```{r}
+heroes %>%
+  mutate(imt = Weight/(Height/100)^2, .keep = "none")
 ```
 
 `dplyr::transmute()` --- это аналог `mutate()`, который не только создает новые колонки, но и сразу же выкидывает все старые:
