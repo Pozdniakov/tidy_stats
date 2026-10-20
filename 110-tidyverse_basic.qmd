@@ -631,10 +631,9 @@ heroes %>%
 
 ```{r}
 heroes %>%
-  mutate(imt = Weight/(Height/100)^2) %>%
   group_by(Gender) %>%
-  summarise(min(imt, na.rm = TRUE),
-            max(imt, na.rm = TRUE))
+  summarise(min_weight = min(Weight, na.rm = TRUE),
+            max_weight = max(Weight, na.rm = TRUE))
 ```
 
 Схематически это выглядит вот так:
