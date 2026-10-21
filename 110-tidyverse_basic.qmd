@@ -824,6 +824,15 @@ heroes %>%
 
 ![](images/110-tidyverse_basic_group_by_s.png)
 
+<!-- А1 (решение Ивана 15.10): параметр .by --- одноразовая группировка без group_by()/ungroup(); текст --- Иван. Факты (dplyr 1.2.1): .by есть у mutate(), summarise(), reframe(), filter(), slice(), filter_out(); у slice_head/tail/min/max/sample --- `by =` без точки; у arrange() --- `.by_group = TRUE`; в tidyr --- nest(.by), fill(.by). Результат с .by всегда обычный (несгруппированный) тиббл; порядок строк --- как в данных, а не по алфавиту группы; с уже сгруппированным тибблом .by нельзя (ошибка «Can't supply .by when .data is a grouped data frame»). Появился в dplyr 1.1.0 (январь 2023). -->
+
+```{r}
+heroes %>%
+  summarise(min_weight = min(Weight, na.rm = TRUE),
+            max_weight = max(Weight, na.rm = TRUE),
+            .by = Gender)
+```
+
 ### Подсчет строк: `dplyr::n()`, `dplyr::count()` {#sec-tidy_count}
 
 Для подсчёта количества значений можно воспользоваться функцией `n()`.
@@ -898,6 +907,43 @@ heroes %>%
 Результаты агрегации были записаны в отдельную колонку, при этом значения этой колонки внутри одной группы повторяются:
 
 ![](images/110-tidyverse_basic_group_by_mutate.png)
+
+<!-- А4 (решение Ивана 16.10): row_number() внутри групп и cumsum() на выходе count(); без lag()/lead(); текст --- Иван. Факты: row_number(desc(Weight)) --- место по весу (1 = самый тяжёлый) внутри своего пола; в отличие от slice_max() ранг остаётся колонкой. cumsum(share) --- накопленная доля: первые два издателя (Marvel 388, DC 215) дают 82% героев, 5 из 25 издателей --- 89%. В Publisher есть значение "" (15 героев): при импорте `na = c("-", "-99", "NA")` пустая строка перестала считаться NA --- видно в count(). -->
+
+```{r}
+heroes %>%
+  mutate(rank = row_number(desc(Weight)), .by = Gender) %>%
+  filter(rank <= 2) %>%
+  select(name, Gender, Weight, rank)
+```
+
+```{r}
+heroes %>%
+  count(Publisher, sort = TRUE) %>%
+  mutate(share = n / sum(n),
+         cum_share = cumsum(share))
+```
+
+::: callout-important
+## *Осторожно:* группировка прилипает
+
+<!-- Решение Ивана 22.10: врезка про «липкость» group_by() + ungroup() как защитный приём; текст --- Иван. Факты (dplyr 1.2.1): группировка --- атрибут тиббла, её сохраняют mutate(), filter(), arrange(), slice_*(), distinct(), count(), *_join(); select() без группирующей колонки добавляет её обратно с сообщением «Adding missing grouping variables». Снимают: ungroup() --- все; reframe() --- все; summarise() --- только ОДИН уровень, последний в group_by() (`.groups = "drop_last"` по умолчанию; `.groups = "drop"` снимает все, "keep" оставляет все). Ловушка: после group_by(Publisher, Gender) %>% summarise() тиббл остаётся сгруппирован по Publisher, и mutate(share = n / sum(n)) считает долю внутри издателя (сумма share по каждому издателю = 1), а не по всей таблице; dplyr печатает сообщение «summarise() has regrouped the output… Output is grouped by Publisher» и сам советует .by. Защита: ungroup() перед mutate() (или `.groups = "drop"`, или сразу `.by`, которая не прилипает никогда). -->
+
+```{r}
+heroes %>%
+  group_by(Publisher, Gender) %>%
+  summarise(n = n()) %>%
+  mutate(share = n / sum(n))
+```
+
+```{r}
+heroes %>%
+  group_by(Publisher, Gender) %>%
+  summarise(n = n()) %>%
+  ungroup() %>%
+  mutate(share = n / sum(n))
+```
+:::
 
 ## Заключение
 
