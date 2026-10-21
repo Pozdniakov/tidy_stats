@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,6 +143,8 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -322,7 +324,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -492,7 +494,7 @@ window.Quarto = {
 </div>
 </div>
 <p>У дисперсионного анализа очень много разновидностей, для которых придумали множество названий. «Обычная» ANOVA называется One-Way ANOVA, она же межгрупповая ANOVA, это аналог независимого <span class="math inline">\(t\)</span>-теста для нескольких групп.</p>
-<p>Давайте начнем сразу с проведения теста. Мы будем использовать <a href="https://www.sheffield.ac.uk/polopoly_fs/1.570199!/file/stcp-Rdataset-Diet.csv">данные с курса по статистике Университета Шеффилда про эффективность диет</a>, на которых мы разбирались с <span class="math inline">\(t\)</span>-тестом (<a href="320-ttest.html#sec-dep_ttest" class="quarto-xref"><span>Глава 18.2.1</span></a>).</p>
+<p>Давайте начнем сразу с проведения теста. Мы будем использовать <a href="https://web.archive.org/web/20220315092936/https://www.sheffield.ac.uk/mash/statistics/datasets">данные с курса по статистике Университета Шеффилда про эффективность диет</a>, на которых мы разбирались с <span class="math inline">\(t\)</span>-тестом (<a href="320-ttest.html#sec-dep_ttest" class="quarto-xref"><span>Глава 18.2.1</span></a>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>diet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/stcp-Rdataset-Diet.csv"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1033,7 +1035,7 @@ C-B -1.880148 -3.454614 -0.3056826 0.0152020</code></pre>
 3 C        27</code></pre>
 </div>
 </div>
-<p>Небольшие различия в размерах групп — это ОК, тем более, что на практике такое очень часто случается: кого-то пришлось выкинуть из анализа, для какой-то строчки были потеряны данные и т.д. Однако больших различий в размерах групп стоит избегать. Самое плохое, когда группы различаются значительно по размеру (более чем в 2 раза) и вариабельность внутри групп отличается значительно (более чем в 2 раза).</p>
+<p>Небольшие различия в размерах групп — это ОК, тем более, что на практике такое очень часто случается: кого-то пришлось выкинуть из анализа, для какой-то строчки были потеряны данные и&nbsp;т.&nbsp;д. Однако больших различий в размерах групп стоит избегать. Самое плохое, когда группы различаются значительно по размеру (более чем в 2 раза) и вариабельность внутри групп отличается значительно (более чем в 2 раза).</p>
 </section>
 <section id="sec-fact_aov" class="level2" data-number="22.6">
 <h2 data-number="22.6" class="anchored" data-anchor-id="sec-fact_aov"><span class="header-section-number">22.6</span> Многофакторный дисперсионный анализ (Factorial ANOVA)</h2>
@@ -1187,7 +1189,7 @@ well-considered value for the type argument to ezANOVA().</code></pre>
 <p>Как было описано выше, ANOVA довольно устойчив к разным отклонениям от нормальности и некоторой гетероскедастичности (разным дисперсиям в выборках). Но если уж у вас данные ну совсем-совсем ненормальные, несимметричные, а от преобразований шкалы вы по каким-то причинам отказались, то стоит упомянуть о непараметрических аналогах ANOVA.</p>
 <section id="sec-krask_aov" class="level3" data-number="22.9.1">
 <h3 data-number="22.9.1" class="anchored" data-anchor-id="sec-krask_aov"><span class="header-section-number">22.9.1</span> Тест Краскела-Уоллиса</h3>
-<p>Это <strong>тест Краскела-Уоллиса</strong> <em>(Kruskal-Wallis test)</em> — обобщение теста Манна-Уитни на несколько выборок (т.е. аналог межгруппового ANOVA):</p>
+<p>Это <strong>тест Краскела-Уоллиса</strong> <em>(Kruskal-Wallis test)</em> — обобщение теста Манна-Уитни на несколько выборок (т.&nbsp;е. аналог межгруппового ANOVA):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kruskal.test</span>(weight.loss <span class="sc">~</span> Dietf, diet)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">

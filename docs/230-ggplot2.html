@@ -104,7 +104,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -134,6 +134,8 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -313,7 +315,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -477,7 +479,7 @@ div.csl-indent {
 <ul>
 <li><p><strong>Данные (data).</strong> Собственно, сами данные в виде датафрейма, используемые в данном слое.</p></li>
 <li><p><strong>Геом (geom).</strong> Геом — это сокращение от “геометрический объект”. Собственно, в какой геометрический объект мы собираемся превращать данные. Например, в точки, прямоугольники или линии.</p></li>
-<li><p><strong>Отображение (mapping).</strong> Эстетические отображения или просто <strong>эстетики (aesthetics)</strong> — это набор правил, как различные переменные превращаются в визуальные особенности геометрии. Без эстетик остается непонятно, какие именно колонки в используемом датафрейме превращаются в различные особенности геомов: позицию, размер, цвет и т.д. У каждой геометрии свой набор эстетик, но многие из них совпадают у разных геомов, например, <em>x</em>, <em>y</em>, <em>colour</em>, <em>fill</em>, <em>size</em>. Без некоторых эстетик геом не будет работать. Например, геометрия в виде точек не будет работать без двух координат этих точек (<em>x</em> и <em>y</em>). Другие эстетики необязательны и имеют значения по умолчанию. Например, по умолчанию точки будут черными, но можно сделать их цвет зависимым от выбранной колонки в датафрейме с помощью эстетики <em>colour</em>.</p></li>
+<li><p><strong>Отображение (mapping).</strong> Эстетические отображения или просто <strong>эстетики (aesthetics)</strong> — это набор правил, как различные переменные превращаются в визуальные особенности геометрии. Без эстетик остается непонятно, какие именно колонки в используемом датафрейме превращаются в различные особенности геомов: позицию, размер, цвет и&nbsp;т.&nbsp;д. У каждой геометрии свой набор эстетик, но многие из них совпадают у разных геомов, например, <em>x</em>, <em>y</em>, <em>colour</em>, <em>fill</em>, <em>size</em>. Без некоторых эстетик геом не будет работать. Например, геометрия в виде точек не будет работать без двух координат этих точек (<em>x</em> и <em>y</em>). Другие эстетики необязательны и имеют значения по умолчанию. Например, по умолчанию точки будут черными, но можно сделать их цвет зависимым от выбранной колонки в датафрейме с помощью эстетики <em>colour</em>.</p></li>
 <li><p><strong>Статистические трансформации (stat).</strong> Название используемой статистической трансформации (или просто — статистики). Да, статистические трансформации можно делать прямо внутри <code>{ggplot2}</code>! Это дает дополнительную свободу в выборе инструментов, потому что обычно те же статистические трансформации можно сделать вне <code>{ggplot2}</code> в процессе препроцессинга. Формально, статистические трансформации — это обязательный элемент геома, но если вы не хотите преобразовывать данные, то можете выбрать “identity” преобразование, которое оставляет все как есть. В <code>{ggplot2}</code> у каждого геома есть статистика по умолчанию, а у каждой статистики — свой геом по умолчанию. И не всегда статистика по умолчанию — это “identity” статистика. Например, для барплота (<code>geom_bar()</code>) используется статистика “count”<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, которая считает частоты, ведь именно частоты затем трансформируются в высоту барплотов.</p></li>
 </ul>
 <!-- -->
@@ -486,13 +488,13 @@ div.csl-indent {
 </ul>
 <p>Кроме слоев, у графика есть:</p>
 <ul>
-<li><strong>Координатная система (coord).</strong> Если мы задали координаты, то нам нужно задать и координатную плоскость, верно? Конечно, в большинстве случаев используется <em>декартова система координат (Cartesian coordinate system)</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, т.е. стандартная прямоугольная система координат, но можно использовать и другие, например, полярную систему координат или картографическую проекцию.</li>
+<li><strong>Координатная система (coord).</strong> Если мы задали координаты, то нам нужно задать и координатную плоскость, верно? Конечно, в большинстве случаев используется <em>декартова система координат (Cartesian coordinate system)</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, т.&nbsp;е. стандартная прямоугольная система координат, но можно использовать и другие, например, полярную систему координат или картографическую проекцию.</li>
 </ul>
 <!-- -->
 <ul>
 <li><p><strong>Шкалы (scales).</strong> Шкалы задают то, <em>как именно</em> значения превращаются в эстетики. Например, если мы задали, что разные значения в колонке будут влиять на цвет точки, то какая именно палитра будет использоваться? В какие конкретно цвета будут превращаться числовые, логические или строковые значения в колонке? В <code>{ggplot2}</code> есть правила по умолчанию для всех эстетик, и они отличные, но самостоятельная настройка шкал может значительно улучшить график.</p></li>
 <li><p><strong>Фасетки (facets).</strong> Фасетки — это одно из нововведений Уикхэма в грамматику графики. Фасетки позволяют разбить график на множество похожих, задав переменную, по которой график будет разделен. Это очень напоминает использование группировки с помощью <code>group_by()</code>.</p></li>
-<li><p><strong>Тема (theme).</strong> Тема — это зрительное оформление “подложки” графика, не относящийся к содержанию графика: размер шрифта, цвет фона, размер и цвет линий на фоне и т.д. и т.п. В <code>{ggplot2}</code> есть несколько встроенных тем, а также есть множество пакетов, которые добавляют дополнительные темы. Кроме того, их можно настраивать самостоятельно!</p></li>
+<li><p><strong>Тема (theme).</strong> Тема — это зрительное оформление “подложки” графика, не относящийся к содержанию графика: размер шрифта, цвет фона, размер и цвет линий на фоне и&nbsp;т.&nbsp;д. и&nbsp;т.&nbsp;п. В <code>{ggplot2}</code> есть несколько встроенных тем, а также есть множество пакетов, которые добавляют дополнительные темы. Кроме того, их можно настраивать самостоятельно!</p></li>
 <li><p><strong>Значения по умолчанию (defaults).</strong> Если в графике используется несколько слоев, то часто все они используют одни и те же данные и эстетики. Можно задать данные и эстетики по умолчанию для всего графика, чтобы не повторять код.</p></li>
 </ul>
 </section>
@@ -612,7 +614,7 @@ div.csl-indent {
 <h2 data-number="14.4" class="anchored" data-anchor-id="sec-gg_1"><span class="header-section-number">14.4</span> Пример №1: мета-анализ образования и интеллекта</h2>
 <p>Для этого примера мы возьмем мета-анализ связи количества лет обучения и интеллекта: <em>“How Much Does Education Improve Intelligence? A Meta-Analysis”</em> <span class="citation" data-cites="eduiq">(<a href="950-references.html#ref-eduiq" role="doc-biblioref">Ritchie &amp; Tucker-Drob, 2018</a>)</span>. Мета-анализ — это группа статистических методов, которые позволяют объединить результаты нескольких исследований с похожим планом исследования и тематикой, чтобы посчитать средний эффект между несколькими статьями сразу.</p>
 <p>Данные и скрипт для анализа данных в этой статье находятся в открытом доступе <a href="https://osf.io/r8a24/">на OSF</a>.</p>
-<p>Существует положительная корреляция между количеством лет, который человек потратил на обучение, и интеллектом. Это может объясняться по-разному: как то, что обучение повышает интеллект, и как то, что люди с высоким интеллекте стремятся получать больше образования. Напрямую в эксперименте это проверить нельзя, поэтому есть несколько квази-экспериментальных планов, которые косвенно указывают на верность той или иной гипотезы. Например, если в стране изменилось количество лет обязательного школьного образования, то повлияло ли это на интеллект целого поколения? <del>Или всё-таки дело в Моргенштерне</del></p>
+<p>Существует положительная корреляция между количеством лет, который человек потратил на обучение, и интеллектом. Это может объясняться по-разному: как то, что обучение повышает интеллект, и как то, что люди с высоким интеллекте стремятся получать больше образования. Напрямую в эксперименте это проверить нельзя, поэтому есть несколько квази-экспериментальных планов, которые косвенно указывают на верность той или иной гипотезы. Например, если в стране изменилось количество лет обязательного школьного образования, то повлияло ли это на интеллект целого поколения? <del>Или всё-таки дело в Моргенштерне?</del></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/230-ggplot2_meta.png" class="img-fluid figure-img"></p>
@@ -658,7 +660,7 @@ div.csl-indent {
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>poli <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, <span class="at">subset=</span>(Design<span class="sc">==</span><span class="st">"Policy Change"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Авторы исследования используют <code>subset()</code>, это функция базового R, принцип которой очень похож на <code>filter()</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
-<p>Итак, начнем рисовать сам график. Сначала иницируем объект <code>ggplot</code> с данными <code>poli</code> по умолчанию.</p>
+<p>Итак, начнем рисовать сам график. Сначала инициируем объект <code>ggplot</code> с данными <code>poli</code> по умолчанию.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>poli) </span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -824,7 +826,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>Регрессионную линию авторы немного утоньшают с помощью параметра <code>size =</code>.</p>
+<p>Регрессионную линию авторы делают чуть тоньше с помощью параметра <code>size =</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -952,7 +954,7 @@ of ggplot2 3.3.4.</code></pre>
 </div>
 </div>
 </div>
-<p>Теперь пришло время сделать график более красивым и понятным с помощью изменения подложки, т.е. работы с темой графика. Здесь тема задается сначала как <code>theme_bw()</code> — встроенная в <code>{ggplot2}</code> минималистичная тема, а потом через функцию <code>theme()</code>, через которую можно управлять конкретными элементами темы. Здесь это сделано, чтобы передвинуть название графика к центру.</p>
+<p>Теперь пришло время сделать график более красивым и понятным с помощью изменения подложки, т.&nbsp;е. работы с темой графика. Здесь тема задается сначала как <code>theme_bw()</code> — встроенная в <code>{ggplot2}</code> минималистичная тема, а потом через функцию <code>theme()</code>, через которую можно управлять конкретными элементами темы. Здесь это сделано, чтобы передвинуть название графика к центру.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Outcome_age, <span class="at">y=</span>Effect_size, <span class="at">size=</span><span class="dv">1</span><span class="sc">/</span>(SE<span class="sc">^</span><span class="dv">2</span>)), <span class="at">data=</span>poli) <span class="sc">+</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="at">alpha=</span>.<span class="dv">55</span>, <span class="at">colour=</span><span class="st">"#BA1825"</span>) <span class="sc">+</span></span>
@@ -1163,7 +1165,7 @@ Wilkinson, L. (2005). <em>The Grammar of Graphics</em> (2-я изд.). Springer.
 <ol>
 <li id="fn1"><p>Идентична по своему смыслу функции <code>dplyr::count</code>, которая считает частоты по выбранной колонке тиббла (см. <a href="110-tidyverse_basic.html#sec-tidy_count" class="quarto-xref"><span>Глава 10.9.3</span></a>).<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Декартова система координат названа в честь великого математика и философа Рене Декарта, на латинском — <em>Renatus Cartesius</em>, отсюда и название <em>cartesian coordinate system</em>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Кстати, именно функция <code>subset()</code> вдохновила Уикхема на создание <code>filter()</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Кстати, именно функция <code>subset()</code> вдохновила Уикхэма на создание <code>filter()</code>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

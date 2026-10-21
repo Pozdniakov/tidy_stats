@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,6 +143,8 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -322,7 +324,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -582,7 +584,7 @@ $vectors
 <pre><code>[1] 2.7537551 0.7725168 0.3652359 0.1084922</code></pre>
 </div>
 </div>
-<p>В контексте АГК собственные векторы — это новые оси (т.е. те самые новые компоненты), а собственные значения — это размер объясняемой дисперсии с помощью новых осей. Чтобы перейти от дисперсии к стандартному отклонению, нам нужно взять корень из собственных значений:</p>
+<p>В контексте АГК собственные векторы — это новые оси (т.&nbsp;е. те самые новые компоненты), а собственные значения — это размер объясняемой дисперсии с помощью новых осей. Чтобы перейти от дисперсии к стандартному отклонению, нам нужно взять корень из собственных значений:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(eigens<span class="sc">$</span>values)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -653,7 +655,7 @@ Cumulative Var   0.25   0.50   0.75   1.00</code></pre>
 </div>
 </div>
 </div>
-<p>Итак, для начала нам нужно центрировать и нормировать данные — вычесть среднее и поделить на стандартное отклонение, т.е. посчитать <span class="math inline">\(z\)</span>-оценки (см. <a href="210-desc_stats.html#sec-z_scores" class="quarto-xref"><span>Глава 12.5.3.1</span></a>). Это нужно для того, чтобы сделать все шкалы равноценными. Это особенно важно делать, когда разные шкалы используют несопоставимые единицы измерения. Скажем, одна колонка — это масса человека в килограммах, а другая — рост в метрах. Если применять АГК к этим данным, то ничего хорошего не выйдет: вклад роста будет слишком маленьким. А вот если мы сделаем <span class="math inline">\(z\)</span>-преобразование, то приведем и массу, и рост к «общему знаменателю».</p>
+<p>Итак, для начала нам нужно центрировать и нормировать данные — вычесть среднее и поделить на стандартное отклонение, т.&nbsp;е. посчитать <span class="math inline">\(z\)</span>-оценки (см. <a href="210-desc_stats.html#sec-z_scores" class="quarto-xref"><span>Глава 12.5.3.1</span></a>). Это нужно для того, чтобы сделать все шкалы равноценными. Это особенно важно делать, когда разные шкалы используют несопоставимые единицы измерения. Скажем, одна колонка — это масса человека в килограммах, а другая — рост в метрах. Если применять АГК к этим данным, то ничего хорошего не выйдет: вклад роста будет слишком маленьким. А вот если мы сделаем <span class="math inline">\(z\)</span>-преобразование, то приведем и массу, и рост к «общему знаменателю».</p>
 <p>В базовом R уже есть инструменты для АГК <code>princomp()</code> и <code>prcomp()</code>, считают они немного по-разному. Возьмем более рекомендуемый вариант, <code>prcomp()</code>. Эта функция умеет самостоятельно проводить <span class="math inline">\(z\)</span>-преобразования, для чего нужно поставить <code>center = TRUE</code> и <code>scale. = TRUE</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>penguins_prcomp <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span></span>

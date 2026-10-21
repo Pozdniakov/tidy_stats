@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,6 +143,8 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -322,7 +324,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -489,7 +491,7 @@ window.Quarto = {
 <p><img src="images/013-vector_coord_vector.png" class="img-fluid" alt="Вектор {2, 3} на координатной плоскости: синяя стрелка из начала координат в точку (2, 3)"></p>
 <p>Вот последние два числа и будем считать вектором. Попытайтесь теперь мысленно стереть координатную плоскость и выбросить стрелочки из головы, оставив только последовательность чисел {2,3}:</p>
 <p><img src="images/013-vector_coord_vector_blur.png" class="img-fluid" alt="Тот же вектор {2, 3}, но координатная плоскость и стрелка изображены блекло --- остается только последовательность чисел {2, 3}"></p>
-<p>На самом деле, мы уже работали с векторами в R, но, возможно, вы об этом даже не догадывались. Дело в том, что в R нет как таковых скалярных (т.е. одиночных) значений, <strong>есть вектора длиной 1</strong>. Такие дела!</p>
+<p>На самом деле, мы уже работали с векторами в R, но, возможно, вы об этом даже не догадывались. Дело в том, что в R нет как таковых скалярных (т.&nbsp;е. одиночных) значений, <strong>есть вектора длиной 1</strong>. Такие дела!</p>
 <p>Чтобы создать вектор из нескольких значений, нужно воспользоваться функцией <code>c()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">23</span>, <span class="dv">42</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -660,7 +662,7 @@ window.Quarto = {
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p>Это называется <strong>неявным приведением типов (implicit coercion)</strong>.</p>
+<p>Это называется <strong>неявным приведением типов</strong> <em>(implicit coercion)</em>.</p>
 <p>Вот более сложный пример:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="dv">3</span>, <span class="st">"hi"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -689,7 +691,7 @@ window.Quarto = {
 <p>У R есть иерархия приведения типов:</p>
 <p><code>NULL &lt; raw &lt; logical &lt; integer &lt; double &lt; complex &lt; character &lt; list &lt; expression</code>.</p>
 <p>Мы из этого списка еще многого не знаем, сейчас важно запомнить, что логические данные — <code>FALSE</code> и <code>TRUE</code> — превращаются в <code>0</code> и <code>1</code> соответственно, а <code>0</code> и <code>1</code> в строчки <code>"0"</code> и <code>"1"</code>.</p>
-<p>Если вы боитесь полагаться на приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных()</code> для явного приведения типов (<strong>explicit coercion</strong>):</p>
+<p>Если вы боитесь полагаться на неявное приведение типов, то можете воспользоваться функциями <code>as.нужныйтипданных()</code> для <strong>явного приведения типов</strong> <em>(explicit coercion)</em>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -827,7 +829,7 @@ object length</code></pre>
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-index_atomic"><span class="header-section-number">3.5</span> Индексирование векторов</h2>
 <p>Итак, мы подошли к одному из самых сложных моментов. И одному из основных. От того, как хорошо вы научитесь с этим работать, зависит весь ваш дальнейший успех на R-поприще!</p>
 <p>Речь пойдет об <strong>индексировании</strong> векторов. Задача, которую вам придется решать каждые пять минут работы в R — как выбрать из вектора (или же списка, матрицы и датафрейма) какую-то его часть. Для этого используются квадратные скобочки <code>[]</code> (не круглые — они для функций!).</p>
-<p>Самое простое — индексировать по номеру индекса, т.е. порядку значения в векторе.</p>
+<p>Самое простое — индексировать по номеру индекса, т.&nbsp;е. порядку значения в векторе.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">21</span>, <span class="dv">34</span>)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>n[<span class="dv">1</span>]</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1300,7 +1302,7 @@ object length</code></pre>
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
-<p>Заметьте, даже сравнение <code>NA</code> c <code>NA</code> выдает <code>NA</code>. Это может прозвучать абсурдно: ну как же так, и то <code>NA</code>, и другое <code>NA</code> — это же одно и то же, они должны быть равны! Не совсем: <code>NA</code> — это отсутствие информации об объекте, неопределенность, неизвестная нам величина. Если мы не знаем двух значений (т.е. имеем два <code>NA</code>), то это еще не значит, что они равны.</p>
+<p>Заметьте, даже сравнение <code>NA</code> c <code>NA</code> выдает <code>NA</code>. Это может прозвучать абсурдно: ну как же так, и то <code>NA</code>, и другое <code>NA</code> — это же одно и то же, они должны быть равны! Не совсем: <code>NA</code> — это отсутствие информации об объекте, неопределенность, неизвестная нам величина. Если мы не знаем двух значений (т.&nbsp;е. имеем два <code>NA</code>), то это еще не значит, что они равны.</p>
 <p>Иногда наличие <code>NA</code> в данных очень бесит:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>n[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>

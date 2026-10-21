@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,6 +114,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -293,7 +295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -465,7 +467,7 @@ file or directory</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"heroes_information.csv"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Кроме того, путь к рабочей папке можно увидеть в RStudio во вкладке с консолью, в самой верхней части (прямо под надписью “Console”):</p>
+<p>Кроме того, путь к рабочей папке можно увидеть в <em>RStudio</em> во вкладке с консолью, в самой верхней части (прямо под надписью “Console”):</p>
 <p><img src="images/030-import_data_console_wd.png" class="img-fluid" alt="Вкладка Console в RStudio: под строкой вкладок показан путь к текущей рабочей папке `~/R/teaching_drafts/`" width="400"></p>
 <ul>
 <li>Гора идет к Магомету: изменение рабочей папки.</li>
@@ -483,12 +485,12 @@ file or directory</code></pre>
 </div>
 <p>Этот вариант страдает теми же проблемами, что и предыдущий, поэтому тоже не рекомендуется!</p>
 <blockquote class="blockquote">
-<p>Для пользователей Windows есть дополнительная сложность: в путях Windows используется обратный слэш <code>\</code>, а в R он — специальный знак (используется для экранирования). Поэтому в путях его нужно либо удваивать (<code>\\</code>), либо просто использовать прямой слэш <code>/</code>, как в macOS и Linux, — он одинаково работает на всех системах.</p>
+<p>Для пользователей <em>Windows</em> есть дополнительная сложность: в путях <em>Windows</em> используется обратный слэш <code>\</code>, а в R он — специальный знак (используется для экранирования). Поэтому в путях его нужно либо удваивать (<code>\\</code>), либо просто использовать прямой слэш <code>/</code>, как в <em>macOS</em> и <em>Linux</em>, — он одинаково работает на всех системах.</p>
 </blockquote>
 <ul>
 <li>Магомет использует кнопочный интерфейс: Import Dataset.</li>
 </ul>
-<p>Во вкладке Environment справа в окне RStudio есть кнопка “Import Dataset”. Возможно, у вас возникло непреодолимое желание отдохнуть от написания кода и понажимать кнопочки — сопротивляйтесь этому всеми силами, но не вините себя, если не сдержитесь.</p>
+<p>Во вкладке Environment справа в окне <em>RStudio</em> есть кнопка “Import Dataset”. Возможно, у вас возникло непреодолимое желание отдохнуть от написания кода и понажимать кнопочки — сопротивляйтесь этому всеми силами, но не вините себя, если не сдержитесь.</p>
 <ul>
 <li>Гора находит Магомета в интернете.</li>
 </ul>
@@ -497,7 +499,7 @@ file or directory</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/Pozdniakov/tidy_stats/master/data/heroes_information.csv"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
-<li>Каждый Магомет получает по своей горе: использование проектов в RStudio.</li>
+<li>Каждый Магомет получает по своей горе: использование проектов в <em>RStudio</em>.</li>
 </ul>
 <p>На первый взгляд это кажется чем-то очень сложным, но это не так. Это очень просто и ОЧЕНЬ удобно. При создании проекта создается отдельная папка, где у вас лежат данные, хранятся скрипты, вспомогательные файлы и отчеты. Кроме папки создается файл формата <em>.Rproj</em>, в котором хранятся настройки проекта. Если нужно вернуться к другому проекту — просто открываете другой проект, с другими файлами и скриптами. Можно даже иметь открытыми несколько окон <em>RStudio</em> таким образом. Это еще помогает не пересекаться переменным из разных проектов — а то, знаете, использование двух переменных <code>data</code> в разных скриптах чревато ошибками. Поэтому очень удобным решением будет выделение отдельного проекта под этот курс и отдельного проекта — под практику работы с конкретным датасетом, на котором вы тренируетесь, применяя изученные инструменты.</p>
 <blockquote class="blockquote">
@@ -506,7 +508,7 @@ file or directory</code></pre>
 </section>
 <section id="sec-project_workflow" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="sec-project_workflow"><span class="header-section-number">6.2</span> Организация проектов</h2>
-<p>Даже если не пользоваться проектами RStudio (но я настоятельно рекомендую, это очень удобно), то все равно имеет смысл разделять различные свои проекты по отдельным папкам. Для небольших проектов этого уже может быть достаточно, но я рекомендую делать немного более сложную структуру папок внутри проекта. Например, такую:</p>
+<p>Даже если не пользоваться проектами <em>RStudio</em> (но я настоятельно рекомендую, это очень удобно), то все равно имеет смысл разделять различные свои проекты по отдельным папкам. Для небольших проектов этого уже может быть достаточно, но я рекомендую делать немного более сложную структуру папок внутри проекта. Например, такую:</p>
 <pre><code>.
 └── my_project 
     ├── R 
@@ -519,13 +521,13 @@ file or directory</code></pre>
     ├── my_project.Rproj
     ├── output
     └── README.txt</code></pre>
-<p>В основной папке содержится автоматически созданный RStudio файл .Rproj, основной скрипт в формате .R (или же это может быть .Rmd файл — см. <a href="250-quarto.html" class="quarto-xref"><span>Глава 16</span></a>). Вспомогательные скрипты (например, с функциями) могут храниться в папке R. Если скриптов несколько, то их порядок стоит обозначить числами:</p>
+<p>В основной папке содержится автоматически созданный <em>RStudio</em> файл <em>.Rproj</em>, основной скрипт в формате <em>.R</em> (или же это может быть <em>.Rmd</em> файл — см. <a href="250-quarto.html" class="quarto-xref"><span>Глава 16</span></a>). Вспомогательные скрипты (например, с функциями) могут храниться в папке R. Если скриптов несколько, то их порядок стоит обозначить числами:</p>
 <pre><code>.
 ├── 01_first_script_preposcessing.R
 ├── 02_second_script_statistics.R
 └── 03_third_script_figures.R </code></pre>
 <p>Данные стоит держать в отдельной папке, причем в некоторых ситуациях вы захотите создать отдельные подпапки, например, отдельные подпапки для данных на входе, временных файлов и данных на выходе. Результаты работы, например отчеты, сгенерированные с помощью <em>Quarto</em> (см. <a href="250-quarto.html" class="quarto-xref"><span>Глава 16</span></a>), удобно складывать в отдельную папку для выходных данных. Туда же можно поместить папку с графиками или же поместить эту папку в корневую директорию.</p>
-<p>Это лишь пример структуры организации проектов, детали могут различаться, но такая структура позволит не заблудиться в собственных файлах, если тех накопилось достаточно много. Кроме того, другому человеку в такой структуре проекта будет разобраться значительно проще. Еще больше облегчит жизнь добавление файла README, в котором будет прописана вся важная информация о проекте: для чего какие файлы в проекте, что означают колонки в таблицах и т.д. Файл README можно создать в любом популярном текстовом формате — желательно в распространённых <em>.txt</em> или <em>Markdown</em> (см. <a href="250-quarto.html" class="quarto-xref"><span>Глава 16</span></a>).</p>
+<p>Это лишь пример структуры организации проектов, детали могут различаться, но такая структура позволит не заблудиться в собственных файлах, если тех накопилось достаточно много. Кроме того, другому человеку в такой структуре проекта будет разобраться значительно проще. Еще больше облегчит жизнь добавление файла README, в котором будет прописана вся важная информация о проекте: для чего какие файлы в проекте, что означают колонки в таблицах и&nbsp;т.&nbsp;д. Файл README можно создать в любом популярном текстовом формате — желательно в распространённых <em>.txt</em> или <em>Markdown</em> (см. <a href="250-quarto.html" class="quarto-xref"><span>Глава 16</span></a>).</p>
 <p>При создании папок внутри основного проекта важно помнить о том, что теперь ваши файлы больше нельзя найти в вашей корневой директории: нужно искать их в соответствующих папках. Это значит, что путь до файла теперь будет не <code>"heroes_information.csv"</code>, а <code>"data/heroes_information.csv"</code> или даже <code>"data/raw/heroes_information.csv"</code>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -550,7 +552,7 @@ file or directory</code></pre>
 </div>
 </div>
 </div>
-<p>Сами скрипты тоже лучше разделять на смысловые части. Для этого есть горячие клавиши <code>Ctrl</code> + <code>Shift</code> + <code>R</code> (<code>Cmd</code> + <code>Shift</code> + <code>R</code> на macOS). Это сочетание клавиш выведет окно, в котором вам нужно вписать название, после чего появится вот такой аккуратный комментарий:</p>
+<p>Сами скрипты тоже лучше разделять на смысловые части. Для этого есть горячие клавиши <code>Ctrl</code> + <code>Shift</code> + <code>R</code> (<code>Cmd</code> + <code>Shift</code> + <code>R</code> на <em>macOS</em>). Это сочетание клавиш выведет окно, в котором вам нужно вписать название, после чего появится вот такой аккуратный комментарий:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Meaningful part of the script -------------------------------------------</span></span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -563,7 +565,7 @@ file or directory</code></pre>
 <p>Текстовый файл означает, что такой файл можно открыть в программе <em>Блокнот</em> или его аналоге (например, <em>TextEdit</em> на <em>macOS</em>) и увидеть напечатанный текст: скрипт, роман или упорядоченный набор цифр и букв. Нас сейчас интересует именно последний случай. Таблица может быть представлена как текст: отдельные строчки в файле будут разделять разные строчки таблицы, а какой-нибудь знак-разделитель отделять колонки друг от друга.</p>
 <p>Для чтения данных из текстового файла есть довольно удобная функция <code>read.table()</code>. Почитайте хэлп по ней и ужаснитесь: столько разных параметров на входе! Но там же вы увидите функции <code>read.csv()</code>, <code>read.csv2()</code> и некоторые другие — по сути, это тот же <code>read.table()</code>, но с другими параметрами по умолчанию, соответствующими формату файла, который мы загружаем. Здесь используется формат <em>.csv</em>, что означает <em>“Comma Separated Values”</em> (значения, разделенные запятыми). Формат <em>.csv</em> — это самый известный способ хранения табличных данных в файле на сегодняшний день. Файлы с расширением <em>.csv</em> можно легко открыть в любой программе, работающей с таблицами, в том числе <em>Microsoft Excel</em> и его аналогах.</p>
 <p>Файл с расширением <em>.csv</em> — это просто текстовый файл, в котором “закодирована” таблица: разные строчки разделяют разные строчки таблицы, а столбцы отделяются запятыми (отсюда и название). Вы можете вручную создать такие файлы в <em>Блокноте</em> и сохранять их с форматом <em>.csv</em> — и такая табличка будет нормально открываться в <em>Microsoft Excel</em> и других программах для работы с таблицами. Можете попробовать это сделать самостоятельно!</p>
-<p>Как говорилось ранее, в качестве разделителя ячеек по горизонтали — то есть разделителя между столбцами — используется запятая. С этим связана одна проблема: в некоторых странах (в т.ч. и России) принято использовать запятую для разделения дробной части числа, а не точку, как это делается в большинстве стран мира. Поэтому есть альтернативный вариант формата .csv, где значения разделены точкой с запятой (<code>;</code>), а дробные значения — запятой (<code>,</code>). В этом и различие функций <code>read.csv()</code> и <code>read.csv2()</code> — первая функция предназначена для “международного” формата, вторая — для (условно) “российского”. Оба варианта формата имеют расширение <em>.csv</em>, поэтому заранее понять какой именно будет вариант довольно сложно, приходится либо пробовать оба, либо заранее открывать файл в текстовом редакторе.</p>
+<p>Как говорилось ранее, в качестве разделителя ячеек по горизонтали — то есть разделителя между столбцами — используется запятая. С этим связана одна проблема: в некоторых странах (в т.ч. и России) принято использовать запятую для разделения дробной части числа, а не точку, как это делается в большинстве стран мира. Поэтому есть альтернативный вариант формата <em>.csv</em>, где значения разделены точкой с запятой (<code>;</code>), а дробные значения — запятой (<code>,</code>). В этом и различие функций <code>read.csv()</code> и <code>read.csv2()</code> — первая функция предназначена для “международного” формата, вторая — для (условно) “российского”. Оба варианта формата имеют расширение <em>.csv</em>, поэтому заранее понять какой именно будет вариант довольно сложно, приходится либо пробовать оба, либо заранее открывать файл в текстовом редакторе.</p>
 <p>В первой строчке обычно содержатся названия столбцов — и это чертовски удобно, функции <code>read.csv()</code> и <code>read.csv2()</code> по умолчанию считают первую строчку именно как название для колонок.</p>
 <p>Кроме <em>.csv</em> формата есть и другие варианты хранения таблиц в виде текста. Например, <strong><em>.tsv</em></strong> — то же самое, что и <em>.csv</em>, но разделитель — знак табуляции. Для чтения таких файлов есть функция <code>read.delim()</code> и <code>read.delim2()</code>. Впрочем, даже если бы ее и не было, можно было бы просто подобрать нужные параметры для функции <code>read.table()</code>. Есть даже функции, которые пытаются сами “угадать” нужные параметры для чтения — часто они справляются с этим довольно удачно. Но не всегда. Поэтому стоит научиться справляться с любого рода данными на входе.</p>
 <p>Итак, прочитаем наш файл. Для этого используем только параметр <code>file =</code>, который идет первым:</p>
@@ -638,7 +640,7 @@ file or directory</code></pre>
 <li><p>В отдельных строчках все прочиталось как одна колонка, а в остальных нормально. Скорее всего, в файле есть значения типа <code>\</code> или <code>"</code>, которые в функциях <code>read.csv()</code>, <code>read.delim()</code>, <code>read.csv2()</code>, <code>read.delim2()</code> читаются как символы для закавычивания значений. Это может понадобиться, если у вас в таблице есть строковые значения со знаками <code>,</code> или <code>;</code>, которые могут восприниматься как разделитель столбцов.</p></li>
 <li><p>Появились какие-то новые числовые колонки. Возможно неправильно поставлен разделитель дробной части. Обычно это либо <code>.</code> (<code>read.table()</code>, <code>read.csv()</code>, <code>read.delim()</code>), либо <code>,</code> (<code>read.csv2()</code>, <code>read.delim2()</code>).</p></li>
 </ol>
-<p>Конкретно в нашем случае все прочиталось хорошо с помощью функции <code>read.csv()</code>, но в строковых переменных есть много прочерков, которые обозначают отсутствие информации по этому параметру супергероя, т.е. пропущенное значение. А вот с числовыми значениями все не так просто: для всех супергероев прописано какое-то число, но во многих случаях это <code>-99</code>. Очевидно, отрицательного роста и массы не бывает, это просто обозначение пропущенных значений (такое иногда используется). Таким образом, чтобы адекватно прочитать файл, нам нужно поменять параметр <code>na.strings =</code> функции <code>read.csv()</code>:</p>
+<p>Конкретно в нашем случае все прочиталось хорошо с помощью функции <code>read.csv()</code>, но в строковых переменных есть много прочерков, которые обозначают отсутствие информации по этому параметру супергероя, т.&nbsp;е. пропущенное значение. А вот с числовыми значениями все не так просто: для всех супергероев прописано какое-то число, но во многих случаях это <code>-99</code>. Очевидно, отрицательного роста и массы не бывает, это просто обозначение пропущенных значений (такое иногда используется). Таким образом, чтобы адекватно прочитать файл, нам нужно поменять параметр <code>na.strings =</code> функции <code>read.csv()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>heroes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/heroes_information.csv"</span>, </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"-"</span>, <span class="st">"-99"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -658,24 +660,24 @@ file or directory</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>По аналогии с <code>read.csv2()</code>, <code>write.csv2()</code> позволит записать файлы формата .csv с разделителем <code>;</code>.</p>
+<p>По аналогии с <code>read.csv2()</code>, <code>write.csv2()</code> позволит записать файлы формата <em>.csv</em> с разделителем <code>;</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(dc, <span class="st">"data/dc_heroes_information.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="sec-binary" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="sec-binary"><span class="header-section-number">6.6</span> Импорт таблиц в бинарном формате: таблицы Excel, SPSS</h2>
-<p>Тем не менее, далеко не всегда таблицы представлены в виде текстового файла. Самый распространенный пример таблицы в бинарном виде — родные форматы Microsoft Excel. Если вы попробуете открыть .xlsx файл в Блокноте, то увидите кракозябры. Это делает работу с этими файлами гораздо менее удобной, поэтому стоит избегать экселевских форматов и стараться все сохранять в .csv.</p>
+<p>Тем не менее, далеко не всегда таблицы представлены в виде текстового файла. Самый распространенный пример таблицы в бинарном виде — родные форматы <em>Microsoft Excel</em>. Если вы попробуете открыть <em>.xlsx</em> файл в Блокноте, то увидите кракозябры. Это делает работу с этими файлами гораздо менее удобной, поэтому стоит избегать экселевских форматов и стараться все сохранять в <em>.csv</em>.</p>
 <p>Такие файлы не получится прочитать при помощи базового инструментария R. Тем не менее, для чтения таких файлов есть много дополнительных пакетов:</p>
 <ul>
-<li><p>файлы Microsoft Excel: лучше всего справляется пакет <a href="https://readxl.tidyverse.org/"><code>{readxl}</code></a> (входит в расширенный <em>tidyverse</em>), у него есть много альтернатив (<a href="https://github.com/colearendt/xlsx"><code>{xlsx}</code></a>, <a href="https://ycphs.github.io/openxlsx/"><code>{openxlsx}</code></a>).</p></li>
-<li><p>файлы SPSS, SAS, Stata: существуют два основных пакета — <a href="https://haven.tidyverse.org/"><code>{haven}</code></a> (часть расширенного <em>tidyverse</em>) и <code>{foreign}</code>.</p></li>
+<li><p>файлы <em>Microsoft Excel</em>: лучше всего справляется пакет <a href="https://readxl.tidyverse.org/"><code>{readxl}</code></a> (входит в расширенный <em>tidyverse</em>), у него есть много альтернатив (<a href="https://github.com/colearendt/xlsx"><code>{xlsx}</code></a>, <a href="https://ycphs.github.io/openxlsx/"><code>{openxlsx}</code></a>).</p></li>
+<li><p>файлы <em>SPSS</em>, <em>SAS</em>, <em>Stata</em>: существуют два основных пакета — <a href="https://haven.tidyverse.org/"><code>{haven}</code></a> (часть расширенного <em>tidyverse</em>) и <code>{foreign}</code>.</p></li>
 </ul>
 </section>
 <section id="sec-import_googlesheets" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="sec-import_googlesheets"><span class="header-section-number">6.7</span> Импорт данных из Google Sheets</h2>
-<p>Все чаще “кнопочная” работа с данными переезжает из Excel в облачный Google Sheets, который обладает схожим интерфейсом и функционалом, но позволяет удобно работать нескольким пользователям одновременно.</p>
-<p>Оттуда данные можно легко выгрузить в нужном формате. Конечно, и в .csv тоже. Но было бы удобно загружать данные из Google Sheets напрямую, по ссылке. И это вполне возможно и даже не очень трудно! Лучший пакет для этого — <a href="https://googlesheets4.tidyverse.org/"><code>{googlesheets4}</code></a>.</p>
+<p>Все чаще “кнопочная” работа с данными переезжает из <em>Excel</em> в облачный Google Sheets, который обладает схожим интерфейсом и функционалом, но позволяет удобно работать нескольким пользователям одновременно.</p>
+<p>Оттуда данные можно легко выгрузить в нужном формате. Конечно, и в <em>.csv</em> тоже. Но было бы удобно загружать данные из Google Sheets напрямую, по ссылке. И это вполне возможно и даже не очень трудно! Лучший пакет для этого — <a href="https://googlesheets4.tidyverse.org/"><code>{googlesheets4}</code></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"googlesheets4"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>

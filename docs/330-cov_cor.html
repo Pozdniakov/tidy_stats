@@ -84,7 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -143,6 +143,8 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -322,7 +324,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -832,7 +834,7 @@ body_kg     1.0000000   0.1893312
 backpack_kg 0.1893312   1.0000000</code></pre>
 </div>
 </div>
-<p>Для тестирования уровня значимости нулевой гипотезы для корреляции есть функция <code>cor.test()</code>. В случае с коэффициентами корреляции, нулевая гипотеза формулируется как отсутствие корреляции (т.е. она равна нулю) в генеральной совокупности.</p>
+<p>Для тестирования уровня значимости нулевой гипотезы для корреляции есть функция <code>cor.test()</code>. В случае с коэффициентами корреляции, нулевая гипотеза формулируется как отсутствие корреляции (т.&nbsp;е. она равна нулю) в генеральной совокупности.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(back<span class="sc">$</span>backpack_kg, back<span class="sc">$</span>body_kg)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -998,7 +1000,7 @@ Year           0.36        0.57  0.77    0
 </div>
 <p>Тем не менее, если у вас много гипотез для тестирования, то у вас появляется проблема: вероятность выпадения статистически значимых результатов сильно повышается. Даже если эти переменные никак не связаны друг с другом.</p>
 <p>Эта проблема называется <strong>проблемой множественных сравнений</strong> <em>(multiple comparisons problem)</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Если мы проверяем сразу несколько гипотез, то у нас возрастает <strong>групповая вероятность ошибки первого рода</strong> <em>(family-wise error rate)</em> — вероятность ошибки первого рода для хотя бы одной из множества гипотез.</p>
-<p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.е. в среднем 2–3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
+<p>Например, если вы коррелируете 10 переменных друг с другом, то вы проверяете 45 гипотез о связи. Пять процентов из этих гипотез, т.&nbsp;е. в среднем 2–3 гипотезы у вас будут статистически значимыми даже если никаких эффектов на самом деле нет!</p>
 <p>Поэтому если вы проверяете сразу много гипотез, то необходимо применять <strong>поправки на множественные сравнения</strong> <em>(multiple testing correction)</em>. Эти поправки позволяют контролировать групповую вероятность ошибки первого рода на желаемом уровне. Самая простая и популярная поправка на множественные сравнения — <strong>поправка Бонферрони</strong> <em>(Bonferroni correction)</em>. Она считается очень просто: мы просто умножаем p-value на количество проверяемых гипотез!</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>
@@ -1025,7 +1027,7 @@ Year           0.36        0.57  0.77    0
 </div>
 </div>
 <p>Это очень «дубовая» и излишне консервативная поправка. Да, она гарантирует контроль групповой вероятности ошибки первого рода, но при этом сильно повышает вероятность ошибки второго рода — вероятность пропустить эффект, если он на самом деле существует. Поэтому по умолчанию в R используется более либеральная поправка на множественные сравнения под названием <strong>поправка Холма</strong> или <strong>поправка Холма-Бонферрони</strong> <em>(Holm-Bonferroni correction)</em>, которая, тем не менее, тоже гарантирует контроль групповой вероятности ошибки первого рода.</p>
-<p>Альтернативный подход к решению проблемы множественных сравнений — это контроль <strong>средней доли ложных отклонений</strong> <em>(false discovery rate, FDR)</em> на уровне не выше уровня <span class="math inline">\(\alpha\)</span>. Это более либеральный подход: в этом случае мы контролируем, что ложно-положительных результатов у нас не больше, например, 5%. Такой подход применяется в областях, где происходит масштабное множественное тестирование. Попытка контролировать <em>групповую вероятность ошибки первого рода</em> не выше уровня <span class="math inline">\(\alpha\)</span> привела бы к чрезвычайно низкой вероятности обнаружить хоть какие-нибудь эффекты (т.е. к низкой статистической мощности).</p>
+<p>Альтернативный подход к решению проблемы множественных сравнений — это контроль <strong>средней доли ложных отклонений</strong> <em>(false discovery rate, FDR)</em> на уровне не выше уровня <span class="math inline">\(\alpha\)</span>. Это более либеральный подход: в этом случае мы контролируем, что ложно-положительных результатов у нас не больше, например, 5%. Такой подход применяется в областях, где происходит масштабное множественное тестирование. Попытка контролировать <em>групповую вероятность ошибки первого рода</em> не выше уровня <span class="math inline">\(\alpha\)</span> привела бы к чрезвычайно низкой вероятности обнаружить хоть какие-нибудь эффекты (т.&nbsp;е. к низкой статистической мощности).</p>
 <p>Самая известная поправка для контроля <em>средней доли ложных отклонений</em> — это <strong>поправка Бенджамини-Хохберга</strong> <em>(Benjamini-Hochberg correction)</em>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>back <span class="sc">%&gt;%</span></span>

@@ -104,7 +104,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c5b9d0f11ee6b10004fd74eb52442ecb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -134,6 +134,8 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="callout-custom.css">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="md-result.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -313,7 +315,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./250-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Отчеты: Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Воспроизводимые отчеты в Quarto</span></span></a>
   </div>
 </li>
       </ul>
@@ -661,14 +663,14 @@ div.csl-indent {
 <p>Чтобы понять вычисления в R, полезны два девиза: всё, что существует, — это объект; всё, что происходит, — это вызов функции.</p>
 <p>— Джон Чеймберс, один из создателей R <span class="citation" data-cites="chambers2008">(<a href="950-references.html#ref-chambers2008" role="doc-biblioref">Chambers, 2008</a>)</span></p>
 </blockquote>
-<p>А сами функции — это объекты первого порядка в R. Это означает, что с функциями вы можете делать практически все то же самое, что и с другими объектами в R (векторами, датафреймами и т.д.). Небольшой пример, который может взорвать ваш мозг:</p>
+<p>А сами функции — это объекты первого порядка в R. Это означает, что с функциями вы можете делать практически все то же самое, что и с другими объектами в R (векторами, датафреймами и&nbsp;т.&nbsp;д.). Небольшой пример, который может взорвать ваш мозг:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(mean, min, <span class="st">`</span><span class="at">{</span><span class="st">`</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x966b96cb8&gt;
+&lt;bytecode: 0xaca42a708&gt;
 &lt;environment: namespace:base&gt;
 
 [[2]]
@@ -703,7 +705,7 @@ function (..., na.rm = FALSE)  .Primitive("min")
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Каждая переменная, которую мы создаем, хранится в каком-то <strong>окружении</strong> <em>(environment)</em>. Окружение — это набор переменных, собранных вместе: каждому имени в нем соответствует какое-то значение, что делает окружение похожим на именованный список <span class="citation" data-cites="wickham19">(<a href="950-references.html#ref-wickham19" role="doc-biblioref">Wickham, 2019</a>, chap.&nbsp;7)</span>. Главное окружение, с которым мы работаем, — <strong>глобальное</strong> <em>(global environment)</em>: именно оно показано во вкладке <strong>Environment</strong> в RStudio.</p>
+<p>Каждая переменная, которую мы создаем, хранится в каком-то <strong>окружении</strong> <em>(environment)</em>. Окружение — это набор переменных, собранных вместе: каждому имени в нем соответствует какое-то значение, что делает окружение похожим на именованный список <span class="citation" data-cites="wickham19">(<a href="950-references.html#ref-wickham19" role="doc-biblioref">Wickham, 2019</a>, chap.&nbsp;7)</span>. Главное окружение, с которым мы работаем, — <strong>глобальное</strong> <em>(global environment)</em>: именно оно показано во вкладке <strong>Environment</strong> в <em>RStudio</em>.</p>
 <p>У каждой запущенной функции появляется свое окружение. В нем живут параметры — имена из круглых скобок, получившие переданные значения (аргументы), — и переменные, созданные в теле функции (обычно на основе тех же аргументов).</p>
 <p>Когда мы запускаем команду <code>x &lt;- 10</code> в консоли или в скрипте, мы добавляем в глобальное окружение переменную <code>x</code> со значением <code>10</code>. Если же <code>x &lt;- 10</code> стоит в теле функции, то при ее выполнении переменная <code>x</code> создается в окружении функции и попадает в компанию параметров и других переменных, созданных внутри.</p>
 <p>Кстати, переменные можно создавать и по-другому — функцией <code>assign()</code>. Вызов <code>assign("x", 10)</code> даст тот же результат, что и <code>x &lt;- 10</code>. У <code>assign()</code> есть параметр <code>envir =</code>, которым можно задать, в какое именно окружение поместить переменную. По умолчанию она попадает в то окружение, откуда вызвали сам <code>assign()</code>: ровно так же, как при обычном присваивании — в глобальном окружении переменная добавится к глобальному, а внутри функции — к окружению функции. А если передать <code>envir = globalenv()</code>, присваивание произойдет в глобальном окружении, даже когда мы находимся внутри функции. Правда, в R так делать не принято: это побочный эффект, из-за которого функция перестает быть «чистой» (см. <a href="#sec-pure_fun" class="quarto-xref"><span>Глава 8.5</span></a>).</p>
@@ -730,7 +732,7 @@ function (..., na.rm = FALSE)  .Primitive("min")
 <p>Один из важных аспектов функциональной парадигмы в программировании — это использование <strong>чистых функций</strong> <em>(pure functions)</em>. У чистых функций две ключевые особенности:</p>
 <ol type="1">
 <li>Чистые функции <strong>детерминированы</strong>: их результат зависит только от переданных аргументов.</li>
-<li>У чистых функций нет <strong>побочных эффектов</strong> <em>(side effects)</em>: они не записывают файлы, не печатают сообщений, не рисуют графиков, не создают глобальных переменных и т.д.</li>
+<li>У чистых функций нет <strong>побочных эффектов</strong> <em>(side effects)</em>: они не записывают файлы, не печатают сообщений, не рисуют графиков, не создают глобальных переменных и&nbsp;т.&nbsp;д.</li>
 </ol>
 <p>Критерий детерминированности исключает функции для импорта данных (подставив разные файлы с одинаковым названием, мы получим разные результаты) и функции вроде <code>Sys.time()</code> для определения текущего времени. Ну а без функций с побочными эффектами… зачем нам вообще тогда что-то делать в R?</p>
 <p>Короче говоря, R не является на 100% функциональным языком: не все функции в нем чистые. Тем не менее в R принято придерживаться функционального стиля и стараться создавать чистые функции там, где это не противоречит здравому смыслу. В первую очередь это означает не создавать переменные в глобальном окружении изнутри функций и полагаться только на переменные в окружении самой функции. Ограничение не такое уж большое, зато благодаря ему функции становятся полностью предсказуемыми, а весь анализ данных можно представить как набор функций, примененных к данным. Этим мы будем активно пользоваться с функциями семейства <code>apply()</code> (<a href="#sec-apply_f" class="quarto-xref"><span>Глава 8.6</span></a>), а особенно — с пайпами и <em>tidyverse</em> (<a href="110-tidyverse_basic.html" class="quarto-xref"><span>Глава 10</span></a>).</p>
@@ -750,7 +752,7 @@ function (..., na.rm = FALSE)  .Primitive("min")
 [3,]    3    6    9   12</code></pre>
 </div>
 </div>
-<p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code>apply()</code> вы можете в буквальном смысле “применить” функцию к матрице или датафрейму. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> — данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.е. для каждого элемента по отдельности), а <code>FUN</code> — это функция, которую вы хотите применить! <code>apply()</code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
+<p>Теперь представим, что нам нужно посчитать что-нибудь (например, сумму) по каждой из строк. С помощью функции <code>apply()</code> вы можете в буквальном смысле “применить” функцию к матрице или датафрейму. Синтаксис такой: <code>apply(X, MARGIN, FUN, ...)</code>, где <code>X</code> — данные, <code>MARGIN</code> это <code>1</code> (для строк), <code>2</code> (для колонок), <code>c(1,2)</code> для строк и колонок (т.&nbsp;е. для каждого элемента по отдельности), а <code>FUN</code> — это функция, которую вы хотите применить! <code>apply()</code> будет брать строки/колонки из <code>X</code> в качестве первого аргумента для функции.</p>
 <p><img src="images/050-functional_apply_function.png" class="img-fluid" alt="Схема работы `apply()`: выбираем матрицу, задаем направление обхода (по строкам или по столбцам) и функцию, которая применяется к каждой строке или столбцу"></p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
